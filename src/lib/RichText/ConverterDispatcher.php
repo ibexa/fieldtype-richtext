@@ -10,6 +10,7 @@ namespace Ibexa\FieldTypeRichText\RichText;
 
 use DOMDocument;
 use eZ\Publish\Core\Base\Exceptions\NotFoundException;
+use Ibexa\Contracts\FieldTypeRichText\RichText\Converter;
 
 /**
  * Dispatcher for various converters depending on the XML document namespace.
