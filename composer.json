@@ -2,7 +2,6 @@
     "name": "ibexa/fieldtype-richtext",
     "description": "Ibexa RichText Extension, including the RichText FieldType.",
     "license": "GPL-2.0-only",
-    "type": "ezplatform-bundle",
     "replace": {
         "ezsystems/ezplatform-richtext": "*"
     },

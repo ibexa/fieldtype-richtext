@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\Bundle\FieldTypeRichText\Templating\Twig\Extension;
 
-use Ibexa\FieldTypeRichText\API\Configuration;
+use Ibexa\Contracts\FieldTypeRichText\Configuration\ProviderService;
 use Twig\Extension\AbstractExtension;
 use Twig\Extension\GlobalsInterface;
 
@@ -22,7 +22,7 @@ final class RichTextConfigurationExtension extends AbstractExtension implements 
     /** @var \EzSystems\EzPlatformRichText\API\Configuration\ProviderService */
     private $configurationProvider;
 
-    public function __construct(Configuration\ProviderService $configurationProvider)
+    public function __construct(ProviderService $configurationProvider)
     {
         $this->configurationProvider = $configurationProvider;
     }
