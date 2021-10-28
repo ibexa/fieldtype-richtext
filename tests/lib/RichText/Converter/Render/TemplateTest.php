@@ -11,6 +11,7 @@ namespace Ibexa\Tests\FieldTypeRichText\RichText\Converter\Render;
 use DOMDocument;
 use Ibexa\Contracts\FieldTypeRichText\RichText\Converter;
 use Ibexa\Contracts\FieldTypeRichText\RichText\RendererInterface;
+use Ibexa\FieldTypeRichText\RichText\Converter\Aggregate;
 use Ibexa\FieldTypeRichText\RichText\Converter\Render\Template;
 use PHPUnit\Framework\TestCase;
 
@@ -132,7 +133,7 @@ class TemplateTest extends TestCase
     {
         return new Template(
             $this->rendererMock,
-            new Converter\Aggregate([
+            new Aggregate([
                 new Template($this->rendererMock, $this->converterMock),
                 $this->converterMock,
             ])

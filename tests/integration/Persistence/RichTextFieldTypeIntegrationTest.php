@@ -66,8 +66,8 @@ class RichTextFieldTypeIntegrationTest extends BaseIntegrationTest
             ]),
             new RichText\Validator\ValidatorAggregate([
                 new RichText\Validator\Validator([
-                    $this->getAbsolutePath('eZ/RichText/Resources/schemas/docbook/ezpublish.rng'),
-                    $this->getAbsolutePath('eZ/RichText/Resources/schemas/docbook/docbook.iso.sch.xsl'),
+                    $this->getAbsolutePath('src/bundle/Resources/richtext/schemas/docbook/ezpublish.rng'),
+                    $this->getAbsolutePath('src/bundle/Resources/richtext/schemas/docbook/docbook.iso.sch.xsl'),
                 ]),
             ]),
             new RichText\RelationProcessor()

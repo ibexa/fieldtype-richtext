@@ -49,7 +49,7 @@ class Xhtml5ToDocbookTest extends BaseTest
      */
     protected function getConversionTransformationStylesheet()
     {
-        return __DIR__ . '/../../../../../../src/bundle/Resources/richtext/stylesheets/xhtml5/edit/docbook.xsl';
+        return __DIR__ . '/../../../../../src/bundle/Resources/richtext/stylesheets/xhtml5/edit/docbook.xsl';
     }
 
     /**
@@ -93,7 +93,7 @@ class Xhtml5ToDocbookTest extends BaseTest
     {
         return [
             __DIR__ . '/_fixtures/docbook/custom_schemas/youtube.rng',
-            __DIR__ . '/../../../../../../src/bundle/Resources/richtext/schemas/docbook/docbook.iso.sch.xsl',
+            __DIR__ . '/../../../../../src/bundle/Resources/richtext/schemas/docbook/docbook.iso.sch.xsl',
         ];
     }
 

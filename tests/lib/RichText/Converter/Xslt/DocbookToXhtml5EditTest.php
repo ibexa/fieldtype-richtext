@@ -45,7 +45,7 @@ class DocbookToXhtml5EditTest extends BaseTest
      */
     protected function getConversionTransformationStylesheet()
     {
-        return __DIR__ . '/../../../../../../src/bundle/Resources/richtext/stylesheets/docbook/xhtml5/edit/xhtml5.xsl';
+        return __DIR__ . '/../../../../../src/bundle/Resources/richtext/stylesheets/docbook/xhtml5/edit/xhtml5.xsl';
     }
 
     /**
@@ -74,7 +74,7 @@ class DocbookToXhtml5EditTest extends BaseTest
     {
         return [
             [
-                'path' => __DIR__ . '/../../../../../../src/bundle/Resources/richtext/stylesheets/docbook/xhtml5/edit/core.xsl',
+                'path' => __DIR__ . '/../../../../../src/bundle/Resources/richtext/stylesheets/docbook/xhtml5/edit/core.xsl',
                 'priority' => 100,
             ],
             [

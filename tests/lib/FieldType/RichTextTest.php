@@ -440,7 +440,7 @@ EOT;
      */
     protected function getAbsolutePath($relativePath)
     {
-        $absolutePath = realpath(__DIR__ . '/../../../../' . $relativePath);
+        $absolutePath = realpath(__DIR__ . '/../../../' . $relativePath);
         if (false === $absolutePath) {
             throw new RuntimeException("Unable to determine the absolute path for '{$relativePath}'");
         }

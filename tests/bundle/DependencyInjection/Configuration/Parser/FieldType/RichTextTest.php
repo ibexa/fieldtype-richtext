@@ -11,6 +11,8 @@ namespace Ibexa\Tests\Bundle\FieldTypeRichText\DependencyInjection\Configuration
 use eZ\Bundle\EzPublishCoreBundle\DependencyInjection\EzPublishCoreExtension;
 use eZ\Bundle\EzPublishCoreBundle\Tests\DependencyInjection\Configuration\Parser\AbstractParserTestCase;
 use Ibexa\Bundle\FieldTypeRichText\DependencyInjection\Configuration\Parser\FieldType\RichText as RichTextConfigParser;
+use Ibexa\Bundle\FieldTypeRichText\DependencyInjection\IbexaFieldTypeRichTextExtension;
+use Ibexa\Bundle\FieldTypeRichText\IbexaFieldTypeRichTextBundle;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\Yaml\Yaml;
@@ -51,13 +53,13 @@ class RichTextTest extends AbstractParserTestCase
      */
     protected function configureAndLoad(array $configurationValues = [])
     {
-        $bundle = new EzPlatformRichTextBundle();
+        $bundle = new IbexaFieldTypeRichTextBundle();
         $bundle->build($this->container);
 
         // mock list of available bundles
         $this->setParameter(
             'kernel.bundles',
-            ['EzPublishCoreBundle' => null, 'EzPlatformRichTextBundle' => null]
+            ['EzPublishCoreBundle' => null, 'IbexaFieldTypeRichTextBundle' => null]
         );
 
         $configs = array_merge_recursive($this->getMinimalConfiguration(), $configurationValues);
@@ -85,7 +87,7 @@ class RichTextTest extends AbstractParserTestCase
     {
         return [
             new EzPublishCoreExtension([new RichTextConfigParser()]),
-            new EzPlatformRichTextExtension(),
+            new IbexaFieldTypeRichTextExtension(),
         ];
     }
 
@@ -101,7 +103,7 @@ class RichTextTest extends AbstractParserTestCase
         $this->assertConfigResolverParameterValue(
             'fieldtypes.ezrichtext.tags.default',
             [
-                'template' => '@EzPlatformRichText/RichText/tag/default.html.twig',
+                'template' => '@IbexaFieldTypeRichText/RichText/tag/default.html.twig',
             ],
             'ezdemo_site'
         );

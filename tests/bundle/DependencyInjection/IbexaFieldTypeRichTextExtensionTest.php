@@ -8,15 +8,16 @@ declare(strict_types=1);
 
 namespace Ibexa\Tests\Bundle\FieldTypeRichText\DependencyInjection;
 
+use Ibexa\Bundle\FieldTypeRichText\DependencyInjection\IbexaFieldTypeRichTextExtension;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Symfony\Component\Yaml\Yaml;
 
-class EzPlatformRichTextExtensionTest extends AbstractExtensionTestCase
+class IbexaFieldTypeRichTextExtensionTest extends AbstractExtensionTestCase
 {
     protected function getContainerExtensions(): array
     {
-        return [new EzPlatformRichTextExtension()];
+        return [new IbexaFieldTypeRichTextExtension()];
     }
 
     /**
@@ -31,7 +32,7 @@ class EzPlatformRichTextExtensionTest extends AbstractExtensionTestCase
 
         // Validate Custom Tags
         $this->assertTrue(
-            $this->container->hasParameter(EzPlatformRichTextExtension::RICHTEXT_CUSTOM_TAGS_PARAMETER)
+            $this->container->hasParameter(IbexaFieldTypeRichTextExtension::RICHTEXT_CUSTOM_TAGS_PARAMETER)
         );
         $expectedCustomTagsConfig = [
             'video' => [
@@ -78,14 +79,14 @@ class EzPlatformRichTextExtensionTest extends AbstractExtensionTestCase
 
         $this->assertSame(
             $expectedCustomTagsConfig,
-            $this->container->getParameter(EzPlatformRichTextExtension::RICHTEXT_CUSTOM_TAGS_PARAMETER)
+            $this->container->getParameter(IbexaFieldTypeRichTextExtension::RICHTEXT_CUSTOM_TAGS_PARAMETER)
         );
     }
 
     /**
-     * Test EzPlatformRichTextExtension prepends expected and needed core settings.
+     * Test IbexaFieldTypeRichTextExtension prepends expected and needed core settings.
      *
-     * @see \EzSystems\EzPlatformRichTextBundle\DependencyInjection\EzPlatformRichTextExtension::prepend
+     * @see \EzSystems\EzPlatformRichTextBundle\DependencyInjection\IbexaFieldTypeRichTextExtension::prepend
      */
     public function testPrepend(): void
     {
@@ -98,13 +99,13 @@ class EzPlatformRichTextExtensionTest extends AbstractExtensionTestCase
         $expectedPrependedConfig = [
             'field_templates' => [
                     [
-                        'template' => '@EzPlatformRichText/RichText/content_fields.html.twig',
+                        'template' => '@IbexaFieldTypeRichText/RichText/content_fields.html.twig',
                         'priority' => 0,
                     ],
                 ],
             'fielddefinition_settings_templates' => [
                 [
-                    'template' => '@EzPlatformRichText/RichText/fielddefinition_settings.html.twig',
+                    'template' => '@IbexaFieldTypeRichText/RichText/fielddefinition_settings.html.twig',
                     'priority' => 0,
                 ],
             ],
@@ -158,4 +159,4 @@ class EzPlatformRichTextExtensionTest extends AbstractExtensionTestCase
     }
 }
 
-class_alias(EzPlatformRichTextExtensionTest::class, 'EzSystems\Tests\EzPlatformRichTextBundle\DependencyInjection\EzPlatformRichTextExtensionTest');
+class_alias(IbexaFieldTypeRichTextExtensionTest::class, 'EzSystems\Tests\EzPlatformRichTextBundle\DependencyInjection\IbexaFieldTypeRichTextExtensionTest');
