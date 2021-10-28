@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -10,8 +10,8 @@ namespace Ibexa\Bundle\FieldTypeRichText\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Component\DependencyInjection\Reference;
 
 /**
  * Compiler pass for the RichText Aggregate converter tags.
@@ -37,7 +37,7 @@ class RichTextHtml5ConverterPass implements CompilerPassInterface
 
     /**
      * @param array $taggedServiceIds
-     * @param Definition $converterDefinition
+     * @param \Symfony\Component\DependencyInjection\Definition $converterDefinition
      */
     protected function setConverterDefinitions(array $taggedServiceIds, Definition $converterDefinition)
     {

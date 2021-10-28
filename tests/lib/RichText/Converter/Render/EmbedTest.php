@@ -1,17 +1,17 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
 namespace Ibexa\Tests\FieldTypeRichText\RichText\Converter\Render;
 
-use PHPUnit\Framework\TestCase;
-use Ibexa\FieldTypeRichText\RichText\Converter\Render\Embed;
-use Ibexa\Contracts\FieldTypeRichText\RichText\RendererInterface;
 use DOMDocument;
+use Ibexa\Contracts\FieldTypeRichText\RichText\RendererInterface;
+use Ibexa\FieldTypeRichText\RichText\Converter\Render\Embed;
+use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 
 class EmbedTest extends TestCase

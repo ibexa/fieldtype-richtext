@@ -1,15 +1,15 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
 namespace Ibexa\FieldTypeRichText\RichText\Converter;
 
-use Ibexa\FieldTypeRichText\RichText\Converter\Xslt as XsltConverter;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
+use Ibexa\FieldTypeRichText\RichText\Converter\Xslt as XsltConverter;
 
 /**
  * Adds ConfigResolver awareness to the Xslt converter.

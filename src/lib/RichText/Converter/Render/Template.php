@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -13,8 +13,8 @@ use DOMElement;
 use DOMNode;
 use DOMXPath;
 use Ibexa\Contracts\FieldTypeRichText\RichText\Converter;
-use Ibexa\FieldTypeRichText\RichText\Converter\Render;
 use Ibexa\Contracts\FieldTypeRichText\RichText\RendererInterface;
+use Ibexa\FieldTypeRichText\RichText\Converter\Render;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 

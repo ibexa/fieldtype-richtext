@@ -1,21 +1,21 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
 namespace Ibexa\FieldTypeRichText\Form\DataTransformer;
 
-use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 use eZ\Publish\API\Repository\Exceptions\InvalidArgumentException;
-use Symfony\Component\Form\DataTransformerInterface;
-use Symfony\Component\Form\Exception\TransformationFailedException;
+use eZ\Publish\API\Repository\Exceptions\NotFoundException;
+use Ibexa\Contracts\FieldTypeRichText\RichText\Converter;
+use Ibexa\Contracts\FieldTypeRichText\RichText\InputHandlerInterface;
 use Ibexa\FieldTypeRichText\FieldType\RichText\Value;
 use Ibexa\FieldTypeRichText\RichText\DOMDocumentFactory;
-use Ibexa\Contracts\FieldTypeRichText\RichText\InputHandlerInterface;
-use Ibexa\Contracts\FieldTypeRichText\RichText\Converter;
+use Symfony\Component\Form\DataTransformerInterface;
+use Symfony\Component\Form\Exception\TransformationFailedException;
 
 class RichTextTransformer implements DataTransformerInterface
 {
@@ -50,7 +50,7 @@ class RichTextTransformer implements DataTransformerInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function transform($value): string
     {
@@ -68,7 +68,7 @@ class RichTextTransformer implements DataTransformerInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function reverseTransform($value): string
     {

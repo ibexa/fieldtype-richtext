@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -11,10 +11,7 @@ namespace Ibexa\Tests\Bundle\FieldTypeRichText\DependencyInjection\Configuration
 use eZ\Bundle\EzPublishCoreBundle\DependencyInjection\EzPublishCoreExtension;
 use eZ\Bundle\EzPublishCoreBundle\Tests\DependencyInjection\Configuration\Parser\AbstractParserTestCase;
 use Ibexa\Bundle\FieldTypeRichText\DependencyInjection\Configuration\Parser\FieldType\RichText as RichTextConfigParser;
-use Ibexa\Bundle\FieldTypeRichText\DependencyInjection\IbexaFieldTypeRichTextExtension;
-use Ibexa\Bundle\FieldTypeRichText\IbexaFieldTypeRichTextBundle;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
-use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\Yaml\Yaml;
 
@@ -82,7 +79,7 @@ class RichTextTest extends AbstractParserTestCase
      * Return an array of container extensions you need to be registered for each test (usually just the container
      * extension you are testing.
      *
-     * @return ExtensionInterface[]
+     * @return \Symfony\Component\DependencyInjection\Extension\ExtensionInterface[]
      */
     protected function getContainerExtensions(): array
     {

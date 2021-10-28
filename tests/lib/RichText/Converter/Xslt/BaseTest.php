@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
 namespace Ibexa\Tests\FieldTypeRichText\RichText\Converter\Xslt;
 
-use Ibexa\FieldTypeRichText\RichText\Validator\Validator;
-use Ibexa\FieldTypeRichText\RichText\Converter\Xslt;
-use PHPUnit\Framework\TestCase;
 use DOMDocument;
 use DOMXpath;
+use Ibexa\FieldTypeRichText\RichText\Converter\Xslt;
+use Ibexa\FieldTypeRichText\RichText\Validator\Validator;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Base class for XSLT converter tests.

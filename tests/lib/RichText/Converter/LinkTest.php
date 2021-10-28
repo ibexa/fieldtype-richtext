@@ -1,23 +1,23 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
 namespace Ibexa\Tests\FieldTypeRichText\RichText\Converter;
 
+use DOMDocument;
 use eZ\Publish\API\Repository\Values\Content\ContentInfo as APIContentInfo;
 use eZ\Publish\API\Repository\Values\Content\Location as APILocation;
-use Ibexa\FieldTypeRichText\RichText\Converter\Link;
-use eZ\Publish\Core\Repository\ContentService;
-use eZ\Publish\Core\Repository\LocationService;
-use eZ\Publish\Core\MVC\Symfony\Routing\UrlAliasRouter;
-use PHPUnit\Framework\TestCase;
 use eZ\Publish\Core\Base\Exceptions\NotFoundException as APINotFoundException;
 use eZ\Publish\Core\Base\Exceptions\UnauthorizedException as APIUnauthorizedException;
-use DOMDocument;
+use eZ\Publish\Core\MVC\Symfony\Routing\UrlAliasRouter;
+use eZ\Publish\Core\Repository\ContentService;
+use eZ\Publish\Core\Repository\LocationService;
+use Ibexa\FieldTypeRichText\RichText\Converter\Link;
+use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 
 /**

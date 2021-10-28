@@ -1,24 +1,24 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
 namespace Ibexa\Tests\FieldTypeRichText\FieldType;
 
+use Exception;
 use eZ\Publish\API\Repository\Exceptions\InvalidArgumentException as ApiInvalidArgumentException;
+use eZ\Publish\API\Repository\Values\Content\Relation;
 use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition as APIFieldDefinition;
-use eZ\Publish\Core\FieldType\Value as CoreValue;
-use Ibexa\FieldTypeRichText\FieldType\RichText\Type as RichTextType;
-use Ibexa\FieldTypeRichText\FieldType\RichText\Value;
 use eZ\Publish\Core\Base\Exceptions\InvalidArgumentException;
 use eZ\Publish\Core\Base\Exceptions\NotFoundException;
-use eZ\Publish\API\Repository\Values\Content\Relation;
-use eZ\Publish\Core\Persistence\TransformationProcessor;
 use eZ\Publish\Core\FieldType\ValidationError;
-use Exception;
+use eZ\Publish\Core\FieldType\Value as CoreValue;
+use eZ\Publish\Core\Persistence\TransformationProcessor;
+use Ibexa\FieldTypeRichText\FieldType\RichText\Type as RichTextType;
+use Ibexa\FieldTypeRichText\FieldType\RichText\Value;
 use Ibexa\FieldTypeRichText\RichText\ConverterDispatcher;
 use Ibexa\FieldTypeRichText\RichText\DOMDocumentFactory;
 use Ibexa\FieldTypeRichText\RichText\InputHandler;

@@ -1,25 +1,25 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
 namespace Ibexa\FieldTypeRichText\RichText;
 
+use Exception;
+use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 use eZ\Publish\API\Repository\Repository;
 use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
-use Ibexa\Contracts\FieldTypeRichText\RichText\RendererInterface;
-use Psr\Log\NullLogger;
-use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use eZ\Publish\Core\MVC\Symfony\Security\Authorization\Attribute as AuthorizationAttribute;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use eZ\Publish\API\Repository\Exceptions\NotFoundException;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Exception;
+use Ibexa\Contracts\FieldTypeRichText\RichText\RendererInterface;
 use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Twig\Environment;
 
 /**
@@ -56,7 +56,7 @@ class Renderer implements RendererInterface
     protected $embedConfigurationNamespace;
 
     /**
-     * @var ConfigResolverInterface
+     * @var \eZ\Publish\Core\MVC\ConfigResolverInterface
      */
     protected $configResolver;
 
@@ -117,7 +117,7 @@ class Renderer implements RendererInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function renderContentEmbed($contentId, $viewType, array $parameters, $isInline)
     {
@@ -126,7 +126,7 @@ class Renderer implements RendererInterface
         try {
             /** @var \eZ\Publish\API\Repository\Values\Content\Content $content */
             $content = $this->repository->sudo(
-                function (Repository $repository) use ($contentId) {
+                static function (Repository $repository) use ($contentId) {
                     return $repository->getContentService()->loadContent((int)$contentId);
                 }
             );
@@ -192,7 +192,7 @@ class Renderer implements RendererInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function renderLocationEmbed($locationId, $viewType, array $parameters, $isInline)
     {
@@ -494,7 +494,7 @@ class Renderer implements RendererInterface
     {
         /** @var \eZ\Publish\API\Repository\Values\Content\Location $location */
         $location = $this->repository->sudo(
-            function (Repository $repository) use ($id) {
+            static function (Repository $repository) use ($id) {
                 return $repository->getLocationService()->loadLocation($id);
             }
         );

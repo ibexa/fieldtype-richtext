@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -16,7 +16,7 @@ namespace Ibexa\FieldTypeRichText\Configuration\UI\Mapper\CustomTag;
 class CommonAttributeMapper implements AttributeMapper
 {
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function supports(string $attributeType): bool
     {
@@ -24,7 +24,7 @@ class CommonAttributeMapper implements AttributeMapper
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function mapConfig(
         string $tagName,

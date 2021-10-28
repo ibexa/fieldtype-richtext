@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -11,17 +11,17 @@ namespace Ibexa\Tests\Integration\FieldTypeRichText\Repository;
 use DirectoryIterator;
 use Doctrine\DBAL\FetchMode;
 use Doctrine\DBAL\ParameterType;
+use DOMDocument;
 use eZ\Publish\API\Repository\Exceptions\ContentFieldValidationException;
 use eZ\Publish\API\Repository\Repository;
 use eZ\Publish\API\Repository\Tests\FieldType\RelationSearchBaseIntegrationTestTrait;
 use eZ\Publish\API\Repository\Tests\FieldType\SearchBaseIntegrationTest;
-use eZ\Publish\API\Repository\Values\Content\Location;
-use EzSystems\EzPlatformRichText\FieldType\RichText\Value as RichTextValue;
-use eZ\Publish\API\Repository\Values\Content\Field;
-use DOMDocument;
-use eZ\Publish\Core\Repository\Values\Content\Relation;
 use eZ\Publish\API\Repository\Values\Content\Content;
+use eZ\Publish\API\Repository\Values\Content\Field;
+use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
+use eZ\Publish\Core\Repository\Values\Content\Relation;
+use EzSystems\EzPlatformRichText\FieldType\RichText\Value as RichTextValue;
 
 /**
  * Integration test for use field type.
@@ -247,7 +247,7 @@ EOT
      * Asserts that the data provided by {@link getValidCreationFieldData()}
      * was stored and loaded correctly.
      *
-     * @param Field $field
+     * @param \eZ\Publish\API\Repository\Values\Content\Field $field
      */
     public function assertFieldDataLoadedCorrect(Field $field)
     {
@@ -359,7 +359,7 @@ EOT
      * Asserts that the data provided by {@link getValidCreationFieldData()}
      * was copied and loaded correctly.
      *
-     * @param Field $field
+     * @param \eZ\Publish\API\Repository\Values\Content\Field $field
      */
     public function assertCopiedFieldDataLoadedCorrectly(Field $field)
     {

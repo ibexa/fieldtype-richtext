@@ -1,15 +1,15 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
 namespace Ibexa\Tests\FieldTypeRichText\RichText\Normalizer;
 
-use Ibexa\FieldTypeRichText\RichText\Normalizer\DocumentTypeDefinition;
 use DOMDocument;
+use Ibexa\FieldTypeRichText\RichText\Normalizer\DocumentTypeDefinition;
 use PHPUnit\Framework\TestCase;
 
 class DocumentTypeDefinitionTest extends TestCase

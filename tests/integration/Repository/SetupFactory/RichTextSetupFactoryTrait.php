@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -10,9 +10,9 @@ namespace Ibexa\Tests\Integration\FieldTypeRichText\Repository\SetupFactory;
 
 use Ibexa\Bundle\FieldTypeRichText\DependencyInjection\Compiler;
 use RuntimeException;
+use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
-use Symfony\Component\Config\FileLocator;
 
 trait RichTextSetupFactoryTrait
 {

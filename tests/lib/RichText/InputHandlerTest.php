@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -11,12 +11,12 @@ namespace Ibexa\Tests\FieldTypeRichText\RichText;
 use DOMDocument;
 use eZ\Publish\API\Repository\Values\Content\Relation;
 use eZ\Publish\Core\Base\Exceptions\InvalidArgumentException;
+use Ibexa\Contracts\FieldTypeRichText\RichText\ValidatorInterface;
 use Ibexa\FieldTypeRichText\RichText\ConverterDispatcher;
 use Ibexa\FieldTypeRichText\RichText\DOMDocumentFactory;
 use Ibexa\FieldTypeRichText\RichText\InputHandler;
 use Ibexa\FieldTypeRichText\RichText\Normalizer;
 use Ibexa\FieldTypeRichText\RichText\RelationProcessor;
-use Ibexa\Contracts\FieldTypeRichText\RichText\ValidatorInterface;
 use PHPUnit\Framework\TestCase;
 
 class InputHandlerTest extends TestCase
@@ -57,7 +57,7 @@ class InputHandlerTest extends TestCase
     private $inputHandler;
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     protected function setUp(): void
     {

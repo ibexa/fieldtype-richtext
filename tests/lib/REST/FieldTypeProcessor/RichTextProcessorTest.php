@@ -1,17 +1,17 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
 namespace Ibexa\Tests\FieldTypeRichText\REST\FieldTypeProcessor;
 
-use Ibexa\FieldTypeRichText\REST\FieldTypeProcessor\RichTextProcessor;
-use Ibexa\Contracts\FieldTypeRichText\RichText\Converter;
-use PHPUnit\Framework\TestCase;
 use DOMDocument;
+use Ibexa\Contracts\FieldTypeRichText\RichText\Converter;
+use Ibexa\FieldTypeRichText\REST\FieldTypeProcessor\RichTextProcessor;
+use PHPUnit\Framework\TestCase;
 
 class RichTextProcessorTest extends TestCase
 {

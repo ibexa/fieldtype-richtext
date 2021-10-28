@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -75,7 +75,7 @@ class Configuration extends SiteAccessConfiguration
                             ->arrayPrototype()
                                 ->beforeNormalization()
                                     ->always(
-                                        function ($v) {
+                                        static function ($v) {
                                             // Workaround: set empty value to be able to unset it later on (see validation for "choices")
                                             if (!isset($v['choices'])) {
                                                 $v['choices'] = [];
@@ -87,7 +87,7 @@ class Configuration extends SiteAccessConfiguration
                                 ->end()
                                 ->validate()
                                     ->ifTrue(
-                                        function ($v) {
+                                        static function ($v) {
                                             return $v['type'] === 'choice' && !empty($v['required']) && empty($v['choices']);
                                         }
                                     )
@@ -95,7 +95,7 @@ class Configuration extends SiteAccessConfiguration
                                 ->end()
                                 ->validate()
                                     ->ifTrue(
-                                        function ($v) {
+                                        static function ($v) {
                                             return !empty($v['choices']) && $v['type'] !== 'choice';
                                         }
                                     )

@@ -1,16 +1,16 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
 namespace Ibexa\FieldTypeRichText\RichText;
 
-use Ibexa\Contracts\FieldTypeRichText\RichText\InputHandlerInterface;
 use DOMDocument;
 use eZ\Publish\Core\Base\Exceptions\InvalidArgumentException;
+use Ibexa\Contracts\FieldTypeRichText\RichText\InputHandlerInterface;
 use Ibexa\FieldTypeRichText\FieldType\RichText\Value;
 
 class InputHandler implements InputHandlerInterface
@@ -70,7 +70,7 @@ class InputHandler implements InputHandlerInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function fromString(?string $inputValue = null): DOMDocument
     {
@@ -86,7 +86,7 @@ class InputHandler implements InputHandlerInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function fromDocument(DOMDocument $inputValue): DOMDocument
     {
@@ -102,7 +102,7 @@ class InputHandler implements InputHandlerInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getRelations(DOMDocument $document): array
     {
@@ -110,7 +110,7 @@ class InputHandler implements InputHandlerInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function validate(DOMDocument $document): array
     {
