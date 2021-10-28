@@ -25,7 +25,7 @@ trait RichTextSetupFactoryTrait
      */
     protected function loadRichTextSettings(ContainerBuilder $containerBuilder)
     {
-        $settingsPath = realpath(__DIR__ . '/../../../../../src/lib/eZ/settings/');
+        $settingsPath = realpath(__DIR__ . '/../../../../src/bundle/Resources/config/settings/');
         if (false === $settingsPath) {
             throw new RuntimeException('Unable to find RichText package settings');
         }
@@ -42,7 +42,7 @@ trait RichTextSetupFactoryTrait
         // load test settings
         $loader = new YamlFileLoader(
             $containerBuilder,
-            new FileLocator(__DIR__ . '/../../../../lib/eZ/settings')
+            new FileLocator(__DIR__ . '/../../../../tests/lib/_settings')
         );
         $loader->load('common.yaml');
 

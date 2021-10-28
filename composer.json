@@ -53,7 +53,7 @@
         "psr-4": {
             "Ibexa\\Tests\\Bundle\\FieldTypeRichText\\": "tests/bundle/",
             "Ibexa\\Tests\\FieldTypeRichText\\": "tests/lib/",
-            "Ibexa\\Tests\\Integration\\FieldType\\RichText\\": "tests/integration/"
+            "Ibexa\\Tests\\Integration\\FieldTypeRichText\\": "tests/integration/"
         }
     },
     "scripts": {

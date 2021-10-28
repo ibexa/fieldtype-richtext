@@ -21,7 +21,7 @@ use eZ\Publish\API\Repository\Values\Content\Field;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use eZ\Publish\Core\Repository\Values\Content\Relation;
-use EzSystems\EzPlatformRichText\FieldType\RichText\Value as RichTextValue;
+use Ibexa\FieldTypeRichText\FieldType\RichText\Value as RichTextValue;
 
 /**
  * Integration test for use field type.
