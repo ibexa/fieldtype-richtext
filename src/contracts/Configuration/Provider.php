@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformRichText\SPI\Configuration;
+namespace Ibexa\Contracts\FieldTypeRichText\Configuration;
 
 /**
  * RichText configuration provider.
@@ -29,3 +29,5 @@ interface Provider
      */
     public function getConfiguration(): array;
 }
+
+class_alias(Provider::class, 'EzSystems\EzPlatformRichText\SPI\Configuration\Provider');

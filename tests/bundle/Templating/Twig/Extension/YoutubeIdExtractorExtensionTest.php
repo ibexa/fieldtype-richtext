@@ -6,9 +6,9 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\Tests\EzPlatformRichTextBundle\Templating\Twig\Extension;
+namespace Ibexa\Tests\Bundle\FieldTypeRichText\Templating\Twig\Extension;
 
-use EzSystems\EzPlatformRichTextBundle\Templating\Twig\Extension\YoutubeIdExtractorExtension;
+use Ibexa\Bundle\FieldTypeRichText\Templating\Twig\Extension\YoutubeIdExtractorExtension;
 use PHPUnit\Framework\TestCase;
 use Twig\TwigFunction;
 
@@ -78,3 +78,5 @@ class YoutubeIdExtractorExtensionTest extends TestCase
         $this->assertEquals('ez_richtext_youtube_extract_id', $result[0]->getName());
     }
 }
+
+class_alias(YoutubeIdExtractorExtensionTest::class, 'EzSystems\Tests\EzPlatformRichTextBundle\Templating\Twig\Extension\YoutubeIdExtractorExtensionTest');

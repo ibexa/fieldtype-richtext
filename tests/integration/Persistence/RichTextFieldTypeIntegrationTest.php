@@ -12,11 +12,11 @@ use eZ\Publish\SPI\Persistence\Content\FieldValue;
 use eZ\Publish\SPI\Persistence\Content\FieldTypeConstraints;
 use eZ\Publish\Core\FieldType\Url\UrlStorage\Gateway\DoctrineStorage as UrlGateway;
 use eZ\Publish\SPI\Tests\FieldType\BaseIntegrationTest;
-use EzSystems\EzPlatformRichText\FieldType\RichText\RichTextStorage;
-use EzSystems\EzPlatformRichText\FieldType\RichText\Type;
-use EzSystems\EzPlatformRichText\RichText;
-use EzSystems\EzPlatformRichText\FieldType\RichText\RichTextStorage\Gateway\DoctrineStorage;
-use EzSystems\EzPlatformRichText\Persistence\Legacy\RichTextFieldValueConverter;
+use Ibexa\FieldTypeRichText\FieldType\RichText\RichTextStorage;
+use Ibexa\FieldTypeRichText\FieldType\RichText\Type;
+use Ibexa\FieldTypeRichText\RichText;
+use Ibexa\FieldTypeRichText\FieldType\RichText\RichTextStorage\Gateway\DoctrineStorage;
+use Ibexa\FieldTypeRichText\Persistence\Legacy\RichTextFieldValueConverter;
 
 /**
  * Integration test for legacy storage field types.

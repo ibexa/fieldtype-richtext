@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformRichText\API\Configuration;
+namespace Ibexa\Contracts\FieldTypeRichText\Configuration;
 
 /**
  * RichText configuration provider API.
@@ -25,3 +25,5 @@ interface ProviderService
      */
     public function getConfiguration(): array;
 }
+
+class_alias(ProviderService::class, 'EzSystems\EzPlatformRichText\API\Configuration\ProviderService');

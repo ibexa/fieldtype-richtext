@@ -6,13 +6,13 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\Tests\EzPlatformRichText\Validator\Constraints;
+namespace Ibexa\Tests\FieldTypeRichText\Validator\Constraints;
 
 use DOMDocument;
-use EzSystems\EzPlatformRichText\eZ\RichText\Exception\InvalidXmlException;
-use EzSystems\EzPlatformRichText\eZ\RichText\InputHandlerInterface;
-use EzSystems\EzPlatformRichText\Validator\Constraints\RichText;
-use EzSystems\EzPlatformRichText\Validator\Constraints\RichTextValidator;
+use Ibexa\FieldTypeRichText\RichText\Exception\InvalidXmlException;
+use Ibexa\Contracts\FieldTypeRichText\RichText\InputHandlerInterface;
+use Ibexa\FieldTypeRichText\Validator\Constraints\RichText;
+use Ibexa\FieldTypeRichText\Validator\Constraints\RichTextValidator;
 use LibXMLError;
 use PHPUnit\Framework\TestCase;
 use stdClass;
@@ -21,7 +21,7 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 class RichTextValidatorTest extends TestCase
 {
     /**
-     * @var \EzSystems\EzPlatformRichText\eZ\RichText\InputHandlerInterface|\PHPUnit\Framework\MockObject\MockObject
+     * @var \EzSystems\EzPlatformRichText\RichText\InputHandlerInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private $inputHandler;
 
@@ -140,3 +140,5 @@ class RichTextValidatorTest extends TestCase
         return $error;
     }
 }
+
+class_alias(RichTextValidatorTest::class, 'EzSystems\Tests\EzPlatformRichText\Validator\Constraints\RichTextValidatorTest');

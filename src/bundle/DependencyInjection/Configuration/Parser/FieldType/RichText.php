@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformRichTextBundle\DependencyInjection\Configuration\Parser\FieldType;
+namespace Ibexa\Bundle\FieldTypeRichText\DependencyInjection\Configuration\Parser\FieldType;
 
 use eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Configuration\Parser\AbstractFieldTypeParser;
 use eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Configuration\SiteAccessAware\ContextualizerInterface;
@@ -425,3 +425,5 @@ class RichText extends AbstractFieldTypeParser
         };
     }
 }
+
+class_alias(RichText::class, 'EzSystems\EzPlatformRichTextBundle\DependencyInjection\Configuration\Parser\FieldType\RichText');

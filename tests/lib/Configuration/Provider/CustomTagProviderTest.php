@@ -6,10 +6,10 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\Tests\EzPlatformRichText\Configuration\Provider;
+namespace Ibexa\Tests\FieldTypeRichText\Configuration\Provider;
 
-use EzSystems\EzPlatformRichText\Configuration\Provider\CustomTag;
-use EzSystems\EzPlatformRichText\SPI\Configuration\Provider;
+use Ibexa\FieldTypeRichText\Configuration\Provider\CustomTag;
+use Ibexa\Contracts\FieldTypeRichText\Configuration\Provider;
 
 class CustomTagProviderTest extends BaseCustomTemplateProviderTestCase
 {
@@ -33,3 +33,5 @@ class CustomTagProviderTest extends BaseCustomTemplateProviderTestCase
         return 'fieldtypes.ezrichtext.custom_tags';
     }
 }
+
+class_alias(CustomTagProviderTest::class, 'EzSystems\Tests\EzPlatformRichText\Configuration\Provider\CustomTagProviderTest');

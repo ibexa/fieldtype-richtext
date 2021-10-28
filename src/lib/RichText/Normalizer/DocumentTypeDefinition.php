@@ -6,9 +6,9 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformRichText\eZ\RichText\Normalizer;
+namespace Ibexa\FieldTypeRichText\RichText\Normalizer;
 
-use EzSystems\EzPlatformRichText\eZ\RichText\Normalizer;
+use Ibexa\FieldTypeRichText\RichText\Normalizer;
 
 /**
  * Character entity definition normalizer adds DTD containing character entity definition to
@@ -106,3 +106,5 @@ class DocumentTypeDefinition extends Normalizer
         return $this->expression;
     }
 }
+
+class_alias(DocumentTypeDefinition::class, 'EzSystems\EzPlatformRichText\eZ\RichText\Normalizer\DocumentTypeDefinition');

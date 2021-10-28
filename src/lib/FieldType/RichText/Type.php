@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformRichText\eZ\FieldType\RichText;
+namespace Ibexa\FieldTypeRichText\FieldType\RichText;
 
 use eZ\Publish\Core\FieldType\FieldType;
 use eZ\Publish\Core\Base\Exceptions\InvalidArgumentType;
@@ -16,7 +16,7 @@ use eZ\Publish\SPI\Persistence\Content\FieldValue;
 use eZ\Publish\Core\FieldType\Value as BaseValue;
 use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
 use DOMDocument;
-use EzSystems\EzPlatformRichText\eZ\RichText\InputHandlerInterface;
+use Ibexa\Contracts\FieldTypeRichText\RichText\InputHandlerInterface;
 use RuntimeException;
 
 /**
@@ -285,3 +285,5 @@ class Type extends FieldType
         return $relations;
     }
 }
+
+class_alias(Type::class, 'EzSystems\EzPlatformRichText\eZ\FieldType\RichText\Type');

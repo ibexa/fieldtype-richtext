@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformRichText\eZ\RichText;
+namespace Ibexa\Contracts\FieldTypeRichText\RichText;
 
 use DOMDocument;
 
@@ -55,3 +55,5 @@ interface InputHandlerInterface
      */
     public function validate(DOMDocument $document): array;
 }
+
+class_alias(InputHandlerInterface::class, 'EzSystems\EzPlatformRichText\eZ\RichText\InputHandlerInterface');

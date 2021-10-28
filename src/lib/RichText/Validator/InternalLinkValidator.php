@@ -6,14 +6,14 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformRichText\eZ\RichText\Validator;
+namespace Ibexa\FieldTypeRichText\RichText\Validator;
 
 use DOMDocument;
 use eZ\Publish\SPI\Persistence\Content\Handler as ContentHandler;
 use eZ\Publish\SPI\Persistence\Content\Location\Handler as LocationHandler;
 use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 use eZ\Publish\Core\Base\Exceptions\InvalidArgumentException;
-use EzSystems\EzPlatformRichText\eZ\RichText\ValidatorInterface;
+use Ibexa\Contracts\FieldTypeRichText\RichText\ValidatorInterface;
 
 /**
  * Validator for RichText internal format links.
@@ -147,3 +147,5 @@ class InternalLinkValidator implements ValidatorInterface
         return "//docbook:{$tagName}[starts-with(@xlink:href, 'ezcontent://') or starts-with(@xlink:href, 'ezlocation://') or starts-with(@xlink:href, 'ezremote://')]";
     }
 }
+
+class_alias(InternalLinkValidator::class, 'EzSystems\EzPlatformRichText\eZ\RichText\Validator\InternalLinkValidator');

@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformRichText\eZ\RichText;
+namespace Ibexa\FieldTypeRichText\RichText;
 
 use eZ\Publish\Core\Base\Exceptions\NotFoundException;
 use DOMDocument;
@@ -74,3 +74,5 @@ class ConverterDispatcher
         throw new NotFoundException('Converter', $documentNamespace);
     }
 }
+
+class_alias(ConverterDispatcher::class, 'EzSystems\EzPlatformRichText\eZ\RichText\ConverterDispatcher');

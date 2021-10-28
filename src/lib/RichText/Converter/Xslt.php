@@ -6,12 +6,12 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformRichText\eZ\RichText\Converter;
+namespace Ibexa\FieldTypeRichText\RichText\Converter;
 
 use eZ\Publish\Core\Base\Exceptions\InvalidArgumentException;
 use DOMDocument;
-use EzSystems\EzPlatformRichText\eZ\RichText\Converter;
-use EzSystems\EzPlatformRichText\eZ\RichText\XmlBase;
+use Ibexa\Contracts\FieldTypeRichText\RichText\Converter;
+use Ibexa\FieldTypeRichText\RichText\XmlBase;
 use XSLTProcessor;
 use RuntimeException;
 
@@ -147,3 +147,5 @@ class Xslt extends XmlBase implements Converter
         return $document;
     }
 }
+
+class_alias(Xslt::class, 'EzSystems\EzPlatformRichText\eZ\RichText\Converter\Xslt');

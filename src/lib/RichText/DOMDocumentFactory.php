@@ -6,10 +6,10 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformRichText\eZ\RichText;
+namespace Ibexa\FieldTypeRichText\RichText;
 
 use DOMDocument;
-use EzSystems\EzPlatformRichText\eZ\RichText\Exception\InvalidXmlException;
+use Ibexa\FieldTypeRichText\RichText\Exception\InvalidXmlException;
 
 final class DOMDocumentFactory
 {
@@ -41,3 +41,5 @@ final class DOMDocumentFactory
         return $document;
     }
 }
+
+class_alias(DOMDocumentFactory::class, 'EzSystems\EzPlatformRichText\eZ\RichText\DOMDocumentFactory');

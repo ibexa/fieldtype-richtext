@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformRichTextBundle\DependencyInjection\Compiler;
+namespace Ibexa\Bundle\FieldTypeRichText\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -71,3 +71,5 @@ class RichTextHtml5ConverterPass implements CompilerPassInterface
         return array_merge(...$convertersByPriority);
     }
 }
+
+class_alias(RichTextHtml5ConverterPass::class, 'EzSystems\EzPlatformRichTextBundle\DependencyInjection\Compiler\RichTextHtml5ConverterPass');

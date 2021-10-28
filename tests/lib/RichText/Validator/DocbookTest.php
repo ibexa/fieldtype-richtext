@@ -161,8 +161,8 @@ class DocbookTest extends TestCase
     protected function getConversionValidationSchemas()
     {
         return [
-            __DIR__ . '/../../../../../src/lib/eZ/RichText/Resources/schemas/docbook/ezpublish.rng',
-            __DIR__ . '/../../../../../src/lib/eZ/RichText/Resources/schemas/docbook/docbook.iso.sch.xsl',
+            __DIR__ . '/../../../../../src/bundle/Resources/richtext/schemas/docbook/ezpublish.rng',
+            __DIR__ . '/../../../../../src/bundle/Resources/richtext/schemas/docbook/docbook.iso.sch.xsl',
         ];
     }
 }

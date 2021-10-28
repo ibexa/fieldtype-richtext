@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformRichText\eZ\RichText;
+namespace Ibexa\Contracts\FieldTypeRichText\RichText;
 
 /**
  * RichText field type renderer interface, to be implemented in MVC layer.
@@ -49,3 +49,5 @@ interface RendererInterface
      */
     public function renderLocationEmbed($locationId, $viewType, array $parameters, $isInline);
 }
+
+class_alias(RendererInterface::class, 'EzSystems\EzPlatformRichText\eZ\RichText\RendererInterface');

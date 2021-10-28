@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformRichText\eZ\RichText\Exception;
+namespace Ibexa\FieldTypeRichText\RichText\Exception;
 
 use eZ\Publish\Core\Base\Exceptions\InvalidArgumentException;
 use Throwable;
@@ -43,3 +43,5 @@ class InvalidXmlException extends InvalidArgumentException
         return $this->errors;
     }
 }
+
+class_alias(InvalidXmlException::class, 'EzSystems\EzPlatformRichText\eZ\RichText\Exception\InvalidXmlException');

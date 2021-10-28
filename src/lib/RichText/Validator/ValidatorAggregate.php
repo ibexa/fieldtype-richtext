@@ -6,10 +6,10 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformRichText\eZ\RichText\Validator;
+namespace Ibexa\FieldTypeRichText\RichText\Validator;
 
 use DOMDocument;
-use EzSystems\EzPlatformRichText\eZ\RichText\ValidatorInterface;
+use Ibexa\Contracts\FieldTypeRichText\RichText\ValidatorInterface;
 
 class ValidatorAggregate implements ValidatorInterface
 {
@@ -40,3 +40,5 @@ class ValidatorAggregate implements ValidatorInterface
         return $validationErrors;
     }
 }
+
+class_alias(ValidatorAggregate::class, 'EzSystems\EzPlatformRichText\eZ\RichText\Validator\ValidatorAggregate');

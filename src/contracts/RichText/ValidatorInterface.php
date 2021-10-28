@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformRichText\eZ\RichText;
+namespace Ibexa\Contracts\FieldTypeRichText\RichText;
 
 use DOMDocument;
 
@@ -21,3 +21,5 @@ interface ValidatorInterface
      */
     public function validateDocument(DOMDocument $xmlDocument): array;
 }
+
+class_alias(ValidatorInterface::class, 'EzSystems\EzPlatformRichText\eZ\RichText\ValidatorInterface');

@@ -6,10 +6,10 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\Tests\EzPlatformRichText\Configuration;
+namespace Ibexa\Tests\FieldTypeRichText\Configuration;
 
-use EzSystems\EzPlatformRichText\Configuration\AggregateProvider;
-use EzSystems\EzPlatformRichText\SPI\Configuration\Provider;
+use Ibexa\FieldTypeRichText\Configuration\AggregateProvider;
+use Ibexa\Contracts\FieldTypeRichText\Configuration\Provider;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -87,3 +87,5 @@ class AggregateProviderTest extends TestCase
         ];
     }
 }
+
+class_alias(AggregateProviderTest::class, 'EzSystems\Tests\EzPlatformRichText\Configuration\AggregateProviderTest');

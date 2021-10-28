@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformRichText\Configuration\UI\Mapper;
+namespace Ibexa\FieldTypeRichText\Configuration\UI\Mapper;
 
 use RuntimeException;
 use Symfony\Component\Asset\Packages;
@@ -73,3 +73,5 @@ final class CustomStyle implements CustomTemplateConfigMapper
         return $config;
     }
 }
+
+class_alias(CustomStyle::class, 'EzSystems\EzPlatformRichText\Configuration\UI\Mapper\CustomStyle');

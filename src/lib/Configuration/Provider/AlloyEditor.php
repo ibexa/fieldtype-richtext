@@ -6,12 +6,12 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformRichText\Configuration\Provider;
+namespace Ibexa\FieldTypeRichText\Configuration\Provider;
 
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
-use EzSystems\EzPlatformRichText\Configuration\UI\Mapper\OnlineEditorConfigMapper;
-use EzSystems\EzPlatformRichText\SPI\Configuration\Provider;
-use EzSystems\EzPlatformRichTextBundle\DependencyInjection\Configuration\Parser\FieldType\RichText;
+use Ibexa\FieldTypeRichText\Configuration\UI\Mapper\OnlineEditorConfigMapper;
+use Ibexa\Contracts\FieldTypeRichText\Configuration\Provider;
+use Ibexa\Bundle\FieldTypeRichText\DependencyInjection\Configuration\Parser\FieldType\RichText;
 
 /**
  * AlloyEditor configuration provider.
@@ -145,3 +145,5 @@ final class AlloyEditor implements Provider
             : [];
     }
 }
+
+class_alias(AlloyEditor::class, 'EzSystems\EzPlatformRichText\Configuration\Provider\AlloyEditor');

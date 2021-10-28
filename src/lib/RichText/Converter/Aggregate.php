@@ -6,10 +6,10 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformRichText\eZ\RichText\Converter;
+namespace Ibexa\FieldTypeRichText\RichText\Converter;
 
 use DOMDocument;
-use EzSystems\EzPlatformRichText\eZ\RichText\Converter;
+use Ibexa\Contracts\FieldTypeRichText\RichText\Converter;
 
 /**
  * Aggregate converter converts using configured converters in prioritized order.
@@ -52,3 +52,5 @@ class Aggregate implements Converter
         $this->converters[] = $converter;
     }
 }
+
+class_alias(Aggregate::class, 'EzSystems\EzPlatformRichText\eZ\RichText\Converter\Aggregate');

@@ -6,9 +6,9 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformRichText\eZ\RichText\Normalizer;
+namespace Ibexa\FieldTypeRichText\RichText\Normalizer;
 
-use EzSystems\EzPlatformRichText\eZ\RichText\Normalizer;
+use Ibexa\FieldTypeRichText\RichText\Normalizer;
 
 /**
  * Aggregate normalizer converts using configured normalizers in prioritized order.
@@ -62,3 +62,5 @@ class Aggregate extends Normalizer
         return $input;
     }
 }
+
+class_alias(Aggregate::class, 'EzSystems\EzPlatformRichText\eZ\RichText\Normalizer\Aggregate');

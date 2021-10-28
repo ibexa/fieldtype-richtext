@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformRichText\eZ\FieldType\RichText;
+namespace Ibexa\FieldTypeRichText\FieldType\RichText;
 
 use eZ\Publish\SPI\FieldType\GatewayBasedStorage;
 use eZ\Publish\SPI\FieldType\StorageGateway;
@@ -207,3 +207,5 @@ class RichTextStorage extends GatewayBasedStorage
     {
     }
 }
+
+class_alias(RichTextStorage::class, 'EzSystems\EzPlatformRichText\eZ\FieldType\RichText\RichTextStorage');

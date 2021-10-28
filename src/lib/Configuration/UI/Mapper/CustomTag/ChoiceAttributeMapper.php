@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformRichText\Configuration\UI\Mapper\CustomTag;
+namespace Ibexa\FieldTypeRichText\Configuration\UI\Mapper\CustomTag;
 
 /**
  * Map RichText Custom Tag attribute of 'choice' type to proper UI config.
@@ -40,3 +40,5 @@ final class ChoiceAttributeMapper extends CommonAttributeMapper implements Attri
         return $parentConfig;
     }
 }
+
+class_alias(ChoiceAttributeMapper::class, 'EzSystems\EzPlatformRichText\Configuration\UI\Mapper\CustomTag\ChoiceAttributeMapper');

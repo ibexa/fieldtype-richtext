@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformRichText\eZ\RichText;
+namespace Ibexa\FieldTypeRichText\RichText;
 
 use DOMDocument;
 use LibXMLError;
@@ -115,3 +115,5 @@ abstract class XmlBase
         return $errors;
     }
 }
+
+class_alias(XmlBase::class, 'EzSystems\EzPlatformRichText\eZ\RichText\XmlBase');

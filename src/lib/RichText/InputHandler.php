@@ -6,11 +6,12 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformRichText\eZ\RichText;
+namespace Ibexa\FieldTypeRichText\RichText;
 
+use Ibexa\Contracts\FieldTypeRichText\RichText\InputHandlerInterface;
 use DOMDocument;
 use eZ\Publish\Core\Base\Exceptions\InvalidArgumentException;
-use EzSystems\EzPlatformRichText\eZ\FieldType\RichText\Value;
+use Ibexa\FieldTypeRichText\FieldType\RichText\Value;
 
 class InputHandler implements InputHandlerInterface
 {
@@ -116,3 +117,5 @@ class InputHandler implements InputHandlerInterface
         return $this->docbookValidator->validateDocument($document);
     }
 }
+
+class_alias(InputHandler::class, 'EzSystems\EzPlatformRichText\eZ\RichText\InputHandler');

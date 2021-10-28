@@ -6,10 +6,10 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformRichText\Translation\Extractor;
+namespace Ibexa\FieldTypeRichText\Translation\Extractor;
 
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
-use EzSystems\EzPlatformRichTextBundle\DependencyInjection\Configuration\Parser\FieldType\RichText;
+use Ibexa\Bundle\FieldTypeRichText\DependencyInjection\Configuration\Parser\FieldType\RichText;
 use JMS\TranslationBundle\Model\MessageCatalogue;
 use JMS\TranslationBundle\Model\Message\XliffMessage;
 use JMS\TranslationBundle\Translation\ExtractorInterface;
@@ -111,3 +111,5 @@ final class OnlineEditorCustomAttributesExtractor implements ExtractorInterface
         }
     }
 }
+
+class_alias(OnlineEditorCustomAttributesExtractor::class, 'EzSystems\EzPlatformRichText\Translation\Extractor\OnlineEditorCustomAttributesExtractor');

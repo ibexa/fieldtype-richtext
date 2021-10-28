@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformRichText\eZ\RichText;
+namespace Ibexa\Contracts\FieldTypeRichText\RichText;
 
 use DOMDocument;
 
@@ -24,3 +24,5 @@ interface Converter
      */
     public function convert(DOMDocument $xmlDoc);
 }
+
+class_alias(Converter::class, 'EzSystems\EzPlatformRichText\eZ\RichText\Converter');

@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformRichTextBundle\DependencyInjection;
+namespace Ibexa\Bundle\FieldTypeRichText\DependencyInjection;
 
 use eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Configuration\SiteAccessAware\Configuration as SiteAccessConfiguration;
 use Symfony\Component\Config\Definition\Builder\NodeBuilder;
@@ -214,3 +214,5 @@ class Configuration extends SiteAccessConfiguration
             ;
     }
 }
+
+class_alias(Configuration::class, 'EzSystems\EzPlatformRichTextBundle\DependencyInjection\Configuration');

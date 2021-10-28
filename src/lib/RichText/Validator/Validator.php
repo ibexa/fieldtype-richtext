@@ -6,13 +6,13 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformRichText\eZ\RichText\Validator;
+namespace Ibexa\FieldTypeRichText\RichText\Validator;
 
 use DOMDocument;
 use DOMElement;
 use DOMXPath;
-use EzSystems\EzPlatformRichText\eZ\RichText\ValidatorInterface;
-use EzSystems\EzPlatformRichText\eZ\RichText\XmlBase;
+use Ibexa\Contracts\FieldTypeRichText\RichText\ValidatorInterface;
+use Ibexa\FieldTypeRichText\RichText\XmlBase;
 use XSLTProcessor;
 use RuntimeException;
 
@@ -153,3 +153,5 @@ class Validator extends XmlBase implements ValidatorInterface
         return (strlen($location) ? $location . ': ' : '') . $failedAssert->textContent;
     }
 }
+
+class_alias(Validator::class, 'EzSystems\EzPlatformRichText\eZ\RichText\Validator\Validator');

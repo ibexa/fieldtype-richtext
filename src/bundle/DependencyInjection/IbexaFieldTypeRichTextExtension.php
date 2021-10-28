@@ -6,9 +6,9 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformRichTextBundle\DependencyInjection;
+namespace Ibexa\Bundle\FieldTypeRichText\DependencyInjection;
 
-use EzSystems\EzPlatformRichText\SPI\Configuration\Provider;
+use Ibexa\Contracts\FieldTypeRichText\Configuration\Provider;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Config\Resource\FileResource;
@@ -21,7 +21,7 @@ use Symfony\Component\Yaml\Yaml;
 /**
  * eZ Platform RichText Field Type Bundle extension.
  */
-class EzPlatformRichTextExtension extends Extension implements PrependExtensionInterface
+class IbexaFieldTypeRichTextExtension extends Extension implements PrependExtensionInterface
 {
     const RICHTEXT_CUSTOM_STYLES_PARAMETER = 'ezplatform.ezrichtext.custom_styles';
     const RICHTEXT_CUSTOM_TAGS_PARAMETER = 'ezplatform.ezrichtext.custom_tags';
@@ -45,16 +45,16 @@ class EzPlatformRichTextExtension extends Extension implements PrependExtensionI
      */
     public function load(array $configs, ContainerBuilder $container)
     {
-        $ezLoader = new Loader\YamlFileLoader(
+        $settingsLoader = new Loader\YamlFileLoader(
             $container,
-            new FileLocator(__DIR__ . '/../../lib/eZ/settings')
+            new FileLocator(__DIR__ . '/../Resources/config/settings')
         );
-        $ezLoader->load('fieldtypes.yaml');
-        $ezLoader->load('fieldtype_services.yaml');
-        $ezLoader->load('fieldtype_external_storages.yaml');
-        $ezLoader->load('indexable_fieldtypes.yaml');
-        $ezLoader->load('storage_engines/legacy/external_storage_gateways.yaml');
-        $ezLoader->load('storage_engines/legacy/field_value_converters.yaml');
+        $settingsLoader->load('fieldtypes.yaml');
+        $settingsLoader->load('fieldtype_services.yaml');
+        $settingsLoader->load('fieldtype_external_storages.yaml');
+        $settingsLoader->load('indexable_fieldtypes.yaml');
+        $settingsLoader->load('storage_engines/legacy/external_storage_gateways.yaml');
+        $settingsLoader->load('storage_engines/legacy/field_value_converters.yaml');
 
         $container
             ->registerForAutoconfiguration(Provider::class)
@@ -291,3 +291,5 @@ class EzPlatformRichTextExtension extends Extension implements PrependExtensionI
         }
     }
 }
+
+class_alias(IbexaFieldTypeRichTextExtension::class, 'EzSystems\EzPlatformRichTextBundle\DependencyInjection\EzPlatformRichTextExtension');

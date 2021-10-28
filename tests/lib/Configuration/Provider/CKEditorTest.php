@@ -6,12 +6,12 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\Tests\EzPlatformRichText\Configuration\Provider;
+namespace Ibexa\Tests\FieldTypeRichText\Configuration\Provider;
 
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
-use EzSystems\EzPlatformRichText\Configuration\Provider\CKEditor;
-use EzSystems\EzPlatformRichText\SPI\Configuration\Provider;
-use EzSystems\EzPlatformRichTextBundle\DependencyInjection\Configuration\Parser\FieldType\RichText;
+use Ibexa\FieldTypeRichText\Configuration\Provider\CKEditor;
+use Ibexa\Contracts\FieldTypeRichText\Configuration\Provider;
+use Ibexa\Bundle\FieldTypeRichText\DependencyInjection\Configuration\Parser\FieldType\RichText;
 
 final class CKEditorTest extends BaseProviderTestCase
 {
@@ -459,3 +459,5 @@ final class CKEditorTest extends BaseProviderTestCase
         };
     }
 }
+
+class_alias(CKEditorTest::class, 'EzSystems\Tests\EzPlatformRichText\Configuration\Provider\CKEditorTest');

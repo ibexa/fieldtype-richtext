@@ -4,7 +4,7 @@ alloy_editor:
 custom_tags:
     ezfacebook:
         template: '@ezdesign/ezrichtext/custom_tags/ezfacebook.html.twig'
-        icon: '/bundles/ezplatformrichtext/assets/images/custom_tags/admin/icons/facebook.svg#facebook'
+        icon: '/bundles/ibexafieldtyperichtext/assets/images/custom_tags/admin/icons/facebook.svg#facebook'
         attributes:
             post_url:
                 type: 'string'
@@ -13,7 +13,7 @@ custom_tags:
                 type: 'number'
     eztwitter:
         template: '@ezdesign/ezrichtext/custom_tags/eztwitter.html.twig'
-        icon: '/bundles/ezplatformrichtext/assets/images/custom_tags/admin/icons/twitter.svg#twitter'
+        icon: '/bundles/ibexafieldtyperichtext/assets/images/custom_tags/admin/icons/twitter.svg#twitter'
         attributes:
             tweet_url:
                 type: 'string'
@@ -47,7 +47,7 @@ custom_tags:
                 default_value: true
     ezyoutube:
         template: '@ezdesign/ezrichtext/custom_tags/ezyoutube.html.twig'
-        icon: '/bundles/ezplatformrichtext/assets/images/custom_tags/admin/icons/video.svg#video'
+        icon: '/bundles/ibexafieldtyperichtext/assets/images/custom_tags/admin/icons/video.svg#video'
         attributes:
             video_url:
                 type: 'string'

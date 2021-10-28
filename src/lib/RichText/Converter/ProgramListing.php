@@ -6,9 +6,9 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformRichText\eZ\RichText\Converter;
+namespace Ibexa\FieldTypeRichText\RichText\Converter;
 
-use EzSystems\EzPlatformRichText\eZ\RichText\Converter;
+use Ibexa\Contracts\FieldTypeRichText\RichText\Converter;
 use DOMDocument;
 use DOMXPath;
 
@@ -42,3 +42,5 @@ class ProgramListing implements Converter
         return $document;
     }
 }
+
+class_alias(ProgramListing::class, 'EzSystems\EzPlatformRichText\eZ\RichText\Converter\ProgramListing');

@@ -6,11 +6,11 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformRichText\Configuration\Provider;
+namespace Ibexa\FieldTypeRichText\Configuration\Provider;
 
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
-use EzSystems\EzPlatformRichText\SPI\Configuration\Provider;
-use EzSystems\EzPlatformRichTextBundle\DependencyInjection\Configuration\Parser\FieldType\RichText;
+use Ibexa\Contracts\FieldTypeRichText\Configuration\Provider;
+use Ibexa\Bundle\FieldTypeRichText\DependencyInjection\Configuration\Parser\FieldType\RichText;
 
 /**
  * CKEditor configuration provider.
@@ -164,3 +164,5 @@ final class CKEditor implements Provider
             : [];
     }
 }
+
+class_alias(CKEditor::class, 'EzSystems\EzPlatformRichText\Configuration\Provider\CKEditor');

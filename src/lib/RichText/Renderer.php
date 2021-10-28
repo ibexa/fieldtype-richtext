@@ -6,12 +6,12 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformRichTextBundle\eZ\RichText;
+namespace Ibexa\FieldTypeRichText\RichText;
 
 use eZ\Publish\API\Repository\Repository;
 use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
-use EzSystems\EzPlatformRichText\eZ\RichText\RendererInterface;
+use Ibexa\Contracts\FieldTypeRichText\RichText\RendererInterface;
 use Psr\Log\NullLogger;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use eZ\Publish\Core\MVC\Symfony\Security\Authorization\Attribute as AuthorizationAttribute;
@@ -522,3 +522,5 @@ class Renderer implements RendererInterface
         return $location;
     }
 }
+
+class_alias(Renderer::class, 'EzSystems\EzPlatformRichTextBundle\eZ\RichText\Renderer');

@@ -6,17 +6,17 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformRichText\Form\Type;
+namespace Ibexa\FieldTypeRichText\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use EzSystems\EzPlatformRichText\eZ\RichText\DOMDocumentFactory;
-use EzSystems\EzPlatformRichText\eZ\RichText\InputHandlerInterface;
-use EzSystems\EzPlatformRichText\eZ\RichText\Converter;
-use EzSystems\EzPlatformRichText\Form\DataTransformer\RichTextTransformer;
-use EzSystems\EzPlatformRichText\Validator\Constraints\RichText as ValidRichText;
+use Ibexa\FieldTypeRichText\RichText\DOMDocumentFactory;
+use Ibexa\Contracts\FieldTypeRichText\RichText\InputHandlerInterface;
+use Ibexa\Contracts\FieldTypeRichText\RichText\Converter;
+use Ibexa\FieldTypeRichText\Form\DataTransformer\RichTextTransformer;
+use Ibexa\FieldTypeRichText\Validator\Constraints\RichText as ValidRichText;
 
 class RichTextType extends AbstractType
 {
@@ -90,3 +90,5 @@ class RichTextType extends AbstractType
         return 'richtext';
     }
 }
+
+class_alias(RichTextType::class, 'EzSystems\EzPlatformRichText\Form\Type\RichTextType');

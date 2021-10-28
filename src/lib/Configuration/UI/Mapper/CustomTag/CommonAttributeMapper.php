@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformRichText\Configuration\UI\Mapper\CustomTag;
+namespace Ibexa\FieldTypeRichText\Configuration\UI\Mapper\CustomTag;
 
 /**
  * Map RichText Custom Tag attribute of any type to proper UI config.
@@ -39,3 +39,5 @@ class CommonAttributeMapper implements AttributeMapper
         ];
     }
 }
+
+class_alias(CommonAttributeMapper::class, 'EzSystems\EzPlatformRichText\Configuration\UI\Mapper\CustomTag\CommonAttributeMapper');

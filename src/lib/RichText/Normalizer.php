@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformRichText\eZ\RichText;
+namespace Ibexa\FieldTypeRichText\RichText;
 
 /**
  * Abstract class for XML normalization of string input.
@@ -31,3 +31,5 @@ abstract class Normalizer
      */
     abstract public function normalize($input);
 }
+
+class_alias(Normalizer::class, 'EzSystems\EzPlatformRichText\eZ\RichText\Normalizer');

@@ -6,9 +6,9 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformRichTextBundle\eZ\RichText\Converter;
+namespace Ibexa\FieldTypeRichText\RichText\Converter;
 
-use EzSystems\EzPlatformRichText\eZ\RichText\Converter\Xslt as XsltConverter;
+use Ibexa\FieldTypeRichText\RichText\Converter\Xslt as XsltConverter;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
 
 /**
@@ -23,3 +23,5 @@ class Html5 extends XsltConverter
         parent::__construct($stylesheet, $customStylesheets);
     }
 }
+
+class_alias(Html5::class, 'EzSystems\EzPlatformRichTextBundle\eZ\RichText\Converter\Html5');

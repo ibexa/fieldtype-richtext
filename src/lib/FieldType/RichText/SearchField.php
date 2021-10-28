@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformRichText\eZ\FieldType\RichText;
+namespace Ibexa\FieldTypeRichText\FieldType\RichText;
 
 use eZ\Publish\SPI\Persistence\Content\Field;
 use eZ\Publish\SPI\Persistence\Content\Type\FieldDefinition;
@@ -142,3 +142,5 @@ class SearchField implements Indexable
         return $this->getDefaultMatchField();
     }
 }
+
+class_alias(SearchField::class, 'EzSystems\EzPlatformRichText\eZ\FieldType\RichText\SearchField');

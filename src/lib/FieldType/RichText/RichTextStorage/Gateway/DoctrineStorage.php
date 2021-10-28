@@ -6,10 +6,10 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformRichText\eZ\FieldType\RichText\RichTextStorage\Gateway;
+namespace Ibexa\FieldTypeRichText\FieldType\RichText\RichTextStorage\Gateway;
 
 use Doctrine\DBAL\Connection;
-use EzSystems\EzPlatformRichText\eZ\FieldType\RichText\RichTextStorage\Gateway;
+use Ibexa\FieldTypeRichText\FieldType\RichText\RichTextStorage\Gateway;
 use eZ\Publish\Core\FieldType\Url\UrlStorage\Gateway as UrlGateway;
 
 class DoctrineStorage extends Gateway
@@ -59,3 +59,5 @@ class DoctrineStorage extends Gateway
         return $objectRemoteIdMap;
     }
 }
+
+class_alias(DoctrineStorage::class, 'EzSystems\EzPlatformRichText\eZ\FieldType\RichText\RichTextStorage\Gateway\DoctrineStorage');

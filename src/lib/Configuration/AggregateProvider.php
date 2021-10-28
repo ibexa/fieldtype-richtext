@@ -6,9 +6,9 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformRichText\Configuration;
+namespace Ibexa\FieldTypeRichText\Configuration;
 
-use EzSystems\EzPlatformRichText\API\Configuration\ProviderService;
+use Ibexa\Contracts\FieldTypeRichText\Configuration\ProviderService;
 
 /**
  * RichText configuration provider, providing configuration by aggregating different sources.
@@ -38,3 +38,5 @@ final class AggregateProvider implements ProviderService
         return $configuration;
     }
 }
+
+class_alias(AggregateProvider::class, 'EzSystems\EzPlatformRichText\Configuration\AggregateProvider');

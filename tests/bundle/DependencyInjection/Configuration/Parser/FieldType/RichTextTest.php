@@ -6,13 +6,13 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\Tests\EzPlatformRichTextBundle\DependencyInjection\Configuration\Parser\FieldType;
+namespace Ibexa\Tests\Bundle\FieldTypeRichText\DependencyInjection\Configuration\Parser\FieldType;
 
 use eZ\Bundle\EzPublishCoreBundle\DependencyInjection\EzPublishCoreExtension;
 use eZ\Bundle\EzPublishCoreBundle\Tests\DependencyInjection\Configuration\Parser\AbstractParserTestCase;
-use EzSystems\EzPlatformRichTextBundle\DependencyInjection\Configuration\Parser\FieldType\RichText as RichTextConfigParser;
-use EzSystems\EzPlatformRichTextBundle\DependencyInjection\EzPlatformRichTextExtension;
-use EzSystems\EzPlatformRichTextBundle\EzPlatformRichTextBundle;
+use Ibexa\Bundle\FieldTypeRichText\DependencyInjection\Configuration\Parser\FieldType\RichText as RichTextConfigParser;
+use Ibexa\Bundle\FieldTypeRichText\DependencyInjection\IbexaFieldTypeRichTextExtension;
+use Ibexa\Bundle\FieldTypeRichText\IbexaFieldTypeRichTextBundle;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
@@ -112,7 +112,7 @@ class RichTextTest extends AbstractParserTestCase
             'fieldtypes.ezrichtext.output_custom_xsl',
             [
                 0 => [
-                    'path' => '%kernel.project_dir%/vendor/ezsystems/ezplatform-richtext/src/lib/eZ/RichText/Resources/stylesheets/docbook/xhtml5/output/core.xsl',
+                    'path' => '%kernel.project_dir%/vendor/ezsystems/ezplatform-richtext/src/bundle/Resources/richtext/stylesheets/docbook/xhtml5/output/core.xsl',
                     'priority' => 0,
                 ],
             ],
@@ -417,3 +417,5 @@ class RichTextTest extends AbstractParserTestCase
         ];
     }
 }
+
+class_alias(RichTextTest::class, 'EzSystems\Tests\EzPlatformRichTextBundle\DependencyInjection\Configuration\Parser\FieldType\RichTextTest');

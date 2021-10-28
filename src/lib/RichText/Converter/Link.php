@@ -6,10 +6,10 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformRichText\eZ\RichText\Converter;
+namespace Ibexa\FieldTypeRichText\RichText\Converter;
 
 use eZ\Publish\API\Repository\Values\Content\Location;
-use EzSystems\EzPlatformRichText\eZ\RichText\Converter;
+use Ibexa\Contracts\FieldTypeRichText\RichText\Converter;
 use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\Core\MVC\Symfony\Routing\UrlAliasRouter;
@@ -145,3 +145,5 @@ class Link implements Converter
         return $urlAlias . $fragment;
     }
 }
+
+class_alias(Link::class, 'EzSystems\EzPlatformRichText\eZ\RichText\Converter\Link');

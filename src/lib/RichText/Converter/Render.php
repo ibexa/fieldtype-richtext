@@ -6,12 +6,12 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformRichText\eZ\RichText\Converter;
+namespace Ibexa\FieldTypeRichText\RichText\Converter;
 
 use DOMElement;
 use DOMNode;
 use DOMXPath;
-use EzSystems\EzPlatformRichText\eZ\RichText\RendererInterface;
+use Ibexa\Contracts\FieldTypeRichText\RichText\RendererInterface;
 
 /**
  * Base class for Render converters.
@@ -73,3 +73,5 @@ abstract class Render
         return $hash;
     }
 }
+
+class_alias(Render::class, 'EzSystems\EzPlatformRichText\eZ\RichText\Converter\Render');

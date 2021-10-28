@@ -6,14 +6,14 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformRichText\eZ\Persistence\Legacy;
+namespace Ibexa\FieldTypeRichText\Persistence\Legacy;
 
 use eZ\Publish\Core\Persistence\Legacy\Content\FieldValue\Converter;
 use eZ\Publish\Core\Persistence\Legacy\Content\StorageFieldValue;
 use eZ\Publish\SPI\Persistence\Content\FieldValue;
 use eZ\Publish\SPI\Persistence\Content\Type\FieldDefinition;
 use eZ\Publish\Core\Persistence\Legacy\Content\StorageFieldDefinition;
-use EzSystems\EzPlatformRichText\eZ\FieldType\RichText\Value;
+use Ibexa\FieldTypeRichText\FieldType\RichText\Value;
 
 class RichTextFieldValueConverter implements Converter
 {
@@ -77,3 +77,5 @@ class RichTextFieldValueConverter implements Converter
         return 'sort_key_string';
     }
 }
+
+class_alias(RichTextFieldValueConverter::class, 'EzSystems\EzPlatformRichText\eZ\Persistence\Legacy\RichTextFieldValueConverter');

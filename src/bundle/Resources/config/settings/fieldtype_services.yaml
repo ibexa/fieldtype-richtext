@@ -8,29 +8,29 @@ services:
         public: false
 
     ezrichtext.converter.input.dispatcher:
-        class: EzSystems\EzPlatformRichText\eZ\RichText\ConverterDispatcher
+        class: Ibexa\FieldTypeRichText\RichText\ConverterDispatcher
         arguments:
             -
                 http://docbook.org/ns/docbook: null
 
     ezrichtext.validator.input.ezxhtml5:
-        class: EzSystems\EzPlatformRichText\eZ\RichText\Validator\ValidatorAggregate
+        class: Ibexa\FieldTypeRichText\RichText\Validator\ValidatorAggregate
         arguments: [!tagged ezrichtext.validator.input.ezxhtml5]
 
     ezrichtext.validator.docbook:
-        class: EzSystems\EzPlatformRichText\eZ\RichText\Validator\Validator
+        class: Ibexa\FieldTypeRichText\RichText\Validator\Validator
         arguments: ['%ezrichtext.validator.docbook.resources%']
         tags:
             - { name: 'ezrichtext.validator.input.ezxhtml5' }
 
     ezrichtext.validator.input.dispatcher:
-        class: EzSystems\EzPlatformRichText\eZ\RichText\Validator\ValidatorDispatcher
+        class: Ibexa\FieldTypeRichText\RichText\Validator\ValidatorDispatcher
         arguments:
             -
                 http://docbook.org/ns/docbook: null
 
     ezrichtext.validator.internal_link:
-        class: EzSystems\EzPlatformRichText\eZ\RichText\Validator\InternalLinkValidator
+        class: Ibexa\FieldTypeRichText\RichText\Validator\InternalLinkValidator
         arguments:
             - '@ezpublish.spi.persistence.cache.contentHandler'
             - '@ezpublish.spi.persistence.cache.locationHandler'
@@ -38,29 +38,29 @@ services:
             - { name: 'ezrichtext.validator.input.ezxhtml5' }
 
     ezrichtext.normalizer.input:
-        class: EzSystems\EzPlatformRichText\eZ\RichText\Normalizer\Aggregate
+        class: Ibexa\FieldTypeRichText\RichText\Normalizer\Aggregate
 
     # Symfony 3.4+ service definitions:
-    EzSystems\EzPlatformRichText\eZ\RichText\Validator\CustomTagsValidator:
+    Ibexa\FieldTypeRichText\RichText\Validator\CustomTagsValidator:
         public: false
         arguments: ['%ezplatform.ezrichtext.custom_tags%']
         tags:
             - { name: 'ezrichtext.validator.input.ezxhtml5' }
 
-    EzSystems\EzPlatformRichText\eZ\RichText\RelationProcessor:
+    Ibexa\FieldTypeRichText\RichText\RelationProcessor:
         public: false
 
-    EzSystems\EzPlatformRichText\eZ\RichText\DOMDocumentFactory:
+    Ibexa\FieldTypeRichText\RichText\DOMDocumentFactory:
         public: false
 
-    EzSystems\EzPlatformRichText\eZ\RichText\InputHandler:
+    Ibexa\FieldTypeRichText\RichText\InputHandler:
         arguments:
-            - '@EzSystems\EzPlatformRichText\eZ\RichText\DOMDocumentFactory'
+            - '@Ibexa\FieldTypeRichText\RichText\DOMDocumentFactory'
             - '@ezrichtext.converter.input.dispatcher'
             - '@ezrichtext.normalizer.input'
             - '@ezrichtext.validator.input.dispatcher'
             - '@ezrichtext.validator.input.ezxhtml5'
-            - '@EzSystems\EzPlatformRichText\eZ\RichText\RelationProcessor'
+            - '@Ibexa\FieldTypeRichText\RichText\RelationProcessor'
 
     # Default InputHandler
-    EzSystems\EzPlatformRichText\eZ\RichText\InputHandlerInterface: '@EzSystems\EzPlatformRichText\eZ\RichText\InputHandler'
+    Ibexa\Contracts\FieldTypeRichText\RichText\InputHandlerInterface: '@Ibexa\FieldTypeRichText\RichText\InputHandler'

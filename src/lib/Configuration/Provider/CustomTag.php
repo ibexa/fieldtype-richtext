@@ -6,11 +6,11 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformRichText\Configuration\Provider;
+namespace Ibexa\FieldTypeRichText\Configuration\Provider;
 
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
-use EzSystems\EzPlatformRichText\Configuration\UI\Mapper\CustomTemplateConfigMapper;
-use EzSystems\EzPlatformRichText\SPI\Configuration\Provider;
+use Ibexa\FieldTypeRichText\Configuration\UI\Mapper\CustomTemplateConfigMapper;
+use Ibexa\Contracts\FieldTypeRichText\Configuration\Provider;
 
 /**
  * Custom Tags configuration provider.
@@ -52,3 +52,5 @@ final class CustomTag implements Provider
         return [];
     }
 }
+
+class_alias(CustomTag::class, 'EzSystems\EzPlatformRichText\Configuration\Provider\CustomTag');

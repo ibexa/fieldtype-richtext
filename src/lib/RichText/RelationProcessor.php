@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformRichText\eZ\RichText;
+namespace Ibexa\FieldTypeRichText\RichText;
 
 use DOMDocument;
 use DOMXPath;
@@ -93,3 +93,5 @@ final class RelationProcessor
         ];
     }
 }
+
+class_alias(RelationProcessor::class, 'EzSystems\EzPlatformRichText\eZ\RichText\RelationProcessor');

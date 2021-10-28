@@ -5,7 +5,7 @@
     targetNamespace="http://ez.no/namespaces/ezpublish5/xhtml5"
     elementFormDefault="qualified">
 
-  <xs:redefine schemaLocation="../../../../../../../../../../src/lib/eZ/RichText/Resources/schemas/ezxhtml5/output/ezxhtml5.xsd">
+  <xs:redefine schemaLocation="../../../../../../../../../../src/bundle/Resources/richtext/schemas/ezxhtml5/output/ezxhtml5.xsd">
     <xs:complexType name="iframeType">
       <xs:complexContent>
         <xs:extension base="iframeType">
@@ -16,7 +16,7 @@
     </xs:complexType>
   </xs:redefine>
 
-  <xs:redefine schemaLocation="../../../../../../../../../../src/lib/eZ/RichText/Resources/schemas/ezxhtml5/output/ezxhtml5.xsd">
+  <xs:redefine schemaLocation="../../../../../../../../../../src/bundle/Resources/richtext/schemas/ezxhtml5/output/ezxhtml5.xsd">
     <xs:attributeGroup name="coreAttributeGroupNodir">
       <xs:attributeGroup ref="coreAttributeGroupNodir"/>
       <xs:attribute name="data-ezattribute-name-1" type="string"/>
@@ -32,7 +32,7 @@
   </xs:redefine>
 
   <!-- Schema extension to handle debug renderer -->
-  <xs:redefine schemaLocation="../../../../../../../../../../src/lib/eZ/RichText/Resources/schemas/ezxhtml5/output/ezxhtml5.xsd">
+  <xs:redefine schemaLocation="../../../../../../../../../../src/bundle/Resources/richtext/schemas/ezxhtml5/output/ezxhtml5.xsd">
       <xs:group name="flowContent">
           <xs:choice>
               <xs:group ref="flowContent" />

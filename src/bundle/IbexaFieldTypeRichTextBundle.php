@@ -6,19 +6,19 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformRichTextBundle;
+namespace Ibexa\Bundle\FieldTypeRichText;
 
 use eZ\Bundle\EzPublishCoreBundle\DependencyInjection\EzPublishCoreExtension;
-use EzSystems\EzPlatformRichTextBundle\DependencyInjection\Compiler\RichTextHtml5ConverterPass;
-use EzSystems\EzPlatformRichTextBundle\DependencyInjection\Configuration\Parser\FieldType\RichText;
-use EzSystems\EzPlatformRichTextBundle\DependencyInjection\EzPlatformRichTextExtension;
+use Ibexa\Bundle\FieldTypeRichText\DependencyInjection\Compiler\RichTextHtml5ConverterPass;
+use Ibexa\Bundle\FieldTypeRichText\DependencyInjection\Configuration\Parser\FieldType\RichText;
+use Ibexa\Bundle\FieldTypeRichText\DependencyInjection\IbexaFieldTypeRichTextExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
  * eZ Platform RichText FieldType Bundle.
  */
-class EzPlatformRichTextBundle extends Bundle
+class IbexaFieldTypeRichTextBundle extends Bundle
 {
     public function build(ContainerBuilder $container)
     {
@@ -56,3 +56,5 @@ class EzPlatformRichTextBundle extends Bundle
         return $this->extension;
     }
 }
+
+class_alias(IbexaFieldTypeRichTextBundle::class, 'EzSystems\EzPlatformRichTextBundle\EzPlatformRichTextBundle');

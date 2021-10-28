@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformRichTextBundle\Templating\Twig\Extension;
+namespace Ibexa\Bundle\FieldTypeRichText\Templating\Twig\Extension;
 
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
@@ -43,3 +43,5 @@ final class YoutubeIdExtractorExtension extends AbstractExtension
         return $matches['id'] ?? null;
     }
 }
+
+class_alias(YoutubeIdExtractorExtension::class, 'EzSystems\EzPlatformRichTextBundle\Templating\Twig\Extension\YoutubeIdExtractorExtension');

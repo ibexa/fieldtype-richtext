@@ -6,9 +6,9 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformRichTextBundle\Templating\Twig\Extension;
+namespace Ibexa\Bundle\FieldTypeRichText\Templating\Twig\Extension;
 
-use EzSystems\EzPlatformRichText\API\Configuration;
+use Ibexa\FieldTypeRichText\API\Configuration;
 use Twig\Extension\AbstractExtension;
 use Twig\Extension\GlobalsInterface;
 
@@ -39,3 +39,5 @@ final class RichTextConfigurationExtension extends AbstractExtension implements 
         ];
     }
 }
+
+class_alias(RichTextConfigurationExtension::class, 'EzSystems\EzPlatformRichTextBundle\Templating\Twig\Extension\RichTextConfigurationExtension');

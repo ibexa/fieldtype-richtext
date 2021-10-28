@@ -6,9 +6,9 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformRichText\Form\Mapper;
+namespace Ibexa\FieldTypeRichText\Form\Mapper;
 
-use EzSystems\EzPlatformRichText\Form\Type\RichTextFieldType;
+use Ibexa\FieldTypeRichText\Form\Type\RichTextFieldType;
 use EzSystems\EzPlatformContentForms\Data\Content\FieldData;
 use EzSystems\EzPlatformContentForms\FieldType\FieldValueFormMapperInterface;
 use Symfony\Component\Form\FormInterface;
@@ -44,3 +44,5 @@ class RichTextFormMapper implements FieldValueFormMapperInterface
             ]);
     }
 }
+
+class_alias(RichTextFormMapper::class, 'EzSystems\EzPlatformRichText\Form\Mapper\RichTextFormMapper');

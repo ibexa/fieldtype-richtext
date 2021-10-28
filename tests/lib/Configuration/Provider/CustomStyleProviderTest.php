@@ -6,10 +6,10 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\Tests\EzPlatformRichText\Configuration\Provider;
+namespace Ibexa\Tests\FieldTypeRichText\Configuration\Provider;
 
-use EzSystems\EzPlatformRichText\Configuration\Provider\CustomStyle;
-use EzSystems\EzPlatformRichText\SPI\Configuration\Provider;
+use Ibexa\FieldTypeRichText\Configuration\Provider\CustomStyle;
+use Ibexa\Contracts\FieldTypeRichText\Configuration\Provider;
 
 class CustomStyleProviderTest extends BaseCustomTemplateProviderTestCase
 {
@@ -33,3 +33,5 @@ class CustomStyleProviderTest extends BaseCustomTemplateProviderTestCase
         return 'fieldtypes.ezrichtext.custom_styles';
     }
 }
+
+class_alias(CustomStyleProviderTest::class, 'EzSystems\Tests\EzPlatformRichText\Configuration\Provider\CustomStyleProviderTest');

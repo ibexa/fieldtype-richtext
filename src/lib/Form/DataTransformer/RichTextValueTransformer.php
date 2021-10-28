@@ -6,11 +6,11 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformRichText\Form\DataTransformer;
+namespace Ibexa\FieldTypeRichText\Form\DataTransformer;
 
 use eZ\Publish\API\Repository\FieldType;
-use EzSystems\EzPlatformRichText\eZ\RichText\Converter;
-use EzSystems\EzPlatformRichText\eZ\FieldType\RichText\Value;
+use Ibexa\Contracts\FieldTypeRichText\RichText\Converter;
+use Ibexa\FieldTypeRichText\FieldType\RichText\Value;
 use Symfony\Component\Form\DataTransformerInterface;
 
 /**
@@ -60,3 +60,5 @@ class RichTextValueTransformer implements DataTransformerInterface
         return $this->fieldType->fromHash(['xml' => $value]);
     }
 }
+
+class_alias(RichTextValueTransformer::class, 'EzSystems\EzPlatformRichText\Form\DataTransformer\RichTextValueTransformer');

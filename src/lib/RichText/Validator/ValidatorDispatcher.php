@@ -6,10 +6,10 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformRichText\eZ\RichText\Validator;
+namespace Ibexa\FieldTypeRichText\RichText\Validator;
 
 use eZ\Publish\Core\Base\Exceptions\NotFoundException;
-use EzSystems\EzPlatformRichText\eZ\RichText\ValidatorInterface;
+use Ibexa\Contracts\FieldTypeRichText\RichText\ValidatorInterface;
 use DOMDocument;
 
 /**
@@ -83,3 +83,5 @@ class ValidatorDispatcher implements ValidatorInterface
         return $this->dispatch($xmlDocument);
     }
 }
+
+class_alias(ValidatorDispatcher::class, 'EzSystems\EzPlatformRichText\eZ\RichText\Validator\ValidatorDispatcher');

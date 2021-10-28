@@ -6,15 +6,15 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformRichText\eZ\RichText\Converter\Render;
+namespace Ibexa\FieldTypeRichText\RichText\Converter\Render;
 
 use DOMDocument;
 use DOMElement;
 use DOMNode;
 use DOMXPath;
-use EzSystems\EzPlatformRichText\eZ\RichText\Converter;
-use EzSystems\EzPlatformRichText\eZ\RichText\Converter\Render;
-use EzSystems\EzPlatformRichText\eZ\RichText\RendererInterface;
+use Ibexa\Contracts\FieldTypeRichText\RichText\Converter;
+use Ibexa\FieldTypeRichText\RichText\Converter\Render;
+use Ibexa\Contracts\FieldTypeRichText\RichText\RendererInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 
@@ -194,3 +194,5 @@ class Template extends Render implements Converter
         return $rootNode->appendChild($literalLayoutNode);
     }
 }
+
+class_alias(Template::class, 'EzSystems\EzPlatformRichText\eZ\RichText\Converter\Render\Template');

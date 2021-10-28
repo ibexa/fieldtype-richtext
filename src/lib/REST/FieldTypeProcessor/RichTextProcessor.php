@@ -6,10 +6,10 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformRichText\eZ\REST\FieldTypeProcessor;
+namespace Ibexa\FieldTypeRichText\REST\FieldTypeProcessor;
 
 use EzSystems\EzPlatformRest\FieldTypeProcessor;
-use EzSystems\EzPlatformRichText\eZ\RichText\Converter;
+use Ibexa\Contracts\FieldTypeRichText\RichText\Converter;
 use DOMDocument;
 
 class RichTextProcessor extends FieldTypeProcessor
@@ -39,3 +39,5 @@ class RichTextProcessor extends FieldTypeProcessor
         return $outgoingValueHash;
     }
 }
+
+class_alias(RichTextProcessor::class, 'EzSystems\EzPlatformRichText\eZ\REST\FieldTypeProcessor\RichTextProcessor');

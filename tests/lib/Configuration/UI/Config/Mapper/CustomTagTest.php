@@ -6,10 +6,10 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\Tests\EzPlatformRichText\Configuration\UI\Config\Mapper;
+namespace Ibexa\Tests\FieldTypeRichText\Configuration\UI\Config\Mapper;
 
 use ArrayObject;
-use EzSystems\EzPlatformRichText\Configuration\UI\Mapper\CustomTag;
+use Ibexa\FieldTypeRichText\Configuration\UI\Mapper\CustomTag;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Asset\Packages;
@@ -225,3 +225,5 @@ class CustomTagTest extends TestCase
         return $packagesMock;
     }
 }
+
+class_alias(CustomTagTest::class, 'EzSystems\Tests\EzPlatformRichText\Configuration\UI\Config\Mapper\CustomTagTest');

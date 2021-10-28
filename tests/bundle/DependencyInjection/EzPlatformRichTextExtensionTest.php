@@ -6,9 +6,9 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\Tests\EzPlatformRichTextBundle\DependencyInjection;
+namespace Ibexa\Tests\Bundle\FieldTypeRichText\DependencyInjection;
 
-use EzSystems\EzPlatformRichTextBundle\DependencyInjection\EzPlatformRichTextExtension;
+use Ibexa\Bundle\FieldTypeRichText\DependencyInjection\IbexaFieldTypeRichTextExtension;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Symfony\Component\Yaml\Yaml;
@@ -158,3 +158,5 @@ class EzPlatformRichTextExtensionTest extends AbstractExtensionTestCase
         ];
     }
 }
+
+class_alias(EzPlatformRichTextExtensionTest::class, 'EzSystems\Tests\EzPlatformRichTextBundle\DependencyInjection\EzPlatformRichTextExtensionTest');

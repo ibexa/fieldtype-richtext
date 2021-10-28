@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformRichText\eZ\FieldType\RichText\RichTextStorage;
+namespace Ibexa\FieldTypeRichText\FieldType\RichText\RichTextStorage;
 
 use eZ\Publish\SPI\FieldType\StorageGateway;
 use eZ\Publish\Core\FieldType\Url\UrlStorage\Gateway as UrlGateway;
@@ -102,3 +102,5 @@ abstract class Gateway extends StorageGateway
         $this->urlGateway->unlinkUrl($fieldId, $versionNo, $excludeUrlIds);
     }
 }
+
+class_alias(Gateway::class, 'EzSystems\EzPlatformRichText\eZ\FieldType\RichText\RichTextStorage\Gateway');

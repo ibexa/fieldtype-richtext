@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformRichText\Configuration\UI\Mapper;
+namespace Ibexa\FieldTypeRichText\Configuration\UI\Mapper;
 
 /**
  * @internal For internal use by RichText package
@@ -15,3 +15,5 @@ interface CustomTemplateConfigMapper
 {
     public function mapConfig(array $enabledCustomTemplates): array;
 }
+
+class_alias(CustomTemplateConfigMapper::class, 'EzSystems\EzPlatformRichText\Configuration\UI\Mapper\CustomTemplateConfigMapper');

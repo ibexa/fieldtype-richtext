@@ -6,16 +6,16 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformRichText\Form\DataTransformer;
+namespace Ibexa\FieldTypeRichText\Form\DataTransformer;
 
 use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 use eZ\Publish\API\Repository\Exceptions\InvalidArgumentException;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
-use EzSystems\EzPlatformRichText\eZ\FieldType\RichText\Value;
-use EzSystems\EzPlatformRichText\eZ\RichText\DOMDocumentFactory;
-use EzSystems\EzPlatformRichText\eZ\RichText\InputHandlerInterface;
-use EzSystems\EzPlatformRichText\eZ\RichText\Converter;
+use Ibexa\FieldTypeRichText\FieldType\RichText\Value;
+use Ibexa\FieldTypeRichText\RichText\DOMDocumentFactory;
+use Ibexa\Contracts\FieldTypeRichText\RichText\InputHandlerInterface;
+use Ibexa\Contracts\FieldTypeRichText\RichText\Converter;
 
 class RichTextTransformer implements DataTransformerInterface
 {
@@ -79,3 +79,5 @@ class RichTextTransformer implements DataTransformerInterface
         }
     }
 }
+
+class_alias(RichTextTransformer::class, 'EzSystems\EzPlatformRichText\Form\DataTransformer\RichTextTransformer');

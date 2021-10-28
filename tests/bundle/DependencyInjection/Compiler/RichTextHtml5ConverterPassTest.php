@@ -6,9 +6,9 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\Tests\EzPlatformRichTextBundle\DependencyInjection\Compiler;
+namespace Ibexa\Tests\Bundle\FieldTypeRichText\DependencyInjection\Compiler;
 
-use EzSystems\EzPlatformRichTextBundle\DependencyInjection\Compiler\RichTextHtml5ConverterPass;
+use Ibexa\Bundle\FieldTypeRichText\DependencyInjection\Compiler\RichTextHtml5ConverterPass;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractCompilerPassTestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
@@ -67,3 +67,5 @@ class RichTextHtml5ConverterPassTest extends AbstractCompilerPassTestCase
         );
     }
 }
+
+class_alias(RichTextHtml5ConverterPassTest::class, 'EzSystems\Tests\EzPlatformRichTextBundle\DependencyInjection\Compiler\RichTextHtml5ConverterPassTest');

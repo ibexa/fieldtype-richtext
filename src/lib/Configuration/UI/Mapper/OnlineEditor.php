@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformRichText\Configuration\UI\Mapper;
+namespace Ibexa\FieldTypeRichText\Configuration\UI\Mapper;
 
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -87,3 +87,5 @@ final class OnlineEditor implements OnlineEditorConfigMapper
         return $configuration;
     }
 }
+
+class_alias(OnlineEditor::class, 'EzSystems\EzPlatformRichText\Configuration\UI\Mapper\OnlineEditor');

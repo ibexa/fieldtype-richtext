@@ -6,7 +6,7 @@
          ns="http://docbook.org/ns/docbook"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
 
-  <include href="../../../../../../../../../src/lib/eZ/RichText/Resources/schemas/docbook/ezpublish.rng"/>
+  <include href="../../../../../../../../../src/bundle/Resources/richtext/schemas/docbook/ezpublish.rng"/>
 
   <define name="ez.extension.inlines" combine="choice">
     <a:documentation>

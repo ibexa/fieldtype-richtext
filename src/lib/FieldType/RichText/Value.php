@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformRichText\eZ\FieldType\RichText;
+namespace Ibexa\FieldTypeRichText\FieldType\RichText;
 
 use eZ\Publish\Core\FieldType\Value as BaseValue;
 use DOMDocument;
@@ -51,3 +51,5 @@ EOT;
         return isset($this->xml) ? (string)$this->xml->saveXML() : self::EMPTY_VALUE;
     }
 }
+
+class_alias(Value::class, 'EzSystems\EzPlatformRichText\eZ\FieldType\RichText\Value');

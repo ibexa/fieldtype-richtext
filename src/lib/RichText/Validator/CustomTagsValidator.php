@@ -6,9 +6,9 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformRichText\eZ\RichText\Validator;
+namespace Ibexa\FieldTypeRichText\RichText\Validator;
 
-use EzSystems\EzPlatformRichText\eZ\RichText\ValidatorInterface;
+use Ibexa\Contracts\FieldTypeRichText\RichText\ValidatorInterface;
 use DOMDocument;
 use DOMXPath;
 
@@ -101,3 +101,5 @@ class CustomTagsValidator implements ValidatorInterface
         return $errors;
     }
 }
+
+class_alias(CustomTagsValidator::class, 'EzSystems\EzPlatformRichText\eZ\RichText\Validator\CustomTagsValidator');

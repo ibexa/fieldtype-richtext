@@ -6,9 +6,9 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\Tests\EzPlatformRichText\Configuration\UI\Config\Mapper;
+namespace Ibexa\Tests\FieldTypeRichText\Configuration\UI\Config\Mapper;
 
-use EzSystems\EzPlatformRichText\Configuration\UI\Mapper\OnlineEditor;
+use Ibexa\FieldTypeRichText\Configuration\UI\Mapper\OnlineEditor;
 use PHPUnit\Framework\TestCase;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -215,3 +215,5 @@ class OnlineEditorTest extends TestCase
         );
     }
 }
+
+class_alias(OnlineEditorTest::class, 'EzSystems\Tests\EzPlatformRichText\Configuration\UI\Config\Mapper\OnlineEditorTest');
