@@ -11,8 +11,8 @@ namespace Ibexa\FieldTypeRichText\RichText;
 use DOMDocument;
 use eZ\Publish\Core\Base\Exceptions\InvalidArgumentException;
 use Ibexa\Contracts\FieldTypeRichText\RichText\InputHandlerInterface;
-use Ibexa\FieldTypeRichText\FieldType\RichText\Value;
 use Ibexa\Contracts\FieldTypeRichText\RichText\ValidatorInterface;
+use Ibexa\FieldTypeRichText\FieldType\RichText\Value;
 
 class InputHandler implements InputHandlerInterface
 {
