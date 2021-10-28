@@ -30,7 +30,7 @@ trait CoreSetupFactoryTrait
     protected function loadCoreSettings(ContainerBuilder $containerBuilder)
     {
         // @todo refactor when refactoring kernel SetupFactory to avoid hardcoding package path
-        $kernelRootDir = realpath(__DIR__ . '/../../../../../../ezsystems/ezplatform-kernel');
+        $kernelRootDir = realpath(__DIR__ . '/../../../../vendor/ezsystems/ezplatform-kernel');
         if (false === $kernelRootDir) {
             throw new RuntimeException('Unable to find the ezplatform-kernel package directory');
         }
