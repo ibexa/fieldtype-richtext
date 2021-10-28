@@ -3,6 +3,9 @@
     "description": "Ibexa RichText Extension, including the RichText FieldType.",
     "license": "GPL-2.0-only",
     "type": "ezplatform-bundle",
+    "replace": {
+        "ezsystems/ezplatform-richtext": "*"
+    },
     "require": {
         "php": "^7.3",
         "ext-xsl": "*",
