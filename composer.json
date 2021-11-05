@@ -41,12 +41,12 @@
     },
     "autoload": {
         "psr-4": {
-            "EzSystems\\EzPlatformRichTextBundle\\": "src/bundle",
-            "EzSystems\\EzPlatformRichText\\": "src/lib",
-            "Ibexa\\Tests\\FieldTypeRichText\\": "tests/lib/",
             "Ibexa\\FieldTypeRichText\\": "src/lib/",
+            "Ibexa\\Contracts\\FieldTypeRichText\\": "src/contracts/",
             "Ibexa\\Bundle\\FieldTypeRichText\\": "src/bundle/",
-            "Ibexa\\Contracts\\FieldTypeRichText\\": "src/contracts/"
+            "Ibexa\\Tests\\FieldTypeRichText\\": "tests/lib/",
+            "EzSystems\\EzPlatformRichTextBundle\\": "src/bundle",
+            "EzSystems\\EzPlatformRichText\\": "src/lib"
         }
     },
     "autoload-dev": {
