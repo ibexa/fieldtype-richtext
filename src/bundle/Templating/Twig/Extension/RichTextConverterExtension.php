@@ -1,15 +1,15 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformRichTextBundle\Templating\Twig\Extension;
+namespace Ibexa\Bundle\FieldTypeRichText\Templating\Twig\Extension;
 
 use DOMDocument;
-use EzSystems\EzPlatformRichText\eZ\RichText\Converter as RichTextConverterInterface;
+use Ibexa\Contracts\FieldTypeRichText\RichText\Converter as RichTextConverterInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 
@@ -74,3 +74,5 @@ class RichTextConverterExtension extends AbstractExtension
         return $this->richTextEditConverter->convert($xmlData)->saveHTML() ?: '';
     }
 }
+
+class_alias(RichTextConverterExtension::class, 'EzSystems\EzPlatformRichTextBundle\Templating\Twig\Extension\RichTextConverterExtension');

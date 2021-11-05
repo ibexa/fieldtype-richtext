@@ -1,12 +1,12 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformRichText\Configuration\UI\Mapper\CustomTag;
+namespace Ibexa\FieldTypeRichText\Configuration\UI\Mapper\CustomTag;
 
 /**
  * Map RichText Custom Tag attribute of 'choice' type to proper UI config.
@@ -21,7 +21,7 @@ final class ChoiceAttributeMapper extends CommonAttributeMapper implements Attri
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function mapConfig(
         string $tagName,
@@ -40,3 +40,5 @@ final class ChoiceAttributeMapper extends CommonAttributeMapper implements Attri
         return $parentConfig;
     }
 }
+
+class_alias(ChoiceAttributeMapper::class, 'EzSystems\EzPlatformRichText\Configuration\UI\Mapper\CustomTag\ChoiceAttributeMapper');

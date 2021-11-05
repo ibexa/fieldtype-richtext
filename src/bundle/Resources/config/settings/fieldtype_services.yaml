@@ -1,0 +1,66 @@
+parameters:
+    ezrichtext.validator.docbook.resources: []
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    ezrichtext.converter.input.dispatcher:
+        class: Ibexa\FieldTypeRichText\RichText\ConverterDispatcher
+        arguments:
+            -
+                http://docbook.org/ns/docbook: null
+
+    ezrichtext.validator.input.ezxhtml5:
+        class: Ibexa\FieldTypeRichText\RichText\Validator\ValidatorAggregate
+        arguments: [!tagged ezrichtext.validator.input.ezxhtml5]
+
+    ezrichtext.validator.docbook:
+        class: Ibexa\FieldTypeRichText\RichText\Validator\Validator
+        arguments: ['%ezrichtext.validator.docbook.resources%']
+        tags:
+            - { name: 'ezrichtext.validator.input.ezxhtml5' }
+
+    ezrichtext.validator.input.dispatcher:
+        class: Ibexa\FieldTypeRichText\RichText\Validator\ValidatorDispatcher
+        arguments:
+            -
+                http://docbook.org/ns/docbook: null
+
+    ezrichtext.validator.internal_link:
+        class: Ibexa\FieldTypeRichText\RichText\Validator\InternalLinkValidator
+        arguments:
+            - '@ezpublish.spi.persistence.cache.contentHandler'
+            - '@ezpublish.spi.persistence.cache.locationHandler'
+        tags:
+            - { name: 'ezrichtext.validator.input.ezxhtml5' }
+
+    ezrichtext.normalizer.input:
+        class: Ibexa\FieldTypeRichText\RichText\Normalizer\Aggregate
+
+    # Symfony 3.4+ service definitions:
+    Ibexa\FieldTypeRichText\RichText\Validator\CustomTagsValidator:
+        public: false
+        arguments: ['%ezplatform.ezrichtext.custom_tags%']
+        tags:
+            - { name: 'ezrichtext.validator.input.ezxhtml5' }
+
+    Ibexa\FieldTypeRichText\RichText\RelationProcessor:
+        public: false
+
+    Ibexa\FieldTypeRichText\RichText\DOMDocumentFactory:
+        public: false
+
+    Ibexa\FieldTypeRichText\RichText\InputHandler:
+        arguments:
+            - '@Ibexa\FieldTypeRichText\RichText\DOMDocumentFactory'
+            - '@ezrichtext.converter.input.dispatcher'
+            - '@ezrichtext.normalizer.input'
+            - '@ezrichtext.validator.input.dispatcher'
+            - '@ezrichtext.validator.input.ezxhtml5'
+            - '@Ibexa\FieldTypeRichText\RichText\RelationProcessor'
+
+    # Default InputHandler
+    Ibexa\Contracts\FieldTypeRichText\RichText\InputHandlerInterface: '@Ibexa\FieldTypeRichText\RichText\InputHandler'

@@ -4,20 +4,20 @@ services:
         autoconfigure: true
         public: false
 
-    EzSystems\EzPlatformRichText\Form\Type\RichTextFieldType:
+    Ibexa\FieldTypeRichText\Form\Type\RichTextFieldType:
         arguments:
             $docbookToXhtml5EditConverter: '@ezrichtext.converter.edit.xhtml5'
             $fieldTypeService: '@ezpublish.api.service.field_type'
 
-    EzSystems\EzPlatformRichText\Form\Type\RichTextType:
+    Ibexa\FieldTypeRichText\Form\Type\RichTextType:
         arguments:
             $docbookToXhtml5EditConverter: '@ezrichtext.converter.edit.xhtml5'
 
-    EzSystems\EzPlatformRichText\Validator\Constraints\RichTextValidator:
+    Ibexa\FieldTypeRichText\Validator\Constraints\RichTextValidator:
         tags:
             - { name: validator.constraint_validator }
 
-    EzSystems\EzPlatformRichText\Form\Mapper\RichTextFormMapper:
+    Ibexa\FieldTypeRichText\Form\Mapper\RichTextFormMapper:
         tags:
             - { name: ezplatform.field_type.form_mapper.value, fieldType: ezrichtext }
 

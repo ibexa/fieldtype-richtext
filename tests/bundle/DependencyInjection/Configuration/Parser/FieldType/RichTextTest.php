@@ -1,20 +1,19 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
-namespace EzSystems\Tests\EzPlatformRichTextBundle\DependencyInjection\Configuration\Parser\FieldType;
+namespace Ibexa\Tests\Bundle\FieldTypeRichText\DependencyInjection\Configuration\Parser\FieldType;
 
 use eZ\Bundle\EzPublishCoreBundle\DependencyInjection\EzPublishCoreExtension;
 use eZ\Bundle\EzPublishCoreBundle\Tests\DependencyInjection\Configuration\Parser\AbstractParserTestCase;
-use EzSystems\EzPlatformRichTextBundle\DependencyInjection\Configuration\Parser\FieldType\RichText as RichTextConfigParser;
-use EzSystems\EzPlatformRichTextBundle\DependencyInjection\EzPlatformRichTextExtension;
-use EzSystems\EzPlatformRichTextBundle\EzPlatformRichTextBundle;
+use Ibexa\Bundle\FieldTypeRichText\DependencyInjection\Configuration\Parser\FieldType\RichText as RichTextConfigParser;
+use Ibexa\Bundle\FieldTypeRichText\DependencyInjection\IbexaFieldTypeRichTextExtension;
+use Ibexa\Bundle\FieldTypeRichText\IbexaFieldTypeRichTextBundle;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
-use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\Yaml\Yaml;
 
@@ -54,13 +53,13 @@ class RichTextTest extends AbstractParserTestCase
      */
     protected function configureAndLoad(array $configurationValues = [])
     {
-        $bundle = new EzPlatformRichTextBundle();
+        $bundle = new IbexaFieldTypeRichTextBundle();
         $bundle->build($this->container);
 
         // mock list of available bundles
         $this->setParameter(
             'kernel.bundles',
-            ['EzPublishCoreBundle' => null, 'EzPlatformRichTextBundle' => null]
+            ['EzPublishCoreBundle' => null, 'IbexaFieldTypeRichTextBundle' => null]
         );
 
         $configs = array_merge_recursive($this->getMinimalConfiguration(), $configurationValues);
@@ -82,13 +81,13 @@ class RichTextTest extends AbstractParserTestCase
      * Return an array of container extensions you need to be registered for each test (usually just the container
      * extension you are testing.
      *
-     * @return ExtensionInterface[]
+     * @return \Symfony\Component\DependencyInjection\Extension\ExtensionInterface[]
      */
     protected function getContainerExtensions(): array
     {
         return [
             new EzPublishCoreExtension([new RichTextConfigParser()]),
-            new EzPlatformRichTextExtension(),
+            new IbexaFieldTypeRichTextExtension(),
         ];
     }
 
@@ -104,7 +103,7 @@ class RichTextTest extends AbstractParserTestCase
         $this->assertConfigResolverParameterValue(
             'fieldtypes.ezrichtext.tags.default',
             [
-                'template' => '@EzPlatformRichText/RichText/tag/default.html.twig',
+                'template' => '@IbexaFieldTypeRichText/RichText/tag/default.html.twig',
             ],
             'ezdemo_site'
         );
@@ -112,7 +111,7 @@ class RichTextTest extends AbstractParserTestCase
             'fieldtypes.ezrichtext.output_custom_xsl',
             [
                 0 => [
-                    'path' => '%kernel.project_dir%/vendor/ezsystems/ezplatform-richtext/src/lib/eZ/RichText/Resources/stylesheets/docbook/xhtml5/output/core.xsl',
+                    'path' => '%kernel.project_dir%/vendor/ibexa/fieldtype-richtext/src/bundle/Resources/richtext/stylesheets/docbook/xhtml5/output/core.xsl',
                     'priority' => 0,
                 ],
             ],
@@ -417,3 +416,5 @@ class RichTextTest extends AbstractParserTestCase
         ];
     }
 }
+
+class_alias(RichTextTest::class, 'EzSystems\Tests\EzPlatformRichTextBundle\DependencyInjection\Configuration\Parser\FieldType\RichTextTest');

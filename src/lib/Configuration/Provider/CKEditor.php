@@ -1,16 +1,16 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformRichText\Configuration\Provider;
+namespace Ibexa\FieldTypeRichText\Configuration\Provider;
 
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
-use EzSystems\EzPlatformRichText\SPI\Configuration\Provider;
-use EzSystems\EzPlatformRichTextBundle\DependencyInjection\Configuration\Parser\FieldType\RichText;
+use Ibexa\Bundle\FieldTypeRichText\DependencyInjection\Configuration\Parser\FieldType\RichText;
+use Ibexa\Contracts\FieldTypeRichText\Configuration\Provider;
 
 /**
  * CKEditor configuration provider.
@@ -164,3 +164,5 @@ final class CKEditor implements Provider
             : [];
     }
 }
+
+class_alias(CKEditor::class, 'EzSystems\EzPlatformRichText\Configuration\Provider\CKEditor');

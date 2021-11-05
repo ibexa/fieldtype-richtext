@@ -1,15 +1,15 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
-namespace EzSystems\Tests\EzPlatformRichText\Configuration\Provider;
+namespace Ibexa\Tests\FieldTypeRichText\Configuration\Provider;
 
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
-use EzSystems\EzPlatformRichText\SPI\Configuration\Provider;
+use Ibexa\Contracts\FieldTypeRichText\Configuration\Provider;
 use PHPUnit\Framework\TestCase;
 
 abstract class BaseProviderTestCase extends TestCase
@@ -37,3 +37,5 @@ abstract class BaseProviderTestCase extends TestCase
         );
     }
 }
+
+class_alias(BaseProviderTestCase::class, 'EzSystems\Tests\EzPlatformRichText\Configuration\Provider\BaseProviderTestCase');

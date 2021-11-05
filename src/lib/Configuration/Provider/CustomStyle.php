@@ -1,16 +1,16 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformRichText\Configuration\Provider;
+namespace Ibexa\FieldTypeRichText\Configuration\Provider;
 
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
-use EzSystems\EzPlatformRichText\Configuration\UI\Mapper\CustomTemplateConfigMapper;
-use EzSystems\EzPlatformRichText\SPI\Configuration\Provider;
+use Ibexa\Contracts\FieldTypeRichText\Configuration\Provider;
+use Ibexa\FieldTypeRichText\Configuration\UI\Mapper\CustomTemplateConfigMapper;
 
 /**
  * Custom Styles configuration provider.
@@ -52,3 +52,5 @@ final class CustomStyle implements Provider
         return [];
     }
 }
+
+class_alias(CustomStyle::class, 'EzSystems\EzPlatformRichText\Configuration\Provider\CustomStyle');

@@ -1,14 +1,14 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformRichText\Configuration\UI\Mapper;
+namespace Ibexa\FieldTypeRichText\Configuration\UI\Mapper;
 
-use EzSystems\EzPlatformRichText\Configuration\UI\Mapper\CustomTag\AttributeMapper;
+use Ibexa\FieldTypeRichText\Configuration\UI\Mapper\CustomTag\AttributeMapper;
 use RuntimeException;
 use Symfony\Component\Asset\Packages;
 use Symfony\Component\Translation\TranslatorBagInterface;
@@ -202,3 +202,5 @@ final class CustomTag implements CustomTemplateConfigMapper
         return $config;
     }
 }
+
+class_alias(CustomTag::class, 'EzSystems\EzPlatformRichText\Configuration\UI\Mapper\CustomTag');

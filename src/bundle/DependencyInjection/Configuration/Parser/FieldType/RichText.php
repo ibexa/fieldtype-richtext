@@ -1,12 +1,12 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformRichTextBundle\DependencyInjection\Configuration\Parser\FieldType;
+namespace Ibexa\Bundle\FieldTypeRichText\DependencyInjection\Configuration\Parser\FieldType;
 
 use eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Configuration\Parser\AbstractFieldTypeParser;
 use eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Configuration\SiteAccessAware\ContextualizerInterface;
@@ -308,7 +308,7 @@ class RichText extends AbstractFieldTypeParser
      */
     private function buildOnlineEditorConfiguration(NodeBuilder $nodeBuilder): void
     {
-        $invalidChoiceCallback = function (array $v) {
+        $invalidChoiceCallback = static function (array $v) {
             $message = sprintf(
                 'The default value must be one of the possible choices: %s, instead of "%s" ',
                 implode(', ', $v[self::CHOICES_NODE_KEY]),
@@ -323,7 +323,7 @@ class RichText extends AbstractFieldTypeParser
                 ->useAttributeAsKey(self::ELEMENT_NODE_KEY)
                 ->arrayPrototype()
                     ->validate()
-                        ->ifTrue(function (array $v) {
+                        ->ifTrue(static function (array $v) {
                             return !empty($v[self::DEFAULT_VALUE_NODE_KEY])
                                 && !in_array($v[self::DEFAULT_VALUE_NODE_KEY], $v[self::CHOICES_NODE_KEY]);
                         })
@@ -396,7 +396,7 @@ class RichText extends AbstractFieldTypeParser
      */
     private function getAttributesValidatorCallback(callable $invalidChoiceCallback): callable
     {
-        return function (array $v) use ($invalidChoiceCallback) {
+        return static function (array $v) use ($invalidChoiceCallback) {
             if ($v[self::ATTRIBUTE_TYPE_NODE_KEY] === self::ATTRIBUTE_TYPE_CHOICE
                 && !empty($v[self::DEFAULT_VALUE_NODE_KEY])
                 && !in_array($v[self::DEFAULT_VALUE_NODE_KEY], $v[self::CHOICES_NODE_KEY])
@@ -425,3 +425,5 @@ class RichText extends AbstractFieldTypeParser
         };
     }
 }
+
+class_alias(RichText::class, 'EzSystems\EzPlatformRichTextBundle\DependencyInjection\Configuration\Parser\FieldType\RichText');

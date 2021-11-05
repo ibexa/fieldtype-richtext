@@ -1,14 +1,14 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformRichText\Configuration;
+namespace Ibexa\FieldTypeRichText\Configuration;
 
-use EzSystems\EzPlatformRichText\API\Configuration\ProviderService;
+use Ibexa\Contracts\FieldTypeRichText\Configuration\ProviderService;
 
 /**
  * RichText configuration provider, providing configuration by aggregating different sources.
@@ -38,3 +38,5 @@ final class AggregateProvider implements ProviderService
         return $configuration;
     }
 }
+
+class_alias(AggregateProvider::class, 'EzSystems\EzPlatformRichText\Configuration\AggregateProvider');

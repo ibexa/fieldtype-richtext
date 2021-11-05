@@ -1,14 +1,14 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
-namespace EzSystems\Tests\EzPlatformRichText\Configuration\Provider;
+namespace Ibexa\Tests\FieldTypeRichText\Configuration\Provider;
 
-use EzSystems\EzPlatformRichText\Configuration\UI\Mapper\CustomTemplateConfigMapper;
+use Ibexa\FieldTypeRichText\Configuration\UI\Mapper\CustomTemplateConfigMapper;
 
 abstract class BaseCustomTemplateProviderTestCase extends BaseProviderTestCase
 {
@@ -59,3 +59,5 @@ abstract class BaseCustomTemplateProviderTestCase extends BaseProviderTestCase
         );
     }
 }
+
+class_alias(BaseCustomTemplateProviderTestCase::class, 'EzSystems\Tests\EzPlatformRichText\Configuration\Provider\BaseCustomTemplateProviderTestCase');
