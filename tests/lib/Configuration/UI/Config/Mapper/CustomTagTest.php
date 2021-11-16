@@ -69,7 +69,7 @@ class CustomTagTest extends TestCase
                 [
                     'ezyoutube' => [
                         'template' => '@ezdesign/fields/ezrichtext/custom_tags/ezyoutube.html.twig',
-                        'icon' => '/bundles/ezplatformadminuiassets/vendors/webalys/streamlineicons/all-icons.svg#video',
+                        'icon' => '/bundles/ibexaadminuiassets/vendors/webalys/streamlineicons/all-icons.svg#video',
                         'is_inline' => false,
                         'attributes' => [
                             'width' => [
@@ -91,7 +91,7 @@ class CustomTagTest extends TestCase
                     ],
                     'eztwitter' => [
                         'template' => '@ezdesign/fields/ezrichtext/custom_tags/eztwitter.html.twig',
-                        'icon' => '/bundles/ezplatformadminuiassets/vendors/webalys/streamlineicons/all-icons.svg#twitter',
+                        'icon' => '/bundles/ibexaadminuiassets/vendors/webalys/streamlineicons/all-icons.svg#twitter',
                         'is_inline' => false,
                         'attributes' => [
                             'tweet_url' => [
@@ -116,7 +116,7 @@ class CustomTagTest extends TestCase
                     'ezyoutube' => [
                         'label' => 'ezrichtext.custom_tags.ezyoutube.label',
                         'description' => 'ezrichtext.custom_tags.ezyoutube.description',
-                        'icon' => '/bundles/ezplatformadminuiassets/vendors/webalys/streamlineicons/all-icons.svg#video',
+                        'icon' => '/bundles/ibexaadminuiassets/vendors/webalys/streamlineicons/all-icons.svg#video',
                         'isInline' => false,
                         'attributes' => [
                             'width' => [
@@ -142,7 +142,7 @@ class CustomTagTest extends TestCase
                     'eztwitter' => [
                         'label' => 'ezrichtext.custom_tags.eztwitter.label',
                         'description' => 'ezrichtext.custom_tags.eztwitter.description',
-                        'icon' => '/bundles/ezplatformadminuiassets/vendors/webalys/streamlineicons/all-icons.svg#twitter',
+                        'icon' => '/bundles/ibexaadminuiassets/vendors/webalys/streamlineicons/all-icons.svg#twitter',
                         'isInline' => false,
                         'attributes' => [
                             'tweet_url' => [

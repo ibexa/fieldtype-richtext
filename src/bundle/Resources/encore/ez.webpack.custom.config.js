@@ -1,6 +1,6 @@
 const Encore = require('@symfony/webpack-encore');
 const path = require('path');
-const { styles } = require('../../../../../ezplatform-admin-ui-assets/Resources/public/vendors/@ckeditor/ckeditor5-dev-utils');
+const { styles } = require('../../../../../../ibexa/admin-ui-assets/src/bundle/Resources/public/vendors/@ckeditor/ckeditor5-dev-utils');
 
 Encore.reset();
 Encore.setOutputPath('public/assets/richtext/build')
@@ -13,7 +13,7 @@ Encore.addEntry('ezplatform-richtext-onlineeditor-js', [
 ]).addStyleEntry('ezplatform-richtext-onlineeditor-css', [path.resolve(__dirname, '../public/scss/ckeditor.scss')]);
 
 Encore.addAliases({
-    '@ckeditor': path.resolve(__dirname, '../../../../../ezplatform-admin-ui-assets/Resources/public/vendors/@ckeditor'),
+    '@ckeditor': path.resolve(__dirname, '../../../../../../ibexa/admin-ui-assets/src/bundle/Resources/public/vendors/@ckeditor'),
 });
 
 const customConfig = Encore.getWebpackConfig();
@@ -42,7 +42,7 @@ customConfig.module.rules.push({
             options: styles.getPostCssConfig({
                 themeImporter: {
                     themePath: require.resolve(
-                        '../../../../../ezplatform-admin-ui-assets/Resources/public/vendors/@ckeditor/ckeditor5-theme-lark'
+                        '../../../../../../ibexa/admin-ui-assets/src/bundle/Resources/public/vendors/@ckeditor/ckeditor5-theme-lark'
                     ),
                 },
                 minify: true,
