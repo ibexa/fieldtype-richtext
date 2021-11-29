@@ -15,7 +15,7 @@
 {% endif %}
 
 <div {% if embedParams.anchor is defined %}id="{{ embedParams.anchor }}"{% endif %} class="{% if embedParams.align is defined %}align-{{ embedParams.align }}{% endif %}{% if embedParams.class is defined %} {{ embedParams.class }}{% endif %}"{{ data_attributes_str|raw }}>
-    {{ ez_http_tag_relation_ids([embedParams.id]) }}
+    {{ ibexa_http_cache_tag_relation_ids([embedParams.id]) }}
     {{
         render(
             controller(

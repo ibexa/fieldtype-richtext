@@ -13,7 +13,7 @@
     {% set params = params|merge( { "class": embedParams.class } ) %}
 {% endif %}
 
-{{ ez_http_tag_relation_location_ids([embedParams.id]) }}
+{{ ibexa_http_cache_tag_relation_location_ids([embedParams.id]) }}
 {{
     render(
         controller(
