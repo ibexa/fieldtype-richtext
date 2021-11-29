@@ -40,35 +40,39 @@ class RichTextConverterExtension extends AbstractExtension
             new TwigFilter(
                 'ez_richtext_to_html5',
                 [$this, 'richTextToHtml5'],
-                ['is_safe' => ['html']]
+                [
+                    'is_safe' => ['html'],
+                    'deprecated' => '4.0',
+                    'alternative' => 'ibexa_richtext_to_html5',
+                ]
             ),
             new TwigFilter(
                 'ez_richtext_to_html5_edit',
+                [$this, 'richTextToHtml5Edit'],
+                [
+                    'is_safe' => ['html'],
+                    'deprecated' => '4.0',
+                    'alternative' => 'ibexa_richtext_to_html5_edit',
+                ]
+            ),
+            new TwigFilter(
+                'ibexa_richtext_to_html5',
+                [$this, 'richTextToHtml5'],
+                ['is_safe' => ['html']]
+            ),
+            new TwigFilter(
+                'ibexa_richtext_to_html5_edit',
                 [$this, 'richTextToHtml5Edit'],
                 ['is_safe' => ['html']]
             ),
         ];
     }
 
-    /**
-     * Implements the "ez_richtext_to_html5" filter.
-     *
-     * @param \DOMDocument $xmlData
-     *
-     * @return string
-     */
     public function richTextToHtml5(DOMDocument $xmlData): string
     {
         return $this->richTextOutputConverter->convert($xmlData)->saveHTML() ?: '';
     }
 
-    /**
-     * Implements the "ez_richtext_to_html5_edit" filter.
-     *
-     * @param \DOMDocument $xmlData
-     *
-     * @return string
-     */
     public function richTextToHtml5Edit(DOMDocument $xmlData): string
     {
         return $this->richTextEditConverter->convert($xmlData)->saveHTML() ?: '';
