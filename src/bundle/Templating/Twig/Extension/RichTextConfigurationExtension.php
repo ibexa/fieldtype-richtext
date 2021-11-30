@@ -27,11 +27,6 @@ final class RichTextConfigurationExtension extends AbstractExtension implements 
         $this->configurationProvider = $configurationProvider;
     }
 
-    public function getName(): string
-    {
-        return 'ezrichtext.configuration';
-    }
-
     public function getGlobals(): array
     {
         return [

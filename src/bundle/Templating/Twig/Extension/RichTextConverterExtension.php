@@ -29,11 +29,6 @@ class RichTextConverterExtension extends AbstractExtension
         $this->richTextEditConverter = $richTextEditConverter;
     }
 
-    public function getName(): string
-    {
-        return 'ezrichtext.converter';
-    }
-
     public function getFilters(): array
     {
         return [
