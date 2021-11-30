@@ -29,8 +29,11 @@ final class RichTextConfigurationExtension extends AbstractExtension implements 
 
     public function getGlobals(): array
     {
+        $config = $this->configurationProvider->getConfiguration();
         return [
-            'ez_richtext_config' => $this->configurationProvider->getConfiguration(),
+            /** @deprecated ez_richtext_config is deprecated since 4.0, use ibexa_richtext_config instead */
+            'ez_richtext_config' => $config,
+            'ibexa_richtext_config' => $config,
         ];
     }
 }
