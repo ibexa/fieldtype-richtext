@@ -31,7 +31,7 @@
     },
     "require-dev": {
         "ibexa/ci-scripts": "^0.2@dev",
-        "ibexa/doctrine-dbal-schema": "^4.0@dev",
+        "ibexa/doctrine-schema": "^4.0@dev",
         "phpunit/phpunit": "^8.5",
         "symfony/finder": "^5.0",
         "matthiasnoback/symfony-config-test": "^4.1",
