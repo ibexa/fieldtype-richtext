@@ -23,7 +23,7 @@ class Configuration extends SiteAccessConfiguration
      */
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder('ezrichtext');
+        $treeBuilder = new TreeBuilder(IbexaFieldTypeRichTextExtension::EXTENSION_NAME);
 
         $rootNode = $treeBuilder->getRootNode();
 
