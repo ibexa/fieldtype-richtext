@@ -8,8 +8,8 @@ declare(strict_types=1);
 
 namespace Ibexa\Tests\FieldTypeRichText\Configuration\Provider;
 
-use Ibexa\Core\MVC\ConfigResolverInterface;
 use Ibexa\Contracts\FieldTypeRichText\Configuration\Provider;
+use Ibexa\Core\MVC\ConfigResolverInterface;
 use PHPUnit\Framework\TestCase;
 
 abstract class BaseProviderTestCase extends TestCase

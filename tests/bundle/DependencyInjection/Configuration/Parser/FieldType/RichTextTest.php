@@ -9,10 +9,10 @@ declare(strict_types=1);
 namespace Ibexa\Tests\Bundle\FieldTypeRichText\DependencyInjection\Configuration\Parser\FieldType;
 
 use Ibexa\Bundle\Core\DependencyInjection\IbexaCoreExtension;
-use Ibexa\Tests\Bundle\Core\DependencyInjection\Configuration\Parser\AbstractParserTestCase;
 use Ibexa\Bundle\FieldTypeRichText\DependencyInjection\Configuration\Parser\FieldType\RichText as RichTextConfigParser;
 use Ibexa\Bundle\FieldTypeRichText\DependencyInjection\IbexaFieldTypeRichTextExtension;
 use Ibexa\Bundle\FieldTypeRichText\IbexaFieldTypeRichTextBundle;
+use Ibexa\Tests\Bundle\Core\DependencyInjection\Configuration\Parser\AbstractParserTestCase;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\Yaml\Yaml;

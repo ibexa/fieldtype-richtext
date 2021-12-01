@@ -23,7 +23,7 @@ use Psr\Log\NullLogger;
  */
 class Template extends Render implements Converter
 {
-    const LITERAL_LAYOUT_LINE_BREAK = "\n";
+    public const LITERAL_LAYOUT_LINE_BREAK = "\n";
 
     /**
      * @var \Ibexa\Contracts\FieldTypeRichText\RichText\Converter

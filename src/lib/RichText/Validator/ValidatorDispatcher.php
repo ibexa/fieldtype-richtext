@@ -9,8 +9,8 @@ declare(strict_types=1);
 namespace Ibexa\FieldTypeRichText\RichText\Validator;
 
 use DOMDocument;
-use Ibexa\Core\Base\Exceptions\NotFoundException;
 use Ibexa\Contracts\FieldTypeRichText\RichText\ValidatorInterface;
+use Ibexa\Core\Base\Exceptions\NotFoundException;
 
 /**
  * Dispatcher for various validators depending on the XML document namespace.
@@ -76,7 +76,7 @@ class ValidatorDispatcher implements ValidatorInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function validateDocument(DOMDocument $xmlDocument): array
     {

@@ -10,8 +10,8 @@ namespace Ibexa\Tests\FieldTypeRichText\RichText;
 
 use DOMDocument;
 use Ibexa\Contracts\Core\Repository\Values\Content\Relation;
-use Ibexa\Core\Base\Exceptions\InvalidArgumentException;
 use Ibexa\Contracts\FieldTypeRichText\RichText\ValidatorInterface;
+use Ibexa\Core\Base\Exceptions\InvalidArgumentException;
 use Ibexa\FieldTypeRichText\RichText\ConverterDispatcher;
 use Ibexa\FieldTypeRichText\RichText\DOMDocumentFactory;
 use Ibexa\FieldTypeRichText\RichText\InputHandler;
@@ -57,7 +57,7 @@ class InputHandlerTest extends TestCase
     private $inputHandler;
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function setUp(): void
     {

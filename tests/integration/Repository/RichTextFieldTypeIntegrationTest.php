@@ -14,14 +14,14 @@ use Doctrine\DBAL\ParameterType;
 use DOMDocument;
 use Ibexa\Contracts\Core\Repository\Exceptions\ContentFieldValidationException;
 use Ibexa\Contracts\Core\Repository\Repository;
-use Ibexa\Tests\Integration\Core\Repository\FieldType\RelationSearchBaseIntegrationTestTrait;
-use Ibexa\Tests\Integration\Core\Repository\FieldType\SearchBaseIntegrationTest;
 use Ibexa\Contracts\Core\Repository\Values\Content\Content;
 use Ibexa\Contracts\Core\Repository\Values\Content\Field;
 use Ibexa\Contracts\Core\Repository\Values\Content\Location;
 use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType;
 use Ibexa\Core\Repository\Values\Content\Relation;
 use Ibexa\FieldTypeRichText\FieldType\RichText\Value as RichTextValue;
+use Ibexa\Tests\Integration\Core\Repository\FieldType\RelationSearchBaseIntegrationTestTrait;
+use Ibexa\Tests\Integration\Core\Repository\FieldType\SearchBaseIntegrationTest;
 
 /**
  * Integration test for use field type.
@@ -992,7 +992,8 @@ EOT;
             );
         }
         $document->loadXML(
-            (<<<XML
+            (
+                <<<XML
 <?xml version="1.0" encoding="UTF-8"?>
     <section 
     xmlns="http://docbook.org/ns/docbook" 

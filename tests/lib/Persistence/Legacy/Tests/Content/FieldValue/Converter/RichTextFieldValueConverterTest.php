@@ -8,8 +8,8 @@ declare(strict_types=1);
 
 namespace Ibexa\FieldTypeRichText\Persistence\Legacy\Tests\Content\FieldValue\Converter;
 
-use Ibexa\Core\Persistence\Legacy\Content\StorageFieldValue;
 use Ibexa\Contracts\Core\Persistence\Content\FieldValue;
+use Ibexa\Core\Persistence\Legacy\Content\StorageFieldValue;
 use Ibexa\FieldTypeRichText\Persistence\Legacy\RichTextFieldValueConverter;
 use PHPUnit\Framework\TestCase;
 

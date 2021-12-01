@@ -12,9 +12,9 @@ use Exception;
 use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
 use Ibexa\Contracts\Core\Repository\Repository;
 use Ibexa\Contracts\Core\Repository\Values\Content\Content;
+use Ibexa\Contracts\FieldTypeRichText\RichText\RendererInterface;
 use Ibexa\Core\MVC\ConfigResolverInterface;
 use Ibexa\Core\MVC\Symfony\Security\Authorization\Attribute as AuthorizationAttribute;
-use Ibexa\Contracts\FieldTypeRichText\RichText\RendererInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -27,8 +27,8 @@ use Twig\Environment;
  */
 class Renderer implements RendererInterface
 {
-    const RESOURCE_TYPE_CONTENT = 0;
-    const RESOURCE_TYPE_LOCATION = 1;
+    public const RESOURCE_TYPE_CONTENT = 0;
+    public const RESOURCE_TYPE_LOCATION = 1;
 
     /**
      * @var \Ibexa\Core\Repository\Repository
@@ -117,7 +117,7 @@ class Renderer implements RendererInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function renderContentEmbed($contentId, $viewType, array $parameters, $isInline)
     {
@@ -192,7 +192,7 @@ class Renderer implements RendererInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function renderLocationEmbed($locationId, $viewType, array $parameters, $isInline)
     {

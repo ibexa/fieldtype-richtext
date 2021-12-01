@@ -25,9 +25,9 @@ class IbexaFieldTypeRichTextExtension extends Extension implements PrependExtens
 {
     public const EXTENSION_NAME = 'ibexa_fieldtype_richtext';
 
-    const RICHTEXT_CUSTOM_STYLES_PARAMETER = 'ezplatform.ezrichtext.custom_styles';
-    const RICHTEXT_CUSTOM_TAGS_PARAMETER = 'ezplatform.ezrichtext.custom_tags';
-    const RICHTEXT_ALLOY_EDITOR_PARAMETER = 'ezplatform.ezrichtext.alloy_editor';
+    public const RICHTEXT_CUSTOM_STYLES_PARAMETER = 'ezplatform.ezrichtext.custom_styles';
+    public const RICHTEXT_CUSTOM_TAGS_PARAMETER = 'ezplatform.ezrichtext.custom_tags';
+    public const RICHTEXT_ALLOY_EDITOR_PARAMETER = 'ezplatform.ezrichtext.alloy_editor';
     public const RICHTEXT_CONFIGURATION_PROVIDER_TAG = 'ezplatform.ezrichtext.configuration.provider';
 
     private const RICHTEXT_TEXT_TOOLBAR_NAME = 'text';

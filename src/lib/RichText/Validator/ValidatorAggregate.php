@@ -25,7 +25,7 @@ class ValidatorAggregate implements ValidatorInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function validateDocument(DOMDocument $xmlDocument): array
     {

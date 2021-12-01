@@ -8,11 +8,11 @@ declare(strict_types=1);
 
 namespace Ibexa\Tests\FieldTypeRichText\FieldType\RichText;
 
-use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
 use Ibexa\Contracts\Core\FieldType\StorageGateway;
 use Ibexa\Contracts\Core\Persistence\Content\Field;
 use Ibexa\Contracts\Core\Persistence\Content\FieldValue;
 use Ibexa\Contracts\Core\Persistence\Content\VersionInfo;
+use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
 use Ibexa\FieldTypeRichText\FieldType\RichText\RichTextStorage;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;

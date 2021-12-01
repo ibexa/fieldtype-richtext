@@ -9,8 +9,8 @@ declare(strict_types=1);
 namespace Ibexa\Tests\FieldTypeRichText\FieldType\RichText\Gateway;
 
 use Ibexa\Core\FieldType\Url\UrlStorage\Gateway\DoctrineStorage as UrlStorageDoctrineGateway;
-use Ibexa\Tests\Core\Persistence\Legacy\TestCase;
 use Ibexa\FieldTypeRichText\FieldType\RichText\RichTextStorage\Gateway\DoctrineStorage;
+use Ibexa\Tests\Core\Persistence\Legacy\TestCase;
 
 /**
  * Tests the RichText DoctrineStorage.

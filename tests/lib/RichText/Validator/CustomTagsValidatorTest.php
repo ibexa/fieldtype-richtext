@@ -193,7 +193,7 @@ DOCBOOK
     public function testValidateDocumentAcceptsLegacyTags()
     {
         $document = $this->createDocument(
-                <<<DOCBOOK
+            <<<DOCBOOK
 <?xml version="1.0" encoding="UTF-8"?>
 <section xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink"
          xmlns:ezxhtml="http://ez.no/xmlns/ezpublish/docbook/xhtml"

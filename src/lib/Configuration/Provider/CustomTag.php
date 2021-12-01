@@ -8,8 +8,8 @@ declare(strict_types=1);
 
 namespace Ibexa\FieldTypeRichText\Configuration\Provider;
 
-use Ibexa\Core\MVC\ConfigResolverInterface;
 use Ibexa\Contracts\FieldTypeRichText\Configuration\Provider;
+use Ibexa\Core\MVC\ConfigResolverInterface;
 use Ibexa\FieldTypeRichText\Configuration\UI\Mapper\CustomTemplateConfigMapper;
 
 /**

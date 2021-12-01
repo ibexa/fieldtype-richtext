@@ -9,8 +9,8 @@ declare(strict_types=1);
 namespace Ibexa\FieldTypeRichText\RichText;
 
 use DOMDocument;
-use Ibexa\Core\Base\Exceptions\NotFoundException;
 use Ibexa\Contracts\FieldTypeRichText\RichText\Converter;
+use Ibexa\Core\Base\Exceptions\NotFoundException;
 
 /**
  * Dispatcher for various converters depending on the XML document namespace.

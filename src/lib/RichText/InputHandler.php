@@ -9,9 +9,9 @@ declare(strict_types=1);
 namespace Ibexa\FieldTypeRichText\RichText;
 
 use DOMDocument;
-use Ibexa\Core\Base\Exceptions\InvalidArgumentException;
 use Ibexa\Contracts\FieldTypeRichText\RichText\InputHandlerInterface;
 use Ibexa\Contracts\FieldTypeRichText\RichText\ValidatorInterface;
+use Ibexa\Core\Base\Exceptions\InvalidArgumentException;
 use Ibexa\FieldTypeRichText\FieldType\RichText\Value;
 
 class InputHandler implements InputHandlerInterface
@@ -71,7 +71,7 @@ class InputHandler implements InputHandlerInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function fromString(?string $inputValue = null): DOMDocument
     {
@@ -87,7 +87,7 @@ class InputHandler implements InputHandlerInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function fromDocument(DOMDocument $inputValue): DOMDocument
     {
@@ -103,7 +103,7 @@ class InputHandler implements InputHandlerInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getRelations(DOMDocument $document): array
     {
@@ -111,7 +111,7 @@ class InputHandler implements InputHandlerInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function validate(DOMDocument $document): array
     {

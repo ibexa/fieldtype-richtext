@@ -9,8 +9,8 @@ declare(strict_types=1);
 namespace Ibexa\FieldTypeRichText\RichText\Converter;
 
 use DOMDocument;
-use Ibexa\Core\Base\Exceptions\InvalidArgumentException;
 use Ibexa\Contracts\FieldTypeRichText\RichText\Converter;
+use Ibexa\Core\Base\Exceptions\InvalidArgumentException;
 use Ibexa\FieldTypeRichText\RichText\XmlBase;
 use RuntimeException;
 use XSLTProcessor;

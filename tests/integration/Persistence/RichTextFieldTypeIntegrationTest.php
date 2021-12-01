@@ -8,9 +8,9 @@ declare(strict_types=1);
 
 namespace Ibexa\Tests\Integration\FieldTypeRichText\Persistence;
 
-use Ibexa\Core\FieldType\Url\UrlStorage\Gateway\DoctrineStorage as UrlGateway;
 use Ibexa\Contracts\Core\Persistence\Content\FieldTypeConstraints;
 use Ibexa\Contracts\Core\Persistence\Content\FieldValue;
+use Ibexa\Core\FieldType\Url\UrlStorage\Gateway\DoctrineStorage as UrlGateway;
 use Ibexa\Core\Tests\FieldType\BaseIntegrationTest;
 use Ibexa\FieldTypeRichText\FieldType\RichText\RichTextStorage;
 use Ibexa\FieldTypeRichText\FieldType\RichText\RichTextStorage\Gateway\DoctrineStorage;

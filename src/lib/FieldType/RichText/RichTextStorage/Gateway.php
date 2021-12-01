@@ -8,8 +8,8 @@ declare(strict_types=1);
 
 namespace Ibexa\FieldTypeRichText\FieldType\RichText\RichTextStorage;
 
-use Ibexa\Core\FieldType\Url\UrlStorage\Gateway as UrlGateway;
 use Ibexa\Contracts\Core\FieldType\StorageGateway;
+use Ibexa\Core\FieldType\Url\UrlStorage\Gateway as UrlGateway;
 
 /**
  * Abstract gateway class for RichText type.

@@ -8,10 +8,10 @@ declare(strict_types=1);
 
 namespace Ibexa\Tests\FieldTypeRichText\RichText\Validator;
 
-use Ibexa\Core\Base\Exceptions\InvalidArgumentException;
-use Ibexa\Core\Base\Exceptions\NotFoundException;
 use Ibexa\Contracts\Core\Persistence\Content\Handler as ContentHandler;
 use Ibexa\Contracts\Core\Persistence\Content\Location\Handler as LocationHandler;
+use Ibexa\Core\Base\Exceptions\InvalidArgumentException;
+use Ibexa\Core\Base\Exceptions\NotFoundException;
 use Ibexa\FieldTypeRichText\RichText\Validator\InternalLinkValidator;
 use PHPUnit\Framework\TestCase;
 

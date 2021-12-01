@@ -15,8 +15,8 @@ use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException as APINotFoundE
 use Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException as APIUnauthorizedException;
 use Ibexa\Contracts\Core\Repository\LocationService;
 use Ibexa\Contracts\Core\Repository\Values\Content\Location;
-use Ibexa\Core\MVC\Symfony\Routing\UrlAliasRouter;
 use Ibexa\Contracts\FieldTypeRichText\RichText\Converter;
+use Ibexa\Core\MVC\Symfony\Routing\UrlAliasRouter;
 use Psr\Log\LoggerInterface;
 
 class Link implements Converter
