@@ -9,7 +9,7 @@ declare(strict_types=1);
 namespace Ibexa\FieldTypeRichText\RichText;
 
 use DOMDocument;
-use eZ\Publish\Core\Base\Exceptions\NotFoundException;
+use Ibexa\Core\Base\Exceptions\NotFoundException;
 use Ibexa\Contracts\FieldTypeRichText\RichText\Converter;
 
 /**
@@ -20,12 +20,12 @@ class ConverterDispatcher
     /**
      * Mapping of namespaces to converters.
      *
-     * @var \EzSystems\EzPlatformRichText\eZ\RichText\Converter[]
+     * @var \Ibexa\Contracts\FieldTypeRichText\RichText\Converter[]
      */
     protected $mapping = [];
 
     /**
-     * @param \EzSystems\EzPlatformRichText\eZ\RichText\Converter[] $converterMap
+     * @param \Ibexa\Contracts\FieldTypeRichText\RichText\Converter[] $converterMap
      */
     public function __construct($converterMap)
     {
@@ -38,7 +38,7 @@ class ConverterDispatcher
      * Adds converter mapping.
      *
      * @param string $namespace
-     * @param \EzSystems\EzPlatformRichText\eZ\RichText\Converter|null $converter
+     * @param \Ibexa\Contracts\FieldTypeRichText\RichText\Converter|null $converter
      */
     public function addConverter($namespace, Converter $converter = null)
     {
@@ -48,7 +48,7 @@ class ConverterDispatcher
     /**
      * Dispatches DOMDocument to the namespace mapped converter.
      *
-     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      *
      * @param \DOMDocument $document
      *

@@ -8,8 +8,8 @@ declare(strict_types=1);
 
 namespace Ibexa\FieldTypeRichText\FieldType\RichText\RichTextStorage;
 
-use eZ\Publish\Core\FieldType\Url\UrlStorage\Gateway as UrlGateway;
-use eZ\Publish\SPI\FieldType\StorageGateway;
+use Ibexa\Core\FieldType\Url\UrlStorage\Gateway as UrlGateway;
+use Ibexa\Contracts\Core\FieldType\StorageGateway;
 
 /**
  * Abstract gateway class for RichText type.
@@ -18,7 +18,7 @@ use eZ\Publish\SPI\FieldType\StorageGateway;
 abstract class Gateway extends StorageGateway
 {
     /**
-     * @var \eZ\Publish\Core\FieldType\Url\UrlStorage\Gateway
+     * @var \Ibexa\Core\FieldType\Url\UrlStorage\Gateway
      */
     protected $urlGateway;
 

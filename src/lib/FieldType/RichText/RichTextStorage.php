@@ -10,11 +10,11 @@ namespace Ibexa\FieldTypeRichText\FieldType\RichText;
 
 use DOMDocument;
 use DOMXPath;
-use eZ\Publish\Core\Base\Exceptions\NotFoundException;
-use eZ\Publish\SPI\FieldType\GatewayBasedStorage;
-use eZ\Publish\SPI\FieldType\StorageGateway;
-use eZ\Publish\SPI\Persistence\Content\Field;
-use eZ\Publish\SPI\Persistence\Content\VersionInfo;
+use Ibexa\Core\Base\Exceptions\NotFoundException;
+use Ibexa\Contracts\Core\FieldType\GatewayBasedStorage;
+use Ibexa\Contracts\Core\FieldType\StorageGateway;
+use Ibexa\Contracts\Core\Persistence\Content\Field;
+use Ibexa\Contracts\Core\Persistence\Content\VersionInfo;
 use Psr\Log\LoggerInterface;
 
 class RichTextStorage extends GatewayBasedStorage
@@ -25,12 +25,12 @@ class RichTextStorage extends GatewayBasedStorage
     protected $logger;
 
     /**
-     * @var \EzSystems\EzPlatformRichText\eZ\FieldType\RichText\RichTextStorage\Gateway
+     * @var \Ibexa\FieldTypeRichText\FieldType\RichText\RichTextStorage\Gateway
      */
     protected $gateway;
 
     /**
-     * @param \eZ\Publish\SPI\FieldType\StorageGateway $gateway
+     * @param \Ibexa\Contracts\Core\FieldType\StorageGateway $gateway
      * @param \Psr\Log\LoggerInterface $logger
      */
     public function __construct(StorageGateway $gateway, LoggerInterface $logger = null)
@@ -40,7 +40,7 @@ class RichTextStorage extends GatewayBasedStorage
     }
 
     /**
-     * @see \eZ\Publish\SPI\FieldType\FieldStorage
+     * @see \Ibexa\Contracts\Core\FieldType\FieldStorage
      */
     public function storeFieldData(VersionInfo $versionInfo, Field $field, array $context)
     {
@@ -129,8 +129,8 @@ class RichTextStorage extends GatewayBasedStorage
     /**
      * Modifies $field if needed, using external data (like for Urls).
      *
-     * @param \eZ\Publish\SPI\Persistence\Content\VersionInfo $versionInfo
-     * @param \eZ\Publish\SPI\Persistence\Content\Field $field
+     * @param \Ibexa\Contracts\Core\Persistence\Content\VersionInfo $versionInfo
+     * @param \Ibexa\Contracts\Core\Persistence\Content\Field $field
      * @param array $context
      */
     public function getFieldData(VersionInfo $versionInfo, Field $field, array $context)

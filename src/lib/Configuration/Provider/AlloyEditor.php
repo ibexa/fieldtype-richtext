@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\FieldTypeRichText\Configuration\Provider;
 
-use eZ\Publish\Core\MVC\ConfigResolverInterface;
+use Ibexa\Core\MVC\ConfigResolverInterface;
 use Ibexa\Bundle\FieldTypeRichText\DependencyInjection\Configuration\Parser\FieldType\RichText;
 use Ibexa\Contracts\FieldTypeRichText\Configuration\Provider;
 use Ibexa\FieldTypeRichText\Configuration\UI\Mapper\OnlineEditorConfigMapper;
@@ -23,10 +23,10 @@ final class AlloyEditor implements Provider
     /** @var array */
     private $alloyEditorConfiguration;
 
-    /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
+    /** @var \Ibexa\Core\MVC\ConfigResolverInterface */
     private $configResolver;
 
-    /** @var \EzSystems\EzPlatformRichText\Configuration\UI\Mapper\OnlineEditorConfigMapper */
+    /** @var \Ibexa\FieldTypeRichText\Configuration\UI\Mapper\OnlineEditorConfigMapper */
     private $onlineEditorConfigMapper;
 
     public function __construct(

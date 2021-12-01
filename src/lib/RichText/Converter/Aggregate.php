@@ -19,12 +19,12 @@ class Aggregate implements Converter
     /**
      * An array of converters, sorted by priority.
      *
-     * @var \EzSystems\EzPlatformRichText\eZ\RichText\Converter[]
+     * @var \Ibexa\Contracts\FieldTypeRichText\RichText\Converter[]
      */
     protected $converters = [];
 
     /**
-     * @param \EzSystems\EzPlatformRichText\eZ\RichText\Converter[] $converters An array of Converters, sorted by priority
+     * @param \Ibexa\Contracts\FieldTypeRichText\RichText\Converter[] $converters An array of Converters, sorted by priority
      */
     public function __construct(array $converters = [])
     {

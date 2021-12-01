@@ -10,7 +10,7 @@ namespace Ibexa\FieldTypeRichText\RichText;
 
 use DOMDocument;
 use DOMXPath;
-use eZ\Publish\API\Repository\Values\Content\Relation;
+use Ibexa\Contracts\Core\Repository\Values\Content\Relation;
 
 final class RelationProcessor
 {

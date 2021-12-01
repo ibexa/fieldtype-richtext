@@ -8,10 +8,10 @@ declare(strict_types=1);
 
 namespace Ibexa\Tests\Integration\FieldTypeRichText\Persistence;
 
-use eZ\Publish\Core\FieldType\Url\UrlStorage\Gateway\DoctrineStorage as UrlGateway;
-use eZ\Publish\SPI\Persistence\Content\FieldTypeConstraints;
-use eZ\Publish\SPI\Persistence\Content\FieldValue;
-use eZ\Publish\SPI\Tests\FieldType\BaseIntegrationTest;
+use Ibexa\Core\FieldType\Url\UrlStorage\Gateway\DoctrineStorage as UrlGateway;
+use Ibexa\Contracts\Core\Persistence\Content\FieldTypeConstraints;
+use Ibexa\Contracts\Core\Persistence\Content\FieldValue;
+use Ibexa\Core\Tests\FieldType\BaseIntegrationTest;
 use Ibexa\FieldTypeRichText\FieldType\RichText\RichTextStorage;
 use Ibexa\FieldTypeRichText\FieldType\RichText\RichTextStorage\Gateway\DoctrineStorage;
 use Ibexa\FieldTypeRichText\FieldType\RichText\Type;
@@ -53,7 +53,7 @@ class RichTextFieldTypeIntegrationTest extends BaseIntegrationTest
     /**
      * Get handler with required custom field types registered.
      *
-     * @return \eZ\Publish\SPI\Persistence\Handler
+     * @return \Ibexa\Contracts\Core\Persistence\Handler
      */
     public function getCustomHandler()
     {
@@ -95,7 +95,7 @@ class RichTextFieldTypeIntegrationTest extends BaseIntegrationTest
      * Returns the FieldTypeConstraints to be used to create a field definition
      * of the FieldType under test.
      *
-     * @return \eZ\Publish\SPI\Persistence\Content\FieldTypeConstraints
+     * @return \Ibexa\Contracts\Core\Persistence\Content\FieldTypeConstraints
      */
     public function getTypeConstraints()
     {
@@ -125,7 +125,7 @@ class RichTextFieldTypeIntegrationTest extends BaseIntegrationTest
     /**
      * Get initial field value.
      *
-     * @return \eZ\Publish\SPI\Persistence\Content\FieldValue
+     * @return \Ibexa\Contracts\Core\Persistence\Content\FieldValue
      */
     public function getInitialValue()
     {
@@ -150,7 +150,7 @@ class RichTextFieldTypeIntegrationTest extends BaseIntegrationTest
      *
      * Use to update the field
      *
-     * @return \eZ\Publish\SPI\Persistence\Content\FieldValue
+     * @return \Ibexa\Contracts\Core\Persistence\Content\FieldValue
      */
     public function getUpdatedValue()
     {

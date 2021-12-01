@@ -19,7 +19,7 @@ use Twig\Extension\GlobalsInterface;
  */
 final class RichTextConfigurationExtension extends AbstractExtension implements GlobalsInterface
 {
-    /** @var \EzSystems\EzPlatformRichText\API\Configuration\ProviderService */
+    /** @var \Ibexa\Contracts\FieldTypeRichText\Configuration\ProviderService */
     private $configurationProvider;
 
     public function __construct(ProviderService $configurationProvider)

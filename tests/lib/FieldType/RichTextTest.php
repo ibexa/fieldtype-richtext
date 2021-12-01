@@ -9,14 +9,14 @@ declare(strict_types=1);
 namespace Ibexa\Tests\FieldTypeRichText\FieldType;
 
 use Exception;
-use eZ\Publish\API\Repository\Exceptions\InvalidArgumentException as ApiInvalidArgumentException;
-use eZ\Publish\API\Repository\Values\Content\Relation;
-use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition as APIFieldDefinition;
-use eZ\Publish\Core\Base\Exceptions\InvalidArgumentException;
-use eZ\Publish\Core\Base\Exceptions\NotFoundException;
-use eZ\Publish\Core\FieldType\ValidationError;
-use eZ\Publish\Core\FieldType\Value as CoreValue;
-use eZ\Publish\Core\Persistence\TransformationProcessor;
+use Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException as ApiInvalidArgumentException;
+use Ibexa\Contracts\Core\Repository\Values\Content\Relation;
+use Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition as APIFieldDefinition;
+use Ibexa\Core\Base\Exceptions\InvalidArgumentException;
+use Ibexa\Core\Base\Exceptions\NotFoundException;
+use Ibexa\Core\FieldType\ValidationError;
+use Ibexa\Core\FieldType\Value as CoreValue;
+use Ibexa\Core\Persistence\TransformationProcessor;
 use Ibexa\FieldTypeRichText\FieldType\RichText\Type as RichTextType;
 use Ibexa\FieldTypeRichText\FieldType\RichText\Value;
 use Ibexa\FieldTypeRichText\RichText\ConverterDispatcher;
@@ -36,7 +36,7 @@ use RuntimeException;
 class RichTextTest extends TestCase
 {
     /**
-     * @return \EzSystems\EzPlatformRichText\FieldType\RichText\Type
+     * @return \Ibexa\FieldTypeRichText\FieldType\RichText\Type
      */
     protected function getFieldType()
     {
@@ -267,7 +267,7 @@ class RichTextTest extends TestCase
         $fieldType = $this->getFieldType();
         $value = new Value($xmlString);
 
-        /** @var \eZ\Publish\API\Repository\Values\ContentType\FieldDefinition|\PHPUnit\Framework\MockObject\MockObject $fieldDefinitionMock */
+        /** @var \Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition|\PHPUnit\Framework\MockObject\MockObject $fieldDefinitionMock */
         $fieldDefinitionMock = $this->createMock(APIFieldDefinition::class);
 
         $validationErrors = $fieldType->validate($fieldDefinitionMock, $value);

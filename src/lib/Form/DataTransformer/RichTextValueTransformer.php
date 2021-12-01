@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\FieldTypeRichText\Form\DataTransformer;
 
-use eZ\Publish\API\Repository\FieldType;
+use Ibexa\Contracts\Core\Repository\FieldType;
 use Ibexa\Contracts\FieldTypeRichText\RichText\Converter;
 use Ibexa\FieldTypeRichText\FieldType\RichText\Value;
 use Symfony\Component\Form\DataTransformerInterface;
@@ -18,11 +18,11 @@ use Symfony\Component\Form\DataTransformerInterface;
  */
 class RichTextValueTransformer implements DataTransformerInterface
 {
-    /** @var \eZ\Publish\API\Repository\FieldType */
+    /** @var \Ibexa\Contracts\Core\Repository\FieldType */
     private $fieldType;
 
     /**
-     * @var \EzSystems\EzPlatformRichText\eZ\RichText\Converter Converter
+     * @var \Ibexa\Contracts\FieldTypeRichText\RichText\Converter Converter
      */
     protected $docbookToXhtml5EditConverter;
 

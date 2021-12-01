@@ -10,8 +10,8 @@ namespace Ibexa\Tests\FieldTypeRichText\Form\DataTransformer;
 
 use DOMDocument;
 use Exception;
-use eZ\Publish\API\Repository\Exceptions\InvalidArgumentException;
-use eZ\Publish\API\Repository\Exceptions\NotFoundException;
+use Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException;
+use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
 use Ibexa\Contracts\FieldTypeRichText\RichText\Converter;
 use Ibexa\Contracts\FieldTypeRichText\RichText\InputHandlerInterface;
 use Ibexa\FieldTypeRichText\Form\DataTransformer\RichTextTransformer;
@@ -21,13 +21,13 @@ use Symfony\Component\Form\Exception\TransformationFailedException;
 
 class RichTextTransformerTest extends TestCase
 {
-    /** @var \EzSystems\EzPlatformRichText\RichText\InputHandlerInterface|\PHPUnit\Framework\MockObject\MockObject */
+    /** @var \Ibexa\FieldTypeRichText\RichText\InputHandlerInterface|\PHPUnit\Framework\MockObject\MockObject */
     private $inputHandler;
 
-    /** @var \EzSystems\EzPlatformRichText\RichText\Converter|\PHPUnit\Framework\MockObject\MockObject */
+    /** @var \Ibexa\FieldTypeRichText\RichText\Converter|\PHPUnit\Framework\MockObject\MockObject */
     private $docbook2xhtml5editConverter;
 
-    /** @var \EzSystems\EzPlatformRichText\Form\DataTransformer\RichTextTransformer */
+    /** @var \Ibexa\FieldTypeRichText\Form\DataTransformer\RichTextTransformer */
     private $richTextTransformer;
 
     protected function setUp(): void

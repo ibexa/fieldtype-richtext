@@ -16,7 +16,7 @@ use Symfony\Component\DependencyInjection\Reference;
 /**
  * Compiler pass for the RichText Aggregate converter tags.
  *
- * @see \EzSystems\EzPlatformRichText\eZ\RichText\Converter\Aggregate
+ * @see \Ibexa\FieldTypeRichText\RichText\Converter\Aggregate
  */
 class RichTextHtml5ConverterPass implements CompilerPassInterface
 {

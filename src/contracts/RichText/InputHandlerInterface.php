@@ -17,9 +17,9 @@ interface InputHandlerInterface
      *
      * @param string|null $inputValue
      *
-     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
-     * @throws \EzSystems\EzPlatformRichText\eZ\RichText\Exception\InvalidXmlException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
+     * @throws \Ibexa\FieldTypeRichText\RichText\Exception\InvalidXmlException
      *
      * @return \DOMDocument
      */
@@ -30,8 +30,8 @@ interface InputHandlerInterface
      *
      * @param \DOMDocument $inputValue
      *
-     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
      *
      * @return \DOMDocument
      */

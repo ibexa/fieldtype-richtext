@@ -8,8 +8,8 @@ declare(strict_types=1);
 
 namespace Ibexa\FieldTypeRichText\Form\DataTransformer;
 
-use eZ\Publish\API\Repository\Exceptions\InvalidArgumentException;
-use eZ\Publish\API\Repository\Exceptions\NotFoundException;
+use Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException;
+use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
 use Ibexa\Contracts\FieldTypeRichText\RichText\Converter;
 use Ibexa\Contracts\FieldTypeRichText\RichText\InputHandlerInterface;
 use Ibexa\FieldTypeRichText\FieldType\RichText\Value;
@@ -20,24 +20,24 @@ use Symfony\Component\Form\Exception\TransformationFailedException;
 class RichTextTransformer implements DataTransformerInterface
 {
     /**
-     * @var \EzSystems\EzPlatformRichText\eZ\RichText\DOMDocumentFactory
+     * @var \Ibexa\FieldTypeRichText\RichText\DOMDocumentFactory
      */
     private $domDocumentFactory;
 
     /**
-     * @var \EzSystems\EzPlatformRichText\eZ\RichText\InputHandlerInterface
+     * @var \Ibexa\Contracts\FieldTypeRichText\RichText\InputHandlerInterface
      */
     private $inputHandler;
 
     /**
-     * @var \EzSystems\EzPlatformRichText\eZ\RichText\Converter
+     * @var \Ibexa\Contracts\FieldTypeRichText\RichText\Converter
      */
     private $docbook2xhtml5editConverter;
 
     /**
-     * @param \EzSystems\EzPlatformRichText\eZ\RichText\DOMDocumentFactory $domDocumentFactory
-     * @param \EzSystems\EzPlatformRichText\eZ\RichText\InputHandlerInterface $inputHandler
-     * @param \EzSystems\EzPlatformRichText\eZ\RichText\Converter $docbook2xhtml5editConverter
+     * @param \Ibexa\FieldTypeRichText\RichText\DOMDocumentFactory $domDocumentFactory
+     * @param \Ibexa\Contracts\FieldTypeRichText\RichText\InputHandlerInterface $inputHandler
+     * @param \Ibexa\Contracts\FieldTypeRichText\RichText\Converter $docbook2xhtml5editConverter
      */
     public function __construct(
         DOMDocumentFactory $domDocumentFactory,

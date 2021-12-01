@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\FieldTypeRichText\Form\Type;
 
-use eZ\Publish\API\Repository\FieldTypeService;
+use Ibexa\Contracts\Core\Repository\FieldTypeService;
 use Ibexa\Contracts\FieldTypeRichText\RichText\Converter;
 use Ibexa\FieldTypeRichText\Form\DataTransformer\RichTextValueTransformer;
 use Symfony\Component\Form\AbstractType;
@@ -20,7 +20,7 @@ use Symfony\Component\Form\FormBuilderInterface;
  */
 class RichTextFieldType extends AbstractType
 {
-    /** @var \eZ\Publish\API\Repository\FieldTypeService */
+    /** @var \Ibexa\Contracts\Core\Repository\FieldTypeService */
     protected $fieldTypeService;
 
     /** @var \Ibexa\Contracts\FieldTypeRichText\RichText\Converter */

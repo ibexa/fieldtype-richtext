@@ -138,7 +138,7 @@ class IbexaFieldTypeRichTextExtension extends Extension implements PrependExtens
     private function prependEzPublishConfiguration(ContainerBuilder $container): void
     {
         $coreExtensionConfigFile = realpath(__DIR__ . '/../Resources/config/prepend/ezpublish.yaml');
-        $container->prependExtensionConfig('ezpublish', Yaml::parseFile($coreExtensionConfigFile));
+        $container->prependExtensionConfig('ibexa', Yaml::parseFile($coreExtensionConfigFile));
         $container->addResource(new FileResource($coreExtensionConfigFile));
     }
 

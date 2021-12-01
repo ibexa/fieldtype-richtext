@@ -9,7 +9,7 @@ declare(strict_types=1);
 namespace Ibexa\FieldTypeRichText\RichText\Validator;
 
 use DOMDocument;
-use eZ\Publish\Core\Base\Exceptions\NotFoundException;
+use Ibexa\Core\Base\Exceptions\NotFoundException;
 use Ibexa\Contracts\FieldTypeRichText\RichText\ValidatorInterface;
 
 /**
@@ -20,12 +20,12 @@ class ValidatorDispatcher implements ValidatorInterface
     /**
      * Mapping of namespaces to validators.
      *
-     * @var \EzSystems\EzPlatformRichText\eZ\RichText\Validator[]
+     * @var \Ibexa\FieldTypeRichText\eZ\RichText\Validator[]
      */
     protected $mapping = [];
 
     /**
-     * @param \EzSystems\EzPlatformRichText\eZ\RichText\Validator[] $validatorMap
+     * @param \Ibexa\FieldTypeRichText\eZ\RichText\Validator[] $validatorMap
      */
     public function __construct($validatorMap)
     {
@@ -38,7 +38,7 @@ class ValidatorDispatcher implements ValidatorInterface
      * Adds validator mapping.
      *
      * @param string $namespace
-     * @param \EzSystems\EzPlatformRichText\eZ\RichText\Validator $validator
+     * @param \Ibexa\FieldTypeRichText\eZ\RichText\Validator $validator
      */
     public function addValidator($namespace, ValidatorInterface $validator = null)
     {
@@ -48,7 +48,7 @@ class ValidatorDispatcher implements ValidatorInterface
     /**
      * Dispatches DOMDocument to the namespace mapped validator.
      *
-     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      *
      * @param \DOMDocument $document
      *

@@ -86,13 +86,13 @@ class IbexaFieldTypeRichTextExtensionTest extends AbstractExtensionTestCase
     /**
      * Test IbexaFieldTypeRichTextExtension prepends expected and needed core settings.
      *
-     * @see \EzSystems\EzPlatformRichTextBundle\DependencyInjection\IbexaFieldTypeRichTextExtension::prepend
+     * @see \Ibexa\Bundle\FieldTypeRichText\DependencyInjection\IbexaFieldTypeRichTextExtension::prepend
      */
     public function testPrepend(): void
     {
         $this->load([]);
 
-        $actualPrependedConfig = $this->container->getExtensionConfig('ezpublish');
+        $actualPrependedConfig = $this->container->getExtensionConfig('ibexa');
         // merge multiple configs returned
         $actualPrependedConfig = array_merge(...$actualPrependedConfig);
 

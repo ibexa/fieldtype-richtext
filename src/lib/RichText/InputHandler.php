@@ -9,7 +9,7 @@ declare(strict_types=1);
 namespace Ibexa\FieldTypeRichText\RichText;
 
 use DOMDocument;
-use eZ\Publish\Core\Base\Exceptions\InvalidArgumentException;
+use Ibexa\Core\Base\Exceptions\InvalidArgumentException;
 use Ibexa\Contracts\FieldTypeRichText\RichText\InputHandlerInterface;
 use Ibexa\Contracts\FieldTypeRichText\RichText\ValidatorInterface;
 use Ibexa\FieldTypeRichText\FieldType\RichText\Value;
@@ -17,42 +17,42 @@ use Ibexa\FieldTypeRichText\FieldType\RichText\Value;
 class InputHandler implements InputHandlerInterface
 {
     /**
-     * @var \EzSystems\EzPlatformRichText\eZ\RichText\DOMDocumentFactory
+     * @var \Ibexa\FieldTypeRichText\RichText\DOMDocumentFactory
      */
     private $domDocumentFactory;
 
     /**
-     * @var \EzSystems\EzPlatformRichText\eZ\RichText\ConverterDispatcher
+     * @var \Ibexa\FieldTypeRichText\RichText\ConverterDispatcher
      */
     private $converter;
 
     /**
-     * @var \EzSystems\EzPlatformRichText\eZ\RichText\Normalizer
+     * @var \Ibexa\FieldTypeRichText\RichText\Normalizer
      */
     private $normalizer;
 
     /**
-     * @var \EzSystems\EzPlatformRichText\eZ\RichText\ValidatorInterface
+     * @var \Ibexa\Contracts\FieldTypeRichText\RichText\ValidatorInterface
      */
     private $schemaValidator;
 
     /**
-     * @var \EzSystems\EzPlatformRichText\eZ\RichText\ValidatorInterface
+     * @var \Ibexa\Contracts\FieldTypeRichText\RichText\ValidatorInterface
      */
     private $docbookValidator;
 
     /**
-     * @var \EzSystems\EzPlatformRichText\eZ\RichText\RelationProcessor
+     * @var \Ibexa\FieldTypeRichText\RichText\RelationProcessor
      */
     private $relationProcessor;
 
     /**
-     * @param \EzSystems\EzPlatformRichText\eZ\RichText\DOMDocumentFactory $domDocumentFactory
-     * @param \EzSystems\EzPlatformRichText\eZ\RichText\ConverterDispatcher $inputConverter
-     * @param \EzSystems\EzPlatformRichText\eZ\RichText\Normalizer $inputNormalizer
-     * @param \EzSystems\EzPlatformRichText\eZ\RichText\ValidatorInterface $schemaValidator
-     * @param \EzSystems\EzPlatformRichText\eZ\RichText\ValidatorInterface $dockbookValidator
-     * @param \EzSystems\EzPlatformRichText\eZ\RichText\RelationProcessor $relationProcessor
+     * @param \Ibexa\FieldTypeRichText\RichText\DOMDocumentFactory $domDocumentFactory
+     * @param \Ibexa\FieldTypeRichText\RichText\ConverterDispatcher $inputConverter
+     * @param \Ibexa\FieldTypeRichText\RichText\Normalizer $inputNormalizer
+     * @param \Ibexa\Contracts\FieldTypeRichText\RichText\ValidatorInterface $schemaValidator
+     * @param \Ibexa\Contracts\FieldTypeRichText\RichText\ValidatorInterface $dockbookValidator
+     * @param \Ibexa\FieldTypeRichText\RichText\RelationProcessor $relationProcessor
      */
     public function __construct(
         DOMDocumentFactory $domDocumentFactory,

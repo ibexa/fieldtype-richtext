@@ -136,12 +136,12 @@ class DocbookTest extends TestCase
     }
 
     /**
-     * @var \EzSystems\EzPlatformRichText\RichText\ValidatorInterface
+     * @var \Ibexa\FieldTypeRichText\RichText\ValidatorInterface
      */
     protected $validator;
 
     /**
-     * @return \EzSystems\EzPlatformRichText\RichText\ValidatorInterface
+     * @return \Ibexa\FieldTypeRichText\RichText\ValidatorInterface
      */
     protected function getConversionValidator()
     {

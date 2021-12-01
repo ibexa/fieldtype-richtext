@@ -9,7 +9,7 @@
          failOnWarning="true"
          >
     <php>
-        <env name="setupFactory" value="EzSystems\IntegrationTests\EzPlatformRichText\eZ\API\SetupFactory\SolrLegacySetupFactory" />
+        <env name="setupFactory" value="Ibexa\Tests\Integration\FieldTypeRichText\eZ\API\SetupFactory\SolrLegacySetupFactory" />
         <env name="backendVersion" value="5" />
         <env name="fixtureDir" value="Solr" />
         <env name="solrServer" value="http://localhost:8983/" />

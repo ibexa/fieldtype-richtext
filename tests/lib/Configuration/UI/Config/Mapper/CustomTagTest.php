@@ -20,7 +20,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 /**
  * UI Config Mapper test for RichText Custom Tags configuration.
  *
- * @see \EzSystems\EzPlatformRichText\Configuration\UI\Mapper\CustomTag::__construct
+ * @see \Ibexa\FieldTypeRichText\Configuration\UI\Mapper\CustomTag::__construct
  */
 class CustomTagTest extends TestCase
 {

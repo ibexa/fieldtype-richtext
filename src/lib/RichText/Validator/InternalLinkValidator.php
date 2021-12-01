@@ -9,10 +9,10 @@ declare(strict_types=1);
 namespace Ibexa\FieldTypeRichText\RichText\Validator;
 
 use DOMDocument;
-use eZ\Publish\API\Repository\Exceptions\NotFoundException;
-use eZ\Publish\Core\Base\Exceptions\InvalidArgumentException;
-use eZ\Publish\SPI\Persistence\Content\Handler as ContentHandler;
-use eZ\Publish\SPI\Persistence\Content\Location\Handler as LocationHandler;
+use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
+use Ibexa\Core\Base\Exceptions\InvalidArgumentException;
+use Ibexa\Contracts\Core\Persistence\Content\Handler as ContentHandler;
+use Ibexa\Contracts\Core\Persistence\Content\Location\Handler as LocationHandler;
 use Ibexa\Contracts\FieldTypeRichText\RichText\ValidatorInterface;
 
 /**
@@ -21,20 +21,20 @@ use Ibexa\Contracts\FieldTypeRichText\RichText\ValidatorInterface;
 class InternalLinkValidator implements ValidatorInterface
 {
     /**
-     * @var \eZ\Publish\SPI\Persistence\Content\Handler
+     * @var \Ibexa\Contracts\Core\Persistence\Content\Handler
      */
     private $contentHandler;
 
     /**
-     * @var \eZ\Publish\SPI\Persistence\Content\Location\Handler;
+     * @var \Ibexa\Contracts\Core\Persistence\Content\Location\Handler;
      */
     private $locationHandler;
 
     /**
      * InternalLinkValidator constructor.
      *
-     * @param \eZ\Publish\SPI\Persistence\Content\Handler $contentHandler
-     * @param \eZ\Publish\SPI\Persistence\Content\Location\Handler $locationHandler
+     * @param \Ibexa\Contracts\Core\Persistence\Content\Handler $contentHandler
+     * @param \Ibexa\Contracts\Core\Persistence\Content\Location\Handler $locationHandler
      */
     public function __construct(ContentHandler $contentHandler, LocationHandler $locationHandler)
     {
@@ -49,7 +49,7 @@ class InternalLinkValidator implements ValidatorInterface
      *
      * @return array
      *
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
      */
     public function validateDocument(DOMDocument $xml): array
     {
@@ -82,7 +82,7 @@ class InternalLinkValidator implements ValidatorInterface
     /**
      * Validates following link formats: 'ezcontent://<contentId>', 'ezremote://<contentRemoteId>', 'ezlocation://<locationId>'.
      *
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException if given $scheme is not supported
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException if given $scheme is not supported
      *
      * @param string $scheme
      * @param string $id
@@ -115,7 +115,7 @@ class InternalLinkValidator implements ValidatorInterface
     /**
      * Builds error message for invalid url.
      *
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException if given $scheme is not supported
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException if given $scheme is not supported
      *
      * @param string $scheme
      * @param string $url

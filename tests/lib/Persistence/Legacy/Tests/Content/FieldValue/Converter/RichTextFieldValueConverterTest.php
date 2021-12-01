@@ -8,8 +8,8 @@ declare(strict_types=1);
 
 namespace Ibexa\FieldTypeRichText\Persistence\Legacy\Tests\Content\FieldValue\Converter;
 
-use eZ\Publish\Core\Persistence\Legacy\Content\StorageFieldValue;
-use eZ\Publish\SPI\Persistence\Content\FieldValue;
+use Ibexa\Core\Persistence\Legacy\Content\StorageFieldValue;
+use Ibexa\Contracts\Core\Persistence\Content\FieldValue;
 use Ibexa\FieldTypeRichText\Persistence\Legacy\RichTextFieldValueConverter;
 use PHPUnit\Framework\TestCase;
 
@@ -22,7 +22,7 @@ use PHPUnit\Framework\TestCase;
 class RichTextFieldValueConverterTest extends TestCase
 {
     /**
-     * @var \EzSystems\EzPlatformRichText\Persistence\Legacy\RichTextFieldValueConverter
+     * @var \Ibexa\FieldTypeRichText\Persistence\Legacy\RichTextFieldValueConverter
      */
     protected $converter;
 

@@ -18,12 +18,12 @@ class Aggregate extends Normalizer
     /**
      * An array of normalizers, sorted by priority.
      *
-     * @var \EzSystems\EzPlatformRichText\eZ\RichText\Normalizer[]
+     * @var \Ibexa\FieldTypeRichText\RichText\Normalizer[]
      */
     protected $normalizers = [];
 
     /**
-     * @param \EzSystems\EzPlatformRichText\eZ\RichText\Normalizer[] $normalizers An array of Normalizers, sorted by priority
+     * @param \Ibexa\FieldTypeRichText\RichText\Normalizer[] $normalizers An array of Normalizers, sorted by priority
      */
     public function __construct(array $normalizers = [])
     {

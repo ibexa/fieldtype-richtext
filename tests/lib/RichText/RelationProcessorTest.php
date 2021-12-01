@@ -9,7 +9,7 @@ declare(strict_types=1);
 namespace Ibexa\Tests\FieldTypeRichText\RichText;
 
 use DOMDocument;
-use eZ\Publish\API\Repository\Values\Content\Relation;
+use Ibexa\Contracts\Core\Repository\Values\Content\Relation;
 use Ibexa\FieldTypeRichText\RichText\RelationProcessor;
 use PHPUnit\Framework\TestCase;
 

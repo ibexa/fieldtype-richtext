@@ -16,12 +16,12 @@ use Symfony\Component\Yaml\Yaml;
 /**
  * Test RichText CustomTagsValidator.
  *
- * @see \EzSystems\EzPlatformRichText\FieldType\RichText\CustomTagsValidator
+ * @see \Ibexa\FieldTypeRichText\FieldType\RichText\CustomTagsValidator
  */
 class CustomTagsValidatorTest extends TestCase
 {
     /**
-     * @var \EzSystems\EzPlatformRichText\RichText\Validator\CustomTagsValidator
+     * @var \Ibexa\FieldTypeRichText\RichText\Validator\CustomTagsValidator
      */
     private $validator;
 

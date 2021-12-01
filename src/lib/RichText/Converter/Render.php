@@ -19,7 +19,7 @@ use Ibexa\Contracts\FieldTypeRichText\RichText\RendererInterface;
 abstract class Render
 {
     /**
-     * @var \EzSystems\EzPlatformRichText\eZ\RichText\RendererInterface
+     * @var \Ibexa\Contracts\FieldTypeRichText\RichText\RendererInterface
      */
     protected $renderer;
 

@@ -9,7 +9,7 @@ declare(strict_types=1);
 namespace Ibexa\FieldTypeRichText\FieldType\RichText\RichTextStorage\Gateway;
 
 use Doctrine\DBAL\Connection;
-use eZ\Publish\Core\FieldType\Url\UrlStorage\Gateway as UrlGateway;
+use Ibexa\Core\FieldType\Url\UrlStorage\Gateway as UrlGateway;
 use Ibexa\FieldTypeRichText\FieldType\RichText\RichTextStorage\Gateway;
 
 class DoctrineStorage extends Gateway
