@@ -55,17 +55,6 @@ class YoutubeIdExtractorExtensionTest extends TestCase
     }
 
     /**
-     * @covers \EzSystems\EzPlatformRichTextBundle\Templating\Twig\Extension\YoutubeIdExtractorExtension::getName
-     */
-    public function testGetName(): void
-    {
-        $subject = new YoutubeIdExtractorExtension();
-        $result = $subject->getName();
-        $this->assertIsString($result);
-        $this->assertEquals('ezrichtext.youtube_extract_id', $result);
-    }
-
-    /**
      * @covers \EzSystems\EzPlatformRichTextBundle\Templating\Twig\Extension\YoutubeIdExtractorExtension::getFunctions
      */
     public function testGetFunctions(): void
@@ -75,7 +64,7 @@ class YoutubeIdExtractorExtensionTest extends TestCase
         $result = $subject->getFunctions();
         $this->assertIsArray($result);
         $this->assertInstanceOf(TwigFunction::class, $result[0]);
-        $this->assertEquals('ez_richtext_youtube_extract_id', $result[0]->getName());
+        $this->assertEquals('ibexa_richtext_youtube_extract_id', $result[0]->getName());
     }
 }
 
