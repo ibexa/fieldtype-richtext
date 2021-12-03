@@ -23,6 +23,8 @@ use Symfony\Component\Yaml\Yaml;
  */
 class IbexaFieldTypeRichTextExtension extends Extension implements PrependExtensionInterface
 {
+    public const EXTENSION_NAME = 'ibexa_fieldtype_richtext';
+
     const RICHTEXT_CUSTOM_STYLES_PARAMETER = 'ezplatform.ezrichtext.custom_styles';
     const RICHTEXT_CUSTOM_TAGS_PARAMETER = 'ezplatform.ezrichtext.custom_tags';
     const RICHTEXT_ALLOY_EDITOR_PARAMETER = 'ezplatform.ezrichtext.alloy_editor';
@@ -32,7 +34,7 @@ class IbexaFieldTypeRichTextExtension extends Extension implements PrependExtens
 
     public function getAlias()
     {
-        return 'ezrichtext';
+        return self::EXTENSION_NAME;
     }
 
     /**
@@ -143,7 +145,7 @@ class IbexaFieldTypeRichTextExtension extends Extension implements PrependExtens
     private function prependEzRichTextConfiguration(ContainerBuilder $container): void
     {
         $richTextExtensionConfigFile = realpath(__DIR__ . '/../Resources/config/prepend/ezrichtext.yaml');
-        $container->prependExtensionConfig('ezrichtext', Yaml::parseFile($richTextExtensionConfigFile));
+        $container->prependExtensionConfig(self::EXTENSION_NAME, Yaml::parseFile($richTextExtensionConfigFile));
         $container->addResource(new FileResource($richTextExtensionConfigFile));
     }
 

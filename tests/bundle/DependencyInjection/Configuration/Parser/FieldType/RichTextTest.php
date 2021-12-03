@@ -34,9 +34,10 @@ class RichTextTest extends AbstractParserTestCase
     private function getExtensionsConfig(): array
     {
         if (null === $this->extensionsConfig) {
-            foreach (['ezrichtext', 'ezpublish'] as $extensionName) {
+            $extensionNames = [IbexaFieldTypeRichTextExtension::EXTENSION_NAME, 'ezpublish'];
+            foreach ($extensionNames as $extensionName) {
                 $this->extensionsConfig[$extensionName] = Yaml::parseFile(
-                    __DIR__ . "/../../../Fixtures/{$extensionName}.yaml"
+                    dirname(__DIR__, 3) . "/Fixtures/{$extensionName}.yaml"
                 );
             }
         }

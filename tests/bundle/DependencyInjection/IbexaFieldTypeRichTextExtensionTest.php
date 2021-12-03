@@ -26,7 +26,7 @@ class IbexaFieldTypeRichTextExtensionTest extends AbstractExtensionTestCase
     public function testRichTextConfiguration(): void
     {
         $config = Yaml::parse(
-            file_get_contents(__DIR__ . '/Fixtures/ezrichtext.yaml')
+            file_get_contents(__DIR__ . '/Fixtures/ibexa_fieldtype_richtext.yaml')
         );
         $this->load($config);
 
@@ -123,7 +123,7 @@ class IbexaFieldTypeRichTextExtensionTest extends AbstractExtensionTestCase
     public function testCheckingInlineCustomTagsInToolbars(string $toolbarName, ?string $expectedException): void
     {
         $config = Yaml::parse(
-            file_get_contents(__DIR__ . '/Fixtures/ezrichtext.yaml')
+            file_get_contents(__DIR__ . '/Fixtures/ibexa_fieldtype_richtext.yaml')
         );
         $config['custom_tags']['video']['is_inline'] = true;
         $this->container->setParameter('ezpublish.siteaccess.list', ['admin_group']);
