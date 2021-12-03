@@ -686,12 +686,12 @@ class EmbedTest extends TestCase
     }
 
     /**
-     * @var \EzSystems\EzPlatformRichText\RichText\RendererInterface|\PHPUnit\Framework\MockObject\MockObject
+     * @var \Ibexa\FieldTypeRichText\RichText\RendererInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     protected $rendererMock;
 
     /**
-     * @return \PHPUnit\Framework\MockObject\MockObject|\EzSystems\EzPlatformRichText\RichText\RendererInterface
+     * @return \PHPUnit\Framework\MockObject\MockObject|\Ibexa\FieldTypeRichText\RichText\RendererInterface
      */
     protected function getRendererMock()
     {

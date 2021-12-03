@@ -8,8 +8,8 @@ declare(strict_types=1);
 
 namespace Ibexa\Tests\Integration\FieldTypeRichText\Repository\SetupFactory;
 
-use eZ\Publish\Core\Base\ServiceContainer;
-use EzSystems\EzPlatformSolrSearchEngine\Tests\SetupFactory\LegacySetupFactory as BaseSolrLegacySetupFactory;
+use Ibexa\Core\Base\ServiceContainer;
+use Ibexa\Solr\LegacySetupFactory as BaseSolrLegacySetupFactory;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
@@ -23,7 +23,7 @@ class SolrLegacySetupFactory extends BaseSolrLegacySetupFactory
     /**
      * Returns the service container used for initialization of the repository.
      *
-     * @return \eZ\Publish\Core\Base\ServiceContainer
+     * @return \Ibexa\Core\Base\ServiceContainer
      *
      * @throws \Exception
      */

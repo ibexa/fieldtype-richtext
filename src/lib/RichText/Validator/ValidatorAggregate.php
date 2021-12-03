@@ -13,7 +13,7 @@ use Ibexa\Contracts\FieldTypeRichText\RichText\ValidatorInterface;
 
 class ValidatorAggregate implements ValidatorInterface
 {
-    /** @var \EzSystems\EzPlatformRichText\eZ\RichText\ValidatorInterface[] */
+    /** @var \Ibexa\Contracts\FieldTypeRichText\RichText\ValidatorInterface[] */
     private $validators;
 
     /**
@@ -25,7 +25,7 @@ class ValidatorAggregate implements ValidatorInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function validateDocument(DOMDocument $xmlDocument): array
     {

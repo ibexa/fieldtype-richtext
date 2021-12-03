@@ -23,10 +23,10 @@ use Psr\Log\NullLogger;
  */
 class Template extends Render implements Converter
 {
-    const LITERAL_LAYOUT_LINE_BREAK = "\n";
+    public const LITERAL_LAYOUT_LINE_BREAK = "\n";
 
     /**
-     * @var \EzSystems\EzPlatformRichText\eZ\RichText\Converter
+     * @var \Ibexa\Contracts\FieldTypeRichText\RichText\Converter
      */
     private $richTextConverter;
 
@@ -38,8 +38,8 @@ class Template extends Render implements Converter
     /**
      * RichText Template converter constructor.
      *
-     * @param \EzSystems\EzPlatformRichText\eZ\RichText\RendererInterface $renderer
-     * @param \EzSystems\EzPlatformRichText\eZ\RichText\Converter $richTextConverter
+     * @param \Ibexa\Contracts\FieldTypeRichText\RichText\RendererInterface $renderer
+     * @param \Ibexa\Contracts\FieldTypeRichText\RichText\Converter $richTextConverter
      * @param \Psr\Log\LoggerInterface $logger
      */
     public function __construct(

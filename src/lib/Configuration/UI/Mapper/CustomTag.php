@@ -34,10 +34,10 @@ final class CustomTag implements CustomTemplateConfigMapper
     /** @var \Symfony\Component\Asset\Packages */
     private $packages;
 
-    /** @var \EzSystems\EzPlatformRichText\Configuration\UI\Mapper\CustomTag\AttributeMapper[] */
+    /** @var \Ibexa\FieldTypeRichText\Configuration\UI\Mapper\CustomTag\AttributeMapper[] */
     private $customTagAttributeMappers;
 
-    /** @var \EzSystems\EzPlatformRichText\Configuration\UI\Mapper\CustomTag\AttributeMapper[] */
+    /** @var \Ibexa\FieldTypeRichText\Configuration\UI\Mapper\CustomTag\AttributeMapper[] */
     private $supportedTagAttributeMappersCache;
 
     /** @var string */
@@ -128,7 +128,7 @@ final class CustomTag implements CustomTemplateConfigMapper
      * @param string $attributeName
      * @param string $attributeType
      *
-     * @return \EzSystems\EzPlatformRichText\Configuration\UI\Mapper\CustomTag\AttributeMapper
+     * @return \Ibexa\FieldTypeRichText\Configuration\UI\Mapper\CustomTag\AttributeMapper
      */
     private function getAttributeTypeMapper(
         string $tagName,

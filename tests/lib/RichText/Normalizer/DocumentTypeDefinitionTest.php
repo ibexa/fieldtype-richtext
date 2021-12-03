@@ -105,7 +105,8 @@ xmlns="http://ez.no/namespaces/ezpublish5/xhtml5/edit">
     {
         $normalizer = $this->getNormalizer($documentElement, $namespace, $dtdPath);
 
-        $this->assertTrue($normalizer->accept(<<<XML
+        $this->assertTrue($normalizer->accept(
+            <<<XML
 <section xmlns="http://ez.no/namespaces/ezpublish5/xhtml5/edit">
   <p>You will need chili pepper, black pepper, bat wings (dried and grounded) and tomato juice.</p>
   <p>Then you combine the ingredients and shake.</p>
@@ -113,7 +114,7 @@ xmlns="http://ez.no/namespaces/ezpublish5/xhtml5/edit">
   <p>The price is 165¥.</p>
 </section>
 XML
-));
+        ));
     }
 
     /**

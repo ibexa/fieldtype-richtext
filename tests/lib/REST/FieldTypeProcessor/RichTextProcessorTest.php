@@ -54,12 +54,12 @@ EOT;
     }
 
     /**
-     * @var \EzSystems\EzPlatformRichText\RichText\Converter|\PHPUnit\Framework\MockObject\MockObject
+     * @var \Ibexa\FieldTypeRichText\RichText\Converter|\PHPUnit\Framework\MockObject\MockObject
      */
     protected $converter;
 
     /**
-     * @return \EzSystems\EzPlatformRichText\REST\FieldTypeProcessor\RichTextProcessor
+     * @return \Ibexa\FieldTypeRichText\REST\FieldTypeProcessor\RichTextProcessor
      */
     protected function getProcessor()
     {

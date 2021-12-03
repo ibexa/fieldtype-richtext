@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\FieldTypeRichText\RichText\Exception;
 
-use eZ\Publish\Core\Base\Exceptions\InvalidArgumentException;
+use Ibexa\Core\Base\Exceptions\InvalidArgumentException;
 use Throwable;
 
 class InvalidXmlException extends InvalidArgumentException

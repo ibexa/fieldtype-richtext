@@ -9,13 +9,13 @@ declare(strict_types=1);
 namespace Ibexa\FieldTypeRichText\REST\FieldTypeProcessor;
 
 use DOMDocument;
-use EzSystems\EzPlatformRest\FieldTypeProcessor;
 use Ibexa\Contracts\FieldTypeRichText\RichText\Converter;
+use Ibexa\Contracts\Rest\FieldTypeProcessor;
 
 class RichTextProcessor extends FieldTypeProcessor
 {
     /**
-     * @var \EzSystems\EzPlatformRichText\eZ\RichText\Converter
+     * @var \Ibexa\Contracts\FieldTypeRichText\RichText\Converter
      */
     protected $docbookToXhtml5EditConverter;
 
@@ -25,7 +25,7 @@ class RichTextProcessor extends FieldTypeProcessor
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function postProcessValueHash($outgoingValueHash)
     {

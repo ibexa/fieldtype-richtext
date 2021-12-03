@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\Tests\Integration\FieldTypeRichText\Repository\SetupFactory;
 
-use eZ\Publish\Core\Base\Container\Compiler;
+use Ibexa\Core\Base\Container\Compiler;
 use RuntimeException;
 use Symfony\Component\Cache\Adapter\RedisAdapter;
 use Symfony\Component\Config\FileLocator;

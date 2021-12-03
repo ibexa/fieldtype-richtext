@@ -8,11 +8,11 @@ declare(strict_types=1);
 
 namespace Ibexa\Tests\FieldTypeRichText\FieldType\RichText;
 
-use eZ\Publish\API\Repository\Exceptions\NotFoundException;
-use eZ\Publish\SPI\FieldType\StorageGateway;
-use eZ\Publish\SPI\Persistence\Content\Field;
-use eZ\Publish\SPI\Persistence\Content\FieldValue;
-use eZ\Publish\SPI\Persistence\Content\VersionInfo;
+use Ibexa\Contracts\Core\FieldType\StorageGateway;
+use Ibexa\Contracts\Core\Persistence\Content\Field;
+use Ibexa\Contracts\Core\Persistence\Content\FieldValue;
+use Ibexa\Contracts\Core\Persistence\Content\VersionInfo;
+use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
 use Ibexa\FieldTypeRichText\FieldType\RichText\RichTextStorage;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
@@ -350,9 +350,9 @@ class RichTextStorageTest extends TestCase
     }
 
     /**
-     * @param \eZ\Publish\SPI\FieldType\StorageGateway $gateway
+     * @param \Ibexa\Contracts\Core\FieldType\StorageGateway $gateway
      *
-     * @return \EzSystems\EzPlatformRichText\FieldType\RichText\RichTextStorage|\PHPUnit\Framework\MockObject\MockObject
+     * @return \Ibexa\FieldTypeRichText\FieldType\RichText\RichTextStorage|\PHPUnit\Framework\MockObject\MockObject
      */
     protected function getPartlyMockedStorage(StorageGateway $gateway)
     {
@@ -395,12 +395,12 @@ class RichTextStorageTest extends TestCase
     }
 
     /**
-     * @var \EzSystems\EzPlatformRichText\FieldType\RichText\RichTextStorage\Gateway|\PHPUnit\Framework\MockObject\MockObject
+     * @var \Ibexa\FieldTypeRichText\FieldType\RichText\RichTextStorage\Gateway|\PHPUnit\Framework\MockObject\MockObject
      */
     protected $gatewayMock;
 
     /**
-     * @return \EzSystems\EzPlatformRichText\FieldType\RichText\RichTextStorage\Gateway|\PHPUnit\Framework\MockObject\MockObject
+     * @return \Ibexa\FieldTypeRichText\FieldType\RichText\RichTextStorage\Gateway|\PHPUnit\Framework\MockObject\MockObject
      */
     protected function getGatewayMock()
     {

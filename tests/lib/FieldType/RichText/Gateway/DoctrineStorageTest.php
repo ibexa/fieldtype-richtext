@@ -8,9 +8,9 @@ declare(strict_types=1);
 
 namespace Ibexa\Tests\FieldTypeRichText\FieldType\RichText\Gateway;
 
-use eZ\Publish\Core\FieldType\Url\UrlStorage\Gateway\DoctrineStorage as UrlStorageDoctrineGateway;
-use eZ\Publish\Core\Persistence\Legacy\Tests\TestCase;
+use Ibexa\Core\FieldType\Url\UrlStorage\Gateway\DoctrineStorage as UrlStorageDoctrineGateway;
 use Ibexa\FieldTypeRichText\FieldType\RichText\RichTextStorage\Gateway\DoctrineStorage;
+use Ibexa\Tests\Core\Persistence\Legacy\TestCase;
 
 /**
  * Tests the RichText DoctrineStorage.
@@ -18,7 +18,7 @@ use Ibexa\FieldTypeRichText\FieldType\RichText\RichTextStorage\Gateway\DoctrineS
 class DoctrineStorageTest extends TestCase
 {
     /**
-     * @var \EzSystems\EzPlatformRichText\FieldType\RichText\RichTextStorage\Gateway\DoctrineStorage
+     * @var \Ibexa\FieldTypeRichText\FieldType\RichText\RichTextStorage\Gateway\DoctrineStorage
      */
     protected $storageGateway;
 
@@ -46,7 +46,7 @@ class DoctrineStorageTest extends TestCase
     /**
      * Return a ready to test DoctrineStorage gateway.
      *
-     * @return \EzSystems\EzPlatformRichText\FieldType\RichText\RichTextStorage\Gateway\DoctrineStorage
+     * @return \Ibexa\FieldTypeRichText\FieldType\RichText\RichTextStorage\Gateway\DoctrineStorage
      */
     protected function getStorageGateway()
     {

@@ -8,16 +8,16 @@ declare(strict_types=1);
 
 namespace Ibexa\Tests\FieldTypeRichText\FieldType\RichText;
 
-use eZ\Publish\SPI\Persistence\Content\Field;
-use eZ\Publish\SPI\Persistence\Content\FieldValue;
-use eZ\Publish\SPI\Persistence\Content\Type\FieldDefinition;
-use eZ\Publish\SPI\Search;
+use Ibexa\Contracts\Core\Persistence\Content\Field;
+use Ibexa\Contracts\Core\Persistence\Content\FieldValue;
+use Ibexa\Contracts\Core\Persistence\Content\Type\FieldDefinition;
+use Ibexa\Contracts\Core\Search;
 use Ibexa\FieldTypeRichText\FieldType\RichText\SearchField;
 use PHPUnit\Framework\TestCase;
 
 final class SearchFieldTest extends TestCase
 {
-    /** @var \EzSystems\EzPlatformRichText\FieldType\RichText\SearchField */
+    /** @var \Ibexa\FieldTypeRichText\FieldType\RichText\SearchField */
     private $searchField;
 
     public function getDataForTestGetIndexData(): array

@@ -16,12 +16,12 @@ use PHPUnit\Framework\TestCase;
 class DOMDocumentFactoryTest extends TestCase
 {
     /**
-     * @var \EzSystems\EzPlatformRichText\RichText\DOMDocumentFactory
+     * @var \Ibexa\FieldTypeRichText\RichText\DOMDocumentFactory
      */
     private $domDocumentFactory;
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function setUp(): void
     {

@@ -9,10 +9,10 @@ declare(strict_types=1);
 namespace Ibexa\Tests\FieldTypeRichText\RichText\Converter;
 
 use DOMDocument;
-use eZ\Publish\API\Repository\ContentService;
-use eZ\Publish\API\Repository\LocationService;
-use eZ\Publish\Core\MVC\Symfony\Routing\UrlAliasRouter;
+use Ibexa\Contracts\Core\Repository\ContentService;
+use Ibexa\Contracts\Core\Repository\LocationService;
 use Ibexa\Contracts\FieldTypeRichText\RichText\RendererInterface;
+use Ibexa\Core\MVC\Symfony\Routing\UrlAliasRouter;
 use Ibexa\FieldTypeRichText\RichText\Converter\Aggregate;
 use Ibexa\FieldTypeRichText\RichText\Converter\Link;
 use Ibexa\FieldTypeRichText\RichText\Converter\Render\Template;

@@ -8,13 +8,13 @@ declare(strict_types=1);
 
 namespace Ibexa\Tests\FieldTypeRichText\Configuration\Provider;
 
-use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use Ibexa\Contracts\FieldTypeRichText\Configuration\Provider;
+use Ibexa\Core\MVC\ConfigResolverInterface;
 use PHPUnit\Framework\TestCase;
 
 abstract class BaseProviderTestCase extends TestCase
 {
-    /** @var \PHPUnit\Framework\MockObject\MockObject|\eZ\Publish\Core\MVC\ConfigResolverInterface */
+    /** @var \PHPUnit\Framework\MockObject\MockObject|\Ibexa\Core\MVC\ConfigResolverInterface */
     protected $configResolver;
 
     public function setUp(): void

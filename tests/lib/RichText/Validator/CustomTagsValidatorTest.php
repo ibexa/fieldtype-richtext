@@ -16,12 +16,12 @@ use Symfony\Component\Yaml\Yaml;
 /**
  * Test RichText CustomTagsValidator.
  *
- * @see \EzSystems\EzPlatformRichText\FieldType\RichText\CustomTagsValidator
+ * @see \Ibexa\FieldTypeRichText\FieldType\RichText\CustomTagsValidator
  */
 class CustomTagsValidatorTest extends TestCase
 {
     /**
-     * @var \EzSystems\EzPlatformRichText\RichText\Validator\CustomTagsValidator
+     * @var \Ibexa\FieldTypeRichText\RichText\Validator\CustomTagsValidator
      */
     private $validator;
 
@@ -193,7 +193,7 @@ DOCBOOK
     public function testValidateDocumentAcceptsLegacyTags()
     {
         $document = $this->createDocument(
-                <<<DOCBOOK
+            <<<DOCBOOK
 <?xml version="1.0" encoding="UTF-8"?>
 <section xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink"
          xmlns:ezxhtml="http://ez.no/xmlns/ezpublish/docbook/xhtml"

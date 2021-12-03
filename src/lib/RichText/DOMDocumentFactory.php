@@ -16,7 +16,7 @@ final class DOMDocumentFactory
     /**
      * Creates \DOMDocument from given $xmlString.
      *
-     * @throws \EzSystems\EzPlatformRichText\eZ\RichText\Exception\InvalidXmlException
+     * @throws \Ibexa\FieldTypeRichText\RichText\Exception\InvalidXmlException
      *
      * @param string $xmlString
      *

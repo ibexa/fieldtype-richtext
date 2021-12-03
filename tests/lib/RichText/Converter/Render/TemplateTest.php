@@ -18,12 +18,12 @@ use PHPUnit\Framework\TestCase;
 class TemplateTest extends TestCase
 {
     /**
-     * @var \EzSystems\EzPlatformRichText\RichText\RendererInterface|\PHPUnit\Framework\MockObject\MockObject
+     * @var \Ibexa\FieldTypeRichText\RichText\RendererInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     protected $rendererMock;
 
     /**
-     * @var \EzSystems\EzPlatformRichText\RichText\Converter|\PHPUnit\Framework\MockObject\MockObject
+     * @var \Ibexa\FieldTypeRichText\RichText\Converter|\PHPUnit\Framework\MockObject\MockObject
      */
     protected $converterMock;
 
@@ -141,7 +141,7 @@ class TemplateTest extends TestCase
     }
 
     /**
-     * @return \EzSystems\EzPlatformRichText\RichText\RendererInterface|\PHPUnit\Framework\MockObject\MockObject
+     * @return \Ibexa\FieldTypeRichText\RichText\RendererInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     protected function getRendererMock()
     {
@@ -149,7 +149,7 @@ class TemplateTest extends TestCase
     }
 
     /**
-     * @return \EzSystems\EzPlatformRichText\RichText\Converter|\PHPUnit\Framework\MockObject\MockObject
+     * @return \Ibexa\FieldTypeRichText\RichText\Converter|\PHPUnit\Framework\MockObject\MockObject
      */
     protected function getConverterMock()
     {
@@ -159,7 +159,7 @@ class TemplateTest extends TestCase
     /**
      * Expected Template parameters for each test fixture (key is a fixture name).
      */
-    const FIXTURES_PARAMETERS = [
+    public const FIXTURES_PARAMETERS = [
         '00-block' => [
             [
                 'name' => 'template1',

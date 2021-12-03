@@ -9,14 +9,14 @@ declare(strict_types=1);
 namespace Ibexa\FieldTypeRichText\FieldType\RichText;
 
 use DOMDocument;
-use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
-use eZ\Publish\Core\Base\Exceptions\InvalidArgumentType;
-use eZ\Publish\Core\FieldType\FieldType;
-use eZ\Publish\Core\FieldType\ValidationError;
-use eZ\Publish\Core\FieldType\Value as BaseValue;
-use eZ\Publish\SPI\FieldType\Value as SPIValue;
-use eZ\Publish\SPI\Persistence\Content\FieldValue;
+use Ibexa\Contracts\Core\FieldType\Value as SPIValue;
+use Ibexa\Contracts\Core\Persistence\Content\FieldValue;
+use Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition;
 use Ibexa\Contracts\FieldTypeRichText\RichText\InputHandlerInterface;
+use Ibexa\Core\Base\Exceptions\InvalidArgumentType;
+use Ibexa\Core\FieldType\FieldType;
+use Ibexa\Core\FieldType\ValidationError;
+use Ibexa\Core\FieldType\Value as BaseValue;
 use RuntimeException;
 
 /**
@@ -25,12 +25,12 @@ use RuntimeException;
 class Type extends FieldType
 {
     /**
-     * @var \EzSystems\EzPlatformRichText\eZ\RichText\InputHandlerInterface
+     * @var \Ibexa\Contracts\FieldTypeRichText\RichText\InputHandlerInterface
      */
     private $inputHandler;
 
     /**
-     * @param \EzSystems\EzPlatformRichText\eZ\RichText\InputHandlerInterface $inputHandler
+     * @param \Ibexa\Contracts\FieldTypeRichText\RichText\InputHandlerInterface $inputHandler
      */
     public function __construct(InputHandlerInterface $inputHandler)
     {
@@ -53,8 +53,8 @@ class Type extends FieldType
      * It will be used to generate content name and url alias if current field is designated
      * to be used in the content name/urlAlias pattern.
      *
-     * @param \eZ\Publish\SPI\FieldType\Value $value
-     * @param \eZ\Publish\API\Repository\Values\ContentType\FieldDefinition $fieldDefinition
+     * @param \Ibexa\Contracts\Core\FieldType\Value $value
+     * @param \Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition $fieldDefinition
      * @param string $languageCode
      *
      * @return string
@@ -83,7 +83,7 @@ class Type extends FieldType
      * Returns the fallback default value of field type when no such default
      * value is provided in the field definition in content types.
      *
-     * @return \EzSystems\EzPlatformRichText\eZ\FieldType\RichText\Value
+     * @return \Ibexa\FieldTypeRichText\FieldType\RichText\Value
      */
     public function getEmptyValue()
     {
@@ -93,7 +93,7 @@ class Type extends FieldType
     /**
      * Returns if the given $value is considered empty by the field type.
      *
-     * @param \EzSystems\EzPlatformRichText\eZ\FieldType\RichText\Value $value
+     * @param \Ibexa\FieldTypeRichText\FieldType\RichText\Value $value
      *
      * @return bool
      */
@@ -109,9 +109,9 @@ class Type extends FieldType
     /**
      * Inspects given $inputValue and potentially converts it into a dedicated value object.
      *
-     * @param \EzSystems\EzPlatformRichText\eZ\FieldType\RichText\Value|\DOMDocument|string $inputValue
+     * @param \Ibexa\FieldTypeRichText\FieldType\RichText\Value|\DOMDocument|string $inputValue
      *
-     * @return \EzSystems\EzPlatformRichText\eZ\FieldType\RichText\Value the potentially converted and structurally plausible value
+     * @return \Ibexa\FieldTypeRichText\FieldType\RichText\Value the potentially converted and structurally plausible value
      */
     protected function createValueFromInput($inputValue)
     {
@@ -129,9 +129,9 @@ class Type extends FieldType
     /**
      * Throws an exception if value structure is not of expected format.
      *
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException if the value does not match the expected structure
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException if the value does not match the expected structure
      *
-     * @param \EzSystems\EzPlatformRichText\eZ\FieldType\RichText\Value $value
+     * @param \Ibexa\FieldTypeRichText\FieldType\RichText\Value $value
      */
     protected function checkValueStructure(BaseValue $value)
     {
@@ -151,12 +151,12 @@ class Type extends FieldType
      * that no validation errors occurred. Overwrite in derived types, if
      * validation is supported.
      *
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
      *
-     * @param \eZ\Publish\API\Repository\Values\ContentType\FieldDefinition $fieldDefinition The field definition of the field
-     * @param \EzSystems\EzPlatformRichText\eZ\FieldType\RichText\Value $value The field value for which an action is performed
+     * @param \Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition $fieldDefinition The field definition of the field
+     * @param \Ibexa\FieldTypeRichText\FieldType\RichText\Value $value The field value for which an action is performed
      *
-     * @return \eZ\Publish\SPI\FieldType\ValidationError[]
+     * @return \Ibexa\Contracts\Core\FieldType\ValidationError[]
      */
     public function validate(FieldDefinition $fieldDefinition, SPIValue $value)
     {
@@ -168,9 +168,9 @@ class Type extends FieldType
     /**
      * Returns information for FieldValue->$sortKey relevant to the field type.
      *
-     * @see \eZ\Publish\Core\FieldType
+     * @see \Ibexa\Core\FieldType
      *
-     * @param \EzSystems\EzPlatformRichText\eZ\FieldType\RichText\Value $value
+     * @param \Ibexa\FieldTypeRichText\FieldType\RichText\Value $value
      *
      * @return string|null
      */
@@ -186,7 +186,7 @@ class Type extends FieldType
      *
      * @param mixed $hash
      *
-     * @return \EzSystems\EzPlatformRichText\eZ\FieldType\RichText\Value $value
+     * @return \Ibexa\FieldTypeRichText\FieldType\RichText\Value $value
      */
     public function fromHash($hash)
     {
@@ -200,7 +200,7 @@ class Type extends FieldType
     /**
      * Converts a $Value to a hash.
      *
-     * @param \EzSystems\EzPlatformRichText\eZ\FieldType\RichText\Value $value
+     * @param \Ibexa\FieldTypeRichText\FieldType\RichText\Value $value
      *
      * @return mixed
      */
@@ -213,7 +213,7 @@ class Type extends FieldType
      * Creates a new Value object from persistence data.
      * $fieldValue->data is supposed to be a string.
      *
-     * @param \eZ\Publish\SPI\Persistence\Content\FieldValue $fieldValue
+     * @param \Ibexa\Contracts\Core\Persistence\Content\FieldValue $fieldValue
      *
      * @return Value
      */
@@ -223,9 +223,9 @@ class Type extends FieldType
     }
 
     /**
-     * @param \EzSystems\EzPlatformRichText\eZ\FieldType\RichText\Value $value
+     * @param \Ibexa\FieldTypeRichText\FieldType\RichText\Value $value
      *
-     * @return \eZ\Publish\SPI\Persistence\Content\FieldValue
+     * @return \Ibexa\Contracts\Core\Persistence\Content\FieldValue
      */
     public function toPersistenceValue(SPIValue $value)
     {
@@ -254,7 +254,7 @@ class Type extends FieldType
      * Not intended for \eZ\Publish\API\Repository\Values\Content\Relation::COMMON type relations,
      * there is a service API for handling those.
      *
-     * @param \eZ\Publish\SPI\FieldType\Value $value
+     * @param \Ibexa\Contracts\Core\FieldType\Value $value
      *
      * @return array hash with relation type as key and array of destination content ids as value.
      *
@@ -277,7 +277,7 @@ class Type extends FieldType
     {
         $relations = [];
 
-        /** @var \EzSystems\EzPlatformRichText\eZ\FieldType\RichText\Value $value */
+        /** @var \Ibexa\FieldTypeRichText\FieldType\RichText\Value $value */
         if ($value->xml instanceof DOMDocument) {
             $relations = $this->inputHandler->getRelations($value->xml);
         }

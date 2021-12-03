@@ -21,24 +21,24 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class RichTextType extends AbstractType
 {
     /**
-     * @var \EzSystems\EzPlatformRichText\eZ\RichText\DOMDocumentFactory
+     * @var \Ibexa\FieldTypeRichText\RichText\DOMDocumentFactory
      */
     private $domDocumentFactory;
 
     /**
-     * @var \EzSystems\EzPlatformRichText\eZ\RichText\InputHandlerInterface
+     * @var \Ibexa\Contracts\FieldTypeRichText\RichText\InputHandlerInterface
      */
     private $inputHandler;
 
     /**
-     * @var \EzSystems\EzPlatformRichText\eZ\RichText\Converter
+     * @var \Ibexa\Contracts\FieldTypeRichText\RichText\Converter
      */
     private $docbookToXhtml5EditConverter;
 
     /**
-     * @param \EzSystems\EzPlatformRichText\eZ\RichText\DOMDocumentFactory $domDocumentFactory
-     * @param \EzSystems\EzPlatformRichText\eZ\RichText\InputHandlerInterface $inputHandler
-     * @param \EzSystems\EzPlatformRichText\eZ\RichText\Converter $docbookToXhtml5EditConverter
+     * @param \Ibexa\FieldTypeRichText\RichText\DOMDocumentFactory $domDocumentFactory
+     * @param \Ibexa\Contracts\FieldTypeRichText\RichText\InputHandlerInterface $inputHandler
+     * @param \Ibexa\Contracts\FieldTypeRichText\RichText\Converter $docbookToXhtml5EditConverter
      */
     public function __construct(
         DOMDocumentFactory $domDocumentFactory,
@@ -51,7 +51,7 @@ class RichTextType extends AbstractType
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -63,7 +63,7 @@ class RichTextType extends AbstractType
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver): void
     {
@@ -75,7 +75,7 @@ class RichTextType extends AbstractType
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getParent(): string
     {
@@ -83,7 +83,7 @@ class RichTextType extends AbstractType
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getBlockPrefix(): string
     {

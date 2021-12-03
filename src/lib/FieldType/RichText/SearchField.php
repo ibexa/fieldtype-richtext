@@ -10,10 +10,10 @@ namespace Ibexa\FieldTypeRichText\FieldType\RichText;
 
 use DOMDocument;
 use DOMNode;
-use eZ\Publish\SPI\FieldType\Indexable;
-use eZ\Publish\SPI\Persistence\Content\Field;
-use eZ\Publish\SPI\Persistence\Content\Type\FieldDefinition;
-use eZ\Publish\SPI\Search;
+use Ibexa\Contracts\Core\FieldType\Indexable;
+use Ibexa\Contracts\Core\Persistence\Content\Field;
+use Ibexa\Contracts\Core\Persistence\Content\Type\FieldDefinition;
+use Ibexa\Contracts\Core\Search;
 
 /**
  * Indexable definition for RichText field type.
@@ -23,10 +23,10 @@ class SearchField implements Indexable
     /**
      * Get index data for field for search backend.
      *
-     * @param \eZ\Publish\SPI\Persistence\Content\Field $field
-     * @param \eZ\Publish\SPI\Persistence\Content\Type\FieldDefinition $fieldDefinition
+     * @param \Ibexa\Contracts\Core\Persistence\Content\Field $field
+     * @param \Ibexa\Contracts\Core\Persistence\Content\Type\FieldDefinition $fieldDefinition
      *
-     * @return \eZ\Publish\SPI\Search\Field[]
+     * @return \Ibexa\Contracts\Core\Search\Field[]
      */
     public function getIndexData(Field $field, FieldDefinition $fieldDefinition)
     {
@@ -105,7 +105,7 @@ class SearchField implements Indexable
     /**
      * Get index field types for search backend.
      *
-     * @return \eZ\Publish\SPI\Search\FieldType[]
+     * @return \Ibexa\Contracts\Core\Search\FieldType[]
      */
     public function getIndexDefinition()
     {

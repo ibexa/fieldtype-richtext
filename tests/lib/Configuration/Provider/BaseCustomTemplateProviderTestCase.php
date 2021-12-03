@@ -12,7 +12,7 @@ use Ibexa\FieldTypeRichText\Configuration\UI\Mapper\CustomTemplateConfigMapper;
 
 abstract class BaseCustomTemplateProviderTestCase extends BaseProviderTestCase
 {
-    /** @var \PHPUnit\Framework\MockObject\MockObject|\EzSystems\EzPlatformRichText\Configuration\UI\Mapper\CustomStyle */
+    /** @var \PHPUnit\Framework\MockObject\MockObject|\Ibexa\FieldTypeRichText\Configuration\UI\Mapper\CustomStyle */
     protected $mapper;
 
     abstract protected function getExpectedCustomTemplatesConfiguration(): array;

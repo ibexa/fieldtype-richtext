@@ -9,12 +9,12 @@ declare(strict_types=1);
 namespace Ibexa\FieldTypeRichText\RichText;
 
 use Exception;
-use eZ\Publish\API\Repository\Exceptions\NotFoundException;
-use eZ\Publish\API\Repository\Repository;
-use eZ\Publish\API\Repository\Values\Content\Content;
-use eZ\Publish\Core\MVC\ConfigResolverInterface;
-use eZ\Publish\Core\MVC\Symfony\Security\Authorization\Attribute as AuthorizationAttribute;
+use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
+use Ibexa\Contracts\Core\Repository\Repository;
+use Ibexa\Contracts\Core\Repository\Values\Content\Content;
 use Ibexa\Contracts\FieldTypeRichText\RichText\RendererInterface;
+use Ibexa\Core\MVC\ConfigResolverInterface;
+use Ibexa\Core\MVC\Symfony\Security\Authorization\Attribute as AuthorizationAttribute;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -27,11 +27,11 @@ use Twig\Environment;
  */
 class Renderer implements RendererInterface
 {
-    const RESOURCE_TYPE_CONTENT = 0;
-    const RESOURCE_TYPE_LOCATION = 1;
+    public const RESOURCE_TYPE_CONTENT = 0;
+    public const RESOURCE_TYPE_LOCATION = 1;
 
     /**
-     * @var \eZ\Publish\Core\Repository\Repository
+     * @var \Ibexa\Core\Repository\Repository
      */
     protected $repository;
 
@@ -56,7 +56,7 @@ class Renderer implements RendererInterface
     protected $embedConfigurationNamespace;
 
     /**
-     * @var \eZ\Publish\Core\MVC\ConfigResolverInterface
+     * @var \Ibexa\Core\MVC\ConfigResolverInterface
      */
     protected $configResolver;
 
@@ -81,9 +81,9 @@ class Renderer implements RendererInterface
     private $customStylesConfiguration;
 
     /**
-     * @param \eZ\Publish\API\Repository\Repository $repository
+     * @param \Ibexa\Contracts\Core\Repository\Repository $repository
      * @param \Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface $authorizationChecker
-     * @param \eZ\Publish\Core\MVC\ConfigResolverInterface $configResolver
+     * @param \Ibexa\Core\MVC\ConfigResolverInterface $configResolver
      * @param \Twig\Environment $templateEngine
      * @param string $tagConfigurationNamespace
      * @param string $styleConfigurationNamespace
@@ -117,14 +117,14 @@ class Renderer implements RendererInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function renderContentEmbed($contentId, $viewType, array $parameters, $isInline)
     {
         $isDenied = false;
 
         try {
-            /** @var \eZ\Publish\API\Repository\Values\Content\Content $content */
+            /** @var \Ibexa\Contracts\Core\Repository\Values\Content\Content $content */
             $content = $this->repository->sudo(
                 static function (Repository $repository) use ($contentId) {
                     return $repository->getContentService()->loadContent((int)$contentId);
@@ -192,7 +192,7 @@ class Renderer implements RendererInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function renderLocationEmbed($locationId, $viewType, array $parameters, $isInline)
     {
@@ -454,7 +454,7 @@ class Renderer implements RendererInterface
      *
      * @throws \Symfony\Component\Security\Core\Exception\AccessDeniedException
      *
-     * @param \eZ\Publish\API\Repository\Values\Content\Content $content
+     * @param \Ibexa\Contracts\Core\Repository\Values\Content\Content $content
      */
     protected function checkContentPermissions(Content $content)
     {
@@ -488,11 +488,11 @@ class Renderer implements RendererInterface
      *
      * @param int|string $id
      *
-     * @return \eZ\Publish\API\Repository\Values\Content\Location
+     * @return \Ibexa\Contracts\Core\Repository\Values\Content\Location
      */
     protected function checkLocation($id)
     {
-        /** @var \eZ\Publish\API\Repository\Values\Content\Location $location */
+        /** @var \Ibexa\Contracts\Core\Repository\Values\Content\Location $location */
         $location = $this->repository->sudo(
             static function (Repository $repository) use ($id) {
                 return $repository->getLocationService()->loadLocation($id);

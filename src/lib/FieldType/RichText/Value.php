@@ -9,14 +9,14 @@ declare(strict_types=1);
 namespace Ibexa\FieldTypeRichText\FieldType\RichText;
 
 use DOMDocument;
-use eZ\Publish\Core\FieldType\Value as BaseValue;
+use Ibexa\Core\FieldType\Value as BaseValue;
 
 /**
  * Value for RichText field type.
  */
 class Value extends BaseValue
 {
-    const EMPTY_VALUE = <<<EOT
+    public const EMPTY_VALUE = <<<EOT
 <?xml version="1.0" encoding="UTF-8"?>
 <section xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0-variant ezpublish-1.0"/>
 EOT;
@@ -44,7 +44,7 @@ EOT;
     }
 
     /**
-     * @see \eZ\Publish\Core\FieldType\Value
+     * @see \Ibexa\Core\FieldType\Value
      */
     public function __toString()
     {

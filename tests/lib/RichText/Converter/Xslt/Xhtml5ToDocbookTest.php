@@ -98,7 +98,7 @@ class Xhtml5ToDocbookTest extends BaseTest
     }
 
     /**
-     * @return \EzSystems\EzPlatformRichText\RichText\Converter
+     * @return \Ibexa\FieldTypeRichText\RichText\Converter
      */
     protected function getConverter()
     {

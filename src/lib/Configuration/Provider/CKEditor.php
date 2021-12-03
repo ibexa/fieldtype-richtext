@@ -8,9 +8,9 @@ declare(strict_types=1);
 
 namespace Ibexa\FieldTypeRichText\Configuration\Provider;
 
-use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use Ibexa\Bundle\FieldTypeRichText\DependencyInjection\Configuration\Parser\FieldType\RichText;
 use Ibexa\Contracts\FieldTypeRichText\Configuration\Provider;
+use Ibexa\Core\MVC\ConfigResolverInterface;
 
 /**
  * CKEditor configuration provider.
@@ -22,7 +22,7 @@ final class CKEditor implements Provider
     private const SEPARATOR = '|';
     private const CUSTOM_STYLE_INLINE = 'ibexaCustomStyleInline';
 
-    /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
+    /** @var \Ibexa\Core\MVC\ConfigResolverInterface */
     private $configResolver;
 
     /** @var array */

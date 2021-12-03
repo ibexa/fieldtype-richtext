@@ -9,8 +9,8 @@ declare(strict_types=1);
 namespace Ibexa\FieldTypeRichText\RichText\Converter;
 
 use DOMDocument;
-use eZ\Publish\Core\Base\Exceptions\InvalidArgumentException;
 use Ibexa\Contracts\FieldTypeRichText\RichText\Converter;
+use Ibexa\Core\Base\Exceptions\InvalidArgumentException;
 use Ibexa\FieldTypeRichText\RichText\XmlBase;
 use RuntimeException;
 use XSLTProcessor;
@@ -113,8 +113,8 @@ class Xslt extends XmlBase implements Converter
     /**
      * Performs conversion of the given $document using XSLT stylesheet.
      *
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException if stylesheet is not found
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException if document does not transform
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException if stylesheet is not found
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException if document does not transform
      *
      * @param \DOMDocument $document
      *

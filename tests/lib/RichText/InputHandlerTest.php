@@ -9,9 +9,9 @@ declare(strict_types=1);
 namespace Ibexa\Tests\FieldTypeRichText\RichText;
 
 use DOMDocument;
-use eZ\Publish\API\Repository\Values\Content\Relation;
-use eZ\Publish\Core\Base\Exceptions\InvalidArgumentException;
+use Ibexa\Contracts\Core\Repository\Values\Content\Relation;
 use Ibexa\Contracts\FieldTypeRichText\RichText\ValidatorInterface;
+use Ibexa\Core\Base\Exceptions\InvalidArgumentException;
 use Ibexa\FieldTypeRichText\RichText\ConverterDispatcher;
 use Ibexa\FieldTypeRichText\RichText\DOMDocumentFactory;
 use Ibexa\FieldTypeRichText\RichText\InputHandler;
@@ -22,42 +22,42 @@ use PHPUnit\Framework\TestCase;
 class InputHandlerTest extends TestCase
 {
     /**
-     * @var \EzSystems\EzPlatformRichText\RichText\DOMDocumentFactory|\PHPUnit\Framework\MockObject\MockObject
+     * @var \Ibexa\FieldTypeRichText\RichText\DOMDocumentFactory|\PHPUnit\Framework\MockObject\MockObject
      */
     private $domDocumentFactory;
 
     /**
-     * @var \EzSystems\EzPlatformRichText\RichText\ConverterDispatcher|\PHPUnit\Framework\MockObject\MockObject
+     * @var \Ibexa\FieldTypeRichText\RichText\ConverterDispatcher|\PHPUnit\Framework\MockObject\MockObject
      */
     private $converter;
 
     /**
-     * @var \EzSystems\EzPlatformRichText\RichText\Normalizer|\PHPUnit\Framework\MockObject\MockObject
+     * @var \Ibexa\FieldTypeRichText\RichText\Normalizer|\PHPUnit\Framework\MockObject\MockObject
      */
     private $normalizer;
 
     /**
-     * @var \EzSystems\EzPlatformRichText\RichText\ValidatorInterface|\PHPUnit\Framework\MockObject\MockObject
+     * @var \Ibexa\FieldTypeRichText\RichText\ValidatorInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private $schemaValidator;
 
     /**
-     * @var \EzSystems\EzPlatformRichText\RichText\ValidatorInterface|\PHPUnit\Framework\MockObject\MockObject
+     * @var \Ibexa\FieldTypeRichText\RichText\ValidatorInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private $docbookValidator;
 
     /**
-     * @var \EzSystems\EzPlatformRichText\RichText\RelationProcessor
+     * @var \Ibexa\FieldTypeRichText\RichText\RelationProcessor
      */
     private $relationProcessor;
 
     /**
-     * @var \EzSystems\EzPlatformRichText\RichText\InputHandler|\PHPUnit\Framework\MockObject\MockObject
+     * @var \Ibexa\FieldTypeRichText\RichText\InputHandler|\PHPUnit\Framework\MockObject\MockObject
      */
     private $inputHandler;
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function setUp(): void
     {

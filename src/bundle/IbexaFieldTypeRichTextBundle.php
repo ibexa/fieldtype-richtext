@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\Bundle\FieldTypeRichText;
 
-use eZ\Bundle\EzPublishCoreBundle\DependencyInjection\EzPublishCoreExtension;
+use Ibexa\Bundle\Core\DependencyInjection\IbexaCoreExtension;
 use Ibexa\Bundle\FieldTypeRichText\DependencyInjection\Compiler\RichTextHtml5ConverterPass;
 use Ibexa\Bundle\FieldTypeRichText\DependencyInjection\Configuration\Parser\FieldType\RichText;
 use Ibexa\Bundle\FieldTypeRichText\DependencyInjection\IbexaFieldTypeRichTextExtension;
@@ -24,8 +24,8 @@ class IbexaFieldTypeRichTextBundle extends Bundle
     {
         parent::build($container);
 
-        /** @var \eZ\Bundle\EzPublishCoreBundle\DependencyInjection\EzPublishCoreExtension $core */
-        $core = $container->getExtension('ezpublish');
+        /** @var \Ibexa\Bundle\Core\DependencyInjection\IbexaCoreExtension $core */
+        $core = $container->getExtension('ibexa');
         $core->addDefaultSettings(__DIR__ . '/Resources/config', ['default_settings.yaml']);
 
         $container->addCompilerPass(new RichTextHtml5ConverterPass());
@@ -40,11 +40,11 @@ class IbexaFieldTypeRichTextBundle extends Bundle
     /**
      * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
      *
-     * @return \eZ\Bundle\EzPublishCoreBundle\DependencyInjection\EzPublishCoreExtension
+     * @return \Ibexa\Bundle\Core\DependencyInjection\IbexaCoreExtension
      */
-    protected function getCoreExtension(ContainerBuilder $container): EzPublishCoreExtension
+    protected function getCoreExtension(ContainerBuilder $container): IbexaCoreExtension
     {
-        return $container->getExtension('ezpublish');
+        return $container->getExtension('ibexa');
     }
 
     public function getContainerExtension()

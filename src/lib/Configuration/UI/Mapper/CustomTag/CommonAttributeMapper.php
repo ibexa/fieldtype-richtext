@@ -16,7 +16,7 @@ namespace Ibexa\FieldTypeRichText\Configuration\UI\Mapper\CustomTag;
 class CommonAttributeMapper implements AttributeMapper
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function supports(string $attributeType): bool
     {
@@ -24,7 +24,7 @@ class CommonAttributeMapper implements AttributeMapper
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function mapConfig(
         string $tagName,

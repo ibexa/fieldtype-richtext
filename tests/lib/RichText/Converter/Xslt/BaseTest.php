@@ -20,12 +20,12 @@ use PHPUnit\Framework\TestCase;
 abstract class BaseTest extends TestCase
 {
     /**
-     * @var \EzSystems\EzPlatformRichText\RichText\Converter
+     * @var \Ibexa\FieldTypeRichText\RichText\Converter
      */
     protected $converter;
 
     /**
-     * @var \EzSystems\EzPlatformRichText\RichText\Validator
+     * @var \Ibexa\FieldTypeRichText\RichText\Validator
      */
     protected $validator;
 
@@ -164,7 +164,7 @@ abstract class BaseTest extends TestCase
     }
 
     /**
-     * @return \EzSystems\EzPlatformRichText\RichText\Converter
+     * @return \Ibexa\FieldTypeRichText\RichText\Converter
      */
     protected function getConverter()
     {
@@ -179,7 +179,7 @@ abstract class BaseTest extends TestCase
     }
 
     /**
-     * @return \EzSystems\EzPlatformRichText\RichText\ValidatorInterface
+     * @return \Ibexa\FieldTypeRichText\RichText\ValidatorInterface
      */
     protected function getConversionValidator()
     {

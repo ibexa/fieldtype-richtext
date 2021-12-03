@@ -21,7 +21,7 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 class RichTextValidatorTest extends TestCase
 {
     /**
-     * @var \EzSystems\EzPlatformRichText\RichText\InputHandlerInterface|\PHPUnit\Framework\MockObject\MockObject
+     * @var \Ibexa\FieldTypeRichText\RichText\InputHandlerInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private $inputHandler;
 
@@ -31,7 +31,7 @@ class RichTextValidatorTest extends TestCase
     private $executionContext;
 
     /**
-     * @var \EzSystems\EzPlatformRichText\Validator\Constraints\RichTextValidator
+     * @var \Ibexa\FieldTypeRichText\Validator\Constraints\RichTextValidator
      */
     private $validator;
 

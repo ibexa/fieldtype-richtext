@@ -14,7 +14,7 @@ namespace Ibexa\Contracts\FieldTypeRichText\Configuration;
  * To provide custom configuration implement \EzSystems\EzPlatformRichText\SPI\Configuration\Provider
  * instead.
  *
- * @see \EzSystems\EzPlatformRichText\SPI\Configuration\Provider
+ * @see \Ibexa\Contracts\FieldTypeRichText\Configuration\Provider
  */
 interface ProviderService
 {

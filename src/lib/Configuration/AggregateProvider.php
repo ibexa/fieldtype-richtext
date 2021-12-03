@@ -17,11 +17,11 @@ use Ibexa\Contracts\FieldTypeRichText\Configuration\ProviderService;
  */
 final class AggregateProvider implements ProviderService
 {
-    /** @var \EzSystems\EzPlatformRichText\SPI\Configuration\Provider[]|iterable */
+    /** @var \Ibexa\Contracts\FieldTypeRichText\Configuration\Provider[]|iterable */
     private $providers;
 
     /**
-     * @param \EzSystems\EzPlatformRichText\SPI\Configuration\Provider[] $providers
+     * @param \Ibexa\Contracts\FieldTypeRichText\Configuration\Provider[] $providers
      */
     public function __construct(iterable $providers)
     {

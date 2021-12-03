@@ -8,8 +8,8 @@ declare(strict_types=1);
 
 namespace Ibexa\Tests\Integration\FieldTypeRichText\Repository\SetupFactory;
 
-use eZ\Publish\API\Repository\Tests\SetupFactory\Legacy as CoreLegacySetupFactory;
-use eZ\Publish\Core\Base\ServiceContainer;
+use Ibexa\Contracts\Core\Test\Repository\SetupFactory\Legacy as CoreLegacySetupFactory;
+use Ibexa\Core\Base\ServiceContainer;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
@@ -24,7 +24,7 @@ class LegacySetupFactory extends CoreLegacySetupFactory
     /**
      * Returns the service container used for initialization of the repository.
      *
-     * @return \eZ\Publish\Core\Base\ServiceContainer
+     * @return \Ibexa\Core\Base\ServiceContainer
      *
      * @throws \Exception
      */
