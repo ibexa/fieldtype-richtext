@@ -11,7 +11,7 @@ namespace Ibexa\Tests\FieldTypeRichText\FieldType\RichText;
 use Ibexa\Contracts\Core\Persistence\Content\Field;
 use Ibexa\Contracts\Core\Persistence\Content\FieldValue;
 use Ibexa\Contracts\Core\Persistence\Content\Type\FieldDefinition;
-use Ibexa\Core\Search;
+use Ibexa\Contracts\Core\Search;
 use Ibexa\FieldTypeRichText\FieldType\RichText\SearchField;
 use PHPUnit\Framework\TestCase;
 
