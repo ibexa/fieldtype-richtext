@@ -20,6 +20,9 @@ const customConfig = Encore.getWebpackConfig();
 
 customConfig.name = 'richtext';
 
+customConfig.module.rules[4].oneOf[1].use[1].options.url = false;
+customConfig.module.rules[1].oneOf[1].use[1].options.url = false;
+
 customConfig.module.rules.push({
     test: /ckeditor5-[^/\\]+[/\\]theme[/\\]icons[/\\][^/\\]+\.svg$/,
     use: ['raw-loader'],
