@@ -28,7 +28,7 @@ class IbexaCustomTagFormView extends View {
         const buttonView = new IbexaButtonView(this.locale);
 
         buttonView.set({
-            icon: window.eZ.helpers.icon.getIconPath('edit'),
+            icon: window.ibexa.helpers.icon.getIconPath('edit'),
         });
 
         buttonView.delegate('execute').to(this, 'edit-attributes');

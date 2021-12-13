@@ -113,7 +113,7 @@ class IbexaCustomTagUI extends Plugin {
         const modelElement = this.editor.model.document.selection.getSelectedElement();
         const values = modelElement.getAttribute('values');
 
-        this.attributesView.setValues(values, window.eZ.richText.customTags[this.componentName].label);
+        this.attributesView.setValues(values, window.ibexa.richText.customTags[this.componentName].label);
 
         this.balloon.add({
             view: this.attributesView,

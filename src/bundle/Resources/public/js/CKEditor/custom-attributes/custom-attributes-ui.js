@@ -57,8 +57,8 @@ class IbexaAttributesUI extends Plugin {
 
     showForm() {
         const parentElement = this.getModelElement();
-        const customAttributes = window.eZ.richText.alloyEditor.attributes[parentElement.name];
-        const customClasses = window.eZ.richText.alloyEditor.classes[parentElement.name];
+        const customAttributes = window.ibexa.richText.alloyEditor.attributes[parentElement.name];
+        const customClasses = window.ibexa.richText.alloyEditor.classes[parentElement.name];
         const areCustomAttributesSet =
             parentElement.hasAttribute('custom-classes') ||
             Object.keys(customAttributes).some((customAttributeName) => parentElement.hasAttribute(customAttributeName));
@@ -99,7 +99,7 @@ class IbexaAttributesUI extends Plugin {
 
             buttonView.set({
                 label: Translator.trans(/*@Desc("Custom attributes")*/ 'custom_attributes_btn.label', {}, 'ck_editor'),
-                icon: window.eZ.helpers.icon.getIconPath('edit'),
+                icon: window.ibexa.helpers.icon.getIconPath('edit'),
                 tooltip: true,
             });
 

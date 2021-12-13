@@ -8,7 +8,7 @@ class IbexaEmbedContentUI extends IbexaEmbedBaseUI {
         this.commandName = 'insertIbexaEmbed';
         this.buttonLabel = Translator.trans(/*@Desc("Embed")*/ 'embed_btn.label', {}, 'ck_editor');
         this.componentName = 'ibexaEmbed';
-        this.icon = window.eZ.helpers.icon.getIconPath('embed');
+        this.icon = window.ibexa.helpers.icon.getIconPath('embed');
     }
 
     getCommandOptions(items) {

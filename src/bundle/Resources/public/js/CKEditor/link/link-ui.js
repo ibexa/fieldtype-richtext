@@ -142,7 +142,7 @@ class IbexaLinkUI extends Plugin {
 
             buttonView.set({
                 label: Translator.trans(/*@Desc("Link")*/ 'link_btn.label', {}, 'ck_editor'),
-                icon: window.eZ.helpers.icon.getIconPath('link'),
+                icon: window.ibexa.helpers.icon.getIconPath('link'),
                 tooltip: true,
             });
 

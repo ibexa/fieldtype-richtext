@@ -36,7 +36,7 @@ class IbexaCustomStyleInlineUI extends Plugin {
     init() {
         this.editor.ui.componentFactory.add('ibexaCustomStyleInline', (locale) => {
             const dropdownView = createDropdown(locale);
-            const customStylesInline = Object.entries(window.eZ.richText.customStyles).filter(([name, config]) => config.inline);
+            const customStylesInline = Object.entries(window.ibexa.richText.customStyles).filter(([name, config]) => config.inline);
             const customStylesButtons = customStylesInline.map(this.createButton);
 
             dropdownView.buttonView.set({

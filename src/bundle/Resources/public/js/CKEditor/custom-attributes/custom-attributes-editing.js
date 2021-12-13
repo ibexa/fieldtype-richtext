@@ -20,7 +20,7 @@ class IbexaCustomAttributesEditing extends Plugin {
             },
         });
 
-        Object.values(window.eZ.richText.alloyEditor.attributes).forEach((customAttributes) => {
+        Object.values(window.ibexa.richText.alloyEditor.attributes).forEach((customAttributes) => {
             Object.keys(customAttributes).forEach((customAttributeName) => {
                 conversion.attributeToAttribute({
                     model: {
@@ -36,11 +36,11 @@ class IbexaCustomAttributesEditing extends Plugin {
 
     init() {
         const { model } = this.editor;
-        const elementsWithCustomAttributes = Object.keys(window.eZ.richText.alloyEditor.attributes);
-        const elementsWithCustomClasses = Object.keys(window.eZ.richText.alloyEditor.classes);
+        const elementsWithCustomAttributes = Object.keys(window.ibexa.richText.alloyEditor.attributes);
+        const elementsWithCustomClasses = Object.keys(window.ibexa.richText.alloyEditor.classes);
 
         elementsWithCustomAttributes.forEach((element) => {
-            const customAttributes = Object.keys(window.eZ.richText.alloyEditor.attributes[element]);
+            const customAttributes = Object.keys(window.ibexa.richText.alloyEditor.attributes[element]);
 
             model.schema.extend(element, { allowAttributes: customAttributes });
         });

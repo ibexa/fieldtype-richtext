@@ -26,11 +26,11 @@ export const findContent = ({ token, siteaccess, contentId, limit = 1, offset = 
     });
 
     fetch(request)
-        .then(window.eZ.helpers.request.getJsonFromResponse)
+        .then(window.ibexa.helpers.request.getJsonFromResponse)
         .then((response) => {
             const items = response.View.Result.searchHits.searchHit.map((searchHit) => searchHit.value.Content);
 
             callback(items);
         })
-        .catch(window.eZ.helpers.notification.showErrorNotification);
+        .catch(window.ibexa.helpers.notification.showErrorNotification);
 };

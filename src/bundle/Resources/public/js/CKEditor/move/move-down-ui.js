@@ -19,7 +19,7 @@ class IbexaMoveDownUI extends Plugin {
 
             buttonView.set({
                 label: Translator.trans(/*@Desc("Move down")*/ 'move_down_btn.title', {}, 'ck_editor'),
-                icon: window.eZ.helpers.icon.getIconPath('circle-caret-down'),
+                icon: window.ibexa.helpers.icon.getIconPath('circle-caret-down'),
                 tooltip: true,
             });
 

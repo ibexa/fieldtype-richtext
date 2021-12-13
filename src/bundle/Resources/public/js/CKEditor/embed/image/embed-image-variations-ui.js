@@ -32,7 +32,7 @@ class IbexaEmbedImageVariationsUI extends Plugin {
             const dropdownView = createDropdown(locale);
             const itemDefinitions = new Collection();
 
-            Object.keys(window.eZ.adminUiConfig.imageVariations).forEach((variation) => {
+            Object.keys(window.ibexa.adminUiConfig.imageVariations).forEach((variation) => {
                 itemDefinitions.add({
                     type: 'button',
                     model: new Model({

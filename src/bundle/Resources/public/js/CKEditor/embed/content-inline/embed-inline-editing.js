@@ -8,7 +8,7 @@ import { findContent } from '../../services/content-service';
 
 const renderPreview = (title) => {
     return `<svg class="ibexa-icon ibexa-icon--medium ibexa-icon--secondary">
-        <use xlink:href="${window.eZ.helpers.icon.getIconPath('embed')}"></use>
+        <use xlink:href="${window.ibexa.helpers.icon.getIconPath('embed')}"></use>
     </svg>
     <span class="ibexa-embed-content__title">${title}</span>`;
 };

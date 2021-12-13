@@ -54,7 +54,7 @@ class IbexaEmbedImageEditing extends Plugin {
                     writer.setAttribute('previewUrl', imageData.ContentImageVariation.uri, modelElement);
                 });
             })
-            .catch(window.eZ.helpers.notification.showErrorNotification);
+            .catch(window.ibexa.helpers.notification.showErrorNotification);
     }
 
     defineSchema() {

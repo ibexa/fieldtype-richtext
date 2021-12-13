@@ -91,7 +91,7 @@ class IbexaAnchorUI extends Plugin {
 
             buttonView.set({
                 label: Translator.trans(/*@Desc("Anchor")*/ 'anchor_btn.label', {}, 'ck_editor'),
-                icon: window.eZ.helpers.icon.getIconPath('link-anchor'),
+                icon: window.ibexa.helpers.icon.getIconPath('link-anchor'),
                 tooltip: true,
             });
 
