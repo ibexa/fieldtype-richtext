@@ -66,7 +66,7 @@ class AggregateTest extends TestCase
          xmlns:ezcustom="http://ez.no/xmlns/ezpublish/docbook/custom"
          version="5.0-variant ezpublish-1.0">
     <para></para>
-    <eztemplate name="bulbo" ezxhtml:class="ez-custom-tag ez-custom-tag--attributes-visible">
+    <eztemplate name="bulbo" ezxhtml:class="ibexa-custom-tag ibexa-custom-tag--attributes-visible">
         <ezcontent>
             <para>Just a regular text</para>
             <para>
@@ -81,7 +81,7 @@ class AggregateTest extends TestCase
 </section>',
                 '<section xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ezxhtml="http://ez.no/xmlns/ezpublish/docbook/xhtml" xmlns:ezcustom="http://ez.no/xmlns/ezpublish/docbook/custom" version="5.0-variant ezpublish-1.0">
     <para/>
-    <eztemplate name="bulbo" ezxhtml:class="ez-custom-tag ez-custom-tag--attributes-visible">
+    <eztemplate name="bulbo" ezxhtml:class="ibexa-custom-tag ibexa-custom-tag--attributes-visible">
         <ezcontent>
             <para>Just a regular text</para>
             <para>
