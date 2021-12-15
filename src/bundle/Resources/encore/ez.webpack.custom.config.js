@@ -8,9 +8,9 @@ Encore.setOutputPath('public/assets/richtext/build')
     .enableSassLoader()
     .disableSingleRuntimeChunk();
 
-Encore.addEntry('ezplatform-richtext-onlineeditor-js', [
+Encore.addEntry('ibexa-richtext-onlineeditor-js', [
     path.resolve(__dirname, '../public/js/CKEditor/core/base-ckeditor.js'),
-]).addStyleEntry('ezplatform-richtext-onlineeditor-css', [path.resolve(__dirname, '../public/scss/ckeditor.scss')]);
+]).addStyleEntry('ibexa-richtext-onlineeditor-css', [path.resolve(__dirname, '../public/scss/ckeditor.scss')]);
 
 Encore.addAliases({
     '@ckeditor': path.resolve(__dirname, '../../../../../../ibexa/admin-ui-assets/src/bundle/Resources/public/vendors/@ckeditor'),
