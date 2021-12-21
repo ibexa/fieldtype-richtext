@@ -7,8 +7,8 @@ import IbexaInlineCustomTagsEditing from './inline-custom-tag/inline-custom-tag-
 
 class IbexaCustomTags extends Plugin {
     static get requires() {
-        const blockCustomTags = Object.entries(window.eZ.richText.customTags).filter(([name, config]) => !config.isInline);
-        const inlineCustomTags = Object.entries(window.eZ.richText.customTags).filter(([name, config]) => config.isInline);
+        const blockCustomTags = Object.entries(window.ibexa.richText.customTags).filter(([name, config]) => !config.isInline);
+        const inlineCustomTags = Object.entries(window.ibexa.richText.customTags).filter(([name, config]) => config.isInline);
         const inlineCustomTagsUI = inlineCustomTags.map(([name, config]) => {
             return class InlineCustomTagUI extends IbexaInlineCustomTagsUI {
                 constructor(props) {
@@ -21,7 +21,7 @@ class IbexaCustomTags extends Plugin {
                         {
                             attributes: this.config.attributes,
                         },
-                        window.eZ.richText.customTags[name].label
+                        window.ibexa.richText.customTags[name].label
                     );
                 }
             };
@@ -38,7 +38,7 @@ class IbexaCustomTags extends Plugin {
                         {
                             attributes: this.config.attributes,
                         },
-                        window.eZ.richText.customTags[name].label
+                        window.ibexa.richText.customTags[name].label
                     );
 
                     this.attributesView.setChildren({

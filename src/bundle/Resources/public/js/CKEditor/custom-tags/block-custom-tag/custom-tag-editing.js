@@ -41,16 +41,16 @@ class IbexaCustomTagEditing extends Plugin {
                     const domElement = this.toDomElement(domDocument);
 
                     domElement.innerHTML = `
-                        <div class="ibexa-custom-tag__header-title">${window.eZ.richText.customTags[customTagName].label}</div>
+                        <div class="ibexa-custom-tag__header-title">${window.ibexa.richText.customTags[customTagName].label}</div>
                         <div class="ibexa-custom-tag__header-actions">
                             <button type="button" class="ibexa-btn ibexa-btn--ghost ibexa-btn--small ibexa-btn--no-text ibexa-btn--show-custom-tag-attributes">
                                 <svg class="ibexa-icon ibexa-icon--small ibexa-icon--secondary">
-                                    <use xlink:href="${window.eZ.helpers.icon.getIconPath('settings-block')}"></use>
+                                    <use xlink:href="${window.ibexa.helpers.icon.getIconPath('settings-block')}"></use>
                                 </svg>
                             </button>
                             <button type="button" class="ibexa-btn ibexa-btn--ghost ibexa-btn--small ibexa-btn--no-text ibexa-btn--remove-custom-tag">
                                 <svg class="ibexa-icon ibexa-icon--small ibexa-icon--secondary">
-                                    <use xlink:href="${window.eZ.helpers.icon.getIconPath('trash')}"></use>
+                                    <use xlink:href="${window.ibexa.helpers.icon.getIconPath('trash')}"></use>
                                 </svg>
                             </button>
                         </div>

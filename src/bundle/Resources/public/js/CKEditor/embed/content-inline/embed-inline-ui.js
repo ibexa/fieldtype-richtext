@@ -8,7 +8,7 @@ class IbexaEmbedContentInlineUI extends IbexaEmbedBaseUI {
         this.commandName = 'insertIbexaEmbedInline';
         this.buttonLabel = Translator.trans(/*@Desc("Embed")*/ 'embed_btn.label', {}, 'ck_editor');
         this.componentName = 'ibexaEmbedInline';
-        this.icon = window.eZ.helpers.icon.getIconPath('embed');
+        this.icon = window.ibexa.helpers.icon.getIconPath('embed');
     }
 
     getCommandOptions(items) {

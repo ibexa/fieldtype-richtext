@@ -19,7 +19,7 @@ class IbexaRemoveElementUI extends Plugin {
 
             buttonView.set({
                 label: Translator.trans(/*@Desc("Remove")*/ 'remove_block.title', {}, 'ck_editor'),
-                icon: window.eZ.helpers.icon.getIconPath('trash'),
+                icon: window.ibexa.helpers.icon.getIconPath('trash'),
                 tooltip: true,
             });
 

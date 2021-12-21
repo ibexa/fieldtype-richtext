@@ -178,7 +178,7 @@ class IbexaLinkFormView extends View {
     chooseContent() {
         const languageCode = document.querySelector('meta[name="LanguageCode"]').content;
         const config = JSON.parse(document.querySelector(`[data-udw-config-name="richtext_embed"]`).dataset.udwConfig);
-        const selectContent = window.eZ.richText.alloyEditor.callbacks.selectContent;
+        const selectContent = window.ibexa.richText.alloyEditor.callbacks.selectContent;
         const mergedConfig = Object.assign(
             {
                 onConfirm: this.confirmHandler,

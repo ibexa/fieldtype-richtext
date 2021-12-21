@@ -19,7 +19,7 @@ class IbexaMoveUpUI extends Plugin {
 
             buttonView.set({
                 label: Translator.trans(/*@Desc("Move up")*/ 'move_up_btn.title', {}, 'ck_editor'),
-                icon: window.eZ.helpers.icon.getIconPath('circle-caret-up'),
+                icon: window.ibexa.helpers.icon.getIconPath('circle-caret-up'),
                 tooltip: true,
             });
 

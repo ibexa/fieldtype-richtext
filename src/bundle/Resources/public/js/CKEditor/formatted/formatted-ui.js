@@ -19,7 +19,7 @@ class IbexaFormattedUI extends Plugin {
 
             buttonView.set({
                 label: Translator.trans(/*@Desc("Formatted")*/ 'formatted_btn.label', {}, 'ck_editor'),
-                icon: window.eZ.helpers.icon.getIconPath('tag'),
+                icon: window.ibexa.helpers.icon.getIconPath('tag'),
                 tooltip: true,
             });
 
