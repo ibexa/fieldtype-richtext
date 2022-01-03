@@ -30,11 +30,12 @@ trait CoreSetupFactoryTrait
     protected function loadCoreSettings(ContainerBuilder $containerBuilder)
     {
         // @todo refactor when refactoring kernel SetupFactory to avoid hardcoding package path
-        $kernelRootDir = realpath(__DIR__ . '/../../../../vendor/ezsystems/ezplatform-kernel');
+        $kernelRootDir = realpath(__DIR__ . '/../../../../vendor/ibexa/core');
         if (false === $kernelRootDir) {
-            throw new RuntimeException('Unable to find the ezplatform-kernel package directory');
+            throw new RuntimeException('Unable to find the ibexa/core package directory');
         }
-        $settingsPath = "{$kernelRootDir}/eZ/Publish/Core/settings";
+        $settingsPath = "{$kernelRootDir}/src/lib/Resources/settings";
+        $settingsTestsPath = "{$kernelRootDir}/tests/integration/Core/Resources/settings";
 
         $loader = new YamlFileLoader($containerBuilder, new FileLocator($settingsPath));
 
@@ -57,11 +58,13 @@ trait CoreSetupFactoryTrait
         $loader->load('settings.yml');
         $loader->load('thumbnails.yml');
         $loader->load('utils.yml');
-        $loader->load('tests/common.yml');
         $loader->load('policies.yml');
 
         $loader->load('search_engines/legacy.yml');
-        $loader->load('tests/integration_legacy.yml');
+
+        $loader = new YamlFileLoader($containerBuilder, new FileLocator($settingsTestsPath));
+        $loader->load('common.yml');
+        $loader->load('integration_legacy.yml');
 
         // Cache settings (takes same env variables as ezplatform does, only supports "singleredis" setup)
         if (getenv('CUSTOM_CACHE_POOL') === 'singleredis') {
@@ -108,6 +111,6 @@ trait CoreSetupFactoryTrait
         );
 
         // load overrides just before creating test Container
-        $loader->load('tests/override.yml');
+        $loader->load('override.yml');
     }
 }
