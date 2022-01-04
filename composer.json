@@ -6,7 +6,7 @@
         "ezsystems/ezplatform-richtext": "*"
     },
     "require": {
-        "php": "^7.4",
+        "php": "^7.4 || ^8.0",
         "ext-xsl": "*",
         "ext-dom": "*",
         "ext-libxml": "*",
@@ -32,7 +32,7 @@
     "require-dev": {
         "ibexa/ci-scripts": "^0.2@dev",
         "ibexa/doctrine-schema": "^4.0@dev",
-        "phpunit/phpunit": "^8.5",
+        "phpunit/phpunit": "^9.5",
         "symfony/finder": "^5.0",
         "matthiasnoback/symfony-config-test": "^4.1",
         "matthiasnoback/symfony-dependency-injection-test": "^4.1",
