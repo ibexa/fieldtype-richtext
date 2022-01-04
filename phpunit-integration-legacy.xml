@@ -9,14 +9,14 @@
          failOnWarning="true"
          >
     <php>
-        <env name="setupFactory" value="EzSystems\IntegrationTests\EzPlatformRichText\eZ\API\SetupFactory\LegacySetupFactory" />
+        <env name="setupFactory" value="Ibexa\Tests\Integration\FieldTypeRichText\Repository\SetupFactory\LegacySetupFactory" />
         <env name="backendVersion" value="5" />
         <env name="fixtureDir" value="Legacy" />
         <ini name="error_reporting" value="-1" />
     </php>
     <testsuites>
         <testsuite name="ezrichtext_field_type_db_integration">
-            <file>tests/integration/eZ/API/RichTextFieldTypeIntegrationTest.php</file>
+            <file>tests/integration/Repository/RichTextFieldTypeIntegrationTest.php</file>
         </testsuite>
     </testsuites>
 </phpunit>

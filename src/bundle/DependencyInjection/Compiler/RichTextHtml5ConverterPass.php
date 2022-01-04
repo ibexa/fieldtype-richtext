@@ -1,22 +1,22 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformRichTextBundle\DependencyInjection\Compiler;
+namespace Ibexa\Bundle\FieldTypeRichText\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Component\DependencyInjection\Reference;
 
 /**
  * Compiler pass for the RichText Aggregate converter tags.
  *
- * @see \EzSystems\EzPlatformRichText\eZ\RichText\Converter\Aggregate
+ * @see \Ibexa\FieldTypeRichText\RichText\Converter\Aggregate
  */
 class RichTextHtml5ConverterPass implements CompilerPassInterface
 {
@@ -37,7 +37,7 @@ class RichTextHtml5ConverterPass implements CompilerPassInterface
 
     /**
      * @param array $taggedServiceIds
-     * @param Definition $converterDefinition
+     * @param \Symfony\Component\DependencyInjection\Definition $converterDefinition
      */
     protected function setConverterDefinitions(array $taggedServiceIds, Definition $converterDefinition)
     {
@@ -71,3 +71,5 @@ class RichTextHtml5ConverterPass implements CompilerPassInterface
         return array_merge(...$convertersByPriority);
     }
 }
+
+class_alias(RichTextHtml5ConverterPass::class, 'EzSystems\EzPlatformRichTextBundle\DependencyInjection\Compiler\RichTextHtml5ConverterPass');
