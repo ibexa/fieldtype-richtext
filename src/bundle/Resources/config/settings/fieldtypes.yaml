@@ -5,4 +5,4 @@ services:
         arguments:
             - '@Ibexa\FieldTypeRichText\RichText\InputHandler'
         tags:
-            - {name: ezplatform.field_type, alias: ezrichtext}
+            - {name: ibexa.field_type, alias: ezrichtext}
