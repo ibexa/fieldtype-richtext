@@ -77,11 +77,6 @@ class IbexaFormattedEditing extends Plugin {
             const writer = new UpcastWriter(this.editor.editing.view.document);
 
             data.content = rawSnippetTextToViewDocumentFragment(writer, text);
-
-            // model.change((writer) => {
-            //     model.insertContent(rawSnippetTextToModelDocumentFragment(writer, text), modelSelection);
-            //     event.stop();
-            // });
         });
     }
 
