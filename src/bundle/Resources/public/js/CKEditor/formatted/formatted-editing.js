@@ -1,6 +1,7 @@
 import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
 import { toWidgetEditable } from '@ckeditor/ckeditor5-widget/src/utils';
-import { rawSnippetTextToModelDocumentFragment } from '@ckeditor/ckeditor5-code-block/src/utils';
+import { rawSnippetTextToViewDocumentFragment } from '@ckeditor/ckeditor5-code-block/src/utils';
+import UpcastWriter from '@ckeditor/ckeditor5-engine/src/view/upcastwriter';
 import Widget from '@ckeditor/ckeditor5-widget/src/widget';
 
 import IbexaFormattedCommand from './formatted-command';
@@ -73,11 +74,9 @@ class IbexaFormattedEditing extends Plugin {
             }
 
             const text = data.dataTransfer.getData('text/plain');
+            const writer = new UpcastWriter(this.editor.editing.view.document);
 
-            model.change((writer) => {
-                model.insertContent(rawSnippetTextToModelDocumentFragment(writer, text), modelSelection);
-                event.stop();
-            });
+            data.content = rawSnippetTextToViewDocumentFragment(writer, text);
         });
     }
 
