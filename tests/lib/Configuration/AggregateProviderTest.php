@@ -1,15 +1,15 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
-namespace EzSystems\Tests\EzPlatformRichText\Configuration;
+namespace Ibexa\Tests\FieldTypeRichText\Configuration;
 
-use EzSystems\EzPlatformRichText\Configuration\AggregateProvider;
-use EzSystems\EzPlatformRichText\SPI\Configuration\Provider;
+use Ibexa\Contracts\FieldTypeRichText\Configuration\Provider;
+use Ibexa\FieldTypeRichText\Configuration\AggregateProvider;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -30,6 +30,7 @@ class AggregateProviderTest extends TestCase
         foreach ($configuration as $providerName => $providerConfiguration) {
             $providers[] = new class($providerName, $providerConfiguration) implements Provider {
                 private $name;
+
                 private $configuration;
 
                 public function __construct(string $name, array $configuration)
@@ -87,3 +88,5 @@ class AggregateProviderTest extends TestCase
         ];
     }
 }
+
+class_alias(AggregateProviderTest::class, 'EzSystems\Tests\EzPlatformRichText\Configuration\AggregateProviderTest');

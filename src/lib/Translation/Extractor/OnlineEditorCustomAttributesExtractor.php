@@ -1,17 +1,17 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformRichText\Translation\Extractor;
+namespace Ibexa\FieldTypeRichText\Translation\Extractor;
 
-use eZ\Publish\Core\MVC\ConfigResolverInterface;
-use EzSystems\EzPlatformRichTextBundle\DependencyInjection\Configuration\Parser\FieldType\RichText;
-use JMS\TranslationBundle\Model\MessageCatalogue;
+use Ibexa\Bundle\FieldTypeRichText\DependencyInjection\Configuration\Parser\FieldType\RichText;
+use Ibexa\Core\MVC\ConfigResolverInterface;
 use JMS\TranslationBundle\Model\Message\XliffMessage;
+use JMS\TranslationBundle\Model\MessageCatalogue;
 use JMS\TranslationBundle\Translation\ExtractorInterface;
 
 /**
@@ -24,7 +24,7 @@ final class OnlineEditorCustomAttributesExtractor implements ExtractorInterface
     private const CLASS_LABEL_MESSAGE_ID = 'ezrichtext.classes.class.label';
 
     /**
-     * @var \eZ\Publish\Core\MVC\ConfigResolverInterface
+     * @var \Ibexa\Core\MVC\ConfigResolverInterface
      */
     private $configResolver;
 
@@ -34,7 +34,7 @@ final class OnlineEditorCustomAttributesExtractor implements ExtractorInterface
     private $siteAccessList;
 
     /**
-     * @param \eZ\Publish\Core\MVC\ConfigResolverInterface $configResolver
+     * @param \Ibexa\Core\MVC\ConfigResolverInterface $configResolver
      * @param string[] $siteAccessList
      */
     public function __construct(ConfigResolverInterface $configResolver, array $siteAccessList)
@@ -111,3 +111,5 @@ final class OnlineEditorCustomAttributesExtractor implements ExtractorInterface
         }
     }
 }
+
+class_alias(OnlineEditorCustomAttributesExtractor::class, 'EzSystems\EzPlatformRichText\Translation\Extractor\OnlineEditorCustomAttributesExtractor');

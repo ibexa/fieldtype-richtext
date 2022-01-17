@@ -4,11 +4,11 @@ services:
         autoconfigure: true
         public: false
 
-    EzSystems\EzPlatformRichTextBundle\Templating\Twig\Extension\RichTextConverterExtension:
+    Ibexa\Bundle\FieldTypeRichText\Templating\Twig\Extension\RichTextConverterExtension:
         arguments:
             $richTextOutputConverter: '@ezrichtext.converter.output.xhtml5'
             $richTextEditConverter: '@ezrichtext.converter.edit.xhtml5'
 
-    EzSystems\EzPlatformRichTextBundle\Templating\Twig\Extension\YoutubeIdExtractorExtension: ~
+    Ibexa\Bundle\FieldTypeRichText\Templating\Twig\Extension\YoutubeIdExtractorExtension: ~
 
-    EzSystems\EzPlatformRichTextBundle\Templating\Twig\Extension\RichTextConfigurationExtension: ~
+    Ibexa\Bundle\FieldTypeRichText\Templating\Twig\Extension\RichTextConfigurationExtension: ~
