@@ -11,14 +11,14 @@ services:
     # RichText Custom Tags UI config attribute type mappers
     Ibexa\FieldTypeRichText\Configuration\UI\Mapper\CustomTag\CommonAttributeMapper:
         tags:
-            - { name: ezrichtext.configuration.custom_tag.mapper, priority: 0 }
+            - { name: ibexa.field_type.richtext.configuration.custom_tag.mapper, priority: 0 }
 
     Ibexa\FieldTypeRichText\Configuration\UI\Mapper\CustomTag\ChoiceAttributeMapper:
         parent: Ibexa\FieldTypeRichText\Configuration\UI\Mapper\CustomTag\CommonAttributeMapper
         autowire: true
         public: false
         tags:
-            - { name: ezrichtext.configuration.custom_tag.mapper, priority: 10 }
+            - { name: ibexa.field_type.richtext.configuration.custom_tag.mapper, priority: 10 }
 
     # RichText Custom Tags UI config mapper
     Ibexa\FieldTypeRichText\Configuration\UI\Mapper\CustomTag:
@@ -26,7 +26,7 @@ services:
             $customTagsConfiguration: '%ezplatform.ezrichtext.custom_tags%'
             $translatorBag: '@translator'
             $translationDomain: '%ezrichtext.custom_tags.translation_domain%'
-            $customTagAttributeMappers: !tagged ezrichtext.configuration.custom_tag.mapper
+            $customTagAttributeMappers: !tagged ibexa.field_type.richtext.configuration.custom_tag.mapper
 
     # RichText Custom Styles UI config mapper
     Ibexa\FieldTypeRichText\Configuration\UI\Mapper\CustomStyle:

@@ -1,4 +1,4 @@
 services:
     Ibexa\FieldTypeRichText\Persistence\Legacy\RichTextFieldValueConverter:
         tags:
-            - {name: ezplatform.field_type.legacy_storage.converter, alias: ezrichtext}
+            - {name: ibexa.field_type.storage.legacy.converter, alias: ezrichtext}

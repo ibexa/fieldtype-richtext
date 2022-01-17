@@ -15,13 +15,13 @@ services:
 
     ezrichtext.validator.input.ezxhtml5:
         class: Ibexa\FieldTypeRichText\RichText\Validator\ValidatorAggregate
-        arguments: [!tagged ezrichtext.validator.input.ezxhtml5]
+        arguments: [!tagged ibexa.field_type.richtext.validator.input.xhtml5]
 
     ezrichtext.validator.docbook:
         class: Ibexa\FieldTypeRichText\RichText\Validator\Validator
         arguments: ['%ezrichtext.validator.docbook.resources%']
         tags:
-            - { name: 'ezrichtext.validator.input.ezxhtml5' }
+            - { name: ibexa.field_type.richtext.validator.input.xhtml5 }
 
     ezrichtext.validator.input.dispatcher:
         class: Ibexa\FieldTypeRichText\RichText\Validator\ValidatorDispatcher
@@ -35,7 +35,7 @@ services:
             - '@ezpublish.spi.persistence.cache.contentHandler'
             - '@ezpublish.spi.persistence.cache.locationHandler'
         tags:
-            - { name: 'ezrichtext.validator.input.ezxhtml5' }
+            - { name: ibexa.field_type.richtext.validator.input.xhtml5 }
 
     ezrichtext.normalizer.input:
         class: Ibexa\FieldTypeRichText\RichText\Normalizer\Aggregate
@@ -45,7 +45,7 @@ services:
         public: false
         arguments: ['%ezplatform.ezrichtext.custom_tags%']
         tags:
-            - { name: 'ezrichtext.validator.input.ezxhtml5' }
+            - { name: ibexa.field_type.richtext.validator.input.xhtml5 }
 
     Ibexa\FieldTypeRichText\RichText\RelationProcessor:
         public: false
