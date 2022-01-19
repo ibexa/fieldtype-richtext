@@ -1,7 +1,7 @@
 services:
     Ibexa\FieldTypeRichText\FieldType\RichText\Type:
         public: true # @todo should be private
-        parent: ezpublish.fieldType
+        parent: Ibexa\Core\FieldType\FieldType
         arguments:
             - '@Ibexa\FieldTypeRichText\RichText\InputHandler'
         tags:

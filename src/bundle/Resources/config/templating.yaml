@@ -6,8 +6,8 @@ services:
 
     Ibexa\Bundle\FieldTypeRichText\Templating\Twig\Extension\RichTextConverterExtension:
         arguments:
-            $richTextOutputConverter: '@ezrichtext.converter.output.xhtml5'
-            $richTextEditConverter: '@ezrichtext.converter.edit.xhtml5'
+            $richTextOutputConverter: '@ibexa.richtext.converter.output.xhtml5'
+            $richTextEditConverter: '@Ibexa\FieldTypeRichText\RichText\Converter\Html5Edit'
 
     Ibexa\Bundle\FieldTypeRichText\Templating\Twig\Extension\YoutubeIdExtractorExtension: ~
 
