@@ -33,7 +33,7 @@ class RichTextHtml5ConverterPassTest extends AbstractCompilerPassTestCase
     {
         $configurationResolver = new Definition();
         $this->setDefinition(
-            'ezrichtext.converter.output.xhtml5',
+            'ibexa.richtext.converter.output.xhtml5',
             $configurationResolver
         );
 
@@ -56,7 +56,7 @@ class RichTextHtml5ConverterPassTest extends AbstractCompilerPassTestCase
         $this->compile();
 
         $this->assertContainerBuilderHasServiceDefinitionWithArgument(
-            'ezrichtext.converter.output.xhtml5',
+            'ibexa.richtext.converter.output.xhtml5',
             0,
             [
                 new Reference('ezrichtext.converter.test1'),

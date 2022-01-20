@@ -22,16 +22,16 @@ class RichTextHtml5ConverterPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container)
     {
-        if ($container->hasDefinition('ezrichtext.converter.output.xhtml5')) {
-            $html5OutputConverterDefinition = $container->getDefinition('ezrichtext.converter.output.xhtml5');
+        if ($container->hasDefinition('ibexa.richtext.converter.output.xhtml5')) {
+            $html5OutputConverterDefinition = $container->getDefinition('ibexa.richtext.converter.output.xhtml5');
             $taggedOutputServiceIds = $container->findTaggedServiceIds(
                 'ibexa.field_type.richtext.converter.output.xhtml5'
             );
             $this->setConverterDefinitions($taggedOutputServiceIds, $html5OutputConverterDefinition);
         }
 
-        if ($container->hasDefinition('ezrichtext.converter.input.xhtml5')) {
-            $html5InputConverterDefinition = $container->getDefinition('ezrichtext.converter.input.xhtml5');
+        if ($container->hasDefinition('ibexa.richtext.converter.input.xhtml5')) {
+            $html5InputConverterDefinition = $container->getDefinition('ibexa.richtext.converter.input.xhtml5');
             $taggedInputServiceIds = $container->findTaggedServiceIds(
                 'ibexa.field_type.richtext.converter.input.xhtml5'
             );
