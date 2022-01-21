@@ -11,18 +11,22 @@ services:
         autoconfigure: true
         public: false
 
-    EzSystems\EzPlatformRichText\Configuration\Provider\CustomStyle:
+    Ibexa\FieldTypeRichText\Configuration\Provider\CustomStyle:
         arguments:
-            $customStyleConfigurationMapper: '@EzSystems\EzPlatformRichText\Configuration\UI\Mapper\CustomStyle'
+            $customStyleConfigurationMapper: '@Ibexa\FieldTypeRichText\Configuration\UI\Mapper\CustomStyle'
 
-    EzSystems\EzPlatformRichText\Configuration\Provider\CustomTag:
+    Ibexa\FieldTypeRichText\Configuration\Provider\CustomTag:
         arguments:
-            $customTagConfigurationMapper: '@EzSystems\EzPlatformRichText\Configuration\UI\Mapper\CustomTag'
+            $customTagConfigurationMapper: '@Ibexa\FieldTypeRichText\Configuration\UI\Mapper\CustomTag'
 
-    EzSystems\EzPlatformRichText\Configuration\Provider\AlloyEditor:
+    Ibexa\FieldTypeRichText\Configuration\Provider\AlloyEditor:
         arguments:
             $alloyEditorConfiguration: '%ezplatform.ezrichtext.alloy_editor%'
 
-    EzSystems\EzPlatformRichText\Configuration\AggregateProvider:
+    Ibexa\FieldTypeRichText\Configuration\Provider\CKEditor:
         arguments:
-            $providers: !tagged ezplatform.ezrichtext.configuration.provider
+            $customStylesConfiguration: '%ezplatform.ezrichtext.custom_styles%'
+
+    Ibexa\FieldTypeRichText\Configuration\AggregateProvider:
+        arguments:
+            $providers: !tagged ibexa.field_type.richtext.configuration.provider

@@ -1,43 +1,43 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformRichText\Form\DataTransformer;
+namespace Ibexa\FieldTypeRichText\Form\DataTransformer;
 
-use eZ\Publish\API\Repository\Exceptions\NotFoundException;
-use eZ\Publish\API\Repository\Exceptions\InvalidArgumentException;
+use Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException;
+use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
+use Ibexa\Contracts\FieldTypeRichText\RichText\Converter;
+use Ibexa\Contracts\FieldTypeRichText\RichText\InputHandlerInterface;
+use Ibexa\FieldTypeRichText\FieldType\RichText\Value;
+use Ibexa\FieldTypeRichText\RichText\DOMDocumentFactory;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
-use EzSystems\EzPlatformRichText\eZ\FieldType\RichText\Value;
-use EzSystems\EzPlatformRichText\eZ\RichText\DOMDocumentFactory;
-use EzSystems\EzPlatformRichText\eZ\RichText\InputHandlerInterface;
-use EzSystems\EzPlatformRichText\eZ\RichText\Converter;
 
 class RichTextTransformer implements DataTransformerInterface
 {
     /**
-     * @var \EzSystems\EzPlatformRichText\eZ\RichText\DOMDocumentFactory
+     * @var \Ibexa\FieldTypeRichText\RichText\DOMDocumentFactory
      */
     private $domDocumentFactory;
 
     /**
-     * @var \EzSystems\EzPlatformRichText\eZ\RichText\InputHandlerInterface
+     * @var \Ibexa\Contracts\FieldTypeRichText\RichText\InputHandlerInterface
      */
     private $inputHandler;
 
     /**
-     * @var \EzSystems\EzPlatformRichText\eZ\RichText\Converter
+     * @var \Ibexa\Contracts\FieldTypeRichText\RichText\Converter
      */
     private $docbook2xhtml5editConverter;
 
     /**
-     * @param \EzSystems\EzPlatformRichText\eZ\RichText\DOMDocumentFactory $domDocumentFactory
-     * @param \EzSystems\EzPlatformRichText\eZ\RichText\InputHandlerInterface $inputHandler
-     * @param \EzSystems\EzPlatformRichText\eZ\RichText\Converter $docbook2xhtml5editConverter
+     * @param \Ibexa\FieldTypeRichText\RichText\DOMDocumentFactory $domDocumentFactory
+     * @param \Ibexa\Contracts\FieldTypeRichText\RichText\InputHandlerInterface $inputHandler
+     * @param \Ibexa\Contracts\FieldTypeRichText\RichText\Converter $docbook2xhtml5editConverter
      */
     public function __construct(
         DOMDocumentFactory $domDocumentFactory,
@@ -79,3 +79,5 @@ class RichTextTransformer implements DataTransformerInterface
         }
     }
 }
+
+class_alias(RichTextTransformer::class, 'EzSystems\EzPlatformRichText\Form\DataTransformer\RichTextTransformer');

@@ -1,12 +1,12 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformRichText\Configuration\UI\Mapper;
+namespace Ibexa\FieldTypeRichText\Configuration\UI\Mapper;
 
 /**
  * Contracts for mapping Semantic configuration to settings exposed to templates.
@@ -33,3 +33,5 @@ interface OnlineEditorConfigMapper
      */
     public function mapDataAttributesConfiguration(array $semanticConfiguration): array;
 }
+
+class_alias(OnlineEditorConfigMapper::class, 'EzSystems\EzPlatformRichText\Configuration\UI\Mapper\OnlineEditorConfigMapper');

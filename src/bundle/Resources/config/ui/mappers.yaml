@@ -9,34 +9,34 @@ services:
         public: false
 
     # RichText Custom Tags UI config attribute type mappers
-    EzSystems\EzPlatformRichText\Configuration\UI\Mapper\CustomTag\CommonAttributeMapper:
+    Ibexa\FieldTypeRichText\Configuration\UI\Mapper\CustomTag\CommonAttributeMapper:
         tags:
-            - { name: ezrichtext.configuration.custom_tag.mapper, priority: 0 }
+            - { name: ibexa.field_type.richtext.configuration.custom_tag.mapper, priority: 0 }
 
-    EzSystems\EzPlatformRichText\Configuration\UI\Mapper\CustomTag\ChoiceAttributeMapper:
-        parent: EzSystems\EzPlatformRichText\Configuration\UI\Mapper\CustomTag\CommonAttributeMapper
+    Ibexa\FieldTypeRichText\Configuration\UI\Mapper\CustomTag\ChoiceAttributeMapper:
+        parent: Ibexa\FieldTypeRichText\Configuration\UI\Mapper\CustomTag\CommonAttributeMapper
         autowire: true
         public: false
         tags:
-            - { name: ezrichtext.configuration.custom_tag.mapper, priority: 10 }
+            - { name: ibexa.field_type.richtext.configuration.custom_tag.mapper, priority: 10 }
 
     # RichText Custom Tags UI config mapper
-    EzSystems\EzPlatformRichText\Configuration\UI\Mapper\CustomTag:
+    Ibexa\FieldTypeRichText\Configuration\UI\Mapper\CustomTag:
         arguments:
             $customTagsConfiguration: '%ezplatform.ezrichtext.custom_tags%'
             $translatorBag: '@translator'
             $translationDomain: '%ezrichtext.custom_tags.translation_domain%'
-            $customTagAttributeMappers: !tagged ezrichtext.configuration.custom_tag.mapper
+            $customTagAttributeMappers: !tagged ibexa.field_type.richtext.configuration.custom_tag.mapper
 
     # RichText Custom Styles UI config mapper
-    EzSystems\EzPlatformRichText\Configuration\UI\Mapper\CustomStyle:
+    Ibexa\FieldTypeRichText\Configuration\UI\Mapper\CustomStyle:
         arguments:
             $customStylesConfiguration: '%ezplatform.ezrichtext.custom_styles%'
             $translationDomain: '%ezrichtext.custom_styles.translation_domain%'
 
-    EzSystems\EzPlatformRichText\Configuration\UI\Mapper\OnlineEditorConfigMapper:
-        alias: EzSystems\EzPlatformRichText\Configuration\UI\Mapper\OnlineEditor
+    Ibexa\FieldTypeRichText\Configuration\UI\Mapper\OnlineEditorConfigMapper:
+        alias: Ibexa\FieldTypeRichText\Configuration\UI\Mapper\OnlineEditor
 
-    EzSystems\EzPlatformRichText\Configuration\UI\Mapper\OnlineEditor:
+    Ibexa\FieldTypeRichText\Configuration\UI\Mapper\OnlineEditor:
         arguments:
             $translationDomain: '%ezrichtext.online_editor.translation_domain%'

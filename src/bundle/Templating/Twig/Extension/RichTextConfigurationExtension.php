@@ -1,14 +1,14 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformRichTextBundle\Templating\Twig\Extension;
+namespace Ibexa\Bundle\FieldTypeRichText\Templating\Twig\Extension;
 
-use EzSystems\EzPlatformRichText\API\Configuration;
+use Ibexa\Contracts\FieldTypeRichText\Configuration\ProviderService;
 use Twig\Extension\AbstractExtension;
 use Twig\Extension\GlobalsInterface;
 
@@ -19,23 +19,24 @@ use Twig\Extension\GlobalsInterface;
  */
 final class RichTextConfigurationExtension extends AbstractExtension implements GlobalsInterface
 {
-    /** @var \EzSystems\EzPlatformRichText\API\Configuration\ProviderService */
+    /** @var \Ibexa\Contracts\FieldTypeRichText\Configuration\ProviderService */
     private $configurationProvider;
 
-    public function __construct(Configuration\ProviderService $configurationProvider)
+    public function __construct(ProviderService $configurationProvider)
     {
         $this->configurationProvider = $configurationProvider;
     }
 
-    public function getName(): string
-    {
-        return 'ezrichtext.configuration';
-    }
-
     public function getGlobals(): array
     {
+        $config = $this->configurationProvider->getConfiguration();
+
         return [
-            'ez_richtext_config' => $this->configurationProvider->getConfiguration(),
+            /** @deprecated ez_richtext_config is deprecated since 4.0, use ibexa_richtext_config instead */
+            'ez_richtext_config' => $config,
+            'ibexa_richtext_config' => $config,
         ];
     }
 }
+
+class_alias(RichTextConfigurationExtension::class, 'EzSystems\EzPlatformRichTextBundle\Templating\Twig\Extension\RichTextConfigurationExtension');

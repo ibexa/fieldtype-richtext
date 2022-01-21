@@ -1,0 +1,4 @@
+services:
+    Ibexa\FieldTypeRichText\FieldType\RichText\SearchField:
+        tags:
+            - {name: ibexa.field_type.indexable, alias: ezrichtext}
