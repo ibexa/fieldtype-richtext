@@ -39,7 +39,7 @@ class IbexaEmbedImageEditing extends Plugin {
         const request = new Request(variationHref, {
             method: 'GET',
             headers: {
-                Accept: 'application/vnd.ez.api.ContentImageVariation+json',
+                Accept: 'application/vnd.ibexa.api.ContentImageVariation+json',
                 'X-Siteaccess': siteaccess,
                 'X-CSRF-Token': token,
             },
