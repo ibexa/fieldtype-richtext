@@ -11,6 +11,7 @@ system:
     admin_group:
         fieldtypes:
             ezrichtext:
+                custom_tags: [ezyoutube, eztwitter, ezfacebook]
                 toolbar:
                     group1:
                         priority: 60
