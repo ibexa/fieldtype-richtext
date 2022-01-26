@@ -223,3 +223,10 @@
         }
     }
 }
+
+.ibexa-data-source {
+    &--richtext {
+        border: calculateRem(1px) solid $ibexa-color-dark-200;
+        border-radius: $ibexa-border-radius;
+    }
+}
