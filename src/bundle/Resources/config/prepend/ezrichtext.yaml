@@ -3,7 +3,7 @@ alloy_editor:
         table: [border]
 custom_tags:
     ezfacebook:
-        template: '@ezdesign/ezrichtext/custom_tags/ezfacebook.html.twig'
+        template: '@ibexadesign/ezrichtext/custom_tags/ezfacebook.html.twig'
         icon: '/bundles/ibexafieldtyperichtext/assets/images/custom_tags/admin/icons/facebook.svg#facebook'
         attributes:
             post_url:
@@ -12,7 +12,7 @@ custom_tags:
             width:
                 type: 'number'
     eztwitter:
-        template: '@ezdesign/ezrichtext/custom_tags/eztwitter.html.twig'
+        template: '@ibexadesign/ezrichtext/custom_tags/eztwitter.html.twig'
         icon: '/bundles/ibexafieldtyperichtext/assets/images/custom_tags/admin/icons/twitter.svg#twitter'
         attributes:
             tweet_url:
@@ -46,7 +46,7 @@ custom_tags:
                 type: 'boolean'
                 default_value: true
     ezyoutube:
-        template: '@ezdesign/ezrichtext/custom_tags/ezyoutube.html.twig'
+        template: '@ibexadesign/ezrichtext/custom_tags/ezyoutube.html.twig'
         icon: '/bundles/ibexafieldtyperichtext/assets/images/custom_tags/admin/icons/video.svg#video'
         attributes:
             video_url:
