@@ -68,7 +68,7 @@ class CustomTagTest extends TestCase
             [
                 [
                     'ezyoutube' => [
-                        'template' => '@ezdesign/fields/ezrichtext/custom_tags/ezyoutube.html.twig',
+                        'template' => '@ibexadesign/fields/ezrichtext/custom_tags/ezyoutube.html.twig',
                         'icon' => '/bundles/ibexaadminuiassets/vendors/webalys/streamlineicons/all-icons.svg#video',
                         'is_inline' => false,
                         'attributes' => [
@@ -90,7 +90,7 @@ class CustomTagTest extends TestCase
                         ],
                     ],
                     'eztwitter' => [
-                        'template' => '@ezdesign/fields/ezrichtext/custom_tags/eztwitter.html.twig',
+                        'template' => '@ibexadesign/fields/ezrichtext/custom_tags/eztwitter.html.twig',
                         'icon' => '/bundles/ibexaadminuiassets/vendors/webalys/streamlineicons/all-icons.svg#twitter',
                         'is_inline' => false,
                         'attributes' => [
