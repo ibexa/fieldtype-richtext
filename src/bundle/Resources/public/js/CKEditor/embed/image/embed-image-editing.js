@@ -142,8 +142,8 @@ class IbexaEmbedImageEditing extends Plugin {
                 name: 'div',
                 attributes: {
                     'data-ezelement': 'ezembed',
-                    class: 'ibexa-embed-type-image',
                 },
+                classes: 'ibexa-embed-type-image',
             },
             model: (viewElement, { writer: upcastWriter }) => {
                 const href = viewElement.getAttribute('data-href');
