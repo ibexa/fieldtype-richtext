@@ -3,9 +3,15 @@ import Command from '@ckeditor/ckeditor5-core/src/command';
 class IbexaMoveCommand extends Command {
     execute(moveData) {
         this.editor.model.change((writer) => {
-            const parentElement = this.editor.model.document.selection.getFirstPosition().parent;
-            const ancestors = parentElement.getAncestors();
-            const elementToMove = ancestors[1] ?? parentElement;
+            let elementToMove = this.editor.model.document.selection.getSelectedElement();
+
+            if (!elementToMove) {
+                const parentElement = this.editor.model.document.selection.getFirstPosition().parent;
+                const ancestors = parentElement.getAncestors();
+
+                elementToMove = ancestors[1] ?? parentElement;
+            }
+
             const elementRange = writer.createRangeOn(elementToMove);
 
             if (moveData.up && elementToMove.previousSibling) {

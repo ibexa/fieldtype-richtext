@@ -171,7 +171,11 @@ const VIEWPORT_TOP_OFFSET = 102;
                 ],
                 toolbar: {
                     items: toolbar,
-                    viewportTopOffset: VIEWPORT_TOP_OFFSET,
+                    ui: {
+                        viewportTopOffset: {
+                            top: VIEWPORT_TOP_OFFSET,
+                        },
+                    },
                 },
                 embedImage: {
                     toolbar: ['imageVarations', 'ibexaRemoveElement'],
