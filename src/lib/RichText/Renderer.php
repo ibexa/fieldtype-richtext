@@ -117,7 +117,7 @@ class Renderer implements RendererInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function renderContentEmbed($contentId, $viewType, array $parameters, $isInline)
     {
@@ -192,7 +192,7 @@ class Renderer implements RendererInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function renderLocationEmbed($locationId, $viewType, array $parameters, $isInline)
     {

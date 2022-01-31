@@ -25,7 +25,7 @@ class RichTextProcessor extends FieldTypeProcessor
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function postProcessValueHash($outgoingValueHash)
     {

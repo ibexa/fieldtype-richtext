@@ -21,7 +21,7 @@ class DOMDocumentFactoryTest extends TestCase
     private $domDocumentFactory;
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function setUp(): void
     {
