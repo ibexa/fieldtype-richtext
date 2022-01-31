@@ -9,8 +9,8 @@ declare(strict_types=1);
 namespace Ibexa\Tests\FieldTypeRichText\Configuration\Provider;
 
 use Ibexa\Bundle\FieldTypeRichText\DependencyInjection\Configuration\Parser\FieldType\RichText;
-use Ibexa\Contracts\FieldTypeRichText\Configuration\Provider;
 use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
+use Ibexa\Contracts\FieldTypeRichText\Configuration\Provider;
 use Ibexa\FieldTypeRichText\Configuration\Provider\CKEditor;
 
 final class CKEditorTest extends BaseProviderTestCase

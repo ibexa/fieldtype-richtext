@@ -12,8 +12,8 @@ use Exception;
 use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
 use Ibexa\Contracts\Core\Repository\Repository;
 use Ibexa\Contracts\Core\Repository\Values\Content\Content;
-use Ibexa\Contracts\FieldTypeRichText\RichText\RendererInterface;
 use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
+use Ibexa\Contracts\FieldTypeRichText\RichText\RendererInterface;
 use Ibexa\Core\MVC\Symfony\Security\Authorization\Attribute as AuthorizationAttribute;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
@@ -117,7 +117,7 @@ class Renderer implements RendererInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function renderContentEmbed($contentId, $viewType, array $parameters, $isInline)
     {
@@ -192,7 +192,7 @@ class Renderer implements RendererInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function renderLocationEmbed($locationId, $viewType, array $parameters, $isInline)
     {

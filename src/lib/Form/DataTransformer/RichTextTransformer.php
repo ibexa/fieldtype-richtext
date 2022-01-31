@@ -50,7 +50,7 @@ class RichTextTransformer implements DataTransformerInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function transform($value): string
     {
@@ -68,7 +68,7 @@ class RichTextTransformer implements DataTransformerInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function reverseTransform($value): string
     {

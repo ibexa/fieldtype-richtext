@@ -57,7 +57,7 @@ class InputHandlerTest extends TestCase
     private $inputHandler;
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     protected function setUp(): void
     {

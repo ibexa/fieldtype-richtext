@@ -30,7 +30,7 @@ final class OnlineEditor implements OnlineEditorConfigMapper
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function mapCssClassesConfiguration(array $semanticConfiguration): array
     {
@@ -55,7 +55,7 @@ final class OnlineEditor implements OnlineEditorConfigMapper
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function mapDataAttributesConfiguration(array $semanticConfiguration): array
     {
