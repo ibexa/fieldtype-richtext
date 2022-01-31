@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\FieldTypeRichText\RichText\Converter;
 
-use Ibexa\Core\MVC\ConfigResolverInterface;
+use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 use Ibexa\FieldTypeRichText\RichText\Converter\Xslt as XsltConverter;
 
 /**

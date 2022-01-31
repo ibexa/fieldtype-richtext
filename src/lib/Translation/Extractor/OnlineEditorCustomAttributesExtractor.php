@@ -9,7 +9,7 @@ declare(strict_types=1);
 namespace Ibexa\FieldTypeRichText\Translation\Extractor;
 
 use Ibexa\Bundle\FieldTypeRichText\DependencyInjection\Configuration\Parser\FieldType\RichText;
-use Ibexa\Core\MVC\ConfigResolverInterface;
+use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 use JMS\TranslationBundle\Model\Message\XliffMessage;
 use JMS\TranslationBundle\Model\MessageCatalogue;
 use JMS\TranslationBundle\Translation\ExtractorInterface;
@@ -24,7 +24,7 @@ final class OnlineEditorCustomAttributesExtractor implements ExtractorInterface
     private const CLASS_LABEL_MESSAGE_ID = 'ezrichtext.classes.class.label';
 
     /**
-     * @var \Ibexa\Core\MVC\ConfigResolverInterface
+     * @var \Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface
      */
     private $configResolver;
 
@@ -34,7 +34,7 @@ final class OnlineEditorCustomAttributesExtractor implements ExtractorInterface
     private $siteAccessList;
 
     /**
-     * @param \Ibexa\Core\MVC\ConfigResolverInterface $configResolver
+     * @param \Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface $configResolver
      * @param string[] $siteAccessList
      */
     public function __construct(ConfigResolverInterface $configResolver, array $siteAccessList)
