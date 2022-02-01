@@ -1,10 +1,10 @@
 parameters:
-    ezrichtext.resources: 'src/bundle/Resources/richtext'
-    ezrichtext.validator.docbook.resources:
-        - '%ezrichtext.resources%/schemas/docbook/ezpublish.rng'
-        - '%ezrichtext.resources%/schemas/docbook/docbook.iso.sch.xsl'
+    ibexa.field_type.richtext.resources: 'src/bundle/Resources/richtext'
+    ibexa.field_type.richtext.validator.docbook.resources:
+        - '%ibexa.field_type.richtext.resources%/schemas/docbook/ezpublish.rng'
+        - '%ibexa.field_type.richtext.resources%/schemas/docbook/docbook.iso.sch.xsl'
 
-    ezplatform.ezrichtext.custom_tags:
+    ibexa.field_type.richtext.custom_tags:
         video:
             template: 'MyBundle:FieldType/RichText/tag:video.html.twig'
             icon: '/bundles/mybundle/fieldtype/richtext/video.svg#video'

@@ -1,7 +1,7 @@
 parameters:
-    ezrichtext.custom_tags.translation_domain: 'custom_tags'
-    ezrichtext.custom_styles.translation_domain: 'custom_styles'
-    ezrichtext.online_editor.translation_domain: 'online_editor'
+    ibexa.field_type.richtext.custom_tags.translation_domain: 'custom_tags'
+    ibexa.field_type.richtext.custom_styles.translation_domain: 'custom_styles'
+    ibexa.field_type.richtext.online_editor.translation_domain: 'online_editor'
 
 services:
     _defaults:
@@ -23,20 +23,20 @@ services:
     # RichText Custom Tags UI config mapper
     Ibexa\FieldTypeRichText\Configuration\UI\Mapper\CustomTag:
         arguments:
-            $customTagsConfiguration: '%ezplatform.ezrichtext.custom_tags%'
+            $customTagsConfiguration: '%ibexa.field_type.richtext.custom_tags%'
             $translatorBag: '@translator'
-            $translationDomain: '%ezrichtext.custom_tags.translation_domain%'
+            $translationDomain: '%ibexa.field_type.richtext.custom_tags.translation_domain%'
             $customTagAttributeMappers: !tagged ibexa.field_type.richtext.configuration.custom_tag.mapper
 
     # RichText Custom Styles UI config mapper
     Ibexa\FieldTypeRichText\Configuration\UI\Mapper\CustomStyle:
         arguments:
-            $customStylesConfiguration: '%ezplatform.ezrichtext.custom_styles%'
-            $translationDomain: '%ezrichtext.custom_styles.translation_domain%'
+            $customStylesConfiguration: '%ibexa.field_type.richtext.custom_styles%'
+            $translationDomain: '%ibexa.field_type.richtext.custom_styles.translation_domain%'
 
     Ibexa\FieldTypeRichText\Configuration\UI\Mapper\OnlineEditorConfigMapper:
         alias: Ibexa\FieldTypeRichText\Configuration\UI\Mapper\OnlineEditor
 
     Ibexa\FieldTypeRichText\Configuration\UI\Mapper\OnlineEditor:
         arguments:
-            $translationDomain: '%ezrichtext.online_editor.translation_domain%'
+            $translationDomain: '%ibexa.field_type.richtext.online_editor.translation_domain%'

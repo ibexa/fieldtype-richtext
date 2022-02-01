@@ -25,9 +25,9 @@ class IbexaFieldTypeRichTextExtension extends Extension implements PrependExtens
 {
     public const EXTENSION_NAME = 'ibexa_fieldtype_richtext';
 
-    public const RICHTEXT_CUSTOM_STYLES_PARAMETER = 'ezplatform.ezrichtext.custom_styles';
-    public const RICHTEXT_CUSTOM_TAGS_PARAMETER = 'ezplatform.ezrichtext.custom_tags';
-    public const RICHTEXT_ALLOY_EDITOR_PARAMETER = 'ezplatform.ezrichtext.alloy_editor';
+    public const RICHTEXT_CUSTOM_STYLES_PARAMETER = 'ibexa.field_type.richtext.custom_styles';
+    public const RICHTEXT_CUSTOM_TAGS_PARAMETER = 'ibexa.field_type.richtext.custom_tags';
+    public const RICHTEXT_ALLOY_EDITOR_PARAMETER = 'ibexa.field_type.richtext.alloy_editor';
     public const RICHTEXT_CONFIGURATION_PROVIDER_TAG = 'ibexa.field_type.richtext.configuration.provider';
 
     private const RICHTEXT_TEXT_TOOLBAR_NAME = 'text';
@@ -91,8 +91,8 @@ class IbexaFieldTypeRichTextExtension extends Extension implements PrependExtens
         $customStylesConfig = $config['custom_styles'] ?? [];
         $alloyEditorConfig = $config['alloy_editor'] ?? [];
 
-        $availableSiteAccesses = $container->hasParameter('ezpublish.siteaccess.list')
-            ? $container->getParameter('ezpublish.siteaccess.list')
+        $availableSiteAccesses = $container->hasParameter('ibexa.site_access.list')
+            ? $container->getParameter('ibexa.site_access.list')
             : [];
 
         $this->validateCustomTemplatesConfig(
@@ -198,7 +198,7 @@ class IbexaFieldTypeRichTextExtension extends Extension implements PrependExtens
         string $type,
         ContainerBuilder $container
     ): void {
-        $namespace = 'ezsettings';
+        $namespace = 'ibexa.site_access.config';
         $definedCustomTemplates = array_keys($config);
         // iterate manually through available Scopes as scope context is not available
         foreach ($availableSiteAccesses as $siteAccessName) {
@@ -243,7 +243,7 @@ class IbexaFieldTypeRichTextExtension extends Extension implements PrependExtens
     private function getToolbarsBySiteAccess(array $availableSiteAccesses, ContainerBuilder $container): iterable
     {
         foreach ($availableSiteAccesses as $siteAccessName) {
-            $paramName = "ezsettings.{$siteAccessName}.fieldtypes.ezrichtext.toolbars";
+            $paramName = "ibexa.site_access.config.{$siteAccessName}.fieldtypes.ezrichtext.toolbars";
             if (!$container->hasParameter($paramName)) {
                 continue;
             }

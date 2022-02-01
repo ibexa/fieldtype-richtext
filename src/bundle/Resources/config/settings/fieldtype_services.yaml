@@ -1,5 +1,5 @@
 parameters:
-    ezrichtext.validator.docbook.resources: []
+    ibexa.field_type.richtext.validator.docbook.resources: []
 
 services:
     _defaults:
@@ -19,7 +19,7 @@ services:
 
     ibexa.richtext.validator.docbook:
         class: Ibexa\FieldTypeRichText\RichText\Validator\Validator
-        arguments: ['%ezrichtext.validator.docbook.resources%']
+        arguments: ['%ibexa.field_type.richtext.validator.docbook.resources%']
         tags:
             - { name: ibexa.field_type.richtext.validator.input.xhtml5 }
 
@@ -43,7 +43,7 @@ services:
     # Symfony 3.4+ service definitions:
     Ibexa\FieldTypeRichText\RichText\Validator\CustomTagsValidator:
         public: false
-        arguments: ['%ezplatform.ezrichtext.custom_tags%']
+        arguments: ['%ibexa.field_type.richtext.custom_tags%']
         tags:
             - { name: ibexa.field_type.richtext.validator.input.xhtml5 }
 

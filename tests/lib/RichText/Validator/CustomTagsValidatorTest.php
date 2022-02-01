@@ -29,7 +29,7 @@ class CustomTagsValidatorTest extends TestCase
     {
         // reuse Custom Tags configuration from common test settings
         $commonSettings = Yaml::parseFile(__DIR__ . '/../../_settings/common.yaml');
-        $customTagsConfiguration = $commonSettings['parameters']['ezplatform.ezrichtext.custom_tags'];
+        $customTagsConfiguration = $commonSettings['parameters']['ibexa.field_type.richtext.custom_tags'];
 
         $this->validator = new CustomTagsValidator($customTagsConfiguration);
     }

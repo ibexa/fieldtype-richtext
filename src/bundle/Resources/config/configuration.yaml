@@ -3,7 +3,7 @@ imports:
 
 parameters:
     # set via compiler pass
-    ezplatform.ezrichtext.alloy_editor: []
+    ibexa.field_type.richtext.alloy_editor: []
 
 services:
     _defaults:
@@ -21,11 +21,11 @@ services:
 
     Ibexa\FieldTypeRichText\Configuration\Provider\AlloyEditor:
         arguments:
-            $alloyEditorConfiguration: '%ezplatform.ezrichtext.alloy_editor%'
+            $alloyEditorConfiguration: '%ibexa.field_type.richtext.alloy_editor%'
 
     Ibexa\FieldTypeRichText\Configuration\Provider\CKEditor:
         arguments:
-            $customStylesConfiguration: '%ezplatform.ezrichtext.custom_styles%'
+            $customStylesConfiguration: '%ibexa.field_type.richtext.custom_styles%'
 
     Ibexa\FieldTypeRichText\Configuration\AggregateProvider:
         arguments:
