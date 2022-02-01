@@ -126,8 +126,8 @@ class IbexaFieldTypeRichTextExtensionTest extends AbstractExtensionTestCase
             file_get_contents(__DIR__ . '/Fixtures/ibexa_fieldtype_richtext.yaml')
         );
         $config['custom_tags']['video']['is_inline'] = true;
-        $this->container->setParameter('ezpublish.siteaccess.list', ['admin_group']);
-        $this->container->setParameter('ezsettings.admin_group.fieldtypes.ezrichtext.toolbars', [
+        $this->container->setParameter('ibexa.site_access.list', ['admin_group']);
+        $this->container->setParameter('ibexa.site_access.config.admin_group.fieldtypes.ezrichtext.toolbars', [
             $toolbarName => [
                 'buttons' => [
                     'video' => [
@@ -149,7 +149,7 @@ class IbexaFieldTypeRichTextExtensionTest extends AbstractExtensionTestCase
     {
         yield 'Inline tag in normal toolbar' => [
             'foo',
-            "Toolbar 'foo' configured in the 'ezsettings.admin_group.fieldtypes.ezrichtext.toolbars' scope cannot contain Custom Tag 'video'. Inline Custom Tags are not allowed in Toolbars other than 'text'.",
+            "Toolbar 'foo' configured in the 'ibexa.site_access.config.admin_group.fieldtypes.ezrichtext.toolbars' scope cannot contain Custom Tag 'video'. Inline Custom Tags are not allowed in Toolbars other than 'text'.",
         ];
 
         yield 'Inline tag in text toolbar' => [

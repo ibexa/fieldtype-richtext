@@ -21,14 +21,14 @@ use Ibexa\Contracts\FieldTypeRichText\RichText\ValidatorInterface;
 class CustomTagsValidator implements ValidatorInterface
 {
     /**
-     * Custom Tags global configuration (ezpublish.ezrichtext.custom_tags Semantic Config).
+     * Custom Tags global configuration (ibexa.richtext.custom_tags Semantic Config).
      *
      * @var array
      */
     private $customTagsConfiguration;
 
     /**
-     * @param array $customTagsConfiguration Injectable using %ezplatform.ezrichtext.custom_tags% DI Container parameter.
+     * @param array $customTagsConfiguration Injectable using "%ibexa.field_type.richtext.custom_tags%" DI Container parameter.
      */
     public function __construct(array $customTagsConfiguration)
     {

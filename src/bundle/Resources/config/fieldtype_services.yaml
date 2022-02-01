@@ -1,19 +1,19 @@
 parameters:
-    ezrichtext.tag.namespace: fieldtypes.ezrichtext.tags
-    ezrichtext.style.namespace: fieldtypes.ezrichtext.styles
-    ezrichtext.embed.namespace: fieldtypes.ezrichtext.embed
-    ezrichtext.resources: '%kernel.project_dir%/vendor/ibexa/fieldtype-richtext/src/bundle/Resources/richtext'
+    ibexa.field_type.richtext.tag.namespace: fieldtypes.ezrichtext.tags
+    ibexa.field_type.richtext.style.namespace: fieldtypes.ezrichtext.styles
+    ibexa.field_type.richtext.embed.namespace: fieldtypes.ezrichtext.embed
+    ibexa.field_type.richtext.resources: '%kernel.project_dir%/vendor/ibexa/fieldtype-richtext/src/bundle/Resources/richtext'
 
-    ezrichtext.converter.input.xhtml5.resources: '%ezrichtext.resources%/stylesheets/xhtml5/edit/docbook.xsl'
-    ezrichtext.converter.edit.xhtml5.resources: '%ezrichtext.resources%/stylesheets/docbook/xhtml5/edit/xhtml5.xsl'
-    ezrichtext.converter.output.xhtml5.resources: '%ezrichtext.resources%/stylesheets/docbook/xhtml5/output/xhtml5.xsl'
-    ezrichtext.converter.output.xhtml5.fragment.resources: '%ezrichtext.resources%/stylesheets/xhtml5/output/fragment.xsl'
+    ibexa.field_type.richtext.converter.input.xhtml5.resources: '%ibexa.field_type.richtext.resources%/stylesheets/xhtml5/edit/docbook.xsl'
+    ibexa.field_type.richtext.converter.edit.xhtml5.resources: '%ibexa.field_type.richtext.resources%/stylesheets/docbook/xhtml5/edit/xhtml5.xsl'
+    ibexa.field_type.richtext.converter.output.xhtml5.resources: '%ibexa.field_type.richtext.resources%/stylesheets/docbook/xhtml5/output/xhtml5.xsl'
+    ibexa.field_type.richtext.converter.output.xhtml5.fragment.resources: '%ibexa.field_type.richtext.resources%/stylesheets/xhtml5/output/fragment.xsl'
 
-    ezrichtext.validator.docbook.resources:
-        - '%ezrichtext.resources%/schemas/docbook/ezpublish.rng'
-        - '%ezrichtext.resources%/schemas/docbook/docbook.iso.sch.xsl'
-    ezrichtext.validator.output.ezxhtml5.resources:
-        - '%ezrichtext.resources%/schemas/ezxhtml5/output/ezxhtml5.xsd'
+    ibexa.field_type.richtext.validator.docbook.resources:
+        - '%ibexa.field_type.richtext.resources%/schemas/docbook/ezpublish.rng'
+        - '%ibexa.field_type.richtext.resources%/schemas/docbook/docbook.iso.sch.xsl'
+    ibexa.field_type.richtext.validator.output.xhtml5.resources:
+        - '%ibexa.field_type.richtext.resources%/schemas/ezxhtml5/output/ezxhtml5.xsd'
 
 services:
     Ibexa\FieldTypeRichText\RichText\Normalizer\DocumentTypeDefinition:
@@ -21,7 +21,7 @@ services:
         arguments:
             - 'section'
             - 'http://ez.no/namespaces/ezpublish5/xhtml5/edit'
-            - '%ezrichtext.resources%/dtd/ezxhtml5_edit_html_character_entities.dtd'
+            - '%ibexa.field_type.richtext.resources%/dtd/ezxhtml5_edit_html_character_entities.dtd'
 
     Ibexa\FieldTypeRichText\RichText\ConverterDispatcher:
         class: Ibexa\FieldTypeRichText\RichText\ConverterDispatcher
@@ -37,12 +37,12 @@ services:
             - '@security.authorization_checker'
             - '@ibexa.config.resolver'
             - '@twig'
-            - '%ezrichtext.tag.namespace%'
-            - '%ezrichtext.style.namespace%'
-            - '%ezrichtext.embed.namespace%'
+            - '%ibexa.field_type.richtext.tag.namespace%'
+            - '%ibexa.field_type.richtext.style.namespace%'
+            - '%ibexa.field_type.richtext.embed.namespace%'
             - '@?logger'
-            - '%ezplatform.ezrichtext.custom_tags%'
-            - '%ezplatform.ezrichtext.custom_styles%'
+            - '%ibexa.field_type.richtext.custom_tags%'
+            - '%ibexa.field_type.richtext.custom_styles%'
 
     Ibexa\FieldTypeRichText\RichText\Converter\Link:
         class: Ibexa\FieldTypeRichText\RichText\Converter\Link
@@ -71,7 +71,7 @@ services:
     # Note: should typically be the last one as it produces embeddable fragment
     Ibexa\FieldTypeRichText\RichText\Converter\Xslt:
         class: Ibexa\FieldTypeRichText\RichText\Converter\Xslt
-        arguments: ['%ezrichtext.converter.output.xhtml5.fragment.resources%']
+        arguments: ['%ibexa.field_type.richtext.converter.output.xhtml5.fragment.resources%']
         tags:
             - {name: ibexa.field_type.richtext.converter.output.xhtml5, priority: 100}
 
@@ -87,13 +87,13 @@ services:
 
     ibexa.richtext.validator.docbook:
         class: Ibexa\FieldTypeRichText\RichText\Validator\Validator
-        arguments: ['%ezrichtext.validator.docbook.resources%']
+        arguments: ['%ibexa.field_type.richtext.validator.docbook.resources%']
         tags:
             - { name: ibexa.field_type.richtext.validator.input.xhtml5 }
 
     ibexa.richtext.validator.output.ezxhtml5:
         class: Ibexa\FieldTypeRichText\RichText\Validator\Validator
-        arguments: ['%ezrichtext.validator.output.ezxhtml5.resources%']
+        arguments: ['%ibexa.field_type.richtext.validator.output.xhtml5.resources%']
 
     Ibexa\FieldTypeRichText\RichText\Validator\ValidatorDispatcher:
         class: Ibexa\FieldTypeRichText\RichText\Validator\ValidatorDispatcher
@@ -114,7 +114,7 @@ services:
     Ibexa\FieldTypeRichText\RichText\Converter\Html5:
         class: Ibexa\FieldTypeRichText\RichText\Converter\Html5
         arguments:
-            - '%ezrichtext.converter.output.xhtml5.resources%'
+            - '%ibexa.field_type.richtext.converter.output.xhtml5.resources%'
             - '@ibexa.config.resolver'
         tags:
             - {name: ibexa.field_type.richtext.converter.output.xhtml5, priority: 50}
@@ -128,7 +128,7 @@ services:
     Ibexa\FieldTypeRichText\RichText\Converter\Html5Input:
         class: Ibexa\FieldTypeRichText\RichText\Converter\Html5Input
         arguments:
-            - '%ezrichtext.converter.input.xhtml5.resources%'
+            - '%ibexa.field_type.richtext.converter.input.xhtml5.resources%'
             - '@ibexa.config.resolver'
         tags:
             - {name: ibexa.field_type.richtext.converter.input.xhtml5, priority: 50}
@@ -142,6 +142,6 @@ services:
     Ibexa\FieldTypeRichText\RichText\Converter\Html5Edit:
         class: Ibexa\FieldTypeRichText\RichText\Converter\Html5Edit
         arguments:
-            - '%ezrichtext.converter.edit.xhtml5.resources%'
+            - '%ibexa.field_type.richtext.converter.edit.xhtml5.resources%'
             - '@ibexa.config.resolver'
 
