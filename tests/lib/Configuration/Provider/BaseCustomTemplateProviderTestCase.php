@@ -27,7 +27,7 @@ abstract class BaseCustomTemplateProviderTestCase extends BaseProviderTestCase
     }
 
     /**
-     * @covers \EzSystems\EzPlatformRichText\SPI\Configuration\Provider::getConfiguration
+     * @covers \Ibexa\Contracts\FieldTypeRichText\Configuration\Provider::getConfiguration
      */
     final public function testGetConfiguration()
     {

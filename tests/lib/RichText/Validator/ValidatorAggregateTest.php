@@ -16,7 +16,7 @@ use PHPUnit\Framework\TestCase;
 class ValidatorAggregateTest extends TestCase
 {
     /**
-     * @covers \EzSystems\EzPlatformRichText\RichText\ValidatorAggregate::validateDocument
+     * @covers \Ibexa\FieldTypeRichText\RichText\ValidatorAggregate::validateDocument
      */
     public function testValidateDocument(): void
     {

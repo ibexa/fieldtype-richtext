@@ -11,7 +11,7 @@ namespace Ibexa\Contracts\FieldTypeRichText\Configuration;
 /**
  * RichText configuration provider API.
  *
- * To provide custom configuration implement \EzSystems\EzPlatformRichText\SPI\Configuration\Provider
+ * To provide custom configuration implement \Ibexa\Contracts\FieldTypeRichText\Configuration\Provider
  * instead.
  *
  * @see \Ibexa\Contracts\FieldTypeRichText\Configuration\Provider

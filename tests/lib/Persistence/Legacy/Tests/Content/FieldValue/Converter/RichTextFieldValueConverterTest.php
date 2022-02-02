@@ -52,7 +52,7 @@ EOT;
     }
 
     /**
-     * @covers \EzSystems\EzPlatformRichText\Persistence\Legacy\RichTextFieldValueConverter::toStorageValue
+     * @covers \Ibexa\FieldTypeRichText\Persistence\Legacy\RichTextFieldValueConverter::toStorageValue
      */
     public function testToStorageValue()
     {
@@ -65,7 +65,7 @@ EOT;
     }
 
     /**
-     * @covers \EzSystems\EzPlatformRichText\Persistence\Legacy\RichTextFieldValueConverter::toFieldValue
+     * @covers \Ibexa\FieldTypeRichText\Persistence\Legacy\RichTextFieldValueConverter::toFieldValue
      */
     public function testToFieldValue()
     {

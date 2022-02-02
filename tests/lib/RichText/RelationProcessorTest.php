@@ -20,7 +20,7 @@ use PHPUnit\Framework\TestCase;
 class RelationProcessorTest extends TestCase
 {
     /**
-     * @covers \EzSystems\EzPlatformRichText\RichText\RelationProcessor::getRelations
+     * @covers \Ibexa\FieldTypeRichText\RichText\RelationProcessor::getRelations
      *
      * @dataProvider dateProviderForGetRelations
      *

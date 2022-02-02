@@ -15,7 +15,7 @@ use Twig\Extension\GlobalsInterface;
 /**
  * Twig extension exposing RichText Configuration as ez_richtext_config global Twig variable.
  *
- * @internal To access configuration use \EzSystems\EzPlatformRichText\API\Configuration\ProviderService
+ * @internal To access configuration use \Ibexa\Contracts\FieldTypeRichText\Configuration\ProviderService
  */
 final class RichTextConfigurationExtension extends AbstractExtension implements GlobalsInterface
 {
