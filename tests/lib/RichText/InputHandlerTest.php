@@ -79,7 +79,7 @@ class InputHandlerTest extends TestCase
     }
 
     /**
-     * @covers \EzSystems\EzPlatformRichText\RichText\InputHandler::fromString
+     * @covers \Ibexa\FieldTypeRichText\RichText\InputHandler::fromString
      */
     public function testFromString(): void
     {
@@ -125,7 +125,7 @@ class InputHandlerTest extends TestCase
     }
 
     /**
-     * @covers \EzSystems\EzPlatformRichText\RichText\InputHandler::fromDocument
+     * @covers \Ibexa\FieldTypeRichText\RichText\InputHandler::fromDocument
      */
     public function testFromDocument(): void
     {
@@ -148,7 +148,7 @@ class InputHandlerTest extends TestCase
     }
 
     /**
-     * @covers \EzSystems\EzPlatformRichText\RichText\InputHandler::fromDocument
+     * @covers \Ibexa\FieldTypeRichText\RichText\InputHandler::fromDocument
      */
     public function testFromDocumentThrowsInvalidArgumentException(): void
     {
@@ -173,7 +173,7 @@ class InputHandlerTest extends TestCase
     }
 
     /**
-     * @covers \EzSystems\EzPlatformRichText\RichText\InputHandler::getRelations
+     * @covers \Ibexa\FieldTypeRichText\RichText\InputHandler::getRelations
      */
     public function testGetRelations(): void
     {
@@ -206,7 +206,7 @@ EOT;
     }
 
     /**
-     * @covers \EzSystems\EzPlatformRichText\RichText\InputHandler::validate
+     * @covers \Ibexa\FieldTypeRichText\RichText\InputHandler::validate
      */
     public function testValidate(): void
     {

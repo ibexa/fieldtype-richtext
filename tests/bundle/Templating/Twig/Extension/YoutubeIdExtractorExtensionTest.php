@@ -40,7 +40,7 @@ class YoutubeIdExtractorExtensionTest extends TestCase
     }
 
     /**
-     * @covers \EzSystems\EzPlatformRichTextBundle\Templating\Twig\Extension\YoutubeIdExtractorExtension::extractId
+     * @covers \Ibexa\Bundle\FieldTypeRichText\Templating\Twig\Extension\YoutubeIdExtractorExtension::extractId
      *
      * @dataProvider getYouTubeUrls
      *
@@ -55,7 +55,7 @@ class YoutubeIdExtractorExtensionTest extends TestCase
     }
 
     /**
-     * @covers \EzSystems\EzPlatformRichTextBundle\Templating\Twig\Extension\YoutubeIdExtractorExtension::getFunctions
+     * @covers \Ibexa\Bundle\FieldTypeRichText\Templating\Twig\Extension\YoutubeIdExtractorExtension::getFunctions
      */
     public function testGetFunctions(): void
     {

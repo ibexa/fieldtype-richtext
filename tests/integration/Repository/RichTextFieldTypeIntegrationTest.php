@@ -277,7 +277,7 @@ EOT
      * array(
      *      array(
      *          new DoomedValue( true ),
-     *          'eZ\\Publish\\API\\Repository\\Exceptions\\ContentValidationException'
+     *          'Ibexa\\Contracts\\Core\\Repository\\Exceptions\\ContentValidationException'
      *      ),
      *      // ...
      * );
@@ -340,7 +340,7 @@ EOT
      * array(
      *      array(
      *          new DoomedValue( true ),
-     *          'eZ\\Publish\\API\\Repository\\Exceptions\\ContentValidationException'
+     *          'Ibexa\\Contracts\\Core\\Repository\\Exceptions\\ContentValidationException'
      *      ),
      *      // ...
      * );

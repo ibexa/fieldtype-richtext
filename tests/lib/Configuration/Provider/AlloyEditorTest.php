@@ -43,7 +43,7 @@ class AlloyEditorTest extends BaseProviderTestCase
     }
 
     /**
-     * @covers \EzSystems\Tests\EzPlatformRichText\Configuration\Provider\AlloyEditorTest::createProvider
+     * @covers \Ibexa\Tests\FieldTypeRichText\Configuration\Provider\AlloyEditorTest::createProvider
      */
     public function testGetConfiguration(): void
     {

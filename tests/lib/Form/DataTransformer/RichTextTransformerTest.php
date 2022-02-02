@@ -44,7 +44,7 @@ class RichTextTransformerTest extends TestCase
     }
 
     /**
-     * @covers \EzSystems\EzPlatformRichText\Form\DataTransformer\RichTextTransformer::transform
+     * @covers \Ibexa\FieldTypeRichText\Form\DataTransformer\RichTextTransformer::transform
      */
     public function testTransform(): void
     {
@@ -71,7 +71,7 @@ class RichTextTransformerTest extends TestCase
     }
 
     /**
-     * @covers \EzSystems\EzPlatformRichText\Form\DataTransformer\RichTextTransformer::transform
+     * @covers \Ibexa\FieldTypeRichText\Form\DataTransformer\RichTextTransformer::transform
      */
     public function testTransformThrowsTransformationFailedException(): void
     {
@@ -82,7 +82,7 @@ class RichTextTransformerTest extends TestCase
     }
 
     /**
-     * @covers \EzSystems\EzPlatformRichText\Form\DataTransformer\RichTextTransformer::reverseTransform
+     * @covers \Ibexa\FieldTypeRichText\Form\DataTransformer\RichTextTransformer::reverseTransform
      */
     public function testReverseTransform(): void
     {
@@ -112,7 +112,7 @@ class RichTextTransformerTest extends TestCase
     }
 
     /**
-     * @covers \EzSystems\EzPlatformRichText\Form\DataTransformer\RichTextTransformer::reverseTransform
+     * @covers \Ibexa\FieldTypeRichText\Form\DataTransformer\RichTextTransformer::reverseTransform
      *
      * @dataProvider dataProviderForReverseTransformTransformationFailedException
      */

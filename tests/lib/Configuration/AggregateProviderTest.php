@@ -13,12 +13,12 @@ use Ibexa\FieldTypeRichText\Configuration\AggregateProvider;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \EzSystems\EzPlatformRichText\Configuration\AggregateProvider
+ * @covers \Ibexa\FieldTypeRichText\Configuration\AggregateProvider
  */
 class AggregateProviderTest extends TestCase
 {
     /**
-     * @covers \EzSystems\EzPlatformRichText\Configuration\AggregateProvider::getConfiguration
+     * @covers \Ibexa\FieldTypeRichText\Configuration\AggregateProvider::getConfiguration
      *
      * @dataProvider getConfiguration
      *

@@ -37,7 +37,7 @@ class CustomTagsValidatorTest extends TestCase
     /**
      * Test validating DocBook document containing Custom Tags.
      *
-     * @covers \EzSystems\EzPlatformRichText\RichText\CustomTagsValidator::validateDocument
+     * @covers \Ibexa\FieldTypeRichText\RichText\CustomTagsValidator::validateDocument
      *
      * @dataProvider providerForTestValidateDocument
      *

@@ -29,7 +29,7 @@ class DOMDocumentFactoryTest extends TestCase
     }
 
     /**
-     * @covers \EzSystems\EzPlatformRichText\RichText\DOMDocumentFactory::loadXMLString
+     * @covers \Ibexa\FieldTypeRichText\RichText\DOMDocumentFactory::loadXMLString
      */
     public function testLoadXMLString(): void
     {
@@ -46,7 +46,7 @@ EOT;
     }
 
     /**
-     * @covers \EzSystems\EzPlatformRichText\RichText\DOMDocumentFactory::loadXMLString
+     * @covers \Ibexa\FieldTypeRichText\RichText\DOMDocumentFactory::loadXMLString
      */
     public function testLoadXMLStringThrowsInvalidXmlException(): void
     {

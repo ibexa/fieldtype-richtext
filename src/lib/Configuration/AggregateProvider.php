@@ -13,7 +13,7 @@ use Ibexa\Contracts\FieldTypeRichText\Configuration\ProviderService;
 /**
  * RichText configuration provider, providing configuration by aggregating different sources.
  *
- * @internal type-hint \EzSystems\EzPlatformRichText\API\Configuration\ProviderService
+ * @internal type-hint \Ibexa\Contracts\FieldTypeRichText\Configuration\ProviderService
  */
 final class AggregateProvider implements ProviderService
 {

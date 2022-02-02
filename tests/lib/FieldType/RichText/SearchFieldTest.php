@@ -62,7 +62,7 @@ final class SearchFieldTest extends TestCase
     }
 
     /**
-     * @covers \EzSystems\EzPlatformRichText\FieldType\RichText\SearchField::getIndexData
+     * @covers \Ibexa\FieldTypeRichText\FieldType\RichText\SearchField::getIndexData
      *
      * @dataProvider getDataForTestGetIndexData
      *

@@ -27,7 +27,7 @@ abstract class BaseProviderTestCase extends TestCase
     abstract public function getExpectedProviderName(): string;
 
     /**
-     * @covers \EzSystems\EzPlatformRichText\SPI\Configuration\Provider::getName
+     * @covers \Ibexa\Contracts\FieldTypeRichText\Configuration\Provider::getName
      */
     final public function testGetName(): void
     {

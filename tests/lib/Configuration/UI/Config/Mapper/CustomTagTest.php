@@ -25,7 +25,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class CustomTagTest extends TestCase
 {
     /**
-     * @covers \EzSystems\EzPlatformRichText\Configuration\UI\Mapper\CustomTag::mapConfig
+     * @covers \Ibexa\FieldTypeRichText\Configuration\UI\Mapper\CustomTag::mapConfig
      *
      * @dataProvider providerForTestMapConfig
      *

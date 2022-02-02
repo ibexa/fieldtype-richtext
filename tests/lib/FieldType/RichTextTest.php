@@ -78,7 +78,7 @@ class RichTextTest extends TestCase
     }
 
     /**
-     * @covers \eZ\Publish\Core\FieldType\FieldType::getValidatorConfigurationSchema
+     * @covers \Ibexa\Core\FieldType\FieldType::getValidatorConfigurationSchema
      */
     public function testValidatorConfigurationSchema()
     {
@@ -90,7 +90,7 @@ class RichTextTest extends TestCase
     }
 
     /**
-     * @covers \eZ\Publish\Core\FieldType\FieldType::getSettingsSchema
+     * @covers \Ibexa\Core\FieldType\FieldType::getSettingsSchema
      */
     public function testSettingsSchema()
     {
@@ -103,7 +103,7 @@ class RichTextTest extends TestCase
     }
 
     /**
-     * @covers \EzSystems\EzPlatformRichText\FieldType\RichText\Type::acceptValue
+     * @covers \Ibexa\FieldTypeRichText\FieldType\RichText\Type::acceptValue
      */
     public function testAcceptValueInvalidType()
     {
@@ -133,7 +133,7 @@ class RichTextTest extends TestCase
     }
 
     /**
-     * @covers \eZ\Publish\Core\FieldType\Author\Type::acceptValue
+     * @covers \Ibexa\Core\FieldType\Author\Type::acceptValue
      * @dataProvider providerForTestAcceptValueValidFormat
      */
     public function testAcceptValueValidFormat($input)
@@ -163,7 +163,7 @@ class RichTextTest extends TestCase
     }
 
     /**
-     * @covers \eZ\Publish\Core\FieldType\Author\Type::acceptValue
+     * @covers \Ibexa\Core\FieldType\Author\Type::acceptValue
      * @dataProvider providerForTestAcceptValueInvalidFormat
      */
     public function testAcceptValueInvalidFormat($input, Exception $expectedException)
@@ -276,7 +276,7 @@ class RichTextTest extends TestCase
     }
 
     /**
-     * @covers \EzSystems\EzPlatformRichText\FieldType\RichText\Type::toPersistenceValue
+     * @covers \Ibexa\FieldTypeRichText\FieldType\RichText\Type::toPersistenceValue
      */
     public function testToPersistenceValue()
     {
@@ -295,7 +295,7 @@ class RichTextTest extends TestCase
     }
 
     /**
-     * @covers \EzSystems\EzPlatformRichText\FieldType\RichText\Type::getName
+     * @covers \Ibexa\FieldTypeRichText\FieldType\RichText\Type::getName
      * @dataProvider providerForTestGetName
      */
     public function testGetName($xmlString, $expectedName)
@@ -400,7 +400,7 @@ class RichTextTest extends TestCase
 
     /**
      * @todo handle embeds when implemented
-     * @covers \EzSystems\EzPlatformRichText\FieldType\RichText\Type::getRelations
+     * @covers \Ibexa\FieldTypeRichText\FieldType\RichText\Type::getRelations
      */
     public function testGetRelations()
     {

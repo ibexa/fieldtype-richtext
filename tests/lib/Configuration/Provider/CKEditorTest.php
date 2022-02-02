@@ -31,7 +31,7 @@ final class CKEditorTest extends BaseProviderTestCase
     }
 
     /**
-     * @covers \EzSystems\Tests\EzPlatformRichText\Configuration\Provider\CKEditorTest::createProvider
+     * @covers \Ibexa\Tests\FieldTypeRichText\Configuration\Provider\CKEditorTest::createProvider
      */
     public function testGetConfiguration(): void
     {
