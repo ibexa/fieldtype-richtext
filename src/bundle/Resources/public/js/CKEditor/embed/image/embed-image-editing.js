@@ -123,6 +123,7 @@ class IbexaEmbedImageEditing extends Plugin {
                 const config = downcastWriter.createUIElement('span', { 'data-ezelement': 'ezconfig' }, function(domDocument) {
                     const domElement = this.toDomElement(domDocument);
 
+                    // note: do not reformat - configuration value for image embeds cannot contain whitespaces
                     domElement.innerHTML = `<span data-ezelement="ezvalue" data-ezvalue-key="size">${modelElement.getAttribute('size')}</span>`;
 
                     return domElement;
