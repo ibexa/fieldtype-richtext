@@ -123,9 +123,7 @@ class IbexaEmbedImageEditing extends Plugin {
                 const config = downcastWriter.createUIElement('span', { 'data-ezelement': 'ezconfig' }, function(domDocument) {
                     const domElement = this.toDomElement(domDocument);
 
-                    domElement.innerHTML = `<span data-ezelement="ezvalue" data-ezvalue-key="size">
-                        ${modelElement.getAttribute('size')}
-                    </span>`;
+                    domElement.innerHTML = `<span data-ezelement="ezvalue" data-ezvalue-key="size">${modelElement.getAttribute('size')}</span>`;
 
                     return domElement;
                 });
