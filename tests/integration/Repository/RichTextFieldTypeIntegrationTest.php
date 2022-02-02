@@ -290,7 +290,7 @@ EOT
         return [
             [
                 new \stdClass(),
-                'eZ\\Publish\\Core\\Base\\Exceptions\\InvalidArgumentType',
+                'Ibexa\\Core\\Base\\Exceptions\\InvalidArgumentType',
             ],
         ];
     }
