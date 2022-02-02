@@ -1,6 +1,6 @@
 <xsl:stylesheet
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:ezcustom="http://ez.no/xmlns/ezpublish/docbook/custom"
+    xmlns:ezcustom="http://ibexa.co/xmlns/ezpublish/docbook/custom"
     exclude-result-prefixes="ezcustom"
     version="1.0">
 

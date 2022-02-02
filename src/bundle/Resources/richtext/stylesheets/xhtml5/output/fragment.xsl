@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:ezxhtml5="http://ez.no/namespaces/ezpublish5/xhtml5"
+    xmlns:ezxhtml5="http://ibexa.co/namespaces/ezpublish5/xhtml5"
     version="1.0">
 
   <xsl:output omit-xml-declaration="yes" indent="yes" encoding="UTF-8"/>

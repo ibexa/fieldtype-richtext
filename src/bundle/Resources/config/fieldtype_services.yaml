@@ -20,7 +20,7 @@ services:
         class: Ibexa\FieldTypeRichText\RichText\Normalizer\DocumentTypeDefinition
         arguments:
             - 'section'
-            - 'http://ez.no/namespaces/ezpublish5/xhtml5/edit'
+            - 'http://ibexa.co/namespaces/ezpublish5/xhtml5/edit'
             - '%ibexa.field_type.richtext.resources%/dtd/ezxhtml5_edit_html_character_entities.dtd'
 
     Ibexa\FieldTypeRichText\RichText\ConverterDispatcher:
@@ -28,7 +28,7 @@ services:
         arguments:
             -
                 http://docbook.org/ns/docbook: null
-                http://ez.no/namespaces/ezpublish5/xhtml5/edit: '@ibexa.richtext.converter.input.xhtml5'
+                http://ibexa.co/namespaces/ezpublish5/xhtml5/edit: '@ibexa.richtext.converter.input.xhtml5'
 
     Ibexa\FieldTypeRichText\RichText\Renderer:
         class: Ibexa\FieldTypeRichText\RichText\Renderer
@@ -100,8 +100,8 @@ services:
         arguments:
             -
                 http://docbook.org/ns/docbook: null
-                http://ez.no/namespaces/ezpublish5/xhtml5/edit: null
-                http://ez.no/namespaces/ezpublish5/xhtml5: '@ibexa.richtext.validator.output.ezxhtml5'
+                http://ibexa.co/namespaces/ezpublish5/xhtml5/edit: null
+                http://ibexa.co/namespaces/ezpublish5/xhtml5: '@ibexa.richtext.validator.output.ezxhtml5'
 
     Ibexa\FieldTypeRichText\RichText\Validator\InternalLinkValidator:
         class: Ibexa\FieldTypeRichText\RichText\Validator\InternalLinkValidator

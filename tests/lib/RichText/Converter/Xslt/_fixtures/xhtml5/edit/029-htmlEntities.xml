@@ -249,7 +249,7 @@
 <!ENTITY hearts "&#9829;">
 <!ENTITY diams "&#9830;">
 ]>
-<section xmlns="http://ez.no/namespaces/ezpublish5/xhtml5/edit">
+<section xmlns="http://ibexa.co/namespaces/ezpublish5/xhtml5/edit">
     <!-- XML predefined -->
     <p>&quot;</p>
     <p>&amp;</p>

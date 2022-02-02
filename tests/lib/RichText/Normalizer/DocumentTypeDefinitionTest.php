@@ -19,33 +19,33 @@ class DocumentTypeDefinitionTest extends TestCase
         return [
             [
                 'section',
-                'http://ez.no/namespaces/ezpublish5/xhtml5/edit',
+                'http://ibexa.co/namespaces/ezpublish5/xhtml5/edit',
                 __DIR__ . '/_fixtures/pound.dtd',
                 '<?xml version="1.0" encoding="UTF-8"?>
-<section xmlns="http://ez.no/namespaces/ezpublish5/xhtml5/edit">
+<section xmlns="http://ibexa.co/namespaces/ezpublish5/xhtml5/edit">
   <p>Behold the pound pudding in a pond: &pound;</p>
 </section>',
                 '<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE section [
     <!ENTITY pound "&#163;">
 ]>
-<section xmlns="http://ez.no/namespaces/ezpublish5/xhtml5/edit">
+<section xmlns="http://ibexa.co/namespaces/ezpublish5/xhtml5/edit">
   <p>Behold the pound pudding in a pond: &pound;</p>
 </section>',
                 '<?xml version="1.0" encoding="UTF-8"?>
-<section xmlns="http://ez.no/namespaces/ezpublish5/xhtml5/edit">
+<section xmlns="http://ibexa.co/namespaces/ezpublish5/xhtml5/edit">
   <p>Behold the pound pudding in a pond: £</p>
 </section>',
             ],
             [
                 'section',
-                'http://ez.no/namespaces/ezpublish5/xhtml5/edit',
+                'http://ibexa.co/namespaces/ezpublish5/xhtml5/edit',
                 __DIR__ . '/_fixtures/weird_drink.dtd',
                 '<?xml version="1.0"
 
  encoding="UTF-8"?>
 <section
-xmlns="http://ez.no/namespaces/ezpublish5/xhtml5/edit">
+xmlns="http://ibexa.co/namespaces/ezpublish5/xhtml5/edit">
   <p>You will need &ingredients;.</p>
   <p>Then you &recipe;.</p>
   <p>Serve chilled.</p>
@@ -61,14 +61,14 @@ xmlns="http://ez.no/namespaces/ezpublish5/xhtml5/edit">
     <!ENTITY yen "&#165;">
 ]>
 <section
-xmlns="http://ez.no/namespaces/ezpublish5/xhtml5/edit">
+xmlns="http://ibexa.co/namespaces/ezpublish5/xhtml5/edit">
   <p>You will need &ingredients;.</p>
   <p>Then you &recipe;.</p>
   <p>Serve chilled.</p>
   <p>The price is &price;&yen;.</p>
 </section>',
                 '<?xml version="1.0" encoding="UTF-8"?>
-<section xmlns="http://ez.no/namespaces/ezpublish5/xhtml5/edit">
+<section xmlns="http://ibexa.co/namespaces/ezpublish5/xhtml5/edit">
   <p>You will need chili pepper, black pepper, bat wings (dried and grounded) and tomato juice.</p>
   <p>Then you combine the ingredients and shake.</p>
   <p>Serve chilled.</p>
@@ -107,7 +107,7 @@ xmlns="http://ez.no/namespaces/ezpublish5/xhtml5/edit">
 
         $this->assertTrue($normalizer->accept(
             <<<XML
-<section xmlns="http://ez.no/namespaces/ezpublish5/xhtml5/edit">
+<section xmlns="http://ibexa.co/namespaces/ezpublish5/xhtml5/edit">
   <p>You will need chili pepper, black pepper, bat wings (dried and grounded) and tomato juice.</p>
   <p>Then you combine the ingredients and shake.</p>
   <p>Serve chilled.</p>
@@ -148,19 +148,19 @@ XML
         return [
             [
                 'section',
-                'http://ez.no/namespaces/ezpublish5/xhtml5/edit',
+                'http://ibexa.co/namespaces/ezpublish5/xhtml5/edit',
                 __DIR__ . '/_fixtures/pound.dtd',
                 '`eZ` flavored **markdown**',
             ],
             [
                 'section',
-                'http://ez.no/namespaces/ezpublish5/xhtml5/edit',
+                'http://ibexa.co/namespaces/ezpublish5/xhtml5/edit',
                 __DIR__ . '/_fixtures/pound.dtd',
                 '<?xml version="1.0" encoding="UTF-8"?>this is not exactly well formed...',
             ],
             [
                 'section',
-                'http://ez.no/namespaces/ezpublish5/xhtml5/edit',
+                'http://ibexa.co/namespaces/ezpublish5/xhtml5/edit',
                 __DIR__ . '/_fixtures/pound.dtd',
                 '<?xml version="1.0" encoding="UTF-8"?>
 <truck xmlns="http://example.com/something">
@@ -169,25 +169,25 @@ XML
             ],
             [
                 'section',
-                'http://ez.no/namespaces/ezpublish5/xhtml5/edit',
+                'http://ibexa.co/namespaces/ezpublish5/xhtml5/edit',
                 __DIR__ . '/_fixtures/pound.dtd',
                 '<?xml version="1.0" encoding="UTF-8"?>
 <section xmlns="http://docbook.org/ns/docbook"
          xmlns:xlink="http://www.w3.org/1999/xlink"
-         xmlns:ezxhtml="http://ez.no/xmlns/ezpublish/docbook/xhtml"
-         xmlns:ezcustom="http://ez.no/xmlns/ezpublish/docbook/custom"
+         xmlns:ezxhtml="http://ibexa.co/xmlns/ezpublish/docbook/xhtml"
+         xmlns:ezcustom="http://ibexa.co/xmlns/ezpublish/docbook/custom"
          version="5.0-variant ezpublish-1.0">
   <para ezxhtml:class="paraClass">This is a paragraph.</para>
 </section>',
             ],
             [
                 'section',
-                'http://ez.no/namespaces/ezpublish5/xhtml5/edit',
+                'http://ibexa.co/namespaces/ezpublish5/xhtml5/edit',
                 __DIR__ . '/_fixtures/pound.dtd',
                 '<?xml version="1.0" encoding="UTF-8"?>
-<section xmlns:xhtml="http://ez.no/namespaces/ezpublish3/xhtml/"
-         xmlns:image="http://ez.no/namespaces/ezpublish3/image/"
-         xmlns:custom="http://ez.no/namespaces/ezpublish3/custom/">
+<section xmlns:xhtml="http://ibexa.co/namespaces/ezpublish3/xhtml/"
+         xmlns:image="http://ibexa.co/namespaces/ezpublish3/image/"
+         xmlns:custom="http://ibexa.co/namespaces/ezpublish3/custom/">
   <section>
     <header>This is a heading.</header>
   </section>

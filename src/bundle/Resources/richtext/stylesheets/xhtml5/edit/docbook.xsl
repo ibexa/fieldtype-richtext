@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:ezxhtml5="http://ez.no/namespaces/ezpublish5/xhtml5/edit"
-    xmlns:ezxhtml="http://ez.no/xmlns/ezpublish/docbook/xhtml"
+    xmlns:ezxhtml5="http://ibexa.co/namespaces/ezpublish5/xhtml5/edit"
+    xmlns:ezxhtml="http://ibexa.co/xmlns/ezpublish/docbook/xhtml"
     xmlns:xlink="http://www.w3.org/1999/xlink"
     xmlns="http://docbook.org/ns/docbook"
     exclude-result-prefixes="ezxhtml5"
@@ -12,8 +12,8 @@
   <xsl:template match="/ezxhtml5:section">
     <section xmlns="http://docbook.org/ns/docbook"
              xmlns:xlink="http://www.w3.org/1999/xlink"
-             xmlns:ezxhtml="http://ez.no/xmlns/ezpublish/docbook/xhtml"
-             xmlns:ezcustom="http://ez.no/xmlns/ezpublish/docbook/custom"
+             xmlns:ezxhtml="http://ibexa.co/xmlns/ezpublish/docbook/xhtml"
+             xmlns:ezcustom="http://ibexa.co/xmlns/ezpublish/docbook/custom"
              version="5.0-variant ezpublish-1.0">
       <xsl:apply-templates/>
     </section>

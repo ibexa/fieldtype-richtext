@@ -22,7 +22,7 @@ class RichTextProcessorTest extends TestCase
         $outputValue = [
             'xml' => <<<EOT
 <?xml version="1.0" encoding="UTF-8"?>
-<section xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ezxhtml="http://ez.no/xmlns/ezpublish/docbook/xhtml" xmlns:ezcustom="http://ez.no/xmlns/ezpublish/docbook/custom" version="5.0-variant ezpublish-1.0">
+<section xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ezxhtml="http://ibexa.co/xmlns/ezpublish/docbook/xhtml" xmlns:ezcustom="http://ibexa.co/xmlns/ezpublish/docbook/custom" version="5.0-variant ezpublish-1.0">
     <title>Some text</title>
     <para>Foobar</para>
 </section>
@@ -31,7 +31,7 @@ EOT
         $processedOutputValue = $outputValue;
         $processedOutputValue['xhtml5edit'] = <<<EOT
 <?xml version="1.0" encoding="UTF-8"?>
-<section xmlns="http://ez.no/namespaces/ezpublish5/xhtml5/edit">
+<section xmlns="http://ibexa.co/namespaces/ezpublish5/xhtml5/edit">
     <h1>Some text</h1>
     <p>Foobar</p>
 </section>

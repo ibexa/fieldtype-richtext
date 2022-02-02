@@ -18,7 +18,7 @@ covered by:
  004-sectionNested.xml
 
 -->
-<section xmlns="http://ez.no/namespaces/ezpublish5/xhtml5/edit">
+<section xmlns="http://ibexa.co/namespaces/ezpublish5/xhtml5/edit">
   <h1>This is a first level heading.</h1>
   <section>
     <h2>This is a second level heading.</h2>

@@ -28,12 +28,12 @@ final class SearchFieldTest extends TestCase
                 [
                     new Search\Field(
                         'value',
-                        'Welcome to eZ Platform',
+                        'Welcome to Ibexa',
                         new Search\FieldType\StringField()
                     ),
                     new Search\Field(
                         'fulltext',
-                        "\n   Welcome to eZ Platform \n   eZ Platform  is the new generation DXP from eZ Systems. \n ",
+                        "\n   Welcome to Ibexa \n   Ibexa  is the new generation DXP from Ibexa. \n ",
                         new Search\FieldType\FullTextField()
                     ),
                 ],
@@ -92,8 +92,8 @@ final class SearchFieldTest extends TestCase
 <section xmlns="http://docbook.org/ns/docbook"
          xmlns:xlink="http://www.w3.org/1999/xlink"
          xmlns:ezxhtml="https://ezplatform.com/xmlns/docbook/xhtml">
-  <title ezxhtml:level="2">Welcome to eZ Platform</title>
-  <para><link xlink:href="ezurl://1" xlink:show="none">eZ Platform</link> is the new generation DXP from eZ Systems.</para>
+  <title ezxhtml:level="2">Welcome to Ibexa</title>
+  <para><link xlink:href="ezurl://1" xlink:show="none">Ibexa</link> is the new generation DXP from Ibexa.</para>
 </section>
 XML;
     }

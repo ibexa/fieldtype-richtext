@@ -218,7 +218,7 @@ class RichTextTest extends TestCase
             ],
             [
                 '<?xml version="1.0" encoding="UTF-8"?>
-<section xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ezxhtml="http://ez.no/xmlns/ezpublish/docbook/xhtml" xmlns:ezcustom="http://ez.no/xmlns/ezpublish/docbook/custom" version="5.0-variant ezpublish-1.0">
+<section xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ezxhtml="http://ibexa.co/xmlns/ezpublish/docbook/xhtml" xmlns:ezcustom="http://ibexa.co/xmlns/ezpublish/docbook/custom" version="5.0-variant ezpublish-1.0">
   <para><link xlink:href="javascript:alert(\'XSS\');">link</link></para>
 </section>',
                 [
@@ -233,7 +233,7 @@ class RichTextTest extends TestCase
             ],
             [
                 '<?xml version="1.0" encoding="UTF-8"?>
-<section xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ezxhtml="http://ez.no/xmlns/ezpublish/docbook/xhtml" xmlns:ezcustom="http://ez.no/xmlns/ezpublish/docbook/custom" version="5.0-variant ezpublish-1.0">
+<section xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ezxhtml="http://ibexa.co/xmlns/ezpublish/docbook/xhtml" xmlns:ezcustom="http://ibexa.co/xmlns/ezpublish/docbook/custom" version="5.0-variant ezpublish-1.0">
   <para><link xlink:href="vbscript:alert(\'XSS\');">link</link></para>
 </section>',
                 [
@@ -248,7 +248,7 @@ class RichTextTest extends TestCase
             ],
             [
                 '<?xml version="1.0" encoding="UTF-8"?>
-<section xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ezxhtml="http://ez.no/xmlns/ezpublish/docbook/xhtml" xmlns:ezcustom="http://ez.no/xmlns/ezpublish/docbook/custom" version="5.0-variant ezpublish-1.0">
+<section xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ezxhtml="http://ibexa.co/xmlns/ezpublish/docbook/xhtml" xmlns:ezcustom="http://ibexa.co/xmlns/ezpublish/docbook/custom" version="5.0-variant ezpublish-1.0">
   <para><link xlink:href="http://example.org">link</link></para>
 </section>',
                 [],
@@ -318,77 +318,77 @@ class RichTextTest extends TestCase
         return [
             [
                 '<?xml version="1.0" encoding="utf-8"?>
-<section xmlns:image="http://ez.no/namespaces/ezpublish3/image/"
-         xmlns:xhtml="http://ez.no/namespaces/ezpublish3/xhtml/"
-         xmlns:custom="http://ez.no/namespaces/ezpublish3/custom/"><header level="1">This is a piece of text</header></section>',
+<section xmlns:image="http://ibexa.co/namespaces/ezpublish3/image/"
+         xmlns:xhtml="http://ibexa.co/namespaces/ezpublish3/xhtml/"
+         xmlns:custom="http://ibexa.co/namespaces/ezpublish3/custom/"><header level="1">This is a piece of text</header></section>',
                 'This is a piece of text',
             ],
 
             [
                 '<?xml version="1.0" encoding="utf-8"?>
-<section xmlns:image="http://ez.no/namespaces/ezpublish3/image/"
-         xmlns:xhtml="http://ez.no/namespaces/ezpublish3/xhtml/"
-         xmlns:custom="http://ez.no/namespaces/ezpublish3/custom/"><header level="1">This is a piece of <emphasize>text</emphasize></header></section>',
+<section xmlns:image="http://ibexa.co/namespaces/ezpublish3/image/"
+         xmlns:xhtml="http://ibexa.co/namespaces/ezpublish3/xhtml/"
+         xmlns:custom="http://ibexa.co/namespaces/ezpublish3/custom/"><header level="1">This is a piece of <emphasize>text</emphasize></header></section>',
                 /* @todo FIXME: should probably be "This is a piece of text" */
                 'This is a piece of',
             ],
 
             [
                 '<?xml version="1.0" encoding="utf-8"?>
-<section xmlns:image="http://ez.no/namespaces/ezpublish3/image/"
-         xmlns:xhtml="http://ez.no/namespaces/ezpublish3/xhtml/"
-         xmlns:custom="http://ez.no/namespaces/ezpublish3/custom/"><header level="1"><strong>This is a piece</strong> of text</header></section>',
+<section xmlns:image="http://ibexa.co/namespaces/ezpublish3/image/"
+         xmlns:xhtml="http://ibexa.co/namespaces/ezpublish3/xhtml/"
+         xmlns:custom="http://ibexa.co/namespaces/ezpublish3/custom/"><header level="1"><strong>This is a piece</strong> of text</header></section>',
                 /* @todo FIXME: should probably be "This is a piece of text" */
                 'This is a piece',
             ],
 
             [
                 '<?xml version="1.0" encoding="utf-8"?>
-<section xmlns:image="http://ez.no/namespaces/ezpublish3/image/"
-         xmlns:xhtml="http://ez.no/namespaces/ezpublish3/xhtml/"
-         xmlns:custom="http://ez.no/namespaces/ezpublish3/custom/"><header level="1"><strong><emphasize>This is</emphasize> a piece</strong> of text</header></section>',
+<section xmlns:image="http://ibexa.co/namespaces/ezpublish3/image/"
+         xmlns:xhtml="http://ibexa.co/namespaces/ezpublish3/xhtml/"
+         xmlns:custom="http://ibexa.co/namespaces/ezpublish3/custom/"><header level="1"><strong><emphasize>This is</emphasize> a piece</strong> of text</header></section>',
                 /* @todo FIXME: should probably be "This is a piece of text" */
                 'This is',
             ],
 
             [
                 '<?xml version="1.0" encoding="utf-8"?>
-<section xmlns:image="http://ez.no/namespaces/ezpublish3/image/"
-         xmlns:xhtml="http://ez.no/namespaces/ezpublish3/xhtml/"
-         xmlns:custom="http://ez.no/namespaces/ezpublish3/custom/"><paragraph><table class="default" border="0" width="100%" custom:summary="wai" custom:caption=""><tr><td><paragraph>First cell</paragraph></td><td><paragraph>Second cell</paragraph></td></tr><tr><td><paragraph>Third cell</paragraph></td><td><paragraph>Fourth cell</paragraph></td></tr></table></paragraph><paragraph>Text after table</paragraph></section>',
+<section xmlns:image="http://ibexa.co/namespaces/ezpublish3/image/"
+         xmlns:xhtml="http://ibexa.co/namespaces/ezpublish3/xhtml/"
+         xmlns:custom="http://ibexa.co/namespaces/ezpublish3/custom/"><paragraph><table class="default" border="0" width="100%" custom:summary="wai" custom:caption=""><tr><td><paragraph>First cell</paragraph></td><td><paragraph>Second cell</paragraph></td></tr><tr><td><paragraph>Third cell</paragraph></td><td><paragraph>Fourth cell</paragraph></td></tr></table></paragraph><paragraph>Text after table</paragraph></section>',
                 /* @todo FIXME: should probably be "First cell" */
                 'First cellSecond cell',
             ],
 
             [
                 '<?xml version="1.0" encoding="utf-8"?>
-<section xmlns:image="http://ez.no/namespaces/ezpublish3/image/"
-         xmlns:xhtml="http://ez.no/namespaces/ezpublish3/xhtml/"
-         xmlns:custom="http://ez.no/namespaces/ezpublish3/custom/"><paragraph xmlns:tmp="http://ez.no/namespaces/ezpublish3/temporary/"><ul><li><paragraph xmlns:tmp="http://ez.no/namespaces/ezpublish3/temporary/">List item</paragraph></li></ul></paragraph></section>',
+<section xmlns:image="http://ibexa.co/namespaces/ezpublish3/image/"
+         xmlns:xhtml="http://ibexa.co/namespaces/ezpublish3/xhtml/"
+         xmlns:custom="http://ibexa.co/namespaces/ezpublish3/custom/"><paragraph xmlns:tmp="http://ibexa.co/namespaces/ezpublish3/temporary/"><ul><li><paragraph xmlns:tmp="http://ibexa.co/namespaces/ezpublish3/temporary/">List item</paragraph></li></ul></paragraph></section>',
                 'List item',
             ],
 
             [
                 '<?xml version="1.0" encoding="utf-8"?>
-<section xmlns:image="http://ez.no/namespaces/ezpublish3/image/"
-         xmlns:xhtml="http://ez.no/namespaces/ezpublish3/xhtml/"
-         xmlns:custom="http://ez.no/namespaces/ezpublish3/custom/"><paragraph xmlns:tmp="http://ez.no/namespaces/ezpublish3/temporary/"><ul><li><paragraph xmlns:tmp="http://ez.no/namespaces/ezpublish3/temporary/">List <emphasize>item</emphasize></paragraph></li></ul></paragraph></section>',
+<section xmlns:image="http://ibexa.co/namespaces/ezpublish3/image/"
+         xmlns:xhtml="http://ibexa.co/namespaces/ezpublish3/xhtml/"
+         xmlns:custom="http://ibexa.co/namespaces/ezpublish3/custom/"><paragraph xmlns:tmp="http://ibexa.co/namespaces/ezpublish3/temporary/"><ul><li><paragraph xmlns:tmp="http://ibexa.co/namespaces/ezpublish3/temporary/">List <emphasize>item</emphasize></paragraph></li></ul></paragraph></section>',
                 'List item',
             ],
 
             [
                 '<?xml version="1.0" encoding="utf-8"?>
-<section xmlns:image="http://ez.no/namespaces/ezpublish3/image/"
-         xmlns:xhtml="http://ez.no/namespaces/ezpublish3/xhtml/"
-         xmlns:custom="http://ez.no/namespaces/ezpublish3/custom/" />',
+<section xmlns:image="http://ibexa.co/namespaces/ezpublish3/image/"
+         xmlns:xhtml="http://ibexa.co/namespaces/ezpublish3/xhtml/"
+         xmlns:custom="http://ibexa.co/namespaces/ezpublish3/custom/" />',
                 '',
             ],
 
             [
                 '<?xml version="1.0" encoding="utf-8"?>
-<section xmlns:image="http://ez.no/namespaces/ezpublish3/image/"
-         xmlns:xhtml="http://ez.no/namespaces/ezpublish3/xhtml/"
-         xmlns:custom="http://ez.no/namespaces/ezpublish3/custom/"><paragraph><strong><emphasize>A simple</emphasize></strong> paragraph!</paragraph></section>',
+<section xmlns:image="http://ibexa.co/namespaces/ezpublish3/image/"
+         xmlns:xhtml="http://ibexa.co/namespaces/ezpublish3/xhtml/"
+         xmlns:custom="http://ibexa.co/namespaces/ezpublish3/custom/"><paragraph><strong><emphasize>A simple</emphasize></strong> paragraph!</paragraph></section>',
                 'A simple',
             ],
 

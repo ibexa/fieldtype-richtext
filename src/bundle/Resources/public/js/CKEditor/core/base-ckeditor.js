@@ -33,7 +33,7 @@ const VIEWPORT_TOP_OFFSET = 102;
 (function(global, doc, ibexa) {
     class BaseRichText {
         constructor(config) {
-            this.ezNamespace = 'http://ez.no/namespaces/ezpublish5/xhtml5/edit';
+            this.ezNamespace = 'http://ibexa.co/namespaces/ezpublish5/xhtml5/edit';
             this.xhtmlNamespace = 'http://www.w3.org/1999/xhtml';
 
             this.editor = null;

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <grammar xmlns="http://relaxng.org/ns/structure/1.0"
-         xmlns:ezcustom="http://ez.no/xmlns/ezpublish/docbook/custom"
-         xmlns:a="http://ez.no/xmlns/annotation"
-         xmlns:m="http://ez.no/xmlns/module"
+         xmlns:ezcustom="http://ibexa.co/xmlns/ezpublish/docbook/custom"
+         xmlns:a="http://ibexa.co/xmlns/annotation"
+         xmlns:m="http://ibexa.co/xmlns/module"
          ns="http://docbook.org/ns/docbook"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
 

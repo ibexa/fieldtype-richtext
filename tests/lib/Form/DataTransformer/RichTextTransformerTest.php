@@ -49,7 +49,7 @@ class RichTextTransformerTest extends TestCase
     public function testTransform(): void
     {
         $outputXML = '<?xml version="1.0" encoding="UTF-8"?>' . PHP_EOL
-            . '<section xmlns="http://ez.no/namespaces/ezpublish5/xhtml5/edit"><p>This is a paragraph.</p></section>';
+            . '<section xmlns="http://ibexa.co/namespaces/ezpublish5/xhtml5/edit"><p>This is a paragraph.</p></section>';
 
         $outputDocument = new DOMDocument();
         $outputDocument->loadXML($outputXML);
@@ -87,7 +87,7 @@ class RichTextTransformerTest extends TestCase
     public function testReverseTransform(): void
     {
         $inputXML = '<?xml version="1.0" encoding="UTF-8"?>' . PHP_EOL . '
-            <section xmlns="http://ez.no/namespaces/ezpublish5/xhtml5/edit">
+            <section xmlns="http://ibexa.co/namespaces/ezpublish5/xhtml5/edit">
               <p>This is a paragraph.</p>
             </section>
             ';

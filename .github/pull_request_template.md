@@ -1,6 +1,6 @@
 | Question           | Answer
 | ------------------ | ------------------
-| **JIRA issue**     | [EZP-XXXXX](https://jira.ez.no/browse/EZP-XXXXX)
+| **JIRA issue**     | [EZP-XXXXX](https://jira.ibexa.co/browse/EZP-XXXXX)
 | **Bug/Improvement**| yes/no
 | **New feature**    | yes/no
 | **Target version** | latest stable for bug fixes, master for new features

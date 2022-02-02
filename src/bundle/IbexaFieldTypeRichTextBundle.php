@@ -16,7 +16,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
- * eZ Platform RichText FieldType Bundle.
+ * Ibexa RichText FieldType Bundle.
  */
 class IbexaFieldTypeRichTextBundle extends Bundle
 {
