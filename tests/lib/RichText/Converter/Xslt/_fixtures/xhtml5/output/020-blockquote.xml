@@ -4,7 +4,7 @@
 @todo somehow support support attribution
 
 -->
-<section xmlns="http://ez.no/namespaces/ezpublish5/xhtml5">
+<section xmlns="http://ibexa.co/namespaces/ezpublish5/xhtml5">
   <h2>Example of blockquote</h2>
   <blockquote>
     <p>Don't wake me for the end of the world unless it has very good special effects.</p>

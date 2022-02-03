@@ -32,12 +32,12 @@
 
 <xs:schema
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    xmlns="http://ez.no/namespaces/ezpublish5/xhtml5"
+    xmlns="http://ibexa.co/namespaces/ezpublish5/xhtml5"
     xmlns:html="http://www.w3.org/1999/xhtml"
     xmlns:svg="http://www.w3.org/2000/svg"
     xmlns:xlink="http://www.w3.org/1999/xlink"
     xmlns:mml="http://www.w3.org/1998/Math/MathML"
-    targetNamespace="http://ez.no/namespaces/ezpublish5/xhtml5"
+    targetNamespace="http://ibexa.co/namespaces/ezpublish5/xhtml5"
     elementFormDefault="qualified">
 
   <xs:import namespace="http://www.w3.org/XML/1998/namespace"

@@ -19,7 +19,7 @@ use Symfony\Component\DependencyInjection\Loader;
 use Symfony\Component\Yaml\Yaml;
 
 /**
- * eZ Platform RichText Field Type Bundle extension.
+ * Ibexa RichText Field Type Bundle extension.
  */
 class IbexaFieldTypeRichTextExtension extends Extension implements PrependExtensionInterface
 {
@@ -38,7 +38,7 @@ class IbexaFieldTypeRichTextExtension extends Extension implements PrependExtens
     }
 
     /**
-     * Load eZ Platform RichText Field Type Bundle configuration.
+     * Load Ibexa RichText Field Type Bundle configuration.
      *
      * @param array $configs
      * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
@@ -129,13 +129,13 @@ class IbexaFieldTypeRichTextExtension extends Extension implements PrependExtens
      */
     public function prepend(ContainerBuilder $container)
     {
-        $this->prependEzPublishConfiguration($container);
+        $this->prependIbexaConfiguration($container);
         $this->prependEzRichTextConfiguration($container);
         $this->prependBazingaJsTranslationConfiguration($container);
         $this->prependJMSTranslation($container);
     }
 
-    private function prependEzPublishConfiguration(ContainerBuilder $container): void
+    private function prependIbexaConfiguration(ContainerBuilder $container): void
     {
         $coreExtensionConfigFile = realpath(__DIR__ . '/../Resources/config/prepend/ezpublish.yaml');
         $container->prependExtensionConfig('ibexa', Yaml::parseFile($coreExtensionConfigFile));

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<section xmlns="http://ez.no/namespaces/ezpublish5/xhtml5/edit">
+<section xmlns="http://ibexa.co/namespaces/ezpublish5/xhtml5/edit">
   <table id="informaltable-id" class="tableClass" data-ezattribute-table-1="value 1" data-ezattribute-table-2="value 2" border="1" title="tableTitle" style="width:24px;border-width:42px;">
     <tbody>
       <tr class="rowClass1" data-ezattribute-row="value 1">

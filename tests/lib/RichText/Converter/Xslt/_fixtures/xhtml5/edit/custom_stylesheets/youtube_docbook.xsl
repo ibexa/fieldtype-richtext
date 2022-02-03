@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:ezxhtml5="http://ez.no/namespaces/ezpublish5/xhtml5/edit"
-    xmlns:ezcustom="http://ez.no/xmlns/ezpublish/docbook/custom"
+    xmlns:ezxhtml5="http://ibexa.co/namespaces/ezpublish5/xhtml5/edit"
+    xmlns:ezcustom="http://ibexa.co/xmlns/dxp/docbook/custom"
     exclude-result-prefixes="ezxhtml5"
     version="1.0">
 

@@ -3,7 +3,7 @@
 Resources for the different formats for RichText.
 
 RichText storage format is docbook (5), two other formats are supported for transformations to/from docbook:
-- ezxml, _for input/output, however only main use case is [upgrade from eZ Publish](https://doc.ez.no/display/DEVELOPER/Upgrading+from+5.4.x+and+2014.11+to+16.xx)._
+- ezxml, _for input/output, however only main use case is [upgrade from eZ Publish](https://doc.ibexa.co/display/DEVELOPER/Upgrading+from+5.4.x+and+2014.11+to+16.xx)._
 - ezhtml5, _exists in two different representations:_
   - "edit" a semantic version for UI use, for input/output.
   - "output" for web view, for output only.

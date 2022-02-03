@@ -11,7 +11,7 @@
 
   <xsl:output indent="yes" encoding="UTF-8"/>
 
-  <xsl:variable name="outputNamespace" select="'http://ez.no/namespaces/ezpublish5/xhtml5'"/>
+  <xsl:variable name="outputNamespace" select="'http://ibexa.co/namespaces/ezpublish5/xhtml5'"/>
   <xsl:template match="/docbook:section">
     <xsl:element name="section" namespace="{$outputNamespace}">
       <xsl:apply-templates/>

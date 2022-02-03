@@ -84,7 +84,7 @@ class InputHandlerTest extends TestCase
     public function testFromString(): void
     {
         $inputXml = '<?xml version="1.0" encoding="UTF-8"?>
-<section xmlns="http://ez.no/namespaces/ezpublish5/xhtml5/edit">
+<section xmlns="http://ibexa.co/namespaces/ezpublish5/xhtml5/edit">
   <p>Hello World!</p>
 </section>
 ';

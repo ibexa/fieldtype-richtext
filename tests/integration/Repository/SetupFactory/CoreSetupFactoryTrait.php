@@ -19,7 +19,7 @@ use Symfony\Component\DependencyInjection\Reference;
 trait CoreSetupFactoryTrait
 {
     /**
-     * Load eZ Platform Kernel settings and setup container.
+     * Load Ibexa Kernel settings and setup container.
      *
      * @todo refactor ezplatform-kernel SetupFactory to include that setup w/o relying on config.php
      *

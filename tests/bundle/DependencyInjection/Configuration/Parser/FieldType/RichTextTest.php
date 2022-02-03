@@ -60,7 +60,7 @@ class RichTextTest extends AbstractParserTestCase
         // mock list of available bundles
         $this->setParameter(
             'kernel.bundles',
-            ['EzPublishCoreBundle' => null, 'IbexaFieldTypeRichTextBundle' => null]
+            ['IbexaCoreBundle' => null, 'IbexaFieldTypeRichTextBundle' => null]
         );
 
         $configs = array_merge_recursive($this->getMinimalConfiguration(), $configurationValues);
@@ -106,7 +106,7 @@ class RichTextTest extends AbstractParserTestCase
             [
                 'template' => '@IbexaFieldTypeRichText/RichText/tag/default.html.twig',
             ],
-            'ezdemo_site'
+            'ibexa_demo_site'
         );
         $this->assertConfigResolverParameterValue(
             'fieldtypes.ezrichtext.output_custom_xsl',
@@ -116,7 +116,7 @@ class RichTextTest extends AbstractParserTestCase
                     'priority' => 0,
                 ],
             ],
-            'ezdemo_site'
+            'ibexa_demo_site'
         );
     }
 
@@ -132,7 +132,7 @@ class RichTextTest extends AbstractParserTestCase
             [
                 'ibexa' => [
                     'system' => [
-                        'ezdemo_site' => [
+                        'ibexa_demo_site' => [
                             'fieldtypes' => [
                                 'ezrichtext' => [
                                     'custom_tags' => ['foo'],
@@ -146,7 +146,7 @@ class RichTextTest extends AbstractParserTestCase
         $this->assertConfigResolverParameterValue(
             'fieldtypes.ezrichtext.custom_tags',
             ['foo'],
-            'ezdemo_site'
+            'ibexa_demo_site'
         );
     }
 
@@ -171,7 +171,7 @@ class RichTextTest extends AbstractParserTestCase
             [
                 'ibexa' => [
                     'system' => [
-                        'ezdemo_site' => [
+                        'ibexa_demo_site' => [
                             'fieldtypes' => [
                                 'ezrichtext' => $config,
                             ],
@@ -260,14 +260,14 @@ class RichTextTest extends AbstractParserTestCase
             [
                 'ibexa' => [
                     'system' => [
-                        'ezdemo_site' => $config,
+                        'ibexa_demo_site' => $config,
                     ],
                 ],
             ]
         );
 
         foreach ($expected as $key => $val) {
-            $this->assertConfigResolverParameterValue($key, $val, 'ezdemo_site');
+            $this->assertConfigResolverParameterValue($key, $val, 'ibexa_demo_site');
         }
     }
 
