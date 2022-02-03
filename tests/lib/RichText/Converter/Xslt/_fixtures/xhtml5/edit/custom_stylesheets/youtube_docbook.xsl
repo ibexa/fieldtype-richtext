@@ -2,7 +2,7 @@
 <xsl:stylesheet
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:ezxhtml5="http://ibexa.co/namespaces/ezpublish5/xhtml5/edit"
-    xmlns:ezcustom="http://ibexa.co/xmlns/ezpublish/docbook/custom"
+    xmlns:ezcustom="http://ibexa.co/xmlns/dxp/docbook/custom"
     exclude-result-prefixes="ezxhtml5"
     version="1.0">
 
