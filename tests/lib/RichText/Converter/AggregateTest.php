@@ -23,7 +23,7 @@ class AggregateTest extends TestCase
     /**
      * @dataProvider providerConvertWithLinkInCustomTag
      *
-     * @see https://jira.ibexa.co/browse/EZP-30166
+     * @see https://issues.ibexa.co/browse/EZP-30166
      */
     public function testConvertWithLinkInCustomTag(string $input, string $expectedOutput): void
     {
