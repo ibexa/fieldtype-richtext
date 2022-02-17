@@ -11,6 +11,7 @@ import IbexaAnchor from '../anchor/anchor';
 import IbexaFormatted from '../formatted/formatted';
 import IbexaMove from '../move/move';
 import IbexaRemoveElement from '../remove-element/remove-element';
+import IbexaBlockAlignment from '../block-alignment/block-alignment';
 
 import CKEditor from '@ckeditor/ckeditor5-editor-inline/src/inlineeditor';
 import Essentials from '@ckeditor/ckeditor5-essentials/src/essentials';
@@ -167,6 +168,7 @@ const VIEWPORT_TOP_OFFSET = 102;
                     IbexaFormatted,
                     IbexaMove,
                     IbexaRemoveElement,
+                    IbexaBlockAlignment,
                     ...extraPlugins,
                 ],
                 toolbar: {
@@ -178,7 +180,13 @@ const VIEWPORT_TOP_OFFSET = 102;
                     },
                 },
                 embedImage: {
-                    toolbar: ['imageVarations', 'ibexaRemoveElement'],
+                    toolbar: [
+                        'imageVarations',
+                        'ibexaBlockLeftAlignment',
+                        'ibexaBlockCenterAlignment',
+                        'ibexaBlockRightAlignment',
+                        'ibexaRemoveElement',
+                    ],
                 },
                 heading: {
                     options: [
