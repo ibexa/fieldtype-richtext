@@ -11,6 +11,21 @@
         <target state="new">Anchor</target>
         <note>key: anchor_btn.label</note>
       </trans-unit>
+      <trans-unit id="18521c98ecdb47eba2ceee2926516d53f89b0e34" resname="block_alignment.center">
+        <source>Center</source>
+        <target state="new">Center</target>
+        <note>key: block_alignment.center</note>
+      </trans-unit>
+      <trans-unit id="8a9146b3a0aec35567929ab9e793312af26ce89b" resname="block_alignment.left">
+        <source>Left</source>
+        <target state="new">Left</target>
+        <note>key: block_alignment.left</note>
+      </trans-unit>
+      <trans-unit id="a371a27c4cfc05d751e69ac9c478c336e5bc9826" resname="block_alignment.right">
+        <source>Right</source>
+        <target state="new">Right</target>
+        <note>key: block_alignment.right</note>
+      </trans-unit>
       <trans-unit id="250e037cfe2d6e349e2da22428ac75e7559f1d66" resname="custom_attributes_btn.label">
         <source>Custom attributes</source>
         <target state="new">Custom attributes</target>

@@ -90,18 +90,6 @@
             margin: calculateRem(16px) calculateRem(40px);
         }
 
-        [data-ezalign='right'] {
-            float: right;
-        }
-
-        [data-ezalign='left'] {
-            float: left;
-        }
-
-        [data-ezalign='center'] {
-            text-align: center;
-        }
-
         [data-ezelement='ezconfig'] {
             display: none;
         }
@@ -156,6 +144,18 @@
 
         .ibexa-embed-type-image {
             padding: calculateRem(8px);
+        }
+
+        [data-ezalign='right'] {
+            float: right;
+        }
+
+        [data-ezalign='left'] {
+            float: left;
+        }
+
+        [data-ezalign='center'] {
+            margin: calculateRem(16px) auto;
         }
 
         p {
