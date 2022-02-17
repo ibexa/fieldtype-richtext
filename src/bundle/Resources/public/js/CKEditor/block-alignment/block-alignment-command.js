@@ -4,12 +4,7 @@ class IbexaBlockAlignmentCommand extends Command {
     refresh() {
         const modelElement = this.editor.model.document.selection.getSelectedElement();
 
-        if (modelElement && modelElement.hasAttribute('data-ezalign')) {
-            this.value = modelElement.getAttribute('data-ezalign');
-        } else {
-            this.value = '';
-        }
-
+        this.value = modelElement?.getAttribute('data-ezalign') || '';
         this.isEnabled = true;
     }
 

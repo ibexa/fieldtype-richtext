@@ -3,7 +3,7 @@ import ClickObserver from '@ckeditor/ckeditor5-engine/src/view/observer/clickobs
 
 import IbexaButtonView from '../common/button-view/button-view';
 
-const { Translator } = window;
+const { ibexa, Translator } = window;
 
 class IbexaInlineCustomTagUI extends Plugin {
     constructor(props) {
@@ -43,7 +43,7 @@ class IbexaInlineCustomTagUI extends Plugin {
             this.createButton.bind(
                 this,
                 Translator.trans(/*@Desc("Left")*/ 'block_alignment.left', {}, 'ck_editor'),
-                window.ibexa.helpers.icon.getIconPath('image-left'),
+                ibexa.helpers.icon.getIconPath('image-left'),
                 'left'
             )
         );
@@ -52,7 +52,7 @@ class IbexaInlineCustomTagUI extends Plugin {
             this.createButton.bind(
                 this,
                 Translator.trans(/*@Desc("Center")*/ 'block_alignment.center', {}, 'ck_editor'),
-                window.ibexa.helpers.icon.getIconPath('image-center'),
+                ibexa.helpers.icon.getIconPath('image-center'),
                 'center'
             )
         );
@@ -61,7 +61,7 @@ class IbexaInlineCustomTagUI extends Plugin {
             this.createButton.bind(
                 this,
                 Translator.trans(/*@Desc("Right")*/ 'block_alignment.right', {}, 'ck_editor'),
-                window.ibexa.helpers.icon.getIconPath('image-right'),
+                ibexa.helpers.icon.getIconPath('image-right'),
                 'right'
             )
         );
