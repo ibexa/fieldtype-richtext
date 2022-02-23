@@ -1,6 +1,6 @@
 const Encore = require('@symfony/webpack-encore');
 const path = require('path');
-const { styles } = require('../../../../../../ibexa/admin-ui-assets/src/bundle/Resources/public/vendors/@ckeditor/ckeditor5-dev-utils');
+const { styles } = require(path.resolve('./public/bundles/ibexaadminuiassets/vendors/@ckeditor/ckeditor5-dev-utils'));
 
 Encore.reset();
 Encore.setOutputPath('public/assets/richtext/build')
@@ -8,12 +8,13 @@ Encore.setOutputPath('public/assets/richtext/build')
     .enableSassLoader()
     .disableSingleRuntimeChunk();
 
-Encore.addEntry('ibexa-richtext-onlineeditor-js', [
-    path.resolve(__dirname, '../public/js/CKEditor/core/base-ckeditor.js'),
-]).addStyleEntry('ibexa-richtext-onlineeditor-css', [path.resolve(__dirname, '../public/scss/ckeditor.scss')]);
+Encore.addEntry('ibexa-richtext-onlineeditor-js', [path.resolve(__dirname, '../public/js/CKEditor/core/base-ckeditor.js')]).addStyleEntry(
+    'ibexa-richtext-onlineeditor-css',
+    [path.resolve(__dirname, '../public/scss/ckeditor.scss')]
+);
 
 Encore.addAliases({
-    '@ckeditor': path.resolve(__dirname, '../../../../../../ibexa/admin-ui-assets/src/bundle/Resources/public/vendors/@ckeditor'),
+    '@ckeditor': path.resolve('./public/bundles/ibexaadminuiassets/vendors/@ckeditor'),
 });
 
 const customConfig = Encore.getWebpackConfig();
@@ -44,9 +45,7 @@ customConfig.module.rules.push({
             loader: 'postcss-loader',
             options: styles.getPostCssConfig({
                 themeImporter: {
-                    themePath: require.resolve(
-                        '../../../../../../ibexa/admin-ui-assets/src/bundle/Resources/public/vendors/@ckeditor/ckeditor5-theme-lark'
-                    ),
+                    themePath: require.resolve(path.resolve('./public/bundles/ibexaadminuiassets/vendors/@ckeditor/ckeditor5-theme-lark')),
                 },
                 minify: true,
             }),
