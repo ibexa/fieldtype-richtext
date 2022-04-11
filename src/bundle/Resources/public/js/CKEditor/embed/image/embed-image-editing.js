@@ -58,7 +58,7 @@ class IbexaEmbedImageEditing extends Plugin {
     }
 
     defineSchema() {
-        const schema = this.editor.model.schema;
+        const { schema } = this.editor.model;
 
         schema.register('embedImage', {
             isObject: true,
@@ -68,7 +68,7 @@ class IbexaEmbedImageEditing extends Plugin {
     }
 
     defineConverters() {
-        const conversion = this.editor.conversion;
+        const { conversion } = this.editor;
 
         conversion
             .for('editingDowncast')
@@ -91,24 +91,26 @@ class IbexaEmbedImageEditing extends Plugin {
                     const downcastWriter = conversionApi.writer;
                     const modelElement = data.item;
                     const viewElement = conversionApi.mapper.toViewElement(modelElement);
-                    const preview = downcastWriter.createUIElement('img', { src: modelElement.getAttribute('previewUrl') }, function(
-                        domDocument
-                    ) {
-                        const domElement = this.toDomElement(domDocument);
+                    const preview = downcastWriter.createUIElement(
+                        'img',
+                        { src: modelElement.getAttribute('previewUrl') },
+                        function (domDocument) {
+                            const domElement = this.toDomElement(domDocument);
 
-                        return domElement;
-                    });
+                            return domElement;
+                        },
+                    );
 
                     downcastWriter.remove(downcastWriter.createRangeIn(viewElement));
                     downcastWriter.insert(downcastWriter.createPositionAt(viewElement, 0), preview);
-                })
+                }),
             )
             .add((dispatcher) =>
-                dispatcher.on('attribute:size', (event, data, conversionApi) => {
+                dispatcher.on('attribute:size', (event, data) => {
                     const modelElement = data.item;
 
                     this.loadImagePreview(modelElement);
-                })
+                }),
             );
 
         conversion.for('dataDowncast').elementToElement({
@@ -120,11 +122,13 @@ class IbexaEmbedImageEditing extends Plugin {
                     'data-ezview': 'embed',
                     class: 'ibexa-embed-type-image',
                 });
-                const config = downcastWriter.createUIElement('span', { 'data-ezelement': 'ezconfig' }, function(domDocument) {
+                const config = downcastWriter.createUIElement('span', { 'data-ezelement': 'ezconfig' }, function (domDocument) {
                     const domElement = this.toDomElement(domDocument);
 
                     // note: do not reformat - configuration value for image embeds cannot contain whitespaces
-                    domElement.innerHTML = `<span data-ezelement="ezvalue" data-ezvalue-key="size">${modelElement.getAttribute('size')}</span>`;
+                    domElement.innerHTML = `<span data-ezelement="ezvalue" data-ezvalue-key="size">${modelElement.getAttribute(
+                        'size',
+                    )}</span>`;
 
                     return domElement;
                 });
@@ -147,10 +151,7 @@ class IbexaEmbedImageEditing extends Plugin {
             model: (viewElement, { writer: upcastWriter }) => {
                 const href = viewElement.getAttribute('data-href');
                 const contentId = href.replace('ezcontent://', '');
-                const size = viewElement
-                    .getChild(0)
-                    .getChild(0)
-                    .getChild(0).data;
+                const size = viewElement.getChild(0).getChild(0).getChild(0).data;
                 const modelElement = upcastWriter.createElement('embedImage', { contentId, size });
 
                 return modelElement;

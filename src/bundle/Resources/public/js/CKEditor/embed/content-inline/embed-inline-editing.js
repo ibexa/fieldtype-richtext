@@ -19,7 +19,7 @@ class IbexaEmbedContentInlineEditing extends Plugin {
     }
 
     defineSchema() {
-        const schema = this.editor.model.schema;
+        const { schema } = this.editor.model;
 
         schema.register('embedInline', {
             isObject: true,
@@ -30,7 +30,7 @@ class IbexaEmbedContentInlineEditing extends Plugin {
     }
 
     defineConverters() {
-        const conversion = this.editor.conversion;
+        const { conversion } = this.editor;
 
         conversion
             .for('editingDowncast')
@@ -42,7 +42,7 @@ class IbexaEmbedContentInlineEditing extends Plugin {
                         'data-ezview': 'embed-inline',
                         class: 'ibexa-embed-inline',
                     });
-                    const preview = downcastWriter.createUIElement('span', { class: 'ibexa-embed-content' }, function(domDocument) {
+                    const preview = downcastWriter.createUIElement('span', { class: 'ibexa-embed-content' }, function (domDocument) {
                         const domElement = this.toDomElement(domDocument);
 
                         domElement.innerHTML = renderPreview(modelElement.getAttribute('contentName'));
@@ -60,7 +60,7 @@ class IbexaEmbedContentInlineEditing extends Plugin {
                     const downcastWriter = conversionApi.writer;
                     const modelElement = data.item;
                     const viewElement = conversionApi.mapper.toViewElement(modelElement);
-                    const preview = downcastWriter.createUIElement('span', { class: 'ibexa-embed-content' }, function(domDocument) {
+                    const preview = downcastWriter.createUIElement('span', { class: 'ibexa-embed-content' }, function (domDocument) {
                         const domElement = this.toDomElement(domDocument);
 
                         domElement.innerHTML = renderPreview(modelElement.getAttribute('contentName'));
@@ -70,7 +70,7 @@ class IbexaEmbedContentInlineEditing extends Plugin {
 
                     downcastWriter.remove(downcastWriter.createRangeIn(viewElement));
                     downcastWriter.insert(downcastWriter.createPositionAt(viewElement, 0), preview);
-                })
+                }),
             );
 
         conversion.for('dataDowncast').elementToElement({
