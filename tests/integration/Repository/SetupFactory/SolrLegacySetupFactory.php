@@ -9,7 +9,7 @@ declare(strict_types=1);
 namespace Ibexa\Tests\Integration\FieldTypeRichText\Repository\SetupFactory;
 
 use Ibexa\Core\Base\ServiceContainer;
-use Ibexa\Solr\LegacySetupFactory as BaseSolrLegacySetupFactory;
+use Ibexa\Tests\Solr\SetupFactory\LegacySetupFactory as BaseSolrLegacySetupFactory;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
