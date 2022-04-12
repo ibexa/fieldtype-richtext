@@ -1,15 +1,15 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformRichTextBundle\DependencyInjection\Configuration\Parser\FieldType;
+namespace Ibexa\Bundle\FieldTypeRichText\DependencyInjection\Configuration\Parser\FieldType;
 
-use eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Configuration\Parser\AbstractFieldTypeParser;
-use eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Configuration\SiteAccessAware\ContextualizerInterface;
+use Ibexa\Bundle\Core\DependencyInjection\Configuration\Parser\AbstractFieldTypeParser;
+use Ibexa\Bundle\Core\DependencyInjection\Configuration\SiteAccessAware\ContextualizerInterface;
 use InvalidArgumentException;
 use Symfony\Component\Config\Definition\Builder\NodeBuilder;
 use Symfony\Component\Config\Definition\Builder\ScalarNodeDefinition;
@@ -30,8 +30,8 @@ class RichText extends AbstractFieldTypeParser
     private const ATTRIBUTE_TYPE_STRING = 'string';
     private const ATTRIBUTE_TYPE_NUMBER = 'number';
 
-    private const TOOLBARS_NODE_KEY = 'toolbars';
-    public const TOOLBARS_SA_SETTINGS_ID = 'fieldtypes.ezrichtext.' . self::TOOLBARS_NODE_KEY;
+    private const TOOLBAR_NODE_KEY = 'toolbar';
+    public const TOOLBARS_SA_SETTINGS_ID = 'fieldtypes.ezrichtext.' . self::TOOLBAR_NODE_KEY;
 
     // constants common for OE custom classes and data attributes configuration
     private const ELEMENT_NODE_KEY = 'element';
@@ -193,11 +193,19 @@ class RichText extends AbstractFieldTypeParser
 
         // RichText Toolbars configuration (defines list of Toolbars and Buttons enabled for current SiteAccess scope)
         $nodeBuilder
-            ->arrayNode(self::TOOLBARS_NODE_KEY)
-                ->useAttributeAsKey('name')
-                ->info('List of Toolbars and Buttons enabled for current SiteAccess scope.')
+            ->arrayNode(self::TOOLBAR_NODE_KEY)
+                ->useAttributeAsKey('group_name')
+                ->info('List of grouped Toolbars and Buttons enabled for current SiteAccess scope.')
                 ->prototype('array')
                     ->children()
+                        ->booleanNode('visible')
+                            ->info('Is group visible on toolbar?')
+                            ->defaultTrue()
+                        ->end()
+                        ->integerNode('priority')
+                            ->info('Defines order in which group appear (255 .. -255).')
+                            ->defaultValue(0)
+                        ->end()
                         ->arrayNode('buttons')
                             ->useAttributeAsKey('name')
                             ->prototype('array')
@@ -265,7 +273,7 @@ class RichText extends AbstractFieldTypeParser
             $onlineEditorSettingsMap = [
                 self::CLASSES_NODE_KEY => self::CLASSES_SA_SETTINGS_ID,
                 self::ATTRIBUTES_NODE_KEY => self::ATTRIBUTES_SA_SETTINGS_ID,
-                self::TOOLBARS_NODE_KEY => self::TOOLBARS_SA_SETTINGS_ID,
+                self::TOOLBAR_NODE_KEY => self::TOOLBARS_SA_SETTINGS_ID,
             ];
             foreach ($onlineEditorSettingsMap as $key => $settingsId) {
                 if (isset($scopeSettings['fieldtypes']['ezrichtext'][$key])) {
@@ -300,7 +308,7 @@ class RichText extends AbstractFieldTypeParser
      */
     private function buildOnlineEditorConfiguration(NodeBuilder $nodeBuilder): void
     {
-        $invalidChoiceCallback = function (array $v) {
+        $invalidChoiceCallback = static function (array $v) {
             $message = sprintf(
                 'The default value must be one of the possible choices: %s, instead of "%s" ',
                 implode(', ', $v[self::CHOICES_NODE_KEY]),
@@ -315,7 +323,7 @@ class RichText extends AbstractFieldTypeParser
                 ->useAttributeAsKey(self::ELEMENT_NODE_KEY)
                 ->arrayPrototype()
                     ->validate()
-                        ->ifTrue(function (array $v) {
+                        ->ifTrue(static function (array $v) {
                             return !empty($v[self::DEFAULT_VALUE_NODE_KEY])
                                 && !in_array($v[self::DEFAULT_VALUE_NODE_KEY], $v[self::CHOICES_NODE_KEY]);
                         })
@@ -388,7 +396,7 @@ class RichText extends AbstractFieldTypeParser
      */
     private function getAttributesValidatorCallback(callable $invalidChoiceCallback): callable
     {
-        return function (array $v) use ($invalidChoiceCallback) {
+        return static function (array $v) use ($invalidChoiceCallback) {
             if ($v[self::ATTRIBUTE_TYPE_NODE_KEY] === self::ATTRIBUTE_TYPE_CHOICE
                 && !empty($v[self::DEFAULT_VALUE_NODE_KEY])
                 && !in_array($v[self::DEFAULT_VALUE_NODE_KEY], $v[self::CHOICES_NODE_KEY])
@@ -417,3 +425,5 @@ class RichText extends AbstractFieldTypeParser
         };
     }
 }
+
+class_alias(RichText::class, 'EzSystems\EzPlatformRichTextBundle\DependencyInjection\Configuration\Parser\FieldType\RichText');

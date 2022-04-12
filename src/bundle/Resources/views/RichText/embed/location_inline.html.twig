@@ -13,11 +13,11 @@
     {% set params = params|merge( { "class": embedParams.class } ) %}
 {% endif %}
 
-{{ ez_http_tag_relation_location_ids([embedParams.id]) }}
+{{ ibexa_http_cache_tag_relation_location_ids([embedParams.id]) }}
 {{
     render(
         controller(
-            "ez_content:viewAction",
+            "ibexa_content:viewAction",
             {
                 "locationId": embedParams.id,
                 "viewType": embedParams.viewType,
