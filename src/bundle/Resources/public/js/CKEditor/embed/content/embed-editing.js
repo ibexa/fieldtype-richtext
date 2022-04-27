@@ -37,6 +37,7 @@ class IbexaEmbedContentEditing extends Plugin {
                 model: 'embed',
                 view: (modelElement, { writer: downcastWriter }) => {
                     const container = downcastWriter.createContainerElement('div', {
+                        'data-href': `ezcontent://${modelElement.getAttribute('contentId')}`,
                         'data-ezelement': 'ezembed',
                         'data-ezview': 'embed',
                         class: 'ibexa-embed',
