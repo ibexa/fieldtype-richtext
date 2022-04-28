@@ -4,5 +4,5 @@ services:
         autowire: true
         public: false
 
-    EzSystems\EzPlatformRichText\API\Configuration\ProviderService:
-        alias: EzSystems\EzPlatformRichText\Configuration\AggregateProvider
+    Ibexa\Contracts\FieldTypeRichText\Configuration\ProviderService:
+        alias: Ibexa\FieldTypeRichText\Configuration\AggregateProvider

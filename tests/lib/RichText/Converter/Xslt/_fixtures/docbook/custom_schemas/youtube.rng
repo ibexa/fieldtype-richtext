@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grammar xmlns="http://relaxng.org/ns/structure/1.0"
+         xmlns:ezcustom="http://ibexa.co/xmlns/dxp/docbook/custom"
+         xmlns:a="http://ibexa.co/xmlns/annotation"
+         xmlns:m="http://ibexa.co/xmlns/module"
+         ns="http://docbook.org/ns/docbook"
+         datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+
+  <include href="../../../../../../../../src/bundle/Resources/richtext/schemas/docbook/ezpublish.rng"/>
+
+  <define name="ez.extension.inlines" combine="choice">
+    <a:documentation>
+      Validation for youtube custom tag.
+    </a:documentation>
+    <optional>
+      <element name="ezattribute">
+        <ref name="ez.config.hash"/>
+      </element>
+    </optional>
+    <element name="ezcustom:youtube">
+      <attribute name="ezcustom:videoWidth">
+        <data type="integer"/>
+      </attribute>
+      <attribute name="ezcustom:videoHeight">
+        <data type="integer"/>
+      </attribute>
+      <attribute name="ezcustom:video">
+        <data type="anyURI"/>
+      </attribute>
+    </element>
+  </define>
+
+</grammar>
