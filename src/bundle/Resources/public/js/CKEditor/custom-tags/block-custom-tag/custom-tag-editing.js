@@ -37,7 +37,7 @@ class IbexaCustomTagEditing extends Plugin {
                     'data-ezname': customTagName,
                     class: 'ibexa-custom-tag',
                 });
-                const header = downcastWriter.createUIElement('div', { class: 'ibexa-custom-tag__header' }, function(domDocument) {
+                const header = downcastWriter.createUIElement('div', { class: 'ibexa-custom-tag__header' }, function (domDocument) {
                     const domElement = this.toDomElement(domDocument);
 
                     domElement.innerHTML = `
@@ -72,7 +72,7 @@ class IbexaCustomTagEditing extends Plugin {
                     'data-ezelement': 'eztemplate',
                     'data-ezname': modelElement.getAttribute('customTagName'),
                 });
-                const config = downcastWriter.createUIElement('span', { 'data-ezelement': 'ezconfig' }, function(domDocument) {
+                const config = downcastWriter.createUIElement('span', { 'data-ezelement': 'ezconfig' }, function (domDocument) {
                     const domElement = this.toDomElement(domDocument);
 
                     domElement.innerHTML = Object.entries(modelElement.getAttribute('values')).reduce((total, [attribute, value]) => {

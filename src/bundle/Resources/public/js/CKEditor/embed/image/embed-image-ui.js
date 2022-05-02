@@ -1,5 +1,7 @@
 import IbexaEmbedBaseUI from '../embed-base-ui';
 
+const { Translator } = window;
+
 class IbexaEmbedImageUI extends IbexaEmbedBaseUI {
     constructor(props) {
         super(props);
