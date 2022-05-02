@@ -4,6 +4,8 @@ import clickOutsideHandler from '@ckeditor/ckeditor5-ui/src/bindings/clickoutsid
 import IbexaCustomAttributesFormView from './ui/custom-attributes-form-view';
 import IbexaButtonView from '../common/button-view/button-view';
 
+const { Translator } = window;
+
 class IbexaAttributesUI extends Plugin {
     constructor(props) {
         super(props);
@@ -85,7 +87,7 @@ class IbexaAttributesUI extends Plugin {
     }
 
     getBalloonPositionData() {
-        const view = this.editor.editing.view;
+        const { view } = this.editor.editing;
         const viewDocument = view.document;
         const range = viewDocument.selection.getFirstRange();
 

@@ -31,9 +31,9 @@ import ContextualBalloon from '@ckeditor/ckeditor5-ui/src/panel/balloon/contextu
 
 const VIEWPORT_TOP_OFFSET = 102;
 
-(function(global, doc, ibexa) {
+(function (global, doc, ibexa) {
     class BaseRichText {
-        constructor(config) {
+        constructor() {
             this.ezNamespace = 'http://ibexa.co/namespaces/ezpublish5/xhtml5/edit';
             this.xhtmlNamespace = 'http://www.w3.org/1999/xhtml';
 
@@ -120,7 +120,7 @@ const VIEWPORT_TOP_OFFSET = 102;
             const section = wrapper.childNodes[0];
             const { toolbar, extraPlugins = [] } = window.ibexa.richText.CKEditor;
             const blockCustomStyles = Object.entries(ibexa.richText.customStyles)
-                .filter(([customStyleName, customStyleConfig]) => !customStyleConfig.inline)
+                .filter(([, customStyleConfig]) => !customStyleConfig.inline)
                 .map(([customStyleName, customStyleConfig]) => {
                     return {
                         model: customStyleName,

@@ -27,9 +27,9 @@ class IbexaCharacterCounter extends Plugin {
 
     getTextNodeValues(node) {
         let values = [];
-        const pushValue = (node) => {
-            if (node.nodeType === TEXT_NODE) {
-                const nodeValue = this.sanitize(node.nodeValue);
+        const pushValue = (nextNode) => {
+            if (nextNode.nodeType === TEXT_NODE) {
+                const nodeValue = this.sanitize(nextNode.nodeValue);
 
                 values = values.concat(this.splitIntoWords(nodeValue));
             }

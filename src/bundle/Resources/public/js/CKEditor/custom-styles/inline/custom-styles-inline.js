@@ -5,8 +5,8 @@ import IbexaCustomStylesInlineEditing from './custom-style-inline-editing';
 
 class IbexaCustomStylesInline extends Plugin {
     static get requires() {
-        const customStylesInline = Object.entries(window.ibexa.richText.customStyles).filter(([name, config]) => config.inline);
-        const customStylesInlineEditing = customStylesInline.map(([name, config]) => {
+        const customStylesInline = Object.entries(window.ibexa.richText.customStyles).filter(([, config]) => config.inline);
+        const customStylesInlineEditing = customStylesInline.map(([name]) => {
             return class CustomStyleEditing extends IbexaCustomStylesInlineEditing {
                 constructor(props) {
                     super(props);

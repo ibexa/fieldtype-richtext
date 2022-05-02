@@ -27,7 +27,7 @@ class IbexaElementsPath extends Plugin {
                 this.editor.model.change((writer) => writer.setSelection(element, 'in'));
                 this.editor.focus();
             },
-            false
+            false,
         );
 
         this.elementsPathWrapper.append(listItemNode);
@@ -39,10 +39,7 @@ class IbexaElementsPath extends Plugin {
         this.editor.model.document.selection.on('change:range', () => {
             this.elementsPathWrapper.innerHTML = '';
 
-            this.editor.model.document.selection
-                .getFirstPosition()
-                .getAncestors()
-                .forEach(this.updatePath);
+            this.editor.model.document.selection.getFirstPosition().getAncestors().forEach(this.updatePath);
         });
     }
 }

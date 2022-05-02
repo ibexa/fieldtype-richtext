@@ -44,8 +44,8 @@ class IbexaInlineCustomTagUI extends Plugin {
                 this,
                 Translator.trans(/*@Desc("Left")*/ 'block_alignment.left', {}, 'ck_editor'),
                 ibexa.helpers.icon.getIconPath('image-left'),
-                'left'
-            )
+                'left',
+            ),
         );
         this.editor.ui.componentFactory.add(
             'ibexaBlockCenterAlignment',
@@ -53,8 +53,8 @@ class IbexaInlineCustomTagUI extends Plugin {
                 this,
                 Translator.trans(/*@Desc("Center")*/ 'block_alignment.center', {}, 'ck_editor'),
                 ibexa.helpers.icon.getIconPath('image-center'),
-                'center'
-            )
+                'center',
+            ),
         );
         this.editor.ui.componentFactory.add(
             'ibexaBlockRightAlignment',
@@ -62,8 +62,8 @@ class IbexaInlineCustomTagUI extends Plugin {
                 this,
                 Translator.trans(/*@Desc("Right")*/ 'block_alignment.right', {}, 'ck_editor'),
                 ibexa.helpers.icon.getIconPath('image-right'),
-                'right'
-            )
+                'right',
+            ),
         );
 
         this.editor.editing.view.addObserver(ClickObserver);

@@ -14,7 +14,7 @@ class IbexaEmbedImageToolbar extends Plugin {
     }
 
     afterInit() {
-        const editor = this.editor;
+        const { editor } = this;
         const widgetToolbarRepository = editor.plugins.get(WidgetToolbarRepository);
 
         widgetToolbarRepository.register('embedImage', {

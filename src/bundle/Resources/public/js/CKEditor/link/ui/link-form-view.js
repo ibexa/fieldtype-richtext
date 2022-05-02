@@ -178,20 +178,16 @@ class IbexaLinkFormView extends View {
     chooseContent() {
         const languageCode = document.querySelector('meta[name="LanguageCode"]').content;
         const config = JSON.parse(document.querySelector(`[data-udw-config-name="richtext_embed"]`).dataset.udwConfig);
-        const selectContent = window.ibexa.richText.alloyEditor.callbacks.selectContent;
-        const mergedConfig = Object.assign(
-            {
-                onConfirm: this.confirmHandler,
-                onCancel: this.cancelHandler,
-                multiple: false,
+        const { selectContent } = window.ibexa.richText.alloyEditor.callbacks;
+        const mergedConfig = {
+            onConfirm: this.confirmHandler,
+            onCancel: this.cancelHandler,
+            multiple: false,
+            ...config,
+            contentOnTheFly: {
+                allowedLanguages: [languageCode],
             },
-            config,
-            {
-                contentOnTheFly: {
-                    allowedLanguages: [languageCode],
-                },
-            }
-        );
+        };
 
         if (typeof selectContent === 'function') {
             selectContent(mergedConfig);

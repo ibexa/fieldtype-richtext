@@ -4,6 +4,8 @@ import clickOutsideHandler from '@ckeditor/ckeditor5-ui/src/bindings/clickoutsid
 import IbexaAnchorFormView from './ui/anchor-form-view';
 import IbexaButtonView from '../common/button-view/button-view';
 
+const { Translator } = window;
+
 class IbexaAnchorUI extends Plugin {
     constructor(props) {
         super(props);
@@ -69,7 +71,7 @@ class IbexaAnchorUI extends Plugin {
     }
 
     getBalloonPositionData() {
-        const view = this.editor.editing.view;
+        const { view } = this.editor.editing;
         const viewDocument = view.document;
         const range = viewDocument.selection.getFirstRange();
 
