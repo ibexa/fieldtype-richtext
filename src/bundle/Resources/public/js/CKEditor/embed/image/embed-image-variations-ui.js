@@ -12,7 +12,7 @@ class IbexaEmbedImageVariationsUI extends Plugin {
 
     changeVariation(dropdownView, event) {
         const modelElement = this.getSelectedElement();
-        const variation = event.source.variation;
+        const { variation } = event.source;
 
         dropdownView.buttonView.set({
             label: variation,

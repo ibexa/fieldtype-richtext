@@ -2,6 +2,8 @@ import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
 
 import IbexaButtonView from '../common/button-view/button-view';
 
+const { Translator } = window;
+
 class IbexaRemoveElementUI extends Plugin {
     constructor(props) {
         super(props);

@@ -4,7 +4,7 @@ export default class InputNumberView extends InputTextView {
     constructor(locale) {
         super(locale);
 
-        const bindTemplate = this.bindTemplate;
+        const { bindTemplate } = this;
 
         this.setTemplate({
             tag: 'input',

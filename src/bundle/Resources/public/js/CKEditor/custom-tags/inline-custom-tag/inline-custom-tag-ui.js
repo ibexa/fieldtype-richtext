@@ -104,7 +104,7 @@ class IbexaInlineCustomTagUI extends Plugin {
     }
 
     getBalloonPositionData() {
-        const view = this.editor.editing.view;
+        const { view } = this.editor.editing;
         const viewDocument = view.document;
         const range = viewDocument.selection.getFirstRange();
 
@@ -112,10 +112,10 @@ class IbexaInlineCustomTagUI extends Plugin {
     }
 
     addInlineCustomTag() {
-        const values = Object.entries(this.config.attributes).reduce((values, [attributeName, config]) => {
-            values[attributeName] = config.defaultValue;
+        const values = Object.entries(this.config.attributes).reduce((outputValues, [attributeName, config]) => {
+            outputValues[attributeName] = config.defaultValue;
 
-            return values;
+            return outputValues;
         }, {});
 
         this.editor.focus();

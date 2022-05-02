@@ -2,6 +2,8 @@ import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
 import ButtonView from '@ckeditor/ckeditor5-ui/src/button/buttonview';
 import { createDropdown, addToolbarToDropdown } from '@ckeditor/ckeditor5-ui/src/dropdown/utils';
 
+const { Translator } = window;
+
 class IbexaCustomStyleInlineUI extends Plugin {
     constructor(props) {
         super(props);
@@ -10,7 +12,7 @@ class IbexaCustomStyleInlineUI extends Plugin {
     }
 
     createButton([customStyleName, config]) {
-        const editor = this.editor;
+        const { editor } = this;
 
         this.editor.ui.componentFactory.add(customStyleName, (locale) => {
             const buttonView = new ButtonView(locale);
@@ -36,7 +38,7 @@ class IbexaCustomStyleInlineUI extends Plugin {
     init() {
         this.editor.ui.componentFactory.add('ibexaCustomStyleInline', (locale) => {
             const dropdownView = createDropdown(locale);
-            const customStylesInline = Object.entries(window.ibexa.richText.customStyles).filter(([name, config]) => config.inline);
+            const customStylesInline = Object.entries(window.ibexa.richText.customStyles).filter(([, config]) => config.inline);
             const customStylesButtons = customStylesInline.map(this.createButton);
 
             dropdownView.buttonView.set({

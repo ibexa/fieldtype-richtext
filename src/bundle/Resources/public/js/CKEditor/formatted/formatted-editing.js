@@ -56,7 +56,7 @@ class IbexaFormattedEditing extends Plugin {
 
                 writer.insert(position, writer.createText('\n'));
             },
-            { priority: 'high' }
+            { priority: 'high' },
         );
 
         conversion.for('upcast').elementToElement({

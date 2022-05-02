@@ -6,6 +6,8 @@ import findAttributeRange from '@ckeditor/ckeditor5-typing/src/utils/findattribu
 import IbexaLinkFormView from './ui/link-form-view';
 import IbexaButtonView from '../common/button-view/button-view';
 
+const { Translator } = window;
+
 class IbexaLinkUI extends Plugin {
     constructor(props) {
         super(props);
@@ -45,7 +47,7 @@ class IbexaLinkUI extends Plugin {
             this.editor.model.document.selection.getFirstPosition(),
             'ibexaLinkHref',
             this.editor.model.document.selection.getAttribute('ibexaLinkHref'),
-            this.editor.model
+            this.editor.model,
         );
 
         this.editor.model.change((writer) => {
@@ -100,7 +102,7 @@ class IbexaLinkUI extends Plugin {
     }
 
     getBalloonPositionData() {
-        const view = this.editor.editing.view;
+        const { view } = this.editor.editing;
         const viewDocument = view.document;
         const range = viewDocument.selection.getFirstRange();
 
