@@ -12,6 +12,7 @@ import IbexaFormatted from '../formatted/formatted';
 import IbexaMove from '../move/move';
 import IbexaRemoveElement from '../remove-element/remove-element';
 import IbexaBlockAlignment from '../block-alignment/block-alignment';
+import IbexaUploadImage from '../upload-image/upload-image';
 
 import CKEditor from '@ckeditor/ckeditor5-editor-inline/src/inlineeditor';
 import Essentials from '@ckeditor/ckeditor5-essentials/src/essentials';
@@ -169,6 +170,7 @@ const VIEWPORT_TOP_OFFSET = 102;
                     IbexaMove,
                     IbexaRemoveElement,
                     IbexaBlockAlignment,
+                    IbexaUploadImage,
                     ...extraPlugins,
                 ],
                 toolbar: {

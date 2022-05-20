@@ -71,6 +71,16 @@
         <target state="new">Remove</target>
         <note>key: remove_block.title</note>
       </trans-unit>
+      <trans-unit id="e66c892cf81b07c5edd1419a197054defd635b77" resname="upload_image.message.error">
+        <source>Error while creating Image: %error%</source>
+        <target state="new">Error while creating Image: %error%</target>
+        <note>key: upload_image.message.error</note>
+      </trans-unit>
+      <trans-unit id="f01b358112531d97f1bcae5684c28ed1edbd4946" resname="upload_image_btn.label">
+        <source>Upload image</source>
+        <target state="new">Upload image</target>
+        <note>key: upload_image_btn.label</note>
+      </trans-unit>
     </body>
   </file>
 </xliff>
