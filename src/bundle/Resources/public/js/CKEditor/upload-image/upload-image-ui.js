@@ -2,7 +2,7 @@ import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
 
 import IbexaButtonView from '../common/button-view/button-view';
 
-const { Translator } = window;
+const { ibexa, Translator } = window;
 
 class IbexaUploadImageUI extends Plugin {
     constructor(props) {
@@ -38,7 +38,7 @@ class IbexaUploadImageUI extends Plugin {
 
             buttonView.set({
                 label: Translator.trans(/*@Desc("Upload image")*/ 'upload_image_btn.label', {}, 'ck_editor'),
-                icon: window.ibexa.helpers.icon.getIconPath('upload-image'),
+                icon: ibexa.helpers.icon.getIconPath('upload-image'),
                 tooltip: true,
             });
 
