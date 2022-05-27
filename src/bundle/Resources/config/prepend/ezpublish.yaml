@@ -1,12 +1,12 @@
 system:
     default:
         field_templates:
-            -   template: '@IbexaFieldTypeRichText/RichText/content_fields.html.twig'
-                priority: 0
+            - template: '@IbexaFieldTypeRichText/RichText/content_fields.html.twig'
+              priority: 0
 
         fielddefinition_settings_templates:
-            -   template: '@IbexaFieldTypeRichText/RichText/fielddefinition_settings.html.twig'
-                priority: 0
+            - template: '@IbexaFieldTypeRichText/RichText/fielddefinition_settings.html.twig'
+              priority: 0
 
     admin_group:
         fieldtypes:
@@ -70,6 +70,8 @@ system:
                                 priority: 30
                             ibexaEmbedImage:
                                 priority: 20
+                            ibexaUploadImage:
+                                priority: 15
                             ibexaEmbedInline:
                                 priority: 10
                     custom_tags_group:
