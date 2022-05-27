@@ -145,20 +145,22 @@ class IbexaCustomTagFormView extends View {
     createFormChildren({ attributes }) {
         const children = this.createCollection();
 
-        Object.entries(attributes).forEach(([name, config]) => {
-            const createAttributeMethod = this.attributeRenderMethods[config.type];
+        if (attributes) {
+            Object.entries(attributes).forEach(([name, config]) => {
+                const createAttributeMethod = this.attributeRenderMethods[config.type];
 
-            if (!createAttributeMethod) {
-                return;
-            }
+                if (!createAttributeMethod) {
+                    return;
+                }
 
-            const createAttribute = createAttributeMethod.bind(this);
-            const attributeView = createAttribute(config);
+                const createAttribute = createAttributeMethod.bind(this);
+                const attributeView = createAttribute(config);
 
-            this.attributeViews[name] = attributeView;
+                this.attributeViews[name] = attributeView;
 
-            children.add(attributeView);
-        });
+                children.add(attributeView);
+            });
+        }
 
         return children;
     }
