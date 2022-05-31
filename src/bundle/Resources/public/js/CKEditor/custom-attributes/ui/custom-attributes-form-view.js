@@ -146,20 +146,22 @@ class IbexaCustomAttributesFormView extends View {
             children.add(classesView);
         }
 
-        Object.entries(customAttributes).forEach(([name, config]) => {
-            const createAttributeMethod = this.attributeRenderMethods[config.type];
+        if (customAttributes) {
+            Object.entries(customAttributes).forEach(([name, config]) => {
+                const createAttributeMethod = this.attributeRenderMethods[config.type];
 
-            if (!createAttributeMethod) {
-                return;
-            }
+                if (!createAttributeMethod) {
+                    return;
+                }
 
-            const createAttribute = createAttributeMethod.bind(this);
-            const attributeView = createAttribute(config);
+                const createAttribute = createAttributeMethod.bind(this);
+                const attributeView = createAttribute(config);
 
-            this.attributeViews[name] = attributeView;
+                this.attributeViews[name] = attributeView;
 
-            children.add(attributeView);
-        });
+                children.add(attributeView);
+            });
+        }
 
         return children;
     }
