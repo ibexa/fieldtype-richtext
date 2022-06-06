@@ -38,14 +38,19 @@ customConfig.module.rules.push({
                 },
             },
         },
+        'css-loader',
         {
             loader: 'postcss-loader',
-            options: styles.getPostCssConfig({
-                themeImporter: {
-                    themePath: require.resolve(path.resolve('./public/bundles/ibexaadminuiassets/vendors/@ckeditor/ckeditor5-theme-lark')),
-                },
-                minify: true,
-            }),
+            options: {
+                postcssOptions: styles.getPostCssConfig({
+                    themeImporter: {
+                        themePath: require.resolve(
+                            path.resolve('./public/bundles/ibexaadminuiassets/vendors/@ckeditor/ckeditor5-theme-lark'),
+                        ),
+                    },
+                    minify: true,
+                }),
+            },
         },
     ],
 });
