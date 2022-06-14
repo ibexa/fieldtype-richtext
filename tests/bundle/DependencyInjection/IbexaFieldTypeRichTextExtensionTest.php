@@ -15,9 +15,18 @@ use Symfony\Component\Yaml\Yaml;
 
 class IbexaFieldTypeRichTextExtensionTest extends AbstractExtensionTestCase
 {
+    use ContainerParameterLoaderTrait;
+
     protected function getContainerExtensions(): array
     {
         return [new IbexaFieldTypeRichTextExtension()];
+    }
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->loadMockedRequiredContainerParameters($this->container);
     }
 
     /**
