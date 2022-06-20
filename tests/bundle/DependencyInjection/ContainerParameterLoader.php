@@ -10,7 +10,10 @@ namespace Ibexa\Tests\Bundle\FieldTypeRichText\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-trait ContainerParameterLoaderTrait
+/**
+ * @internal
+ */
+final class ContainerParameterLoader
 {
     public function loadMockedRequiredContainerParameters(ContainerInterface $container): void
     {

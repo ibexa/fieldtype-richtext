@@ -13,15 +13,13 @@ use Ibexa\Bundle\FieldTypeRichText\DependencyInjection\Configuration\Parser\Fiel
 use Ibexa\Bundle\FieldTypeRichText\DependencyInjection\IbexaFieldTypeRichTextExtension;
 use Ibexa\Bundle\FieldTypeRichText\IbexaFieldTypeRichTextBundle;
 use Ibexa\Tests\Bundle\Core\DependencyInjection\Configuration\Parser\AbstractParserTestCase;
-use Ibexa\Tests\Bundle\FieldTypeRichText\DependencyInjection\ContainerParameterLoaderTrait;
+use Ibexa\Tests\Bundle\FieldTypeRichText\DependencyInjection\ContainerParameterLoader;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\Yaml\Yaml;
 
 class RichTextTest extends AbstractParserTestCase
 {
-    use ContainerParameterLoaderTrait;
-
     /**
      * Multidimensional array of configuration of multiple extensions ([extension => config]).
      *
@@ -60,7 +58,7 @@ class RichTextTest extends AbstractParserTestCase
         $bundle = new IbexaFieldTypeRichTextBundle();
         $bundle->build($this->container);
 
-        $this->loadMockedRequiredContainerParameters($this->container);
+        (new ContainerParameterLoader())->loadMockedRequiredContainerParameters($this->container);
 
         $configs = array_merge_recursive($this->getMinimalConfiguration(), $configurationValues);
 
