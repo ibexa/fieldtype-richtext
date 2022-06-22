@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\Bundle\FieldTypeRichText\DependencyInjection;
 
+use Ibexa\Contracts\Core\Container\Encore\ConfigurationDumper as IbexaEncoreConfigurationDumper;
 use Ibexa\Contracts\FieldTypeRichText\Configuration\Provider;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Symfony\Component\Config\FileLocator;
@@ -31,6 +32,12 @@ class IbexaFieldTypeRichTextExtension extends Extension implements PrependExtens
     public const RICHTEXT_CONFIGURATION_PROVIDER_TAG = 'ibexa.field_type.richtext.configuration.provider';
 
     private const RICHTEXT_TEXT_TOOLBAR_NAME = 'text';
+
+    private const WEBPACK_CONFIG_NAMES = [
+        'ibexa.richtext.config.manager.js' => [
+            'ibexa.richtext.config.manager.js' => [],
+        ],
+    ];
 
     public function getAlias()
     {
@@ -77,6 +84,10 @@ class IbexaFieldTypeRichTextExtension extends Extension implements PrependExtens
         $configuration = $this->getConfiguration($configs, $container);
         $config = $this->processConfiguration($configuration, $configs);
         $this->registerRichTextConfiguration($config, $container);
+
+        (new IbexaEncoreConfigurationDumper($container))->dumpCustomConfiguration(
+            self::WEBPACK_CONFIG_NAMES
+        );
     }
 
     /**

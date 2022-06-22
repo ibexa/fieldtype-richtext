@@ -1,6 +1,8 @@
 const Encore = require('@symfony/webpack-encore');
 const path = require('path');
 const { styles } = require(path.resolve('./public/bundles/ibexaadminuiassets/vendors/@ckeditor/ckeditor5-dev-utils'));
+const ibexaConfigManager = require(path.resolve('./ibexa.webpack.config.manager.js'));
+const configManagers = require(path.resolve('./var/encore/ibexa.richtext.config.manager.js'));
 
 Encore.reset();
 Encore.setOutputPath('public/assets/richtext/build').setPublicPath('/assets/richtext/build').enableSassLoader().disableSingleRuntimeChunk();
@@ -52,5 +54,11 @@ customConfig.module.rules.push({
 
 customConfig.module.rules[1] = {};
 customConfig.module.rules[2] = {};
+
+configManagers.forEach((configManagerPath) => {
+    const configManager = require(path.resolve(configManagerPath));
+
+    configManager(customConfig, ibexaConfigManager);
+});
 
 module.exports = customConfig;
