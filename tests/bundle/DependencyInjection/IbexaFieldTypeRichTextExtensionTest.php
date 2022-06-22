@@ -20,6 +20,13 @@ class IbexaFieldTypeRichTextExtensionTest extends AbstractExtensionTestCase
         return [new IbexaFieldTypeRichTextExtension()];
     }
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        (new ContainerParameterLoader())->loadMockedRequiredContainerParameters($this->container);
+    }
+
     /**
      * Test RichText Semantic Configuration.
      */

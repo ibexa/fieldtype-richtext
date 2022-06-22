@@ -13,6 +13,7 @@ use Ibexa\Bundle\FieldTypeRichText\DependencyInjection\Configuration\Parser\Fiel
 use Ibexa\Bundle\FieldTypeRichText\DependencyInjection\IbexaFieldTypeRichTextExtension;
 use Ibexa\Bundle\FieldTypeRichText\IbexaFieldTypeRichTextBundle;
 use Ibexa\Tests\Bundle\Core\DependencyInjection\Configuration\Parser\AbstractParserTestCase;
+use Ibexa\Tests\Bundle\FieldTypeRichText\DependencyInjection\ContainerParameterLoader;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\Yaml\Yaml;
@@ -57,11 +58,7 @@ class RichTextTest extends AbstractParserTestCase
         $bundle = new IbexaFieldTypeRichTextBundle();
         $bundle->build($this->container);
 
-        // mock list of available bundles
-        $this->setParameter(
-            'kernel.bundles',
-            ['IbexaCoreBundle' => null, 'IbexaFieldTypeRichTextBundle' => null]
-        );
+        (new ContainerParameterLoader())->loadMockedRequiredContainerParameters($this->container);
 
         $configs = array_merge_recursive($this->getMinimalConfiguration(), $configurationValues);
 
@@ -185,9 +182,9 @@ class RichTextTest extends AbstractParserTestCase
     /**
      * Data provider for testOnlineEditorInvalidSettings.
      *
-     * @see testOnlineEditorInvalidSettingsThrowException
-     *
      * @return array
+     *
+     * @see testOnlineEditorInvalidSettingsThrowException
      */
     public function getOnlineEditorInvalidSettings(): array
     {
