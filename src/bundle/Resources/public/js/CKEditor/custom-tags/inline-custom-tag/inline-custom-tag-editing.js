@@ -118,19 +118,12 @@ class IbexaInlineCustomTagEditing extends Plugin {
         });
 
         conversion.for('upcast').elementToElement({
+            model: 'inlineCustomTagContent',
             view: {
                 name: 'span',
                 attributes: {
                     'data-ezelement': 'ezcontent',
                 },
-            },
-            model: (viewElement, { writer: upcastWriter }) => {
-                const content = viewElement.getChild(0);
-                const modelElement = upcastWriter.createElement('inlineCustomTagContent');
-
-                upcastWriter.insertText(content.data, modelElement);
-
-                return modelElement;
             },
         });
     }
