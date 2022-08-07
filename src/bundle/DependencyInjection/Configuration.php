@@ -159,7 +159,7 @@ class Configuration extends SiteAccessConfiguration
                         ->end()
                     ->end()
                 ->end()
-            ;
+        ;
     }
 
     /**
@@ -211,7 +211,7 @@ class Configuration extends SiteAccessConfiguration
                         ->end()
                     ->end()
                 ->end()
-            ;
+        ;
     }
 }
 
