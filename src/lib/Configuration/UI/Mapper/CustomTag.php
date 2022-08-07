@@ -189,9 +189,15 @@ final class CustomTag implements CustomTemplateConfigMapper
 
                 if (isset($config[$tagName]['attributes'][$attributeName]['choicesLabel'])) {
                     foreach ($config[$tagName]['attributes'][$attributeName]['choicesLabel'] as $choice => $label) {
-                        $translatedLabel = $transCatalogue->has($label, $this->translationDomain)
-                            ? $this->translator->trans($label, [], $this->translationDomain)
-                            : $choice;
+                        $translatedLabel = $choice;
+                        if ($transCatalogue->has($label, $this->translationDomain)) {
+                            $translatedLabel = $this->translator->trans(
+                                /** @Ignore */
+                                $label,
+                                [],
+                                $this->translationDomain
+                            );
+                        }
 
                         $config[$tagName]['attributes'][$attributeName]['choicesLabel'][$choice] = $translatedLabel;
                     }
