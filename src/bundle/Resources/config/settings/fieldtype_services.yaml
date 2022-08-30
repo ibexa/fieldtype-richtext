@@ -1,0 +1,66 @@
+parameters:
+    ibexa.field_type.richtext.validator.docbook.resources: []
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    Ibexa\FieldTypeRichText\RichText\ConverterDispatcher:
+        class: Ibexa\FieldTypeRichText\RichText\ConverterDispatcher
+        arguments:
+            -
+                http://docbook.org/ns/docbook: null
+
+    Ibexa\FieldTypeRichText\RichText\Validator\ValidatorAggregate:
+        class: Ibexa\FieldTypeRichText\RichText\Validator\ValidatorAggregate
+        arguments: [!tagged ibexa.field_type.richtext.validator.input.xhtml5]
+
+    ibexa.richtext.validator.docbook:
+        class: Ibexa\FieldTypeRichText\RichText\Validator\Validator
+        arguments: ['%ibexa.field_type.richtext.validator.docbook.resources%']
+        tags:
+            - { name: ibexa.field_type.richtext.validator.input.xhtml5 }
+
+    Ibexa\FieldTypeRichText\RichText\Validator\ValidatorDispatcher:
+        class: Ibexa\FieldTypeRichText\RichText\Validator\ValidatorDispatcher
+        arguments:
+            -
+                http://docbook.org/ns/docbook: null
+
+    Ibexa\FieldTypeRichText\RichText\Validator\InternalLinkValidator:
+        class: Ibexa\FieldTypeRichText\RichText\Validator\InternalLinkValidator
+        arguments:
+            - '@Ibexa\Core\Persistence\Cache\ContentHandler'
+            - '@Ibexa\Core\Persistence\Cache\LocationHandler'
+        tags:
+            - { name: ibexa.field_type.richtext.validator.input.xhtml5 }
+
+    Ibexa\FieldTypeRichText\RichText\Normalizer\DocumentTypeDefinition:
+        class: Ibexa\FieldTypeRichText\RichText\Normalizer\Aggregate
+
+    # Symfony 3.4+ service definitions:
+    Ibexa\FieldTypeRichText\RichText\Validator\CustomTagsValidator:
+        public: false
+        arguments: ['%ibexa.field_type.richtext.custom_tags%']
+        tags:
+            - { name: ibexa.field_type.richtext.validator.input.xhtml5 }
+
+    Ibexa\FieldTypeRichText\RichText\RelationProcessor:
+        public: false
+
+    Ibexa\FieldTypeRichText\RichText\DOMDocumentFactory:
+        public: false
+
+    Ibexa\FieldTypeRichText\RichText\InputHandler:
+        arguments:
+            - '@Ibexa\FieldTypeRichText\RichText\DOMDocumentFactory'
+            - '@Ibexa\FieldTypeRichText\RichText\ConverterDispatcher'
+            - '@Ibexa\FieldTypeRichText\RichText\Normalizer\DocumentTypeDefinition'
+            - '@Ibexa\FieldTypeRichText\RichText\Validator\ValidatorDispatcher'
+            - '@Ibexa\FieldTypeRichText\RichText\Validator\ValidatorAggregate'
+            - '@Ibexa\FieldTypeRichText\RichText\RelationProcessor'
+
+    # Default InputHandler
+    Ibexa\Contracts\FieldTypeRichText\RichText\InputHandlerInterface: '@Ibexa\FieldTypeRichText\RichText\InputHandler'

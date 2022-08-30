@@ -1,14 +1,14 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
-namespace EzSystems\Tests\EzPlatformRichTextBundle\DependencyInjection\Configuration;
+namespace Ibexa\Tests\Bundle\FieldTypeRichText\DependencyInjection\Configuration;
 
-use EzSystems\EzPlatformRichTextBundle\DependencyInjection\Configuration;
+use Ibexa\Bundle\FieldTypeRichText\DependencyInjection\Configuration;
 use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Finder\Finder;
@@ -130,3 +130,5 @@ final class ConfigurationTest extends TestCase
         $this->assertProcessedConfigurationEquals($configurationValues, $expectedProcessedConfiguration);
     }
 }
+
+class_alias(ConfigurationTest::class, 'EzSystems\Tests\EzPlatformRichTextBundle\DependencyInjection\Configuration\ConfigurationTest');

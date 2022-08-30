@@ -1,16 +1,16 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformRichText\Form\Mapper;
+namespace Ibexa\FieldTypeRichText\Form\Mapper;
 
-use EzSystems\EzPlatformRichText\Form\Type\RichTextFieldType;
-use EzSystems\EzPlatformContentForms\Data\Content\FieldData;
-use EzSystems\EzPlatformContentForms\FieldType\FieldValueFormMapperInterface;
+use Ibexa\Contracts\ContentForms\Data\Content\FieldData;
+use Ibexa\Contracts\ContentForms\FieldType\FieldValueFormMapperInterface;
+use Ibexa\FieldTypeRichText\Form\Type\RichTextFieldType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -44,3 +44,5 @@ class RichTextFormMapper implements FieldValueFormMapperInterface
             ]);
     }
 }
+
+class_alias(RichTextFormMapper::class, 'EzSystems\EzPlatformRichText\Form\Mapper\RichTextFormMapper');

@@ -1,44 +1,44 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformRichText\Form\Type;
+namespace Ibexa\FieldTypeRichText\Form\Type;
 
+use Ibexa\Contracts\FieldTypeRichText\RichText\Converter;
+use Ibexa\Contracts\FieldTypeRichText\RichText\InputHandlerInterface;
+use Ibexa\FieldTypeRichText\Form\DataTransformer\RichTextTransformer;
+use Ibexa\FieldTypeRichText\RichText\DOMDocumentFactory;
+use Ibexa\FieldTypeRichText\Validator\Constraints\RichText as ValidRichText;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use EzSystems\EzPlatformRichText\eZ\RichText\DOMDocumentFactory;
-use EzSystems\EzPlatformRichText\eZ\RichText\InputHandlerInterface;
-use EzSystems\EzPlatformRichText\eZ\RichText\Converter;
-use EzSystems\EzPlatformRichText\Form\DataTransformer\RichTextTransformer;
-use EzSystems\EzPlatformRichText\Validator\Constraints\RichText as ValidRichText;
 
 class RichTextType extends AbstractType
 {
     /**
-     * @var \EzSystems\EzPlatformRichText\eZ\RichText\DOMDocumentFactory
+     * @var \Ibexa\FieldTypeRichText\RichText\DOMDocumentFactory
      */
     private $domDocumentFactory;
 
     /**
-     * @var \EzSystems\EzPlatformRichText\eZ\RichText\InputHandlerInterface
+     * @var \Ibexa\Contracts\FieldTypeRichText\RichText\InputHandlerInterface
      */
     private $inputHandler;
 
     /**
-     * @var \EzSystems\EzPlatformRichText\eZ\RichText\Converter
+     * @var \Ibexa\Contracts\FieldTypeRichText\RichText\Converter
      */
     private $docbookToXhtml5EditConverter;
 
     /**
-     * @param \EzSystems\EzPlatformRichText\eZ\RichText\DOMDocumentFactory $domDocumentFactory
-     * @param \EzSystems\EzPlatformRichText\eZ\RichText\InputHandlerInterface $inputHandler
-     * @param \EzSystems\EzPlatformRichText\eZ\RichText\Converter $docbookToXhtml5EditConverter
+     * @param \Ibexa\FieldTypeRichText\RichText\DOMDocumentFactory $domDocumentFactory
+     * @param \Ibexa\Contracts\FieldTypeRichText\RichText\InputHandlerInterface $inputHandler
+     * @param \Ibexa\Contracts\FieldTypeRichText\RichText\Converter $docbookToXhtml5EditConverter
      */
     public function __construct(
         DOMDocumentFactory $domDocumentFactory,
@@ -90,3 +90,5 @@ class RichTextType extends AbstractType
         return 'richtext';
     }
 }
+
+class_alias(RichTextType::class, 'EzSystems\EzPlatformRichText\Form\Type\RichTextType');

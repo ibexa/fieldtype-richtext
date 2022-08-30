@@ -1,147 +1,147 @@
 parameters:
-    ezrichtext.tag.namespace: fieldtypes.ezrichtext.tags
-    ezrichtext.style.namespace: fieldtypes.ezrichtext.styles
-    ezrichtext.embed.namespace: fieldtypes.ezrichtext.embed
-    ezrichtext.resources: '%kernel.project_dir%/vendor/ezsystems/ezplatform-richtext/src/lib/eZ/RichText/Resources'
+    ibexa.field_type.richtext.tag.namespace: fieldtypes.ezrichtext.tags
+    ibexa.field_type.richtext.style.namespace: fieldtypes.ezrichtext.styles
+    ibexa.field_type.richtext.embed.namespace: fieldtypes.ezrichtext.embed
+    ibexa.field_type.richtext.resources: '%kernel.project_dir%/vendor/ibexa/fieldtype-richtext/src/bundle/Resources/richtext'
 
-    ezrichtext.converter.input.xhtml5.resources: '%ezrichtext.resources%/stylesheets/xhtml5/edit/docbook.xsl'
-    ezrichtext.converter.edit.xhtml5.resources: '%ezrichtext.resources%/stylesheets/docbook/xhtml5/edit/xhtml5.xsl'
-    ezrichtext.converter.output.xhtml5.resources: '%ezrichtext.resources%/stylesheets/docbook/xhtml5/output/xhtml5.xsl'
-    ezrichtext.converter.output.xhtml5.fragment.resources: '%ezrichtext.resources%/stylesheets/xhtml5/output/fragment.xsl'
+    ibexa.field_type.richtext.converter.input.xhtml5.resources: '%ibexa.field_type.richtext.resources%/stylesheets/xhtml5/edit/docbook.xsl'
+    ibexa.field_type.richtext.converter.edit.xhtml5.resources: '%ibexa.field_type.richtext.resources%/stylesheets/docbook/xhtml5/edit/xhtml5.xsl'
+    ibexa.field_type.richtext.converter.output.xhtml5.resources: '%ibexa.field_type.richtext.resources%/stylesheets/docbook/xhtml5/output/xhtml5.xsl'
+    ibexa.field_type.richtext.converter.output.xhtml5.fragment.resources: '%ibexa.field_type.richtext.resources%/stylesheets/xhtml5/output/fragment.xsl'
 
-    ezrichtext.validator.docbook.resources:
-        - '%ezrichtext.resources%/schemas/docbook/ezpublish.rng'
-        - '%ezrichtext.resources%/schemas/docbook/docbook.iso.sch.xsl'
-    ezrichtext.validator.output.ezxhtml5.resources:
-        - '%ezrichtext.resources%/schemas/ezxhtml5/output/ezxhtml5.xsd'
+    ibexa.field_type.richtext.validator.docbook.resources:
+        - '%ibexa.field_type.richtext.resources%/schemas/docbook/ezpublish.rng'
+        - '%ibexa.field_type.richtext.resources%/schemas/docbook/docbook.iso.sch.xsl'
+    ibexa.field_type.richtext.validator.output.xhtml5.resources:
+        - '%ibexa.field_type.richtext.resources%/schemas/ezxhtml5/output/ezxhtml5.xsd'
 
 services:
-    ezrichtext.normalizer.input:
-        class: EzSystems\EzPlatformRichText\eZ\RichText\Normalizer\DocumentTypeDefinition
+    Ibexa\FieldTypeRichText\RichText\Normalizer\DocumentTypeDefinition:
+        class: Ibexa\FieldTypeRichText\RichText\Normalizer\DocumentTypeDefinition
         arguments:
             - 'section'
-            - 'http://ez.no/namespaces/ezpublish5/xhtml5/edit'
-            - '%ezrichtext.resources%/dtd/ezxhtml5_edit_html_character_entities.dtd'
+            - 'http://ibexa.co/namespaces/ezpublish5/xhtml5/edit'
+            - '%ibexa.field_type.richtext.resources%/dtd/ezxhtml5_edit_html_character_entities.dtd'
 
-    ezrichtext.converter.input.dispatcher:
-        class: EzSystems\EzPlatformRichText\eZ\RichText\ConverterDispatcher
+    Ibexa\FieldTypeRichText\RichText\ConverterDispatcher:
+        class: Ibexa\FieldTypeRichText\RichText\ConverterDispatcher
         arguments:
             -
                 http://docbook.org/ns/docbook: null
-                http://ez.no/namespaces/ezpublish5/xhtml5/edit: '@ezrichtext.converter.input.xhtml5'
+                http://ibexa.co/namespaces/ezpublish5/xhtml5/edit: '@ibexa.richtext.converter.input.xhtml5'
 
-    ezrichtext.renderer:
-        class: EzSystems\EzPlatformRichTextBundle\eZ\RichText\Renderer
+    Ibexa\FieldTypeRichText\RichText\Renderer:
+        class: Ibexa\FieldTypeRichText\RichText\Renderer
         arguments:
-            - '@ezpublish.api.repository'
+            - '@ibexa.api.repository'
             - '@security.authorization_checker'
-            - '@ezpublish.config.resolver'
+            - '@ibexa.config.resolver'
             - '@twig'
-            - '%ezrichtext.tag.namespace%'
-            - '%ezrichtext.style.namespace%'
-            - '%ezrichtext.embed.namespace%'
+            - '%ibexa.field_type.richtext.tag.namespace%'
+            - '%ibexa.field_type.richtext.style.namespace%'
+            - '%ibexa.field_type.richtext.embed.namespace%'
             - '@?logger'
-            - '%ezplatform.ezrichtext.custom_tags%'
-            - '%ezplatform.ezrichtext.custom_styles%'
+            - '%ibexa.field_type.richtext.custom_tags%'
+            - '%ibexa.field_type.richtext.custom_styles%'
 
-    ezrichtext.converter.link:
-        class: EzSystems\EzPlatformRichText\eZ\RichText\Converter\Link
-        arguments: ['@ezpublish.api.service.location', '@ezpublish.api.service.content', '@ezpublish.urlalias_router', '@?logger']
+    Ibexa\FieldTypeRichText\RichText\Converter\Link:
+        class: Ibexa\FieldTypeRichText\RichText\Converter\Link
+        arguments: ['@ibexa.api.service.location', '@ibexa.api.service.content', '@Ibexa\Bundle\Core\Routing\UrlAliasRouter', '@?logger']
         tags:
-            - {name: ezrichtext.converter.output.xhtml5, priority: 0}
+            - {name: ibexa.field_type.richtext.converter.output.xhtml5, priority: 0}
 
-    ezrichtext.converter.template:
-        class: EzSystems\EzPlatformRichText\eZ\RichText\Converter\Render\Template
+    Ibexa\FieldTypeRichText\RichText\Converter\Render\Template:
+        class: Ibexa\FieldTypeRichText\RichText\Converter\Render\Template
         arguments:
-            - '@ezrichtext.renderer'
-            - '@ezrichtext.converter.output.xhtml5'
+            - '@Ibexa\FieldTypeRichText\RichText\Renderer'
+            - '@ibexa.richtext.converter.output.xhtml5'
             - '@?logger'
         tags:
-            - {name: ezrichtext.converter.output.xhtml5, priority: 10}
+            - {name: ibexa.field_type.richtext.converter.output.xhtml5, priority: 10}
         lazy: true
 
-    ezrichtext.converter.embed:
-        class: EzSystems\EzPlatformRichText\eZ\RichText\Converter\Render\Embed
+    Ibexa\FieldTypeRichText\RichText\Converter\Render\Embed:
+        class: Ibexa\FieldTypeRichText\RichText\Converter\Render\Embed
         arguments:
-            - '@ezrichtext.renderer'
+            - '@Ibexa\FieldTypeRichText\RichText\Renderer'
             - '@?logger'
         tags:
-            - {name: ezrichtext.converter.output.xhtml5, priority: 10}
+            - {name: ibexa.field_type.richtext.converter.output.xhtml5, priority: 10}
 
     # Note: should typically be the last one as it produces embeddable fragment
-    ezrichtext.converter.output.xhtml5.fragment:
-        class: EzSystems\EzPlatformRichText\eZ\RichText\Converter\Xslt
-        arguments: ['%ezrichtext.converter.output.xhtml5.fragment.resources%']
+    Ibexa\FieldTypeRichText\RichText\Converter\Xslt:
+        class: Ibexa\FieldTypeRichText\RichText\Converter\Xslt
+        arguments: ['%ibexa.field_type.richtext.converter.output.xhtml5.fragment.resources%']
         tags:
-            - {name: ezrichtext.converter.output.xhtml5, priority: 100}
+            - {name: ibexa.field_type.richtext.converter.output.xhtml5, priority: 100}
 
     # Aggregate converter for XHTML5 output that other converters register to
     # through service tags.
-    ezrichtext.converter.output.xhtml5:
-        class: EzSystems\EzPlatformRichText\eZ\RichText\Converter\Aggregate
+    ibexa.richtext.converter.output.xhtml5:
+        class: Ibexa\FieldTypeRichText\RichText\Converter\Aggregate
         lazy: true
 
-    ezrichtext.validator.input.ezxhtml5:
-        class: EzSystems\EzPlatformRichText\eZ\RichText\Validator\ValidatorAggregate
-        arguments: [!tagged ezrichtext.validator.input.ezxhtml5]
+    Ibexa\FieldTypeRichText\RichText\Validator\ValidatorAggregate:
+        class: Ibexa\FieldTypeRichText\RichText\Validator\ValidatorAggregate
+        arguments: [!tagged ibexa.field_type.richtext.validator.input.xhtml5]
 
-    ezrichtext.validator.docbook:
-        class: EzSystems\EzPlatformRichText\eZ\RichText\Validator\Validator
-        arguments: ['%ezrichtext.validator.docbook.resources%']
+    ibexa.richtext.validator.docbook:
+        class: Ibexa\FieldTypeRichText\RichText\Validator\Validator
+        arguments: ['%ibexa.field_type.richtext.validator.docbook.resources%']
         tags:
-            - { name: 'ezrichtext.validator.input.ezxhtml5' }
+            - { name: ibexa.field_type.richtext.validator.input.xhtml5 }
 
-    ezrichtext.validator.output.ezxhtml5:
-        class: EzSystems\EzPlatformRichText\eZ\RichText\Validator\Validator
-        arguments: ['%ezrichtext.validator.output.ezxhtml5.resources%']
+    ibexa.richtext.validator.output.ezxhtml5:
+        class: Ibexa\FieldTypeRichText\RichText\Validator\Validator
+        arguments: ['%ibexa.field_type.richtext.validator.output.xhtml5.resources%']
 
-    ezrichtext.validator.input.dispatcher:
-        class: EzSystems\EzPlatformRichText\eZ\RichText\Validator\ValidatorDispatcher
+    Ibexa\FieldTypeRichText\RichText\Validator\ValidatorDispatcher:
+        class: Ibexa\FieldTypeRichText\RichText\Validator\ValidatorDispatcher
         arguments:
             -
                 http://docbook.org/ns/docbook: null
-                http://ez.no/namespaces/ezpublish5/xhtml5/edit: null
-                http://ez.no/namespaces/ezpublish5/xhtml5: '@ezrichtext.validator.output.ezxhtml5'
+                http://ibexa.co/namespaces/ezpublish5/xhtml5/edit: null
+                http://ibexa.co/namespaces/ezpublish5/xhtml5: '@ibexa.richtext.validator.output.ezxhtml5'
 
-    ezrichtext.validator.internal_link:
-        class: EzSystems\EzPlatformRichText\eZ\RichText\Validator\InternalLinkValidator
+    Ibexa\FieldTypeRichText\RichText\Validator\InternalLinkValidator:
+        class: Ibexa\FieldTypeRichText\RichText\Validator\InternalLinkValidator
         arguments:
-            - '@ezpublish.spi.persistence.cache.contentHandler'
-            - '@ezpublish.spi.persistence.cache.locationHandler'
+            - '@Ibexa\Core\Persistence\Cache\ContentHandler'
+            - '@Ibexa\Core\Persistence\Cache\LocationHandler'
         tags:
-            - { name: 'ezrichtext.validator.input.ezxhtml5' }
+            - { name: ibexa.field_type.richtext.validator.input.xhtml5 }
 
-    ezrichtext.converter.output.xhtml5.core:
-        class: EzSystems\EzPlatformRichTextBundle\eZ\RichText\Converter\Html5
+    Ibexa\FieldTypeRichText\RichText\Converter\Html5:
+        class: Ibexa\FieldTypeRichText\RichText\Converter\Html5
         arguments:
-            - '%ezrichtext.converter.output.xhtml5.resources%'
-            - '@ezpublish.config.resolver'
+            - '%ibexa.field_type.richtext.converter.output.xhtml5.resources%'
+            - '@ibexa.config.resolver'
         tags:
-            - {name: ezrichtext.converter.output.xhtml5, priority: 50}
+            - {name: ibexa.field_type.richtext.converter.output.xhtml5, priority: 50}
 
     # Aggregate converter for XHTML5 input that other converters register to
-    # through 'ezrichtext.converter.input.xhtml5' service tag.
-    ezrichtext.converter.input.xhtml5:
-        class: EzSystems\EzPlatformRichText\eZ\RichText\Converter\Aggregate
+    # through 'ibexa.field_type.richtext.converter.input.xhtml5' service tag.
+    ibexa.richtext.converter.input.xhtml5:
+        class: Ibexa\FieldTypeRichText\RichText\Converter\Aggregate
         lazy: true
 
-    ezrichtext.converter.input.xhtml5.core:
-        class: EzSystems\EzPlatformRichTextBundle\eZ\RichText\Converter\Html5Input
+    Ibexa\FieldTypeRichText\RichText\Converter\Html5Input:
+        class: Ibexa\FieldTypeRichText\RichText\Converter\Html5Input
         arguments:
-            - '%ezrichtext.converter.input.xhtml5.resources%'
-            - '@ezpublish.config.resolver'
+            - '%ibexa.field_type.richtext.converter.input.xhtml5.resources%'
+            - '@ibexa.config.resolver'
         tags:
-            - {name: ezrichtext.converter.input.xhtml5, priority: 50}
+            - {name: ibexa.field_type.richtext.converter.input.xhtml5, priority: 50}
 
     # Note: should run before xsl transformation
-    ezrichtext.converter.input.xhtml5.programlisting:
-        class: EzSystems\EzPlatformRichText\eZ\RichText\Converter\ProgramListing
+    Ibexa\FieldTypeRichText\RichText\Converter\ProgramListing:
+        class: Ibexa\FieldTypeRichText\RichText\Converter\ProgramListing
         tags:
-            - {name: ezrichtext.converter.input.xhtml5, priority: 10}
+            - {name: ibexa.field_type.richtext.converter.input.xhtml5, priority: 10}
 
-    ezrichtext.converter.edit.xhtml5:
-        class: EzSystems\EzPlatformRichTextBundle\eZ\RichText\Converter\Html5Edit
+    Ibexa\FieldTypeRichText\RichText\Converter\Html5Edit:
+        class: Ibexa\FieldTypeRichText\RichText\Converter\Html5Edit
         arguments:
-            - '%ezrichtext.converter.edit.xhtml5.resources%'
-            - '@ezpublish.config.resolver'
+            - '%ibexa.field_type.richtext.converter.edit.xhtml5.resources%'
+            - '@ibexa.config.resolver'
 
