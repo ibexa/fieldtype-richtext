@@ -445,6 +445,7 @@ EOT
 
     /**
      * @dataProvider provideFromHashData
+     *
      * @todo: Requires correct registered FieldTypeService, needs to be
      *        maintained!
      */
@@ -755,6 +756,7 @@ EOT;
 
     /**
      * @param string $xmlDocumentPath
+     *
      * @dataProvider providerForTestCreateContentWithValidCustomTag
      */
     public function testCreateContentWithValidCustomTag($xmlDocumentPath)
