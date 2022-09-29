@@ -134,6 +134,7 @@ class RichTextTest extends TestCase
 
     /**
      * @covers \Ibexa\Core\FieldType\Author\Type::acceptValue
+     *
      * @dataProvider providerForTestAcceptValueValidFormat
      */
     public function testAcceptValueValidFormat($input)
@@ -164,6 +165,7 @@ class RichTextTest extends TestCase
 
     /**
      * @covers \Ibexa\Core\FieldType\Author\Type::acceptValue
+     *
      * @dataProvider providerForTestAcceptValueInvalidFormat
      */
     public function testAcceptValueInvalidFormat($input, Exception $expectedException)
@@ -296,6 +298,7 @@ class RichTextTest extends TestCase
 
     /**
      * @covers \Ibexa\FieldTypeRichText\FieldType\RichText\Type::getName
+     *
      * @dataProvider providerForTestGetName
      */
     public function testGetName($xmlString, $expectedName)
@@ -400,6 +403,7 @@ class RichTextTest extends TestCase
 
     /**
      * @todo handle embeds when implemented
+     *
      * @covers \Ibexa\FieldTypeRichText\FieldType\RichText\Type::getRelations
      */
     public function testGetRelations()
