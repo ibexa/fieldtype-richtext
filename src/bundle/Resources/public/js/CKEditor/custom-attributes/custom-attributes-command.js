@@ -32,7 +32,8 @@ class IbexaCustomAttributesCommand extends Command {
     }
 
     refresh() {
-        const parentElement = this.editor.model.document.selection.getFirstPosition().parent;
+        const { selection } = this.editor.model.document;
+        const parentElement = selection.getSelectedElement() ?? selection.getFirstPosition().parent;
         const { attributes, classes } = window.ibexa.richText.alloyEditor;
         const parentElementAttributesConfig = attributes[parentElement.name];
         const parentElementClassesConfig = classes[parentElement.name];
