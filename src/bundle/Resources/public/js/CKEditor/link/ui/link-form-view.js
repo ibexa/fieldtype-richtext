@@ -10,6 +10,7 @@ class IbexaLinkFormView extends View {
         super(props);
 
         this.locale = props.locale;
+        this.editor = props.editor;
 
         this.saveButtonView = this.createButton('Save', null, 'ck-button-save', 'save-link');
         this.cancelButtonView = this.createButton('Remove link', null, 'ck-button-cancel', 'remove-link');
@@ -200,6 +201,8 @@ class IbexaLinkFormView extends View {
         this.urlInputView.fieldView.element.value = url;
         this.urlInputView.fieldView.set('value', url);
         this.urlInputView.fieldView.set('isEmpty', !url);
+
+        this.editor.focus();
     }
 
     cancelHandler() {
