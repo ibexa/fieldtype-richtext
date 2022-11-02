@@ -22,7 +22,7 @@ class IbexaLinkUI extends Plugin {
     }
 
     createFormView() {
-        const formView = new IbexaLinkFormView({ locale: this.editor.locale });
+        const formView = new IbexaLinkFormView({ locale: this.editor.locale, editor: this.editor });
 
         this.listenTo(formView, 'save-link', () => {
             const { url, title, target } = this.formView.getValues();
