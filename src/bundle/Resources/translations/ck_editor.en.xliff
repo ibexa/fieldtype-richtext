@@ -41,6 +41,11 @@
         <target state="new">Embed</target>
         <note>key: embed_btn.label</note>
       </trans-unit>
+      <trans-unit id="b4f97f21f1ca738b786232732212d980e2509dfa" resname="embed_inline_btn.label">
+        <source>Embed inline</source>
+        <target state="new">Embed inline</target>
+        <note>key: embed_inline_btn.label</note>
+      </trans-unit>
       <trans-unit id="60187109a21e0437d6b91e9762fd1c69a79062be" resname="formatted_btn.label">
         <source>Formatted</source>
         <target state="new">Formatted</target>
