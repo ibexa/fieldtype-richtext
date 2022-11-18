@@ -202,6 +202,20 @@
     }
 }
 
+.ibexa-field-edit--ezrichtext.ibexa-field-edit--nontranslatable .ibexa-data-source {
+    .ibexa-data-source__richtext {
+        color: $ibexa-color-dark-300;
+        background-color: $ibexa-color-light-300;
+        pointer-events: none;
+    }
+
+    .ibexa-richtext-tools {
+        color: $ibexa-color-dark-400;
+        background-color: $ibexa-color-light-400;
+        pointer-events: none;
+    }
+}
+
 .ck {
     &.ck-editor__editable_inline {
         border: none;
