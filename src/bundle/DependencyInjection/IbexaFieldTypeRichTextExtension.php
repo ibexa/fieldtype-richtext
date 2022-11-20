@@ -175,7 +175,7 @@ class IbexaFieldTypeRichTextExtension extends Extension implements PrependExtens
     {
         $container->prependExtensionConfig('jms_translation', [
             'configs' => [
-                'ezplatform_richtext' => [
+                'ibexa_fieldtype_richtext' => [
                     'dirs' => [
                         __DIR__ . '/../../../src/',
                     ],
