@@ -19,6 +19,7 @@ use Ibexa\Core\Repository\LocationService;
 use Ibexa\FieldTypeRichText\RichText\Converter\Link;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\Routing\RouterInterface;
 
 /**
  * Tests the Link converter
@@ -45,9 +46,9 @@ class LinkTest extends TestCase
     /**
      * @return \PHPUnit\Framework\MockObject\MockObject
      */
-    protected function getMockUrlAliasRouter()
+    protected function getMockRouter()
     {
-        return $this->createMock(UrlAliasRouter::class);
+        return $this->createMock(RouterInterface::class);
     }
 
     /**
@@ -119,7 +120,7 @@ class LinkTest extends TestCase
 
         $contentService = $this->getMockContentService();
         $locationService = $this->getMockLocationService();
-        $urlAliasRouter = $this->getMockUrlAliasRouter();
+        $router = $this->getMockRouter();
 
         $contentService->expects($this->never())
             ->method($this->anything());
@@ -127,10 +128,10 @@ class LinkTest extends TestCase
         $locationService->expects($this->never())
             ->method($this->anything());
 
-        $urlAliasRouter->expects($this->never())
+        $router->expects($this->never())
             ->method($this->anything());
 
-        $converter = new Link($locationService, $contentService, $urlAliasRouter);
+        $converter = new Link($locationService, $contentService, $router);
 
         $outputDocument = $converter->convert($inputDocument);
 
@@ -215,7 +216,7 @@ class LinkTest extends TestCase
 
         $contentService = $this->getMockContentService();
         $locationService = $this->getMockLocationService();
-        $urlAliasRouter = $this->getMockUrlAliasRouter();
+        $router = $this->getMockRouter();
 
         $location = $this->createMock(APILocation::class);
 
@@ -224,12 +225,12 @@ class LinkTest extends TestCase
             ->with($this->equalTo($locationId))
             ->willReturn($location);
 
-        $urlAliasRouter->expects($this->once())
+        $router->expects($this->once())
             ->method('generate')
             ->with(UrlAliasRouter::URL_ALIAS_ROUTE_NAME, ['location' => $location])
             ->willReturn($urlResolved);
 
-        $converter = new Link($locationService, $contentService, $urlAliasRouter);
+        $converter = new Link($locationService, $contentService, $router);
 
         $outputDocument = $converter->convert($inputDocument);
 
@@ -320,7 +321,7 @@ class LinkTest extends TestCase
 
         $contentService = $this->getMockContentService();
         $locationService = $this->getMockLocationService();
-        $urlAliasRouter = $this->getMockUrlAliasRouter();
+        $router = $this->getMockRouter();
 
         $logger = $this->createMock(LoggerInterface::class);
 
@@ -333,7 +334,7 @@ class LinkTest extends TestCase
             ->with($this->equalTo($locationId))
             ->will($this->throwException($exception));
 
-        $converter = new Link($locationService, $contentService, $urlAliasRouter, $logger);
+        $converter = new Link($locationService, $contentService, $router, $logger);
 
         $outputDocument = $converter->convert($inputDocument);
 
@@ -419,7 +420,7 @@ class LinkTest extends TestCase
 
         $contentService = $this->getMockContentService();
         $locationService = $this->getMockLocationService();
-        $urlAliasRouter = $this->getMockUrlAliasRouter();
+        $router = $this->getMockRouter();
 
         $contentInfo = $this->createMock(APIContentInfo::class);
         $location = $this->createMock(APILocation::class);
@@ -439,12 +440,12 @@ class LinkTest extends TestCase
             ->with($this->equalTo($locationId))
             ->willReturn($location);
 
-        $urlAliasRouter->expects($this->once())
+        $router->expects($this->once())
             ->method('generate')
             ->with(UrlAliasRouter::URL_ALIAS_ROUTE_NAME, ['location' => $location])
             ->willReturn($urlResolved);
 
-        $converter = new Link($locationService, $contentService, $urlAliasRouter);
+        $converter = new Link($locationService, $contentService, $router);
 
         $outputDocument = $converter->convert($inputDocument);
 
@@ -535,7 +536,7 @@ class LinkTest extends TestCase
 
         $contentService = $this->getMockContentService();
         $locationService = $this->getMockLocationService();
-        $urlAliasRouter = $this->getMockUrlAliasRouter();
+        $router = $this->getMockRouter();
 
         $logger = $this->createMock(LoggerInterface::class);
 
@@ -548,7 +549,7 @@ class LinkTest extends TestCase
             ->with($this->equalTo($contentId))
             ->will($this->throwException($exception));
 
-        $converter = new Link($locationService, $contentService, $urlAliasRouter, $logger);
+        $converter = new Link($locationService, $contentService, $router, $logger);
 
         $outputDocument = $converter->convert($inputDocument);
 

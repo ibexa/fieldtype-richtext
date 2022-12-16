@@ -46,7 +46,11 @@ services:
 
     Ibexa\FieldTypeRichText\RichText\Converter\Link:
         class: Ibexa\FieldTypeRichText\RichText\Converter\Link
-        arguments: ['@ibexa.api.service.location', '@ibexa.api.service.content', '@Ibexa\Bundle\Core\Routing\UrlAliasRouter', '@?logger']
+        arguments:
+            - '@ibexa.api.service.location'
+            - '@ibexa.api.service.content'
+            - '@router'
+            - '@?logger'
         tags:
             - {name: ibexa.field_type.richtext.converter.output.xhtml5, priority: 0}
 
