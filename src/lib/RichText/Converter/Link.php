@@ -18,6 +18,7 @@ use Ibexa\Contracts\Core\Repository\Values\Content\Location;
 use Ibexa\Contracts\FieldTypeRichText\RichText\Converter;
 use Ibexa\Core\MVC\Symfony\Routing\UrlAliasRouter;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\Routing\RouterInterface;
 
 class Link implements Converter
 {
@@ -32,20 +33,24 @@ class Link implements Converter
     protected $contentService;
 
     /**
-     * @var \Ibexa\Core\MVC\Symfony\Routing\UrlAliasRouter
+     * @var \Symfony\Component\Routing\RouterInterface
      */
-    protected $urlAliasRouter;
+    protected $router;
 
     /**
      * @var \Psr\Log\LoggerInterface
      */
     protected $logger;
 
-    public function __construct(LocationService $locationService, ContentService $contentService, UrlAliasRouter $urlAliasRouter, LoggerInterface $logger = null)
-    {
+    public function __construct(
+        LocationService $locationService,
+        ContentService $contentService,
+        RouterInterface $router,
+        LoggerInterface $logger = null
+    ) {
         $this->locationService = $locationService;
         $this->contentService = $contentService;
-        $this->urlAliasRouter = $urlAliasRouter;
+        $this->router = $router;
         $this->logger = $logger;
     }
 
@@ -137,7 +142,7 @@ class Link implements Converter
 
     private function generateUrlAliasForLocation(Location $location, string $fragment): string
     {
-        $urlAlias = $this->urlAliasRouter->generate(
+        $urlAlias = $this->router->generate(
             UrlAliasRouter::URL_ALIAS_ROUTE_NAME,
             ['location' => $location]
         );
