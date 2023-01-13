@@ -24,14 +24,14 @@
         "symfony/translation": "^5.0",
         "symfony/translation-contracts": "^2.0",
         "twig/twig": "^3.0",
-        "ibexa/core": "~4.4.0@dev",
-        "ibexa/content-forms": "~4.4.0@dev",
-        "ibexa/rest": "~4.4.0@dev",
-        "ibexa/http-cache": "~4.4.0@dev"
+        "ibexa/core": "~4.4.0@beta",
+        "ibexa/content-forms": "~4.4.0@beta",
+        "ibexa/rest": "~4.4.0@beta",
+        "ibexa/http-cache": "~4.4.0@beta"
     },
     "require-dev": {
-        "ibexa/ci-scripts": "^0.2@dev",
-        "ibexa/doctrine-schema": "~4.4.0@dev",
+        "ibexa/ci-scripts": "^0.2@beta",
+        "ibexa/doctrine-schema": "~4.4.0@beta",
         "phpunit/phpunit": "^9.5",
         "symfony/finder": "^5.0",
         "matthiasnoback/symfony-config-test": "^4.1",
