@@ -361,6 +361,13 @@
           <xsl:value-of select="@class"/>
         </xsl:attribute>
       </xsl:if>
+      <xsl:if test="@style">
+        <xsl:attribute name="mark">
+          <xsl:if test="@style = 'list-style-type:disc;'">disc</xsl:if>
+          <xsl:if test="@style = 'list-style-type:circle;'">circle</xsl:if>
+          <xsl:if test="@style = 'list-style-type:square;'">square</xsl:if>
+        </xsl:attribute>
+      </xsl:if>
       <xsl:call-template name="ezattribute"/>
       <xsl:apply-templates/>
     </itemizedlist>

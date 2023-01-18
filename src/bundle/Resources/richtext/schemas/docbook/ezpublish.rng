@@ -75,6 +75,19 @@
         </oneOrMore>
       </element>
     </define>
+    <define name="db.itemizedlist.mark.attribute">
+      <attribute name="mark">
+        <a:documentation>Identifies the type of mark to be used on items in this list</a:documentation>
+        <choice>
+          <value>disc</value>
+          <a:documentation>Items in  the list should be marked using a disc</a:documentation>
+          <value>circle</value>
+          <a:documentation>Items in  the list should be marked using a circle</a:documentation>
+          <value>square</value>
+          <a:documentation>Items in  the list should be marked using a square</a:documentation>
+        </choice>
+      </attribute>
+    </define>
     <define name="db.itemizedlist">
       <element name="itemizedlist">
         <a:documentation>A list in which each entry is marked with a bullet or other dingbat</a:documentation>
