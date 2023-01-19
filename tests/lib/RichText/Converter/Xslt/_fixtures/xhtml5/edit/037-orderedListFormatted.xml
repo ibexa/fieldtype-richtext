@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xmlns="http://ibexa.co/namespaces/ezpublish5/xhtml5/edit">
+    <p>default</p>
+    <ol>
+        <li>default 1</li>
+        <li>default 2</li>
+    </ol>
+    <p>decimal</p>
+    <ol style="list-style-type:decimal;">
+        <li>decimal 1</li>
+        <li>decimal 2</li>
+    </ol>
+    <p>decimal leading zero</p>
+    <ol style="list-style-type:decimal-leading-zero;">
+        <li>decimal leading zero 1</li>
+        <li>decimal leading zero 2</li>
+    </ol>
+    <p>lower roman</p>
+    <ol style="list-style-type:lower-roman;">
+        <li>lower roman 1</li>
+        <li>lower roman 2</li>
+    </ol>
+    <p>upper roman</p>
+    <ol style="list-style-type:upper-roman;">
+        <li>upper roman 1</li>
+    </ol>
+    <ol>
+        <li>upper roman 2</li>
+    </ol>
+    <p>lower latin</p>
+    <ol style="list-style-type:lower-latin;">
+        <li>lower latin 1</li>
+        <li>lower latin 2</li>
+    </ol>
+    <p>upper latin</p>
+    <ol style="list-style-type:upper-latin;">
+        <li>upper latin 1</li>
+        <li>upper latin 2</li>
+    </ol>
+</section>

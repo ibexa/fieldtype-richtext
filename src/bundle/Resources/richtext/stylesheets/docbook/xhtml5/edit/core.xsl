@@ -317,6 +317,12 @@
           <xsl:value-of select="@ezxhtml:class"/>
         </xsl:attribute>
       </xsl:if>
+      <xsl:if test="@numeration = 'arabic'"><xsl:attribute name="style">list-style-type:decimal;</xsl:attribute></xsl:if>
+      <xsl:if test="@numeration = 'arabicleadingzero'"><xsl:attribute name="style">list-style-type:decimal-leading-zero;</xsl:attribute></xsl:if>
+      <xsl:if test="@numeration = 'lowerroman'"><xsl:attribute name="style">list-style-type:lower-roman;</xsl:attribute></xsl:if>
+      <xsl:if test="@numeration = 'upperroman'"><xsl:attribute name="style">list-style-type:upper-roman;</xsl:attribute></xsl:if>
+      <xsl:if test="@numeration = 'loweralpha'"><xsl:attribute name="style">list-style-type:lower-latin;</xsl:attribute></xsl:if>
+      <xsl:if test="@numeration = 'upperalpha'"><xsl:attribute name="style">list-style-type:upper-latin;</xsl:attribute></xsl:if>
       <xsl:call-template name="ezattribute"/>
       <xsl:apply-templates/>
     </xsl:element>
@@ -334,9 +340,11 @@
           <xsl:value-of select="@ezxhtml:class"/>
         </xsl:attribute>
       </xsl:if>
-      <xsl:if test="@mark = 'disc'"><xsl:attribute name="style">list-style-type:disc;</xsl:attribute></xsl:if>
-      <xsl:if test="@mark = 'circle'"><xsl:attribute name="style">list-style-type:circle;</xsl:attribute></xsl:if>
-      <xsl:if test="@mark = 'square'"><xsl:attribute name="style">list-style-type:square;</xsl:attribute></xsl:if>
+      <xsl:if test="@mark">
+        <xsl:attribute name="style">
+          <xsl:value-of select="concat('list-style-type:', @mark, ';')"/>
+        </xsl:attribute>
+      </xsl:if>
       <xsl:call-template name="ezattribute"/>
       <xsl:apply-templates/>
     </xsl:element>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xmlns="http://docbook.org/ns/docbook"
+         xmlns:xlink="http://www.w3.org/1999/xlink"
+         xmlns:ezxhtml="http://ibexa.co/xmlns/dxp/docbook/xhtml"
+         xmlns:ezcustom="http://ibexa.co/xmlns/dxp/docbook/custom"
+         version="5.0-variant ezpublish-1.0">
+  <para>default</para>
+  <orderedlist>
+    <listitem>
+      <para>default 1</para>
+    </listitem>
+    <listitem>
+      <para>default 2</para>
+    </listitem>
+  </orderedlist>
+  <para>decimal</para>
+  <orderedlist numeration="arabic">
+    <listitem>
+      <para>decimal 1</para>
+    </listitem>
+    <listitem>
+      <para>decimal 2</para>
+    </listitem>
+  </orderedlist>
+  <para>decimal leading zero</para>
+  <orderedlist numeration="arabicleadingzero">
+    <listitem>
+      <para>decimal leading zero 1</para>
+    </listitem>
+    <listitem>
+      <para>decimal leading zero 2</para>
+    </listitem>
+  </orderedlist>
+  <para>lower roman</para>
+  <orderedlist numeration="lowerroman">
+    <listitem>
+      <para>lower roman 1</para>
+    </listitem>
+    <listitem>
+      <para>lower roman 2</para>
+    </listitem>
+  </orderedlist>
+  <para>upper roman</para>
+  <orderedlist numeration="upperroman">
+    <listitem>
+      <para>upper roman 1</para>
+    </listitem>
+  </orderedlist>
+  <orderedlist>
+    <listitem>
+      <para>upper roman 2</para>
+    </listitem>
+  </orderedlist>
+  <para>lower latin</para>
+  <orderedlist numeration="loweralpha">
+    <listitem>
+      <para>lower latin 1</para>
+    </listitem>
+    <listitem>
+      <para>lower latin 2</para>
+    </listitem>
+  </orderedlist>
+  <para>upper latin</para>
+  <orderedlist numeration="upperalpha">
+    <listitem>
+      <para>upper latin 1</para>
+    </listitem>
+    <listitem>
+      <para>upper latin 2</para>
+     </listitem>
+   </orderedlist>
+</section>
