@@ -105,6 +105,10 @@ class IbexaCustomTagEditing extends Plugin {
                 }
 
                 const configElement = viewElement.getChild(1);
+                if (configElement === undefined) {
+                    return;
+                }
+
                 const configValuesIterator = configElement.getChildren();
                 const customTagName = viewElement.getAttribute('data-ezname');
                 const values = {};
