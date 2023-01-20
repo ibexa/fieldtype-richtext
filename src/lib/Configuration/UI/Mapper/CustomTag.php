@@ -96,6 +96,7 @@ final class CustomTag implements CustomTemplateConfigMapper
                 'label' => "ezrichtext.custom_tags.{$tagName}.label",
                 'description' => "ezrichtext.custom_tags.{$tagName}.description",
                 'isInline' => $customTagConfiguration['is_inline'],
+                'attributes' => [],
             ];
 
             if (!empty($customTagConfiguration['icon'])) {
