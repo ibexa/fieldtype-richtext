@@ -83,10 +83,8 @@ final class MigrateNamespacesCommand extends MultiprocessComand
         $cursor['stop'] = $this->getNextCursor($contentAttributeIDs);
         while ($cursor['stop'] !== null) {
             $this->createChildProcess($cursor, count($contentAttributeIDs));
-            //$this->updateNamespacesInColumns($cursor['start'], $cursor['stop']);
 
             $cursor['start'] = $cursor['stop'];
-            //$this->advanceProgressBar(count($contentAttributeIDs));
             $contentAttributeIDs = $this->gateway->getContentObjectAttributeIds($cursor['start'], $limit);
             $cursor['stop'] = $this->getNextCursor($contentAttributeIDs);
         }
@@ -135,8 +133,8 @@ final class MigrateNamespacesCommand extends MultiprocessComand
         $contentAttributes = $this->gateway->getContentObjectAttributes($contentAttributeIdStart, $contentAttributeIdStop);
 
         foreach ($contentAttributes as $contentAttribute) {
-            $contentAttribute['data_text'] = str_replace('xmlns:ezxhtml="http://ez.no/xmlns/ezpublish/docbook/xhtml"', 'xmlns:ezxhtml="http://FOOBAR.co/xmlns/dxp/docbook/xhtml"', $contentAttribute['data_text']);
-            $contentAttribute['data_text'] = str_replace('xmlns:ezcustom="http://ez.no/xmlns/ezpublish/docbook/custom"', 'xmlns:ezcustom="http://FOOBAR.co/xmlns/dxp/docbook/custom"', $contentAttribute['data_text']);
+            $contentAttribute['data_text'] = str_replace('xmlns:ezxhtml="http://ez.no/xmlns/ezpublish/docbook/xhtml"', 'xmlns:ezxhtml="http://ibexa.co/xmlns/dxp/docbook/xhtml"', $contentAttribute['data_text']);
+            $contentAttribute['data_text'] = str_replace('xmlns:ezcustom="http://ez.no/xmlns/ezpublish/docbook/custom"', 'xmlns:ezcustom="http://ibexa.co/xmlns/dxp/docbook/custom"', $contentAttribute['data_text']);
 
             if (!$this->isDryRun()) {
                 $this->gateway->updateContentObjectAttribute($contentAttribute['data_text'], $contentAttribute['contentobject_id'], $contentAttribute['id'], $contentAttribute['version'], $contentAttribute['language_code']);

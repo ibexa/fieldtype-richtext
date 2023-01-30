@@ -37,10 +37,19 @@ abstract class MultiprocessComand extends Command
      */
     protected $progressBar;
 
+    /**
+     * @var OutputInterface
+     */
     protected OutputInterface $output;
 
+    /**
+     * @var bool
+     */
     private bool $dryRun;
 
+    /**
+     * @var int
+     */
     private int $maxProcesses;
 
     /**
@@ -53,8 +62,14 @@ abstract class MultiprocessComand extends Command
      */
     private mixed $user;
 
+    /**
+     * @var int
+     */
     private int $iterationCount;
 
+    /**
+     * @var string
+     */
     private string $environment;
 
     public function __construct(
@@ -154,18 +169,56 @@ abstract class MultiprocessComand extends Command
         return self::SUCCESS;
     }
 
+    /**
+     * This method should return the total number of items to process.
+     *
+     * @return int
+     */
     abstract protected function getObjectCount(): int;
 
+    /**
+     * This method should process the subset of data, specified by the cursor
+     * 
+     * @param mixed $cursor
+     * @return mixed
+     */
     abstract protected function processData(mixed $cursor);
 
+    /**
+     * This method is called once in every child process. It should return a cursor based on the input parameters
+     * to the subprocess command
+     *
+     * @return mixed
+     */
     abstract protected function constructCursorFromInputOptions(): mixed;
 
+    /**
+     * This method should return the command arguments that should be added when launching a new child process. It will
+     * typically be the arguments needed in order to construct the Cursor for the child process
+     *
+     * @param mixed $cursor
+     * @return array
+     */
     abstract protected function addChildProcessArguments(mixed $cursor): array;
 
+    /**
+     * The method should return true if the current process is a child process. This is typically detected using the
+     * custom command arguments used when launching a child proccess
+     *
+     * @return bool
+     */
     abstract protected function isChildProcess(): bool;
 
+    /**
+     * This is the method that is responsible for iterating over the dataset that is being processed and split it into
+     * chunks that can be processed by a child processes. In order to do that it will maintain a cursor and call
+     * createChildProcess() for each chunk.
+     */
     abstract protected function iterate(): void;
 
+    /**
+     * This method is called when all data has been completed successfully
+     */
     abstract protected function completed(): void;
 
     public function isDryRun(): bool
