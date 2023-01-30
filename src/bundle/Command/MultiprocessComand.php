@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ */
+declare(strict_types=1);
+
 namespace Ibexa\Bundle\FieldTypeRichText\Command;
 
 use Ibexa\Contracts\Core\Repository\PermissionResolver;
@@ -10,7 +16,6 @@ use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Process\PhpExecutableFinder;
 use Symfony\Component\Process\Process;
 
@@ -33,11 +38,13 @@ abstract class MultiprocessComand extends Command
     protected $progressBar;
 
     protected OutputInterface $output;
+
     private bool $dryRun;
+
     private int $maxProcesses;
 
     /**
-     * @var Process[]
+     * @var \Symfony\Component\Process\Process[]
      */
     private $processes;
 
@@ -45,15 +52,16 @@ abstract class MultiprocessComand extends Command
      * @var string
      */
     private mixed $user;
+
     private int $iterationCount;
+
     private string $environment;
 
     public function __construct(
         string $name = null,
         PermissionResolver $permissionResolver,
         UserService $userService,
-    )
-    {
+    ) {
         $this->permissionResolver = $permissionResolver;
         $this->userService = $userService;
         $this->dryRun = false;
@@ -70,7 +78,7 @@ abstract class MultiprocessComand extends Command
             InputOption::VALUE_REQUIRED,
             'Ibexa DXP username',
             'admin'
-            )
+        )
             ->addOption(
                 'dry-run',
                 null,
@@ -91,12 +99,12 @@ abstract class MultiprocessComand extends Command
                 1
             )
                 ->addOption(
-                'iteration-count',
-                null,
-                InputOption::VALUE_OPTIONAL,
-                'Number of objects to process in a single iteration. Set to avoid using too much memory [default: 10000]',
-                10000
-            );
+                    'iteration-count',
+                    null,
+                    InputOption::VALUE_OPTIONAL,
+                    'Number of objects to process in a single iteration. Set to avoid using too much memory [default: 10000]',
+                    10000
+                );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -106,7 +114,7 @@ abstract class MultiprocessComand extends Command
             $this->userService->loadUserByLogin($this->user)
         );
 
-        $this->environment = (string) $input->getOption("env");
+        $this->environment = (string) $input->getOption('env');
 
         if ($input->getOption('dry-run')) {
             $this->dryRun = true;
@@ -133,9 +141,8 @@ abstract class MultiprocessComand extends Command
             $cursor = $this->constructCursorFromInputOptions();
             $this->processData($cursor);
         } else {
-            $this->output->writeln("Processing " . $this->getObjectCount() . " items.");
-            $this->output->writeln("Using " . $this->getMaxProcesses() . " concurrent processes and processing " . $this->getIterationCount() . " items per iteration");
-
+            $this->output->writeln('Processing ' . $this->getObjectCount() . ' items.');
+            $this->output->writeln('Using ' . $this->getMaxProcesses() . ' concurrent processes and processing ' . $this->getIterationCount() . ' items per iteration');
 
             $this->startProgressBar();
 
@@ -148,11 +155,17 @@ abstract class MultiprocessComand extends Command
     }
 
     abstract protected function getObjectCount(): int;
+
     abstract protected function processData(mixed $cursor);
+
     abstract protected function constructCursorFromInputOptions(): mixed;
+
     abstract protected function addChildProcessArguments(mixed $cursor): array;
+
     abstract protected function isChildProcess(): bool;
+
     abstract protected function iterate(): void;
+
     abstract protected function completed(): void;
 
     public function isDryRun(): bool
@@ -174,7 +187,6 @@ abstract class MultiprocessComand extends Command
     {
         return $this->maxProcesses > 1;
     }
-
 
     protected function waitForAvailableProcessSlot()
     {
@@ -233,7 +245,7 @@ abstract class MultiprocessComand extends Command
             $phpBinaryFinder = new PhpExecutableFinder();
             $phpBinaryPath = $phpBinaryFinder->find();
 
-            $arguments =[
+            $arguments = [
                 $phpBinaryPath,
                 'bin/console',
                 $this->getName(),
@@ -289,5 +301,4 @@ abstract class MultiprocessComand extends Command
             $this->progressBar->finish();
         }
     }
-
 }

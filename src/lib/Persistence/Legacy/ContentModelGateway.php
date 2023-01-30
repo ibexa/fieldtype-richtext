@@ -1,13 +1,20 @@
 <?php
 
+/**
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ */
+declare(strict_types=1);
+
 namespace Ibexa\FieldTypeRichText\Persistence\Legacy;
 
 use Doctrine\DBAL\Connection;
 
 class ContentModelGateway
 {
-    const DB_TABLE_CONTENTOBJECT_ATTRIBUTE = 'ezcontentobject_attribute';
-    const FIELD_TYPE_IDENTIFIER = 'ezrichtext';
+    public const DB_TABLE_CONTENTOBJECT_ATTRIBUTE = 'ezcontentobject_attribute';
+    public const FIELD_TYPE_IDENTIFIER = 'ezrichtext';
+
     /**
      * @var \Doctrine\DBAL\Connection
      */
@@ -30,7 +37,6 @@ class ContentModelGateway
                 )
             )
             ->setParameter(':data_type', self::FIELD_TYPE_IDENTIFIER);
-
 
         $statement = $query->execute();
 
@@ -138,5 +144,4 @@ class ContentModelGateway
             ->setParameter(':languagecode', $languageCode);
         $updateQuery->execute();
     }
-
 }
