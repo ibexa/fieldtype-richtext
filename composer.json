@@ -27,7 +27,7 @@
         "ibexa/core": "~4.3.0@dev",
         "ibexa/content-forms": "~4.3.0@dev",
         "ibexa/rest": "~4.3.0@dev",
-        "ibexa/http-cache": "~4.3.0@dev"
+        "ibexa/http-cache": "~4.3.0@dev",
         "symfony/process": "*"
     },
     "require-dev": {
