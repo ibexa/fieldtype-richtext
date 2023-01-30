@@ -2,155 +2,94 @@
 
 namespace Ibexa\Bundle\FieldTypeRichText\Command;
 
-use eZ\Publish\API\Repository\Repository;
 use Ibexa\Contracts\Core\Repository\PermissionResolver;
 use Ibexa\Contracts\Core\Repository\UserService;
 use Ibexa\FieldTypeRichText\Persistence\Legacy\ContentModelGateway as Gateway;
-use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Helper\ProgressBar;
+use Symfony\Component\Console\Exception\RuntimeException;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Style\SymfonyStyle;
 
 
-// https://symfony.com/doc/current/components/process.html
-
-final class MigrateNamespacesCommand extends Command
+final class MigrateNamespacesCommand extends MultiprocessComand
 {
-    /** @var \eZ\Publish\API\Repository\Repository */
-    //private $repository;
-
-    /** @var \Ibexa\Contracts\Core\Repository\PermissionResolver */
-    private $permissionResolver;
-
-    /** @var \Ibexa\Contracts\Core\Repository\UserService */
-    private $userService;
-
     private Gateway $gateway;
-
-    /**
-     * @var bool
-     */
-    protected $hasProgressBar;
-
-    /**
-     * @var \Symfony\Component\Console\Helper\ProgressBar
-     */
-    protected $progressBar;
-
-    private OutputInterface $output;
-    private bool $dryRun;
+    private ?int $cursorStart;
+    private ?int $cursorStop;
 
     public function __construct(
         PermissionResolver $permissionResolver,
         UserService $userService,
         Gateway $gateway,
-        /*Repository $repository*/
     )
     {
-        //$this->repository = $repository;
-        $this->permissionResolver = $permissionResolver;
-        $this->userService = $userService;
-        $this->dryRun = false;
-
-        parent::__construct("ibexa:migrate:richtext-namespaces");
+        parent::__construct("ibexa:migrate:richtext-namespaces", $permissionResolver, $userService);
         $this->gateway = $gateway;
     }
 
     public function configure(): void
     {
+        parent::configure();
+
         $this->addOption(
-            'user',
-            'u',
+            'cursor-start',
+            null,
             InputOption::VALUE_REQUIRED,
-            'Ibexa DXP username',
-            'admin'
-        )
-        ->addOption(
-            'dry-run',
-            null,
-            InputOption::VALUE_NONE,
-            'Run the converter without writing anything to the database'
-        )
-        ->addOption(
-            'no-progress',
-            null,
-            InputOption::VALUE_NONE,
-            'Disable the progress bar.'
-        );
+            'Internal option - only used for subprocesses',
+            )
+            ->addOption(
+                'cursor-stop',
+                null,
+                InputOption::VALUE_REQUIRED,
+                'Internal option - only used for subprocesses',
+            );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $login = $input->getOption('user');
-        $this->permissionResolver->setCurrentUserReference(
-            $this->userService->loadUserByLogin($login)
-        );
+        $this->cursorStart = $input->getOption('cursor-start') !== null ? (int) $input->getOption('cursor-start') : null;
+        $this->cursorStop = $input->getOption('cursor-stop') !== null ? (int) $input->getOption('cursor-stop') : null;
 
-        if ($input->getOption('dry-run')) {
-            $this->dryRun = true;
-        }
-        if ($this->dryRun) {
-            $output->writeln('Running in dry-run mode. No changes will actually be written to database');
+        // Check that both --cursor-start and cursor-start are set, or neither
+        if ( ($this->cursorStart === null) xor ($this->cursorStop === null) ) {
+            throw new RuntimeException('The options --cursor-start and -cursor-stop are only for internal use !');
         }
 
 
-        $this->hasProgressBar = !$input->getOption('no-progress');
+        parent::execute($input, $output);
 
-        $this->output = $output;
-
-        //$io = new SymfonyStyle($input, $output);
-
-        $this->migrateNamespaces();
         return self::SUCCESS;
     }
 
-    protected function progressBarStart($count)
+    protected function getObjectCount(): int
     {
-        if ($this->hasProgressBar) {
-            $this->progressBar = new ProgressBar($this->output, $count);
-            $this->progressBar->setFormat('very_verbose');
-            $this->progressBar->start();
-        }
+        return $this->gateway->countRichtextAttributes();
     }
 
-    protected function progressBarAdvance($step)
+    protected function iterate(): void
     {
-        if ($this->hasProgressBar) {
-            $this->progressBar->advance($step);
-        }
-    }
-
-    protected function progressBarFinish()
-    {
-        if ($this->hasProgressBar) {
-            $this->progressBar->finish();
-        }
-    }
-
-    protected function migrateNamespaces(): void
-    {
-        $count = $this->gateway->countRichtextAttributes();
-        $limit = 10;
+        $limit = $this->getIterationCount();
         $cursor =  [
             'start' => -1,
             'stop' => null
         ];
 
-
-        $this->progressBarStart($count);
-
         $contentAttributeIDs = $this->gateway->getContentObjectAttributeIds($cursor['start'], $limit);
         $cursor['stop'] = $this->getNextCursor($contentAttributeIDs);
         while ($cursor['stop'] !== null) {
-            $this->updateNamespacesInColumns($cursor['start'], $cursor['stop']);
+            $this->createChildProcess($cursor, count($contentAttributeIDs));
+            //$this->updateNamespacesInColumns($cursor['start'], $cursor['stop']);
 
             $cursor['start'] = $cursor['stop'];
-            $this->progressBarAdvance(count($contentAttributeIDs)); //fixme -- offset ?
+            //$this->advanceProgressBar(count($contentAttributeIDs));
             $contentAttributeIDs = $this->gateway->getContentObjectAttributeIds($cursor['start'], $limit);
             $cursor['stop'] = $this->getNextCursor($contentAttributeIDs);
         }
+    }
+
+    protected function completed(): void
+    {
+        $this->output->writeln(PHP_EOL . "Completed");
     }
 
     protected function getNextCursor(array $contentAttributeIDs): ?int
@@ -160,19 +99,41 @@ final class MigrateNamespacesCommand extends Command
         return $lastId;
     }
 
+    protected function processData($cursor)
+    {
+        $this->updateNamespacesInColumns($cursor['start'], $cursor['stop']);
+    }
+
+    protected function constructCursorFromInputOptions(): mixed
+    {
+        return [
+            'start' => $this->cursorStart,
+            'stop' => $this->cursorStop,
+        ];
+    }
+
+    protected function addChildProcessArguments($cursor): array
+    {
+        return [
+            '--cursor-start=' . $cursor['start'],
+            '--cursor-stop=' . $cursor['stop'],
+        ];
+    }
+
+    protected function isChildProcess(): bool
+    {
+        return $this->cursorStart !== null || $this->cursorStop !== null;
+    }
+
     protected function updateNamespacesInColumns(int $contentAttributeIdStart, int $contentAttributeIdStop): void
     {
         $contentAttributes = $this->gateway->getContentObjectAttributes($contentAttributeIdStart,$contentAttributeIdStop);
 
         foreach ($contentAttributes as $contentAttribute) {
-            //var_dump("contentAttribute", $contentAttribute);
-//            $contentAttribute['data_text'] = str_replace('xmlns:ezcustom="http://ez.no/xmlns/ezpublish/docbook/custom"', 'xmlns:ezxhtml="http://FOOBAR.co/xmlns/dxp/docbook/xhtml"', $contentAttribute['data_text']);
-//            $contentAttribute['data_text'] = str_replace( 'xmlns:ezcustom="http://ez.no/xmlns/ezpublish/docbook/custom"', 'xmlns:ezcustom="http://FOOBAR.co/xmlns/dxp/docbook/custom"', $xml);
-            $contentAttribute['data_text'] = str_replace('xmlns:ezxhtml="http://ibexa.co/xmlns/dxp/docbook/xhtml', 'xmlns:ezxhtml="http://FOOBAR.co/xmlns/dxp/docbook/xhtml"', $contentAttribute['data_text']);
-            $contentAttribute['data_text'] = str_replace( 'xmlns:ezcustom="http://ibexa.co/xmlns/dxp/docbook/custom"', 'xmlns:ezcustom="http://FOOBAR.co/xmlns/dxp/docbook/custom"', $contentAttribute['data_text']);
-            //var_dump("converted xml", $contentAttribute['data_text']);
+            $contentAttribute['data_text'] = str_replace('xmlns:ezxhtml="http://ez.no/xmlns/ezpublish/docbook/xhtml"', 'xmlns:ezxhtml="http://FOOBAR.co/xmlns/dxp/docbook/xhtml"', $contentAttribute['data_text']);
+            $contentAttribute['data_text'] = str_replace( 'xmlns:ezcustom="http://ez.no/xmlns/ezpublish/docbook/custom"', 'xmlns:ezcustom="http://FOOBAR.co/xmlns/dxp/docbook/custom"', $contentAttribute['data_text']);
 
-            if (!$this->dryRun) {
+            if (!$this->isDryRun()) {
                 $this->gateway->updateContentObjectAttribute($contentAttribute['data_text'], $contentAttribute['contentobject_id'], $contentAttribute['id'], $contentAttribute['version'], $contentAttribute['language_code']);
             }
         }
