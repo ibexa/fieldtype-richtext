@@ -18,16 +18,16 @@ class ContentModelGateway
     /**
      * @var \Doctrine\DBAL\Connection
      */
-    private $dbal;
+    private $connection;
 
-    public function __construct(Connection $dbal)
+    public function __construct(Connection $connection)
     {
-        $this->dbal = $dbal;
+        $this->connection = $connection;
     }
 
     public function countRichtextAttributes(): int
     {
-        $query = $this->dbal->createQueryBuilder();
+        $query = $this->connection->createQueryBuilder();
         $query->select('count(distinct a.id)')
             ->from(self::DB_TABLE_CONTENTOBJECT_ATTRIBUTE, 'a')
             ->where(
@@ -45,7 +45,7 @@ class ContentModelGateway
 
     public function getContentObjectAttributeIds(int $startId, int $limit): array
     {
-        $query = $this->dbal->createQueryBuilder();
+        $query = $this->connection->createQueryBuilder();
         $query->select('a.id')
             ->from(self::DB_TABLE_CONTENTOBJECT_ATTRIBUTE, 'a')
             ->where(
@@ -72,7 +72,7 @@ class ContentModelGateway
 
     public function getContentObjectAttributes(int $contentAttributeIdStart, int $contentAttributeIdStop): array
     {
-        $query = $this->dbal->createQueryBuilder();
+        $query = $this->connection->createQueryBuilder();
         $query->select('a.id, a.version, a.contentobject_id, a.language_code, a.data_text')
             ->from(self::DB_TABLE_CONTENTOBJECT_ATTRIBUTE, 'a')
             ->where(
@@ -103,7 +103,7 @@ class ContentModelGateway
 
     public function updateContentObjectAttribute($xml, $contentId, $attributeId, $version, $languageCode)
     {
-        $updateQuery = $this->dbal->createQueryBuilder();
+        $updateQuery = $this->connection->createQueryBuilder();
         $updateQuery->update('ezcontentobject_attribute')
             ->set('data_text', ':newxml')
             ->where(

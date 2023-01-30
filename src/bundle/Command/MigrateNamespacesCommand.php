@@ -16,7 +16,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-final class MigrateNamespacesCommand extends MultiprocessComand
+final class MigrateNamespacesCommand extends AbstractMultiProcessComand
 {
     private Gateway $gateway;
 

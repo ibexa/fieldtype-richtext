@@ -22,23 +22,23 @@ use Symfony\Component\Process\Process;
 abstract class AbstractMultiProcessComand extends Command
 {
     /** @var \Ibexa\Contracts\Core\Repository\PermissionResolver */
-    protected $permissionResolver;
+    protected PermissionResolver $permissionResolver;
 
     /** @var \Ibexa\Contracts\Core\Repository\UserService */
-    protected $userService;
+    protected UserService $userService;
 
     /**
      * @var bool
      */
-    protected $hasProgressBar;
+    protected bool $hasProgressBar;
 
     /**
      * @var \Symfony\Component\Console\Helper\ProgressBar
      */
-    protected $progressBar;
+    protected ProgressBar $progressBar;
 
     /**
-     * @var OutputInterface
+     * @var \Symfony\Component\Console\Output\OutputInterface
      */
     protected OutputInterface $output;
 
@@ -87,39 +87,36 @@ abstract class AbstractMultiProcessComand extends Command
 
     public function configure(): void
     {
-        $this->addOption(
-            'user',
-            'u',
-            InputOption::VALUE_REQUIRED,
-            'Ibexa DXP username',
-            'admin'
-        )
-            ->addOption(
+        $this->
+            addOption(
+                'user',
+                'u',
+                InputOption::VALUE_REQUIRED,
+                'Ibexa DXP username',
+                'admin'
+            )->addOption(
                 'dry-run',
                 null,
                 InputOption::VALUE_NONE,
                 'Run the converter without writing anything to the database'
-            )
-            ->addOption(
+            )->addOption(
                 'no-progress',
                 null,
                 InputOption::VALUE_NONE,
                 'Disable the progress bar.'
-            )
-            ->addOption(
+            )->addOption(
                 'processes',
                 null,
                 InputOption::VALUE_OPTIONAL,
                 'Number of child processes to run in parallel for iterations, if set to "auto" it will set to number of CPU cores -1, set to "1" or "0" to disable [default: "auto"]',
                 1
-            )
-                ->addOption(
-                    'iteration-count',
-                    null,
-                    InputOption::VALUE_OPTIONAL,
-                    'Number of objects to process in a single iteration. Set to avoid using too much memory [default: 10000]',
-                    10000
-                );
+            )->addOption(
+                'iteration-count',
+                null,
+                InputOption::VALUE_OPTIONAL,
+                'Number of objects to process in a single iteration. Set to avoid using too much memory [default: 10000]',
+                10000
+            );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -177,16 +174,17 @@ abstract class AbstractMultiProcessComand extends Command
     abstract protected function getObjectCount(): int;
 
     /**
-     * This method should process the subset of data, specified by the cursor
-     * 
+     * This method should process the subset of data, specified by the cursor.
+     *
      * @param mixed $cursor
+     *
      * @return mixed
      */
     abstract protected function processData(mixed $cursor);
 
     /**
      * This method is called once in every child process. It should return a cursor based on the input parameters
-     * to the subprocess command
+     * to the subprocess command.
      *
      * @return mixed
      */
@@ -194,16 +192,17 @@ abstract class AbstractMultiProcessComand extends Command
 
     /**
      * This method should return the command arguments that should be added when launching a new child process. It will
-     * typically be the arguments needed in order to construct the Cursor for the child process
+     * typically be the arguments needed in order to construct the Cursor for the child process.
      *
      * @param mixed $cursor
+     *
      * @return array
      */
     abstract protected function addChildProcessArguments(mixed $cursor): array;
 
     /**
      * The method should return true if the current process is a child process. This is typically detected using the
-     * custom command arguments used when launching a child proccess
+     * custom command arguments used when launching a child proccess.
      *
      * @return bool
      */
@@ -217,7 +216,7 @@ abstract class AbstractMultiProcessComand extends Command
     abstract protected function iterate(): void;
 
     /**
-     * This method is called when all data has been completed successfully
+     * This method is called when all data has been completed successfully.
      */
     abstract protected function completed(): void;
 

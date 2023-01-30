@@ -150,5 +150,5 @@ services:
         autoconfigure: true
 
     Ibexa\FieldTypeRichText\Persistence\Legacy\ContentModelGateway:
-        autowire: true
-        autoconfigure: true
+        arguments:
+            $connection: '@ibexa.persistence.connection'
