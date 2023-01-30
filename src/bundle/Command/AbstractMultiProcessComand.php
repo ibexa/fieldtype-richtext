@@ -75,7 +75,7 @@ abstract class AbstractMultiProcessComand extends Command
     public function __construct(
         string $name = null,
         PermissionResolver $permissionResolver,
-        UserService $userService,
+        UserService $userService
     ) {
         $this->permissionResolver = $permissionResolver;
         $this->userService = $userService;

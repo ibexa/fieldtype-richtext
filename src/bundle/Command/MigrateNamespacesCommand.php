@@ -27,7 +27,7 @@ final class MigrateNamespacesCommand extends AbstractMultiProcessComand
     public function __construct(
         PermissionResolver $permissionResolver,
         UserService $userService,
-        Gateway $gateway,
+        Gateway $gateway
     ) {
         parent::__construct('ibexa:migrate:richtext-namespaces', $permissionResolver, $userService);
         $this->gateway = $gateway;
