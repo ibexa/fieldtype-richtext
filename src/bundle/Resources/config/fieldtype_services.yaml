@@ -146,11 +146,8 @@ services:
             - '@ibexa.config.resolver'
 
     Ibexa\Bundle\FieldTypeRichText\Command\MigrateNamespacesCommand:
-#        class: Ibexa\Bundle\FieldTypeRichText\Command\MigrateNamespacesCommand
         autowire: true
         autoconfigure: true
-#        tags: ['console.command']
-#         ./bin/console ibexa:migrate:richtext-namespaces 2>&1 |grep -v "User"
 
     Ibexa\FieldTypeRichText\Persistence\Legacy\ContentModelGateway:
         autowire: true
