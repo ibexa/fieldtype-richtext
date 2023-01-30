@@ -19,7 +19,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Process\PhpExecutableFinder;
 use Symfony\Component\Process\Process;
 
-abstract class MultiprocessComand extends Command
+abstract class AbstractMultiProcessComand extends Command
 {
     /** @var \Ibexa\Contracts\Core\Repository\PermissionResolver */
     protected $permissionResolver;
