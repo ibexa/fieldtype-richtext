@@ -72,9 +72,10 @@ final class MigrateNamespacesCommand extends AbstractMultiProcessComand
     protected function getObjectCount(): int
     {
         if ($this->objectCount === null) {
-            $this->output->writeln("Fetching number of objects to process. This might take several minutes if you are have many records in ezcontentobject_attribute table.");
+            $this->output->writeln('Fetching number of objects to process. This might take several minutes if you are have many records in ezcontentobject_attribute table.');
             $this->objectCount = $this->gateway->countRichtextAttributes();
         }
+
         return $this->objectCount;
     }
 
