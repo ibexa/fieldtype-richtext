@@ -24,11 +24,14 @@ final class MigrateNamespacesCommand extends AbstractMultiProcessComand
 
     private ?int $cursorStop;
 
+    private ?int $objectCount;
+
     public function __construct(
         PermissionResolver $permissionResolver,
         UserService $userService,
         Gateway $gateway
     ) {
+        $this->objectCount = null;
         parent::__construct('ibexa:migrate:richtext-namespaces', $permissionResolver, $userService);
         $this->gateway = $gateway;
     }
@@ -68,7 +71,11 @@ final class MigrateNamespacesCommand extends AbstractMultiProcessComand
 
     protected function getObjectCount(): int
     {
-        return $this->gateway->countRichtextAttributes();
+        if ($this->objectCount === null) {
+            $this->output->writeln("Fetching number of objects to process. This might take several minutes if you are have many records in ezcontentobject_attribute table.");
+            $this->objectCount = $this->gateway->countRichtextAttributes();
+        }
+        return $this->objectCount;
     }
 
     protected function iterate(): void
