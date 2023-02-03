@@ -62,6 +62,23 @@
       </zeroOrMore>
     </define>
 
+    <!-- Adding 'arabicleadingzero' to db.orderedlist.numeration.enumeration as this is exposed in editor from Ibexa DXP 4.0 -->
+    <define name="db.orderedlist.numeration.enumeration">
+      <choice>
+        <value>arabic</value>
+        <a:documentation>Specifies Arabic numeration (1, 2, 3, …)</a:documentation>
+        <value>arabicleadingzero</value>
+        <a:documentation>Specifies Arabic numeration with leading zero(01, 02, 03, …)</a:documentation>
+        <value>upperalpha</value>
+        <a:documentation>Specifies upper-case alphabetic numeration (A, B, C, …)</a:documentation>
+        <value>loweralpha</value>
+        <a:documentation>Specifies lower-case alphabetic numeration (a, b, c, …)</a:documentation>
+        <value>upperroman</value>
+        <a:documentation>Specifies upper-case Roman numeration (I, II, III, …)</a:documentation>
+        <value>lowerroman</value>
+        <a:documentation>Specifies lower-case Roman numeration (i, ii, iii …)</a:documentation>
+      </choice>
+    </define>
     <define name="db.orderedlist">
       <element name="orderedlist">
         <a:documentation>A list in which each entry is marked with a sequentially incremented label</a:documentation>

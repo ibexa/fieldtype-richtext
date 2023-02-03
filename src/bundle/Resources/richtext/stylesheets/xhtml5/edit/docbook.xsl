@@ -344,6 +344,16 @@
           <xsl:value-of select="@class"/>
         </xsl:attribute>
       </xsl:if>
+      <xsl:if test="@style">
+        <xsl:attribute name="numeration">
+          <xsl:if test="@style = 'list-style-type:decimal;'">arabic</xsl:if>
+          <xsl:if test="@style = 'list-style-type:decimal-leading-zero;'">arabicleadingzero</xsl:if>
+          <xsl:if test="@style = 'list-style-type:lower-roman;'">lowerroman</xsl:if>
+          <xsl:if test="@style = 'list-style-type:upper-roman;'">upperroman</xsl:if>
+          <xsl:if test="@style = 'list-style-type:lower-latin;'">loweralpha</xsl:if>
+          <xsl:if test="@style = 'list-style-type:upper-latin;'">upperalpha</xsl:if>
+        </xsl:attribute>
+      </xsl:if>
       <xsl:call-template name="ezattribute"/>
       <xsl:apply-templates/>
     </orderedlist>
@@ -359,6 +369,14 @@
       <xsl:if test="@class">
         <xsl:attribute name="ezxhtml:class">
           <xsl:value-of select="@class"/>
+        </xsl:attribute>
+      </xsl:if>
+      <xsl:if test="contains( @style, 'list-style-type:' )">
+        <xsl:attribute name="mark">
+          <xsl:call-template name="extractStyleValue">
+            <xsl:with-param name="style" select="@style"/>
+            <xsl:with-param name="property" select="'list-style-type'"/>
+          </xsl:call-template>
         </xsl:attribute>
       </xsl:if>
       <xsl:call-template name="ezattribute"/>
