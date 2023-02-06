@@ -14,8 +14,10 @@ use Ibexa\Contracts\Core\Repository\LocationService;
 use Ibexa\Contracts\FieldTypeRichText\RichText\RendererInterface;
 use Ibexa\Core\MVC\Symfony\Routing\UrlAliasRouter;
 use Ibexa\FieldTypeRichText\RichText\Converter\Aggregate;
+use Ibexa\FieldTypeRichText\RichText\Converter\EzNoNamespace;
 use Ibexa\FieldTypeRichText\RichText\Converter\Link;
 use Ibexa\FieldTypeRichText\RichText\Converter\Render\Template;
+use Ibexa\FieldTypeRichText\RichText\Converter\Xslt;
 use PHPUnit\Framework\TestCase;
 
 class AggregateTest extends TestCase
@@ -96,6 +98,114 @@ class AggregateTest extends TestCase
 </section>',
             ],
         ];
+    }
+
+    public function providerConvertDocbookToHtmlEditWithEznoNamespace(): array
+    {
+        return [
+            [
+                '<?xml version="1.0" encoding="UTF-8"?>
+<section xmlns="http://docbook.org/ns/docbook" xmlns:ezcustom="http://ez.no/xmlns/ezpublish/docbook/custom" xmlns:ezxhtml="http://ez.no/xmlns/ezpublish/docbook/xhtml" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0-variant ezpublish-1.0">
+    <para ezxhtml:class="custom_class">
+        This is some text in custom_class with
+        <emphasis>something in bold</emphasis>
+        and the end.
+    </para>
+</section>
+',
+                '<?xml version="1.0" encoding="UTF-8"?>
+<section xmlns="http://ibexa.co/namespaces/ezpublish5/xhtml5/edit">
+    <p class="custom_class">
+        This is some text in custom_class with
+        <em>something in bold</em>
+        and the end.
+    </p>
+</section>
+',
+            ],
+        ];
+    }
+
+    /**
+     * @dataProvider providerConvertDocbookToHtmlEditWithEznoNamespace
+     */
+    public function testConvertDocbookToHtmlEditWithEznoNamespace(string $input, string $expectedOutput): void
+    {
+        $xmlDocument = new DOMDocument();
+        $xmlDocument->loadXML($input);
+
+        $eznoNamespaceConverter = new EzNoNamespace();
+        $xsltConverter = new Xslt(
+            __DIR__ . '/../../../../src/bundle/Resources/richtext/stylesheets/docbook/xhtml5/edit/xhtml5.xsl',
+            [
+                [
+                    'path' => __DIR__ . '/../../../../src/bundle/Resources/richtext/stylesheets/docbook/xhtml5/edit/core.xsl',
+                    'priority' => 100,
+                ],
+            ]
+        );
+
+        $aggregate = new Aggregate([$eznoNamespaceConverter, $xsltConverter]);
+
+        $output = $aggregate->convert($xmlDocument);
+
+        $expectedOutputDocument = new DOMDocument();
+        $expectedOutputDocument->loadXML($expectedOutput);
+        $this->assertEquals($expectedOutputDocument, $output, 'Xml is not converted as expected');
+    }
+
+    public function providerConvertDocbookToHtmlOutputWithEznoNamespace(): array
+    {
+        return [
+            [
+                '<?xml version="1.0" encoding="UTF-8"?>
+<section xmlns="http://docbook.org/ns/docbook" xmlns:ezcustom="http://ez.no/xmlns/ezpublish/docbook/custom" xmlns:ezxhtml="http://ez.no/xmlns/ezpublish/docbook/xhtml" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0-variant ezpublish-1.0">
+    <para ezxhtml:class="custom_class">
+        This is some text in custom_class with
+        <emphasis>something in bold</emphasis>
+        and the end.
+    </para>
+</section>
+',
+                '<?xml version="1.0" encoding="UTF-8"?>
+<section xmlns="http://ibexa.co/namespaces/ezpublish5/xhtml5">
+    <p class="custom_class">
+        This is some text in custom_class with
+        <em>something in bold</em>
+        and the end.
+    </p>
+</section>
+',
+            ],
+        ];
+    }
+
+    /**
+     * @dataProvider providerConvertDocbookToHtmlOutputWithEznoNamespace
+     */
+    public function testConvertDocbookToHtmlOutputWithEznoNamespace(string $input, string $expectedOutput): void
+    {
+        $xmlDocument = new DOMDocument();
+        $xmlDocument->loadXML($input);
+
+        $eznoNamespaceConverter = new EzNoNamespace();
+        $xsltConverter = new Xslt(
+            __DIR__ . '/../../../../src/bundle/Resources/richtext/stylesheets/docbook/xhtml5/output/xhtml5.xsl',
+            [
+                [
+                    'path' => __DIR__ . '/../../../../src/bundle/Resources/richtext/stylesheets/docbook/xhtml5/output/core.xsl',
+                    'priority' => 100,
+                ],
+            ]
+        );
+
+        $aggregate = new Aggregate([$eznoNamespaceConverter, $xsltConverter]);
+
+        $output = $aggregate->convert($xmlDocument);
+
+        $expectedOutputDocument = new DOMDocument();
+        $expectedOutputDocument->loadXML($expectedOutput);
+        $this->assertEquals($expectedOutputDocument, $output, 'Xml is not converted as expected');
     }
 }
 
