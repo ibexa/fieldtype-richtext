@@ -6,12 +6,12 @@ services:
 
     Ibexa\FieldTypeRichText\Form\Type\RichTextFieldType:
         arguments:
-            $docbookToXhtml5EditConverter: '@Ibexa\FieldTypeRichText\RichText\Converter\Html5Edit'
+            $docbookToXhtml5EditConverter: '@ibexa.richtext.converter.edit.xhtml5'
             $fieldTypeService: '@ibexa.api.service.field_type'
 
     Ibexa\FieldTypeRichText\Form\Type\RichTextType:
         arguments:
-            $docbookToXhtml5EditConverter: '@Ibexa\FieldTypeRichText\RichText\Converter\Html5Edit'
+            $docbookToXhtml5EditConverter: '@ibexa.richtext.converter.edit.xhtml5'
 
     Ibexa\FieldTypeRichText\Validator\Constraints\RichTextValidator:
         tags:

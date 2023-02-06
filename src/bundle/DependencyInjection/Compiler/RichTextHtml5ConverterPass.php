@@ -37,6 +37,14 @@ class RichTextHtml5ConverterPass implements CompilerPassInterface
             );
             $this->setConverterDefinitions($taggedInputServiceIds, $html5InputConverterDefinition);
         }
+
+        if ($container->hasDefinition('ibexa.richtext.converter.edit.xhtml5')) {
+            $html5EditConverterDefinition = $container->getDefinition('ibexa.richtext.converter.edit.xhtml5');
+            $taggedInputServiceIds = $container->findTaggedServiceIds(
+                'ibexa.field_type.richtext.converter.edit.xhtml5'
+            );
+            $this->setConverterDefinitions($taggedInputServiceIds, $html5EditConverterDefinition);
+        }
     }
 
     /**

@@ -6,6 +6,6 @@ services:
 
     Ibexa\FieldTypeRichText\REST\FieldTypeProcessor\RichTextProcessor:
         arguments:
-            - '@Ibexa\FieldTypeRichText\RichText\Converter\Html5Edit'
+            - '@ibexa.richtext.converter.edit.xhtml5'
         tags:
             - { name: ibexa.rest.field_type.processor, alias: ezrichtext }

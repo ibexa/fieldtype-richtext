@@ -139,11 +139,26 @@ services:
         tags:
             - {name: ibexa.field_type.richtext.converter.input.xhtml5, priority: 10}
 
+    # Aggregate converter for XHTML5 edit that other converters register to
+    # through 'ibexa.field_type.richtext.converter.edit.xhtml5' service tag.
+    ibexa.richtext.converter.edit.xhtml5:
+        class: Ibexa\FieldTypeRichText\RichText\Converter\Aggregate
+        lazy: true
+
     Ibexa\FieldTypeRichText\RichText\Converter\Html5Edit:
         class: Ibexa\FieldTypeRichText\RichText\Converter\Html5Edit
         arguments:
             - '%ibexa.field_type.richtext.converter.edit.xhtml5.resources%'
             - '@ibexa.config.resolver'
+        tags:
+            - {name: ibexa.field_type.richtext.converter.edit.xhtml5, priority: 100}
+
+    # Note: should run before xsl transformation
+    Ibexa\FieldTypeRichText\RichText\Converter\EzNoNamespace:
+        class: Ibexa\FieldTypeRichText\RichText\Converter\EzNoNamespace
+        tags:
+            - {name: ibexa.field_type.richtext.converter.output.xhtml5, priority: -15}
+            - {name: ibexa.field_type.richtext.converter.edit.xhtml5, priority: -15}
 
     Ibexa\Bundle\FieldTypeRichText\Command\MigrateNamespacesCommand:
         autowire: true
