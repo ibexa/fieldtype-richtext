@@ -123,6 +123,32 @@ class AggregateTest extends TestCase
 </section>
 ',
             ],
+            [
+                '<?xml version="1.0" encoding="UTF-8"?>
+<section xmlns="http://docbook.org/ns/docbook" xmlns:ezcustom="http://ez.no/xmlns/ezpublish/docbook/custom" xmlns:ezxhtml="http://ez.no/xmlns/ezpublish/docbook/xhtml" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0-variant ezpublish-1.0">
+    <para ezxhtml:class="custom_class">
+        This is some text
+    </para>
+    <ezembed xlink:href="ezcontent://78" view="embed" ezxhtml:class="ez-embed-type-image">
+      <ezconfig>
+         <ezvalue key="size">medium</ezvalue>
+      </ezconfig>
+   </ezembed>
+</section>
+',
+                '<?xml version="1.0" encoding="UTF-8"?>
+<section xmlns="http://ibexa.co/namespaces/ezpublish5/xhtml5/edit">
+    <p class="custom_class">
+        This is some text
+    </p>
+    <div class="ibexa-embed-type-image" data-href="ezcontent://78" data-ezelement="ezembed" data-ezview="embed">
+      <span data-ezelement="ezconfig">
+         <span data-ezelement="ezvalue" data-ezvalue-key="size">medium</span>
+      </span>
+   </div>
+</section>
+',
+            ],
         ];
     }
 
