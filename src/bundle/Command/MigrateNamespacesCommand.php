@@ -136,16 +136,28 @@ final class MigrateNamespacesCommand extends AbstractMultiProcessComand
         return $this->cursorStart !== null || $this->cursorStop !== null;
     }
 
+    public static function migrateNamespaces(string $xmlText)
+    {
+        $xmlText = str_replace('xmlns:ezxhtml="http://ez.no/xmlns/ezpublish/docbook/xhtml"', 'xmlns:ezxhtml="http://ibexa.co/xmlns/dxp/docbook/xhtml"', $xmlText);
+        $xmlText = str_replace('xmlns:ezcustom="http://ez.no/xmlns/ezpublish/docbook/custom"', 'xmlns:ezcustom="http://ibexa.co/xmlns/dxp/docbook/custom"', $xmlText);
+        $xmlText = str_replace('ezxhtml:class="ez-embed-type-image"', 'ezxhtml:class="ibexa-embed-type-image"', $xmlText);
+        $xmlText = str_replace('xmlns:ez="http://ez.no/xmlns/ezpublish/docbook"', 'xmlns:ez="http://ibexa.co/xmlns/ezpublish/docbook"', $xmlText);
+        $xmlText = str_replace('xmlns:a="http://ez.no/xmlns/annotation"', 'xmlns:a="http://ibexa.co/xmlns/annotation"', $xmlText);
+        $xmlText = str_replace('xmlns:m="http://ez.no/xmlns/module"', 'xmlns:m="http://ibexa.co/xmlns/module"', $xmlText);
+
+        return $xmlText;
+    }
+
     protected function updateNamespacesInColumns(int $contentAttributeIdStart, int $contentAttributeIdStop): void
     {
         $contentAttributes = $this->gateway->getContentObjectAttributes($contentAttributeIdStart, $contentAttributeIdStop);
 
         foreach ($contentAttributes as $contentAttribute) {
-            $contentAttribute['data_text'] = str_replace('xmlns:ezxhtml="http://ez.no/xmlns/ezpublish/docbook/xhtml"', 'xmlns:ezxhtml="http://ibexa.co/xmlns/dxp/docbook/xhtml"', $contentAttribute['data_text']);
-            $contentAttribute['data_text'] = str_replace('xmlns:ezcustom="http://ez.no/xmlns/ezpublish/docbook/custom"', 'xmlns:ezcustom="http://ibexa.co/xmlns/dxp/docbook/custom"', $contentAttribute['data_text']);
+            //$orgString = $contentAttribute['data_text'];
+            $newXml = self::migrateNamespaces($contentAttribute['data_text']);
 
-            if (!$this->isDryRun()) {
-                $this->gateway->updateContentObjectAttribute($contentAttribute['data_text'], $contentAttribute['contentobject_id'], $contentAttribute['id'], $contentAttribute['version'], $contentAttribute['language_code']);
+            if (!$this->isDryRun() && ($newXml !== $contentAttribute['data_text'])) {
+                $this->gateway->updateContentObjectAttribute($newXml, $contentAttribute['contentobject_id'], $contentAttribute['id'], $contentAttribute['version'], $contentAttribute['language_code']);
             }
         }
     }
