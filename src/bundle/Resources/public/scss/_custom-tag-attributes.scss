@@ -1,6 +1,7 @@
 .ibexa-custom-tag-attributes {
     .ck.ck-reset_all & {
         min-width: calculateRem(400px);
+        max-width: calc(100vw - #{calculateRem(150px)});
 
         &__header {
             display: flex;
@@ -27,6 +28,7 @@
 
         &__item-value {
             font-size: $ibexa-text-font-size;
+            white-space: normal;
         }
     }
 }
