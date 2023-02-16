@@ -27,6 +27,8 @@
 
         &__item-value {
             font-size: $ibexa-text-font-size;
+            max-width: 400px;
+            overflow: hidden;
         }
     }
 }
