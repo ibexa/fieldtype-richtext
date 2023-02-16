@@ -221,6 +221,10 @@
         border: none;
     }
 
+    &.ck-toolbar-container.ck-balloon-panel {
+        z-index: var(--ck-z-modal) - 1;
+    }
+
     &.ck-toolbar-container &.ck-toolbar {
         border: none;
         background: $ibexa-color-white;
@@ -230,9 +234,5 @@
     &.ck-rounded-corners &.ck-balloon-panel,
     &.ck-balloon-panel.ck-rounded-corners {
         border-radius: $ibexa-border-radius;
-
-        &.ck-balloon-panel_with-arrow {
-            z-index: 2000;
-        }
     }
 }
