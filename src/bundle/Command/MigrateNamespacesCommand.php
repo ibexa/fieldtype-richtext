@@ -18,6 +18,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 final class MigrateNamespacesCommand extends AbstractMultiProcessComand
 {
+    protected static $defaultName = 'ibexa:migrate:richtext-namespaces';
+
     private Gateway $gateway;
 
     private ?int $cursorStart;
@@ -32,7 +34,7 @@ final class MigrateNamespacesCommand extends AbstractMultiProcessComand
         Gateway $gateway
     ) {
         $this->objectCount = null;
-        parent::__construct('ibexa:migrate:richtext-namespaces', $permissionResolver, $userService);
+        parent::__construct(null, $permissionResolver, $userService);
         $this->gateway = $gateway;
     }
 
@@ -40,17 +42,19 @@ final class MigrateNamespacesCommand extends AbstractMultiProcessComand
     {
         parent::configure();
 
-        $this->addOption(
-            'cursor-start',
-            null,
-            InputOption::VALUE_REQUIRED,
-            'Internal option - only used for subprocesses',
-        )
+        $this
+            ->setName(self::$defaultName)
             ->addOption(
-                'cursor-stop',
+                'cursor-start',
                 null,
                 InputOption::VALUE_REQUIRED,
                 'Internal option - only used for subprocesses',
+            )
+            ->addOption(
+                    'cursor-stop',
+                    null,
+                    InputOption::VALUE_REQUIRED,
+                    'Internal option - only used for subprocesses',
             );
     }
 
