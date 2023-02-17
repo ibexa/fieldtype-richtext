@@ -51,10 +51,10 @@ final class MigrateNamespacesCommand extends AbstractMultiProcessComand
                 'Internal option - only used for subprocesses',
             )
             ->addOption(
-                    'cursor-stop',
-                    null,
-                    InputOption::VALUE_REQUIRED,
-                    'Internal option - only used for subprocesses',
+                'cursor-stop',
+                null,
+                InputOption::VALUE_REQUIRED,
+                'Internal option - only used for subprocesses',
             );
     }
 
