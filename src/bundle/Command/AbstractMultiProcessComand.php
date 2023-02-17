@@ -21,20 +21,12 @@ use Symfony\Component\Process\Process;
 
 abstract class AbstractMultiProcessComand extends Command
 {
-    /** @var \Ibexa\Contracts\Core\Repository\PermissionResolver */
     protected PermissionResolver $permissionResolver;
 
-    /** @var \Ibexa\Contracts\Core\Repository\UserService */
     protected UserService $userService;
 
-    /**
-     * @var bool
-     */
     protected bool $hasProgressBar;
 
-    /**
-     * @var \Symfony\Component\Console\Helper\ProgressBar
-     */
     protected ProgressBar $progressBar;
 
     /**
@@ -87,19 +79,21 @@ abstract class AbstractMultiProcessComand extends Command
 
     public function configure(): void
     {
-        $this->
-            addOption(
+        $this
+            ->addOption(
                 'user',
                 'u',
                 InputOption::VALUE_REQUIRED,
                 'Ibexa DXP username',
                 'admin'
-            )->addOption(
+            )
+            ->addOption(
                 'dry-run',
                 null,
                 InputOption::VALUE_NONE,
                 'Run the converter without writing anything to the database'
-            )->addOption(
+            )
+            ->addOption(
                 'no-progress',
                 null,
                 InputOption::VALUE_NONE,
