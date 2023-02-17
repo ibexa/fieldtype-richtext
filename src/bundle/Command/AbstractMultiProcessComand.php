@@ -214,6 +214,22 @@ abstract class AbstractMultiProcessComand extends Command
      */
     abstract protected function completed(): void;
 
+    /**
+     * Anything written to standard output from the subprocess might be processed here
+     * Typically, you may print that on the console.
+     *
+     * @param string $output
+     */
+    abstract protected function processIncrementalOutput(string $output): void;
+
+    /**
+     * Anything written to standard error from the subprocess might be processed here
+     * Typically, you may print that on the console.
+     *
+     * @param string $output
+     */
+    abstract protected function processIncrementalErrorOutput(string $output): void;
+
     public function isDryRun(): bool
     {
         return $this->dryRun;
@@ -255,8 +271,8 @@ abstract class AbstractMultiProcessComand extends Command
                 $itemCount = $p['itemCount'];
 
                 if (!$process->isRunning()) {
-                    $this->output->write($process->getIncrementalOutput());
-                    $this->output->write($process->getIncrementalErrorOutput());
+                    $this->processIncrementalOutput($process->getIncrementalOutput());
+                    $this->processIncrementalErrorOutput($process->getIncrementalErrorOutput());
                     $childEnded = true;
                     $exitStatus = $process->getExitCode();
                     if ($exitStatus !== 0) {
@@ -266,8 +282,8 @@ abstract class AbstractMultiProcessComand extends Command
                     $this->advanceProgressBar($itemCount);
                     break;
                 }
-                $this->output->write($process->getIncrementalOutput());
-                $this->output->write($process->getIncrementalErrorOutput());
+                $this->processIncrementalOutput($process->getIncrementalOutput());
+                $this->processIncrementalErrorOutput($process->getIncrementalErrorOutput());
             }
             if (!$childEnded) {
                 sleep(1);

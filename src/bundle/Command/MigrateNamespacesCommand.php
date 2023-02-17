@@ -28,12 +28,18 @@ final class MigrateNamespacesCommand extends AbstractMultiProcessComand
 
     private ?int $objectCount;
 
+    private int $convertDone;
+
+    private int $convertSkipped;
+
     public function __construct(
         PermissionResolver $permissionResolver,
         UserService $userService,
         Gateway $gateway
     ) {
         $this->objectCount = null;
+        $this->convertDone = 0;
+        $this->convertSkipped = 0;
         parent::__construct(null, $permissionResolver, $userService);
         $this->gateway = $gateway;
     }
@@ -105,6 +111,8 @@ final class MigrateNamespacesCommand extends AbstractMultiProcessComand
     protected function completed(): void
     {
         $this->output->writeln(PHP_EOL . 'Completed');
+        $this->output->writeln("Converted $this->convertDone field attributes(s)");
+        $this->output->writeln("Skipped $this->convertSkipped field attributes(s) which already had correct namespaces");
     }
 
     protected function getNextCursor(array $contentAttributeIDs): ?int
@@ -117,6 +125,10 @@ final class MigrateNamespacesCommand extends AbstractMultiProcessComand
     protected function processData($cursor)
     {
         $this->updateNamespacesInColumns($cursor['start'], $cursor['stop']);
+        if ($this->isChildProcess()) {
+            $this->output->writeln("Converted:$this->convertDone");
+            $this->output->writeln("Skipped:$this->convertSkipped");
+        }
     }
 
     protected function constructCursorFromInputOptions(): mixed
@@ -140,6 +152,27 @@ final class MigrateNamespacesCommand extends AbstractMultiProcessComand
         return $this->cursorStart !== null || $this->cursorStop !== null;
     }
 
+    protected function processIncrementalOutput(string $output): void
+    {
+        if ($output !== '') {
+            $lines = explode(PHP_EOL, $output);
+            foreach ($lines as $line) {
+                if (strpos($line, 'Converted:') === 0) {
+                    $this->convertDone += (int) substr($line, strpos($line, ':') + 1);
+                } elseif (strpos($line, 'Skipped:') === 0) {
+                    $this->convertSkipped += (int) substr($line, strpos($line, ':') + 1);
+                } elseif ($line !== '') {
+                    $this->output->writeln($line);
+                }
+            }
+        }
+    }
+
+    protected function processIncrementalErrorOutput(string $output): void
+    {
+        $this->output->write($output);
+    }
+
     public static function migrateNamespaces(string $xmlText)
     {
         $xmlText = str_replace('xmlns:ezxhtml="http://ez.no/xmlns/ezpublish/docbook/xhtml"', 'xmlns:ezxhtml="http://ibexa.co/xmlns/dxp/docbook/xhtml"', $xmlText);
@@ -160,8 +193,13 @@ final class MigrateNamespacesCommand extends AbstractMultiProcessComand
             //$orgString = $contentAttribute['data_text'];
             $newXml = self::migrateNamespaces($contentAttribute['data_text']);
 
-            if (!$this->isDryRun() && ($newXml !== $contentAttribute['data_text'])) {
-                $this->gateway->updateContentObjectAttribute($newXml, $contentAttribute['contentobject_id'], $contentAttribute['id'], $contentAttribute['version'], $contentAttribute['language_code']);
+            if ($newXml !== $contentAttribute['data_text']) {
+                ++$this->convertDone;
+                if (!$this->isDryRun()) {
+                    $this->gateway->updateContentObjectAttribute($newXml, $contentAttribute['contentobject_id'], $contentAttribute['id'], $contentAttribute['version'], $contentAttribute['language_code']);
+                }
+            } else {
+                ++$this->convertSkipped;
             }
         }
     }
