@@ -10,13 +10,13 @@ on:
 jobs:
     cs-fix:
         name: Run code style check
-        runs-on: "ubuntu-20.04"
+        runs-on: ubuntu-22.04
         strategy:
             matrix:
                 php:
                     - '8.0'
         steps:
-            - uses: actions/checkout@v2
+            - uses: actions/checkout@v3
 
             - name: Setup PHP Action
               uses: shivammathur/setup-php@v2
@@ -26,16 +26,16 @@ jobs:
                   extensions: 'pdo_sqlite, gd'
                   tools: cs2pr
 
-            - uses: "ramsey/composer-install@v1"
+            - uses: ramsey/composer-install@v2
               with:
-                  dependency-versions: "highest"
+                  dependency-versions: highest
 
             - name: Run code style check
               run: composer run-script check-cs -- --format=checkstyle | cs2pr
 
     tests:
         name: Tests
-        runs-on: "ubuntu-20.04"
+        runs-on: ubuntu-22.04
         timeout-minutes: 10
 
         strategy:
@@ -47,7 +47,7 @@ jobs:
                     - '8.1'
 
         steps:
-            - uses: actions/checkout@v2
+            - uses: actions/checkout@v3
 
             - name: Setup PHP Action
               uses: shivammathur/setup-php@v2
@@ -57,9 +57,9 @@ jobs:
                   extensions: pdo_sqlite, gd
                   tools: cs2pr
 
-            - uses: "ramsey/composer-install@v1"
+            - uses: ramsey/composer-install@v2
               with:
-                  dependency-versions: "highest"
+                  dependency-versions: highest
 
             - name: Setup problem matchers for PHPUnit
               run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
@@ -84,7 +84,7 @@ jobs:
                     --health-timeout 5s
                     --health-retries 5
                     --tmpfs /var/lib/postgresql/data
-        runs-on: "ubuntu-20.04"
+        runs-on: ubuntu-22.04
         timeout-minutes: 10
 
         strategy:
@@ -96,7 +96,7 @@ jobs:
                     - '8.1'
 
         steps:
-            -   uses: actions/checkout@v2
+            -   uses: actions/checkout@v3
 
             -   name: Setup PHP Action
                 uses: shivammathur/setup-php@v2
@@ -106,9 +106,9 @@ jobs:
                     extensions: pdo_pgsql, gd
                     tools: cs2pr
 
-            -   uses: "ramsey/composer-install@v1"
+            -   uses: ramsey/composer-install@v2
                 with:
-                    dependency-versions: "highest"
+                    dependency-versions: highest
 
             -   name: Setup problem matchers for PHPUnit
                 run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
@@ -137,7 +137,7 @@ jobs:
                     --health-timeout=5s
                     --health-retries=5
                     --tmpfs=/var/lib/mysql
-        runs-on: "ubuntu-20.04"
+        runs-on: ubuntu-22.04
         timeout-minutes: 10
 
         strategy:
@@ -149,7 +149,7 @@ jobs:
                     - '8.1'
 
         steps:
-            -   uses: actions/checkout@v2
+            -   uses: actions/checkout@v3
 
             -   name: Setup PHP Action
                 uses: shivammathur/setup-php@v2
@@ -159,9 +159,9 @@ jobs:
                     extensions: pdo_mysql, gd
                     tools: cs2pr
 
-            -   uses: "ramsey/composer-install@v1"
+            -   uses: ramsey/composer-install@v2
                 with:
-                    dependency-versions: "highest"
+                    dependency-versions: highest
 
             -   name: Setup problem matchers for PHPUnit
                 run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
@@ -172,8 +172,8 @@ jobs:
                     DATABASE: "mysql://mysql:mysql@127.0.0.1:${{ job.services.mysql.ports[3306] }}/testdb"
     solr-integration:
         name: "Solr integration tests"
-        runs-on: "ubuntu-20.04"
-        timeout-minutes: 30
+        runs-on: ubuntu-22.04
+        timeout-minutes: 10
         permissions:
             packages: read
             contents: read
@@ -187,8 +187,8 @@ jobs:
                     --health-interval 10s
                     --health-timeout 5s
                     --health-retries 10
-        steps:   
-            - uses: actions/checkout@v2
+        steps:
+            - uses: actions/checkout@v3
               with:
                   fetch-depth: 0
 
@@ -197,15 +197,15 @@ jobs:
               with:
                   php-version: 7.4
                   coverage: none
-            
+
             - name: Add solr dependency
               run: |
                 VERSION=$(cat composer.json | jq -r '.extra | ."branch-alias" | ."dev-main"')
                 composer require --no-update "ibexa/solr:$VERSION"
 
-            - uses: "ramsey/composer-install@v1"
+            - uses: ramsey/composer-install@v2
               with:
-                  dependency-versions: "highest"
+                  dependency-versions: highest
 
             - name: Run integration test suite
               run: composer integration-solr
