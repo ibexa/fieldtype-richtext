@@ -70,5 +70,8 @@
         "branch-alias": {
             "dev-main": "4.5.x-dev"
         }
+    },
+    "config": {
+        "allow-plugins": false
     }
 }
