@@ -12,7 +12,7 @@ class IbexaCustomTagUI extends Plugin {
 
         this.balloon = this.editor.plugins.get('ContextualBalloon');
         this.formView = this.createFormView();
-        this.attributesView = this.createAttributesVew();
+        this.attributesView = this.createAttributesView();
 
         this.showForm = this.showForm.bind(this);
         this.addCustomTag = this.addCustomTag.bind(this);
@@ -64,7 +64,7 @@ class IbexaCustomTagUI extends Plugin {
         });
     }
 
-    createAttributesVew() {
+    createAttributesView() {
         const attributesView = new IbexaCustomTagAttributesView({ locale: this.editor.locale });
 
         this.listenTo(attributesView, 'edit-attributes', () => {
@@ -73,6 +73,16 @@ class IbexaCustomTagUI extends Plugin {
         });
 
         return attributesView;
+    }
+
+    reinitAttributesView() {
+        this.attributesView.destroy();
+
+        this.attributesView = this.createAttributesView();
+
+        this.attributesView.setChildren({
+            attributes: this.config.attributes,
+        });
     }
 
     createFormView() {
@@ -99,6 +109,7 @@ class IbexaCustomTagUI extends Plugin {
                 writer.setAttribute('values', newValues, modelElement);
             });
 
+            this.reinitAttributesView();
             this.hideForm();
         });
 
