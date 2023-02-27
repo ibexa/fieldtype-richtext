@@ -169,6 +169,10 @@ class IbexaCustomTagUI extends Plugin {
 
         this.editor.model.change((writer) => {
             writer.remove(modelElement);
+
+            if (this.balloon.hasView(this.attributesView)) {
+                this.hideAttributes();
+            }
         });
     }
 
