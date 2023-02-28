@@ -213,7 +213,7 @@ const VIEWPORT_TOP_OFFSET = 102;
 
                     textarea.value = this.xhtmlify(data).replace(this.xhtmlNamespace, this.ezNamespace);
                     textarea.dispatchEvent(new Event('input'));
-                }
+                };
 
                 updateInput(initialData);
 

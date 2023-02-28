@@ -113,13 +113,14 @@ class IbexaCustomTagEditing extends Plugin {
                 const configElement = viewElement.getChild(1);
                 const configValuesIterator = configElement.getChildren();
                 const customTagName = viewElement.getAttribute('data-ezname');
-                const tagConfig = customTags[customTagName];
+                const tagConfig = customTags[customTagName] ?? {};
                 const values = {};
 
                 for (const configValue of configValuesIterator) {
                     const configName = configValue.getAttribute('data-ezvalue-key');
+                    const configAttributes = tagConfig.attributes ?? {};
 
-                    if (!tagConfig?.attributes?.hasOwnProperty(configName)) {
+                    if (!Object.prototype.hasOwnProperty.call(configAttributes, configName)) {
                         continue;
                     }
 
