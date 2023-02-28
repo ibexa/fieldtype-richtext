@@ -1,0 +1,17 @@
+services:
+    Ibexa\FieldTypeRichText\Persistence\Legacy\MigrateRichTextNamespaces\Gateway\DoctrineDatabase:
+        arguments:
+            $connection: '@ibexa.persistence.connection'
+
+    Ibexa\FieldTypeRichText\Persistence\Legacy\MigrateRichTextNamespaces\Gateway\ExceptionConversion:
+        arguments:
+            $gateway: '@Ibexa\FieldTypeRichText\Persistence\Legacy\MigrateRichTextNamespaces\Gateway\DoctrineDatabase'
+
+    # To disable exception conversion layer override this alias so that it points to inner gateway
+    ibexa.persistence.field_type.rich_text.legacy.gateway:
+        alias: Ibexa\FieldTypeRichText\Persistence\Legacy\MigrateRichTextNamespaces\Gateway\ExceptionConversion
+
+    Ibexa\FieldTypeRichText\Persistence\Legacy\MigrateRichTextNamespaces\Handler:
+        arguments:
+            $gateway: '@ibexa.persistence.field_type.rich_text.legacy.gateway'
+        lazy: true
