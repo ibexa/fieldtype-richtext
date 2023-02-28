@@ -148,4 +148,3 @@ services:
         arguments:
             - '%ibexa.field_type.richtext.converter.edit.xhtml5.resources%'
             - '@ibexa.config.resolver'
-
