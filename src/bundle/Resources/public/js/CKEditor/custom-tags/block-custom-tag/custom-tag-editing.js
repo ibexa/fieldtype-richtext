@@ -26,6 +26,7 @@ class IbexaCustomTagEditing extends Plugin {
     }
 
     defineConverters() {
+        const { customTags } = window.ibexa.richText;
         const { conversion } = this.editor;
 
         conversion.for('editingDowncast').elementToElement({
@@ -112,9 +113,16 @@ class IbexaCustomTagEditing extends Plugin {
                 const configElement = viewElement.getChild(1);
                 const configValuesIterator = configElement.getChildren();
                 const customTagName = viewElement.getAttribute('data-ezname');
+                const tagConfig = customTags[customTagName];
                 const values = {};
 
                 for (const configValue of configValuesIterator) {
+                    const configName = configValue.getAttribute('data-ezvalue-key');
+
+                    if (!tagConfig?.attributes?.hasOwnProperty(configName)) {
+                        continue;
+                    }
+
                     const value = (configValue.getChild(0) && configValue.getChild(0).data) || null;
 
                     values[configValue.getAttribute('data-ezvalue-key')] = value;

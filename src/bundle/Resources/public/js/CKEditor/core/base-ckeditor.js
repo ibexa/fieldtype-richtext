@@ -207,13 +207,20 @@ const VIEWPORT_TOP_OFFSET = 102;
                 },
             }).then((editor) => {
                 this.editor = editor;
-
-                this.editor.model.document.on('change:data', () => {
-                    const data = this.getData();
+                const initialData = this.getData();
+                const updateInput = (data) => {
                     const textarea = container.closest('.ibexa-data-source').querySelector('textarea');
 
                     textarea.value = this.xhtmlify(data).replace(this.xhtmlNamespace, this.ezNamespace);
                     textarea.dispatchEvent(new Event('input'));
+                }
+
+                updateInput(initialData);
+
+                this.editor.model.document.on('change:data', () => {
+                    const data = this.getData();
+
+                    updateInput(data);
                 });
             });
         }
