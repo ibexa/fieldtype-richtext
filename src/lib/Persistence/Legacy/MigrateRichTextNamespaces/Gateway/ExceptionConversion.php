@@ -10,17 +10,17 @@ namespace Ibexa\FieldTypeRichText\Persistence\Legacy\MigrateRichTextNamespaces\G
 
 use Doctrine\DBAL\Exception;
 use Ibexa\Core\Base\Exceptions\DatabaseException;
-use Ibexa\FieldTypeRichText\Persistence\Legacy\MigrateRichTextNamespaces\Gateway;
+use Ibexa\FieldTypeRichText\Persistence\Legacy\MigrateRichTextNamespaces\GatewayInterface;
 use PDOException;
 
 /**
  * @interal
  */
-final class ExceptionConversion extends Gateway
+final class ExceptionConversion implements GatewayInterface
 {
-    private Gateway $gateway;
+    private GatewayInterface $gateway;
 
-    public function __construct(Gateway $gateway)
+    public function __construct(GatewayInterface $gateway)
     {
         $this->gateway = $gateway;
     }

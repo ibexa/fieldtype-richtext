@@ -11,12 +11,10 @@ namespace Ibexa\FieldTypeRichText\Persistence\Legacy\MigrateRichTextNamespaces;
 /**
  * @internal
  */
-abstract class Gateway
+interface GatewayInterface
 {
-    public const CONTENT_ATTRIBUTE_TABLE = 'ezcontentobject_attribute';
-
     /**
      * @param array<string, string> $values
      */
-    abstract public function replaceDataTextAttributeValues(array $values): int;
+    public function replaceDataTextAttributeValues(array $values): int;
 }

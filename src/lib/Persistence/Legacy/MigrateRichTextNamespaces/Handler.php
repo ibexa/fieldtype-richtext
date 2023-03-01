@@ -13,11 +13,11 @@ use Ibexa\FieldTypeRichText\Persistence\MigrateRichTextNamespacesHandlerInterfac
 /**
  * @interal
  */
-class Handler implements MigrateRichTextNamespacesHandlerInterface
+final class Handler implements MigrateRichTextNamespacesHandlerInterface
 {
-    private Gateway $gateway;
+    private GatewayInterface $gateway;
 
-    public function __construct(Gateway $gateway)
+    public function __construct(GatewayInterface $gateway)
     {
         $this->gateway = $gateway;
     }

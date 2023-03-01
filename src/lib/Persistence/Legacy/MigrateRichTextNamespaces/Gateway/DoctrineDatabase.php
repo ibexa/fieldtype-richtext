@@ -9,13 +9,14 @@ declare(strict_types=1);
 namespace Ibexa\FieldTypeRichText\Persistence\Legacy\MigrateRichTextNamespaces\Gateway;
 
 use Doctrine\DBAL\Connection;
-use Ibexa\FieldTypeRichText\Persistence\Legacy\MigrateRichTextNamespaces\Gateway;
+use Ibexa\FieldTypeRichText\Persistence\Legacy\MigrateRichTextNamespaces\GatewayInterface;
 
 /**
  * @internal
  */
-final class DoctrineDatabase extends Gateway
+final class DoctrineDatabase implements GatewayInterface
 {
+    private const CONTENT_ATTRIBUTE_TABLE = 'ezcontentobject_attribute';
     private const FIELD_TYPE_IDENTIFIER = 'ezrichtext';
 
     private Connection $connection;
