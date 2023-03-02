@@ -12,7 +12,6 @@ use Ibexa\Contracts\Core\Repository\ContentService;
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
 use Ibexa\Contracts\Core\Repository\Values\Content\Content;
 use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType;
-use Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition;
 use Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinitionCreateStruct;
 use Ibexa\Contracts\Core\Test\IbexaKernelTestCase;
 use Ibexa\FieldTypeRichText\Persistence\Legacy\MigrateRichTextNamespaces\GatewayInterface;
@@ -82,7 +81,8 @@ final class DoctrineDatabaseTest extends IbexaKernelTestCase
                 'contents',
                 'ezrichtext',
                 'Contents',
-                1)
+                1
+            )
         );
 
         $contentGroup = $this->contentTypeService->loadContentTypeGroupByIdentifier('Content');
