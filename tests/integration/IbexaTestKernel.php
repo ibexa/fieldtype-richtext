@@ -11,7 +11,10 @@ namespace Ibexa\Tests\Integration\FieldTypeRichText;
 use DAMA\DoctrineTestBundle\DAMADoctrineTestBundle;
 use Ibexa\Bundle\FieldTypeRichText\IbexaFieldTypeRichTextBundle;
 use Ibexa\Contracts\Core\Test\IbexaTestKernel as BaseIbexaTestKernel;
+use Ibexa\Core\Persistence\Cache\Identifier\CacheIdentifierGeneratorInterface;
 use Ibexa\FieldTypeRichText\Persistence\Legacy\MigrateRichTextNamespaces\GatewayInterface;
+use Symfony\Component\Cache\Adapter\TagAwareAdapterInterface;
+use Symfony\Component\Config\Loader\LoaderInterface;
 
 final class IbexaTestKernel extends BaseIbexaTestKernel
 {
@@ -28,5 +31,21 @@ final class IbexaTestKernel extends BaseIbexaTestKernel
         yield from parent::getExposedServicesByClass();
 
         yield GatewayInterface::class;
+
+        yield CacheIdentifierGeneratorInterface::class;
+    }
+
+    protected static function getExposedServicesById(): iterable
+    {
+        yield from parent::getExposedServicesById();
+
+        yield 'ibexa.cache_pool' => TagAwareAdapterInterface::class;
+    }
+
+    protected function loadConfiguration(LoaderInterface $loader): void
+    {
+        parent::loadConfiguration($loader);
+
+        $loader->load(dirname(__DIR__) . '/lib/_settings/common.yaml');
     }
 }

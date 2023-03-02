@@ -8,15 +8,12 @@ declare(strict_types=1);
 
 namespace Ibexa\Tests\Integration\FieldTypeRichText\Persistence\Legacy\MigrateRichTextNamespaces\Gateway;
 
-use Ibexa\Contracts\Core\Repository\ContentService;
-use Ibexa\Contracts\Core\Repository\ContentTypeService;
 use Ibexa\Contracts\Core\Repository\Values\Content\Content;
-use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType;
-use Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinitionCreateStruct;
-use Ibexa\Contracts\Core\Test\IbexaKernelTestCase;
+use Ibexa\Core\Persistence\Cache\Identifier\CacheIdentifierGeneratorInterface;
 use Ibexa\FieldTypeRichText\Persistence\Legacy\MigrateRichTextNamespaces\GatewayInterface;
+use Ibexa\Tests\Integration\FieldTypeRichText\BaseRichTextIntegrationTestCase;
 
-final class DoctrineDatabaseTest extends IbexaKernelTestCase
+final class DoctrineDatabaseTest extends BaseRichTextIntegrationTestCase
 {
     private GatewayInterface $gateway;
 
@@ -25,17 +22,14 @@ final class DoctrineDatabaseTest extends IbexaKernelTestCase
      */
     private array $xmlNamespacesMigrationMap;
 
-    private ContentService $contentService;
-
-    private ContentTypeService $contentTypeService;
-
     protected function setUp(): void
     {
+        parent::setUp();
+
         $this->gateway = self::getServiceByClassName(GatewayInterface::class);
         $this->xmlNamespacesMigrationMap = self::getContainer()
             ->getParameter('ibexa.field_type.rich_text.namespaces_migration_map');
-        $this->contentService = self::getContentService();
-        $this->contentTypeService = self::getContentTypeService();
+
         self::setAdministratorUser();
     }
 
@@ -49,9 +43,20 @@ final class DoctrineDatabaseTest extends IbexaKernelTestCase
         XML;
 
         $folder = $this->createRichTextContent($contents);
-        self::assertSame($contents, $folder->getField('contents')->getValue());
+        // sanity check
+        self::assertRichTextFieldValue($contents, $folder);
 
-        $this->gateway->replaceDataTextAttributeValues($this->xmlNamespacesMigrationMap);
+        self::assertGreaterThan(
+            0,
+            $this->gateway->replaceDataTextAttributeValues($this->xmlNamespacesMigrationMap)
+        );
+
+        $this->invalidateContentItemPersistenceCache(
+            $folder->id,
+            $folder->getVersionInfo()->versionNo
+        );
+        $folder = $this->contentService->loadContent($folder->id);
+        self::assertRichTextFieldValue($contents, $folder);
     }
 
     /**
@@ -70,40 +75,16 @@ final class DoctrineDatabaseTest extends IbexaKernelTestCase
         return $this->contentService->publishVersion($contentDraft->getVersionInfo());
     }
 
-    protected function createRichTextContentType(): ContentType
+    private function invalidateContentItemPersistenceCache(int $contentId, int $versionNo): void
     {
-        $createStruct = $this->contentTypeService->newContentTypeCreateStruct('richtext_type');
-        $createStruct->mainLanguageCode = 'eng-US';
-        $createStruct->names = ['eng-US' => 'RichText type'];
+        $cache = self::getContainer()->get('ibexa.cache_pool');
+        $cacheIdentifierGenerator = self::getServiceByClassName(CacheIdentifierGeneratorInterface::class);
 
-        $createStruct->addFieldDefinition(
-            $this->createFieldDefinition(
-                'contents',
-                'ezrichtext',
-                'Contents',
-                1
-            )
-        );
-
-        $contentGroup = $this->contentTypeService->loadContentTypeGroupByIdentifier('Content');
-        $contentTypeDraft = $this->contentTypeService->createContentType($createStruct, [$contentGroup]);
-
-        $this->contentTypeService->publishContentTypeDraft($contentTypeDraft);
-
-        return $this->contentTypeService->loadContentType($contentTypeDraft->id);
-    }
-
-    private function createFieldDefinition(string $fieldIdentifier, string $fieldType, string $fieldName, int $position): FieldDefinitionCreateStruct
-    {
-        $fieldCreate = $this->contentTypeService->newFieldDefinitionCreateStruct(
-            $fieldIdentifier,
-            $fieldType
-        );
-        $fieldCreate->names = ['eng-US' => $fieldName];
-        $fieldCreate->fieldGroup = 'main';
-        $fieldCreate->position = $position;
-        $fieldCreate->isTranslatable = true;
-
-        return $fieldCreate;
+        $cache->invalidateTags([
+            $cacheIdentifierGenerator->generateTag(
+                'content_version',
+                [$contentId, $versionNo]
+            ),
+        ]);
     }
 }
