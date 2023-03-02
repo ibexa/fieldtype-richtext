@@ -69,7 +69,8 @@
         "test": "phpunit -c phpunit.xml",
         "integration": [
             "Composer\\Config::disableProcessTimeout",
-            "phpunit -c phpunit-integration-legacy.xml"
+            "phpunit -c phpunit-integration-legacy.xml",
+            "phpunit -c phpunit-integration.xml"
         ],
         "integration-solr": "phpunit -c phpunit-integration-legacy-solr.xml",
         "phpstan": "phpstan analyse -c phpstan.neon"
