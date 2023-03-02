@@ -44,7 +44,6 @@
         "symfony/proxy-manager-bridge": "^5.3",
         "matthiasnoback/symfony-config-test": "^4.1",
         "matthiasnoback/symfony-dependency-injection-test": "^4.1",
-        "friendsofphp/php-cs-fixer": "^3.0",
         "ibexa/code-style": "^1.0"
     },
     "autoload": {
