@@ -1,4 +1,7 @@
 services:
+    Ibexa\FieldTypeRichText\Persistence\Legacy\MigrateRichTextNamespaces\GatewayInterface:
+        alias: Ibexa\FieldTypeRichText\Persistence\Legacy\MigrateRichTextNamespaces\Gateway\ExceptionConversion
+
     Ibexa\FieldTypeRichText\Persistence\Legacy\MigrateRichTextNamespaces\Gateway\DoctrineDatabase:
         arguments:
             $connection: '@ibexa.persistence.connection'
