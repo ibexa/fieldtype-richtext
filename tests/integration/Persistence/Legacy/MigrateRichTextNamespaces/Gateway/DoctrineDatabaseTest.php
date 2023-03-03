@@ -13,6 +13,9 @@ use Ibexa\Core\Persistence\Cache\Identifier\CacheIdentifierGeneratorInterface;
 use Ibexa\FieldTypeRichText\Persistence\Legacy\MigrateRichTextNamespaces\GatewayInterface;
 use Ibexa\Tests\Integration\FieldTypeRichText\BaseRichTextIntegrationTestCase;
 
+/**
+ * @covers \Ibexa\FieldTypeRichText\Persistence\Legacy\MigrateRichTextNamespaces\Gateway\DoctrineDatabase
+ */
 final class DoctrineDatabaseTest extends BaseRichTextIntegrationTestCase
 {
     private GatewayInterface $gateway;
@@ -33,16 +36,17 @@ final class DoctrineDatabaseTest extends BaseRichTextIntegrationTestCase
         self::setAdministratorUser();
     }
 
-    public function testReplaceDataTextAttributeValues(): void
+    /**
+     * @dataProvider provideDataForTestReplaceDataTextAttributeValues
+     *
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\Exception
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
+     */
+    public function testReplaceDataTextAttributeValues(string $expected, string $contents): void
     {
-        $contents = <<<XML
-        <?xml version="1.0" encoding="UTF-8"?>
-        <section xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ezxhtml="http://ez.no/xmlns/ezpublish/docbook/xhtml" xmlns:ezcustom="http://ez.no/xmlns/ezpublish/docbook/custom" version="5.0-variant ezpublish-1.0">
-            <para><emphasis role="strong">You are now ready to start your project.</emphasis></para>
-        </section>
-        XML;
-
         $folder = $this->createRichTextContent($contents);
+
         // sanity check
         self::assertRichTextFieldValue($contents, $folder);
 
@@ -56,7 +60,29 @@ final class DoctrineDatabaseTest extends BaseRichTextIntegrationTestCase
             $folder->getVersionInfo()->versionNo
         );
         $folder = $this->contentService->loadContent($folder->id);
-        self::assertRichTextFieldValue($contents, $folder);
+
+        self::assertRichTextFieldValue($expected, $folder);
+    }
+
+    /**
+     * @return iterable<array{string, string}>
+     */
+    public function provideDataForTestReplaceDataTextAttributeValues(): iterable
+    {
+        yield [
+            <<<XML
+<?xml version="1.0" encoding="UTF-8"?>
+<section xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ibexa.co/xmlns/annotation" xmlns:m="http://ibexa.co/xmlns/module" xmlns:ez="http://ibexa.co/xmlns/dxp/docbook" xmlns:ezxhtml="http://ibexa.co/xmlns/dxp/docbook/xhtml" xmlns:ezcustom="http://ibexa.co/xmlns/dxp/docbook/custom" version="5.0-variant ezpublish-1.0">
+    <para><emphasis role="strong">You are now ready to start your project.</emphasis></para>
+</section>
+XML,
+<<<XML
+<?xml version="1.0" encoding="UTF-8"?>
+<section xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ez.no/xmlns/annotation" xmlns:m="http://ez.no/xmlns/module" xmlns:ez="http://ez.no/xmlns/ezpublish/docbook" xmlns:ezxhtml="http://ez.no/xmlns/ezpublish/docbook/xhtml" xmlns:ezcustom="http://ez.no/xmlns/ezpublish/docbook/custom" version="5.0-variant ezpublish-1.0">
+    <para><emphasis role="strong">You are now ready to start your project.</emphasis></para>
+</section>
+XML,
+        ];
     }
 
     /**
