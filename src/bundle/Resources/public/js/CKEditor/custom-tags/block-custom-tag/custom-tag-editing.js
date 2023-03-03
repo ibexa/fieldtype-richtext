@@ -76,7 +76,12 @@ class IbexaCustomTagEditing extends Plugin {
                     const domElement = this.toDomElement(domDocument);
 
                     domElement.innerHTML = Object.entries(modelElement.getAttribute('values')).reduce((total, [attribute, value]) => {
-                        const attributeValue = value !== null ? value : '';
+                        // Escaping
+                        // <script>alert("Hello! I am a script!");</script> --> &lt;script&gt;alert("Hello! I am a script!");&lt;/script&gt;
+                        const stringTempNode = domDocument.createElement('div');
+                        stringTempNode.appendChild(domDocument.createTextNode(value !== null ? value : ''));
+                        const attributeValue = stringTempNode.innerHTML;
+
                         const ezvalue = `<span data-ezelement="ezvalue" data-ezvalue-key="${attribute}">${attributeValue}</span>`;
 
                         return `${total}${ezvalue}`;
