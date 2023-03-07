@@ -12,9 +12,7 @@ use Ibexa\Tests\Integration\FieldTypeRichText\IbexaTestKernel;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArrayInput;
 
-require dirname(__DIR__, 2) . '/vendor/autoload.php';
-
-//chdir(__DIR__ . '/fieldtype-richtext');
+require_once dirname(__DIR__, 2) . '/vendor/autoload.php';
 
 $kernel = new IbexaTestKernel('test', true);
 $kernel->boot();
