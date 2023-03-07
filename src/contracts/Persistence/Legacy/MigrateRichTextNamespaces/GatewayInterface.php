@@ -6,15 +6,15 @@
  */
 declare(strict_types=1);
 
-namespace Ibexa\FieldTypeRichText\Persistence\Legacy\MigrateRichTextNamespaces;
+namespace Ibexa\Contracts\FieldTypeRichText\Persistence\Legacy\MigrateRichTextNamespaces;
 
 /**
- * @internal
+ * @internal used only for RichText namespaces migration purposes
  */
 interface GatewayInterface
 {
     /**
      * @param array<string, string> $values
      */
-    public function replaceDataTextAttributeValues(array $values): int;
+    public function migrate(array $values): int;
 }

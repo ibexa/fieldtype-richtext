@@ -9,17 +9,15 @@ declare(strict_types=1);
 namespace Ibexa\FieldTypeRichText\Persistence\Legacy\MigrateRichTextNamespaces\Gateway;
 
 use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\Query\QueryBuilder;
-use Ibexa\FieldTypeRichText\Persistence\Legacy\MigrateRichTextNamespaces\GatewayInterface;
+use Ibexa\Contracts\FieldTypeRichText\Persistence\Legacy\MigrateRichTextNamespaces\AbstractGateway;
 
 /**
  * @internal
  */
-final class DoctrineDatabase implements GatewayInterface
+final class DoctrineDatabase extends AbstractGateway
 {
-    private const CONTENT_ATTRIBUTE_TABLE = 'ezcontentobject_attribute';
-
-    private const COLUMN_DATA_TEXT_NAME = 'data_text';
+    private const TABLE_CONTENT_ATTRIBUTE = 'ezcontentobject_attribute';
+    private const COLUMN_DATA_TEXT = 'data_text';
     private const FIELD_TYPE_IDENTIFIER = 'ezrichtext';
 
     private Connection $connection;
@@ -29,19 +27,14 @@ final class DoctrineDatabase implements GatewayInterface
         $this->connection = $connection;
     }
 
-    /**
-     * @param array<string, string> $values
-     *
-     * @throws \Doctrine\DBAL\Exception
-     */
-    public function replaceDataTextAttributeValues(array $values): int
+    public function migrate(array $values): int
     {
         $qb = $this->connection->createQueryBuilder();
         $qb
-            ->update(self::CONTENT_ATTRIBUTE_TABLE)
+            ->update(self::TABLE_CONTENT_ATTRIBUTE)
             ->set(
-                self::COLUMN_DATA_TEXT_NAME,
-                $this->addReplaceStatements($qb, self::COLUMN_DATA_TEXT_NAME, $values)
+                self::COLUMN_DATA_TEXT,
+                $this->addReplaceStatement($qb, self::COLUMN_DATA_TEXT, $values)
             )
             ->andWhere(
                 $qb->expr()->eq(
@@ -53,34 +46,5 @@ final class DoctrineDatabase implements GatewayInterface
             );
 
         return (int)$qb->execute();
-    }
-
-    /**
-     * @param array<string, string> $values
-     */
-    private function addReplaceStatements(
-        QueryBuilder $queryBuilder,
-        string $columnName,
-        array $values
-    ): string {
-        $replaceStatements = '';
-
-        foreach ($values as $oldValue => $newValue) {
-            $oldParam = $queryBuilder->createPositionalParameter($oldValue);
-            $newParam = $queryBuilder->createPositionalParameter($newValue);
-            $replaceStatements = "REPLACE($columnName, $oldParam, $newParam)";
-
-            if (false !== next($values)) {
-                unset($values[$oldValue]);
-
-                return $this->addReplaceStatements(
-                    $queryBuilder,
-                    $replaceStatements,
-                    $values
-                );
-            }
-        }
-
-        return $replaceStatements;
     }
 }
