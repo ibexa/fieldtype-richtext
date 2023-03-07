@@ -14,6 +14,7 @@ use Ibexa\Contracts\Core\Repository\Values\Content\Content;
 use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType;
 use Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinitionCreateStruct;
 use Ibexa\Contracts\Core\Test\IbexaKernelTestCase;
+use Ibexa\FieldTypeRichText\FieldType\RichText\Value;
 
 abstract class BaseRichTextIntegrationTestCase extends IbexaKernelTestCase
 {
@@ -73,8 +74,14 @@ abstract class BaseRichTextIntegrationTestCase extends IbexaKernelTestCase
 
     protected static function assertRichTextFieldValue(string $contents, Content $folder): void
     {
-        /** @var \Ibexa\FieldTypeRichText\FieldType\RichText\Value $actualValue */
-        $actualValue = $folder->getField(self::FIELD_DEFINITION_IDENTIFIER)->getValue();
-        self::assertSame($contents, trim($actualValue->xml->saveXML()));
+        $field = $folder->getField(self::FIELD_DEFINITION_IDENTIFIER);
+        self::assertNotNull($field, 'Missing field with identifier: ' . self::FIELD_DEFINITION_IDENTIFIER);
+
+        $value = $field->getValue();
+        self::assertInstanceOf(Value::class, $value);
+
+        $xml = $value->xml->saveXML();
+        self::assertIsString($xml);
+        self::assertSame($contents, trim($xml));
     }
 }

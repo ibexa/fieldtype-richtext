@@ -11,8 +11,8 @@ namespace Ibexa\Tests\Integration\FieldTypeRichText;
 use DAMA\DoctrineTestBundle\DAMADoctrineTestBundle;
 use Ibexa\Bundle\FieldTypeRichText\IbexaFieldTypeRichTextBundle;
 use Ibexa\Contracts\Core\Test\IbexaTestKernel as BaseIbexaTestKernel;
+use Ibexa\Contracts\FieldTypeRichText\Persistence\Legacy\MigrateRichTextNamespaces\GatewayInterface;
 use Ibexa\Core\Persistence\Cache\Identifier\CacheIdentifierGeneratorInterface;
-use Ibexa\FieldTypeRichText\Persistence\Legacy\MigrateRichTextNamespaces\GatewayInterface;
 use Symfony\Component\Cache\Adapter\TagAwareAdapterInterface;
 use Symfony\Component\Config\Loader\LoaderInterface;
 
