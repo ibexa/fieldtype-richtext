@@ -26,8 +26,10 @@ final class MigrateRichTextNamespacesCommand extends Command
     /**
      * @param array<string, string> $xmlNamespacesMap
      */
-    public function __construct(Handler $handler, array $xmlNamespacesMap)
-    {
+    public function __construct(
+        Handler $handler,
+        array $xmlNamespacesMap
+    ) {
         parent::__construct();
 
         $this->handler = $handler;
@@ -38,7 +40,9 @@ final class MigrateRichTextNamespacesCommand extends Command
     {
         $io = new SymfonyStyle($input, $output);
 
-        $replacedNamespaces = $this->handler->replaceXMLNamespaces($this->xmlNamespacesMap);
+        $io->info('Starting namespaces migration process...');
+
+        $replacedNamespaces = $this->handler->migrateXMLNamespaces($this->xmlNamespacesMap);
 
         if ($replacedNamespaces > 0) {
             $io->success("Updated $replacedNamespaces field attributes(s)");

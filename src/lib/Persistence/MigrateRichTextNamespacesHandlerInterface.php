@@ -16,5 +16,5 @@ interface MigrateRichTextNamespacesHandlerInterface
     /**
      * @param array<string, string> $values
      */
-    public function replaceXMLNamespaces(array $values): int;
+    public function migrateXMLNamespaces(array $values): int;
 }

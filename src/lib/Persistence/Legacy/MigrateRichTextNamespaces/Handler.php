@@ -15,15 +15,25 @@ use Ibexa\FieldTypeRichText\Persistence\MigrateRichTextNamespacesHandlerInterfac
  */
 final class Handler implements MigrateRichTextNamespacesHandlerInterface
 {
-    private GatewayInterface $gateway;
+    /** @var iterable<\Ibexa\Contracts\FieldTypeRichText\Persistence\Legacy\MigrateRichTextNamespaces\GatewayInterface> */
+    private iterable $gateways;
 
-    public function __construct(GatewayInterface $gateway)
+    /**
+     * @param iterable<\Ibexa\Contracts\FieldTypeRichText\Persistence\Legacy\MigrateRichTextNamespaces\GatewayInterface> $gateways
+     */
+    public function __construct(iterable $gateways)
     {
-        $this->gateway = $gateway;
+        $this->gateways = $gateways;
     }
 
-    public function replaceXMLNamespaces(array $values): int
+    public function migrateXMLNamespaces(array $values): int
     {
-        return $this->gateway->replaceDataTextAttributeValues($values);
+        $counter = 0;
+
+        foreach ($this->gateways as $gateway) {
+            $counter += $gateway->migrate($values);
+        }
+
+        return $counter;
     }
 }
