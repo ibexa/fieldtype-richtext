@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace Ibexa\Bundle\FieldTypeRichText\Command;
 
 use Ibexa\FieldTypeRichText\Persistence\Legacy\MigrateRichTextNamespaces\Handler;
+use Symfony\Component\Cache\Adapter\TagAwareAdapterInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -20,6 +21,8 @@ final class MigrateRichTextNamespacesCommand extends Command
 
     private Handler $handler;
 
+    private TagAwareAdapterInterface $cache;
+
     /** @var array<string, string> */
     private array $xmlNamespacesMap;
 
@@ -28,12 +31,14 @@ final class MigrateRichTextNamespacesCommand extends Command
      */
     public function __construct(
         Handler $handler,
-        array $xmlNamespacesMap
+        array $xmlNamespacesMap,
+        TagAwareAdapterInterface $cache
     ) {
         parent::__construct();
 
         $this->handler = $handler;
         $this->xmlNamespacesMap = $xmlNamespacesMap;
+        $this->cache = $cache;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -46,6 +51,8 @@ final class MigrateRichTextNamespacesCommand extends Command
 
         if ($replacedNamespaces > 0) {
             $io->success("Updated $replacedNamespaces field attributes(s)");
+
+            $this->cache->clear();
 
             return self::SUCCESS;
         }
