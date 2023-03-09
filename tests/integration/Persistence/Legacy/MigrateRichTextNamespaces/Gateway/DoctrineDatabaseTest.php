@@ -20,9 +20,7 @@ final class DoctrineDatabaseTest extends BaseRichTextIntegrationTestCase
 {
     private GatewayInterface $gateway;
 
-    /**
-     * @var array<string, string>
-     */
+    /** @var array<string, string> */
     private array $xmlNamespacesMigrationMap;
 
     protected function setUp(): void
@@ -35,13 +33,13 @@ final class DoctrineDatabaseTest extends BaseRichTextIntegrationTestCase
     }
 
     /**
-     * @dataProvider provideDataForTestReplaceDataTextAttributeValues
+     * @dataProvider provideDataForTestMigrate
      *
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\Exception
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
      */
-    public function testReplaceDataTextAttributeValues(string $expected, string $contents): void
+    public function testMigrate(string $expected, string $contents): void
     {
         $folder = $this->createRichTextContent($contents);
 
@@ -65,7 +63,7 @@ final class DoctrineDatabaseTest extends BaseRichTextIntegrationTestCase
     /**
      * @return iterable<array{string, string}>
      */
-    public function provideDataForTestReplaceDataTextAttributeValues(): iterable
+    public function provideDataForTestMigrate(): iterable
     {
         yield [
             <<<XML
@@ -88,9 +86,10 @@ XML,
      */
     private function getXmlNamespacesMigrationMapParameter(): array
     {
-        /** @var array<string, string> $xmlNamespacesMigrationMap */
         $xmlNamespacesMigrationMap = self::getContainer()
             ->getParameter('ibexa.field_type.rich_text.namespaces_migration_map');
+
+        self::assertIsArray($xmlNamespacesMigrationMap);
 
         return $xmlNamespacesMigrationMap;
     }
