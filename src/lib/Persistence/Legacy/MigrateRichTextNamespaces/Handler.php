@@ -11,7 +11,7 @@ namespace Ibexa\FieldTypeRichText\Persistence\Legacy\MigrateRichTextNamespaces;
 use Ibexa\FieldTypeRichText\Persistence\MigrateRichTextNamespacesHandlerInterface;
 
 /**
- * @interal
+ * @internal
  */
 final class Handler implements MigrateRichTextNamespacesHandlerInterface
 {
