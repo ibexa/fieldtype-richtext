@@ -32,7 +32,6 @@
     },
     "require-dev": {
         "dama/doctrine-test-bundle": "^6.7.5",
-        "league/flysystem-memory": "^2.0.6",
         "ibexa/ci-scripts": "^0.2@dev",
         "ibexa/doctrine-schema": "~4.4.0@dev",
         "ibexa/solr": "~4.4.0@dev",
