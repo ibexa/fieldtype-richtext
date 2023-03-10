@@ -50,15 +50,17 @@ final class MigrateRichTextNamespacesCommand extends Command
         $replacedNamespaces = $this->handler->migrateXMLNamespaces($this->xmlNamespacesMap);
 
         if ($replacedNamespaces > 0) {
-            $io->success("Updated $replacedNamespaces field attribute(s)");
+            $io->info('Clearing the cache...');
 
             $this->cache->clear();
+
+            $io->success("Updated $replacedNamespaces field attribute(s)");
 
             return self::SUCCESS;
         }
 
-        $io->error('No namespaces to convert');
+        $io->success('No namespaces to migrate');
 
-        return self::FAILURE;
+        return self::SUCCESS;
     }
 }
