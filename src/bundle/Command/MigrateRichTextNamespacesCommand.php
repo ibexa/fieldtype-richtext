@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\Bundle\FieldTypeRichText\Command;
 
-use Ibexa\FieldTypeRichText\Persistence\Legacy\MigrateRichTextNamespaces\Handler;
+use Ibexa\FieldTypeRichText\Persistence\MigrateRichTextNamespacesHandlerInterface;
 use Symfony\Component\Cache\Adapter\TagAwareAdapterInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -19,7 +19,7 @@ final class MigrateRichTextNamespacesCommand extends Command
 {
     protected static $defaultName = 'ibexa:migrate:richtext-namespaces';
 
-    private Handler $handler;
+    private MigrateRichTextNamespacesHandlerInterface $handler;
 
     private TagAwareAdapterInterface $cache;
 
@@ -30,7 +30,7 @@ final class MigrateRichTextNamespacesCommand extends Command
      * @param array<string, string> $xmlNamespacesMap
      */
     public function __construct(
-        Handler $handler,
+        MigrateRichTextNamespacesHandlerInterface $handler,
         array $xmlNamespacesMap,
         TagAwareAdapterInterface $cache
     ) {
