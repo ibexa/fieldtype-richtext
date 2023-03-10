@@ -9,7 +9,7 @@ declare(strict_types=1);
 namespace Ibexa\FieldTypeRichText\Persistence;
 
 /**
- * @interal
+ * @internal
  */
 interface MigrateRichTextNamespacesHandlerInterface
 {
