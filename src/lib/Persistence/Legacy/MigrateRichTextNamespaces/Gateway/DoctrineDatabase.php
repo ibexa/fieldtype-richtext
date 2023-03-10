@@ -29,22 +29,22 @@ final class DoctrineDatabase extends AbstractGateway
 
     public function migrate(array $values): int
     {
-        $qb = $this->connection->createQueryBuilder();
-        $qb
+        $queryBuilder = $this->connection->createQueryBuilder();
+        $queryBuilder
             ->update(self::TABLE_CONTENT_ATTRIBUTE)
             ->set(
                 self::COLUMN_DATA_TEXT,
-                $this->addReplaceStatement($qb, self::COLUMN_DATA_TEXT, $values)
+                $this->addReplaceStatement($queryBuilder, self::COLUMN_DATA_TEXT, $values)
             )
             ->andWhere(
-                $qb->expr()->eq(
+                $queryBuilder->expr()->eq(
                     'data_type_string',
-                    $qb->createPositionalParameter(
+                    $queryBuilder->createPositionalParameter(
                         self::FIELD_TYPE_IDENTIFIER
                     )
                 )
             );
 
-        return (int)$qb->execute();
+        return (int)$queryBuilder->execute();
     }
 }
