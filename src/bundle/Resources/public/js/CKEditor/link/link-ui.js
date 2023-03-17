@@ -153,7 +153,7 @@ class IbexaLinkUI extends Plugin {
     init() {
         this.editor.ui.componentFactory.add('ibexaLink', (locale) => {
             const buttonView = new IbexaButtonView(locale);
-            const command = this.editor.commands.get('insertIbexaLink');
+            const insertIbexaLinkCommand = this.editor.commands.get('insertIbexaLink');
 
             buttonView.set({
                 label: Translator.trans(/*@Desc("Link")*/ 'link_btn.label', {}, 'ck_editor'),
@@ -161,7 +161,7 @@ class IbexaLinkUI extends Plugin {
                 tooltip: true,
             });
 
-            buttonView.bind('isEnabled').to(command);
+            buttonView.bind('isEnabled').to(insertIbexaLinkCommand);
 
             this.listenTo(buttonView, 'execute', this.addLink);
 
