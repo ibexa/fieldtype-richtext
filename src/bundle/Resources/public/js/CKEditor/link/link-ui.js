@@ -29,7 +29,6 @@ class IbexaLinkUI extends Plugin {
 
             this.isNew = false;
 
-            this.removeLink();
             this.editor.execute('insertIbexaLink', { href: url, title: title, target: target });
             this.hideForm();
         });
@@ -42,7 +41,14 @@ class IbexaLinkUI extends Plugin {
         return formView;
     }
 
+    removeAttributes(writer, element) {
+        writer.removeAttribute('ibexaLinkHref', element);
+        writer.removeAttribute('ibexaLinkTitle', element);
+        writer.removeAttribute('ibexaLinkTarget', element);
+    }
+
     removeLink() {
+        const modelElement = this.editor.model.document.selection.getSelectedElement();
         const range = findAttributeRange(
             this.editor.model.document.selection.getFirstPosition(),
             'ibexaLinkHref',
@@ -50,13 +56,19 @@ class IbexaLinkUI extends Plugin {
             this.editor.model,
         );
 
-        this.editor.model.change((writer) => {
-            writer.removeAttribute('ibexaLinkHref', range);
-            writer.removeAttribute('ibexaLinkTitle', range);
-            writer.removeAttribute('ibexaLinkTarget', range);
+        if (modelElement) {
+            if (this.editor.model.schema.checkAttribute(modelElement, 'ibexaLinkHref')) {
+                this.editor.model.change((writer) => {
+                    this.removeAttributes(writer, modelElement);
+                });
+            }
+        } else {
+            this.editor.model.change((writer) => {
+                this.removeAttributes(writer, range);
 
-            writer.setSelection(range);
-        });
+                writer.setSelection(range);
+            });
+        }
     }
 
     showForm() {
@@ -83,7 +95,7 @@ class IbexaLinkUI extends Plugin {
                 const ranges = this.editor.model.schema.getValidRanges(this.editor.model.document.selection.getRanges(), 'ibexaLinkHref');
 
                 for (const range of ranges) {
-                    writer.removeAttribute('ibexaLinkHref', range);
+                    this.removeAttributes(writer, range);
                 }
             });
         }
@@ -141,12 +153,15 @@ class IbexaLinkUI extends Plugin {
     init() {
         this.editor.ui.componentFactory.add('ibexaLink', (locale) => {
             const buttonView = new IbexaButtonView(locale);
+            const command = this.editor.commands.get('insertIbexaLink');
 
             buttonView.set({
                 label: Translator.trans(/*@Desc("Link")*/ 'link_btn.label', {}, 'ck_editor'),
                 icon: window.ibexa.helpers.icon.getIconPath('link'),
                 tooltip: true,
             });
+
+            buttonView.bind('isEnabled').to(command);
 
             this.listenTo(buttonView, 'execute', this.addLink);
 
