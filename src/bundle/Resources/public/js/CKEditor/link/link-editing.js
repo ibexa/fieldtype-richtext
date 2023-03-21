@@ -74,9 +74,6 @@ class IbexaCustomTagEditing extends Plugin {
         this.editor.model.schema.extend('$text', { allowAttributes: 'ibexaLinkHref' });
         this.editor.model.schema.extend('$text', { allowAttributes: 'ibexaLinkTitle' });
         this.editor.model.schema.extend('$text', { allowAttributes: 'ibexaLinkTarget' });
-        this.editor.model.schema.extend('embedImage', { allowAttributes: 'ibexaLinkHref' });
-        this.editor.model.schema.extend('embedImage', { allowAttributes: 'ibexaLinkTitle' });
-        this.editor.model.schema.extend('embedImage', { allowAttributes: 'ibexaLinkTarget' });
 
         this.defineConverters();
 
