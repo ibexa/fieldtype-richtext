@@ -63,7 +63,7 @@ class IbexaEmbedImageEditing extends Plugin {
         schema.register('embedImage', {
             isObject: true,
             allowWhere: '$block',
-            allowAttributes: ['contentId', 'size'],
+            allowAttributes: ['contentId', 'size', 'ibexaLinkHref', 'ibexaLinkTitle', 'ibexaLinkTarget'],
         });
     }
 
@@ -115,7 +115,7 @@ class IbexaEmbedImageEditing extends Plugin {
 
         conversion.for('dataDowncast').elementToElement({
             model: 'embedImage',
-            view: (modelElement, { writer: downcastWriter }) => {
+            view: (modelElement, { writer: downcastWriter, consumable }) => {
                 const container = downcastWriter.createContainerElement('div', {
                     'data-href': `ezcontent://${modelElement.getAttribute('contentId')}`,
                     'data-ezelement': 'ezembed',
@@ -131,9 +131,25 @@ class IbexaEmbedImageEditing extends Plugin {
 
                     return domElement;
                 });
+                const linkHref = modelElement.getAttribute('ibexaLinkHref');
 
                 downcastWriter.remove(downcastWriter.createRangeIn(container));
                 downcastWriter.insert(downcastWriter.createPositionAt(container, 0), config);
+
+                if (linkHref) {
+                    const link = downcastWriter.createUIElement('a', {
+                        'data-ezelement': 'ezlink',
+                        href: linkHref,
+                        title: modelElement.getAttribute('ibexaLinkTitle'),
+                        target: modelElement.getAttribute('ibexaLinkTarget'),
+                    });
+
+                    consumable.consume(modelElement, 'attribute:ibexaLinkHref');
+                    consumable.consume(modelElement, 'attribute:ibexaLinkTitle');
+                    consumable.consume(modelElement, 'attribute:ibexaLinkTarget');
+
+                    downcastWriter.insert(downcastWriter.createPositionAt(container, 'end'), link);
+                }
 
                 return container;
             },
@@ -151,7 +167,14 @@ class IbexaEmbedImageEditing extends Plugin {
                 const href = viewElement.getAttribute('data-href');
                 const contentId = href.replace('ezcontent://', '');
                 const size = viewElement.getChild(0).getChild(0).getChild(0).data;
+                const link = viewElement.getChild(1);
                 const modelElement = upcastWriter.createElement('embedImage', { contentId, size });
+
+                if (link) {
+                    upcastWriter.setAttribute('ibexaLinkHref', link.getAttribute('href'), modelElement);
+                    upcastWriter.setAttribute('ibexaLinkTitle', link.getAttribute('title') ?? '', modelElement);
+                    upcastWriter.setAttribute('ibexaLinkTarget', link.getAttribute('target') ?? '', modelElement);
+                }
 
                 return modelElement;
             },
