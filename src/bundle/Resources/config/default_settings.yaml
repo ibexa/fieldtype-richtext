@@ -56,3 +56,12 @@ parameters:
         template: '@@IbexaFieldTypeRichText/RichText/embed/location_inline.html.twig'
     ibexa.site_access.config.default.fieldtypes.ezrichtext.embed.location_inline_denied:
         template: '@@IbexaFieldTypeRichText/RichText/embed/location_inline_denied.html.twig'
+
+    # RichText namespaces map to migrate
+    ibexa.field_type.rich_text.namespaces_migration_map:
+        'xmlns:ezxhtml="http://ez.no/xmlns/ezpublish/docbook/xhtml"': 'xmlns:ezxhtml="http://ibexa.co/xmlns/dxp/docbook/xhtml"'
+        'xmlns:ezcustom="http://ez.no/xmlns/ezpublish/docbook/custom"': 'xmlns:ezcustom="http://ibexa.co/xmlns/dxp/docbook/custom"'
+        'ezxhtml:class="ez-embed-type-image"': 'ezxhtml:class="ibexa-embed-type-image"'
+        'xmlns:ez="http://ez.no/xmlns/ezpublish/docbook"': 'xmlns:ez="http://ibexa.co/xmlns/dxp/docbook"'
+        'xmlns:a="http://ez.no/xmlns/annotation"': 'xmlns:a="http://ibexa.co/xmlns/annotation"'
+        'xmlns:m="http://ez.no/xmlns/module"': 'xmlns:m="http://ibexa.co/xmlns/module"'

@@ -1,0 +1,13 @@
+services:
+    Ibexa\Contracts\FieldTypeRichText\Persistence\Legacy\MigrateRichTextNamespaces\GatewayInterface:
+        alias: Ibexa\FieldTypeRichText\Persistence\Legacy\MigrateRichTextNamespaces\Gateway\DoctrineDatabase
+
+    Ibexa\FieldTypeRichText\Persistence\Legacy\MigrateRichTextNamespaces\Gateway\DoctrineDatabase:
+        arguments:
+            $connection: '@ibexa.persistence.connection'
+        tags:
+            - ibexa.field_type.richtext.persistence.legacy.migrate_xml_namespaces.gateway
+
+    Ibexa\FieldTypeRichText\Persistence\Legacy\MigrateRichTextNamespaces\Handler:
+        arguments:
+            $gateways: !tagged_iterator ibexa.field_type.richtext.persistence.legacy.migrate_xml_namespaces.gateway
