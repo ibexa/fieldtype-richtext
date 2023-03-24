@@ -62,6 +62,7 @@ class IbexaFieldTypeRichTextExtension extends Extension implements PrependExtens
         $settingsLoader->load('fieldtype_services.yaml');
         $settingsLoader->load('fieldtype_external_storages.yaml');
         $settingsLoader->load('indexable_fieldtypes.yaml');
+        $settingsLoader->load('storage_engines/legacy/migrate_rich_text_namespaces.yaml');
         $settingsLoader->load('storage_engines/legacy/external_storage_gateways.yaml');
         $settingsLoader->load('storage_engines/legacy/field_value_converters.yaml');
 
@@ -80,6 +81,7 @@ class IbexaFieldTypeRichTextExtension extends Extension implements PrependExtens
         $loader->load('translation.yaml');
         $loader->load('configuration.yaml');
         $loader->load('api.yaml');
+        $loader->load('command.yaml');
 
         $configuration = $this->getConfiguration($configs, $container);
         $config = $this->processConfiguration($configuration, $configs);
