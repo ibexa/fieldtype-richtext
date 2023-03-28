@@ -120,6 +120,7 @@ const VIEWPORT_TOP_OFFSET = 102;
             const wrapper = this.getHTMLDocumentFragment(container.closest('.ibexa-data-source').querySelector('textarea').value);
             const section = wrapper.childNodes[0];
             const { toolbar, extraPlugins = [] } = window.ibexa.richText.CKEditor;
+            const locale = new Intl.Locale(doc.querySelector('meta[name="LanguageCode"]').content);
             const blockCustomStyles = Object.entries(ibexa.richText.customStyles)
                 .filter(([, customStyleConfig]) => !customStyleConfig.inline)
                 .map(([customStyleName, customStyleConfig]) => {
@@ -204,6 +205,9 @@ const VIEWPORT_TOP_OFFSET = 102;
                 },
                 table: {
                     contentToolbar: ['tableColumn', 'tableRow', 'mergeTableCells'],
+                },
+                language: {
+                    content: locale.language,
                 },
             }).then((editor) => {
                 this.editor = editor;
