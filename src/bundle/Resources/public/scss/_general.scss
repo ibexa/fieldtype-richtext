@@ -186,7 +186,7 @@
         min-height: calculateRem(20px);
     }
 
-    [id] {
+    [id]:not(.ibexa-data-source__richtext) {
         position: relative;
 
         &:before {
