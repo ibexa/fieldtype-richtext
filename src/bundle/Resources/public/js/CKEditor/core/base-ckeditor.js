@@ -119,7 +119,7 @@ const VIEWPORT_TOP_OFFSET = 102;
         init(container) {
             const wrapper = this.getHTMLDocumentFragment(container.closest('.ibexa-data-source').querySelector('textarea').value);
             const section = wrapper.childNodes[0];
-            const { toolbar, extraPlugins = [] } = window.ibexa.richText.CKEditor;
+            const { toolbar, extraPlugins = [], extraConfig = {} } = window.ibexa.richText.CKEditor;
             const locale = new Intl.Locale(doc.querySelector('meta[name="LanguageCode"]').content);
             const blockCustomStyles = Object.entries(ibexa.richText.customStyles)
                 .filter(([, customStyleConfig]) => !customStyleConfig.inline)
@@ -209,6 +209,7 @@ const VIEWPORT_TOP_OFFSET = 102;
                 language: {
                     content: locale.language,
                 },
+                ...extraConfig,
             }).then((editor) => {
                 this.editor = editor;
                 const initialData = this.getData();
