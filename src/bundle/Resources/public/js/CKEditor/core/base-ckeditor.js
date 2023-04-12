@@ -213,14 +213,17 @@ const VIEWPORT_TOP_OFFSET = 102;
             }).then((editor) => {
                 this.editor = editor;
                 const initialData = this.getData();
-                const updateInput = (data) => {
+                const updateInput = (data, shouldFireInputEvent = true) => {
                     const textarea = container.closest('.ibexa-data-source').querySelector('textarea');
 
                     textarea.value = this.xhtmlify(data).replace(this.xhtmlNamespace, this.ezNamespace);
-                    textarea.dispatchEvent(new Event('input'));
+
+                    if (shouldFireInputEvent) {
+                        textarea.dispatchEvent(new Event('input'));
+                    }
                 };
 
-                updateInput(initialData);
+                updateInput(initialData, false);
 
                 this.editor.model.document.on('change:data', () => {
                     const data = this.getData();
