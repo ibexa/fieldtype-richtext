@@ -49,10 +49,11 @@ class IbexaInlineCustomTagEditing extends Plugin {
                     'data-ezelement': 'eztemplateinline',
                     'data-ezname': modelElement.getAttribute('customTagName'),
                 });
+                const values = modelElement.getAttribute('values');
                 const config = downcastWriter.createUIElement('span', { 'data-ezelement': 'ezconfig' }, function (domDocument) {
                     const domElement = this.toDomElement(domDocument);
 
-                    domElement.innerHTML = Object.entries(modelElement.getAttribute('values')).reduce((total, [attribute, value]) => {
+                    domElement.innerHTML = Object.entries(values).reduce((total, [attribute, value]) => {
                         const attributeValue = value ?? '';
                         const ezvalue = `<span data-ezelement="ezvalue" data-ezvalue-key="${attribute}">${attributeValue}</span>`;
 
@@ -63,7 +64,10 @@ class IbexaInlineCustomTagEditing extends Plugin {
                 });
 
                 downcastWriter.remove(downcastWriter.createRangeIn(container));
-                downcastWriter.insert(downcastWriter.createPositionAt(container, 0), config);
+
+                if (Object.keys(values).length) {
+                    downcastWriter.insert(downcastWriter.createPositionAt(container, 0), config);
+                }
 
                 return container;
             },
@@ -82,7 +86,8 @@ class IbexaInlineCustomTagEditing extends Plugin {
                 }
 
                 const configElement = viewElement.getChild(1);
-                const configValuesIterator = configElement.getChildren();
+                const configValuesIterator =
+                    configElement?.getAttribute('data-ezelement') === 'ezconfig' ? configElement.getChildren() : [];
                 const customTagName = viewElement.getAttribute('data-ezname');
                 const values = {};
 

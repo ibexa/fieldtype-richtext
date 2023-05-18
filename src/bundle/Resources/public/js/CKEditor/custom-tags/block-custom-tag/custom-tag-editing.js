@@ -40,15 +40,17 @@ class IbexaCustomTagEditing extends Plugin {
                 });
                 const header = downcastWriter.createUIElement('div', { class: 'ibexa-custom-tag__header' }, function (domDocument) {
                     const domElement = this.toDomElement(domDocument);
+                    const customTagConfig = window.ibexa.richText.customTags[customTagName];
+                    const attributesButton = `<button type="button" class="ibexa-btn ibexa-btn--ghost ibexa-btn--small ibexa-btn--no-text ibexa-btn--show-custom-tag-attributes">
+                        <svg class="ibexa-icon ibexa-icon--small ibexa-icon--secondary">
+                            <use xlink:href="${window.ibexa.helpers.icon.getIconPath('settings-block')}"></use>
+                        </svg>
+                    </button>`;
 
                     domElement.innerHTML = `
-                        <div class="ibexa-custom-tag__header-title">${window.ibexa.richText.customTags[customTagName].label}</div>
+                        <div class="ibexa-custom-tag__header-title">${customTagConfig.label}</div>
                         <div class="ibexa-custom-tag__header-actions">
-                            <button type="button" class="ibexa-btn ibexa-btn--ghost ibexa-btn--small ibexa-btn--no-text ibexa-btn--show-custom-tag-attributes">
-                                <svg class="ibexa-icon ibexa-icon--small ibexa-icon--secondary">
-                                    <use xlink:href="${window.ibexa.helpers.icon.getIconPath('settings-block')}"></use>
-                                </svg>
-                            </button>
+                            ${Object.keys(customTagConfig.attributes).length ? attributesButton : ''}
                             <button type="button" class="ibexa-btn ibexa-btn--ghost ibexa-btn--small ibexa-btn--no-text ibexa-btn--remove-custom-tag">
                                 <svg class="ibexa-icon ibexa-icon--small ibexa-icon--secondary">
                                     <use xlink:href="${window.ibexa.helpers.icon.getIconPath('trash')}"></use>
@@ -73,10 +75,11 @@ class IbexaCustomTagEditing extends Plugin {
                     'data-ezelement': 'eztemplate',
                     'data-ezname': modelElement.getAttribute('customTagName'),
                 });
+                const values = modelElement.getAttribute('values');
                 const config = downcastWriter.createUIElement('span', { 'data-ezelement': 'ezconfig' }, function (domDocument) {
                     const domElement = this.toDomElement(domDocument);
 
-                    domElement.innerHTML = Object.entries(modelElement.getAttribute('values')).reduce((total, [attribute, value]) => {
+                    domElement.innerHTML = Object.entries(values).reduce((total, [attribute, value]) => {
                         // Escaping
                         // <script>alert("Hello! I am a script!");</script> --> &lt;script&gt;alert("Hello! I am a script!");&lt;/script&gt;
                         const stringTempNode = domDocument.createElement('div');
@@ -92,7 +95,10 @@ class IbexaCustomTagEditing extends Plugin {
                 });
 
                 downcastWriter.remove(downcastWriter.createRangeIn(container));
-                downcastWriter.insert(downcastWriter.createPositionAt(container, 0), config);
+
+                if (Object.keys(values).length) {
+                    downcastWriter.insert(downcastWriter.createPositionAt(container, 0), config);
+                }
 
                 return container;
             },
@@ -111,7 +117,8 @@ class IbexaCustomTagEditing extends Plugin {
                 }
 
                 const configElement = viewElement.getChild(1);
-                const configValuesIterator = configElement.getChildren();
+                const configValuesIterator =
+                    configElement?.getAttribute('data-ezelement') === 'ezconfig' ? configElement.getChildren() : [];
                 const customTagName = viewElement.getAttribute('data-ezname');
                 const tagConfig = customTags[customTagName] ?? {};
                 const values = {};
