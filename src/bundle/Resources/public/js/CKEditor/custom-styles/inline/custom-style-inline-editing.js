@@ -19,21 +19,29 @@ class IbexaCustomStyleInlineEditing extends Plugin {
         this.editor.conversion.for('editingDowncast').attributeToElement({
             model: this.customStyleName,
             view: (customStyleValue, { writer: downcastWriter }) =>
-                downcastWriter.createAttributeElement('span', {
-                    'data-ezelement': 'eztemplateinline',
-                    'data-eztype': 'style',
-                    'data-ezname': this.customStyleName,
-                }),
+                downcastWriter.createAttributeElement(
+                    'span',
+                    {
+                        'data-ezelement': 'eztemplateinline',
+                        'data-eztype': 'style',
+                        'data-ezname': this.customStyleName,
+                    },
+                    { priority: 5 },
+                ),
         });
 
         this.editor.conversion.for('dataDowncast').attributeToElement({
             model: this.customStyleName,
             view: (customStyleValue, { writer: downcastWriter }) =>
-                downcastWriter.createAttributeElement('span', {
-                    'data-ezelement': 'eztemplateinline',
-                    'data-eztype': 'style',
-                    'data-ezname': this.customStyleName,
-                }),
+                downcastWriter.createAttributeElement(
+                    'span',
+                    {
+                        'data-ezelement': 'eztemplateinline',
+                        'data-eztype': 'style',
+                        'data-ezname': this.customStyleName,
+                    },
+                    { priority: 5 },
+                ),
         });
 
         this.editor.conversion.for('upcast').elementToAttribute({
