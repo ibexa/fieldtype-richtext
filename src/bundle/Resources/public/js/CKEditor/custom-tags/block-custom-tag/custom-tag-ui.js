@@ -34,6 +34,10 @@ class IbexaCustomTagUI extends Plugin {
         return !!eventData.domTarget.closest('.ibexa-btn--show-custom-tag-attributes');
     }
 
+    hasAttributes() {
+        return !!Object.keys(this.config.attributes).length;
+    }
+
     enableUserBalloonInteractions() {
         const viewDocument = this.editor.editing.view.document;
 
@@ -194,9 +198,11 @@ class IbexaCustomTagUI extends Plugin {
         this.editor.focus();
         this.editor.execute('insertIbexaCustomTag', { customTagName: this.componentName, values });
 
-        this.isNew = true;
+        if (this.hasAttributes()) {
+            this.isNew = true;
 
-        this.showForm();
+            this.showForm();
+        }
     }
 
     init() {

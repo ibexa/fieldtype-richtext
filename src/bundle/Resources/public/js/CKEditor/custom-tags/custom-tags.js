@@ -17,6 +17,10 @@ class IbexaCustomTags extends Plugin {
                     this.componentName = name;
                     this.config = config;
 
+                    if (!this.config.attributes) {
+                        this.config.attributes = {};
+                    }
+
                     this.formView.setChildren(
                         {
                             attributes: this.config.attributes,
@@ -33,6 +37,10 @@ class IbexaCustomTags extends Plugin {
 
                     this.componentName = name;
                     this.config = config;
+
+                    if (!this.config.attributes) {
+                        this.config.attributes = {};
+                    }
 
                     this.formView.setChildren(
                         {

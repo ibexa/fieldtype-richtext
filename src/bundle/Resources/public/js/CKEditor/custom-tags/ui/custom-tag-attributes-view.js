@@ -59,7 +59,7 @@ class IbexaCustomTagFormView extends View {
         ];
 
         Object.entries(attributes).forEach(([name, config]) => {
-            const value = values[name] === null || values[name] === '' ? '-' : values[name];
+            const value = values[name] === null || values[name] === undefined || values[name] === '' ? '-' : values[name];
 
             children.push({
                 tag: 'div',

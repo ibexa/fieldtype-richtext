@@ -24,11 +24,15 @@ class IbexaInlineCustomTagUI extends Plugin {
         return modelElement && modelElement.name === 'inlineCustomTag' && modelElement.getAttribute('customTagName') === this.componentName;
     }
 
+    hasAttributes() {
+        return !!Object.keys(this.config.attributes).length;
+    }
+
     enableUserBalloonInteractions() {
         const viewDocument = this.editor.editing.view.document;
 
         this.listenTo(viewDocument, 'click', () => {
-            if (this.isInlineCustomTagSelected()) {
+            if (this.isInlineCustomTagSelected() && this.hasAttributes()) {
                 this.showForm();
             }
         });
@@ -121,9 +125,11 @@ class IbexaInlineCustomTagUI extends Plugin {
         this.editor.focus();
         this.editor.execute('insertIbexaInlineCustomTag', { customTagName: this.componentName, values });
 
-        this.isNew = true;
+        if (this.hasAttributes()) {
+            this.isNew = true;
 
-        this.showForm();
+            this.showForm();
+        }
     }
 
     init() {
