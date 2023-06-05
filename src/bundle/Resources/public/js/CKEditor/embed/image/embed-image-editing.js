@@ -170,7 +170,7 @@ class IbexaEmbedImageEditing extends Plugin {
                 const link = viewElement.getChild(1);
                 const modelElement = upcastWriter.createElement('embedImage', { contentId, size });
 
-                if (link) {
+                if (link instanceof Element) {
                     upcastWriter.setAttribute('ibexaLinkHref', link.getAttribute('href'), modelElement);
                     upcastWriter.setAttribute('ibexaLinkTitle', link.getAttribute('title') ?? '', modelElement);
                     upcastWriter.setAttribute('ibexaLinkTarget', link.getAttribute('target') ?? '', modelElement);
