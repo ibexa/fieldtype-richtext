@@ -36,16 +36,16 @@ class IbexaCustomAttributesCommand extends Command {
     refresh() {
         const { selection } = this.editor.model.document;
         const parentElement = selection.getSelectedElement() ?? selection.getFirstPosition().parent;
-        const attributes = getCustomAttributesConfig();
-        const classes = getCustomClassesConfig();
-        const parentElementAttributesConfig = attributes[parentElement.name];
-        const parentElementClassesConfig = classes[parentElement.name];
+        const customAttributesConfig = getCustomAttributesConfig();
+        const customClassesConfig = getCustomClassesConfig();
+        const parentElementAttributesConfig = customAttributesConfig[parentElement.name];
+        const parentElementClassesConfig = customClassesConfig[parentElement.name];
         const isEnabled = parentElementAttributesConfig || parentElementClassesConfig;
 
         this.isEnabled = !!isEnabled;
 
-        this.cleanAttributes(parentElement, attributes);
-        this.cleanClasses(parentElement, classes);
+        this.cleanAttributes(parentElement, customAttributesConfig);
+        this.cleanClasses(parentElement, customClassesConfig);
     }
 }
 
