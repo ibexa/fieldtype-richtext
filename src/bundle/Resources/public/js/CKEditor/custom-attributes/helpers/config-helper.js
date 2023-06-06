@@ -2,7 +2,6 @@ const headingsList = ['heading1', 'heading2', 'heading3', 'heading4', 'heading5'
 
 const getCustomAttributesConfig = () => {
     const attributes = { ...window.ibexa.richText.alloyEditor.attributes };
-    const classes = { ...window.ibexa.richText.alloyEditor.classes };
 
     if (Object.hasOwn(attributes, 'heading')) {
         headingsList.forEach((headingType) => {
@@ -16,6 +15,12 @@ const getCustomAttributesConfig = () => {
         delete attributes.heading;
     }
 
+    return attributes;
+};
+
+const getCustomClassesConfig = () => {
+    const classes = { ...window.ibexa.richText.alloyEditor.classes };
+
     if (Object.hasOwn(classes, 'heading')) {
         headingsList.forEach((headingType) => {
             if (Object.hasOwn(classes, headingType)) {
@@ -28,7 +33,7 @@ const getCustomAttributesConfig = () => {
         delete classes.heading;
     }
 
-    return { attributes, classes };
+    return classes;
 };
 
-export { getCustomAttributesConfig };
+export { getCustomAttributesConfig, getCustomClassesConfig };

@@ -2,7 +2,7 @@ import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
 import Widget from '@ckeditor/ckeditor5-widget/src/widget';
 
 import IbexaCustomAttributesCommand from './custom-attributes-command';
-import { getCustomAttributesConfig } from './helpers/custom-attributes-config-helper';
+import { getCustomAttributesConfig, getCustomClassesConfig } from './helpers/config-helper';
 
 class IbexaCustomAttributesEditing extends Plugin {
     static get requires() {
@@ -22,7 +22,7 @@ class IbexaCustomAttributesEditing extends Plugin {
             },
         });
 
-        Object.values(customAttributesConfig.attributes).forEach((customAttributes) => {
+        Object.values(customAttributesConfig).forEach((customAttributes) => {
             Object.keys(customAttributes).forEach((customAttributeName) => {
                 conversion.attributeToAttribute({
                     model: {
@@ -47,11 +47,12 @@ class IbexaCustomAttributesEditing extends Plugin {
     init() {
         const { model } = this.editor;
         const customAttributesConfig = getCustomAttributesConfig();
-        const elementsWithCustomAttributes = Object.keys(customAttributesConfig.attributes);
-        const elementsWithCustomClasses = Object.keys(customAttributesConfig.classes);
+        const customClassesConfig = getCustomClassesConfig();
+        const elementsWithCustomAttributes = Object.keys(customAttributesConfig);
+        const elementsWithCustomClasses = Object.keys(customClassesConfig);
 
         elementsWithCustomAttributes.forEach((element) => {
-            const customAttributes = Object.keys(customAttributesConfig.attributes[element]);
+            const customAttributes = Object.keys(customAttributesConfig[element]);
 
             this.extendSchema(model.schema, element, { allowAttributes: customAttributes });
         });

@@ -1,6 +1,6 @@
 import Command from '@ckeditor/ckeditor5-core/src/command';
 
-import { getCustomAttributesConfig } from './helpers/custom-attributes-config-helper';
+import { getCustomAttributesConfig, getCustomClassesConfig } from './helpers/config-helper';
 
 class IbexaCustomAttributesCommand extends Command {
     cleanAttributes(modelElement, attributes) {
@@ -36,7 +36,8 @@ class IbexaCustomAttributesCommand extends Command {
     refresh() {
         const { selection } = this.editor.model.document;
         const parentElement = selection.getSelectedElement() ?? selection.getFirstPosition().parent;
-        const { attributes, classes } = getCustomAttributesConfig();
+        const attributes = getCustomAttributesConfig();
+        const classes = getCustomClassesConfig();
         const parentElementAttributesConfig = attributes[parentElement.name];
         const parentElementClassesConfig = classes[parentElement.name];
         const isEnabled = parentElementAttributesConfig || parentElementClassesConfig;
