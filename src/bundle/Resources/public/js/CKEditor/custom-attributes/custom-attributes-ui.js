@@ -4,6 +4,8 @@ import clickOutsideHandler from '@ckeditor/ckeditor5-ui/src/bindings/clickoutsid
 import IbexaCustomAttributesFormView from './ui/custom-attributes-form-view';
 import IbexaButtonView from '../common/button-view/button-view';
 
+import { getCustomAttributesConfig } from './helpers/custom-attributes-config-helper';
+
 const { Translator } = window;
 
 class IbexaAttributesUI extends Plugin {
@@ -59,8 +61,9 @@ class IbexaAttributesUI extends Plugin {
 
     showForm() {
         const parentElement = this.getModelElement();
-        const customAttributes = window.ibexa.richText.alloyEditor.attributes[parentElement.name] ?? {};
-        const customClasses = window.ibexa.richText.alloyEditor.classes[parentElement.name];
+        const customAttributesConfig = getCustomAttributesConfig();
+        const customAttributes = customAttributesConfig.attributes[parentElement.name] ?? {};
+        const customClasses = customAttributesConfig.classes[parentElement.name];
         const areCustomAttributesSet =
             parentElement.hasAttribute('custom-classes') ||
             Object.keys(customAttributes).some((customAttributeName) => parentElement.hasAttribute(customAttributeName));

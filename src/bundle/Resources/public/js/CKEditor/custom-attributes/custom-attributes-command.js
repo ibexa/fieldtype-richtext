@@ -1,5 +1,7 @@
 import Command from '@ckeditor/ckeditor5-core/src/command';
 
+import { getCustomAttributesConfig } from './helpers/custom-attributes-config-helper';
+
 class IbexaCustomAttributesCommand extends Command {
     cleanAttributes(modelElement, attributes) {
         Object.entries(attributes).forEach(([elementName, config]) => {
@@ -34,7 +36,7 @@ class IbexaCustomAttributesCommand extends Command {
     refresh() {
         const { selection } = this.editor.model.document;
         const parentElement = selection.getSelectedElement() ?? selection.getFirstPosition().parent;
-        const { attributes, classes } = window.ibexa.richText.alloyEditor;
+        const { attributes, classes } = getCustomAttributesConfig();
         const parentElementAttributesConfig = attributes[parentElement.name];
         const parentElementClassesConfig = classes[parentElement.name];
         const isEnabled = parentElementAttributesConfig || parentElementClassesConfig;
