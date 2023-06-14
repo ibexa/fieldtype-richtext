@@ -17,18 +17,8 @@ class IbexaLinkUI extends Plugin {
 
         this.showForm = this.showForm.bind(this);
         this.addLink = this.addLink.bind(this);
-        this.getLinkRange = this.getLinkRange.bind(this);
 
         this.isNew = false;
-    }
-
-    getLinkRange() {
-        return findAttributeRange(
-            this.editor.model.document.selection.getFirstPosition(),
-            'ibexaLinkHref',
-            this.editor.model.document.selection.getAttribute('ibexaLinkHref'),
-            this.editor.model,
-        );
     }
 
     createFormView() {
@@ -36,11 +26,6 @@ class IbexaLinkUI extends Plugin {
 
         this.listenTo(formView, 'save-link', () => {
             const { url, title, target } = this.formView.getValues();
-            const range = this.getLinkRange();
-
-            this.editor.model.change((writer) => {
-                writer.setSelection(range);
-            });
 
             this.isNew = false;
 
@@ -64,7 +49,12 @@ class IbexaLinkUI extends Plugin {
 
     removeLink() {
         const modelElement = this.editor.model.document.selection.getSelectedElement();
-        const range = this.getLinkRange();
+        const range = findAttributeRange(
+            this.editor.model.document.selection.getFirstPosition(),
+            'ibexaLinkHref',
+            this.editor.model.document.selection.getAttribute('ibexaLinkHref'),
+            this.editor.model,
+        );
 
         if (modelElement) {
             if (this.editor.model.schema.checkAttribute(modelElement, 'ibexaLinkHref')) {
