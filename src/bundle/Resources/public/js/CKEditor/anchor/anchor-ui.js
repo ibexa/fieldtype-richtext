@@ -5,6 +5,7 @@ import IbexaAnchorFormView from './ui/anchor-form-view';
 import IbexaButtonView from '../common/button-view/button-view';
 
 const { Translator } = window;
+const ANCHOR_PATTERN = /^[A-Za-z][A-Za-z0-9\-_:.]*$/;
 
 class IbexaAnchorUI extends Plugin {
     constructor(props) {
@@ -25,7 +26,15 @@ class IbexaAnchorUI extends Plugin {
 
         this.listenTo(formView, 'save-anchor', () => {
             const { anchor } = this.formView.getValues();
+            const isValueUnique = this.isValueUnique(anchor);
+            const isValueValid = this.isValueValid(anchor);
             const modelElement = this.getModelElement();
+
+            if (!isValueUnique || !isValueValid) {
+                this.formView.setError(Translator.trans(/*@Desc("A valid anchor link is needed.")*/ 'anchor_btn.error.valid', {}, 'ck_editor'));
+
+                return;
+            }
 
             this.editor.model.change((writer) => {
                 writer.setAttribute('anchor', anchor, modelElement);
@@ -85,6 +94,27 @@ class IbexaAnchorUI extends Plugin {
             contextElements: [this.balloon.view.element],
             callback: () => this.hideForm(),
         });
+    }
+
+    isValueUnique(value) {
+        const anchorHTML = this.getModelElement();
+        const richtexts = document.getElementsByClassName('ibexa-data-source__richtext');
+        const isSameAsBefore = anchorHTML.getAttribute('anchor') === value;
+        let countElementsWithSameId = 0;
+
+        Array.from(richtexts).every((richtext) => {
+            if (countElementsWithSameId >= 2) {
+                return;
+            }
+
+            countElementsWithSameId += richtext.querySelectorAll(`[id="${value}"]`).length;
+        });
+
+        return isSameAsBefore && countElementsWithSameId === 1 || !isSameAsBefore && countElementsWithSameId === 0;
+    }
+
+    isValueValid(value) {
+        return ANCHOR_PATTERN.test(value);
     }
 
     init() {
