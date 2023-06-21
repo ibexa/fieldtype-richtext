@@ -31,7 +31,9 @@ class IbexaAnchorUI extends Plugin {
             const modelElement = this.getModelElement();
 
             if (!isValueUnique || !isValueValid) {
-                this.formView.setError(Translator.trans(/*@Desc("A valid anchor link is needed.")*/ 'anchor_btn.error.valid', {}, 'ck_editor'));
+                this.formView.setError(
+                    Translator.trans(/*@Desc("A valid anchor link is needed.")*/ 'anchor_btn.error.valid', {}, 'ck_editor'),
+                );
 
                 return;
             }
@@ -104,13 +106,15 @@ class IbexaAnchorUI extends Plugin {
 
         Array.from(richtexts).every((richtext) => {
             if (countElementsWithSameId >= 2) {
-                return;
+                return false;
             }
 
             countElementsWithSameId += richtext.querySelectorAll(`[id="${value}"]`).length;
+
+            return true;
         });
 
-        return isSameAsBefore && countElementsWithSameId === 1 || !isSameAsBefore && countElementsWithSameId === 0;
+        return (isSameAsBefore && countElementsWithSameId === 1) || (!isSameAsBefore && countElementsWithSameId === 0);
     }
 
     isValueValid(value) {
