@@ -3,6 +3,8 @@ import { createDropdown, addListToDropdown } from '@ckeditor/ckeditor5-ui/src/dr
 import Model from '@ckeditor/ckeditor5-ui/src/model';
 import Collection from '@ckeditor/ckeditor5-utils/src/collection';
 
+const { Translator } = window;
+
 class IbexaEmbedImageVariationsUI extends Plugin {
     constructor(props) {
         super(props);
@@ -36,7 +38,7 @@ class IbexaEmbedImageVariationsUI extends Plugin {
                 itemDefinitions.add({
                     type: 'button',
                     model: new Model({
-                        label: variation,
+                        label: Translator.trans(variation, {}, 'image_variations'),
                         variation: variation,
                         withText: true,
                     }),
