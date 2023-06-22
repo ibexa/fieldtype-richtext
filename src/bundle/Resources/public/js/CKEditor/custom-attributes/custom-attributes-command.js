@@ -23,7 +23,15 @@ class IbexaCustomAttributesCommand extends Command {
 
     cleanClasses(modelElement, classes) {
         Object.keys(classes).forEach((elementName) => {
-            if (elementName === modelElement.name || classes[modelElement.name]) {
+            const selectedCustomClasses = modelElement.getAttribute('custom-classes') ?? '';
+            const elementCustomClassesConfig = classes[modelElement.name];
+            const hasOwnCustomClasses =
+                elementCustomClassesConfig &&
+                selectedCustomClasses
+                    .split()
+                    .every((selectedCustomClass) => elementCustomClassesConfig.choices.includes(selectedCustomClass));
+
+            if (elementName === modelElement.name || hasOwnCustomClasses) {
                 return;
             }
 
