@@ -1,7 +1,7 @@
 import View from '@ckeditor/ckeditor5-ui/src/view';
 import IbexaButtonView from '../../common/button-view/button-view';
 
-class IbexaCustomTagFormView extends View {
+class IbexaCustomTagAttributesView extends View {
     constructor(props) {
         super(props);
 
@@ -89,4 +89,4 @@ class IbexaCustomTagFormView extends View {
     }
 }
 
-export default IbexaCustomTagFormView;
+export default IbexaCustomTagAttributesView;
