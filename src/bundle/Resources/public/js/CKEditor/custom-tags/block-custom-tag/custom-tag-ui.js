@@ -87,6 +87,13 @@ class IbexaCustomTagUI extends Plugin {
         this.attributesView.setChildren({
             attributes: this.config.attributes,
         });
+
+        clickOutsideHandler({
+            emitter: this.attributesView,
+            activator: () => this.balloon.hasView(this.attributesView),
+            contextElements: [this.balloon.view.element],
+            callback: () => this.hideAttributes(),
+        });
     }
 
     createFormView() {
@@ -132,7 +139,7 @@ class IbexaCustomTagUI extends Plugin {
 
         this.balloon.add({
             view: this.attributesView,
-            position: this.getBalloonPositionData(),
+            position: { target },
         });
 
         this.balloon.updatePosition({ target });
