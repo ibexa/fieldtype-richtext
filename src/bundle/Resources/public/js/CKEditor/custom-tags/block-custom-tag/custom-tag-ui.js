@@ -148,6 +148,7 @@ class IbexaCustomTagUI extends Plugin {
     hideAttributes() {
         this.balloon.remove(this.attributesView);
         this.editor.editing.view.focus();
+        this.reinitAttributesView();
     }
 
     showForm() {
