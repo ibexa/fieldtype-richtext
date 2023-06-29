@@ -28,7 +28,7 @@ class IbexaCustomAttributesCommand extends Command {
             const hasOwnCustomClasses =
                 elementCustomClassesConfig &&
                 selectedCustomClasses
-                    .split()
+                    .split(' ')
                     .every((selectedCustomClass) => elementCustomClassesConfig.choices.includes(selectedCustomClass));
 
             if (elementName === modelElement.name || hasOwnCustomClasses) {
