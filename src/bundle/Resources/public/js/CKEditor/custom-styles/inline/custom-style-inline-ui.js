@@ -2,7 +2,9 @@ import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
 import ButtonView from '@ckeditor/ckeditor5-ui/src/button/buttonview';
 import { createDropdown, addToolbarToDropdown } from '@ckeditor/ckeditor5-ui/src/dropdown/utils';
 
-const { Translator } = window;
+import IbexaCustomStyleInlineCommand from './custom-style-inline-command';
+
+const { Translator, ibexa } = window;
 
 class IbexaCustomStyleInlineUI extends Plugin {
     constructor(props) {
@@ -38,16 +40,27 @@ class IbexaCustomStyleInlineUI extends Plugin {
     init() {
         this.editor.ui.componentFactory.add('ibexaCustomStyleInline', (locale) => {
             const dropdownView = createDropdown(locale);
-            const customStylesInline = Object.entries(window.ibexa.richText.customStyles).filter(([, config]) => config.inline);
+            const { customStyles } = ibexa.richText;
+            const customStylesInline = Object.entries(customStyles).filter(([, config]) => config.inline);
             const customStylesButtons = customStylesInline.map(this.createButton);
+            const defaultLabel = Translator.trans(/*@Desc("Custom styles")*/ 'custom_styles_btn.label', {}, 'ck_editor');
+            const customStyleInlineCommand = new IbexaCustomStyleInlineCommand(this.editor);
 
             dropdownView.buttonView.set({
-                label: Translator.trans(/*@Desc("Custom styles")*/ 'custom_styles_btn.label', {}, 'ck_editor'),
+                label: defaultLabel,
                 tooltip: true,
                 withText: true,
             });
 
             addToolbarToDropdown(dropdownView, customStylesButtons);
+
+            this.editor.commands.add('ibexaCustomStyleInline', customStyleInlineCommand);
+
+            dropdownView.buttonView.bind('label').to(customStyleInlineCommand, 'value', (value) => {
+                const selectedCustomStyle = customStyles[value];
+
+                return selectedCustomStyle?.label ?? defaultLabel;
+            });
 
             return dropdownView;
         });

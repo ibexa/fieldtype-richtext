@@ -147,12 +147,12 @@
             padding: calculateRem(8px);
             border-width: calculateRem(8px);
             border-style: solid;
-            border-color: $ibexa-color-light-100;
+            border-color: $ibexa-color-light-300;
             border-radius: $ibexa-border-radius-small;
         }
 
         &[data-ezelement='eztemplateinline'] {
-            background-color: $ibexa-color-light-100;
+            background-color: $ibexa-color-light-300;
             border-radius: $ibexa-border-radius-small;
             padding: 0 calculateRem(4px);
             margin: 0 calculateRem(4px);
