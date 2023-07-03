@@ -105,13 +105,9 @@ class IbexaAnchorUI extends Plugin {
         let countElementsWithSameId = 0;
 
         Array.from(richtexts).every((richtext) => {
-            if (countElementsWithSameId >= 2) {
-                return false;
-            }
-
             countElementsWithSameId += richtext.querySelectorAll(`[id="${value}"]`).length;
 
-            return true;
+            return countElementsWithSameId > 1;
         });
 
         return (isSameAsBefore && countElementsWithSameId === 1) || (!isSameAsBefore && countElementsWithSameId === 0);
