@@ -5,7 +5,7 @@ import IbexaAnchorFormView from './ui/anchor-form-view';
 import IbexaButtonView from '../common/button-view/button-view';
 
 const { Translator } = window;
-const ANCHOR_PATTERN = /^[A-Za-z][A-Za-z0-9\-_:.]*$/;
+const ANCHOR_PATTERN = /^[A-Za-z][A-Za-z0-9\-_.]*$/;
 
 class IbexaAnchorUI extends Plugin {
     constructor(props) {
