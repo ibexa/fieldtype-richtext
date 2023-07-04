@@ -25,9 +25,8 @@ class IbexaCustomTagUI extends Plugin {
 
         return (
             !!eventData.domTarget.closest(`[data-ezname="${this.componentName}"]`) &&
-            modelElement &&
-            modelElement.name === 'customTag' &&
-            modelElement.getAttribute('customTagName') === this.componentName
+            modelElement?.name === 'customTag' &&
+            modelElement?.getAttribute('customTagName') === this.componentName
         );
     }
 
