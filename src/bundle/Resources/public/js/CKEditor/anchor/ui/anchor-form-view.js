@@ -82,6 +82,10 @@ class IbexaLinkFormView extends View {
         return labeledInput;
     }
 
+    setError(message) {
+        this.anchorInputView.errorText = message;
+    }
+
     createButton(label, icon, className, eventName) {
         const button = new ButtonView(this.locale);
 
