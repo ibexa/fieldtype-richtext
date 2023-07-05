@@ -159,13 +159,13 @@ class IbexaCustomTagUI extends Plugin {
                 return {
                     ...output,
                     [key]: value === 'true',
-                }
+                };
             }
 
             return {
                 ...output,
                 [key]: value,
-            }
+            };
         }, {});
 
         this.formView.setValues(parsedValues);
