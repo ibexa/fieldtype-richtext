@@ -26,13 +26,22 @@ class IbexaAnchorUI extends Plugin {
 
         this.listenTo(formView, 'save-anchor', () => {
             const { anchor } = this.formView.getValues();
-            const isValueUnique = this.isValueUnique(anchor);
-            const isValueValid = this.isValueValid(anchor);
             const modelElement = this.getModelElement();
+            const isValueValid = this.isValueValid(anchor);
 
-            if (!isValueUnique || !isValueValid) {
+            if (!isValueValid) {
                 this.formView.setError(
                     Translator.trans(/*@Desc("A valid anchor link is needed.")*/ 'anchor_btn.error.valid', {}, 'ck_editor'),
+                );
+
+                return;
+            }
+
+            const isValueUnique = this.isValueUnique(anchor);
+
+            if (!isValueUnique) {
+                this.formView.setError(
+                    Translator.trans(/*@Desc("Anchor name must be unique.")*/ 'anchor_btn.error.unique', {}, 'ck_editor'),
                 );
 
                 return;
