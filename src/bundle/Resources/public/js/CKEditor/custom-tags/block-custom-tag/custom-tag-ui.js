@@ -148,13 +148,27 @@ class IbexaCustomTagUI extends Plugin {
     hideAttributes() {
         this.balloon.remove(this.attributesView);
         this.editor.editing.view.focus();
+        this.reinitAttributesView();
     }
 
     showForm() {
         const modelElement = this.editor.model.document.selection.getSelectedElement();
         const values = modelElement.getAttribute('values');
+        const parsedValues = Object.entries(values).reduce((output, [key, value]) => {
+            if (this.config.attributes[key]?.type === 'boolean') {
+                return {
+                    ...output,
+                    [key]: value === 'true',
+                };
+            }
 
-        this.formView.setValues(values);
+            return {
+                ...output,
+                [key]: value,
+            };
+        }, {});
+
+        this.formView.setValues(parsedValues);
 
         this.balloon.add({
             view: this.formView,
