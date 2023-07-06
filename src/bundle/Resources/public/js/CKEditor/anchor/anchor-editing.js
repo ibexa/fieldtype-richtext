@@ -20,13 +20,23 @@ class IbexaAnchorEditing extends Plugin {
     }
 
     init() {
-        const { model } = this.editor;
+        const { commands, model } = this.editor;
 
         model.schema.extend('$block', { allowAttributes: 'anchor' });
         model.schema.extend('embed', { allowAttributes: 'anchor' });
         model.schema.extend('embedInline', { allowAttributes: 'anchor' });
         model.schema.extend('embedImage', { allowAttributes: 'anchor' });
         model.schema.extend('customTag', { allowAttributes: 'anchor' });
+
+        commands.get('enter').on('afterExecute', () => {
+            const blocks = model.document.selection.getSelectedBlocks();
+
+            for (const block of blocks) {
+                model.change((writer) => {
+                    writer.removeAttribute('anchor', block);
+                });
+            }
+        });
 
         this.defineConverters();
     }
