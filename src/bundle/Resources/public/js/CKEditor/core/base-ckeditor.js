@@ -34,11 +34,12 @@ const VIEWPORT_TOP_OFFSET = 102;
 
 (function (global, doc, ibexa) {
     class BaseRichText {
-        constructor() {
+        constructor(config) {
             this.ezNamespace = 'http://ibexa.co/namespaces/ezpublish5/xhtml5/edit';
             this.xhtmlNamespace = 'http://www.w3.org/1999/xhtml';
 
             this.editor = null;
+            this.viewportTopOffset = config?.viewportTopOffset ?? VIEWPORT_TOP_OFFSET;
 
             this.xhtmlify = this.xhtmlify.bind(this);
             this.getData = this.getData.bind(this);
@@ -176,10 +177,10 @@ const VIEWPORT_TOP_OFFSET = 102;
                 ],
                 toolbar: {
                     items: toolbar,
-                    ui: {
-                        viewportTopOffset: {
-                            top: VIEWPORT_TOP_OFFSET,
-                        },
+                },
+                ui: {
+                    viewportOffset: {
+                        top: this.viewportTopOffset,
                     },
                 },
                 embedImage: {
