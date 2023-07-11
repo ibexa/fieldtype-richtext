@@ -212,6 +212,7 @@ class IbexaCustomAttributesFormView extends View {
             const previousValue = labeledDropdown.fieldView.element.value;
 
             let value;
+
             if (config.multiple) {
                 value = previousValue ? [...new Set([...previousValue.split(','), event.source.value])].join(',') : event.source.value;
             } else {
@@ -221,6 +222,7 @@ class IbexaCustomAttributesFormView extends View {
             if (previousValue === value) {
                 if (config.multiple) {
                     const set = new Set([...previousValue.split(',')]);
+
                     set.delete(event.source.value);
                     value = [...set].join(',');
                 } else {
