@@ -215,7 +215,7 @@ class IbexaCustomAttributesFormView extends View {
             if (config.multiple) {
                 value = previousValue ? [...new Set([...previousValue.split(','), event.source.value])].join(',') : event.source.value;
             } else {
-                value = event.source.value;
+                ( { value } = event.source );
             }
 
             if (previousValue === value) {
