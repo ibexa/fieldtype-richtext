@@ -209,8 +209,24 @@ class IbexaCustomAttributesFormView extends View {
         addListToDropdown(labeledDropdown.fieldView, itemsList);
 
         this.listenTo(labeledDropdown.fieldView, 'execute', (event) => {
-            const alreadySelectedValues = labeledDropdown.fieldView.element.value ? labeledDropdown.fieldView.element.value.split(' ') : [];
-            const value = config.multiple ? [...new Set([...alreadySelectedValues, event.source.value])].join(' ') : event.source.value;
+            const previousValue = labeledDropdown.fieldView.element.value;
+            let value = config.multiple
+                ? (
+                    previousValue
+                        ? [...new Set([...previousValue.split(','), event.source.value])].join(',')
+                        : event.source.value
+                )
+                : event.source.value;
+
+            if (previousValue === value) {
+                if (config.multiple) {
+                    const set = new Set([...previousValue.split(',')]);
+                    set.delete(event.source.value);
+                    value = [...set].join(',');
+                } else {
+                    value = null;
+                }
+            }
 
             labeledDropdown.fieldView.buttonView.set({
                 label: value,
