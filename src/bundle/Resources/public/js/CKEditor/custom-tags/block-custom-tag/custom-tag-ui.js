@@ -20,10 +20,14 @@ class IbexaCustomTagUI extends Plugin {
         this.isNew = false;
     }
 
-    isCustomTagSelected() {
+    isCustomTagSelected(eventData) {
         const modelElement = this.editor.model.document.selection.getSelectedElement();
 
-        return modelElement && modelElement.name === 'customTag' && modelElement.getAttribute('customTagName') === this.componentName;
+        return (
+            !!eventData.domTarget.closest(`[data-ezname="${this.componentName}"]`) &&
+            modelElement?.name === 'customTag' &&
+            modelElement?.getAttribute('customTagName') === this.componentName
+        );
     }
 
     isRemoveButtonClicked(eventData) {
@@ -42,7 +46,7 @@ class IbexaCustomTagUI extends Plugin {
         const viewDocument = this.editor.editing.view.document;
 
         this.listenTo(viewDocument, 'click', (eventInfo, eventData) => {
-            if (this.isCustomTagSelected()) {
+            if (this.isCustomTagSelected(eventData)) {
                 if (this.isRemoveButtonClicked(eventData)) {
                     this.removeCustomTag();
                 }
