@@ -1,6 +1,8 @@
 import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
 import Widget from '@ckeditor/ckeditor5-widget/src/widget';
+
 import AttributeCommand from '@ckeditor/ckeditor5-basic-styles/src/attributecommand';
+import IbexaCustomStyleInlineCommand from './custom-style-inline-command';
 
 class IbexaCustomStyleInlineEditing extends Plugin {
     static get requires() {
@@ -64,6 +66,7 @@ class IbexaCustomStyleInlineEditing extends Plugin {
         this.defineConverters();
 
         this.editor.commands.add(this.customStyleName, new AttributeCommand(this.editor, this.customStyleName));
+        this.editor.commands.add('ibexaCustomStyleInline', new IbexaCustomStyleInlineCommand(this.editor));
     }
 }
 

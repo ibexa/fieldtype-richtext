@@ -2,8 +2,6 @@ import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
 import ButtonView from '@ckeditor/ckeditor5-ui/src/button/buttonview';
 import { createDropdown, addToolbarToDropdown } from '@ckeditor/ckeditor5-ui/src/dropdown/utils';
 
-import IbexaCustomStyleInlineCommand from './custom-style-inline-command';
-
 const { Translator, ibexa } = window;
 
 class IbexaCustomStyleInlineUI extends Plugin {
@@ -15,6 +13,7 @@ class IbexaCustomStyleInlineUI extends Plugin {
 
     createButton([customStyleName, config]) {
         const { editor } = this;
+        const customStyleInlineCommand = editor.commands.get('ibexaCustomStyleInline');
 
         this.editor.ui.componentFactory.add(customStyleName, (locale) => {
             const buttonView = new ButtonView(locale);
@@ -25,6 +24,8 @@ class IbexaCustomStyleInlineUI extends Plugin {
                 isToggleable: true,
                 withText: true,
             });
+
+            buttonView.bind('isOn').to(customStyleInlineCommand, 'value', (value) => value === customStyleName);
 
             this.listenTo(buttonView, 'execute', () => {
                 editor.execute(customStyleName);
@@ -44,7 +45,7 @@ class IbexaCustomStyleInlineUI extends Plugin {
             const customStylesInline = Object.entries(customStyles).filter(([, config]) => config.inline);
             const customStylesButtons = customStylesInline.map(this.createButton);
             const defaultLabel = Translator.trans(/*@Desc("Custom styles")*/ 'custom_styles_btn.label', {}, 'ck_editor');
-            const customStyleInlineCommand = new IbexaCustomStyleInlineCommand(this.editor);
+            const customStyleInlineCommand = this.editor.commands.get('ibexaCustomStyleInline');
 
             dropdownView.buttonView.set({
                 label: defaultLabel,
@@ -52,7 +53,7 @@ class IbexaCustomStyleInlineUI extends Plugin {
                 withText: true,
             });
 
-            addToolbarToDropdown(dropdownView, customStylesButtons);
+            addToolbarToDropdown(dropdownView, customStylesButtons, { enableActiveItemFocusOnDropdownOpen: true });
 
             this.editor.commands.add('ibexaCustomStyleInline', customStyleInlineCommand);
 
