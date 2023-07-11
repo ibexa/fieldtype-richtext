@@ -210,7 +210,6 @@ class IbexaCustomAttributesFormView extends View {
 
         this.listenTo(labeledDropdown.fieldView, 'execute', (event) => {
             const previousValue = labeledDropdown.fieldView.element.value;
-
             let value;
 
             if (config.multiple) {
