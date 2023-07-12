@@ -209,25 +209,7 @@ class IbexaCustomAttributesFormView extends View {
         addListToDropdown(labeledDropdown.fieldView, itemsList);
 
         this.listenTo(labeledDropdown.fieldView, 'execute', (event) => {
-            const previousValue = labeledDropdown.fieldView.element.value;
-            let value;
-
-            if (config.multiple) {
-                value = previousValue ? [...new Set([...previousValue.split(' '), event.source.value])].join(' ') : event.source.value;
-            } else {
-                ({ value } = event.source);
-            }
-
-            if (previousValue === value) {
-                if (config.multiple) {
-                    const set = new Set([...previousValue.split(' ')]);
-
-                    set.delete(event.source.value);
-                    value = [...set].join(' ');
-                } else {
-                    value = null;
-                }
-            }
+            const value = this.getNewValue(event.source.value, config.multiple, labeledDropdown.fieldView.element.value);
 
             labeledDropdown.fieldView.buttonView.set({
                 label: value,
@@ -242,6 +224,24 @@ class IbexaCustomAttributesFormView extends View {
         });
 
         return labeledDropdown;
+    }
+
+    getNewValue(clickedValue, multiple, previousValue = '') {
+        const selectedItems = new Set(previousValue.split(' '));
+
+        if (selectedItems.has(clickedValue)) {
+            selectedItems.delete(clickedValue);
+
+            return [...selectedItems].join(' ');
+        }
+
+        if (!multiple) {
+            selectedItems.clear();
+        }
+
+        selectedItems.add(clickedValue);
+
+        return [...selectedItems].join(' ');
     }
 
     createTextInput(config) {
