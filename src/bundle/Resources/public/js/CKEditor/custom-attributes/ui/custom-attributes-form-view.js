@@ -213,17 +213,17 @@ class IbexaCustomAttributesFormView extends View {
             let value;
 
             if (config.multiple) {
-                value = previousValue ? [...new Set([...previousValue.split(','), event.source.value])].join(',') : event.source.value;
+                value = previousValue ? [...new Set([...previousValue.split(' '), event.source.value])].join(' ') : event.source.value;
             } else {
                 ({ value } = event.source);
             }
 
             if (previousValue === value) {
                 if (config.multiple) {
-                    const set = new Set([...previousValue.split(',')]);
+                    const set = new Set([...previousValue.split(' ')]);
 
                     set.delete(event.source.value);
-                    value = [...set].join(',');
+                    value = [...set].join(' ');
                 } else {
                     value = null;
                 }
