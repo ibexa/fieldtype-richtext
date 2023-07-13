@@ -71,6 +71,10 @@ class IbexaAnchorUI extends Plugin {
         const parentElement = this.getModelElement();
         const values = {};
 
+        if (this.balloon.hasView(this.formView)) {
+            return;
+        }
+
         if (parentElement) {
             values.anchor = parentElement.getAttribute('anchor') || '';
         }
@@ -116,7 +120,7 @@ class IbexaAnchorUI extends Plugin {
         Array.from(richtexts).every((richtext) => {
             countElementsWithSameId += richtext.querySelectorAll(`[id="${value}"]`).length;
 
-            return countElementsWithSameId > 1;
+            return countElementsWithSameId < 1;
         });
 
         return (isSameAsBefore && countElementsWithSameId === 1) || (!isSameAsBefore && countElementsWithSameId === 0);
