@@ -40,6 +40,21 @@
     </xsl:if>
   </xsl:template>
 
+  <xsl:template name="ezattribute_from_figure">
+      <xsl:if test="ancestor::ezxhtml5:figure/@*[starts-with(name(), 'data-ezattribute-')]">
+      <xsl:element name="ezattribute" namespace="http://docbook.org/ns/docbook">
+        <xsl:for-each select="ancestor::ezxhtml5:figure/@*[starts-with(name(), 'data-ezattribute-')]">
+          <xsl:element name="ezvalue" namespace="http://docbook.org/ns/docbook">
+            <xsl:attribute name="key">
+              <xsl:value-of select="substring-after(name(), 'data-ezattribute-')"/>
+            </xsl:attribute>
+            <xsl:value-of select="."/>
+          </xsl:element>
+        </xsl:for-each>
+      </xsl:element>
+    </xsl:if>
+  </xsl:template>
+
   <!-- Note: use only in context where literallayout is handled always in parent context -->
   <xsl:template name="breakline">
     <xsl:param name="node"/>
@@ -424,6 +439,13 @@
         <xsl:attribute name="class">
           <xsl:value-of select="@class"/>
         </xsl:attribute>
+      </xsl:if>
+      <!-- Adding class and ezattribute from parent element (<figure>) -->
+      <xsl:if test="ancestor::ezxhtml5:figure">
+        <xsl:attribute name="class">
+          <xsl:value-of select="../@class"/>
+        </xsl:attribute>
+        <xsl:call-template name="ezattribute_from_figure"/>
       </xsl:if>
       <xsl:if test="contains( @style, 'width:' )">
         <xsl:variable name="width">

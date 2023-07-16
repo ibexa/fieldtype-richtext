@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace Ibexa\Tests\FieldTypeRichText\RichText\Converter\Xslt;
 
 use Ibexa\FieldTypeRichText\RichText\Converter\Aggregate;
+use Ibexa\FieldTypeRichText\RichText\Converter\Figure;
 use Ibexa\FieldTypeRichText\RichText\Converter\ProgramListing;
 use Ibexa\FieldTypeRichText\RichText\Converter\Xslt;
 
