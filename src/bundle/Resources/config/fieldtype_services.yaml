@@ -143,6 +143,12 @@ services:
         tags:
             - {name: ibexa.field_type.richtext.converter.input.xhtml5, priority: 10}
 
+    # Note: should run before xsl transformation
+    Ibexa\FieldTypeRichText\RichText\Converter\Figure:
+        class: Ibexa\FieldTypeRichText\RichText\Converter\Figure
+        tags:
+            - {name: ibexa.field_type.richtext.converter.input.xhtml5, priority: 10}
+
     Ibexa\FieldTypeRichText\RichText\Converter\Html5Edit:
         class: Ibexa\FieldTypeRichText\RichText\Converter\Html5Edit
         arguments:
