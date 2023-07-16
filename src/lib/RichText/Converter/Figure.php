@@ -33,7 +33,6 @@ class Figure implements Converter
         $xpathExpression = '//ns:figure [descendant::ns:table]';
         $ns = $document->documentElement ? $document->documentElement->namespaceURI ?: '' : '';
         $xpath->registerNamespace('ns', $ns);
-        /** @var \DomNodeList $elements */
         $elements = $xpath->query($xpathExpression) ?: [];
 
         // elements are list of <figure> elements
@@ -41,18 +40,19 @@ class Figure implements Converter
             if ($element instanceof \DOMElement) {
                 $attributes = $element->attributes;
 
-                // each <figure> element should only contain one table
-                /** @var \DOMElement $node */
-                $tableElement = $element->childNodes[0];
+                // Each <figure> element should only contain one table
+                if ($element->childNodes[0] instanceof \DomElement) {
+                    $tableElement = $element->childNodes[0];
 
-                /** @var \DOMAttr $attribute */
-                foreach ($attributes as $attribute) {
-                    if ($attribute->name === 'class') {
-                        $tableElement->setAttribute('class', $attribute->value);
-                    }
+                    /** @var \DOMAttr $attribute */
+                    foreach ($attributes as $attribute) {
+                        if ($attribute->name === 'class') {
+                            $tableElement->setAttribute('class', $attribute->value);
+                        }
 
-                    if (strpos($attribute->name, 'data-ezattribute-') === 0) {
-                        $tableElement->setAttribute($attribute->name, $attribute->value);
+                        if (strpos($attribute->name, 'data-ezattribute-') === 0) {
+                            $tableElement->setAttribute($attribute->name, $attribute->value);
+                        }
                     }
                 }
             }
