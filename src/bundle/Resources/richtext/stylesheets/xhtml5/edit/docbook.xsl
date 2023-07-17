@@ -441,12 +441,12 @@
         </xsl:attribute>
       </xsl:if>
       <!-- Adding class and ezattribute from parent element (<figure>) -->
-      <xsl:if test="ancestor::ezxhtml5:figure">
+      <xsl:if test="ancestor::ezxhtml5:figure/@class">
         <xsl:attribute name="class">
           <xsl:value-of select="../@class"/>
         </xsl:attribute>
-        <xsl:call-template name="ezattribute_from_figure"/>
       </xsl:if>
+      <xsl:call-template name="ezattribute_from_figure"/>
       <xsl:if test="contains( @style, 'width:' )">
         <xsl:variable name="width">
           <xsl:call-template name="extractStyleValue">
