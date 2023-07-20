@@ -252,4 +252,9 @@
     &.ck-balloon-panel.ck-rounded-corners {
         border-radius: $ibexa-border-radius;
     }
+
+    &.ck-dropdown__panel {
+        max-height: calculateRem(300px);
+        overflow-y: auto;
+    }
 }
