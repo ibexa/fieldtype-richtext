@@ -227,7 +227,7 @@ class IbexaCustomAttributesFormView extends View {
     }
 
     getNewValue(clickedValue, multiple, previousValue = '') {
-        const selectedItems = new Set(previousValue.split(' '));
+        const selectedItems = previousValue ? new Set(previousValue.split(' ')) : new Set();
 
         if (selectedItems.has(clickedValue)) {
             selectedItems.delete(clickedValue);
