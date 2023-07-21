@@ -36,11 +36,17 @@ class IbexaLinkUI extends Plugin {
 
         this.listenTo(formView, 'save-link', () => {
             const { url, title, target } = this.formView.getValues();
-            const range = this.getLinkRange();
+            const { path: firstPosition } = this.editor.model.document.selection.getFirstPosition();
+            const { path: lastPosition } = this.editor.model.document.selection.getLastPosition();
+            const noRangeSelection = firstPosition[0] === lastPosition[0] && firstPosition[1] === lastPosition[1];
 
-            this.editor.model.change((writer) => {
-                writer.setSelection(range);
-            });
+            if (noRangeSelection) {
+                const range = this.getLinkRange();
+
+                this.editor.model.change((writer) => {
+                    writer.setSelection(range);
+                });
+            }
 
             this.isNew = false;
 
