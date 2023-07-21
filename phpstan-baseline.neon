@@ -991,11 +991,6 @@ parameters:
 			path: src/lib/RichText/ConverterDispatcher.php
 
 		-
-			message: "#^Strict comparison using \\=\\=\\= between string and null will always evaluate to false\\.$#"
-			count: 1
-			path: src/lib/RichText/ConverterDispatcher.php
-
-		-
 			message: "#^Method Ibexa\\\\FieldTypeRichText\\\\RichText\\\\Exception\\\\InvalidXmlException\\:\\:__construct\\(\\) has parameter \\$errors with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/lib/RichText/Exception/InvalidXmlException.php
@@ -1267,11 +1262,6 @@ parameters:
 
 		-
 			message: "#^Strict comparison using \\=\\=\\= between Ibexa\\\\FieldTypeRichText\\\\eZ\\\\RichText\\\\Validator and null will always evaluate to false\\.$#"
-			count: 1
-			path: src/lib/RichText/Validator/ValidatorDispatcher.php
-
-		-
-			message: "#^Strict comparison using \\=\\=\\= between string and null will always evaluate to false\\.$#"
 			count: 1
 			path: src/lib/RichText/Validator/ValidatorDispatcher.php
 
