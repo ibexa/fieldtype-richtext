@@ -126,4 +126,8 @@
             padding: 0 calculateRem(16px) calculateRem(16px);
         }
     }
+
+    .ck-balloon-panel_visible {
+        z-index: 300;
+    }
 }
