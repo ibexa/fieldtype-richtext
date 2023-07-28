@@ -114,6 +114,41 @@ class DocbookTest extends TestCase
 </section>',
                 [],
             ],
+            [
+                '<?xml version="1.0" encoding="UTF-8"?>
+<section xmlns="http://docbook.org/ns/docbook" xmlns:ezcustom="http://ibexa.co/xmlns/dxp/docbook/custom" xmlns:ezxhtml="http://ibexa.co/xmlns/dxp/docbook/xhtml" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0-variant ezpublish-1.0">
+    <para ezxhtml:class="p-special">
+        <ezattribute>
+            <ezvalue key="p-custom-attribute">true</ezvalue>
+            <ezvalue key="p-another-attribute">attr2,attr1</ezvalue>
+        </ezattribute>sdf V8</para>
+    <informaltable class="p-special">
+        <ezattribute>
+            <ezvalue key="p-custom-attribute">true</ezvalue>
+            <ezvalue key="p-another-attribute">attr2,attr1</ezvalue>
+        </ezattribute>
+        <tbody>
+            <tr>
+                <td> </td>
+                <td> </td>
+            </tr>
+            <tr>
+                <td> </td>
+                <td> </td>
+            </tr>
+            <tr>
+                <td> </td>
+                <td> </td>
+            </tr>
+            <tr>
+                <td> </td>
+                <td> </td>
+            </tr>
+        </tbody>
+    </informaltable>
+</section>',
+                [],
+            ],
         ];
     }
 

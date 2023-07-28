@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<section xmlns="http://ibexa.co/namespaces/ezpublish5/xhtml5/edit">
+    <p class="p-special" data-ezattribute-p-custom-attribute="true" data-ezattribute-p-another-attribute="attr2,attr1">sdf V8</p>
+    <figure class="table t-special" data-ezattribute-t-custom-attribute="true" data-ezattribute-t-another-attribute="attr2,attr1">
+        <table>
+            <tbody>
+                <tr>
+                    <td> </td>
+                    <td> </td>
+                </tr>
+                <tr>
+                    <td> </td>
+                    <td> </td>
+                </tr>
+                <tr>
+                    <td> </td>
+                    <td> </td>
+                </tr>
+                <tr>
+                    <td> </td>
+                    <td> </td>
+                </tr>
+            </tbody>
+        </table>
+    </figure>
+</section>
