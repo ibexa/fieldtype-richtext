@@ -91,7 +91,12 @@
                 }
             }
 
+            &.ck-button-revert {
+                margin-right: calculateRem(8px);
+            }
+
             &.ck-button-cancel,
+            &.ck-button-revert,
             &.ibexa-btn--select-content {
                 color: $ibexa-color-primary;
                 fill: $ibexa-color-primary;
