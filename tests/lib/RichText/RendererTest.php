@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace Ibexa\Tests\FieldTypeRichText\RichText;
 
 use Exception;
+use Ibexa\Contracts\Core\Repository\PermissionResolver;
 use Ibexa\Contracts\Core\Repository\Values\Content\Content;
 use Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo;
 use Ibexa\Contracts\Core\Repository\Values\Content\Location;
@@ -19,7 +20,6 @@ use Ibexa\FieldTypeRichText\RichText\Renderer;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Twig\Environment;
 use Twig\Loader\LoaderInterface;
@@ -29,7 +29,7 @@ class RendererTest extends TestCase
     public function setUp(): void
     {
         $this->repositoryMock = $this->getRepositoryMock();
-        $this->authorizationCheckerMock = $this->getAuthorizationCheckerMock();
+        $this->permissionResolverMock = $this->getPermissionResolverMock();
         $this->configResolverMock = $this->getConfigResolverMock();
         $this->templateEngineMock = $this->getTemplateEngineMock();
         $this->loggerMock = $this->getLoggerMock();
@@ -1707,9 +1707,9 @@ class RendererTest extends TestCase
             ->setConstructorArgs(
                 [
                     $this->repositoryMock,
-                    $this->authorizationCheckerMock,
                     $this->configResolverMock,
                     $this->templateEngineMock,
+                    $this->permissionResolverMock,
                     'test.name.space.tag',
                     'test.name.space.style',
                     'test.name.space.embed',
@@ -1734,16 +1734,16 @@ class RendererTest extends TestCase
     }
 
     /**
-     * @var \Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface|\PHPUnit\Framework\MockObject\MockObject
+     * @var \Ibexa\Contracts\Core\Repository\PermissionResolver|\PHPUnit\Framework\MockObject\MockObject
      */
-    protected $authorizationCheckerMock;
+    protected $permissionResolverMock;
 
     /**
      * @return \PHPUnit\Framework\MockObject\MockObject
      */
-    protected function getAuthorizationCheckerMock()
+    protected function getPermissionResolverMock()
     {
-        return $this->createMock(AuthorizationCheckerInterface::class);
+        return $this->createMock(PermissionResolver::class);
     }
 
     /**
