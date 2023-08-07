@@ -81,9 +81,9 @@ class Renderer implements RendererInterface
         ConfigResolverInterface $configResolver,
         Environment $templateEngine,
         PermissionResolver $permissionResolver,
-        $tagConfigurationNamespace,
-        $styleConfigurationNamespace,
-        $embedConfigurationNamespace,
+        string $tagConfigurationNamespace,
+        string $styleConfigurationNamespace,
+        string $embedConfigurationNamespace,
         LoggerInterface $logger = null,
         array $customTagsConfiguration = [],
         array $customStylesConfiguration = []
