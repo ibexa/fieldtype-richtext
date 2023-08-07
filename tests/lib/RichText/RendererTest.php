@@ -17,6 +17,7 @@ use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 use Ibexa\Core\Base\Exceptions\NotFoundException;
 use Ibexa\Core\Repository\Repository;
 use Ibexa\FieldTypeRichText\RichText\Renderer;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -1733,26 +1734,11 @@ class RendererTest extends TestCase
         return $this->createMock(Repository::class);
     }
 
-    /**
-     * @var \Ibexa\Contracts\Core\Repository\PermissionResolver|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $permissionResolverMock;
-
-    /**
-     * @return \PHPUnit\Framework\MockObject\MockObject
-     */
-    protected function getPermissionResolverMock()
-    {
-        return $this->createMock(PermissionResolver::class);
-    }
-
-    /**
-     * @var \Psr\Log\LoggerInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
+    /** @var \Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface&\PHPUnit\Framework\MockObject\MockObject */
     protected $configResolverMock;
 
     /**
-     * @return \PHPUnit\Framework\MockObject\MockObject
+     * @return \Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface&\PHPUnit\Framework\MockObject\MockObject
      */
     protected function getConfigResolverMock()
     {
@@ -1770,6 +1756,19 @@ class RendererTest extends TestCase
     protected function getTemplateEngineMock()
     {
         return $this->createMock(Environment::class);
+    }
+
+    /**
+     * @var \Ibexa\Contracts\Core\Repository\PermissionResolver&\PHPUnit\Framework\MockObject\MockObject
+     */
+    protected $permissionResolverMock;
+
+    /**
+     * @return \Ibexa\Contracts\Core\Repository\PermissionResolver&\PHPUnit\Framework\MockObject\MockObject
+     */
+    protected function getPermissionResolverMock(): MockObject
+    {
+        return $this->createMock(PermissionResolver::class);
     }
 
     /**

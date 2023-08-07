@@ -2966,16 +2966,6 @@ parameters:
 			path: tests/lib/RichText/RendererTest.php
 
 		-
-			message: "#^Property Ibexa\\\\Tests\\\\FieldTypeRichText\\\\RichText\\\\RendererTest\\:\\:\\$authorizationCheckerMock \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&Symfony\\\\Component\\\\Security\\\\Core\\\\Authorization\\\\AuthorizationCheckerInterface\\) does not accept PHPUnit\\\\Framework\\\\MockObject\\\\MockObject\\.$#"
-			count: 1
-			path: tests/lib/RichText/RendererTest.php
-
-		-
-			message: "#^Property Ibexa\\\\Tests\\\\FieldTypeRichText\\\\RichText\\\\RendererTest\\:\\:\\$configResolverMock \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&Psr\\\\Log\\\\LoggerInterface\\) does not accept PHPUnit\\\\Framework\\\\MockObject\\\\MockObject\\.$#"
-			count: 1
-			path: tests/lib/RichText/RendererTest.php
-
-		-
 			message: "#^Property Ibexa\\\\Tests\\\\FieldTypeRichText\\\\RichText\\\\RendererTest\\:\\:\\$loaderMock \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&Twig\\\\Loader\\\\LoaderInterface\\) does not accept PHPUnit\\\\Framework\\\\MockObject\\\\MockObject\\.$#"
 			count: 1
 			path: tests/lib/RichText/RendererTest.php
