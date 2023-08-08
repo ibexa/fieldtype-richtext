@@ -2966,26 +2966,6 @@ parameters:
 			path: tests/lib/RichText/RendererTest.php
 
 		-
-			message: "#^Property Ibexa\\\\Tests\\\\FieldTypeRichText\\\\RichText\\\\RendererTest\\:\\:\\$loaderMock \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&Twig\\\\Loader\\\\LoaderInterface\\) does not accept PHPUnit\\\\Framework\\\\MockObject\\\\MockObject\\.$#"
-			count: 1
-			path: tests/lib/RichText/RendererTest.php
-
-		-
-			message: "#^Property Ibexa\\\\Tests\\\\FieldTypeRichText\\\\RichText\\\\RendererTest\\:\\:\\$loggerMock \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&Psr\\\\Log\\\\LoggerInterface\\) does not accept PHPUnit\\\\Framework\\\\MockObject\\\\MockObject\\.$#"
-			count: 1
-			path: tests/lib/RichText/RendererTest.php
-
-		-
-			message: "#^Property Ibexa\\\\Tests\\\\FieldTypeRichText\\\\RichText\\\\RendererTest\\:\\:\\$repositoryMock \\(Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Repository&PHPUnit\\\\Framework\\\\MockObject\\\\MockObject\\) does not accept PHPUnit\\\\Framework\\\\MockObject\\\\MockObject\\.$#"
-			count: 1
-			path: tests/lib/RichText/RendererTest.php
-
-		-
-			message: "#^Property Ibexa\\\\Tests\\\\FieldTypeRichText\\\\RichText\\\\RendererTest\\:\\:\\$templateEngineMock \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&Symfony\\\\Component\\\\Templating\\\\EngineInterface\\) does not accept PHPUnit\\\\Framework\\\\MockObject\\\\MockObject\\.$#"
-			count: 1
-			path: tests/lib/RichText/RendererTest.php
-
-		-
 			message: "#^Method Ibexa\\\\Tests\\\\FieldTypeRichText\\\\RichText\\\\Validator\\\\CustomTagsValidatorTest\\:\\:providerForTestValidateDocument\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: tests/lib/RichText/Validator/CustomTagsValidatorTest.php
