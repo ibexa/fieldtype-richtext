@@ -444,7 +444,7 @@ class Renderer implements RendererInterface
         // Check both 'content/read' and 'content/view_embed'.
         if (
             !$this->permissionResolver->canUser('content', 'read', $content)
-            && !$this->permissionResolver->canUser('content', 'view_embed', $content) // Shouldn't we have `||` here?
+            && !$this->permissionResolver->canUser('content', 'view_embed', $content)
         ) {
             throw new AccessDeniedException();
         }
@@ -484,7 +484,7 @@ class Renderer implements RendererInterface
                 $location->contentInfo,
                 [$location]
             )
-            && !$this->permissionResolver->canUser( // Shouldn't we have `||` here?
+            && !$this->permissionResolver->canUser(
                 'content',
                 'view_embed',
                 $location->contentInfo,
