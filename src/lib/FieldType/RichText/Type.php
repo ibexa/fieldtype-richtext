@@ -13,6 +13,7 @@ use Ibexa\Contracts\Core\FieldType\Value as SPIValue;
 use Ibexa\Contracts\Core\Persistence\Content\FieldValue;
 use Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition;
 use Ibexa\Contracts\FieldTypeRichText\RichText\InputHandlerInterface;
+use Ibexa\Contracts\FieldTypeRichText\RichText\TextExtractorInterface;
 use Ibexa\Core\Base\Exceptions\InvalidArgumentType;
 use Ibexa\Core\FieldType\FieldType;
 use Ibexa\Core\FieldType\ValidationError;
@@ -29,12 +30,14 @@ class Type extends FieldType
      */
     private $inputHandler;
 
-    /**
-     * @param \Ibexa\Contracts\FieldTypeRichText\RichText\InputHandlerInterface $inputHandler
-     */
-    public function __construct(InputHandlerInterface $inputHandler)
-    {
+    private TextExtractorInterface $textExtractor;
+
+    public function __construct(
+        InputHandlerInterface $inputHandler,
+        TextExtractorInterface $textExtractor
+    ) {
         $this->inputHandler = $inputHandler;
+        $this->textExtractor = $textExtractor;
     }
 
     /**
@@ -176,7 +179,7 @@ class Type extends FieldType
      */
     protected function getSortInfo(BaseValue $value)
     {
-        return SearchField::extractShortText($value->xml);
+        return $this->textExtractor->extractShortText($value->xml);
     }
 
     /**

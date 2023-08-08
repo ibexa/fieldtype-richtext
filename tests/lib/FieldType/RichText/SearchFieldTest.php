@@ -12,6 +12,7 @@ use Ibexa\Contracts\Core\Persistence\Content\Field;
 use Ibexa\Contracts\Core\Persistence\Content\FieldValue;
 use Ibexa\Contracts\Core\Persistence\Content\Type\FieldDefinition;
 use Ibexa\Contracts\Core\Search;
+use Ibexa\Contracts\FieldTypeRichText\RichText\TextExtractorInterface;
 use Ibexa\FieldTypeRichText\FieldType\RichText\SearchField;
 use PHPUnit\Framework\TestCase;
 
@@ -20,22 +21,32 @@ final class SearchFieldTest extends TestCase
     /** @var \Ibexa\FieldTypeRichText\FieldType\RichText\SearchField */
     private $searchField;
 
+    /** @var \Ibexa\Contracts\FieldTypeRichText\RichText\TextExtractorInterface&\PHPUnit\Framework\MockObject\MockObject */
+    private TextExtractorInterface $textExtractor;
+
     public function getDataForTestGetIndexData(): array
     {
+        $simpleStubShortTextValue = 'Welcome to Ibexa';
+        $simpleStubFullTextValue = "\n   Welcome to Ibexa \n   Ibexa  is the new generation DXP from Ibexa. \n ";
+
         return [
             'simple stub' => [
                 $this->getSimpleDocBookXml(),
                 [
                     new Search\Field(
                         'value',
-                        'Welcome to Ibexa',
+                        $simpleStubShortTextValue,
                         new Search\FieldType\StringField()
                     ),
                     new Search\Field(
                         'fulltext',
-                        "\n   Welcome to Ibexa \n   Ibexa  is the new generation DXP from Ibexa. \n ",
+                        $simpleStubFullTextValue,
                         new Search\FieldType\FullTextField()
                     ),
+                ],
+                [
+                    $simpleStubShortTextValue,
+                    $simpleStubFullTextValue,
                 ],
             ],
             'empty xml' => [
@@ -52,13 +63,18 @@ final class SearchFieldTest extends TestCase
                         new Search\FieldType\FullTextField()
                     ),
                 ],
+                [
+                    '',
+                    '',
+                ],
             ],
         ];
     }
 
     protected function setUp(): void
     {
-        $this->searchField = new SearchField();
+        $this->textExtractor = $this->createMock(TextExtractorInterface::class);
+        $this->searchField = new SearchField($this->textExtractor);
     }
 
     /**
@@ -66,9 +82,10 @@ final class SearchFieldTest extends TestCase
      *
      * @dataProvider getDataForTestGetIndexData
      *
-     * @param array $expectedSearchFields
+     * @param array<\Ibexa\Contracts\Core\Search\Field> $expectedSearchFields
+     * @param array<string> $expectedTextValues
      */
-    public function testGetIndexData(string $docBookXml, array $expectedSearchFields): void
+    public function testGetIndexData(string $docBookXml, array $expectedSearchFields, array $expectedTextValues): void
     {
         $field = new Field(
             [
@@ -78,6 +95,14 @@ final class SearchFieldTest extends TestCase
             ]
         );
         $fieldDefinition = new FieldDefinition();
+
+        $this->textExtractor
+            ->method('extractShortText')
+            ->willReturn($expectedTextValues[0]);
+
+        $this->textExtractor
+            ->method('extractText')
+            ->willReturn($expectedTextValues[1]);
 
         self::assertEquals(
             $expectedSearchFields,
