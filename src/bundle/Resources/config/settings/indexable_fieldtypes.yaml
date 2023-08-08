@@ -1,4 +1,6 @@
 services:
     Ibexa\FieldTypeRichText\FieldType\RichText\SearchField:
+        arguments:
+            $textExtractor: '@Ibexa\Contracts\FieldTypeRichText\RichText\TextExtractorInterface'
         tags:
             - {name: ibexa.field_type.indexable, alias: ezrichtext}

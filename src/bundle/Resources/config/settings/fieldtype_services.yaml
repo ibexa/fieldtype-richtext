@@ -64,3 +64,8 @@ services:
 
     # Default InputHandler
     Ibexa\Contracts\FieldTypeRichText\RichText\InputHandlerInterface: '@Ibexa\FieldTypeRichText\RichText\InputHandler'
+
+    # Text Extractor
+    Ibexa\FieldTypeRichText\RichText\TextExtractor: ~
+
+    Ibexa\Contracts\FieldTypeRichText\RichText\TextExtractorInterface: '@Ibexa\FieldTypeRichText\RichText\TextExtractor'
