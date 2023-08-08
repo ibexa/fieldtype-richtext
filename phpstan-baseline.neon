@@ -581,11 +581,6 @@ parameters:
 			path: src/lib/FieldType/RichText/RichTextStorage/Gateway.php
 
 		-
-			message: "#^Parameter \\#1 \\$node of method Ibexa\\\\Contracts\\\\FieldTypeRichText\\\\RichText\\\\TextExtractorInterface\\:\\:extractText\\(\\) expects DOMNode, DOMElement\\|null given\\.$#"
-			count: 1
-			path: src/lib/FieldType/RichText/SearchField.php
-
-		-
 			message: "#^Parameter \\#1 \\$source of method DOMDocument\\:\\:loadXML\\(\\) expects string, array\\|bool\\|float\\|int\\|string\\|null given\\.$#"
 			count: 1
 			path: src/lib/FieldType/RichText/SearchField.php
@@ -1131,19 +1126,24 @@ parameters:
 			path: src/lib/RichText/Renderer.php
 
 		-
+			message: "#^Parameter \\#1 \\$node of method Ibexa\\\\FieldTypeRichText\\\\RichText\\\\TextExtractor\\\\FullTextExtractor\\:\\:extractTextFromNode\\(\\) expects DOMNode, DOMElement\\|null given\\.$#"
+			count: 1
+			path: src/lib/RichText/TextExtractor/FullTextExtractor.php
+
+		-
 			message: "#^Cannot access property \\$firstChild on DOMElement\\|null\\.$#"
 			count: 1
-			path: src/lib/RichText/TextExtractor.php
+			path: src/lib/RichText/TextExtractor/ShortTextExtractor.php
 
 		-
 			message: "#^Cannot access property \\$textContent on DOMElement\\|null\\.$#"
 			count: 1
-			path: src/lib/RichText/TextExtractor.php
+			path: src/lib/RichText/TextExtractor/ShortTextExtractor.php
 
 		-
 			message: "#^Cannot access property \\$textContent on DOMNode\\|null\\.$#"
 			count: 1
-			path: src/lib/RichText/TextExtractor.php
+			path: src/lib/RichText/TextExtractor/ShortTextExtractor.php
 
 		-
 			message: "#^Argument of an invalid type DOMNodeList\\<DOMNode\\>\\|false supplied for foreach, only iterables are supported\\.$#"
@@ -2989,11 +2989,6 @@ parameters:
 			message: "#^Property Ibexa\\\\Tests\\\\FieldTypeRichText\\\\RichText\\\\RendererTest\\:\\:\\$templateEngineMock \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&Symfony\\\\Component\\\\Templating\\\\EngineInterface\\) does not accept PHPUnit\\\\Framework\\\\MockObject\\\\MockObject\\.$#"
 			count: 1
 			path: tests/lib/RichText/RendererTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$node of method Ibexa\\\\FieldTypeRichText\\\\RichText\\\\TextExtractor\\:\\:extractText\\(\\) expects DOMNode, DOMElement\\|null given\\.$#"
-			count: 1
-			path: tests/lib/RichText/TextExtractorTest.php
 
 		-
 			message: "#^Method Ibexa\\\\Tests\\\\FieldTypeRichText\\\\RichText\\\\Validator\\\\CustomTagsValidatorTest\\:\\:providerForTestValidateDocument\\(\\) return type has no value type specified in iterable type array\\.$#"

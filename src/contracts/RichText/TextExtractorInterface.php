@@ -9,19 +9,8 @@ declare(strict_types=1);
 namespace Ibexa\Contracts\FieldTypeRichText\RichText;
 
 use DOMDocument;
-use DOMNode;
 
 interface TextExtractorInterface
 {
-    /**
-     * Extracts text content of the given $node.
-     */
-    public function extractText(DOMNode $node): string;
-
-    /**
-     * Extracts short text content of the given $document.
-     *
-     * @internal Only for use by RichText FieldType itself.
-     */
-    public function extractShortText(DOMDocument $document): string;
+    public function extractText(DOMDocument $node): string;
 }

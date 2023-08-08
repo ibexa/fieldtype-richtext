@@ -22,7 +22,10 @@ final class SearchFieldTest extends TestCase
     private $searchField;
 
     /** @var \Ibexa\Contracts\FieldTypeRichText\RichText\TextExtractorInterface&\PHPUnit\Framework\MockObject\MockObject */
-    private TextExtractorInterface $textExtractor;
+    private TextExtractorInterface $shortTextExtractor;
+
+    /** @var \Ibexa\Contracts\FieldTypeRichText\RichText\TextExtractorInterface&\PHPUnit\Framework\MockObject\MockObject */
+    private TextExtractorInterface $fullTextExtractor;
 
     public function getDataForTestGetIndexData(): array
     {
@@ -73,8 +76,12 @@ final class SearchFieldTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->textExtractor = $this->createMock(TextExtractorInterface::class);
-        $this->searchField = new SearchField($this->textExtractor);
+        $this->shortTextExtractor = $this->createMock(TextExtractorInterface::class);
+        $this->fullTextExtractor = $this->createMock(TextExtractorInterface::class);
+        $this->searchField = new SearchField(
+            $this->shortTextExtractor,
+            $this->fullTextExtractor,
+        );
     }
 
     /**
@@ -96,11 +103,11 @@ final class SearchFieldTest extends TestCase
         );
         $fieldDefinition = new FieldDefinition();
 
-        $this->textExtractor
-            ->method('extractShortText')
+        $this->shortTextExtractor
+            ->method('extractText')
             ->willReturn($expectedTextValues[0]);
 
-        $this->textExtractor
+        $this->fullTextExtractor
             ->method('extractText')
             ->willReturn($expectedTextValues[1]);
 

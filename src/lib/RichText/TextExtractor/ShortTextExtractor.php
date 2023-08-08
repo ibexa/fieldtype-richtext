@@ -6,40 +6,29 @@
  */
 declare(strict_types=1);
 
-namespace Ibexa\FieldTypeRichText\RichText;
+namespace Ibexa\FieldTypeRichText\RichText\TextExtractor;
 
 use DOMDocument;
-use DOMNode;
 use Ibexa\Contracts\FieldTypeRichText\RichText\TextExtractorInterface;
 
-final class TextExtractor implements TextExtractorInterface
+/**
+ * Extracts short text content of the given $document.
+ *
+ * @internal Only for use by RichText FieldType itself.
+ */
+final class ShortTextExtractor implements TextExtractorInterface
 {
-    public function extractText(DOMNode $node): string
-    {
-        $text = '';
-
-        if ($node->childNodes !== null && $node->childNodes->count() > 0) {
-            foreach ($node->childNodes as $child) {
-                $text .= $this->extractText($child);
-            }
-        } elseif (!empty($node->nodeValue)) {
-            $text .= $node->nodeValue . ' ';
-        }
-
-        return $text;
-    }
-
-    public function extractShortText(DOMDocument $document): string
+    public function extractText(DOMDocument $document): string
     {
         $result = null;
         // try to extract first paragraph/tag
         if ($section = $document->documentElement->firstChild) {
             $textDom = $section->firstChild;
 
-            if ($textDom && $textDom->hasChildNodes()) {
-                $result = $textDom->firstChild->textContent;
-            } elseif ($textDom) {
-                $result = $textDom->textContent;
+            if (null !== $textDom) {
+                $result = $textDom->hasChildNodes()
+                    ? $textDom->firstChild->textContent
+                    : $textDom->textContent;
             }
         }
 

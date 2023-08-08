@@ -179,7 +179,7 @@ class Type extends FieldType
      */
     protected function getSortInfo(BaseValue $value)
     {
-        return $this->textExtractor->extractShortText($value->xml);
+        return $this->textExtractor->extractText($value->xml);
     }
 
     /**

@@ -20,11 +20,16 @@ use Ibexa\Contracts\FieldTypeRichText\RichText\TextExtractorInterface;
  */
 class SearchField implements Indexable
 {
-    private TextExtractorInterface $textExtractor;
+    private TextExtractorInterface $shortTextExtractor;
 
-    public function __construct(TextExtractorInterface $textExtractor)
-    {
-        $this->textExtractor = $textExtractor;
+    private TextExtractorInterface $fullTextExtractor;
+
+    public function __construct(
+        TextExtractorInterface $shortTextExtractor,
+        TextExtractorInterface $fullTextExtractor
+    ) {
+        $this->shortTextExtractor = $shortTextExtractor;
+        $this->fullTextExtractor = $fullTextExtractor;
     }
 
     /**
@@ -43,12 +48,12 @@ class SearchField implements Indexable
         return [
             new Search\Field(
                 'value',
-                $this->textExtractor->extractShortText($document),
+                $this->shortTextExtractor->extractText($document),
                 new Search\FieldType\StringField()
             ),
             new Search\Field(
                 'fulltext',
-                $this->textExtractor->extractText($document->documentElement),
+                $this->fullTextExtractor->extractText($document),
                 new Search\FieldType\FullTextField()
             ),
         ];
