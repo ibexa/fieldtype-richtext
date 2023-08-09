@@ -22,5 +22,8 @@
   <p>
     <a href="ezcontent://444" id="id7" title="Content title" class="linkClass7">Content name<br/>with some line break</a>
   </p>
+  <p>
+    <a class="linkClass5" href="ezcontent://333" id="id8">Link without title</a>
+  </p>
   <p><a id="anchor"/>Some anchored content.</p>
 </section>
