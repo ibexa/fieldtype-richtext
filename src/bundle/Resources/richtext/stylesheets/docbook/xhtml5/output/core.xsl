@@ -250,7 +250,7 @@
               <xsl:value-of select="@xml:id"/>
             </xsl:attribute>
           </xsl:if>
-          <xsl:if test="@xlink:title">
+          <xsl:if test="not(normalize-space(@xlink:title) = '')">
             <xsl:attribute name="title">
               <xsl:value-of select="@xlink:title"/>
             </xsl:attribute>

@@ -33,5 +33,8 @@
 with some line break</link>
     </literallayout>
   </para>
+  <para>
+    <link xlink:href="ezcontent://333" xlink:show="none" xml:id="id8" xlink:title="" ezxhtml:class="linkClass5">Link without title</link>
+  </para>
   <para><anchor xml:id="anchor"/>Some anchored content.</para>
 </section>
