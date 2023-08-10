@@ -1126,21 +1126,6 @@ parameters:
 			path: src/lib/RichText/Renderer.php
 
 		-
-			message: "#^Parameter \\#1 \\$node of method Ibexa\\\\FieldTypeRichText\\\\RichText\\\\TextExtractor\\\\FullTextExtractor\\:\\:extractTextFromNode\\(\\) expects DOMNode, DOMElement\\|null given\\.$#"
-			count: 1
-			path: src/lib/RichText/TextExtractor/FullTextExtractor.php
-
-		-
-			message: "#^Cannot access property \\$firstChild on DOMElement\\|null\\.$#"
-			count: 1
-			path: src/lib/RichText/TextExtractor/ShortTextExtractor.php
-
-		-
-			message: "#^Cannot access property \\$textContent on DOMElement\\|null\\.$#"
-			count: 1
-			path: src/lib/RichText/TextExtractor/ShortTextExtractor.php
-
-		-
 			message: "#^Cannot access property \\$textContent on DOMNode\\|null\\.$#"
 			count: 1
 			path: src/lib/RichText/TextExtractor/ShortTextExtractor.php

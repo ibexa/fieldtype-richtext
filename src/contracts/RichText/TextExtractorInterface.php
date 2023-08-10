@@ -12,5 +12,5 @@ use DOMDocument;
 
 interface TextExtractorInterface
 {
-    public function extractText(DOMDocument $node): string;
+    public function extractText(DOMDocument $document): string;
 }

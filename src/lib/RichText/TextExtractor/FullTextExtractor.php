@@ -21,7 +21,9 @@ final class FullTextExtractor implements TextExtractorInterface
 {
     public function extractText(DOMDocument $document): string
     {
-        return $this->extractTextFromNode($document->documentElement);
+        return null !== $document->documentElement
+            ? $this->extractTextFromNode($document->documentElement)
+            : '';
     }
 
     private function extractTextFromNode(DOMNode $node): string
