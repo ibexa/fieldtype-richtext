@@ -15,7 +15,7 @@ use Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo;
 use Ibexa\Contracts\Core\Repository\Values\Content\Location;
 use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 use Ibexa\Core\Base\Exceptions\NotFoundException;
-use Ibexa\Core\Repository\Repository;
+use Ibexa\Contracts\Core\Repository\Repository;
 use Ibexa\FieldTypeRichText\RichText\Renderer;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
@@ -1724,7 +1724,7 @@ class RendererTest extends TestCase
     protected Repository $repositoryMock;
 
     /**
-     * @return \Ibexa\Core\Repository\Repository&\PHPUnit\Framework\MockObject\MockObject
+     * @return \Ibexa\Contracts\Core\Repository\Repository&\PHPUnit\Framework\MockObject\MockObject
      */
     protected function getRepositoryMock(): Repository
     {
