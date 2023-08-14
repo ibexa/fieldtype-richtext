@@ -1721,7 +1721,7 @@ class RendererTest extends TestCase
     }
 
     /** @var \Ibexa\Contracts\Core\Repository\Repository&\PHPUnit\Framework\MockObject\MockObject */
-    protected $repositoryMock;
+    protected Repository $repositoryMock;
 
     /**
      * @return \Ibexa\Core\Repository\Repository&\PHPUnit\Framework\MockObject\MockObject
