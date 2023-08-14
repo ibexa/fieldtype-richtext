@@ -10,12 +10,12 @@ namespace Ibexa\Tests\FieldTypeRichText\RichText;
 
 use Exception;
 use Ibexa\Contracts\Core\Repository\PermissionResolver;
+use Ibexa\Contracts\Core\Repository\Repository;
 use Ibexa\Contracts\Core\Repository\Values\Content\Content;
 use Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo;
 use Ibexa\Contracts\Core\Repository\Values\Content\Location;
 use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 use Ibexa\Core\Base\Exceptions\NotFoundException;
-use Ibexa\Contracts\Core\Repository\Repository;
 use Ibexa\FieldTypeRichText\RichText\Renderer;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
