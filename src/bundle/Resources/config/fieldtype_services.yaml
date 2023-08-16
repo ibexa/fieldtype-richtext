@@ -31,18 +31,17 @@ services:
                 http://ibexa.co/namespaces/ezpublish5/xhtml5/edit: '@ibexa.richtext.converter.input.xhtml5'
 
     Ibexa\FieldTypeRichText\RichText\Renderer:
-        class: Ibexa\FieldTypeRichText\RichText\Renderer
         arguments:
-            - '@ibexa.api.repository'
-            - '@security.authorization_checker'
-            - '@ibexa.config.resolver'
-            - '@twig'
-            - '%ibexa.field_type.richtext.tag.namespace%'
-            - '%ibexa.field_type.richtext.style.namespace%'
-            - '%ibexa.field_type.richtext.embed.namespace%'
-            - '@?logger'
-            - '%ibexa.field_type.richtext.custom_tags%'
-            - '%ibexa.field_type.richtext.custom_styles%'
+            $repository: '@ibexa.api.repository'
+            $configResolver: '@ibexa.config.resolver'
+            $templateEngine: '@twig'
+            $permissionResolver: '@Ibexa\Contracts\Core\Repository\PermissionResolver'
+            $tagConfigurationNamespace: '%ibexa.field_type.richtext.tag.namespace%'
+            $styleConfigurationNamespace: '%ibexa.field_type.richtext.style.namespace%'
+            $embedConfigurationNamespace: '%ibexa.field_type.richtext.embed.namespace%'
+            $logger: '@?logger'
+            $customTagsConfiguration: '%ibexa.field_type.richtext.custom_tags%'
+            $customStylesConfiguration: '%ibexa.field_type.richtext.custom_styles%'
 
     Ibexa\FieldTypeRichText\RichText\Converter\Link:
         class: Ibexa\FieldTypeRichText\RichText\Converter\Link
