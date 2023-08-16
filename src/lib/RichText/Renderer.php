@@ -10,15 +10,14 @@ namespace Ibexa\FieldTypeRichText\RichText;
 
 use Exception;
 use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
+use Ibexa\Contracts\Core\Repository\PermissionResolver;
 use Ibexa\Contracts\Core\Repository\Repository;
 use Ibexa\Contracts\Core\Repository\Values\Content\Content;
 use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 use Ibexa\Contracts\FieldTypeRichText\RichText\RendererInterface;
-use Ibexa\Core\MVC\Symfony\Security\Authorization\Attribute as AuthorizationAttribute;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Twig\Environment;
 
@@ -35,10 +34,7 @@ class Renderer implements RendererInterface
      */
     protected $repository;
 
-    /**
-     * @var \Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface
-     */
-    private $authorizationChecker;
+    private PermissionResolver $permissionResolver;
 
     /**
      * @var string
@@ -80,34 +76,22 @@ class Renderer implements RendererInterface
      */
     private $customStylesConfiguration;
 
-    /**
-     * @param \Ibexa\Contracts\Core\Repository\Repository $repository
-     * @param \Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface $authorizationChecker
-     * @param \Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface $configResolver
-     * @param \Twig\Environment $templateEngine
-     * @param string $tagConfigurationNamespace
-     * @param string $styleConfigurationNamespace
-     * @param string $embedConfigurationNamespace
-     * @param \Psr\Log\LoggerInterface|null $logger
-     * @param array $customTagsConfiguration
-     * @param array $customStylesConfiguration
-     */
     public function __construct(
         Repository $repository,
-        AuthorizationCheckerInterface $authorizationChecker,
         ConfigResolverInterface $configResolver,
         Environment $templateEngine,
-        $tagConfigurationNamespace,
-        $styleConfigurationNamespace,
-        $embedConfigurationNamespace,
+        PermissionResolver $permissionResolver,
+        string $tagConfigurationNamespace,
+        string $styleConfigurationNamespace,
+        string $embedConfigurationNamespace,
         LoggerInterface $logger = null,
         array $customTagsConfiguration = [],
         array $customStylesConfiguration = []
     ) {
         $this->repository = $repository;
-        $this->authorizationChecker = $authorizationChecker;
         $this->configResolver = $configResolver;
         $this->templateEngine = $templateEngine;
+        $this->permissionResolver = $permissionResolver;
         $this->tagConfigurationNamespace = $tagConfigurationNamespace;
         $this->styleConfigurationNamespace = $styleConfigurationNamespace;
         $this->embedConfigurationNamespace = $embedConfigurationNamespace;
@@ -452,20 +436,15 @@ class Renderer implements RendererInterface
     /**
      * Check embed permissions for the given Content.
      *
-     * @throws \Symfony\Component\Security\Core\Exception\AccessDeniedException
-     *
-     * @param \Ibexa\Contracts\Core\Repository\Values\Content\Content $content
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\BadStateException
      */
     protected function checkContentPermissions(Content $content)
     {
         // Check both 'content/read' and 'content/view_embed'.
         if (
-            !$this->authorizationChecker->isGranted(
-                new AuthorizationAttribute('content', 'read', ['valueObject' => $content])
-            )
-            && !$this->authorizationChecker->isGranted(
-                new AuthorizationAttribute('content', 'view_embed', ['valueObject' => $content])
-            )
+            !$this->permissionResolver->canUser('content', 'read', $content)
+            && !$this->permissionResolver->canUser('content', 'view_embed', $content)
         ) {
             throw new AccessDeniedException();
         }
@@ -473,9 +452,7 @@ class Renderer implements RendererInterface
         // Check that Content is published, since sudo allows loading unpublished content.
         if (
             !$content->getVersionInfo()->isPublished()
-            && !$this->authorizationChecker->isGranted(
-                new AuthorizationAttribute('content', 'versionread', ['valueObject' => $content])
-            )
+            && !$this->permissionResolver->canUser('content', 'versionread', $content)
         ) {
             throw new AccessDeniedException();
         }
@@ -501,19 +478,17 @@ class Renderer implements RendererInterface
 
         // Check both 'content/read' and 'content/view_embed'.
         if (
-            !$this->authorizationChecker->isGranted(
-                new AuthorizationAttribute(
-                    'content',
-                    'read',
-                    ['valueObject' => $location->contentInfo, 'targets' => [$location]]
-                )
+            !$this->permissionResolver->canUser(
+                'content',
+                'read',
+                $location->contentInfo,
+                [$location]
             )
-            && !$this->authorizationChecker->isGranted(
-                new AuthorizationAttribute(
-                    'content',
-                    'view_embed',
-                    ['valueObject' => $location->contentInfo, 'targets' => [$location]]
-                )
+            && !$this->permissionResolver->canUser(
+                'content',
+                'view_embed',
+                $location->contentInfo,
+                [$location]
             )
         ) {
             throw new AccessDeniedException();
