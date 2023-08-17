@@ -10,6 +10,10 @@ class IbexaUploadImageEditing extends Plugin {
 
     addListeners() {
         this.listenTo(this.editor.editing.view.document, 'drop', (event, data) => {
+            if (data.dataTransfer.effectAllowed === 'copyMove') {
+                return;
+            }
+
             const { files } = data.dataTransfer;
 
             if (!files.length) {
