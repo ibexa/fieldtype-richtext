@@ -4,8 +4,8 @@ services:
         autowire: true
         public: false
 
-    EzSystems\EzPlatformRichText\eZ\REST\FieldTypeProcessor\RichTextProcessor:
+    Ibexa\FieldTypeRichText\REST\FieldTypeProcessor\RichTextProcessor:
         arguments:
-            - '@ezrichtext.converter.edit.xhtml5'
+            - '@Ibexa\FieldTypeRichText\RichText\Converter\Html5Edit'
         tags:
             - { name: ibexa.rest.field_type.processor, alias: ezrichtext }

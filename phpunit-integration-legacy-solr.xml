@@ -1,5 +1,4 @@
-<phpunit bootstrap="tests/bootstrap.php"
-         backupGlobals="false"
+<phpunit backupGlobals="false"
          backupStaticAttributes="false"
          processIsolation="false"
          convertErrorsToExceptions="true"
@@ -10,7 +9,7 @@
          failOnWarning="true"
          >
     <php>
-        <env name="setupFactory" value="EzSystems\IntegrationTests\EzPlatformRichText\eZ\API\SetupFactory\SolrLegacySetupFactory" />
+        <env name="setupFactory" value="Ibexa\Tests\Integration\FieldTypeRichText\Repository\SetupFactory\SolrLegacySetupFactory" />
         <env name="backendVersion" value="5" />
         <env name="fixtureDir" value="Solr" />
         <env name="SOLR_HOST" value="localhost" />
@@ -19,7 +18,7 @@
     </php>
     <testsuites>
         <testsuite name="ezrichtext_field_type_solr_integration">
-            <file>tests/integration/eZ/API/RichTextFieldTypeIntegrationTest.php</file>
+            <file>tests/integration/Repository/RichTextFieldTypeIntegrationTest.php</file>
         </testsuite>
     </testsuites>
 </phpunit>

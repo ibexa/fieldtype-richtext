@@ -4,8 +4,8 @@ services:
         autoconfigure: true
         public: false
 
-    EzSystems\EzPlatformRichText\Translation\Extractor\OnlineEditorCustomAttributesExtractor:
+    Ibexa\FieldTypeRichText\Translation\Extractor\OnlineEditorCustomAttributesExtractor:
         arguments:
-            $siteAccessList: '%ezpublish.siteaccess.list%'
+            $siteAccessList: '%ibexa.site_access.list%'
         tags:
             - { name: jms_translation.extractor, alias: ez_online_editor_attributes }

@@ -1,0 +1,11 @@
+siteaccess:
+    default_siteaccess: ibexa_demo_site
+    list:
+    - ibexa_demo_site
+    groups:
+        ibexa_demo_group:
+        - ibexa_demo_site
+    match:
+        URIElement: 1
+        Map\URI:
+            the_front: ibexa_demo_site

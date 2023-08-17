@@ -1,20 +1,20 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformRichTextBundle\DependencyInjection;
+namespace Ibexa\Bundle\FieldTypeRichText\DependencyInjection;
 
-use eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Configuration\SiteAccessAware\Configuration as SiteAccessConfiguration;
+use Ibexa\Bundle\Core\DependencyInjection\Configuration\SiteAccessAware\Configuration as SiteAccessConfiguration;
 use Symfony\Component\Config\Definition\Builder\NodeBuilder;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 
 class Configuration extends SiteAccessConfiguration
 {
-    const CUSTOM_TAG_ATTRIBUTE_TYPES = ['number', 'string', 'boolean', 'choice', 'link'];
+    public const CUSTOM_TAG_ATTRIBUTE_TYPES = ['number', 'string', 'boolean', 'choice', 'link'];
 
     /**
      * Generates the configuration tree builder.
@@ -23,7 +23,7 @@ class Configuration extends SiteAccessConfiguration
      */
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder('ezrichtext');
+        $treeBuilder = new TreeBuilder(IbexaFieldTypeRichTextExtension::EXTENSION_NAME);
 
         $rootNode = $treeBuilder->getRootNode();
 
@@ -75,7 +75,7 @@ class Configuration extends SiteAccessConfiguration
                             ->arrayPrototype()
                                 ->beforeNormalization()
                                     ->always(
-                                        function ($v) {
+                                        static function ($v) {
                                             // Workaround: set empty value to be able to unset it later on (see validation for "choices")
                                             if (!isset($v['choices'])) {
                                                 $v['choices'] = [];
@@ -87,7 +87,7 @@ class Configuration extends SiteAccessConfiguration
                                 ->end()
                                 ->validate()
                                     ->ifTrue(
-                                        function ($v) {
+                                        static function ($v) {
                                             return $v['type'] === 'choice' && !empty($v['required']) && empty($v['choices']);
                                         }
                                     )
@@ -95,7 +95,7 @@ class Configuration extends SiteAccessConfiguration
                                 ->end()
                                 ->validate()
                                     ->ifTrue(
-                                        function ($v) {
+                                        static function ($v) {
                                             return !empty($v['choices']) && $v['type'] !== 'choice';
                                         }
                                     )
@@ -159,7 +159,7 @@ class Configuration extends SiteAccessConfiguration
                         ->end()
                     ->end()
                 ->end()
-            ;
+        ;
     }
 
     /**
@@ -211,6 +211,8 @@ class Configuration extends SiteAccessConfiguration
                         ->end()
                     ->end()
                 ->end()
-            ;
+        ;
     }
 }
+
+class_alias(Configuration::class, 'EzSystems\EzPlatformRichTextBundle\DependencyInjection\Configuration');

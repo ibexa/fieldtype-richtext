@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xmlns="http://ibexa.co/namespaces/ezpublish5/xhtml5">
+  <h2>Assorted array of links</h2>
+  <p>
+    <a href="#anchor" target="_blank" id="id1" title="Anchor link title" class="linkClass1">Jump to content</a>
+  </p>
+  <p>
+    <a href="ezurl://95#fragment1" target="_blank" id="id2" title="Link title" class="linkClass2">Link text</a>
+  </p>
+  <p>
+    <a href="ezlocation://111" target="_blank" id="id3" title="Location title" class="linkClass3">Location content name</a>
+  </p>
+  <p>
+    <a href="ezlocation://222#fragment2" target="_blank" id="id4" title="Location title 2" class="linkClass4">Location content name 2</a>
+  </p>
+  <p>
+    <a href="ezcontent://333" id="id5" title="Content title" class="linkClass5">Content name</a>
+  </p>
+  <p>
+    <a href="ezcontent://333" data-ezattribute-name-1="value 1" data-ezattribute-name-2="value 2" id="id6" title="Content title" class="linkClass6">Content name</a>
+  </p>
+  <p>
+    <a href="ezcontent://444" id="id7" title="Content title" class="linkClass7">Content name<br/>with some line break</a>
+  </p>
+  <p>
+    <a class="linkClass5" href="ezcontent://333" id="id8">Link without title</a>
+  </p>
+  <p><a id="anchor"/>Some anchored content.</p>
+</section>

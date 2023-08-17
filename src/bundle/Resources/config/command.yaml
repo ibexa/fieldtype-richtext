@@ -1,0 +1,11 @@
+services:
+    _defaults:
+        autoconfigure: true
+        autowire: true
+        public: false
+
+    Ibexa\Bundle\FieldTypeRichText\Command\MigrateRichTextNamespacesCommand:
+        arguments:
+            $handler: '@Ibexa\FieldTypeRichText\Persistence\Legacy\MigrateRichTextNamespaces\Handler'
+            $xmlNamespacesMap: '%ibexa.field_type.rich_text.namespaces_migration_map%'
+            $cache: '@ibexa.cache_pool'

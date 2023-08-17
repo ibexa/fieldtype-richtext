@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -12,7 +12,7 @@ use DOMDocument;
 use DOMElement;
 use DOMNode;
 use DOMXPath;
-use EzSystems\EzPlatformRichText\eZ\RichText\Converter;
+use Ibexa\Contracts\FieldTypeRichText\RichText\Converter;
 
 /**
  * @internal
@@ -42,9 +42,9 @@ final class LiteralLayoutNestedList implements Converter
         $elements = $xpath->query($xpathExpression) ?: [];
 
         // elements are list of <literallayout> elements
-        /** @var DOMElement $element */
+        /** @var \DOMElement $element */
         foreach ($elements as $element) {
-            /** @var DOMNode $childNode */
+            /** @var \DOMNode $childNode */
             foreach ($element->childNodes as $childNode) {
                 if ($this->isNestedListNode($childNode)) {
                     $targetNode = $childNode->parentNode->parentNode;
