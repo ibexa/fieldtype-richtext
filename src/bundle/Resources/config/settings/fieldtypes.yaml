@@ -3,6 +3,7 @@ services:
         public: true # @todo should be private
         parent: Ibexa\Core\FieldType\FieldType
         arguments:
-            - '@Ibexa\FieldTypeRichText\RichText\InputHandler'
+            $textExtractor: '@Ibexa\FieldTypeRichText\RichText\TextExtractor\ShortTextExtractor'
+            $inputHandler: '@Ibexa\FieldTypeRichText\RichText\InputHandler'
         tags:
             - {name: ibexa.field_type, alias: ezrichtext}

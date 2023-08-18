@@ -12,6 +12,7 @@ use Exception;
 use Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException as ApiInvalidArgumentException;
 use Ibexa\Contracts\Core\Repository\Values\Content\Relation;
 use Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition as APIFieldDefinition;
+use Ibexa\Contracts\FieldTypeRichText\RichText\TextExtractorInterface;
 use Ibexa\Core\Base\Exceptions\InvalidArgumentException;
 use Ibexa\Core\Base\Exceptions\NotFoundException;
 use Ibexa\Core\FieldType\ValidationError;
@@ -56,7 +57,9 @@ class RichTextTest extends TestCase
             new RelationProcessor()
         );
 
-        $fieldType = new RichTextType($inputHandler);
+        $textExtractor = $this->createMock(TextExtractorInterface::class);
+
+        $fieldType = new RichTextType($inputHandler, $textExtractor);
         $fieldType->setTransformationProcessor($this->getTransformationProcessorMock());
 
         return $fieldType;
