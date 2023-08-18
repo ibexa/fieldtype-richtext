@@ -129,6 +129,9 @@
       <xsl:call-template name="breaklineWithLiterallayout">
         <xsl:with-param name="node" select="node()"/>
       </xsl:call-template>
+      <xsl:if test="not(node() or @*)">
+        <xsl:text>&#160;</xsl:text>
+      </xsl:if>
     </para>
   </xsl:template>
 
