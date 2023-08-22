@@ -51,6 +51,10 @@ class IbexaAttributesUI extends Plugin {
             this.hideForm();
         });
 
+        this.listenTo(formView, 'revert-custom-attributes', () => {
+            this.hideForm();
+        });
+
         return formView;
     }
 
