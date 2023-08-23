@@ -6,11 +6,24 @@ import IbexaEmbedContentCommand from './embed-command';
 
 import { findContent } from '../../services/content-service';
 
-const renderPreview = (title) => {
+const renderPreview = (title, contentId) => {
     return `<svg class="ibexa-icon ibexa-icon--medium ibexa-icon--secondary">
-        <use xlink:href="${window.ibexa.helpers.icon.getIconPath('embed')}"></use>
-    </svg>
-    <span class="ibexa-embed-content__title">${title}</span>`;
+                <use xlink:href="${window.ibexa.helpers.icon.getIconPath('embed')}"></use>
+            </svg>
+            <span
+                class="ibexa-embed-content__title"
+                data-ibexa-update-content-id="${contentId}"
+                data-ibexa-update-source-data-path="Content.Name">${title}</span>
+            <span>
+                <button 
+                    type="button"
+                    class="btn ibexa-btn ibexa-btn--small ibexa-btn--ghost ibexa-btn--no-text ibexa-embedded-item-actions__menu-trigger-btn"
+                >
+                    <svg class="ibexa-icon ibexa-icon--small ibexa-icon--secondary">
+                        <use xlink:href="${window.ibexa.helpers.icon.getIconPath('options')}"></use>
+                    </svg>
+                </button>
+            </span>`;
 };
 
 class IbexaEmbedContentEditing extends Plugin {
@@ -24,7 +37,7 @@ class IbexaEmbedContentEditing extends Plugin {
         schema.register('embed', {
             isObject: true,
             allowWhere: '$block',
-            allowAttributes: ['contentId', 'contentName'],
+            allowAttributes: ['contentId', 'contentName', 'locationId', 'languageCodes'],
         });
     }
 
@@ -43,9 +56,11 @@ class IbexaEmbedContentEditing extends Plugin {
                         class: 'ibexa-embed',
                     });
                     const preview = downcastWriter.createUIElement('p', { class: 'ibexa-embed-content' }, function (domDocument) {
+                        const contentId = modelElement.getAttribute('contentId');
+                        const contentName = modelElement.getAttribute('contentName');
                         const domElement = this.toDomElement(domDocument);
 
-                        domElement.innerHTML = renderPreview(modelElement.getAttribute('contentName'));
+                        domElement.innerHTML = renderPreview(contentName, contentId);
 
                         return domElement;
                     });
@@ -57,13 +72,35 @@ class IbexaEmbedContentEditing extends Plugin {
             })
             .add((dispatcher) =>
                 dispatcher.on('attribute:contentName', (event, data, conversionApi) => {
+                    const { editor } = this;
                     const downcastWriter = conversionApi.writer;
                     const modelElement = data.item;
                     const viewElement = conversionApi.mapper.toViewElement(modelElement);
                     const preview = downcastWriter.createUIElement('p', { class: 'ibexa-embed-content' }, function (domDocument) {
+                        const contentId = modelElement.getAttribute('contentId');
+                        const contentName = modelElement.getAttribute('contentName');
+                        const locationId = modelElement.getAttribute('locationId');
+                        const languageCodes = modelElement.getAttribute('languageCodes');
                         const domElement = this.toDomElement(domDocument);
 
-                        domElement.innerHTML = renderPreview(modelElement.getAttribute('contentName'));
+                        domElement.innerHTML = renderPreview(contentName);
+
+                        const itemActionsTriggerElement = domElement.querySelector('.ibexa-embedded-item-actions__menu-trigger-btn');
+                        const itemActionsMenuContainer = editor.sourceElement.parentNode.querySelector(
+                            '.ibexa-embedded-item-actions .ibexa-multilevel-popup-menu',
+                        );
+
+                        domDocument.body.dispatchEvent(
+                            new CustomEvent('ibexa-embedded-item:create-dynamic-menu', {
+                                detail: {
+                                    contentId,
+                                    locationId,
+                                    languageCodes,
+                                    menuTriggerElement: itemActionsTriggerElement,
+                                    menuContainer: itemActionsMenuContainer,
+                                },
+                            }),
+                        );
 
                         return domElement;
                     });
@@ -106,9 +143,16 @@ class IbexaEmbedContentEditing extends Plugin {
 
                 findContent({ token, siteaccess, contentId }, (contents) => {
                     const contentName = contents[0].TranslatedName;
+                    const locationId = contents[0].MainLocation._href.split('/').pop();
+                    const languageCodes = contents[0].CurrentVersion.Version.VersionInfo.VersionTranslationInfo.Language.map(
+                        (language) => language.languageCode,
+                    );
 
                     this.editor.model.change((writer) => {
                         writer.setAttribute('contentName', contentName, modelElement);
+                        writer.setAttribute('contentId', contentId, modelElement);
+                        writer.setAttribute('locationId', locationId, modelElement);
+                        writer.setAttribute('languageCodes', languageCodes, modelElement);
                     });
                 });
 

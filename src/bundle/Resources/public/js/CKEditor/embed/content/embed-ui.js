@@ -17,6 +17,10 @@ class IbexaEmbedContentUI extends IbexaEmbedBaseUI {
         return {
             contentId: items[0].ContentInfo.Content._id,
             contentName: items[0].ContentInfo.Content.TranslatedName,
+            locationId: items[0].id,
+            languageCodes: items[0].ContentInfo.Content.CurrentVersion.Version.VersionInfo.VersionTranslationInfo.Language.map(
+                (language) => language.languageCode,
+            ),
         };
     }
 }
