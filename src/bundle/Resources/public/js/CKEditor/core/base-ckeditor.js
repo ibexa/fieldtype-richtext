@@ -46,7 +46,7 @@ const VIEWPORT_TOP_OFFSET = 102;
         }
 
         getData() {
-            return this.editor.getData();
+            return this.editor.getData({ trim: 'none' });
         }
 
         getHTMLDocumentFragment(data) {
