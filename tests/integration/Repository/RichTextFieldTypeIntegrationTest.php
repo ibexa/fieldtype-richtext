@@ -645,7 +645,8 @@ EOT;
      */
     public function testExternalLinkStoringAfterUpdate(): void
     {
-        $xmlDocument = $this->createXmlDocumentWithExternalLink(['https://ibexa.co/', 'https://support.ibexa.co/']);
+        $testLink = 'https://support.ibexa.co/';
+        $xmlDocument = $this->createXmlDocumentWithExternalLink(['https://ibexa.co/', $testLink]);
         $repository = $this->getRepository();
         $contentService = $repository->getContentService();
 
@@ -666,7 +667,6 @@ EOT;
             $content->versionInfo
         );
 
-        $testLink = 'https://support.ibexa.co/';
         $xmlDocument = $this->createXmlDocumentWithExternalLink([$testLink]);
         $contentUpdateStruct = $contentService->newContentUpdateStruct();
         $contentUpdateStruct->setField('description', $xmlDocument, 'eng-GB');
@@ -682,7 +682,7 @@ EOT;
 
         $urlId = $this->getUrlIdForLink($testLink);
 
-        $this->assertContainsEquals($urlId, $urlIdsAfterUpdate);
+        $this->assertContains($urlId, $urlIdsAfterUpdate);
     }
 
     /**
