@@ -18,6 +18,7 @@ use Ibexa\Contracts\Core\Repository\Values\Content\Content;
 use Ibexa\Contracts\Core\Repository\Values\Content\Field;
 use Ibexa\Contracts\Core\Repository\Values\Content\Location;
 use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType;
+use Ibexa\Core\Base\Exceptions\NotFoundException;
 use Ibexa\Core\Repository\Values\Content\Relation;
 use Ibexa\FieldTypeRichText\FieldType\RichText\Value as RichTextValue;
 use Ibexa\Tests\Integration\Core\Repository\FieldType\RelationSearchBaseIntegrationTestTrait;
@@ -664,12 +665,9 @@ EOT;
         $content = $contentService->publishVersion(
             $content->versionInfo
         );
-        $urlIds = $this->getUrlIdsForContentObjectAttributeIdAndVersionNo(
-            $content->getField('description')->id,
-            $content->contentInfo->currentVersionNo
-        );
 
-        $xmlDocument = $this->createXmlDocumentWithExternalLink(['https://support.ibexa.co/']);
+        $testLink = 'https://support.ibexa.co/';
+        $xmlDocument = $this->createXmlDocumentWithExternalLink([$testLink]);
         $contentUpdateStruct = $contentService->newContentUpdateStruct();
         $contentUpdateStruct->setField('description', $xmlDocument, 'eng-GB');
         $contentDraft = $contentService->updateContent(
@@ -682,7 +680,9 @@ EOT;
             $content->contentInfo->currentVersionNo
         );
 
-        $this->assertNotContains(reset($urlIds), $urlIdsAfterUpdate);
+        $urlId = $this->getUrlIdForLink($testLink);
+
+        $this->assertContainsEquals($urlId, $urlIdsAfterUpdate);
     }
 
     /**
@@ -752,6 +752,35 @@ EOT;
             'intval',
             array_column($statement->fetchAll(FetchMode::ASSOCIATIVE), 'url_id')
         );
+    }
+
+    /**
+     * @throws \Doctrine\DBAL\Driver\Exception
+     * @throws \Doctrine\DBAL\Exception
+     * @throws \ErrorException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
+     */
+    private function getUrlIdForLink(
+        string $link
+    ): int {
+        $connection = $this->getRawDatabaseConnection();
+        $query = $connection->createQueryBuilder();
+        $query
+            ->select(
+                $connection->quoteIdentifier('id')
+            )
+            ->from('ezurl')
+            ->where('url = :url')
+            ->setParameter(':url', $link, ParameterType::STRING)
+        ;
+
+        $id = $query->execute()->fetchOne();
+
+        if ($id === false) {
+            throw new NotFoundException('ezurl', $link);
+        }
+
+        return (int)$id;
     }
 
     /**
@@ -913,7 +942,7 @@ EOT;
         $repository = $this->getRepository();
         $contentService = $repository->getContentService();
 
-        list(, $contentB) = $this->prepareInternalLinkValidatorBrokenLinksTestCase($repository);
+        [, $contentB] = $this->prepareInternalLinkValidatorBrokenLinksTestCase($repository);
 
         // update field w/o erroneous link to trigger validation
         $contentUpdateStruct = $contentService->newContentUpdateStruct();
@@ -941,7 +970,7 @@ EOT;
         $repository = $this->getRepository();
         $contentService = $repository->getContentService();
 
-        list($deletedLocation, $brokenContent) = $this->prepareInternalLinkValidatorBrokenLinksTestCase(
+        [$deletedLocation, $brokenContent] = $this->prepareInternalLinkValidatorBrokenLinksTestCase(
             $repository
         );
 
