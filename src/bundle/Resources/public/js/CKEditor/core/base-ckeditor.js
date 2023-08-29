@@ -46,7 +46,10 @@ const VIEWPORT_TOP_OFFSET = 102;
         }
 
         getData() {
-            return this.editor.getData();
+            const notTrimmedData = this.editor.getData({ trim: 'none' });
+            const isDataEmpty = notTrimmedData === '<p>&nbsp;</p>';
+
+            return isDataEmpty ? this.editor.getData() : notTrimmedData;
         }
 
         getHTMLDocumentFragment(data) {
