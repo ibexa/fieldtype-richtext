@@ -132,7 +132,11 @@
         }
     }
 
-    .ck-balloon-panel_visible {
-        z-index: 300;
+    .ck-toolbar-container {
+        z-index: calc(var(--ck-z-modal) - 1);
+
+        &.ck-balloon-panel_with-arrow {
+            z-index: calc(var(--ck-z-modal) + 1);
+        }
     }
 }
