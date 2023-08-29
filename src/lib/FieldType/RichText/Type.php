@@ -18,12 +18,14 @@ use Ibexa\Core\Base\Exceptions\InvalidArgumentType;
 use Ibexa\Core\FieldType\FieldType;
 use Ibexa\Core\FieldType\ValidationError;
 use Ibexa\Core\FieldType\Value as BaseValue;
+use JMS\TranslationBundle\Model\Message;
+use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use RuntimeException;
 
 /**
  * RichText field type.
  */
-class Type extends FieldType
+class Type extends FieldType implements TranslationContainerInterface
 {
     /**
      * @var \Ibexa\Contracts\FieldTypeRichText\RichText\InputHandlerInterface
@@ -286,6 +288,13 @@ class Type extends FieldType
         }
 
         return $relations;
+    }
+
+    public static function getTranslationMessages(): array
+    {
+        return [
+            (new Message('ezrichtext.name', 'ibexa_fieldtypes'))->setDesc('Rich text'),
+        ];
     }
 }
 
