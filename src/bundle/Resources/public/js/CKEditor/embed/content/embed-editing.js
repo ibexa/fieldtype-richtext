@@ -13,7 +13,10 @@ const renderPreview = (title, contentId) => {
             <span
                 class="ibexa-embed-content__title"
                 data-ibexa-update-content-id="${contentId}"
-                data-ibexa-update-source-data-path="Content.Name">${title}</span>
+                data-ibexa-update-source-data-path="Content.Name"
+            >
+                ${title}
+            </span>
             <span>
                 <button 
                     type="button"
