@@ -233,6 +233,26 @@
     }
 }
 
+.ibexa-field-edit--ezrichtext {
+    .ibexa-data-source__richtext.ck.ck-editor__editable.ck-rounded-corners:not(.ck-editor__nested-editable) {
+        border-radius: $ibexa-border-radius $ibexa-border-radius 0 0;
+    }
+
+    &.is-invalid {
+        .ibexa-label {
+            color: $ibexa-color-danger;
+        }
+
+        .ibexa-data-source {
+            border-color: $ibexa-color-danger;
+        }
+
+        .ibexa-data-source__richtext {
+            background-color: $ibexa-color-danger-100;
+        }
+    }
+}
+
 .ck {
     &.ck-editor__editable_inline {
         border: none;
