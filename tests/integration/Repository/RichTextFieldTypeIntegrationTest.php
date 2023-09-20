@@ -18,6 +18,8 @@ use Ibexa\Contracts\Core\Repository\Values\Content\Content;
 use Ibexa\Contracts\Core\Repository\Values\Content\Field;
 use Ibexa\Contracts\Core\Repository\Values\Content\Location;
 use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType;
+use Ibexa\Core\Base\Exceptions\NotFoundException;
+use Ibexa\Core\Persistence\Legacy\URL\Gateway\DoctrineDatabase;
 use Ibexa\Core\Repository\Values\Content\Relation;
 use Ibexa\FieldTypeRichText\FieldType\RichText\Value as RichTextValue;
 use Ibexa\Tests\Integration\Core\Repository\FieldType\RelationSearchBaseIntegrationTestTrait;
@@ -637,6 +639,8 @@ EOT;
     }
 
     /**
+     * @throws \Doctrine\DBAL\Driver\Exception
+     * @throws \Doctrine\DBAL\Exception
      * @throws \ErrorException
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ForbiddenException
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
@@ -644,7 +648,8 @@ EOT;
      */
     public function testExternalLinkStoringAfterUpdate(): void
     {
-        $xmlDocument = $this->createXmlDocumentWithExternalLink(['https://ibexa.co/', 'https://support.ibexa.co/']);
+        $testLink = 'https://support.ibexa.co/';
+        $xmlDocument = $this->createXmlDocumentWithExternalLink(['https://ibexa.co/', $testLink]);
         $repository = $this->getRepository();
         $contentService = $repository->getContentService();
 
@@ -664,12 +669,8 @@ EOT;
         $content = $contentService->publishVersion(
             $content->versionInfo
         );
-        $urlIds = $this->getUrlIdsForContentObjectAttributeIdAndVersionNo(
-            $content->getField('description')->id,
-            $content->contentInfo->currentVersionNo
-        );
 
-        $xmlDocument = $this->createXmlDocumentWithExternalLink(['https://support.ibexa.co/']);
+        $xmlDocument = $this->createXmlDocumentWithExternalLink([$testLink]);
         $contentUpdateStruct = $contentService->newContentUpdateStruct();
         $contentUpdateStruct->setField('description', $xmlDocument, 'eng-GB');
         $contentDraft = $contentService->updateContent(
@@ -682,7 +683,37 @@ EOT;
             $content->contentInfo->currentVersionNo
         );
 
-        $this->assertNotContains(reset($urlIds), $urlIdsAfterUpdate);
+        $urlId = $this->getUrlIdForLink($testLink);
+
+        self::assertContains($urlId, $urlIdsAfterUpdate);
+    }
+
+    /**
+     * @throws \Doctrine\DBAL\Driver\Exception
+     * @throws \Doctrine\DBAL\Exception
+     * @throws \ErrorException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
+     */
+    private function getUrlIdForLink(string $link): int
+    {
+        $connection = $this->getRawDatabaseConnection();
+        $query = $connection->createQueryBuilder();
+        $query
+            ->select(
+                $connection->quoteIdentifier('id')
+            )
+            ->from(DoctrineDatabase::URL_TABLE)
+            ->where('url = :url')
+            ->setParameter(':url', $link, ParameterType::STRING)
+        ;
+
+        $id = $query->execute()->fetchOne();
+
+        if ($id === false) {
+            throw new NotFoundException('ezurl', $link);
+        }
+
+        return (int)$id;
     }
 
     /**
@@ -913,7 +944,7 @@ EOT;
         $repository = $this->getRepository();
         $contentService = $repository->getContentService();
 
-        list(, $contentB) = $this->prepareInternalLinkValidatorBrokenLinksTestCase($repository);
+        [, $contentB] = $this->prepareInternalLinkValidatorBrokenLinksTestCase($repository);
 
         // update field w/o erroneous link to trigger validation
         $contentUpdateStruct = $contentService->newContentUpdateStruct();
@@ -941,7 +972,7 @@ EOT;
         $repository = $this->getRepository();
         $contentService = $repository->getContentService();
 
-        list($deletedLocation, $brokenContent) = $this->prepareInternalLinkValidatorBrokenLinksTestCase(
+        [$deletedLocation, $brokenContent] = $this->prepareInternalLinkValidatorBrokenLinksTestCase(
             $repository
         );
 
@@ -1000,8 +1031,8 @@ EOT;
     <section 
     xmlns="http://docbook.org/ns/docbook" 
     xmlns:xlink="http://www.w3.org/1999/xlink" 
-    xmlns:ezxhtml="http://ibexa.co/xmlns/dxp/docbook/xhtml" 
-    xmlns:ezcustom="http://ibexa.co/xmlns/dxp/docbook/custom" 
+    xmlns:ezxhtml="http://ibexa.co/xmlns/dxp/docbook/xhtml"
+    xmlns:ezcustom="http://ibexa.co/xmlns/dxp/docbook/custom"
     version="5.0-variant ezpublish-1.0">
         <para>
             $links
