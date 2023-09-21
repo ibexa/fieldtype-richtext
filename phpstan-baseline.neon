@@ -1392,9 +1392,12 @@ parameters:
 
 		-
 			message: "#^Cannot access property \\$id on Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Field\\|null\\.$#"
-			count: 2
+			count: 1
 			path: tests/integration/Repository/RichTextFieldTypeIntegrationTest.php
-
+		-
+			message: "#^Cannot call method fetchOne\\(\\) on Doctrine\\\\DBAL\\\\ForwardCompatibility\\\\Result\\|int\\|string\\.$#"
+			count: 1
+			path: tests/integration/Repository/RichTextFieldTypeIntegrationTest.php
 		-
 			message: "#^Cannot access property \\$value on Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Field\\|null\\.$#"
 			count: 1
