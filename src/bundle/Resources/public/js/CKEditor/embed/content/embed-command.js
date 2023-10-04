@@ -9,8 +9,8 @@ class IbexaEmbedContentCommand extends Command {
         });
     }
 
-    createEmbed(writer, { contentId, contentName }) {
-        return writer.createElement('embed', { contentId, contentName });
+    createEmbed(writer, { contentId, contentName, locationId, languageCodes }) {
+        return writer.createElement('embed', { contentId, contentName, locationId, languageCodes });
     }
 }
 

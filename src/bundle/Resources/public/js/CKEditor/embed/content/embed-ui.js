@@ -14,9 +14,16 @@ class IbexaEmbedContentUI extends IbexaEmbedBaseUI {
     }
 
     getCommandOptions(items) {
+        const location = items[0];
+        const content = location.ContentInfo.Content;
+
         return {
-            contentId: items[0].ContentInfo.Content._id,
-            contentName: items[0].ContentInfo.Content.TranslatedName,
+            contentId: content._id,
+            contentName: content.TranslatedName,
+            locationId: location.id,
+            languageCodes: content.CurrentVersion.Version.VersionInfo.VersionTranslationInfo.Language.map(
+                (language) => language.languageCode,
+            ),
         };
     }
 }
