@@ -90,6 +90,11 @@ class IbexaEmbedImageEditing extends Plugin {
                 dispatcher.on('attribute:previewUrl', (event, data, conversionApi) => {
                     const downcastWriter = conversionApi.writer;
                     const modelElement = data.item;
+
+                    if (!modelElement.getAttribute('previewUrl')) {
+                        return;
+                    }
+
                     const viewElement = conversionApi.mapper.toViewElement(modelElement);
                     const preview = downcastWriter.createUIElement(
                         'img',
