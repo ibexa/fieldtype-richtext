@@ -7,8 +7,8 @@ class IbexaEmbedContentInlineCommand extends Command {
         });
     }
 
-    createEmbed(writer, { contentId, contentName }) {
-        return writer.createElement('embedInline', { contentId, contentName });
+    createEmbed(writer, { contentId, contentName, locationId, languageCodes }) {
+        return writer.createElement('embedInline', { contentId, contentName, locationId, languageCodes });
     }
 }
 
