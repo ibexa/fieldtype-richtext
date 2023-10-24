@@ -138,5 +138,35 @@
         &.ck-balloon-panel_with-arrow {
             z-index: calc(var(--ck-z-modal) + 1);
         }
+
+        &.ck-balloon-panel {
+            box-shadow: calculateRem(0px) calculateRem(2px) calculateRem(8px) 0 rgba($ibexa-color-light, 0.15);
+
+            .ck.ck-toolbar {
+                padding: calculateRem(4px);
+            }
+
+            .ck-toolbar__items {
+                .ck-button {
+                    padding: calculateRem(8px);
+                    margin: 0;
+                }
+
+                .ck-dropdown {
+                    padding: 0;
+                    margin: 0;
+                }
+            }
+        }
+    }
+
+    &.ck-body--focus-mode-active {
+        .ck-balloon-panel_visible {
+            z-index: 1080;
+        }
+
+        .ck-balloon-panel_with-arrow {
+            z-index: 1081;
+        }
     }
 }

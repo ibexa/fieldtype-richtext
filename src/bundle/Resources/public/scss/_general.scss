@@ -253,6 +253,16 @@
     }
 }
 
+.ibexa-field-edit {
+    &--focus-mode-active {
+        .ibexa-data-source {
+            &__richtext {
+                height: calc(100% - #{calculateRem(32px)});
+            }
+        }
+    }
+}
+
 .ck {
     &.ck-editor__editable_inline {
         border: none;
