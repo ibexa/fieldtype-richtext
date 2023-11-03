@@ -233,10 +233,8 @@ const VIEWPORT_TOP_OFFSET_FOCUS_MODE = 0;
                 };
                 const setDataSourceHeight = (toolbarNode, fieldEditNode) => {
                     const dataSourceNode = fieldEditNode.querySelector('.ibexa-data-source');
-                    const toolbarNodeRect = toolbarNode.getBoundingClientRect();
-                    const dataSourceNodeRect = dataSourceNode.getBoundingClientRect();
-                    const { height: toolbarHeight } = toolbarNodeRect;
-                    const { top: dataSourceTop } = dataSourceNodeRect;
+                    const { height: toolbarHeight } = toolbarNode.getBoundingClientRect();
+                    const { top: dataSourceTop } = dataSourceNode.getBoundingClientRect();
 
                     if (toolbarHeight > dataSourceTop) {
                         const positionDiff = toolbarHeight - dataSourceTop;
