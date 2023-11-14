@@ -1,13 +1,14 @@
 import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
 
 import IbexaLinkCommand from './link-command';
+import { getCustomAttributesConfig, getCustomClassesConfig } from '../custom-attributes/helpers/config-helper';
 
 class IbexaCustomTagEditing extends Plugin {
     static get requires() {
         return [];
     }
 
-    defineConverters() {
+    defineConverters(customAttributesLinkConfig, customClassesLinkConfig) {
         const { conversion } = this.editor;
 
         conversion.for('editingDowncast').attributeToElement({
@@ -40,42 +41,93 @@ class IbexaCustomTagEditing extends Plugin {
             view: (target, { writer: downcastWriter }) => downcastWriter.createAttributeElement('a', { target }),
         });
 
-        conversion.for('upcast').elementToAttribute({
-            view: {
-                name: 'a',
-                attributes: {
-                    href: true,
-                },
-            },
-            model: {
-                key: 'ibexaLinkHref',
-                value: (viewElement) => viewElement.getAttribute('href'),
-            },
-        });
+        if (customClassesLinkConfig) {
+            conversion.for('editingDowncast').attributeToElement({
+                model: 'ibexaLinkClasses',
+                view: (classes, { writer: downcastWriter }) => downcastWriter.createAttributeElement('a', { class: classes }),
+            });
 
-        conversion.for('upcast').attributeToAttribute({
-            view: {
-                name: 'a',
-                key: 'title',
-            },
-            model: 'ibexaLinkTitle',
-        });
+            conversion.for('dataDowncast').attributeToElement({
+                model: 'ibexaLinkClasses',
+                view: (classes, { writer: downcastWriter }) => downcastWriter.createAttributeElement('a', { class: classes }),
+            });
+        }
 
-        conversion.for('upcast').attributeToAttribute({
-            view: {
-                name: 'a',
-                key: 'target',
-            },
-            model: 'ibexaLinkTarget',
+        if (customAttributesLinkConfig) {
+            Object.keys(customAttributesLinkConfig).forEach((customAttributeName) => {
+                conversion.for('editingDowncast').attributeToElement({
+                    model: `ibexaLink${customAttributeName}`,
+                    view: (attr, { writer: downcastWriter }) =>
+                        downcastWriter.createAttributeElement('a', { [`data-ezattribute-${customAttributeName}`]: attr }),
+                });
+
+                conversion.for('dataDowncast').attributeToElement({
+                    model: `ibexaLink${customAttributeName}`,
+                    view: (attr, { writer: downcastWriter }) =>
+                        downcastWriter.createAttributeElement('a', { [`data-ezattribute-${customAttributeName}`]: attr }),
+                });
+            });
+        }
+
+        conversion.for('upcast').add((dispatcher) => {
+            dispatcher.on('element:a', (evt, data, conversionApi) => {
+                if (conversionApi.consumable.consume(data.viewItem, { attributes: ['href'] })) {
+                    const { modelRange } = conversionApi.convertChildren(data.viewItem, data.modelCursor);
+                    const ibexaLinkHref = data.viewItem.getAttribute('href');
+                    const ibexaLinkTitle = data.viewItem.getAttribute('title');
+                    const ibexaLinkTarget = data.viewItem.getAttribute('target');
+                    const classes = data.viewItem.getAttribute('class');
+
+                    conversionApi.writer.setAttributes(
+                        {
+                            ibexaLinkHref,
+                            ibexaLinkTitle,
+                            ibexaLinkTarget,
+                        },
+                        modelRange,
+                    );
+
+                    if (classes && customClassesLinkConfig) {
+                        conversionApi.writer.setAttribute('ibexaLinkClasses', classes, modelRange);
+                    }
+
+                    if (customAttributesLinkConfig) {
+                        Object.keys(customAttributesLinkConfig).forEach((customAttributeName) => {
+                            const customAttributeValue = data.viewItem.getAttribute(`data-ezattribute-${customAttributeName}`);
+
+                            if (customAttributeValue) {
+                                conversionApi.writer.setAttribute(`ibexaLink${customAttributeName}`, customAttributeValue, modelRange);
+                            }
+                        });
+                    }
+                }
+            });
         });
     }
 
     init() {
+        const customAttributesConfig = getCustomAttributesConfig();
+        const customClassesConfig = getCustomClassesConfig();
+        const customAttributesLinkConfig = customAttributesConfig.link;
+        const customClassesLinkConfig = customClassesConfig.link;
+
         this.editor.model.schema.extend('$text', { allowAttributes: 'ibexaLinkHref' });
         this.editor.model.schema.extend('$text', { allowAttributes: 'ibexaLinkTitle' });
         this.editor.model.schema.extend('$text', { allowAttributes: 'ibexaLinkTarget' });
 
-        this.defineConverters();
+        if (customAttributesLinkConfig) {
+            const attributes = Object.keys(customAttributesLinkConfig);
+
+            attributes.forEach((attribute) => {
+                this.editor.model.schema.extend('$text', { allowAttributes: `ibexaLink${attribute}` });
+            });
+        }
+
+        if (customClassesLinkConfig) {
+            this.editor.model.schema.extend('$text', { allowAttributes: 'ibexaLinkClasses' });
+        }
+
+        this.defineConverters(customAttributesLinkConfig, customClassesLinkConfig);
 
         this.editor.commands.add('insertIbexaLink', new IbexaLinkCommand(this.editor));
     }

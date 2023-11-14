@@ -1,15 +1,20 @@
 .ck.ck-reset_all {
     .ibexa-ckeditor-balloon-form {
+        padding: 0 calculateRem(16px);
+
         &__header {
-            background-color: $ibexa-color-light-100;
             border-top-left-radius: $ibexa-border-radius;
             border-top-right-radius: $ibexa-border-radius;
-            padding: calculateRem(2px) calculateRem(16px);
+            padding: calculateRem(2px) 0;
             font-weight: bold;
         }
 
         &__fields {
-            padding: calculateRem(8px) calculateRem(16px);
+            padding: calculateRem(8px) 0;
+
+            &--attributes {
+                border-bottom: calculateRem(1px) solid $ibexa-color-light;
+            }
 
             .ck-labeled-field-view {
                 margin-bottom: calculateRem(12px);
@@ -128,7 +133,7 @@
         }
 
         &__actions {
-            padding: 0 calculateRem(16px) calculateRem(16px);
+            padding: 0 0 calculateRem(16px);
         }
     }
 
