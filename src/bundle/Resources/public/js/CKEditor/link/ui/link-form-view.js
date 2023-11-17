@@ -41,10 +41,10 @@ class IbexaLinkFormView extends View {
         const customClassesConfig = getCustomClassesConfig();
         const customAttributesLinkConfig = customAttributesConfig.link;
         const customClassesLinkConfig = customClassesConfig.link;
+        const customAttributesDefinitions = [];
 
         this.children = this.createFormChildren();
         this.attributesChildren = this.createFromAttributesChildren(customAttributesLinkConfig, customClassesLinkConfig);
-        const customAttributesDefinitions = [];
 
         if (this.attributesChildren.length > 0) {
             customAttributesDefinitions.push({
@@ -90,7 +90,6 @@ class IbexaLinkFormView extends View {
                             attributes: {
                                 class: 'ibexa-ckeditor-balloon-form__fields',
                             },
-
                             children: [
                                 this.children.first,
                                 {
@@ -300,7 +299,7 @@ class IbexaLinkFormView extends View {
     }
 
     getNewValue(clickedValue, multiple, previousValue = '') {
-        const selectedItems = previousValue ? new Set(previousValue.split(' ')) : new Set();
+        const selectedItems = new Set(previousValue?.split(' '));
 
         if (selectedItems.has(clickedValue)) {
             selectedItems.delete(clickedValue);
