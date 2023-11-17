@@ -31,6 +31,7 @@ import BlockQuote from '@ckeditor/ckeditor5-block-quote/src/blockquote';
 import ContextualBalloon from '@ckeditor/ckeditor5-ui/src/panel/balloon/contextualballoon';
 
 const VIEWPORT_TOP_OFFSET = 102;
+const VIEWPORT_TOP_OFFSET_FOCUS_MODE = 0;
 
 (function (global, doc, ibexa) {
     class BaseRichText {
@@ -180,6 +181,7 @@ const VIEWPORT_TOP_OFFSET = 102;
                 ],
                 toolbar: {
                     items: toolbar,
+                    shouldNotGroupWhenFull: true,
                 },
                 ui: {
                     viewportOffset: {
@@ -216,6 +218,9 @@ const VIEWPORT_TOP_OFFSET = 102;
                 ...extraConfig,
             }).then((editor) => {
                 this.editor = editor;
+
+                const editableElement = this.editor.editing.view.getDomRoot();
+                const editorToolbarPanelInstance = this.editor.ui.view.panel;
                 const initialData = this.getData();
                 const updateInput = (data, shouldFireInputEvent = true) => {
                     const textarea = container.closest('.ibexa-data-source').querySelector('textarea');
@@ -226,6 +231,27 @@ const VIEWPORT_TOP_OFFSET = 102;
                         textarea.dispatchEvent(new Event('input'));
                     }
                 };
+                const setDataSourceHeight = (toolbarNode, fieldEditNode) => {
+                    const dataSourceNode = fieldEditNode.querySelector('.ibexa-data-source');
+                    const { height: toolbarHeight } = toolbarNode.getBoundingClientRect();
+                    const { top: dataSourceTop } = dataSourceNode.getBoundingClientRect();
+
+                    if (toolbarHeight > dataSourceTop) {
+                        const positionDiff = toolbarHeight - dataSourceTop;
+
+                        dataSourceNode.style.height = `calc(100% - ${positionDiff}px)`;
+                        dataSourceNode.style.marginTop = `${positionDiff}px`;
+                    }
+                };
+                const setToolbarMaxWidth = (toolbarNode, fieldEditNode) => {
+                    const focusModeControlNode = fieldEditNode.querySelector('.ibexa-field-edit__focus-mode-control-container');
+                    const dataSourceNode = fieldEditNode.querySelector('.ibexa-data-source');
+                    const { offsetWidth: focusModeControlNodeWidth } = focusModeControlNode;
+                    const { offsetWidth: dataSourceNodeWidth } = dataSourceNode;
+                    const toolbarNodeMaxWidth = dataSourceNodeWidth - focusModeControlNodeWidth;
+
+                    toolbarNode.style.maxWidth = `${toolbarNodeMaxWidth}px`;
+                };
 
                 updateInput(initialData, false);
 
@@ -233,6 +259,33 @@ const VIEWPORT_TOP_OFFSET = 102;
                     const data = this.getData();
 
                     updateInput(data);
+                });
+
+                this.editor.on('set:focusModeActive', ({ source: eventEditorInstance }, name, value) => {
+                    const { ui: eventEditorUiInstance } = eventEditorInstance;
+                    const { panel: eventEditorToolbarPanelInstance } = eventEditorUiInstance.view;
+                    const toolbarPanelNode = eventEditorToolbarPanelInstance.element;
+                    const toolbarPanelsContainer = toolbarPanelNode.closest('.ck-body');
+
+                    eventEditorUiInstance.viewportOffset = {
+                        top: value ? VIEWPORT_TOP_OFFSET_FOCUS_MODE : this.viewportTopOffset,
+                    };
+
+                    toolbarPanelsContainer.classList.toggle('ck-body--focus-mode-active');
+
+                    if (!value) {
+                        eventEditorToolbarPanelInstance.hide();
+                    }
+                });
+
+                editorToolbarPanelInstance.on('change:isVisible', ({ source: eventBalloonPanelViewInstance }) => {
+                    const fieldEditNode = editableElement.closest('.ibexa-field-edit');
+
+                    setToolbarMaxWidth(eventBalloonPanelViewInstance.element, fieldEditNode);
+
+                    if (editor?.focusModeActive) {
+                        setDataSourceHeight(eventBalloonPanelViewInstance.element, fieldEditNode);
+                    }
                 });
             });
         }
