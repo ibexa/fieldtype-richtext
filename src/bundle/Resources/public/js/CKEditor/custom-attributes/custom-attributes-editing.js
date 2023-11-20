@@ -52,12 +52,20 @@ class IbexaCustomAttributesEditing extends Plugin {
         const elementsWithCustomClasses = Object.keys(customClassesConfig);
 
         elementsWithCustomAttributes.forEach((element) => {
+            if (element === 'link') {
+                return;
+            }
+
             const customAttributes = Object.keys(customAttributesConfig[element]);
 
             this.extendSchema(model.schema, element, { allowAttributes: customAttributes });
         });
 
         elementsWithCustomClasses.forEach((element) => {
+            if (element === 'link') {
+                return;
+            }
+
             this.extendSchema(model.schema, element, { allowAttributes: 'custom-classes' });
         });
 

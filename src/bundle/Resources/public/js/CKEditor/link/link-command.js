@@ -28,6 +28,16 @@ class IbexaLinkCommand extends Command {
         writer.setAttribute('ibexaLinkHref', linkData.href, element);
         writer.setAttribute('ibexaLinkTitle', linkData.title, element);
         writer.setAttribute('ibexaLinkTarget', linkData.target, element);
+
+        if (!!linkData.ibexaLinkClasses) {
+            writer.setAttribute('ibexaLinkClasses', linkData.ibexaLinkClasses, element);
+        }
+
+        if (linkData.ibexaLinkAttributes) {
+            Object.entries(linkData.ibexaLinkAttributes).forEach(([name, value]) => {
+                writer.setAttribute(name, value, element);
+            });
+        }
     }
 }
 

@@ -5,6 +5,7 @@ import findAttributeRange from '@ckeditor/ckeditor5-typing/src/utils/findattribu
 
 import IbexaLinkFormView from './ui/link-form-view';
 import IbexaButtonView from '../common/button-view/button-view';
+import { getCustomAttributesConfig, getCustomClassesConfig } from '../custom-attributes/helpers/config-helper';
 
 const { Translator } = window;
 
@@ -35,7 +36,7 @@ class IbexaLinkUI extends Plugin {
         const formView = new IbexaLinkFormView({ locale: this.editor.locale, editor: this.editor });
 
         this.listenTo(formView, 'save-link', () => {
-            const { url, title, target } = this.formView.getValues();
+            const { url, title, target, ibexaLinkClasses, ibexaLinkAttributes } = this.formView.getValues();
             const { path: firstPosition } = this.editor.model.document.selection.getFirstPosition();
             const { path: lastPosition } = this.editor.model.document.selection.getLastPosition();
             const noRangeSelection = firstPosition[0] === lastPosition[0] && firstPosition[1] === lastPosition[1];
@@ -50,7 +51,7 @@ class IbexaLinkUI extends Plugin {
 
             this.isNew = false;
 
-            this.editor.execute('insertIbexaLink', { href: url, title: title, target: target });
+            this.editor.execute('insertIbexaLink', { href: url, title, target, ibexaLinkClasses, ibexaLinkAttributes });
             this.hideForm();
         });
 
@@ -88,12 +89,33 @@ class IbexaLinkUI extends Plugin {
     }
 
     showForm() {
+        const customAttributesConfig = getCustomAttributesConfig();
+        const customClassesConfig = getCustomClassesConfig();
+        const customAttributesLinkConfig = customAttributesConfig.link;
+        const customClassesLinkConfig = customClassesConfig.link;
         const link = this.findLinkElement();
         const values = {
             url: link ? link.getAttribute('href') : '',
             title: link ? link.getAttribute('title') : '',
             target: link ? link.getAttribute('target') : '',
         };
+
+        if (customClassesLinkConfig) {
+            const defaultCustomClasses = customClassesLinkConfig?.defaultValue ?? '';
+            const classesValue = link?.getAttribute('class') ?? defaultCustomClasses;
+
+            values.ibexaLinkClasses = classesValue;
+        }
+
+        if (customAttributesLinkConfig) {
+            const attributesValues = Object.entries(customAttributesLinkConfig).reduce((output, [name, config]) => {
+                output[name] = link?.getAttribute(`data-ezattribute-${name}`) ?? config.defaultValue;
+
+                return output;
+            }, {});
+
+            values.ibexaLinkAttributes = attributesValues;
+        }
 
         this.formView.setValues(values);
 
