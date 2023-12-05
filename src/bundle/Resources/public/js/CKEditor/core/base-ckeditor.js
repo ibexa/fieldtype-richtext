@@ -243,12 +243,21 @@ const VIEWPORT_TOP_OFFSET_FOCUS_MODE = 0;
                         dataSourceNode.style.marginTop = `${positionDiff}px`;
                     }
                 };
-                const setToolbarMaxWidth = (toolbarNode, fieldEditNode) => {
-                    const focusModeControlNode = fieldEditNode.querySelector('.ibexa-field-edit__focus-mode-control-container');
+                const clearDataSourceHeight = () => {
+                    const fieldEditNode = editableElement.closest('.ibexa-field-edit');
                     const dataSourceNode = fieldEditNode.querySelector('.ibexa-data-source');
-                    const { offsetWidth: focusModeControlNodeWidth } = focusModeControlNode;
+
+                    dataSourceNode.style.removeProperty('height');
+                    dataSourceNode.style.removeProperty('margin-top');
+                };
+                const setToolbarMaxWidth = (toolbarNode, fieldEditNode) => {
+                    const focusModeControlNodeBtn = fieldEditNode.querySelector(
+                        '.ibexa-field-edit__focus-mode-control-container .ibexa-field-edit__focus-mode-btns',
+                    );
+                    const dataSourceNode = fieldEditNode.querySelector('.ibexa-data-source');
+                    const { offsetWidth: focusModeControlNodeBtnWidth } = focusModeControlNodeBtn;
                     const { offsetWidth: dataSourceNodeWidth } = dataSourceNode;
-                    const toolbarNodeMaxWidth = dataSourceNodeWidth - focusModeControlNodeWidth;
+                    const toolbarNodeMaxWidth = dataSourceNodeWidth - focusModeControlNodeBtnWidth;
 
                     toolbarNode.style.maxWidth = `${toolbarNodeMaxWidth}px`;
                 };
@@ -275,6 +284,7 @@ const VIEWPORT_TOP_OFFSET_FOCUS_MODE = 0;
 
                     if (!value) {
                         eventEditorToolbarPanelInstance.hide();
+                        clearDataSourceHeight();
                     }
                 });
 
