@@ -80,7 +80,9 @@
 
                 &:hover {
                     color: $ibexa-color-white;
-                    box-shadow: 0 0 0 transparent, $ibexa-btn-hover-box-shadow;
+                    box-shadow:
+                        0 0 0 transparent,
+                        $ibexa-btn-hover-box-shadow;
                 }
 
                 &:hover:focus {
