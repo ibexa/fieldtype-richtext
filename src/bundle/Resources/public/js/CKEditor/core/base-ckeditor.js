@@ -31,7 +31,7 @@ import BlockQuote from '@ckeditor/ckeditor5-block-quote/src/blockquote';
 import ContextualBalloon from '@ckeditor/ckeditor5-ui/src/panel/balloon/contextualballoon';
 
 const VIEWPORT_TOP_OFFSET = 102;
-const VIEWPORT_TOP_OFFSET_FOCUS_MODE = 0;
+const VIEWPORT_TOP_OFFSET_DISTRACTION_FREE_MODE = 0;
 
 (function (global, doc, ibexa) {
     class BaseRichText {
@@ -251,13 +251,13 @@ const VIEWPORT_TOP_OFFSET_FOCUS_MODE = 0;
                     dataSourceNode.style.removeProperty('margin-top');
                 };
                 const setToolbarMaxWidth = (toolbarNode, fieldEditNode) => {
-                    const focusModeControlNodeBtn = fieldEditNode.querySelector(
-                        '.ibexa-field-edit__focus-mode-control-container .ibexa-field-edit__focus-mode-btns',
+                    const distractionFreeModeControlNodeBtn = fieldEditNode.querySelector(
+                        '.ibexa-field-edit__distraction-free-mode-control-container .ibexa-field-edit__distraction-free-mode-btns',
                     );
                     const dataSourceNode = fieldEditNode.querySelector('.ibexa-data-source');
-                    const { offsetWidth: focusModeControlNodeBtnWidth } = focusModeControlNodeBtn;
+                    const { offsetWidth: distractionFreeModeControlNodeBtnWidth } = distractionFreeModeControlNodeBtn;
                     const { offsetWidth: dataSourceNodeWidth } = dataSourceNode;
-                    const toolbarNodeMaxWidth = dataSourceNodeWidth - focusModeControlNodeBtnWidth;
+                    const toolbarNodeMaxWidth = dataSourceNodeWidth - distractionFreeModeControlNodeBtnWidth;
 
                     toolbarNode.style.maxWidth = `${toolbarNodeMaxWidth}px`;
                 };
@@ -270,17 +270,17 @@ const VIEWPORT_TOP_OFFSET_FOCUS_MODE = 0;
                     updateInput(data);
                 });
 
-                this.editor.on('set:focusModeActive', ({ source: eventEditorInstance }, name, value) => {
+                this.editor.on('set:distractionFreeModeActive', ({ source: eventEditorInstance }, name, value) => {
                     const { ui: eventEditorUiInstance } = eventEditorInstance;
                     const { panel: eventEditorToolbarPanelInstance } = eventEditorUiInstance.view;
                     const toolbarPanelNode = eventEditorToolbarPanelInstance.element;
                     const toolbarPanelsContainer = toolbarPanelNode.closest('.ck-body');
 
                     eventEditorUiInstance.viewportOffset = {
-                        top: value ? VIEWPORT_TOP_OFFSET_FOCUS_MODE : this.viewportTopOffset,
+                        top: value ? VIEWPORT_TOP_OFFSET_DISTRACTION_FREE_MODE : this.viewportTopOffset,
                     };
 
-                    toolbarPanelsContainer.classList.toggle('ck-body--focus-mode-active');
+                    toolbarPanelsContainer.classList.toggle('ck-body--distraction-free-mode-active');
 
                     if (!value) {
                         eventEditorToolbarPanelInstance.hide();
@@ -293,7 +293,7 @@ const VIEWPORT_TOP_OFFSET_FOCUS_MODE = 0;
 
                     setToolbarMaxWidth(eventBalloonPanelViewInstance.element, fieldEditNode);
 
-                    if (editor?.focusModeActive) {
+                    if (editor?.distractionFreeModeActive) {
                         setDataSourceHeight(eventBalloonPanelViewInstance.element, fieldEditNode);
                     }
                 });

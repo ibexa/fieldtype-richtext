@@ -254,7 +254,7 @@
 }
 
 .ibexa-field-edit {
-    &--focus-mode-active {
+    &--distraction-free-mode-active {
         .ibexa-data-source {
             &__richtext {
                 height: calc(100% - #{calculateRem(32px)});
