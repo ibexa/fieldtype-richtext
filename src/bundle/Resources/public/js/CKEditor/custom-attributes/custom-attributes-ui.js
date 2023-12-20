@@ -22,16 +22,26 @@ class IbexaAttributesUI extends Plugin {
         return this.editor.model.document.selection.getSelectedElement() || this.editor.model.document.selection.anchor.parent;
     }
 
+    getAttributePrefix() {
+        return this.editor.isListSelected ? 'list-' : '';
+    }
+
     createFormView() {
         const formView = new IbexaCustomAttributesFormView({ locale: this.editor.locale });
 
         this.listenTo(formView, 'save-custom-attributes', () => {
             const values = this.formView.getValues();
-            const modelElement = this.getModelElement();
+            const modelElements = this.editor.isListSelected
+                ? Array.from(this.editor.model.document.selection.getSelectedBlocks())
+                : [this.getModelElement()];
 
             this.editor.model.change((writer) => {
                 Object.entries(values).forEach(([name, value]) => {
-                    writer.setAttribute(name, value, modelElement);
+                    const prefix = this.getAttributePrefix();
+
+                    modelElements.forEach((modelElement) => {
+                        writer.setAttribute(`${prefix}${name}`, value, modelElement);
+                    });
                 });
             });
 
@@ -40,11 +50,17 @@ class IbexaAttributesUI extends Plugin {
 
         this.listenTo(formView, 'remove-custom-attributes', () => {
             const values = this.formView.getValues();
-            const modelElement = this.getModelElement();
+            const modelElements = this.editor.isListSelected
+                ? Array.from(this.editor.model.document.selection.getSelectedBlocks())
+                : [this.getModelElement()];
 
             this.editor.model.change((writer) => {
                 Object.keys(values).forEach((name) => {
-                    writer.removeAttribute(name, modelElement);
+                    const prefix = this.getAttributePrefix();
+
+                    modelElements.forEach((modelElement) => {
+                        writer.removeAttribute(`${prefix}${name}`, modelElement);
+                    });
                 });
             });
 
@@ -67,18 +83,33 @@ class IbexaAttributesUI extends Plugin {
         const parentElement = this.getModelElement();
         const customAttributesConfig = getCustomAttributesConfig();
         const customClassesConfig = getCustomClassesConfig();
-        const customAttributes = customAttributesConfig[parentElement.name] ?? {};
-        const customClasses = customClassesConfig[parentElement.name];
+        const prefix = this.getAttributePrefix();
+        let parentElementName = parentElement.name;
+
+        if (this.editor.isListSelected) {
+            const mapping = {
+                bulleted: 'ul',
+                numbered: 'ol',
+            };
+            const listType = parentElement.getAttribute('listType');
+
+            if (mapping[listType]) {
+                parentElementName = mapping[listType];
+            }
+        }
+
+        const customAttributes = customAttributesConfig[parentElementName] ?? {};
+        const customClasses = customClassesConfig[parentElementName];
         const areCustomAttributesSet =
-            parentElement.hasAttribute('custom-classes') ||
-            Object.keys(customAttributes).some((customAttributeName) => parentElement.hasAttribute(customAttributeName));
+            parentElement.hasAttribute(`${prefix}custom-classes`) ||
+            Object.keys(customAttributes).some((customAttributeName) => parentElement.hasAttribute(`${prefix}${customAttributeName}`));
         const attributesValues = Object.entries(customAttributes).reduce((output, [name, config]) => {
-            output[name] = areCustomAttributesSet ? parentElement.getAttribute(name) : config.defaultValue;
+            output[name] = areCustomAttributesSet ? parentElement.getAttribute(`${prefix}${name}`) : config.defaultValue;
 
             return output;
         }, {});
         const defaultCustomClasses = customClasses?.defaultValue ?? '';
-        const classesValue = areCustomAttributesSet ? parentElement.getAttribute('custom-classes') : defaultCustomClasses;
+        const classesValue = areCustomAttributesSet ? parentElement.getAttribute(`${prefix}custom-classes`) : defaultCustomClasses;
 
         this.formView.destroy();
         this.formView = this.createFormView();

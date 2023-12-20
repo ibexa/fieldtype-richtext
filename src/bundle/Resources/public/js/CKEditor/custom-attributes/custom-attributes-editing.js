@@ -22,8 +22,48 @@ class IbexaCustomAttributesEditing extends Plugin {
             },
         });
 
-        Object.values(customAttributesConfig).forEach((customAttributes) => {
+        Object.entries(customAttributesConfig).forEach(([element, customAttributes]) => {
+            const isList = element === 'ul' || element === 'ol';
+
             Object.keys(customAttributes).forEach((customAttributeName) => {
+                if (isList) {
+                    this.editor.conversion.for('dataDowncast').add((dispatcher) => {
+                        dispatcher.on(`attribute:list-${customAttributeName}:listItem`, (event, data, conversionApi) => {
+                            const viewItem = conversionApi.mapper.toViewElement(data.item);
+
+                            conversionApi.writer.setAttribute(
+                                `data-ezattribute-${customAttributeName}`,
+                                data.attributeNewValue,
+                                viewItem.parent,
+                            );
+                        });
+                    });
+
+                    this.editor.conversion.for('editingDowncast').add((dispatcher) => {
+                        dispatcher.on(`attribute:list-${customAttributeName}:listItem`, (event, data, conversionApi) => {
+                            const viewItem = conversionApi.mapper.toViewElement(data.item);
+
+                            conversionApi.writer.setAttribute(
+                                `data-ezattribute-${customAttributeName}`,
+                                data.attributeNewValue,
+                                viewItem.parent,
+                            );
+                        });
+                    });
+
+                    this.editor.conversion.for('upcast').add((dispatcher) => {
+                        dispatcher.on('element:li', (event, data, conversionApi) => {
+                            const listParent = data.viewItem.parent;
+                            const listItem = data.modelRange.start.nodeAfter || data.modelRange.end.nodeBefore;
+                            const attributeValue = listParent.getAttribute(`data-ezattribute-${customAttributeName}`);
+
+                            conversionApi.writer.setAttribute(`list-${customAttributeName}`, attributeValue, listItem);
+                        });
+                    });
+
+                    return;
+                }
+
                 conversion.attributeToAttribute({
                     model: {
                         key: customAttributeName,
@@ -32,6 +72,42 @@ class IbexaCustomAttributesEditing extends Plugin {
                         key: `data-ezattribute-${customAttributeName}`,
                     },
                 });
+            });
+        });
+
+        this.editor.conversion.for('dataDowncast').add((dispatcher) => {
+            dispatcher.on('attribute:list-custom-classes:listItem', (event, data, conversionApi) => {
+                const viewItem = conversionApi.mapper.toViewElement(data.item);
+                const previousElement = viewItem.parent.previousSibling;
+
+                conversionApi.writer.setAttribute('class', data.attributeNewValue, viewItem.parent);
+
+                if (previousElement?.name === viewItem.parent.name) {
+                    conversionApi.writer.mergeContainers(conversionApi.writer.createPositionAfter(previousElement));
+                }
+            });
+        });
+
+        this.editor.conversion.for('editingDowncast').add((dispatcher) => {
+            dispatcher.on('attribute:list-custom-classes:listItem', (event, data, conversionApi) => {
+                const viewItem = conversionApi.mapper.toViewElement(data.item);
+                const previousElement = viewItem.parent.previousSibling;
+
+                conversionApi.writer.setAttribute('class', data.attributeNewValue, viewItem.parent);
+
+                if (previousElement?.name === viewItem.parent.name) {
+                    conversionApi.writer.mergeContainers(conversionApi.writer.createPositionAfter(previousElement));
+                }
+            });
+        });
+
+        this.editor.conversion.for('upcast').add((dispatcher) => {
+            dispatcher.on('element:li', (event, data, conversionApi) => {
+                const listParent = data.viewItem.parent;
+                const listItem = data.modelRange.start.nodeAfter || data.modelRange.end.nodeBefore;
+                const classes = listParent.getAttribute('class');
+
+                conversionApi.writer.setAttribute('list-custom-classes', classes, listItem);
             });
         });
     }
@@ -52,13 +128,20 @@ class IbexaCustomAttributesEditing extends Plugin {
         const elementsWithCustomClasses = Object.keys(customClassesConfig);
 
         elementsWithCustomAttributes.forEach((element) => {
+            const isList = element === 'ul' || element === 'ol';
+            const prefix = isList ? 'list-' : '';
+            const elementName = isList ? 'listItem' : element;
             const customAttributes = Object.keys(customAttributesConfig[element]);
 
-            this.extendSchema(model.schema, element, { allowAttributes: customAttributes });
+            this.extendSchema(model.schema, elementName, { allowAttributes: `${prefix}${customAttributes}` });
         });
 
         elementsWithCustomClasses.forEach((element) => {
-            this.extendSchema(model.schema, element, { allowAttributes: 'custom-classes' });
+            const isList = element === 'ul' || element === 'ol';
+            const prefix = isList ? 'list-' : '';
+            const elementName = isList ? 'listItem' : element;
+
+            this.extendSchema(model.schema, elementName, { allowAttributes: `${prefix}custom-classes` });
         });
 
         this.defineConverters();
