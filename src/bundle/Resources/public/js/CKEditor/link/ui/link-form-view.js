@@ -20,9 +20,9 @@ class IbexaLinkFormView extends View {
         this.saveButtonView = this.createButton('Save', null, 'ck-button-save', 'save-link');
         this.cancelButtonView = this.createButton('Remove link', null, 'ck-button-cancel', 'remove-link');
         this.selectContentButtonView = this.createButton('Select content', null, 'ibexa-btn--select-content');
-        this.urlInputView = this.createTextInput('Link to');
-        this.titleView = this.createTextInput('Title');
-        this.targetSwitcherView = this.createBoolean('Open in tab');
+        this.urlInputView = this.createTextInput({ label: 'Link to' });
+        this.titleView = this.createTextInput({ label: 'Title' });
+        this.targetSwitcherView = this.createBoolean({ label: 'Open in tab' });
         this.attributeRenderMethods = {
             string: this.createTextInput,
             number: this.createNumberInput,
@@ -237,7 +237,7 @@ class IbexaLinkFormView extends View {
                 }
 
                 const createAttribute = createAttributeMethod.bind(this);
-                const attributeView = createAttribute(config.label);
+                const attributeView = createAttribute(config);
 
                 this.attributeViews[`ibexaLink${name}`] = attributeView;
 
@@ -316,7 +316,7 @@ class IbexaLinkFormView extends View {
         return [...selectedItems].join(' ');
     }
 
-    createTextInput(label) {
+    createTextInput({ label }) {
         const labeledInput = new LabeledFieldView(this.locale, createLabeledInputText);
 
         labeledInput.label = label;
@@ -332,7 +332,7 @@ class IbexaLinkFormView extends View {
         return labeledInput;
     }
 
-    createBoolean(label) {
+    createBoolean({ label }) {
         const labeledSwitch = new LabeledFieldView(this.locale, createLabeledSwitchButton);
 
         this.listenTo(labeledSwitch.fieldView, 'execute', () => {
