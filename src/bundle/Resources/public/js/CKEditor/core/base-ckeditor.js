@@ -218,11 +218,11 @@ const VIEWPORT_TOP_OFFSET_DISTRACTION_FREE_MODE = 0;
                 ...extraConfig,
             };
 
-            const event = new CustomEvent("ibexa-ckeditor:configure", {
-                detail: { container, config }
-            })
+            const customEvent = new CustomEvent('ibexa-ckeditor:configure', {
+                detail: { container, config },
+            });
 
-            global.dispatchEvent(event);
+            doc.body.dispatchEvent(customEvent);
 
             CKEditor.create(container, config).then((editor) => {
                 this.editor = editor;
