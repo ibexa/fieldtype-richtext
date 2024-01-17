@@ -147,7 +147,7 @@ const VIEWPORT_TOP_OFFSET_DISTRACTION_FREE_MODE = 0;
                 section.appendChild(doc.createElement('p'));
             }
 
-            CKEditor.create(container, {
+            const config = {
                 initialData: section.innerHTML,
                 plugins: [
                     Essentials,
@@ -216,7 +216,15 @@ const VIEWPORT_TOP_OFFSET_DISTRACTION_FREE_MODE = 0;
                     content: locale.language,
                 },
                 ...extraConfig,
-            }).then((editor) => {
+            };
+
+            const customEvent = new CustomEvent('ibexa-ckeditor:configure', {
+                detail: { container, config },
+            });
+
+            doc.body.dispatchEvent(customEvent);
+
+            CKEditor.create(container, config).then((editor) => {
                 this.editor = editor;
 
                 const editableElement = this.editor.editing.view.getDomRoot();
