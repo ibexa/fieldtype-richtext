@@ -120,8 +120,24 @@ class IbexaCustomAttributesEditing extends Plugin {
         }
     }
 
-    init() {
+    clearElement(element, customs) {
         const { model } = this.editor;
+
+        Object.entries(customs).forEach(([elementName, config]) => {
+            if (elementName === element.name) {
+                return;
+            }
+
+            model.change((writer) => {
+                Object.keys(config).forEach((name) => {
+                    writer.removeAttribute(name, element);
+                });
+            });
+        });
+    }
+
+    init() {
+        const { commands, model } = this.editor;
         const customAttributesConfig = getCustomAttributesConfig();
         const customClassesConfig = getCustomClassesConfig();
         const elementsWithCustomAttributes = Object.keys(customAttributesConfig);
@@ -133,7 +149,9 @@ class IbexaCustomAttributesEditing extends Plugin {
             const elementName = isList ? 'listItem' : element;
             const customAttributes = Object.keys(customAttributesConfig[element]);
 
-            this.extendSchema(model.schema, elementName, { allowAttributes: `${prefix}${customAttributes}` });
+            customAttributes.forEach((customAttribute) => {
+                this.extendSchema(model.schema, elementName, { allowAttributes: `${prefix}${customAttribute}` });
+            });
         });
 
         elementsWithCustomClasses.forEach((element) => {
@@ -146,7 +164,16 @@ class IbexaCustomAttributesEditing extends Plugin {
 
         this.defineConverters();
 
-        this.editor.commands.add('insertIbexaCustomAttributes', new IbexaCustomAttributesCommand(this.editor));
+        commands.get('enter').on('afterExecute', () => {
+            const blocks = model.document.selection.getSelectedBlocks();
+
+            for (const block of blocks) {
+                this.clearElement(block, customAttributesConfig);
+                this.clearElement(block, customClassesConfig);
+            }
+        });
+
+        commands.add('insertIbexaCustomAttributes', new IbexaCustomAttributesCommand(this.editor));
     }
 }
 
