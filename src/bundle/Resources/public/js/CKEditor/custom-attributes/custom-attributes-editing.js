@@ -120,7 +120,7 @@ class IbexaCustomAttributesEditing extends Plugin {
         }
     }
 
-    clearElement(element, customs) {
+    cleanAttributes(element, customs) {
         const { model } = this.editor;
 
         Object.entries(customs).forEach(([elementName, config]) => {
@@ -168,8 +168,11 @@ class IbexaCustomAttributesEditing extends Plugin {
             const blocks = model.document.selection.getSelectedBlocks();
 
             for (const block of blocks) {
-                this.clearElement(block, customAttributesConfig);
-                this.clearElement(block, customClassesConfig);
+                this.cleanAttributes(block, customAttributesConfig);
+
+                model.change((writer) => {
+                    writer.removeAttribute('custom-classes', block);
+                });
             }
         });
 
