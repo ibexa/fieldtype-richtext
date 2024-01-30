@@ -287,4 +287,8 @@
         max-height: calculateRem(300px);
         overflow-y: auto;
     }
+
+    .ck-body-wrapper &.ck-balloon-panel {
+        z-index: calc(var(--ck-z-modal) + 100);
+    }
 }
