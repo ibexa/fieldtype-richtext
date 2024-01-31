@@ -217,6 +217,17 @@
             background-repeat: no-repeat;
         }
     }
+
+    pre {
+        &[id]:not(.ibexa-data-source__richtext) {
+            padding-left: calculateRem(20px);
+
+            &:before {
+                left: calculateRem(2px);
+                top: calculateRem(2px);
+            }
+        }
+    }
 }
 
 .ibexa-field-edit--ezrichtext.ibexa-field-edit--nontranslatable .ibexa-data-source {
