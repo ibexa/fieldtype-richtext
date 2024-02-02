@@ -1,5 +1,4 @@
 import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
-import { toWidgetEditable } from '@ckeditor/ckeditor5-widget/src/utils';
 import { rawSnippetTextToViewDocumentFragment } from '@ckeditor/ckeditor5-code-block/src/utils';
 import UpcastWriter from '@ckeditor/ckeditor5-engine/src/view/upcastwriter';
 import Widget from '@ckeditor/ckeditor5-widget/src/widget';
@@ -30,8 +29,7 @@ class IbexaFormattedEditing extends Plugin {
 
         conversion.for('editingDowncast').elementToElement({
             model: 'formatted',
-            view: (modelElement, { writer: downcastWriter }) =>
-                toWidgetEditable(downcastWriter.createEditableElement('pre'), downcastWriter),
+            view: (modelElement, { writer: downcastWriter }) => downcastWriter.createContainerElement('pre'),
         });
 
         conversion.for('dataDowncast').elementToElement({

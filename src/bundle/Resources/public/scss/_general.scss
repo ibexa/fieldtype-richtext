@@ -203,6 +203,12 @@
         min-height: calculateRem(20px);
     }
 
+    pre {
+        border: calculateRem(1px) solid $ibexa-color-dark-200;
+        border-radius: $ibexa-border-radius;
+        padding: calculateRem(4px) calculateRem(8px);
+    }
+
     [id]:not(.ibexa-data-source__richtext) {
         position: relative;
 
