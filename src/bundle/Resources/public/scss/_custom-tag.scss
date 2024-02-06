@@ -19,6 +19,13 @@
         border-top-right-radius: $ibexa-border-radius;
     }
 
+    &__header-title {
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        width: 80%;
+    }
+
     &[data-ezelement='eztemplateinline'] {
         padding: calculateRem(4px) calculateRem(8px);
     }
