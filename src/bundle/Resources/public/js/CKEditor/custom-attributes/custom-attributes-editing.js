@@ -77,6 +77,10 @@ class IbexaCustomAttributesEditing extends Plugin {
 
         this.editor.conversion.for('dataDowncast').add((dispatcher) => {
             dispatcher.on('attribute:list-custom-classes:listItem', (event, data, conversionApi) => {
+                if (data.attributeKey !== 'list-custom-classes' || data.attributeNewValue === '') {
+                    return;
+                }
+
                 const viewItem = conversionApi.mapper.toViewElement(data.item);
                 const previousElement = viewItem.parent.previousSibling;
 
@@ -90,13 +94,22 @@ class IbexaCustomAttributesEditing extends Plugin {
 
         this.editor.conversion.for('editingDowncast').add((dispatcher) => {
             dispatcher.on('attribute:list-custom-classes:listItem', (event, data, conversionApi) => {
+                if (data.attributeKey !== 'list-custom-classes' || data.attributeNewValue === '') {
+                    return;
+                }
+
                 const viewItem = conversionApi.mapper.toViewElement(data.item);
                 const previousElement = viewItem.parent.previousSibling;
+                const nextElement = viewItem.parent.nextSibling;
 
                 conversionApi.writer.setAttribute('class', data.attributeNewValue, viewItem.parent);
 
                 if (previousElement?.name === viewItem.parent.name) {
                     conversionApi.writer.mergeContainers(conversionApi.writer.createPositionAfter(previousElement));
+                }
+
+                if (nextElement?.name === viewItem.parent.name) {
+                    conversionApi.writer.mergeContainers(conversionApi.writer.createPositionBefore(nextElement));
                 }
             });
         });
