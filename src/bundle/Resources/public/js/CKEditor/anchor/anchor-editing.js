@@ -27,6 +27,7 @@ class IbexaAnchorEditing extends Plugin {
         model.schema.extend('embedInline', { allowAttributes: 'anchor' });
         model.schema.extend('embedImage', { allowAttributes: 'anchor' });
         model.schema.extend('customTag', { allowAttributes: 'anchor' });
+        model.schema.extend('formatted', { allowAttributes: 'anchor' });
 
         commands.get('enter').on('afterExecute', () => {
             const blocks = model.document.selection.getSelectedBlocks();
