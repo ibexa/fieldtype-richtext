@@ -6,7 +6,9 @@ import IbexaEmbedContentInlineCommand from './embed-inline-command';
 
 import { findContent } from '../../services/content-service';
 
-const renderPreview = (title, contentId) => {
+const renderPreview = (title, contentId, itemActionsContainer) => {
+    const itemActionsHTML = itemActionsContainer?.outerHTML ?? '';
+
     return `<svg class="ibexa-icon ibexa-icon--medium ibexa-icon--secondary">
                 <use xlink:href="${window.ibexa.helpers.icon.getIconPath('embed')}"></use>
             </svg>
@@ -26,7 +28,8 @@ const renderPreview = (title, contentId) => {
                         <use xlink:href="${window.ibexa.helpers.icon.getIconPath('options')}"></use>
                     </svg>
                 </button>
-            </span>`;
+            </span>
+            ${itemActionsHTML}`;
 };
 
 class IbexaEmbedContentInlineEditing extends Plugin {
@@ -53,6 +56,7 @@ class IbexaEmbedContentInlineEditing extends Plugin {
             .elementToElement({
                 model: 'embedInline',
                 view: (modelElement, { writer: downcastWriter }) => {
+                    const { editor } = this;
                     const container = downcastWriter.createContainerElement('span', {
                         'data-ezelement': 'ezembedinline',
                         'data-ezview': 'embed-inline',
@@ -60,8 +64,9 @@ class IbexaEmbedContentInlineEditing extends Plugin {
                     });
                     const preview = downcastWriter.createUIElement('span', { class: 'ibexa-embed-content' }, function (domDocument) {
                         const domElement = this.toDomElement(domDocument);
+                        const itemActionsContainer = editor.sourceElement.parentNode.querySelector('.ibexa-embedded-item-actions');
 
-                        domElement.innerHTML = renderPreview(modelElement.getAttribute('contentName'));
+                        domElement.innerHTML = renderPreview(modelElement.getAttribute('contentName'), null, itemActionsContainer);
 
                         return domElement;
                     });
@@ -72,7 +77,7 @@ class IbexaEmbedContentInlineEditing extends Plugin {
                 },
             })
             .add((dispatcher) =>
-                dispatcher.on('attribute:contentName', (event, data, conversionApi) => {
+                dispatcher.on('attribute:contentName:embedInline', (event, data, conversionApi) => {
                     const { editor } = this;
                     const downcastWriter = conversionApi.writer;
                     const modelElement = data.item;
@@ -83,11 +88,12 @@ class IbexaEmbedContentInlineEditing extends Plugin {
                         const locationId = modelElement.getAttribute('locationId');
                         const languageCodes = modelElement.getAttribute('languageCodes');
                         const domElement = this.toDomElement(domDocument);
+                        const itemActionsContainer = editor.sourceElement.parentNode.querySelector('.ibexa-embedded-item-actions');
 
-                        domElement.innerHTML = renderPreview(contentName, contentId);
+                        domElement.innerHTML = renderPreview(contentName, contentId, itemActionsContainer);
 
                         const itemActionsTriggerElement = domElement.querySelector('.ibexa-embedded-item__actions-menu-trigger-btn');
-                        const itemActionsMenuContainer = editor.sourceElement.parentNode.querySelector(
+                        const itemActionsMenuContainer = domElement.querySelector(
                             '.ibexa-embedded-item-actions .ibexa-multilevel-popup-menu',
                         );
 
