@@ -7,7 +7,7 @@ import IbexaEmbedContentInlineCommand from './embed-inline-command';
 import { findContent } from '../../services/content-service';
 
 const renderPreview = (title, contentId, itemActionsContainer) => {
-    const itemActionsHTML = itemActionsContainer.outerHTML;
+    const itemActionsHTML = itemActionsContainer?.outerHTML ?? '';
 
     return `<svg class="ibexa-icon ibexa-icon--medium ibexa-icon--secondary">
                 <use xlink:href="${window.ibexa.helpers.icon.getIconPath('embed')}"></use>
