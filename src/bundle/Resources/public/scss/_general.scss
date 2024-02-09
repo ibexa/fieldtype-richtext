@@ -234,6 +234,14 @@
             }
         }
     }
+
+    li {
+        &[id]:not(.ibexa-data-source__richtext) {
+            &::before {
+                left: calculateRem(-40px);
+            }
+        }
+    }
 }
 
 .ibexa-field-edit--ezrichtext.ibexa-field-edit--nontranslatable .ibexa-data-source {
