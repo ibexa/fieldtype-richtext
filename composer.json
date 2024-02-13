@@ -25,16 +25,16 @@
         "symfony/translation": "^5.0",
         "symfony/translation-contracts": "^2.0",
         "twig/twig": "^3.0",
-        "ibexa/core": "~4.6.0@dev",
-        "ibexa/content-forms": "~4.6.0@dev",
-        "ibexa/rest": "~4.6.0@dev",
-        "ibexa/http-cache": "~4.6.0@dev"
+        "ibexa/core": "~4.6.0",
+        "ibexa/content-forms": "~4.6.0",
+        "ibexa/rest": "~4.6.0",
+        "ibexa/http-cache": "~4.6.0"
     },
     "require-dev": {
         "dama/doctrine-test-bundle": "^6.7.5",
-        "ibexa/ci-scripts": "^0.2@dev",
-        "ibexa/doctrine-schema": "~4.6.0@dev",
-        "ibexa/solr": "~4.6.0@dev",
+        "ibexa/ci-scripts": "^0.2",
+        "ibexa/doctrine-schema": "~4.6.0",
+        "ibexa/solr": "~4.6.0",
         "phpstan/phpstan": "^1.9",
         "phpstan/phpstan-symfony": "^1.2",
         "phpstan/phpstan-phpunit": "^1.3",
