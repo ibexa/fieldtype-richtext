@@ -44,10 +44,24 @@ class IbexaCustomAttributesCommand extends Command {
     refresh() {
         const { selection } = this.editor.model.document;
         const parentElement = selection.getSelectedElement() ?? selection.getFirstPosition().parent;
+        let parentElementName = parentElement.name;
+
+        if (this.editor.isListSelected) {
+            const mapping = {
+                bulleted: 'ul',
+                numbered: 'ol',
+            };
+            const listType = parentElement.getAttribute('listType');
+
+            if (mapping[listType]) {
+                parentElementName = mapping[listType];
+            }
+        }
+
         const customAttributesConfig = getCustomAttributesConfig();
         const customClassesConfig = getCustomClassesConfig();
-        const parentElementAttributesConfig = customAttributesConfig[parentElement.name];
-        const parentElementClassesConfig = customClassesConfig[parentElement.name];
+        const parentElementAttributesConfig = customAttributesConfig[parentElementName];
+        const parentElementClassesConfig = customClassesConfig[parentElementName];
         const isEnabled = parentElementAttributesConfig || parentElementClassesConfig;
 
         this.isEnabled = !!isEnabled;
