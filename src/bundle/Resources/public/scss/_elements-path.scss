@@ -6,7 +6,11 @@
     font-weight: bold;
     flex-wrap: wrap;
 
-    &__item:not(:last-child) {
-        margin-right: calculateRem(16px);
+    &__item {
+        cursor: pointer;
+
+        &:not(:last-child) {
+            margin-right: calculateRem(16px);
+        }
     }
 }

@@ -46,6 +46,11 @@
         <target state="new">Custom styles</target>
         <note>key: custom_styles_btn.label</note>
       </trans-unit>
+      <trans-unit id="3b257be2c6dd1f7bf0d5c70e64c22bf5b298dbbf" resname="elements_path.list.label">
+        <source>list</source>
+        <target state="new">list</target>
+        <note>key: elements_path.list.label</note>
+      </trans-unit>
       <trans-unit id="5761446626d26974269cd5f7fb428e268928932b" resname="embed_btn.label">
         <source>Embed</source>
         <target state="new">Embed</target>
