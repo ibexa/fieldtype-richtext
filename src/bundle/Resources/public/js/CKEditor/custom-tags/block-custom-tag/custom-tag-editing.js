@@ -48,9 +48,9 @@ class IbexaCustomTagEditing extends Plugin {
                     </button>`;
 
                     domElement.innerHTML = `
-                        <div class="ibexa-custom-tag__header-title" data-cke-tooltip-text="${customTagConfig.label}">${
-                        customTagConfig.label
-                    }</div>
+                        <div class="ibexa-custom-tag__header-title" data-cke-tooltip-text="${customTagConfig.label}">
+                            ${customTagConfig.label}
+                        </div>
                         <div class="ibexa-custom-tag__header-actions">
                             ${Object.keys(customTagConfig.attributes).length ? attributesButton : ''}
                             <button type="button" class="ibexa-btn ibexa-btn--ghost ibexa-btn--small ibexa-btn--no-text ibexa-btn--remove-custom-tag">
