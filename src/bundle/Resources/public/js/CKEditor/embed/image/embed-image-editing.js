@@ -16,6 +16,7 @@ class IbexaEmbedImageEditing extends Plugin {
 
         this.loadImagePreview = this.loadImagePreview.bind(this);
         this.loadImageVariation = this.loadImageVariation.bind(this);
+        this.getSetting = this.getSetting.bind(this);
     }
 
     loadImagePreview(modelElement) {
@@ -55,6 +56,16 @@ class IbexaEmbedImageEditing extends Plugin {
                 });
             })
             .catch(window.ibexa.helpers.notification.showErrorNotification);
+    }
+
+    getSetting(viewElement, settingName) {
+        const children = viewElement.getChildren();
+
+        for (const child of children) {
+            if (child.getAttribute('data-ezelement') === settingName) {
+                return child;
+            }
+        }
     }
 
     defineSchema() {
@@ -171,8 +182,8 @@ class IbexaEmbedImageEditing extends Plugin {
             model: (viewElement, { writer: upcastWriter }) => {
                 const href = viewElement.getAttribute('data-href');
                 const contentId = href.replace('ezcontent://', '');
-                const size = viewElement.getChild(0).getChild(0).getChild(0).data;
-                const link = viewElement.getChild(1);
+                const size = this.getSetting(viewElement, 'ezconfig').getChild(0).getChild(0).data;
+                const link = this.getSetting(viewElement, 'ezlink');
                 const modelElement = upcastWriter.createElement('embedImage', { contentId, size });
 
                 if (link?.is('element', 'a')) {
