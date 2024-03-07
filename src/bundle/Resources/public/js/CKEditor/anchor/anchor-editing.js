@@ -20,14 +20,19 @@ class IbexaAnchorEditing extends Plugin {
 
         this.editor.conversion.for('dataDowncast').add((dispatcher) => {
             dispatcher.on('attribute:anchor:listItem', (event, data, conversionApi) => {
-                if (data.attributeKey !== 'anchor' || data.attributeNewValue === '') {
+                if (data.attributeKey !== 'anchor') {
                     return;
                 }
 
                 const viewItem = conversionApi.mapper.toViewElement(data.item);
                 const previousElement = viewItem.parent.previousSibling;
 
-                conversionApi.writer.setAttribute('id', data.attributeNewValue, viewItem.parent);
+                if (data.attributeNewValue) {
+                    conversionApi.writer.setAttribute('id', data.attributeNewValue, viewItem.parent);
+                } else {
+                    conversionApi.writer.removeAttribute('id', viewItem.parent);
+                }
+
                 conversionApi.writer.removeAttribute('id', viewItem);
 
                 if (previousElement?.name === viewItem.parent.name) {
@@ -38,7 +43,7 @@ class IbexaAnchorEditing extends Plugin {
 
         this.editor.conversion.for('editingDowncast').add((dispatcher) => {
             dispatcher.on('attribute:anchor:listItem', (event, data, conversionApi) => {
-                if (data.attributeKey !== 'anchor' || data.attributeNewValue === '') {
+                if (data.attributeKey !== 'anchor') {
                     return;
                 }
 
@@ -46,7 +51,12 @@ class IbexaAnchorEditing extends Plugin {
                 const previousElement = viewItem.parent.previousSibling;
                 const nextElement = viewItem.parent.nextSibling;
 
-                conversionApi.writer.setAttribute('id', data.attributeNewValue, viewItem.parent);
+                if (data.attributeNewValue) {
+                    conversionApi.writer.setAttribute('id', data.attributeNewValue, viewItem.parent);
+                } else {
+                    conversionApi.writer.removeAttribute('id', viewItem.parent);
+                }
+
                 conversionApi.writer.removeAttribute('id', viewItem);
 
                 if (previousElement?.name === viewItem.parent.name) {
