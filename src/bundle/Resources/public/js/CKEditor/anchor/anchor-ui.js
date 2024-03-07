@@ -22,8 +22,8 @@ class IbexaAnchorUI extends Plugin {
     }
 
     removeAnchorFromSiblings(modelElement, writer) {
-        let previousSibling = modelElement.previousSibling;
-        let nextSibling = modelElement.nextSibling;
+        let { previousSibling } = modelElement;
+        let { nextSibling } = modelElement;
 
         while (previousSibling?.name === 'listItem') {
             writer.removeAttribute('anchor', previousSibling);
@@ -74,7 +74,6 @@ class IbexaAnchorUI extends Plugin {
         this.listenTo(formView, 'remove-anchor', () => {
             const modelElement = this.getModelElement();
             const isListItem = modelElement.name === 'listItem';
-            console.log(modelElement);
 
             this.editor.model.change((writer) => {
                 writer.removeAttribute('anchor', modelElement);
