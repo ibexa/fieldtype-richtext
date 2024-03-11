@@ -1,0 +1,57 @@
+parameters:
+    locale_fallback: en
+    ibexa.field_type.richtext.resources: 'src/bundle/Resources/richtext'
+    ibexa.field_type.richtext.validator.docbook.resources:
+        - '%ibexa.field_type.richtext.resources%/schemas/docbook/ezpublish.rng'
+        - '%ibexa.field_type.richtext.resources%/schemas/docbook/docbook.iso.sch.xsl'
+
+    ibexa.field_type.richtext.custom_tags:
+        video:
+            template: 'MyBundle:FieldType/RichText/tag:video.html.twig'
+            icon: '/bundles/mybundle/fieldtype/richtext/video.svg#video'
+            attributes:
+                title:
+                    type: 'string'
+                    required: true
+                    default_value: 'abc'
+                width:
+                    type: 'number'
+                    required: true
+                    default_value: 360
+                autoplay:
+                    type: 'boolean'
+        equation:
+            template: 'MyBundle:FieldType/RichText/tag:equation.html.twig'
+            icon: '/bundles/mybundle/fieldtype/richtext/equation.svg#equation'
+            attributes:
+                name:
+                    type: 'string'
+                    required: true
+                    default_value: 'Equation'
+                processor:
+                    type: 'choice'
+                    required: true
+                    default_value: 'latex'
+                    choices: ['latex', 'tex']
+
+
+webpack_encore:
+    # The path where Encore is building the assets - i.e. Encore.setOutputPath()
+    output_path: '%kernel.project_dir%/public/build'
+
+lexik_jwt_authentication:
+    secret_key: 'foo'
+
+ibexa:
+    repositories:
+        default:
+            search:
+                engine: '%env(SEARCH_ENGINE)%'
+                connection: default
+
+    system:
+        default:
+            languages:
+                - eng-US
+                - eng-GB
+                - ger-DE
