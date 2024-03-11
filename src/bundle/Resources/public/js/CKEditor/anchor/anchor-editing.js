@@ -72,10 +72,10 @@ class IbexaAnchorEditing extends Plugin {
         this.editor.conversion.for('upcast').add((dispatcher) => {
             dispatcher.on('element:li', (event, data, conversionApi) => {
                 const listParent = data.viewItem.parent;
-                const listItem = data.modelRange.start.nodeAfter || data.modelRange.end.nodeBefore;
-                const classes = listParent.getAttribute('id');
+                const listItem = data.modelRange.start.nodeAfter ?? data.modelRange.end.nodeBefore;
+                const id = listParent.getAttribute('id');
 
-                conversionApi.writer.setAttribute('anchor', classes, listItem);
+                conversionApi.writer.setAttribute('anchor', id, listItem);
             });
         });
     }
