@@ -4,7 +4,7 @@ import clickOutsideHandler from '@ckeditor/ckeditor5-ui/src/bindings/clickoutsid
 import IbexaCustomAttributesFormView from './ui/custom-attributes-form-view';
 import IbexaButtonView from '../common/button-view/button-view';
 
-import { getCustomAttributesConfig, getCustomClassesConfig } from './helpers/config-helper';
+import { getCustomAttributesElementConfig, getCustomClassesElementConfig } from './helpers/config-helper';
 
 const { Translator } = window;
 
@@ -40,6 +40,10 @@ class IbexaAttributesUI extends Plugin {
                     const prefix = this.getAttributePrefix();
 
                     modelElements.forEach((modelElement) => {
+                        if (this.editor.isListSelected && this.editor.listIndent !== modelElement.getAttribute('listIndent')) {
+                            return;
+                        }
+
                         writer.setAttribute(`${prefix}${name}`, value, modelElement);
                     });
                 });
@@ -59,6 +63,10 @@ class IbexaAttributesUI extends Plugin {
                     const prefix = this.getAttributePrefix();
 
                     modelElements.forEach((modelElement) => {
+                        if (this.editor.isListSelected && this.editor.listIndent !== modelElement.getAttribute('listIndent')) {
+                            return;
+                        }
+
                         writer.removeAttribute(`${prefix}${name}`, modelElement);
                     });
                 });
@@ -81,8 +89,6 @@ class IbexaAttributesUI extends Plugin {
 
     showForm() {
         const parentElement = this.getModelElement();
-        const customAttributesConfig = getCustomAttributesConfig();
-        const customClassesConfig = getCustomClassesConfig();
         const prefix = this.getAttributePrefix();
         let parentElementName = parentElement.name;
 
@@ -98,8 +104,8 @@ class IbexaAttributesUI extends Plugin {
             }
         }
 
-        const customAttributes = customAttributesConfig[parentElementName] ?? {};
-        const customClasses = customClassesConfig[parentElementName];
+        const customAttributes = getCustomAttributesElementConfig(parentElementName) ?? {};
+        const customClasses = getCustomClassesElementConfig(parentElementName);
         const areCustomAttributesSet =
             parentElement.hasAttribute(`${prefix}custom-classes`) ||
             Object.keys(customAttributes).some((customAttributeName) => parentElement.hasAttribute(`${prefix}${customAttributeName}`));

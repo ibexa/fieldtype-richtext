@@ -4,6 +4,12 @@ import Widget from '@ckeditor/ckeditor5-widget/src/widget';
 import IbexaCustomAttributesCommand from './custom-attributes-command';
 import { getCustomAttributesConfig, getCustomClassesConfig } from './helpers/config-helper';
 
+const configElementsMapping = {
+    li: 'listItem',
+    tr: 'tableRow',
+    td: 'tableCell',
+};
+
 class IbexaCustomAttributesEditing extends Plugin {
     static get requires() {
         return [Widget];
@@ -126,8 +132,10 @@ class IbexaCustomAttributesEditing extends Plugin {
     }
 
     extendSchema(schema, element, definition) {
-        if (schema.getDefinition(element)) {
-            schema.extend(element, definition);
+        const resolvedElement = configElementsMapping[element] ?? element;
+
+        if (schema.getDefinition(resolvedElement)) {
+            schema.extend(resolvedElement, definition);
         } else {
             console.warn(`Schema does not have '${element}' element`);
         }
@@ -194,3 +202,4 @@ class IbexaCustomAttributesEditing extends Plugin {
 }
 
 export default IbexaCustomAttributesEditing;
+export { configElementsMapping };
