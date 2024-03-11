@@ -116,8 +116,8 @@ jobs:
             -   uses: ramsey/composer-install@v2
                 with:
                     dependency-versions: highest
-            env:
-                COMPOSER_ROOT_VERSION: ${{ env.version }}
+                env:
+                    COMPOSER_ROOT_VERSION: ${{ env.version }}
 
             -   name: Setup problem matchers for PHPUnit
                 run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
