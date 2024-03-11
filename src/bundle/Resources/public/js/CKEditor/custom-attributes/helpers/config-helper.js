@@ -2,7 +2,7 @@ import { configElementsMapping } from '../custom-attributes-editing';
 
 const headingsList = ['heading1', 'heading2', 'heading3', 'heading4', 'heading5', 'heading6'];
 const findConfigName = (elementName) => {
-    const configName = Object.entries(configElementsMapping).find(([key, value]) => value === elementName);
+    const configName = Object.entries(configElementsMapping).find(([, value]) => value === elementName);
 
     return configName ? configName[0] : elementName;
 };
