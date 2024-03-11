@@ -31,11 +31,7 @@ jobs:
                   extensions: 'pdo_sqlite, gd'
                   tools: cs2pr
 
-            - uses: ramsey/composer-install@v2
-              with:
-                  dependency-versions: highest
-              env:
-                  COMPOSER_ROOT_VERSION: ${{ env.version }}
+            - uses: ./.github/actions/composer-install
 
             - name: Run code style check
               run: composer run-script check-cs -- --format=checkstyle | cs2pr
@@ -69,11 +65,7 @@ jobs:
                   extensions: pdo_sqlite, gd
                   tools: cs2pr
 
-            - uses: ramsey/composer-install@v2
-              with:
-                  dependency-versions: highest
-              env:
-                  COMPOSER_ROOT_VERSION: ${{ env.version }}
+            - uses: ./.github/actions/composer-install
 
             - name: Setup problem matchers for PHPUnit
               run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
@@ -128,11 +120,7 @@ jobs:
                     extensions: pdo_pgsql, gd
                     tools: cs2pr
 
-            -   uses: ramsey/composer-install@v2
-                with:
-                    dependency-versions: highest
-                env:
-                    COMPOSER_ROOT_VERSION: ${{ env.version }}
+            -   uses: ./.github/actions/composer-install
 
             -   name: Setup problem matchers for PHPUnit
                 run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
@@ -188,11 +176,7 @@ jobs:
                     extensions: pdo_mysql, gd
                     tools: cs2pr
 
-            -   uses: ramsey/composer-install@v2
-                with:
-                    dependency-versions: highest
-                env:
-                    COMPOSER_ROOT_VERSION: ${{ env.version }}
+            -   uses: ./.github/actions/composer-install
 
             -   name: Setup problem matchers for PHPUnit
                 run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
@@ -229,9 +213,7 @@ jobs:
                   php-version: 7.4
                   coverage: none
 
-            - uses: ramsey/composer-install@v2
-              with:
-                  dependency-versions: highest
+            -   uses: ./.github/actions/composer-install
 
             - name: Run integration test suite
               run: composer integration-solr
