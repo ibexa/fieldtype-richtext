@@ -32,7 +32,7 @@
     },
     "require-dev": {
         "dama/doctrine-test-bundle": "^6.7.5",
-        "ibexa/admin-ui": "^4.6.x-dev",
+        "ibexa/admin-ui": "dev-update-richtext-dependency as 4.6.x-dev",
         "ibexa/ci-scripts": "^0.2@dev",
         "ibexa/doctrine-schema": "~4.6.0@dev",
         "ibexa/search": "^4.6.x-dev",
