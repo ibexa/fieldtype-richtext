@@ -30,7 +30,7 @@ jobs:
               with:
                   dependency-versions: highest
               env:
-                  COMPOSER_ROOT_VERSION: ${{ env.version }}
+                  COMPOSER_ROOT_VERSION: '4.6.x-dev'
 
             - name: Run code style check
               run: composer run-script check-cs -- --format=checkstyle | cs2pr
@@ -63,7 +63,7 @@ jobs:
               with:
                   dependency-versions: highest
               env:
-                  COMPOSER_ROOT_VERSION: ${{ env.version }}
+                  COMPOSER_ROOT_VERSION: '4.6.x-dev'
 
             - name: Setup problem matchers for PHPUnit
               run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
@@ -117,7 +117,7 @@ jobs:
                 with:
                     dependency-versions: highest
                 env:
-                    COMPOSER_ROOT_VERSION: ${{ env.version }}
+                    COMPOSER_ROOT_VERSION: '4.6.x-dev'
 
             -   name: Setup problem matchers for PHPUnit
                 run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
@@ -172,7 +172,7 @@ jobs:
                 with:
                     dependency-versions: highest
                 env:
-                    COMPOSER_ROOT_VERSION: ${{ env.version }}
+                    COMPOSER_ROOT_VERSION: '4.6.x-dev'
 
             -   name: Setup problem matchers for PHPUnit
                 run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
