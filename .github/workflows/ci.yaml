@@ -18,6 +18,11 @@ jobs:
         steps:
             - uses: actions/checkout@v3
 
+            - name: Set package version
+              run: |
+                  version=$(jq -r '.extra | ."branch-alias" | ."dev-main"' < composer.json)
+                  echo "version=$version" >> $GITHUB_ENV
+
             - name: Setup PHP Action
               uses: shivammathur/setup-php@v2
               with:
@@ -30,7 +35,7 @@ jobs:
               with:
                   dependency-versions: highest
               env:
-                  COMPOSER_ROOT_VERSION: '4.6.x-dev'
+                  COMPOSER_ROOT_VERSION: ${{ env.version }}
 
             - name: Run code style check
               run: composer run-script check-cs -- --format=checkstyle | cs2pr
@@ -51,6 +56,11 @@ jobs:
         steps:
             - uses: actions/checkout@v3
 
+            - name: Set package version
+              run: |
+                  version=$(jq -r '.extra | ."branch-alias" | ."dev-main"' < composer.json)
+                  echo "version=$version" >> $GITHUB_ENV
+
             - name: Setup PHP Action
               uses: shivammathur/setup-php@v2
               with:
@@ -63,7 +73,7 @@ jobs:
               with:
                   dependency-versions: highest
               env:
-                  COMPOSER_ROOT_VERSION: '4.6.x-dev'
+                  COMPOSER_ROOT_VERSION: ${{ env.version }}
 
             - name: Setup problem matchers for PHPUnit
               run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
@@ -105,6 +115,11 @@ jobs:
         steps:
             -   uses: actions/checkout@v3
 
+            -   name: Set package version
+                run: |
+                      version=$(jq -r '.extra | ."branch-alias" | ."dev-main"' < composer.json)
+                      echo "version=$version" >> $GITHUB_ENV
+
             -   name: Setup PHP Action
                 uses: shivammathur/setup-php@v2
                 with:
@@ -117,7 +132,7 @@ jobs:
                 with:
                     dependency-versions: highest
                 env:
-                    COMPOSER_ROOT_VERSION: '4.6.x-dev'
+                    COMPOSER_ROOT_VERSION: ${{ env.version }}
 
             -   name: Setup problem matchers for PHPUnit
                 run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
@@ -160,6 +175,11 @@ jobs:
         steps:
             -   uses: actions/checkout@v3
 
+            -   name: Set package version
+                run: |
+                    version=$(jq -r '.extra | ."branch-alias" | ."dev-main"' < composer.json)
+                    echo "version=$version" >> $GITHUB_ENV
+
             -   name: Setup PHP Action
                 uses: shivammathur/setup-php@v2
                 with:
@@ -172,7 +192,7 @@ jobs:
                 with:
                     dependency-versions: highest
                 env:
-                    COMPOSER_ROOT_VERSION: '4.6.x-dev'
+                    COMPOSER_ROOT_VERSION: ${{ env.version }}
 
             -   name: Setup problem matchers for PHPUnit
                 run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
