@@ -4,7 +4,7 @@ const headingsList = ['heading1', 'heading2', 'heading3', 'heading4', 'heading5'
 const findConfigName = (elementName) => {
     const configName = Object.entries(configElementsMapping).find(([, value]) => value === elementName);
 
-    return configName ? configName[0] : elementName;
+    return configName?.[0] ?? elementName;
 };
 const getCustomAttributesConfig = () => {
     const attributes = { ...window.ibexa.richText.alloyEditor.attributes };

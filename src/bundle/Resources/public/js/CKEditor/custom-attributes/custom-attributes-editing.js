@@ -201,5 +201,4 @@ class IbexaCustomAttributesEditing extends Plugin {
     }
 }
 
-export default IbexaCustomAttributesEditing;
-export { configElementsMapping };
+export { IbexaCustomAttributesEditing as default, configElementsMapping };

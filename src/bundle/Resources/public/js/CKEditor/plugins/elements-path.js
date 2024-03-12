@@ -94,13 +94,9 @@ class IbexaElementsPath extends Plugin {
         listItemNode.addEventListener(
             'click',
             () => {
-                let placement = 'in';
-
                 this.isTableCellSelected = element.name === 'tableCell';
 
-                if (this.isTableCellSelected) {
-                    placement = 'on';
-                }
+                const placement = this.isTableCellSelected ? 'on' : 'in';
 
                 this.editor.model.change((writer) => writer.setSelection(element, placement));
                 this.editor.focus();
