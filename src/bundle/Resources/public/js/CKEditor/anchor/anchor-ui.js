@@ -21,6 +21,22 @@ class IbexaAnchorUI extends Plugin {
         return this.editor.model.document.selection.getSelectedElement() || this.editor.model.document.selection.anchor.parent;
     }
 
+    removeAnchorFromSiblings(modelElement, writer) {
+        let { previousSibling, nextSibling } = modelElement;
+
+        while (previousSibling?.name === 'listItem') {
+            writer.removeAttribute('anchor', previousSibling);
+
+            previousSibling = previousSibling.previousSibling;
+        }
+
+        while (nextSibling?.name === 'listItem') {
+            writer.removeAttribute('anchor', nextSibling);
+
+            nextSibling = nextSibling.nextSibling;
+        }
+    }
+
     createFormView() {
         const formView = new IbexaAnchorFormView({ locale: this.editor.locale });
 
@@ -56,9 +72,14 @@ class IbexaAnchorUI extends Plugin {
 
         this.listenTo(formView, 'remove-anchor', () => {
             const modelElement = this.getModelElement();
+            const isListItem = modelElement.name === 'listItem';
 
             this.editor.model.change((writer) => {
                 writer.removeAttribute('anchor', modelElement);
+
+                if (isListItem) {
+                    this.removeAnchorFromSiblings(modelElement, writer);
+                }
             });
 
             this.hideForm();
