@@ -18,11 +18,6 @@ jobs:
         steps:
             - uses: actions/checkout@v3
 
-            - name: Set package version
-              run: |
-                  version=$(jq -r '.extra | ."branch-alias" | ."dev-main"' < composer.json)
-                  echo "version=$version" >> $GITHUB_ENV
-
             - name: Setup PHP Action
               uses: shivammathur/setup-php@v2
               with:
@@ -51,11 +46,6 @@ jobs:
 
         steps:
             - uses: actions/checkout@v3
-
-            - name: Set package version
-              run: |
-                  version=$(jq -r '.extra | ."branch-alias" | ."dev-main"' < composer.json)
-                  echo "version=$version" >> $GITHUB_ENV
 
             - name: Setup PHP Action
               uses: shivammathur/setup-php@v2
@@ -107,11 +97,6 @@ jobs:
         steps:
             -   uses: actions/checkout@v3
 
-            -   name: Set package version
-                run: |
-                      version=$(jq -r '.extra | ."branch-alias" | ."dev-main"' < composer.json)
-                      echo "version=$version" >> $GITHUB_ENV
-
             -   name: Setup PHP Action
                 uses: shivammathur/setup-php@v2
                 with:
@@ -162,11 +147,6 @@ jobs:
 
         steps:
             -   uses: actions/checkout@v3
-
-            -   name: Set package version
-                run: |
-                    version=$(jq -r '.extra | ."branch-alias" | ."dev-main"' < composer.json)
-                    echo "version=$version" >> $GITHUB_ENV
 
             -   name: Setup PHP Action
                 uses: shivammathur/setup-php@v2
