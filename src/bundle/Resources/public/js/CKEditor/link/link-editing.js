@@ -72,7 +72,8 @@ class IbexaCustomTagEditing extends Plugin {
         conversion.for('upcast').add((dispatcher) => {
             dispatcher.on('element:a', (evt, data, conversionApi) => {
                 if (conversionApi.consumable.consume(data.viewItem, { attributes: ['href'] })) {
-                    const { modelRange } = conversionApi.convertChildren(data.viewItem, data.modelCursor);
+                    Object.assign(data, conversionApi.convertChildren(data.viewItem, data.modelCursor));
+
                     const ibexaLinkHref = data.viewItem.getAttribute('href');
                     const ibexaLinkTitle = data.viewItem.getAttribute('title');
                     const ibexaLinkTarget = data.viewItem.getAttribute('target');
@@ -84,11 +85,11 @@ class IbexaCustomTagEditing extends Plugin {
                             ibexaLinkTitle,
                             ibexaLinkTarget,
                         },
-                        modelRange,
+                        data.modelRange,
                     );
 
                     if (classes && customClassesLinkConfig) {
-                        conversionApi.writer.setAttribute('ibexaLinkClasses', classes, modelRange);
+                        conversionApi.writer.setAttribute('ibexaLinkClasses', classes, data.modelRange);
                     }
 
                     if (customAttributesLinkConfig) {
@@ -96,7 +97,7 @@ class IbexaCustomTagEditing extends Plugin {
                             const customAttributeValue = data.viewItem.getAttribute(`data-ezattribute-${customAttributeName}`);
 
                             if (customAttributeValue) {
-                                conversionApi.writer.setAttribute(`ibexaLink${customAttributeName}`, customAttributeValue, modelRange);
+                                conversionApi.writer.setAttribute(`ibexaLink${customAttributeName}`, customAttributeValue, data.modelRange);
                             }
                         });
                     }
