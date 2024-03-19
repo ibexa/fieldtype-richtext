@@ -91,7 +91,7 @@ class IbexaAttributesUI extends Plugin {
         const parentElement = this.getModelElement();
         const prefix = this.getAttributePrefix();
         let parentElementName = parentElement.name;
-        console.log([...this.editor.model.document.selection.getSelectedBlocks()]);
+
         if (this.editor.isListSelected) {
             const mapping = {
                 bulleted: 'ul',
