@@ -50,6 +50,24 @@ class IbexaCustomAttributesCommand extends Command {
         });
     }
 
+    isTableColumnSelected(parentElementName) {
+        const selectedBlocks = [...this.editor.model.document.selection.getSelectedBlocks()];
+        const isTableRow = parentElementName === 'tableRow';
+        const areBlocksInSameRow = selectedBlocks.every((selectedBlock, index) => {
+            const nextBlock = selectedBlocks[index + 1];
+
+            if (!nextBlock) {
+                return true;
+            }
+
+            const commonAncestor = selectedBlock.getCommonAncestor(nextBlock);
+
+            return commonAncestor.name === 'tableRow';
+        });
+
+        return !areBlocksInSameRow && isTableRow;
+    }
+
     refresh() {
         const { selection } = this.editor.model.document;
         const parentElement = selection.getSelectedElement() ?? selection.getFirstPosition().parent;
@@ -71,7 +89,7 @@ class IbexaCustomAttributesCommand extends Command {
         const customClassesConfig = getCustomClassesConfig();
         const parentElementAttributesConfig = getCustomAttributesElementConfig(parentElementName);
         const parentElementClassesConfig = getCustomClassesElementConfig(parentElementName);
-        const isEnabled = parentElementAttributesConfig || parentElementClassesConfig;
+        const isEnabled = !this.isTableColumnSelected(parentElementName) && (parentElementAttributesConfig || parentElementClassesConfig);
 
         this.isEnabled = !!isEnabled;
 
