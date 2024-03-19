@@ -1,17 +1,25 @@
 import Command from '@ckeditor/ckeditor5-core/src/command';
 
-import { getCustomAttributesConfig, getCustomClassesConfig } from './helpers/config-helper';
+import {
+    getCustomAttributesConfig,
+    getCustomClassesConfig,
+    getCustomAttributesElementConfig,
+    getCustomClassesElementConfig,
+    findConfigName,
+} from './helpers/config-helper';
 
 class IbexaCustomAttributesCommand extends Command {
     cleanAttributes(modelElement, attributes) {
         Object.entries(attributes).forEach(([elementName, config]) => {
-            if (elementName === modelElement.name) {
+            const configName = findConfigName(modelElement.name);
+
+            if (elementName === configName) {
                 return;
             }
 
             this.editor.model.change((writer) => {
                 Object.keys(config).forEach((name) => {
-                    if (attributes[modelElement.name]?.[name]) {
+                    if (attributes[configName]?.[name]) {
                         return;
                     }
 
@@ -23,15 +31,16 @@ class IbexaCustomAttributesCommand extends Command {
 
     cleanClasses(modelElement, classes) {
         Object.keys(classes).forEach((elementName) => {
+            const configName = findConfigName(modelElement.name);
             const selectedCustomClasses = modelElement.getAttribute('custom-classes') ?? '';
-            const elementCustomClassesConfig = classes[modelElement.name];
+            const elementCustomClassesConfig = classes[configName];
             const hasOwnCustomClasses =
                 elementCustomClassesConfig &&
                 selectedCustomClasses
                     .split(' ')
                     .every((selectedCustomClass) => elementCustomClassesConfig.choices.includes(selectedCustomClass));
 
-            if (elementName === modelElement.name || hasOwnCustomClasses) {
+            if (elementName === configName || hasOwnCustomClasses) {
                 return;
             }
 
@@ -39,6 +48,24 @@ class IbexaCustomAttributesCommand extends Command {
                 writer.removeAttribute('custom-classes', modelElement);
             });
         });
+    }
+
+    isTableColumnSelected(parentElementName) {
+        const selectedBlocks = [...this.editor.model.document.selection.getSelectedBlocks()];
+        const isTableRow = parentElementName === 'tableRow';
+        const areBlocksInSameRow = selectedBlocks.every((selectedBlock, index) => {
+            const nextBlock = selectedBlocks[index + 1];
+
+            if (!nextBlock) {
+                return true;
+            }
+
+            const commonAncestor = selectedBlock.getCommonAncestor(nextBlock);
+
+            return commonAncestor.name === 'tableRow';
+        });
+
+        return !areBlocksInSameRow && isTableRow;
     }
 
     refresh() {
@@ -60,9 +87,9 @@ class IbexaCustomAttributesCommand extends Command {
 
         const customAttributesConfig = getCustomAttributesConfig();
         const customClassesConfig = getCustomClassesConfig();
-        const parentElementAttributesConfig = customAttributesConfig[parentElementName];
-        const parentElementClassesConfig = customClassesConfig[parentElementName];
-        const isEnabled = parentElementAttributesConfig || parentElementClassesConfig;
+        const parentElementAttributesConfig = getCustomAttributesElementConfig(parentElementName);
+        const parentElementClassesConfig = getCustomClassesElementConfig(parentElementName);
+        const isEnabled = !this.isTableColumnSelected(parentElementName) && (parentElementAttributesConfig || parentElementClassesConfig);
 
         this.isEnabled = !!isEnabled;
 
