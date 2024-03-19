@@ -6,11 +6,33 @@ class IbexaElementsPath extends Plugin {
         super(props);
 
         this.elementsPathWrapper = null;
+        this.isTableCellSelected = false;
 
         this.updatePath = this.updatePath.bind(this);
     }
 
-    addListItem(element) {
+    findElementSiblings(element, siblingsName) {
+        let iterator = element;
+        const elementSiblings = [element];
+
+        while (iterator?.previousSibling?.name === siblingsName) {
+            elementSiblings.unshift(iterator.previousSibling);
+
+            iterator = iterator.previousSibling;
+        }
+
+        iterator = element;
+
+        while (iterator?.nextSibling?.name === siblingsName) {
+            elementSiblings.push(iterator.nextSibling);
+
+            iterator = iterator.nextSibling;
+        }
+
+        return elementSiblings;
+    }
+
+    addListItem(element, index) {
         const label = Translator.trans(/*@Desc("list")*/ 'elements_path.list.label', {}, 'ck_editor');
         const pathItem = `<li class="ibexa-elements-path__item">${label}</li>`;
         const container = document.createElement('ul');
@@ -22,16 +44,9 @@ class IbexaElementsPath extends Plugin {
         listItemNode.addEventListener(
             'click',
             () => {
-                let firstElement = element;
-                let lastElement = element;
-
-                while (firstElement?.previousSibling?.name === 'listItem') {
-                    firstElement = firstElement.previousSibling;
-                }
-
-                while (lastElement?.nextSibling?.name === 'listItem') {
-                    lastElement = lastElement.nextSibling;
-                }
+                const elementSiblings = this.findElementSiblings(element, 'listItem');
+                const firstElement = elementSiblings.find((elementSibling) => elementSibling.getAttribute('listIndent') === index);
+                const lastElement = elementSiblings.findLast((elementSibling) => elementSibling.getAttribute('listIndent') === index);
 
                 const range = this.editor.model.createRange(
                     this.editor.model.createPositionBefore(firstElement),
@@ -39,11 +54,15 @@ class IbexaElementsPath extends Plugin {
                 );
 
                 this.editor.isListSelected = true;
+                this.editor.listIndent = index;
+
                 this.editor.model.change((writer) => writer.setSelection(range));
                 this.editor.focus();
 
                 this.editor.model.document.selection.once('change', () => {
                     this.editor.isListSelected = false;
+
+                    delete this.editor.listIndent;
                 });
             },
             false,
@@ -58,7 +77,11 @@ class IbexaElementsPath extends Plugin {
         }
 
         if (element.name === 'listItem') {
-            this.addListItem(element);
+            const listIndent = element.getAttribute('listIndent');
+
+            for (let i = 0; i <= listIndent; i++) {
+                this.addListItem(element, i);
+            }
         }
 
         const pathItem = `<li class="ibexa-elements-path__item">${element.name}</li>`;
@@ -71,7 +94,11 @@ class IbexaElementsPath extends Plugin {
         listItemNode.addEventListener(
             'click',
             () => {
-                this.editor.model.change((writer) => writer.setSelection(element, 'in'));
+                this.isTableCellSelected = element.name === 'tableCell';
+
+                const placement = this.isTableCellSelected ? 'on' : 'in';
+
+                this.editor.model.change((writer) => writer.setSelection(element, placement));
                 this.editor.focus();
             },
             false,
@@ -87,6 +114,12 @@ class IbexaElementsPath extends Plugin {
             this.elementsPathWrapper.innerHTML = '';
 
             this.editor.model.document.selection.getFirstPosition().getAncestors().forEach(this.updatePath);
+
+            if (this.isTableCellSelected) {
+                this.updatePath(this.editor.model.document.selection.getSelectedElement());
+
+                this.isTableCellSelected = false;
+            }
         });
     }
 }
