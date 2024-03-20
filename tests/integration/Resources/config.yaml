@@ -1,0 +1,23 @@
+parameters:
+    locale_fallback: en
+
+webpack_encore:
+    # The path where Encore is building the assets - i.e. Encore.setOutputPath()
+    output_path: '%kernel.project_dir%/public/build'
+
+lexik_jwt_authentication:
+    secret_key: 'foo'
+
+ibexa:
+    repositories:
+        default:
+            search:
+                engine: '%env(SEARCH_ENGINE)%'
+                connection: default
+
+    system:
+        default:
+            languages:
+                - eng-US
+                - eng-GB
+                - ger-DE

@@ -1,0 +1,14 @@
+name: 'Install Composer dependencies'
+description: 'Set Composer root version from branch alias and install dependencies'
+runs:
+    using: "composite"
+    steps:
+        -   run: |
+                version=$(jq -r '.extra | ."branch-alias" | ."dev-main"' < composer.json)
+                echo "version=$version" >> $GITHUB_ENV
+            shell: bash
+        -   uses: ramsey/composer-install@v2
+            with:
+                dependency-versions: "highest"
+            env:
+                COMPOSER_ROOT_VERSION: ${{ env.version }}
