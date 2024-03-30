@@ -42,6 +42,6 @@ final class NodePathFilterTest extends TestCase
             return $results->item(0);
         }
 
-        throw new RuntimeException("Expression '$expression' did not return a node.");
+        self::fail("Expression '$expression' did not return a node.");
     }
 }
