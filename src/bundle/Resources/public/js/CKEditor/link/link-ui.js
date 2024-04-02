@@ -41,6 +41,14 @@ class IbexaLinkUI extends Plugin {
             const { path: lastPosition } = this.editor.model.document.selection.getLastPosition();
             const noRangeSelection = firstPosition[0] === lastPosition[0] && firstPosition[1] === lastPosition[1];
 
+            const isValueValid = this.isValueValid(url);
+
+            if (!isValueValid) {
+                this.formView.setError(Translator.trans(/*@Desc("A valid link is needed.")*/ 'link_btn.error.valid', {}, 'ck_editor'));
+
+                return;
+            }
+
             if (noRangeSelection) {
                 const range = this.getLinkRange();
 
@@ -186,6 +194,10 @@ class IbexaLinkUI extends Plugin {
 
     isLinkSelected() {
         return !!this.findLinkElement();
+    }
+
+    isValueValid(url) {
+        return typeof url !== 'undefined' && url !== '';
     }
 
     init() {
