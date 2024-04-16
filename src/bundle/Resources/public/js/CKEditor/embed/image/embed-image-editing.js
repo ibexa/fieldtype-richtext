@@ -62,7 +62,7 @@ class IbexaEmbedImageEditing extends Plugin {
         const children = viewElement.getChildren();
 
         for (const child of children) {
-            if (child.getAttribute('data-ezelement') === settingName) {
+            if (child.is('element') && child.getAttribute('data-ezelement') === settingName) {
                 return child;
             }
         }
