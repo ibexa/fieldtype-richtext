@@ -71,6 +71,11 @@
         <target state="new">Image</target>
         <note>key: image_btn.label</note>
       </trans-unit>
+      <trans-unit id="13da450bcabe1534eb9a6f0e595d37bfce9af4a5" resname="link_btn.error.valid">
+        <source>A valid link is needed.</source>
+        <target state="new">A valid link is needed.</target>
+        <note>key: link_btn.error.valid</note>
+      </trans-unit>
       <trans-unit id="111f9659ed2bb03c3009baafc54a24b0a8cab5c4" resname="link_btn.label">
         <source>Link</source>
         <target state="new">Link</target>
