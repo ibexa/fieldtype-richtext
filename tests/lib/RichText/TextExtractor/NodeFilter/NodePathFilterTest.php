@@ -14,7 +14,6 @@ use DOMNodeList;
 use DOMXPath;
 use Ibexa\FieldTypeRichText\RichText\TextExtractor\NodeFilter\NodePathFilter;
 use PHPUnit\Framework\TestCase;
-use RuntimeException;
 
 final class NodePathFilterTest extends TestCase
 {
