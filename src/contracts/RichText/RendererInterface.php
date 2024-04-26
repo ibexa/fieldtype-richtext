@@ -21,7 +21,7 @@ interface RendererInterface
      * @param array $parameters
      * @param bool $isInline
      *
-     * @return string
+     * @return string|null
      */
     public function renderTemplate($name, $type, array $parameters, $isInline);
 
@@ -33,7 +33,7 @@ interface RendererInterface
      * @param array $parameters
      * @param bool $isInline
      *
-     * @return string
+     * @return string|null
      */
     public function renderContentEmbed($contentId, $viewType, array $parameters, $isInline);
 
@@ -45,7 +45,7 @@ interface RendererInterface
      * @param array $parameters
      * @param bool $isInline
      *
-     * @return string
+     * @return string|null
      */
     public function renderLocationEmbed($locationId, $viewType, array $parameters, $isInline);
 }

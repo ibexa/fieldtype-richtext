@@ -235,16 +235,6 @@ class Renderer implements RendererInterface
         return $this->render($templateName, $parameters);
     }
 
-    /**
-     * Renders template tag.
-     *
-     * @param string $name
-     * @param string $type
-     * @param array $parameters
-     * @param bool $isInline
-     *
-     * @return string
-     */
     public function renderTemplate($name, $type, array $parameters, $isInline)
     {
         switch ($type) {

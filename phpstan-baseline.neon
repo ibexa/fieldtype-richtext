@@ -1081,28 +1081,13 @@ parameters:
 			path: src/lib/RichText/Renderer.php
 
 		-
-			message: "#^Method Ibexa\\\\FieldTypeRichText\\\\RichText\\\\Renderer\\:\\:renderContentEmbed\\(\\) should return string but returns null\\.$#"
-			count: 5
-			path: src/lib/RichText/Renderer.php
-
-		-
 			message: "#^Method Ibexa\\\\FieldTypeRichText\\\\RichText\\\\Renderer\\:\\:renderLocationEmbed\\(\\) has parameter \\$parameters with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/lib/RichText/Renderer.php
 
 		-
-			message: "#^Method Ibexa\\\\FieldTypeRichText\\\\RichText\\\\Renderer\\:\\:renderLocationEmbed\\(\\) should return string but returns null\\.$#"
-			count: 4
-			path: src/lib/RichText/Renderer.php
-
-		-
 			message: "#^Method Ibexa\\\\FieldTypeRichText\\\\RichText\\\\Renderer\\:\\:renderTemplate\\(\\) has parameter \\$parameters with no value type specified in iterable type array\\.$#"
 			count: 1
-			path: src/lib/RichText/Renderer.php
-
-		-
-			message: "#^Method Ibexa\\\\FieldTypeRichText\\\\RichText\\\\Renderer\\:\\:renderTemplate\\(\\) should return string but returns null\\.$#"
-			count: 2
 			path: src/lib/RichText/Renderer.php
 
 		-
@@ -2702,11 +2687,6 @@ parameters:
 			message: "#^Method Ibexa\\\\Tests\\\\FieldTypeRichText\\\\RichText\\\\RelationProcessorTest\\:\\:testGetRelations\\(\\) has parameter \\$expectedRelations with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: tests/lib/RichText/RelationProcessorTest.php
-
-		-
-			message: "#^Call to method PHPUnit\\\\Framework\\\\Assert\\:\\:assertNull\\(\\) with string will always evaluate to false\\.$#"
-			count: 9
-			path: tests/lib/RichText/RendererTest.php
 
 		-
 			message: "#^Method Ibexa\\\\Tests\\\\FieldTypeRichText\\\\RichText\\\\RendererTest\\:\\:getContentMock\\(\\) has no return type specified\\.$#"
