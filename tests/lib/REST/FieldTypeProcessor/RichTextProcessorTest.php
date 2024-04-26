@@ -42,12 +42,12 @@ EOT;
         $convertedDocument->loadXML($processedOutputValue['xhtml5edit']);
 
         $this->converter
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('convert')
-            ->with($this->isInstanceOf('DOMDocument'))
+            ->with(self::isInstanceOf('DOMDocument'))
             ->willReturn($convertedDocument);
 
-        $this->assertEquals(
+        self::assertEquals(
             $processedOutputValue,
             $processor->postProcessValueHash($outputValue)
         );

@@ -253,7 +253,7 @@ EOT
      */
     public function assertFieldDataLoadedCorrect(Field $field)
     {
-        $this->assertInstanceOf(
+        self::assertInstanceOf(
             RichTextValue::class,
             $field->value
         );
@@ -316,7 +316,7 @@ EOT
      */
     public function assertUpdatedFieldDataLoadedCorrect(Field $field)
     {
-        $this->assertInstanceOf(
+        self::assertInstanceOf(
             RichTextValue::class,
             $field->value
         );
@@ -365,7 +365,7 @@ EOT
      */
     public function assertCopiedFieldDataLoadedCorrectly(Field $field)
     {
-        $this->assertInstanceOf(
+        self::assertInstanceOf(
             RichTextValue::class,
             $field->value
         );
@@ -458,13 +458,13 @@ EOT
             ->getFieldTypeService()
             ->getFieldType($this->getTypeName())
             ->fromHash($hash);
-        $this->assertInstanceOf(
+        self::assertInstanceOf(
             RichTextValue::class,
             $richTextValue
         );
-        $this->assertInstanceOf('DOMDocument', $richTextValue->xml);
+        self::assertInstanceOf('DOMDocument', $richTextValue->xml);
 
-        $this->assertEquals($hash['xml'], (string)$richTextValue);
+        self::assertEquals($hash['xml'], (string)$richTextValue);
     }
 
     public function providerForTestIsEmptyValue()
@@ -632,7 +632,7 @@ EOT;
             [$locationService->newLocationCreateStruct($locationId)]
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             str_replace('[ObjectId]', (string)$objectId, $expected),
             $test->getField('description')->value->xml->saveXML()
         );
@@ -1072,7 +1072,7 @@ XML
     protected function checkSearchEngineSupport()
     {
         if ($this->getSetupFactory() instanceof SetupFactory\LegacySetupFactory) {
-            $this->markTestSkipped(
+            self::markTestSkipped(
                 "'ezrichtext' field type is not searchable with Legacy Search Engine"
             );
         }

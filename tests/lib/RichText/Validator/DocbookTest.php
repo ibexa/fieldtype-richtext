@@ -163,10 +163,10 @@ class DocbookTest extends TestCase
         $validator = $this->getConversionValidator();
         $errors = $validator->validateDocument($document);
 
-        $this->assertEquals(count($expectedErrors), count($errors));
+        self::assertEquals(count($expectedErrors), count($errors));
 
         foreach ($errors as $index => $error) {
-            $this->assertStringEndsWith($expectedErrors[$index], $error);
+            self::assertStringEndsWith($expectedErrors[$index], $error);
         }
     }
 

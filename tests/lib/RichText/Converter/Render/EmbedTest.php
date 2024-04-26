@@ -811,18 +811,18 @@ class EmbedTest extends TestCase
         array $renderLocationEmbedParams
     ): void {
         $this->loggerMock
-            ->expects($this->exactly(count($errors)))
+            ->expects(self::exactly(count($errors)))
             ->method('error')
             ->withConsecutive($errors);
 
-        $this->rendererMock->expects($this->never())->method('renderTemplate');
+        $this->rendererMock->expects(self::never())->method('renderTemplate');
 
         [$embedContentParams, $embedContentReturnValues] = $renderContentEmbedParams;
         [$embedLocationParams, $embedLocationReturnValues] = $renderLocationEmbedParams;
 
         if (!empty($embedContentParams)) {
             $this->rendererMock
-                ->expects($this->exactly(count($embedContentParams)))
+                ->expects(self::exactly(count($embedContentParams)))
                 ->method('renderContentEmbed')
                 ->withConsecutive(...$embedContentParams)
                 ->willReturnOnConsecutiveCalls(...$embedContentReturnValues);
@@ -830,7 +830,7 @@ class EmbedTest extends TestCase
 
         if (!empty($embedLocationParams)) {
             $this->rendererMock
-                ->expects($this->exactly(count($embedLocationParams)))
+                ->expects(self::exactly(count($embedLocationParams)))
                 ->method('renderLocationEmbed')
                 ->withConsecutive(...$embedLocationParams)
                 ->willReturnOnConsecutiveCalls(...$embedLocationReturnValues);
@@ -848,7 +848,7 @@ class EmbedTest extends TestCase
         $expectedDocument->formatOutput = false;
         $expectedDocument->loadXML($expectedXmlString);
 
-        $this->assertEquals($expectedDocument, $document);
+        self::assertEquals($expectedDocument, $document);
     }
 
     protected function getConverter()

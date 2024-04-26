@@ -176,13 +176,13 @@ class RichTextTest extends TestCase
         try {
             $fieldType = $this->getFieldType();
             $fieldType->acceptValue($input);
-            $this->fail('An InvalidArgumentException was expected! None thrown.');
+            self::fail('An InvalidArgumentException was expected! None thrown.');
         } catch (InvalidArgumentException $e) {
-            $this->assertEquals($expectedException->getMessage(), $e->getMessage());
+            self::assertEquals($expectedException->getMessage(), $e->getMessage());
         } catch (NotFoundException $e) {
-            $this->assertEquals($expectedException->getMessage(), $e->getMessage());
+            self::assertEquals($expectedException->getMessage(), $e->getMessage());
         } catch (Exception $e) {
-            $this->fail(
+            self::fail(
                 'Unexpected exception thrown! ' . get_class($e) . ' thrown with message: ' . $e->getMessage()
             );
         }
@@ -277,7 +277,7 @@ class RichTextTest extends TestCase
 
         $validationErrors = $fieldType->validate($fieldDefinitionMock, $value);
 
-        $this->assertEquals($expectedValidationErrors, $validationErrors);
+        self::assertEquals($expectedValidationErrors, $validationErrors);
     }
 
     /**
@@ -309,7 +309,7 @@ class RichTextTest extends TestCase
         $value = new Value($xmlString);
 
         $fieldType = $this->getFieldType();
-        $this->assertEquals(
+        self::assertEquals(
             $expectedName,
             $fieldType->getName($value, $this->createMock(APIFieldDefinition::class), 'eng-US')
         );
@@ -425,7 +425,7 @@ class RichTextTest extends TestCase
 EOT;
 
         $fieldType = $this->getFieldType();
-        $this->assertEquals(
+        self::assertEquals(
             [
                 Relation::LINK => [
                     'locationIds' => [72, 61],

@@ -30,7 +30,7 @@ class ValidatorAggregateTest extends TestCase
 
             $validator = $this->createMock(ValidatorInterface::class);
             $validator
-                ->expects($this->once())
+                ->expects(self::once())
                 ->method('validateDocument')
                 ->with($doc)
                 ->willReturn([$errorMessage]);
@@ -42,7 +42,7 @@ class ValidatorAggregateTest extends TestCase
         $aggregate = new ValidatorAggregate($validators);
         $actualErrors = $aggregate->validateDocument($doc);
 
-        $this->assertEquals($expectedErrors, $actualErrors);
+        self::assertEquals($expectedErrors, $actualErrors);
     }
 }
 

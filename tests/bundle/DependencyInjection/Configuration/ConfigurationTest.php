@@ -48,7 +48,7 @@ final class ConfigurationTest extends TestCase
         foreach ($finder as $file) {
             $outputFilePath = self::OUTPUT_FIXTURES_DIR . $file->getFilename();
             if (!file_exists($outputFilePath)) {
-                $this->markTestIncomplete("Missing output fixture: {$outputFilePath}");
+                self::markTestIncomplete("Missing output fixture: {$outputFilePath}");
             }
 
             $configs = [Yaml::parseFile($file->getPathname())];

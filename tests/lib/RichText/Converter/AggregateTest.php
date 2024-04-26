@@ -53,7 +53,7 @@ class AggregateTest extends TestCase
 
         $expectedOutputDocument = new DOMDocument();
         $expectedOutputDocument->loadXML($expectedOutput);
-        $this->assertEquals($expectedOutputDocument, $output, 'Xml is not converted as expected');
+        self::assertEquals($expectedOutputDocument, $output, 'Xml is not converted as expected');
     }
 
     public function providerConvertWithLinkInCustomTag(): array

@@ -42,7 +42,7 @@ EOT;
 
         $doc = $this->domDocumentFactory->loadXMLString($xml);
 
-        $this->assertInstanceOf(DOMDocument::class, $doc);
+        self::assertInstanceOf(DOMDocument::class, $doc);
     }
 
     /**

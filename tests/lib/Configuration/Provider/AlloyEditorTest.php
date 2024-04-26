@@ -50,18 +50,18 @@ class AlloyEditorTest extends BaseProviderTestCase
         $provider = $this->createProvider();
 
         $this->configResolver
-            ->expects($this->any())
+            ->expects(self::any())
             ->method('hasParameter')
             ->willReturn(false);
 
         $this->mapper
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('mapCssClassesConfiguration')
             ->with([])
             ->willReturn(['class1', 'class2']);
 
         $this->mapper
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('mapDataAttributesConfiguration')
             ->with([])
             ->willReturn(['attr1', 'attr2']);

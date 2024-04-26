@@ -51,7 +51,7 @@ class YoutubeIdExtractorExtensionTest extends TestCase
     {
         $subject = new YoutubeIdExtractorExtension();
         $result = $subject->extractId($input);
-        $this->assertEquals($expected, $result);
+        self::assertEquals($expected, $result);
     }
 
     /**
@@ -62,9 +62,9 @@ class YoutubeIdExtractorExtensionTest extends TestCase
         $subject = new YoutubeIdExtractorExtension();
         /** @var \Twig\TwigFunction[] $result */
         $result = $subject->getFunctions();
-        $this->assertIsArray($result);
-        $this->assertInstanceOf(TwigFunction::class, $result[0]);
-        $this->assertEquals('ibexa_richtext_youtube_extract_id', $result[0]->getName());
+        self::assertIsArray($result);
+        self::assertInstanceOf(TwigFunction::class, $result[0]);
+        self::assertEquals('ibexa_richtext_youtube_extract_id', $result[0]->getName());
     }
 }
 

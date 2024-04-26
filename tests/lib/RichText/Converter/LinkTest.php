@@ -122,14 +122,14 @@ class LinkTest extends TestCase
         $locationService = $this->getMockLocationService();
         $router = $this->getMockRouter();
 
-        $contentService->expects($this->never())
-            ->method($this->anything());
+        $contentService->expects(self::never())
+            ->method(self::anything());
 
-        $locationService->expects($this->never())
-            ->method($this->anything());
+        $locationService->expects(self::never())
+            ->method(self::anything());
 
-        $router->expects($this->never())
-            ->method($this->anything());
+        $router->expects(self::never())
+            ->method(self::anything());
 
         $converter = new Link($locationService, $contentService, $router);
 
@@ -138,7 +138,7 @@ class LinkTest extends TestCase
         $expectedOutputDocument = new DOMDocument();
         $expectedOutputDocument->loadXML($output);
 
-        $this->assertEquals($expectedOutputDocument, $outputDocument);
+        self::assertEquals($expectedOutputDocument, $outputDocument);
     }
 
     /**
@@ -220,12 +220,12 @@ class LinkTest extends TestCase
 
         $location = $this->createMock(APILocation::class);
 
-        $locationService->expects($this->once())
+        $locationService->expects(self::once())
             ->method('loadLocation')
-            ->with($this->equalTo($locationId))
+            ->with(self::equalTo($locationId))
             ->willReturn($location);
 
-        $router->expects($this->once())
+        $router->expects(self::once())
             ->method('generate')
             ->with(UrlAliasRouter::URL_ALIAS_ROUTE_NAME, ['location' => $location])
             ->willReturn($urlResolved);
@@ -237,7 +237,7 @@ class LinkTest extends TestCase
         $expectedOutputDocument = new DOMDocument();
         $expectedOutputDocument->loadXML($output);
 
-        $this->assertEquals($expectedOutputDocument, $outputDocument);
+        self::assertEquals($expectedOutputDocument, $outputDocument);
     }
 
     /**
@@ -325,14 +325,14 @@ class LinkTest extends TestCase
 
         $logger = $this->createMock(LoggerInterface::class);
 
-        $logger->expects($this->once())
+        $logger->expects(self::once())
             ->method($logType)
-            ->with($this->equalTo($logMessage));
+            ->with(self::equalTo($logMessage));
 
-        $locationService->expects($this->once())
+        $locationService->expects(self::once())
             ->method('loadLocation')
-            ->with($this->equalTo($locationId))
-            ->will($this->throwException($exception));
+            ->with(self::equalTo($locationId))
+            ->will(self::throwException($exception));
 
         $converter = new Link($locationService, $contentService, $router, $logger);
 
@@ -341,7 +341,7 @@ class LinkTest extends TestCase
         $expectedOutputDocument = new DOMDocument();
         $expectedOutputDocument->loadXML($output);
 
-        $this->assertEquals($expectedOutputDocument, $outputDocument);
+        self::assertEquals($expectedOutputDocument, $outputDocument);
     }
 
     /**
@@ -425,22 +425,22 @@ class LinkTest extends TestCase
         $contentInfo = $this->createMock(APIContentInfo::class);
         $location = $this->createMock(APILocation::class);
 
-        $contentInfo->expects($this->once())
+        $contentInfo->expects(self::once())
             ->method('__get')
-            ->with($this->equalTo('mainLocationId'))
+            ->with(self::equalTo('mainLocationId'))
             ->willReturn($locationId);
 
-        $contentService->expects($this->any())
+        $contentService->expects(self::any())
             ->method('loadContentInfo')
-            ->with($this->equalTo($contentId))
+            ->with(self::equalTo($contentId))
             ->willReturn($contentInfo);
 
-        $locationService->expects($this->once())
+        $locationService->expects(self::once())
             ->method('loadLocation')
-            ->with($this->equalTo($locationId))
+            ->with(self::equalTo($locationId))
             ->willReturn($location);
 
-        $router->expects($this->once())
+        $router->expects(self::once())
             ->method('generate')
             ->with(UrlAliasRouter::URL_ALIAS_ROUTE_NAME, ['location' => $location])
             ->willReturn($urlResolved);
@@ -452,7 +452,7 @@ class LinkTest extends TestCase
         $expectedOutputDocument = new DOMDocument();
         $expectedOutputDocument->loadXML($output);
 
-        $this->assertEquals($expectedOutputDocument, $outputDocument);
+        self::assertEquals($expectedOutputDocument, $outputDocument);
     }
 
     /**
@@ -540,14 +540,14 @@ class LinkTest extends TestCase
 
         $logger = $this->createMock(LoggerInterface::class);
 
-        $logger->expects($this->once())
+        $logger->expects(self::once())
             ->method($logType)
-            ->with($this->equalTo($logMessage));
+            ->with(self::equalTo($logMessage));
 
-        $contentService->expects($this->once())
+        $contentService->expects(self::once())
             ->method('loadContentInfo')
-            ->with($this->equalTo($contentId))
-            ->will($this->throwException($exception));
+            ->with(self::equalTo($contentId))
+            ->will(self::throwException($exception));
 
         $converter = new Link($locationService, $contentService, $router, $logger);
 
@@ -556,7 +556,7 @@ class LinkTest extends TestCase
         $expectedOutputDocument = new DOMDocument();
         $expectedOutputDocument->loadXML($output);
 
-        $this->assertEquals($expectedOutputDocument, $outputDocument);
+        self::assertEquals($expectedOutputDocument, $outputDocument);
     }
 }
 
