@@ -105,7 +105,7 @@ class InputHandlerTest extends TestCase
             ->getMock();
 
         $this->normalizer
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('accept')
             ->with($inputXml)
             ->willReturn(false);
@@ -113,7 +113,7 @@ class InputHandlerTest extends TestCase
         $outputDocument = $this->createMock(DOMDocument::class);
 
         $inputHandler
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('fromDocument')
             ->willReturnCallback(function (DOMDocument $document) use ($inputXml, $outputDocument) {
                 $this->assertEquals($inputXml, $document->saveXML());
@@ -121,7 +121,7 @@ class InputHandlerTest extends TestCase
                 return $outputDocument;
             });
 
-        $this->assertEquals($outputDocument, $inputHandler->fromString($inputXml));
+        self::assertEquals($outputDocument, $inputHandler->fromString($inputXml));
     }
 
     /**
@@ -133,18 +133,18 @@ class InputHandlerTest extends TestCase
         $outputDocument = $this->createMock(DOMDocument::class);
 
         $this->schemaValidator
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('validateDocument')
             ->with($inputDocument)
             ->willReturn([]);
 
         $this->converter
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('dispatch')
             ->with($inputDocument)
             ->willReturn($outputDocument);
 
-        $this->assertEquals($outputDocument, $this->inputHandler->fromDocument($inputDocument));
+        self::assertEquals($outputDocument, $this->inputHandler->fromDocument($inputDocument));
     }
 
     /**
@@ -155,7 +155,7 @@ class InputHandlerTest extends TestCase
         $inputDocument = $this->createMock(DOMDocument::class);
 
         $this->schemaValidator
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('validateDocument')
             ->with($inputDocument)
             ->willReturn([
@@ -163,7 +163,7 @@ class InputHandlerTest extends TestCase
             ]);
 
         $this->converter
-            ->expects($this->never())
+            ->expects(self::never())
             ->method('dispatch');
 
         $this->expectException(InvalidArgumentException::class);
@@ -193,7 +193,7 @@ EOT;
         $document = new DOMDocument();
         $document->loadXML($xml);
 
-        $this->assertEquals([
+        self::assertEquals([
             Relation::LINK => [
                 'locationIds' => [72, 61],
                 'contentIds' => [70, 75],
@@ -218,14 +218,14 @@ EOT;
         ];
 
         $this->docbookValidator
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('validateDocument')
             ->with($document)
             ->willReturn($expectedErrors);
 
         $actualErrors = $this->inputHandler->validate($document);
 
-        $this->assertEquals($expectedErrors, $actualErrors);
+        self::assertEquals($expectedErrors, $actualErrors);
     }
 }
 

@@ -179,7 +179,7 @@ class CustomTagTest extends TestCase
     {
         $translatorInterfaceMock = $this->createMock(TranslatorInterface::class);
         $translatorInterfaceMock
-            ->expects($this->any())
+            ->expects(self::any())
             ->method('trans')
             ->withAnyParameters()
             ->willReturnArgument(0);
@@ -194,14 +194,14 @@ class CustomTagTest extends TestCase
     {
         $catalogueMock = $this->createMock(MessageCatalogueInterface::class);
         $catalogueMock
-            ->expects($this->any())
+            ->expects(self::any())
             ->method('has')
             ->withAnyParameters()
             ->willReturn(false);
 
         $translatorBagInterfaceMock = $this->createMock(TranslatorBagInterface::class);
         $translatorBagInterfaceMock
-            ->expects($this->any())
+            ->expects(self::any())
             ->method('getCatalogue')
             ->willReturn(
                 $catalogueMock
@@ -217,7 +217,7 @@ class CustomTagTest extends TestCase
     {
         $packagesMock = $this->createMock(Packages::class);
         $packagesMock
-            ->expects($this->any())
+            ->expects(self::any())
             ->method('getUrl')
             ->withAnyParameters()
             ->willReturnArgument(0);

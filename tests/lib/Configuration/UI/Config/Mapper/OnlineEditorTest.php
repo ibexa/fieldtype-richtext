@@ -22,7 +22,7 @@ class OnlineEditorTest extends TestCase
         /** @var \Symfony\Contracts\Translation\TranslatorInterface $translatorMock */
         $translatorMock = $this->createMock(TranslatorInterface::class);
         $translatorMock
-            ->expects($this->any())
+            ->expects(self::any())
             ->method('trans')
             ->willReturnArgument(0);
         $this->mapper = new OnlineEditor($translatorMock, 'online_editor');

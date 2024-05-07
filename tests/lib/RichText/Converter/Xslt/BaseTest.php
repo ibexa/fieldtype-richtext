@@ -89,11 +89,11 @@ abstract class BaseTest extends TestCase
     {
         $endsWith = '.lossy.xml';
         if (substr_compare($inputFile, $endsWith, -strlen($endsWith), strlen($endsWith)) === 0) {
-            $this->markTestSkipped('Skipped lossy conversion.');
+            self::markTestSkipped('Skipped lossy conversion.');
         }
 
         if (!file_exists($outputFile)) {
-            $this->markTestIncomplete('Test is not complete: missing output fixture: ' . $outputFile);
+            self::markTestIncomplete('Test is not complete: missing output fixture: ' . $outputFile);
         }
 
         $inputDocument = $this->createDocument($inputFile);
@@ -109,7 +109,7 @@ abstract class BaseTest extends TestCase
         $convertedDocumentNormalized = new DOMDocument();
         $convertedDocumentNormalized->loadXML($convertedDocument->saveXML());
 
-        $this->assertEquals(
+        self::assertEquals(
             $outputDocument,
             $convertedDocumentNormalized,
             sprintf(
@@ -123,7 +123,7 @@ abstract class BaseTest extends TestCase
         if (isset($validator)) {
             // As assert below validated converted and output is the same, validate ouput here to get right line number.
             $errors = $validator->validateDocument($outputDocument);
-            $this->assertEmpty(
+            self::assertEmpty(
                 $errors,
                 'Conversion result did not validate against the configured schemas:' .
                 $this->formatValidationErrors($outputFile, $errors)

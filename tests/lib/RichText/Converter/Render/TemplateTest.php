@@ -82,8 +82,8 @@ class TemplateTest extends TestCase
         DOMDocument $expectedOutputDocument,
         array $expectedRenderParams
     ): void {
-        $this->rendererMock->expects($this->never())->method('renderContentEmbed');
-        $this->rendererMock->expects($this->never())->method('renderLocationEmbed');
+        $this->rendererMock->expects(self::never())->method('renderContentEmbed');
+        $this->rendererMock->expects(self::never())->method('renderLocationEmbed');
 
         [
             $convertParameters,
@@ -93,20 +93,20 @@ class TemplateTest extends TestCase
         ] = $this->provideConvertRenderValues($expectedRenderParams);
 
         $this->converterMock
-            ->expects($this->exactly(count($convertReturnValues)))
+            ->expects(self::exactly(count($convertReturnValues)))
             ->method('convert')
             ->withConsecutive(...$convertParameters)
             ->willReturnOnConsecutiveCalls(...$convertReturnValues);
 
         $this->rendererMock
-            ->expects($this->exactly(count($renderReturnValues)))
+            ->expects(self::exactly(count($renderReturnValues)))
             ->method('renderTemplate')
             ->withConsecutive(...$renderParameters)
             ->willReturnOnConsecutiveCalls(...$renderReturnValues);
 
         $outputDocument = $this->getConverter()->convert($inputDocument);
 
-        $this->assertEquals($expectedOutputDocument, $outputDocument);
+        self::assertEquals($expectedOutputDocument, $outputDocument);
     }
 
     private function provideConvertRenderValues(array $expectedValues): array

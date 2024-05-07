@@ -59,7 +59,7 @@ class RichTextTransformerTest extends TestCase
             '<section xmlns="http://docbook.org/ns/docbook" version="5.0-variant ezpublish-1.0"><para>This is a paragraph.</para></section>';
 
         $this->docbook2xhtml5editConverter
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('convert')
             ->willReturnCallback(function (DOMDocument $doc) use ($inputXML, $outputDocument) {
                 $this->assertXmlStringEqualsXmlString($inputXML, $doc->saveXML());
@@ -67,7 +67,7 @@ class RichTextTransformerTest extends TestCase
                 return $outputDocument;
             });
 
-        $this->assertXmlStringEqualsXmlString($outputXML, $this->richTextTransformer->transform($inputXML));
+        self::assertXmlStringEqualsXmlString($outputXML, $this->richTextTransformer->transform($inputXML));
     }
 
     /**
@@ -103,12 +103,12 @@ class RichTextTransformerTest extends TestCase
         $outputDocument->loadXML($outputXML);
 
         $this->inputHandler
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('fromString')
             ->with($inputXML)
             ->willReturn($outputDocument);
 
-        $this->assertXmlStringEqualsXmlString($outputXML, $this->richTextTransformer->reverseTransform($inputXML));
+        self::assertXmlStringEqualsXmlString($outputXML, $this->richTextTransformer->reverseTransform($inputXML));
     }
 
     /**
@@ -123,7 +123,7 @@ class RichTextTransformerTest extends TestCase
         $this->expectException(TransformationFailedException::class);
 
         $this->inputHandler
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('fromString')
             ->with($value)
             ->willThrowException($exception);

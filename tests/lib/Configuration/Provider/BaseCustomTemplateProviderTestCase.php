@@ -36,19 +36,19 @@ abstract class BaseCustomTemplateProviderTestCase extends BaseProviderTestCase
         $tags = $this->getExpectedCustomTemplatesConfiguration();
 
         $this->configResolver
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('hasParameter')
             ->with($this->getCustomTemplateSiteAccessConfigParamName())
             ->willReturn(true);
 
         $this->configResolver
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('getParameter')
             ->with($this->getCustomTemplateSiteAccessConfigParamName())
             ->willReturn($tags);
 
         $this->mapper
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('mapConfig')
             ->with($tags)
             ->willReturnArgument(0);

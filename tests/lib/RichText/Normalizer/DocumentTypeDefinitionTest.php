@@ -90,7 +90,7 @@ xmlns="http://ibexa.co/namespaces/ezpublish5/xhtml5/edit">
     {
         $normalizer = $this->getNormalizer($documentElement, $namespace, $dtdPath);
 
-        $this->assertTrue($normalizer->accept($input));
+        self::assertTrue($normalizer->accept($input));
     }
 
     /**
@@ -105,7 +105,7 @@ xmlns="http://ibexa.co/namespaces/ezpublish5/xhtml5/edit">
     {
         $normalizer = $this->getNormalizer($documentElement, $namespace, $dtdPath);
 
-        $this->assertTrue($normalizer->accept(
+        self::assertTrue($normalizer->accept(
             <<<XML
 <section xmlns="http://ibexa.co/namespaces/ezpublish5/xhtml5/edit">
   <p>You will need chili pepper, black pepper, bat wings (dried and grounded) and tomato juice.</p>
@@ -133,14 +133,14 @@ XML
 
         $output = $normalizer->normalize($input);
 
-        $this->assertEquals($expectedOutput, $output);
+        self::assertEquals($expectedOutput, $output);
 
         $normalizedDocument = new DOMDocument();
         $normalizedDocument->loadXML($output, LIBXML_NOENT);
         $expectedDocument = new DOMDocument();
         $expectedDocument->loadXML($expectedSaved, LIBXML_NOENT);
 
-        $this->assertEquals($expectedDocument, $normalizedDocument);
+        self::assertEquals($expectedDocument, $normalizedDocument);
     }
 
     public function providerForTestRefuse()
@@ -209,7 +209,7 @@ XML
     {
         $normalizer = $this->getNormalizer($documentElement, $namespace, $dtdPath);
 
-        $this->assertFalse($normalizer->accept($input));
+        self::assertFalse($normalizer->accept($input));
     }
 
     protected function getNormalizer($documentElement, $namespace, $dtdPath)

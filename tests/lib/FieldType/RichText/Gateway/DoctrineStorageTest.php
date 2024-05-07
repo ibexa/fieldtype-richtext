@@ -28,7 +28,7 @@ class DoctrineStorageTest extends TestCase
 
         $gateway = $this->getStorageGateway();
 
-        $this->assertEquals(
+        self::assertEquals(
             [
                 'f5c88a2209584891056f987fd965b0ba' => 4,
                 'faaeb9be3bd98ed09f606fc16d144eca' => 10,

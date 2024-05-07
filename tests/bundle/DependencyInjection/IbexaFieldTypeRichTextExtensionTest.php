@@ -38,7 +38,7 @@ class IbexaFieldTypeRichTextExtensionTest extends AbstractExtensionTestCase
         $this->load($config);
 
         // Validate Custom Tags
-        $this->assertTrue(
+        self::assertTrue(
             $this->container->hasParameter(IbexaFieldTypeRichTextExtension::RICHTEXT_CUSTOM_TAGS_PARAMETER)
         );
         $expectedCustomTagsConfig = [
@@ -84,7 +84,7 @@ class IbexaFieldTypeRichTextExtensionTest extends AbstractExtensionTestCase
             ],
         ];
 
-        $this->assertSame(
+        self::assertSame(
             $expectedCustomTagsConfig,
             $this->container->getParameter(IbexaFieldTypeRichTextExtension::RICHTEXT_CUSTOM_TAGS_PARAMETER)
         );
