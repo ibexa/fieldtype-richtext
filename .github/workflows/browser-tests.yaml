@@ -13,6 +13,7 @@ jobs:
         name: "Richtext browser tests"
         uses: ibexa/gh-workflows/.github/workflows/browser-tests.yml@main
         with:
+            php-image: ghcr.io/ibexa/docker/php:8.3-node18
             project-edition: 'oss'
             test-suite:  '--profile=browser --suite=admin-ui --tags=@richtext'
         secrets:
