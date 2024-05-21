@@ -60,5 +60,3 @@ class RichTextValueTransformer implements DataTransformerInterface
         return $this->fieldType->fromHash(['xml' => $value]);
     }
 }
-
-class_alias(RichTextValueTransformer::class, 'EzSystems\EzPlatformRichText\Form\DataTransformer\RichTextValueTransformer');

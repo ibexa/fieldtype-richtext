@@ -17,5 +17,3 @@ class RichText extends Constraint
 {
     public $message = 'Invalid value';
 }
-
-class_alias(RichText::class, 'EzSystems\EzPlatformRichText\Validator\Constraints\RichText');

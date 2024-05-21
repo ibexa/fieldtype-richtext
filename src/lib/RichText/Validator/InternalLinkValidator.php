@@ -147,5 +147,3 @@ class InternalLinkValidator implements ValidatorInterface
         return "//docbook:{$tagName}[starts-with(@xlink:href, 'ezcontent://') or starts-with(@xlink:href, 'ezlocation://') or starts-with(@xlink:href, 'ezremote://')]";
     }
 }
-
-class_alias(InternalLinkValidator::class, 'EzSystems\EzPlatformRichText\eZ\RichText\Validator\InternalLinkValidator');

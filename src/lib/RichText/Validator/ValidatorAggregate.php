@@ -40,5 +40,3 @@ class ValidatorAggregate implements ValidatorInterface
         return $validationErrors;
     }
 }
-
-class_alias(ValidatorAggregate::class, 'EzSystems\EzPlatformRichText\eZ\RichText\Validator\ValidatorAggregate');

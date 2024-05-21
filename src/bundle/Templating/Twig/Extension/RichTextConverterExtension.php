@@ -73,5 +73,3 @@ class RichTextConverterExtension extends AbstractExtension
         return $this->richTextEditConverter->convert($xmlData)->saveHTML() ?: '';
     }
 }
-
-class_alias(RichTextConverterExtension::class, 'EzSystems\EzPlatformRichTextBundle\Templating\Twig\Extension\RichTextConverterExtension');

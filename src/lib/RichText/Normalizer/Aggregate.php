@@ -62,5 +62,3 @@ class Aggregate extends Normalizer
         return $input;
     }
 }
-
-class_alias(Aggregate::class, 'EzSystems\EzPlatformRichText\eZ\RichText\Normalizer\Aggregate');

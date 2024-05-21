@@ -87,5 +87,3 @@ final class OnlineEditor implements OnlineEditorConfigMapper
         return $configuration;
     }
 }
-
-class_alias(OnlineEditor::class, 'EzSystems\EzPlatformRichText\Configuration\UI\Mapper\OnlineEditor');

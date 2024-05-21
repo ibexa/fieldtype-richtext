@@ -153,5 +153,3 @@ class Validator extends XmlBase implements ValidatorInterface
         return (strlen($location) ? $location . ': ' : '') . $failedAssert->textContent;
     }
 }
-
-class_alias(Validator::class, 'EzSystems\EzPlatformRichText\eZ\RichText\Validator\Validator');

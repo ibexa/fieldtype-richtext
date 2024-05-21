@@ -52,5 +52,3 @@ final class CustomTag implements Provider
         return [];
     }
 }
-
-class_alias(CustomTag::class, 'EzSystems\EzPlatformRichText\Configuration\Provider\CustomTag');

@@ -39,5 +39,3 @@ class RichTextProcessor extends FieldTypeProcessor
         return $outgoingValueHash;
     }
 }
-
-class_alias(RichTextProcessor::class, 'EzSystems\EzPlatformRichText\eZ\REST\FieldTypeProcessor\RichTextProcessor');

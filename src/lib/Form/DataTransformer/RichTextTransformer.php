@@ -79,5 +79,3 @@ class RichTextTransformer implements DataTransformerInterface
         }
     }
 }
-
-class_alias(RichTextTransformer::class, 'EzSystems\EzPlatformRichText\Form\DataTransformer\RichTextTransformer');

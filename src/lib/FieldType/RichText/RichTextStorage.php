@@ -207,5 +207,3 @@ class RichTextStorage extends GatewayBasedStorage
     {
     }
 }
-
-class_alias(RichTextStorage::class, 'EzSystems\EzPlatformRichText\eZ\FieldType\RichText\RichTextStorage');

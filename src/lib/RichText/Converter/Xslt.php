@@ -147,5 +147,3 @@ class Xslt extends XmlBase implements Converter
         return $document;
     }
 }
-
-class_alias(Xslt::class, 'EzSystems\EzPlatformRichText\eZ\RichText\Converter\Xslt');

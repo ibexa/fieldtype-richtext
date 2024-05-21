@@ -23,5 +23,3 @@ class Html5Input extends XsltConverter
         parent::__construct($stylesheet, $customStylesheets);
     }
 }
-
-class_alias(Html5Input::class, 'EzSystems\EzPlatformRichTextBundle\eZ\RichText\Converter\Html5Input');

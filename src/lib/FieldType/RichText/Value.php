@@ -51,5 +51,3 @@ EOT;
         return isset($this->xml) ? (string)$this->xml->saveXML() : self::EMPTY_VALUE;
     }
 }
-
-class_alias(Value::class, 'EzSystems\EzPlatformRichText\eZ\FieldType\RichText\Value');

@@ -24,5 +24,3 @@ interface Converter
      */
     public function convert(DOMDocument $xmlDoc);
 }
-
-class_alias(Converter::class, 'EzSystems\EzPlatformRichText\eZ\RichText\Converter');

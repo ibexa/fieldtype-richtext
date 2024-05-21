@@ -38,5 +38,3 @@ final class RichTextConfigurationExtension extends AbstractExtension implements 
         ];
     }
 }
-
-class_alias(RichTextConfigurationExtension::class, 'EzSystems\EzPlatformRichTextBundle\Templating\Twig\Extension\RichTextConfigurationExtension');

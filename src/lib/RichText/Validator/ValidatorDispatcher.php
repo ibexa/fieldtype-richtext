@@ -83,5 +83,3 @@ class ValidatorDispatcher implements ValidatorInterface
         return $this->dispatch($xmlDocument);
     }
 }
-
-class_alias(ValidatorDispatcher::class, 'EzSystems\EzPlatformRichText\eZ\RichText\Validator\ValidatorDispatcher');

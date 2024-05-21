@@ -73,5 +73,3 @@ final class CustomStyle implements CustomTemplateConfigMapper
         return $config;
     }
 }
-
-class_alias(CustomStyle::class, 'EzSystems\EzPlatformRichText\Configuration\UI\Mapper\CustomStyle');

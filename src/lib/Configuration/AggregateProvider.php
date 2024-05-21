@@ -38,5 +38,3 @@ final class AggregateProvider implements ProviderService
         return $configuration;
     }
 }
-
-class_alias(AggregateProvider::class, 'EzSystems\EzPlatformRichText\Configuration\AggregateProvider');

@@ -150,5 +150,3 @@ class Link implements Converter
         return $urlAlias . $fragment;
     }
 }
-
-class_alias(Link::class, 'EzSystems\EzPlatformRichText\eZ\RichText\Converter\Link');

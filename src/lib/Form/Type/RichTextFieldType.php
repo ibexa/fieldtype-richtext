@@ -55,5 +55,3 @@ class RichTextFieldType extends AbstractType
         ));
     }
 }
-
-class_alias(RichTextFieldType::class, 'EzSystems\EzPlatformRichText\Form\Type\RichTextFieldType');

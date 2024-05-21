@@ -29,5 +29,3 @@ interface Provider
      */
     public function getConfiguration(): array;
 }
-
-class_alias(Provider::class, 'EzSystems\EzPlatformRichText\SPI\Configuration\Provider');

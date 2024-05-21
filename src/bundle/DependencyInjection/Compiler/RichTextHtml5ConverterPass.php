@@ -75,5 +75,3 @@ class RichTextHtml5ConverterPass implements CompilerPassInterface
         return array_merge(...$convertersByPriority);
     }
 }
-
-class_alias(RichTextHtml5ConverterPass::class, 'EzSystems\EzPlatformRichTextBundle\DependencyInjection\Compiler\RichTextHtml5ConverterPass');

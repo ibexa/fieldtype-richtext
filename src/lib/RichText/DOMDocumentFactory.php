@@ -41,5 +41,3 @@ final class DOMDocumentFactory
         return $document;
     }
 }
-
-class_alias(DOMDocumentFactory::class, 'EzSystems\EzPlatformRichText\eZ\RichText\DOMDocumentFactory');
