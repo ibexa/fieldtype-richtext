@@ -57,9 +57,7 @@
             "Ibexa\\FieldTypeRichText\\": "src/lib/",
             "Ibexa\\Contracts\\FieldTypeRichText\\": "src/contracts/",
             "Ibexa\\Bundle\\FieldTypeRichText\\": "src/bundle/",
-            "Ibexa\\Tests\\FieldTypeRichText\\": "tests/lib/",
-            "EzSystems\\EzPlatformRichTextBundle\\": "src/bundle",
-            "EzSystems\\EzPlatformRichText\\": "src/lib"
+            "Ibexa\\Tests\\FieldTypeRichText\\": "tests/lib/"
         }
     },
     "autoload-dev": {
