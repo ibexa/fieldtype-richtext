@@ -59,5 +59,3 @@ abstract class BaseCustomTemplateProviderTestCase extends BaseProviderTestCase
         );
     }
 }
-
-class_alias(BaseCustomTemplateProviderTestCase::class, 'EzSystems\Tests\EzPlatformRichText\Configuration\Provider\BaseCustomTemplateProviderTestCase');

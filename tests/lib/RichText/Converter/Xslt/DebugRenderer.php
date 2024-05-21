@@ -78,5 +78,3 @@ final class DebugRenderer implements RendererInterface
         return $isInline ? 'true' : 'false';
     }
 }
-
-class_alias(DebugRenderer::class, 'EzSystems\Tests\EzPlatformRichText\RichText\Converter\Xslt\DebugRenderer');

@@ -139,5 +139,3 @@ class RichTextTransformerTest extends TestCase
         ];
     }
 }
-
-class_alias(RichTextTransformerTest::class, 'EzSystems\Tests\EzPlatformRichText\Form\DataTransformer\RichTextTransformerTest');

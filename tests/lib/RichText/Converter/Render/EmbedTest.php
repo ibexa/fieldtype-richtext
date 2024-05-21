@@ -885,5 +885,3 @@ class EmbedTest extends TestCase
         return $this->createMock(LoggerInterface::class);
     }
 }
-
-class_alias(EmbedTest::class, 'EzSystems\Tests\EzPlatformRichText\RichText\Converter\Render\EmbedTest');

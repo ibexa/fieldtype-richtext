@@ -33,5 +33,3 @@ class CustomTagProviderTest extends BaseCustomTemplateProviderTestCase
         return 'fieldtypes.ezrichtext.custom_tags';
     }
 }
-
-class_alias(CustomTagProviderTest::class, 'EzSystems\Tests\EzPlatformRichText\Configuration\Provider\CustomTagProviderTest');

@@ -130,5 +130,3 @@ final class ConfigurationTest extends TestCase
         $this->assertProcessedConfigurationEquals($configurationValues, $expectedProcessedConfiguration);
     }
 }
-
-class_alias(ConfigurationTest::class, 'EzSystems\Tests\EzPlatformRichTextBundle\DependencyInjection\Configuration\ConfigurationTest');

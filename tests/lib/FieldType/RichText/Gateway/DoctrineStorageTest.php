@@ -59,5 +59,3 @@ class DoctrineStorageTest extends TestCase
         return $this->storageGateway;
     }
 }
-
-class_alias(DoctrineStorageTest::class, 'EzSystems\Tests\EzPlatformRichText\FieldType\RichText\Gateway\DoctrineStorageTest');

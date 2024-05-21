@@ -33,5 +33,3 @@ class CustomStyleProviderTest extends BaseCustomTemplateProviderTestCase
         return 'fieldtypes.ezrichtext.custom_styles';
     }
 }
-
-class_alias(CustomStyleProviderTest::class, 'EzSystems\Tests\EzPlatformRichText\Configuration\Provider\CustomStyleProviderTest');

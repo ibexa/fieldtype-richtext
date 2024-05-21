@@ -67,5 +67,3 @@ class YoutubeIdExtractorExtensionTest extends TestCase
         self::assertEquals('ibexa_richtext_youtube_extract_id', $result[0]->getName());
     }
 }
-
-class_alias(YoutubeIdExtractorExtensionTest::class, 'EzSystems\Tests\EzPlatformRichTextBundle\Templating\Twig\Extension\YoutubeIdExtractorExtensionTest');

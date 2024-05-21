@@ -433,5 +433,3 @@ class RichTextStorageTest extends TestCase
         return $this->gatewayMock;
     }
 }
-
-class_alias(RichTextStorageTest::class, 'EzSystems\Tests\EzPlatformRichText\FieldType\RichText\RichTextStorageTest');

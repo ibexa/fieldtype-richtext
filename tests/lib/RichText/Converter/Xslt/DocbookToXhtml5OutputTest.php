@@ -112,5 +112,3 @@ class DocbookToXhtml5OutputTest extends BaseTest
         return $this->converter;
     }
 }
-
-class_alias(DocbookToXhtml5OutputTest::class, 'EzSystems\Tests\EzPlatformRichText\RichText\Converter\Xslt\DocbookToXhtml5OutputTest');

@@ -201,5 +201,3 @@ class DocbookTest extends TestCase
         ];
     }
 }
-
-class_alias(DocbookTest::class, 'EzSystems\Tests\EzPlatformRichText\RichText\Validator\DocbookTest');

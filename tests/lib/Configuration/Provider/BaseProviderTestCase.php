@@ -37,5 +37,3 @@ abstract class BaseProviderTestCase extends TestCase
         );
     }
 }
-
-class_alias(BaseProviderTestCase::class, 'EzSystems\Tests\EzPlatformRichText\Configuration\Provider\BaseProviderTestCase');

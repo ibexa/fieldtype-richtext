@@ -45,5 +45,3 @@ class ValidatorAggregateTest extends TestCase
         self::assertEquals($expectedErrors, $actualErrors);
     }
 }
-
-class_alias(ValidatorAggregateTest::class, 'EzSystems\Tests\EzPlatformRichText\RichText\Validator\ValidatorAggregateTest');

@@ -165,5 +165,3 @@ class IbexaFieldTypeRichTextExtensionTest extends AbstractExtensionTestCase
         ];
     }
 }
-
-class_alias(IbexaFieldTypeRichTextExtensionTest::class, 'EzSystems\Tests\EzPlatformRichTextBundle\DependencyInjection\IbexaFieldTypeRichTextExtensionTest');

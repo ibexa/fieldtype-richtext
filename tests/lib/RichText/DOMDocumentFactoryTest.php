@@ -56,5 +56,3 @@ EOT;
         $this->domDocumentFactory->loadXMLString('This is not XML');
     }
 }
-
-class_alias(DOMDocumentFactoryTest::class, 'EzSystems\Tests\EzPlatformRichText\RichText\DOMDocumentFactoryTest');

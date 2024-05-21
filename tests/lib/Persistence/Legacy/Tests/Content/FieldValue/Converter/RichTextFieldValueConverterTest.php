@@ -77,5 +77,3 @@ EOT;
         self::assertSame($this->docbookString, $fieldValue->data);
     }
 }
-
-class_alias(RichTextFieldValueConverterTest::class, 'EzSystems\EzPlatformRichText\Persistence\Legacy\Tests\Content\FieldValue\Converter\RichTextFieldValueConverterTest');

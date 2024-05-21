@@ -459,5 +459,3 @@ final class CKEditorTest extends BaseProviderTestCase
         };
     }
 }
-
-class_alias(CKEditorTest::class, 'EzSystems\Tests\EzPlatformRichText\Configuration\Provider\CKEditorTest');
