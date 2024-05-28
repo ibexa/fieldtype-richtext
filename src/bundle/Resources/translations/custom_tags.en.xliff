@@ -47,8 +47,8 @@
         <note>key: ezrichtext.custom_tags.eztwitter.attributes.conversation.label</note>
       </trans-unit>
       <trans-unit id="7fa382eb492f241c0377d64e8ad5c8ab8aa740fb" resname="ezrichtext.custom_tags.eztwitter.attributes.dnt.label">
-        <source>Do not target</source>
-        <target>Do not target</target>
+        <source>Don't target</source>
+        <target>Don't target</target>
         <note>key: ezrichtext.custom_tags.eztwitter.attributes.dnt.label</note>
       </trans-unit>
       <trans-unit id="df37139c5dd99f14d3e1390341bd49d11da3d5ba" resname="ezrichtext.custom_tags.eztwitter.attributes.lang.label">

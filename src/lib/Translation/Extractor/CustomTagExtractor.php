@@ -26,25 +26,25 @@ final class CustomTagExtractor implements ExtractorInterface
     private string $domain;
 
     /** @var string[] */
-    private array $whitelist;
+    private array $allowlist;
 
     /**
      * @param array<string, mixed> $customTags Custom tags definitions
      * @param string $domain Target translation domain
-     * @param string[] $whitelist Whitelist of custom tags to extract
+     * @param string[] $allowlist Whitelist of custom tags to extract
      */
-    public function __construct(array $customTags, string $domain, array $whitelist = [])
+    public function __construct(array $customTags, string $domain, array $allowlist = [])
     {
         $this->customTags = $customTags;
         $this->domain = $domain;
-        $this->whitelist = $whitelist;
+        $this->allowlist = $allowlist;
     }
 
     public function extract(): MessageCatalogue
     {
         $catalogue = new MessageCatalogueBuilder($this->domain);
         foreach ($this->customTags as $tagName => $config) {
-            if (!in_array($tagName, $this->whitelist, true)) {
+            if (!in_array($tagName, $this->allowlist, true)) {
                 continue;
             }
 

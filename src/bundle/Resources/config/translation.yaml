@@ -15,7 +15,7 @@ services:
         arguments:
             $customTags: '%ibexa.field_type.richtext.custom_tags%'
             $domain: '%ibexa.field_type.richtext.custom_tags.translation_domain%'
-            $whitelist: ['ezyoutube', 'eztwitter', 'ezfacebook']
+            $allowlist: ['ezyoutube', 'eztwitter', 'ezfacebook']
         tags:
             -   name: jms_translation.extractor
                 alias: ibexa.translation_extractor.field_type.ezrichtext.custom_tags
@@ -24,7 +24,7 @@ services:
         arguments:
             $customTags: '%ibexa.field_type.richtext.custom_tags%'
             $domain: '%ibexa.field_type.richtext.custom_tags.translation_domain%'
-            $whitelist: ['ezyoutube', 'eztwitter', 'ezfacebook']
+            $allowlist: ['ezyoutube', 'eztwitter', 'ezfacebook']
         tags:
             -   name: jms_translation.extractor
                 alias: ibexa.translation_extractor.field_type.ezrichtext.custom_tags.choices
