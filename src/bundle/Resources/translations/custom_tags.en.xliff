@@ -87,13 +87,13 @@
         <note>key: ezrichtext.custom_tags.eztwitter.attributes.width.label</note>
       </trans-unit>
       <trans-unit id="c1fd25ffc048cf47e9bc6bcaae98dd86abb2a7dd" resname="ezrichtext.custom_tags.eztwitter.description">
-        <source>Embed X (Twitter) post</source>
-        <target>Embed X (Twitter) post</target>
+        <source>Embed X post</source>
+        <target>Embed X post</target>
         <note>key: ezrichtext.custom_tags.eztwitter.description</note>
       </trans-unit>
       <trans-unit id="3d7387b1935640d467dc4070c0a9fe4c35d81e52" resname="ezrichtext.custom_tags.eztwitter.label">
-        <source>X (Twitter)</source>
-        <target>X (Twitter)</target>
+        <source>X</source>
+        <target>X</target>
         <note>key: ezrichtext.custom_tags.eztwitter.label</note>
       </trans-unit>
       <trans-unit id="605cb001f1553455c945e45234d73b47cf1417b1" resname="ezrichtext.custom_tags.ezyoutube.attributes.autoplay.label">
