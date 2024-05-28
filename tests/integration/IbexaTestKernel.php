@@ -32,7 +32,7 @@ use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\Notifier\NotifierInterface;
 use Symfony\WebpackEncoreBundle\WebpackEncoreBundle;
 
-class IbexaTestKernel extends BaseIbexaTestKernel
+final class IbexaTestKernel extends BaseIbexaTestKernel
 {
     public function registerBundles(): iterable
     {
@@ -72,19 +72,11 @@ class IbexaTestKernel extends BaseIbexaTestKernel
         yield 'ibexa.cache_pool' => TagAwareAdapterInterface::class;
     }
 
-    protected function skipOverridingCustomTagConfig(): bool
-    {
-        return false;
-    }
-
     public function registerContainerConfiguration(LoaderInterface $loader): void
     {
         parent::registerContainerConfiguration($loader);
 
-        if (!$this->skipOverridingCustomTagConfig()) {
-            $loader->load(__DIR__ . '/../lib/_settings/common.yaml');
-        }
-
+        $loader->load(__DIR__ . '/Resources/override.yaml');
         $loader->load(__DIR__ . '/Resources/config.yaml');
         $loader->load(static function (ContainerBuilder $container): void {
             $container->setDefinition(

@@ -1,0 +1,5 @@
+parameters:
+    ibexa.field_type.richtext.resources: 'src/bundle/Resources/richtext'
+    ibexa.field_type.richtext.validator.docbook.resources:
+        - '%ibexa.field_type.richtext.resources%/schemas/docbook/ezpublish.rng'
+        - '%ibexa.field_type.richtext.resources%/schemas/docbook/docbook.iso.sch.xsl'
