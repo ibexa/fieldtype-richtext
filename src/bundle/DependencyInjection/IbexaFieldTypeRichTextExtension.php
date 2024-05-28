@@ -185,7 +185,8 @@ class IbexaFieldTypeRichTextExtension extends Extension implements PrependExtens
                     'output_format' => 'xliff',
                     'excluded_dirs' => ['Behat', 'Tests', 'node_modules'],
                     'extractors' => [
-                        'ibexa.field_type.richtext.translation_extractor.custom_tags',
+                        'ibexa.translation_extractor.field_type.ezrichtext.custom_tags',
+                        'ibexa.translation_extractor.field_type.ezrichtext.custom_tags.choices',
                     ],
                 ],
             ],

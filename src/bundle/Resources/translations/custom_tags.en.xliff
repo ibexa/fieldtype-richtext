@@ -26,10 +26,20 @@
         <target>Facebook</target>
         <note>key: ezrichtext.custom_tags.ezfacebook.label</note>
       </trans-unit>
+      <trans-unit id="a711cbe9c11ea82cc8ad02c93af5727dceb8b34d" resname="ezrichtext.custom_tags.eztwitter.attributes.cards.choice.hidden.label">
+        <source>Hidden</source>
+        <target>Hidden</target>
+        <note>key: ezrichtext.custom_tags.eztwitter.attributes.cards.choice.hidden.label</note>
+      </trans-unit>
       <trans-unit id="b7ef5c07f5cbc982f23e547bc1e1326752853018" resname="ezrichtext.custom_tags.eztwitter.attributes.cards.label">
         <source>Cards</source>
         <target>Cards</target>
         <note>key: ezrichtext.custom_tags.eztwitter.attributes.cards.label</note>
+      </trans-unit>
+      <trans-unit id="333d02160158768833ecf1aa1bde5b60a9c3f7d1" resname="ezrichtext.custom_tags.eztwitter.attributes.conversation.choice.none.label">
+        <source>None</source>
+        <target>None</target>
+        <note>key: ezrichtext.custom_tags.eztwitter.attributes.conversation.choice.none.label</note>
       </trans-unit>
       <trans-unit id="5671ef11994be024b75d6360144708538714d952" resname="ezrichtext.custom_tags.eztwitter.attributes.conversation.label">
         <source>Conversation</source>
@@ -50,6 +60,16 @@
         <source>Link color</source>
         <target>Link color</target>
         <note>key: ezrichtext.custom_tags.eztwitter.attributes.link_color.label</note>
+      </trans-unit>
+      <trans-unit id="708de039c84f0c302306526df2a893cdc5f3ba88" resname="ezrichtext.custom_tags.eztwitter.attributes.theme.choice.dark.label">
+        <source>Dark</source>
+        <target>Dark</target>
+        <note>key: ezrichtext.custom_tags.eztwitter.attributes.theme.choice.dark.label</note>
+      </trans-unit>
+      <trans-unit id="bc7cb500be683ba8dca30d588849d49acde30377" resname="ezrichtext.custom_tags.eztwitter.attributes.theme.choice.light.label">
+        <source>Light</source>
+        <target>Light</target>
+        <note>key: ezrichtext.custom_tags.eztwitter.attributes.theme.choice.light.label</note>
       </trans-unit>
       <trans-unit id="38dcf6fd48a4264ead1cce0e8e69f71211fa7670" resname="ezrichtext.custom_tags.eztwitter.attributes.theme.label">
         <source>Theme</source>
