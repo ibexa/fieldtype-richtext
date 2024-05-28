@@ -9,3 +9,11 @@ services:
             $siteAccessList: '%ibexa.site_access.list%'
         tags:
             - { name: jms_translation.extractor, alias: ez_online_editor_attributes }
+
+    Ibexa\FieldTypeRichText\Translation\Extractor\OnlineEditorCustomTagExtractor:
+        arguments:
+            $customTags: '%ibexa.field_type.richtext.custom_tags%'
+            $domain: '%ibexa.field_type.richtext.custom_tags.translation_domain%'
+            $filter: ['ezyoutube', 'eztwitter', 'ezfacebook']
+        tags:
+            - { name: jms_translation.extractor, alias: ibexa.field_type.richtext.translation_extractor.custom_tags }
