@@ -16,9 +16,4 @@ final class TranslationTest extends AbstractTranslationCase
     {
         yield ['ibexa_fieldtype_richtext'];
     }
-
-    protected static function getKernelClass(): string
-    {
-        return IbexaTestKernelForTranslationTest::class;
-    }
 }
