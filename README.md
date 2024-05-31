@@ -9,7 +9,7 @@ It is a Field Type for supporting rich formatted text stored in a structured XML
 
 ## COPYRIGHT
 
-Copyright (C) 1999-2021 Ibexa AS (formerly eZ Systems AS). All rights reserved.
+Copyright (C) 1999-2024 Ibexa AS (formerly eZ Systems AS). All rights reserved.
 
 ## LICENSE
 
