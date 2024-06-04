@@ -15,7 +15,7 @@ use JMS\TranslationBundle\Model\MessageCatalogue;
 use JMS\TranslationBundle\Translation\ExtractorInterface;
 
 /**
- * Generates translation strings for limitation types.
+ * @deprecated 4.6.7 The "OnlineEditorCustomAttributesExtractor" class is deprecated, will be removed in 5.0.
  */
 final class OnlineEditorCustomAttributesExtractor implements ExtractorInterface
 {
