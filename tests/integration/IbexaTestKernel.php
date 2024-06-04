@@ -76,7 +76,7 @@ final class IbexaTestKernel extends BaseIbexaTestKernel
     {
         parent::registerContainerConfiguration($loader);
 
-        $loader->load(__DIR__ . '/../lib/_settings/common.yaml');
+        $loader->load(__DIR__ . '/Resources/override.yaml');
         $loader->load(__DIR__ . '/Resources/config.yaml');
         $loader->load(static function (ContainerBuilder $container): void {
             $container->setDefinition(
