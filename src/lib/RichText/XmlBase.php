@@ -115,5 +115,3 @@ abstract class XmlBase
         return $errors;
     }
 }
-
-class_alias(XmlBase::class, 'EzSystems\EzPlatformRichText\eZ\RichText\XmlBase');

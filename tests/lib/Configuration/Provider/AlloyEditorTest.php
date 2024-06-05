@@ -224,5 +224,3 @@ class AlloyEditorTest extends BaseProviderTestCase
         };
     }
 }
-
-class_alias(AlloyEditorTest::class, 'EzSystems\Tests\EzPlatformRichText\Configuration\Provider\AlloyEditorTest');

@@ -1811,5 +1811,3 @@ class RendererTest extends TestCase
         return $contentMock;
     }
 }
-
-class_alias(RendererTest::class, 'EzSystems\Tests\EzPlatformRichTextBundle\eZ\RichText\RendererTest');

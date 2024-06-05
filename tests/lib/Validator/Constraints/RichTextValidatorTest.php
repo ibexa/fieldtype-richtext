@@ -142,5 +142,3 @@ class RichTextValidatorTest extends TestCase
         }, $errors);
     }
 }
-
-class_alias(RichTextValidatorTest::class, 'EzSystems\Tests\EzPlatformRichText\Validator\Constraints\RichTextValidatorTest');

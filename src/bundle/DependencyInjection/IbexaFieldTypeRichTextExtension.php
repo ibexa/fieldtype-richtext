@@ -309,5 +309,3 @@ class IbexaFieldTypeRichTextExtension extends Extension implements PrependExtens
         }
     }
 }
-
-class_alias(IbexaFieldTypeRichTextExtension::class, 'EzSystems\EzPlatformRichTextBundle\DependencyInjection\EzPlatformRichTextExtension');

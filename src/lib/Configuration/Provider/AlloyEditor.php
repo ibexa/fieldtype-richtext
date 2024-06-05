@@ -145,5 +145,3 @@ final class AlloyEditor implements Provider
             : [];
     }
 }
-
-class_alias(AlloyEditor::class, 'EzSystems\EzPlatformRichText\Configuration\Provider\AlloyEditor');

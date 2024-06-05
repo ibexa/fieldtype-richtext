@@ -75,5 +75,3 @@ class ConverterDispatcher
         throw new NotFoundException('Converter', $documentNamespace);
     }
 }
-
-class_alias(ConverterDispatcher::class, 'EzSystems\EzPlatformRichText\eZ\RichText\ConverterDispatcher');

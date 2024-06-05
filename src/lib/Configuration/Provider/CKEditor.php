@@ -164,5 +164,3 @@ final class CKEditor implements Provider
             : [];
     }
 }
-
-class_alias(CKEditor::class, 'EzSystems\EzPlatformRichText\Configuration\Provider\CKEditor');

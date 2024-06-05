@@ -15,5 +15,3 @@ interface CustomTemplateConfigMapper
 {
     public function mapConfig(array $enabledCustomTemplates): array;
 }
-
-class_alias(CustomTemplateConfigMapper::class, 'EzSystems\EzPlatformRichText\Configuration\UI\Mapper\CustomTemplateConfigMapper');

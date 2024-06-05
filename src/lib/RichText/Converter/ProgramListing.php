@@ -42,5 +42,3 @@ class ProgramListing implements Converter
         return $document;
     }
 }
-
-class_alias(ProgramListing::class, 'EzSystems\EzPlatformRichText\eZ\RichText\Converter\ProgramListing');

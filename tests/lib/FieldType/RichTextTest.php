@@ -465,5 +465,3 @@ EOT;
         return [];
     }
 }
-
-class_alias(RichTextTest::class, 'EzSystems\Tests\EzPlatformRichText\FieldType\RichTextTest');

@@ -59,5 +59,3 @@ class DoctrineStorage extends Gateway
         return $objectRemoteIdMap;
     }
 }
-
-class_alias(DoctrineStorage::class, 'EzSystems\EzPlatformRichText\eZ\FieldType\RichText\RichTextStorage\Gateway\DoctrineStorage');

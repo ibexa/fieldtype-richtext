@@ -194,5 +194,3 @@ class Template extends Render implements Converter
         return $rootNode->appendChild($literalLayoutNode);
     }
 }
-
-class_alias(Template::class, 'EzSystems\EzPlatformRichText\eZ\RichText\Converter\Render\Template');

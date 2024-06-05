@@ -559,5 +559,3 @@ class LinkTest extends TestCase
         self::assertEquals($expectedOutputDocument, $outputDocument);
     }
 }
-
-class_alias(LinkTest::class, 'EzSystems\Tests\EzPlatformRichText\RichText\Converter\LinkTest');

@@ -56,5 +56,3 @@ class IbexaFieldTypeRichTextBundle extends Bundle
         return $this->extension;
     }
 }
-
-class_alias(IbexaFieldTypeRichTextBundle::class, 'EzSystems\EzPlatformRichTextBundle\EzPlatformRichTextBundle');

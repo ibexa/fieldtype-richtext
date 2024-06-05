@@ -77,5 +77,3 @@ abstract class Render
         return $hash;
     }
 }
-
-class_alias(Render::class, 'EzSystems\EzPlatformRichText\eZ\RichText\Converter\Render');

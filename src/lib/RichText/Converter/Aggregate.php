@@ -52,5 +52,3 @@ class Aggregate implements Converter
         $this->converters[] = $converter;
     }
 }
-
-class_alias(Aggregate::class, 'EzSystems\EzPlatformRichText\eZ\RichText\Converter\Aggregate');

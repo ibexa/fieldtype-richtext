@@ -297,5 +297,3 @@ class Type extends FieldType implements TranslationContainerInterface
         ];
     }
 }
-
-class_alias(Type::class, 'EzSystems\EzPlatformRichText\eZ\FieldType\RichText\Type');

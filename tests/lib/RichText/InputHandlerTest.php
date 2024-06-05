@@ -228,5 +228,3 @@ EOT;
         self::assertEquals($expectedErrors, $actualErrors);
     }
 }
-
-class_alias(InputHandlerTest::class, 'EzSystems\Tests\EzPlatformRichText\RichText\InputHandlerTest');

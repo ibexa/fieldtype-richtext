@@ -118,5 +118,3 @@ class InputHandler implements InputHandlerInterface
         return $this->docbookValidator->validateDocument($document);
     }
 }
-
-class_alias(InputHandler::class, 'EzSystems\EzPlatformRichText\eZ\RichText\InputHandler');

@@ -225,5 +225,3 @@ class CustomTagTest extends TestCase
         return $packagesMock;
     }
 }
-
-class_alias(CustomTagTest::class, 'EzSystems\Tests\EzPlatformRichText\Configuration\UI\Config\Mapper\CustomTagTest');

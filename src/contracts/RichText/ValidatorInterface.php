@@ -21,5 +21,3 @@ interface ValidatorInterface
      */
     public function validateDocument(DOMDocument $xmlDocument): array;
 }
-
-class_alias(ValidatorInterface::class, 'EzSystems\EzPlatformRichText\eZ\RichText\ValidatorInterface');

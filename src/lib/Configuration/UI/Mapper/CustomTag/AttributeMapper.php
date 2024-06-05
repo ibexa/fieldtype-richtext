@@ -39,5 +39,3 @@ interface AttributeMapper
         array $customTagAttributeProperties
     ): array;
 }
-
-class_alias(AttributeMapper::class, 'EzSystems\EzPlatformRichText\Configuration\UI\Mapper\CustomTag\AttributeMapper');

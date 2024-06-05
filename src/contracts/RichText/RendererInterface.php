@@ -49,5 +49,3 @@ interface RendererInterface
      */
     public function renderLocationEmbed($locationId, $viewType, array $parameters, $isInline);
 }
-
-class_alias(RendererInterface::class, 'EzSystems\EzPlatformRichText\eZ\RichText\RendererInterface');

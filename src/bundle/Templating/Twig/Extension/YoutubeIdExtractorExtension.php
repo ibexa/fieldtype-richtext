@@ -49,5 +49,3 @@ final class YoutubeIdExtractorExtension extends AbstractExtension
         return $matches['id'] ?? null;
     }
 }
-
-class_alias(YoutubeIdExtractorExtension::class, 'EzSystems\EzPlatformRichTextBundle\Templating\Twig\Extension\YoutubeIdExtractorExtension');

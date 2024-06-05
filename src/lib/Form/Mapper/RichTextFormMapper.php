@@ -44,5 +44,3 @@ class RichTextFormMapper implements FieldValueFormMapperInterface
             ]);
     }
 }
-
-class_alias(RichTextFormMapper::class, 'EzSystems\EzPlatformRichText\Form\Mapper\RichTextFormMapper');

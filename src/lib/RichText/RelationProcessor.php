@@ -93,5 +93,3 @@ final class RelationProcessor
         ];
     }
 }
-
-class_alias(RelationProcessor::class, 'EzSystems\EzPlatformRichText\eZ\RichText\RelationProcessor');

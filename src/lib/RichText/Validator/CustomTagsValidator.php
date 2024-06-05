@@ -101,5 +101,3 @@ class CustomTagsValidator implements ValidatorInterface
         return $errors;
     }
 }
-
-class_alias(CustomTagsValidator::class, 'EzSystems\EzPlatformRichText\eZ\RichText\Validator\CustomTagsValidator');

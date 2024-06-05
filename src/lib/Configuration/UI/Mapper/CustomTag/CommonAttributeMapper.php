@@ -39,5 +39,3 @@ class CommonAttributeMapper implements AttributeMapper
         ];
     }
 }
-
-class_alias(CommonAttributeMapper::class, 'EzSystems\EzPlatformRichText\Configuration\UI\Mapper\CustomTag\CommonAttributeMapper');

@@ -208,5 +208,3 @@ final class CustomTag implements CustomTemplateConfigMapper
         return $config;
     }
 }
-
-class_alias(CustomTag::class, 'EzSystems\EzPlatformRichText\Configuration\UI\Mapper\CustomTag');

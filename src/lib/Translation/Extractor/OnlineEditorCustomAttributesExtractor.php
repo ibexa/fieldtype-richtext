@@ -111,5 +111,3 @@ final class OnlineEditorCustomAttributesExtractor implements ExtractorInterface
         }
     }
 }
-
-class_alias(OnlineEditorCustomAttributesExtractor::class, 'EzSystems\EzPlatformRichText\Translation\Extractor\OnlineEditorCustomAttributesExtractor');

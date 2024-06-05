@@ -74,5 +74,3 @@ EOT;
         return $document;
     }
 }
-
-class_alias(RelationProcessorTest::class, 'EzSystems\Tests\EzPlatformRichText\RichText\RelationProcessorTest');

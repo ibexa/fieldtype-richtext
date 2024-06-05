@@ -25,5 +25,3 @@ interface ProviderService
      */
     public function getConfiguration(): array;
 }
-
-class_alias(ProviderService::class, 'EzSystems\EzPlatformRichText\API\Configuration\ProviderService');

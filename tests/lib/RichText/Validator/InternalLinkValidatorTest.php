@@ -316,5 +316,3 @@ class InternalLinkValidatorTest extends TestCase
         return $doc;
     }
 }
-
-class_alias(InternalLinkValidatorTest::class, 'EzSystems\Tests\EzPlatformRichText\RichText\Validator\InternalLinkValidatorTest');

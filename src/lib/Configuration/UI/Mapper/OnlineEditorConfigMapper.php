@@ -33,5 +33,3 @@ interface OnlineEditorConfigMapper
      */
     public function mapDataAttributesConfiguration(array $semanticConfiguration): array;
 }
-
-class_alias(OnlineEditorConfigMapper::class, 'EzSystems\EzPlatformRichText\Configuration\UI\Mapper\OnlineEditorConfigMapper');

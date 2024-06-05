@@ -215,5 +215,3 @@ class OnlineEditorTest extends TestCase
         );
     }
 }
-
-class_alias(OnlineEditorTest::class, 'EzSystems\Tests\EzPlatformRichText\Configuration\UI\Config\Mapper\OnlineEditorTest');

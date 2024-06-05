@@ -229,5 +229,3 @@ DOCBOOK
         return $document;
     }
 }
-
-class_alias(CustomTagsValidatorTest::class, 'EzSystems\Tests\EzPlatformRichText\RichText\Validator\CustomTagsValidatorTest');

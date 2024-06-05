@@ -88,5 +88,3 @@ class AggregateProviderTest extends TestCase
         ];
     }
 }
-
-class_alias(AggregateProviderTest::class, 'EzSystems\Tests\EzPlatformRichText\Configuration\AggregateProviderTest');

@@ -102,5 +102,3 @@ abstract class Gateway extends StorageGateway
         $this->urlGateway->unlinkUrl($fieldId, $versionNo, $excludeUrlIds);
     }
 }
-
-class_alias(Gateway::class, 'EzSystems\EzPlatformRichText\eZ\FieldType\RichText\RichTextStorage\Gateway');

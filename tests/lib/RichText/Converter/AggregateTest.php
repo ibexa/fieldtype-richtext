@@ -98,5 +98,3 @@ class AggregateTest extends TestCase
         ];
     }
 }
-
-class_alias(AggregateTest::class, 'EzSystems\Tests\EzPlatformRichText\RichText\Converter\AggregateTest');

@@ -31,5 +31,3 @@ abstract class Normalizer
      */
     abstract public function normalize($input);
 }
-
-class_alias(Normalizer::class, 'EzSystems\EzPlatformRichText\eZ\RichText\Normalizer');

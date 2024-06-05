@@ -84,5 +84,3 @@ class DocbookToXhtml5EditTest extends BaseTest
         ];
     }
 }
-
-class_alias(DocbookToXhtml5EditTest::class, 'EzSystems\Tests\EzPlatformRichText\RichText\Converter\Xslt\DocbookToXhtml5EditTest');

@@ -67,5 +67,3 @@ class RichTextHtml5ConverterPassTest extends AbstractCompilerPassTestCase
         );
     }
 }
-
-class_alias(RichTextHtml5ConverterPassTest::class, 'EzSystems\Tests\EzPlatformRichTextBundle\DependencyInjection\Compiler\RichTextHtml5ConverterPassTest');

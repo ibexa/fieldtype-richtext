@@ -106,5 +106,3 @@ class DocumentTypeDefinition extends Normalizer
         return $this->expression;
     }
 }
-
-class_alias(DocumentTypeDefinition::class, 'EzSystems\EzPlatformRichText\eZ\RichText\Normalizer\DocumentTypeDefinition');

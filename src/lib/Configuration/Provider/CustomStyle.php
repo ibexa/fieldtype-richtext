@@ -52,5 +52,3 @@ final class CustomStyle implements Provider
         return [];
     }
 }
-
-class_alias(CustomStyle::class, 'EzSystems\EzPlatformRichText\Configuration\Provider\CustomStyle');

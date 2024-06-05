@@ -77,5 +77,3 @@ class RichTextFieldValueConverter implements Converter
         return 'sort_key_string';
     }
 }
-
-class_alias(RichTextFieldValueConverter::class, 'EzSystems\EzPlatformRichText\eZ\Persistence\Legacy\RichTextFieldValueConverter');

@@ -68,5 +68,3 @@ EOT;
         return new RichTextProcessor($this->converter);
     }
 }
-
-class_alias(RichTextProcessorTest::class, 'EzSystems\Tests\EzPlatformRichText\REST\FieldTypeProcessor\RichTextProcessorTest');

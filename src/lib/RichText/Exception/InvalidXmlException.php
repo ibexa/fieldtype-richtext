@@ -43,5 +43,3 @@ class InvalidXmlException extends InvalidArgumentException
         return $this->errors;
     }
 }
-
-class_alias(InvalidXmlException::class, 'EzSystems\EzPlatformRichText\eZ\RichText\Exception\InvalidXmlException');

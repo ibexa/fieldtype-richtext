@@ -414,5 +414,3 @@ class RichTextTest extends AbstractParserTestCase
         ];
     }
 }
-
-class_alias(RichTextTest::class, 'EzSystems\Tests\EzPlatformRichTextBundle\DependencyInjection\Configuration\Parser\FieldType\RichTextTest');

@@ -425,5 +425,3 @@ class RichText extends AbstractFieldTypeParser
         };
     }
 }
-
-class_alias(RichText::class, 'EzSystems\EzPlatformRichTextBundle\DependencyInjection\Configuration\Parser\FieldType\RichText');

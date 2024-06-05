@@ -53,5 +53,3 @@ class RichTextValidator extends ConstraintValidator
         }
     }
 }
-
-class_alias(RichTextValidator::class, 'EzSystems\EzPlatformRichText\Validator\Constraints\RichTextValidator');

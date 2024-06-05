@@ -340,5 +340,3 @@ class Embed extends Render implements Converter
         return $dataAttributes;
     }
 }
-
-class_alias(Embed::class, 'EzSystems\EzPlatformRichText\eZ\RichText\Converter\Render\Embed');

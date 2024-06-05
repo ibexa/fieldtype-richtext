@@ -40,5 +40,3 @@ final class ChoiceAttributeMapper extends CommonAttributeMapper implements Attri
         return $parentConfig;
     }
 }
-
-class_alias(ChoiceAttributeMapper::class, 'EzSystems\EzPlatformRichText\Configuration\UI\Mapper\CustomTag\ChoiceAttributeMapper');

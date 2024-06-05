@@ -280,5 +280,3 @@ abstract class BaseTest extends TestCase
         return [];
     }
 }
-
-class_alias(BaseTest::class, 'EzSystems\Tests\EzPlatformRichText\RichText\Converter\Xslt\BaseTest');

@@ -23,5 +23,3 @@ class Html5Edit extends XsltConverter
         parent::__construct($stylesheet, $customStylesheets);
     }
 }
-
-class_alias(Html5Edit::class, 'EzSystems\EzPlatformRichTextBundle\eZ\RichText\Converter\Html5Edit');

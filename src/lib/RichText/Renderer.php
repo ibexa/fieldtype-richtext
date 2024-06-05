@@ -487,5 +487,3 @@ class Renderer implements RendererInterface
         return $location;
     }
 }
-
-class_alias(Renderer::class, 'EzSystems\EzPlatformRichTextBundle\eZ\RichText\Renderer');

@@ -55,5 +55,3 @@ interface InputHandlerInterface
      */
     public function validate(DOMDocument $document): array;
 }
-
-class_alias(InputHandlerInterface::class, 'EzSystems\EzPlatformRichText\eZ\RichText\InputHandlerInterface');

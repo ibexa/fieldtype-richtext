@@ -217,5 +217,3 @@ XML
         return new DocumentTypeDefinition($documentElement, $namespace, $dtdPath);
     }
 }
-
-class_alias(DocumentTypeDefinitionTest::class, 'EzSystems\Tests\EzPlatformRichText\RichText\Normalizer\DocumentTypeDefinitionTest');

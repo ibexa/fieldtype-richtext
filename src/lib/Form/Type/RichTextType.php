@@ -90,5 +90,3 @@ class RichTextType extends AbstractType
         return 'richtext';
     }
 }
-
-class_alias(RichTextType::class, 'EzSystems\EzPlatformRichText\Form\Type\RichTextType');

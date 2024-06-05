@@ -352,5 +352,3 @@ class TemplateTest extends TestCase
         ],
     ];
 }
-
-class_alias(TemplateTest::class, 'EzSystems\Tests\EzPlatformRichText\RichText\Converter\Render\TemplateTest');
