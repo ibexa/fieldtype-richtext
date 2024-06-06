@@ -2024,16 +2024,6 @@ parameters:
 			path: tests/lib/Form/DataTransformer/RichTextTransformerTest.php
 
 		-
-			message: "#^Method Ibexa\\\\FieldTypeRichText\\\\Persistence\\\\Legacy\\\\Tests\\\\Content\\\\FieldValue\\\\Converter\\\\RichTextFieldValueConverterTest\\:\\:testToFieldValue\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Persistence/Legacy/Tests/Content/FieldValue/Converter/RichTextFieldValueConverterTest.php
-
-		-
-			message: "#^Method Ibexa\\\\FieldTypeRichText\\\\Persistence\\\\Legacy\\\\Tests\\\\Content\\\\FieldValue\\\\Converter\\\\RichTextFieldValueConverterTest\\:\\:testToStorageValue\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Persistence/Legacy/Tests/Content/FieldValue/Converter/RichTextFieldValueConverterTest.php
-
-		-
 			message: "#^Call to method expects\\(\\) on an unknown class Ibexa\\\\FieldTypeRichText\\\\RichText\\\\Converter\\.$#"
 			count: 1
 			path: tests/lib/REST/FieldTypeProcessor/RichTextProcessorTest.php

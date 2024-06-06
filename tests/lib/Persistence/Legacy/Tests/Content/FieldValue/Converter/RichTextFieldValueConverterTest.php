@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace Ibexa\FieldTypeRichText\Persistence\Legacy\Tests\Content\FieldValue\Converter;
+namespace Ibexa\Tests\FieldTypeRichText\Persistence\Legacy\Tests\Content\FieldValue\Converter;
 
 use Ibexa\Contracts\Core\Persistence\Content\FieldValue;
 use Ibexa\Core\Persistence\Legacy\Content\StorageFieldValue;
@@ -54,7 +54,7 @@ EOT;
     /**
      * @covers \Ibexa\FieldTypeRichText\Persistence\Legacy\RichTextFieldValueConverter::toStorageValue
      */
-    public function testToStorageValue()
+    public function testToStorageValue(): void
     {
         $value = new FieldValue();
         $value->data = $this->docbookString;
@@ -67,7 +67,7 @@ EOT;
     /**
      * @covers \Ibexa\FieldTypeRichText\Persistence\Legacy\RichTextFieldValueConverter::toFieldValue
      */
-    public function testToFieldValue()
+    public function testToFieldValue(): void
     {
         $storageFieldValue = new StorageFieldValue();
         $storageFieldValue->dataText = $this->docbookString;
