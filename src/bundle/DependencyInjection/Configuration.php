@@ -46,7 +46,7 @@ class Configuration extends SiteAccessConfiguration
         return $treeBuilder;
     }
 
-    private function addEnabledAttributeTypesSection(NodeBuilder $richTextNode)
+    private function addEnabledAttributeTypesSection(NodeBuilder $richTextNode): NodeBuilder
     {
         return $richTextNode
                 ->arrayNode('enabled_attribute_types')
