@@ -262,6 +262,11 @@ const VIEWPORT_TOP_OFFSET_DISTRACTION_FREE_MODE = 0;
                     const distractionFreeModeControlNodeBtn = fieldEditNode.querySelector(
                         '.ibexa-field-edit__distraction-free-mode-control-container .ibexa-field-edit__distraction-free-mode-btns',
                     );
+
+                    if (distractionFreeModeControlNodeBtn === null) {
+                        return;
+                    }
+
                     const dataSourceNode = fieldEditNode.querySelector('.ibexa-data-source');
                     const { offsetWidth: distractionFreeModeControlNodeBtnWidth } = distractionFreeModeControlNodeBtn;
                     const { offsetWidth: dataSourceNodeWidth } = dataSourceNode;
