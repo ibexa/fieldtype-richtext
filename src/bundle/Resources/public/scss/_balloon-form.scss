@@ -1,6 +1,6 @@
 .ck.ck-reset_all {
-    .ck.ck-icon.ck-button__icon {
-        margin: 0.2rem;
+    .ck.ck-dropdown .ck-button.ck-dropdown__button {
+        padding-right: calculateRem(10px);
     }
     .ibexa-ckeditor-balloon-form {
         padding: 0 calculateRem(16px);
