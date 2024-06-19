@@ -2,6 +2,9 @@
     .ck.ck-dropdown .ck-button.ck-dropdown__button {
         padding-right: calculateRem(10px);
     }
+    .ck.ck-icon.ck-button__icon {
+        margin: calculateRem(3px);
+    }
     .ibexa-ckeditor-balloon-form {
         padding: 0 calculateRem(16px);
 
