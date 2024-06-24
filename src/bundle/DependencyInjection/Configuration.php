@@ -74,7 +74,7 @@ class Configuration extends SiteAccessConfiguration
                                     'The value "%s" is not allowed for path "ibexa_fieldtype_richtext.custom_tags.%s.attributes.campaign.type". Allowed values: %s',
                                     $attribute['type'],
                                     $tagIdentifier,
-                                    implode(', ', array_map(static fn ($type) => "\"$type\"", $enabledTypes))
+                                    implode(', ', array_map(static fn ($type): string => "\"$type\"", $enabledTypes))
                                 )
                             );
                         }
