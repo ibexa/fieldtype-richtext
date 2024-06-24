@@ -73,6 +73,7 @@ final class ConfigurationTest extends TestCase
                 [
                     'custom_tags' => [],
                     'custom_styles' => [],
+                    'enabled_attribute_types' => ['number', 'string', 'boolean', 'choice', 'link'],
                 ],
             ],
             'Alloy editor configs from multiple sources' => [
@@ -111,6 +112,7 @@ final class ConfigurationTest extends TestCase
                     ],
                     'custom_tags' => [],
                     'custom_styles' => [],
+                    'enabled_attribute_types' => ['number', 'string', 'boolean', 'choice', 'link'],
                 ],
             ],
         ];
