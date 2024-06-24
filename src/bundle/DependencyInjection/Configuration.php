@@ -71,7 +71,7 @@ class Configuration extends SiteAccessConfiguration
                         if (!in_array($attribute['type'], $enabledTypes, true)) {
                             throw new InvalidConfigurationException(
                                 sprintf(
-                                    'The value "%s" is not allowed for path "ibexa_fieldtype_richtext.custom_tags.%s.attributes.campaign.type". Permissible values: %s',
+                                    'The value "%s" is not allowed for path "ibexa_fieldtype_richtext.custom_tags.%s.attributes.campaign.type". Allowed values: %s',
                                     $attribute['type'],
                                     $tagIdentifier,
                                     implode(', ', array_map(static fn ($type) => "\"$type\"", $enabledTypes))
