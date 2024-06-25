@@ -208,7 +208,7 @@ class IbexaLinkFormView extends View {
         const relativeLinkPrefix = '/';
         const schemaPattern = /^[a-z0-9]+:\/?\/?/i;
         const isAnchor = href.indexOf(anchorPrefix) === 0;
-        const isRelativeLink = href.indexOf(relativeLinkPrefix) === 0;
+        const isRelativeLink = href.startsWith(relativeLinkPrefix);
         const isLocation = schemaPattern.test(href);
 
         if (isAnchor || isLocation || isRelativeLink) {
