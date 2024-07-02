@@ -157,8 +157,12 @@
                 .ck-button {
                     padding: calculateRem(8px);
                     margin: 0;
-                }
 
+                    &.ck-insert-table-dropdown-grid-box {
+                        padding: 0;
+                        margin: var(--ck-insert-table-dropdown-box-margin);
+                    }
+                }
                 .ck-dropdown {
                     padding: 0;
                     margin: 0;
