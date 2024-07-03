@@ -15,17 +15,41 @@ services:
         arguments:
             $customStyleConfigurationMapper: '@Ibexa\FieldTypeRichText\Configuration\UI\Mapper\CustomStyle'
 
+    ibexa.field_type_rich_text.configuration.provider.custom_style.configurable:
+        class: Ibexa\FieldTypeRichText\Configuration\Provider\ConfigurableProvider
+        decorates: Ibexa\FieldTypeRichText\Configuration\Provider\CustomStyle
+        arguments:
+            $configurators: !tagged_iterator ibexa.field_type.richtext.configuration.custom_style.configurator
+
     Ibexa\FieldTypeRichText\Configuration\Provider\CustomTag:
         arguments:
             $customTagConfigurationMapper: '@Ibexa\FieldTypeRichText\Configuration\UI\Mapper\CustomTag'
+
+    ibexa.field_type_rich_text.configuration.provider.custom_tag.configurable:
+        class: Ibexa\FieldTypeRichText\Configuration\Provider\ConfigurableProvider
+        decorates: Ibexa\FieldTypeRichText\Configuration\Provider\CustomTag
+        arguments:
+            $configurators: !tagged_iterator ibexa.field_type.richtext.configuration.custom_tag.configurator
 
     Ibexa\FieldTypeRichText\Configuration\Provider\AlloyEditor:
         arguments:
             $alloyEditorConfiguration: '%ibexa.field_type.richtext.alloy_editor%'
 
+    ibexa.field_type_rich_text.configuration.provider.alloy_editor.configurable:
+        class: Ibexa\FieldTypeRichText\Configuration\Provider\ConfigurableProvider
+        decorates: Ibexa\FieldTypeRichText\Configuration\Provider\AlloyEditor
+        arguments:
+            $configurators: !tagged_iterator ibexa.field_type.richtext.configuration.alloy_editor.configurator
+
     Ibexa\FieldTypeRichText\Configuration\Provider\CKEditor:
         arguments:
             $customStylesConfiguration: '%ibexa.field_type.richtext.custom_styles%'
+
+    ibexa.field_type_rich_text.configuration.provider.ck_editor.configurable:
+        class: Ibexa\FieldTypeRichText\Configuration\Provider\ConfigurableProvider
+        decorates: Ibexa\FieldTypeRichText\Configuration\Provider\CKEditor
+        arguments:
+            $configurators: !tagged_iterator ibexa.field_type.richtext.configuration.ck_editor.configurator
 
     Ibexa\FieldTypeRichText\Configuration\AggregateProvider:
         arguments:

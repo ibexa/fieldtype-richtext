@@ -26,7 +26,7 @@ services:
             $customTagsConfiguration: '%ibexa.field_type.richtext.custom_tags%'
             $translatorBag: '@translator'
             $translationDomain: '%ibexa.field_type.richtext.custom_tags.translation_domain%'
-            $customTagAttributeMappers: !tagged ibexa.field_type.richtext.configuration.custom_tag.mapper
+            $customTagAttributeMappers: !tagged_iterator ibexa.field_type.richtext.configuration.custom_tag.mapper
 
     # RichText Custom Styles UI config mapper
     Ibexa\FieldTypeRichText\Configuration\UI\Mapper\CustomStyle:

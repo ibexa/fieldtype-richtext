@@ -13,35 +13,47 @@ use RuntimeException;
 use Symfony\Component\Asset\Packages;
 use Symfony\Component\Translation\TranslatorBagInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Traversable;
 
 /**
  * RichText Custom Tag configuration mapper.
  *
  * @internal For internal use by RichText package
+ *
+ * @phpstan-type TConfig array{
+ *     label: string,
+ *     description: string,
+ *     is_inline: bool,
+ *     icon?: string,
+ *     attributes: array<string, TConfigAttribute>
+ * }
+ * @phpstan-type TConfigAttribute array{
+ *     type: string,
+ *     required: bool,
+ *     default_value: mixed,
+ *     choices?: array<string>,
+ * }
+ *
+ * @phpstan-import-type TConfigOutput from \Ibexa\FieldTypeRichText\Configuration\Provider\CustomTag
+ * @phpstan-import-type TConfigAttributeOutput from \Ibexa\FieldTypeRichText\Configuration\Provider\CustomTag
  */
 final class CustomTag implements CustomTemplateConfigMapper
 {
-    /** @var array */
-    private $customTagsConfiguration;
+    /** @phpstan-var array<TConfig> */
+    private array $customTagsConfiguration;
 
-    /** @var \Symfony\Contracts\Translation\TranslatorInterface */
-    private $translator;
+    private TranslatorInterface $translator;
 
-    /** @var \Symfony\Component\Translation\TranslatorBagInterface */
-    private $translatorBag;
+    private TranslatorBagInterface $translatorBag;
 
-    /** @var \Symfony\Component\Asset\Packages */
-    private $packages;
+    private Packages $packages;
 
-    /** @var \Ibexa\FieldTypeRichText\Configuration\UI\Mapper\CustomTag\AttributeMapper[] */
-    private $customTagAttributeMappers;
+    /** @var iterable<\Ibexa\FieldTypeRichText\Configuration\UI\Mapper\CustomTag\AttributeMapper> */
+    private iterable $customTagAttributeMappers;
 
-    /** @var \Ibexa\FieldTypeRichText\Configuration\UI\Mapper\CustomTag\AttributeMapper[] */
-    private $supportedTagAttributeMappersCache;
+    /** @var array<\Ibexa\FieldTypeRichText\Configuration\UI\Mapper\CustomTag\AttributeMapper> */
+    private array $supportedTagAttributeMappersCache;
 
-    /** @var string */
-    private $translationDomain;
+    private string $translationDomain;
 
     /**
      * CustomTag configuration mapper constructor.
@@ -49,12 +61,9 @@ final class CustomTag implements CustomTemplateConfigMapper
      * Note: type-hinting Translator to have an instance which implements
      * both TranslatorInterface and TranslatorBagInterface.
      *
-     * @param array $customTagsConfiguration
-     * @param \Symfony\Contracts\Translation\TranslatorInterface $translator
-     * @param \Symfony\Component\Translation\TranslatorBagInterface $translatorBag
-     * @param string $translationDomain
-     * @param \Symfony\Component\Asset\Packages $packages
-     * @param \Traversable $customTagAttributeMappers
+     * @phpstan-param array<TConfig> $customTagsConfiguration
+     *
+     * @param iterable<\Ibexa\FieldTypeRichText\Configuration\UI\Mapper\CustomTag\AttributeMapper> $customTagAttributeMappers
      */
     public function __construct(
         array $customTagsConfiguration,
@@ -62,7 +71,7 @@ final class CustomTag implements CustomTemplateConfigMapper
         TranslatorBagInterface $translatorBag,
         string $translationDomain,
         Packages $packages,
-        Traversable $customTagAttributeMappers
+        iterable $customTagAttributeMappers
     ) {
         $this->customTagsConfiguration = $customTagsConfiguration;
         $this->translator = $translator;
@@ -76,9 +85,9 @@ final class CustomTag implements CustomTemplateConfigMapper
     /**
      * Map Configuration for the given list of enabled Custom Tags.
      *
-     * @param array $enabledCustomTags
+     * @phpstan-param array<string> $enabledCustomTags
      *
-     * @return array Mapped configuration
+     * @phpstan-return array<TConfigOutput> Mapped configuration
      */
     public function mapConfig(array $enabledCustomTags): array
     {
@@ -123,12 +132,6 @@ final class CustomTag implements CustomTemplateConfigMapper
 
     /**
      * Get first available Custom Tag Attribute Type mapper.
-     *
-     * @param string $tagName
-     * @param string $attributeName
-     * @param string $attributeType
-     *
-     * @return \Ibexa\FieldTypeRichText\Configuration\UI\Mapper\CustomTag\AttributeMapper
      */
     private function getAttributeTypeMapper(
         string $tagName,
@@ -154,9 +157,9 @@ final class CustomTag implements CustomTemplateConfigMapper
     /**
      * Process Custom Tags config and translate labels for UI.
      *
-     * @param array $config
+     * @param array<string, TConfigOutput> $config
      *
-     * @return array processed Custom Tags config with translated labels
+     * @return array<string, TConfigOutput> processed Custom Tags config with translated labels
      */
     private function translateLabels(array $config): array
     {

@@ -316,16 +316,6 @@ parameters:
 			path: src/lib/Configuration/Provider/CustomStyle.php
 
 		-
-			message: "#^Method Ibexa\\\\FieldTypeRichText\\\\Configuration\\\\Provider\\\\CustomTag\\:\\:getConfiguration\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/lib/Configuration/Provider/CustomTag.php
-
-		-
-			message: "#^Property Ibexa\\\\FieldTypeRichText\\\\Configuration\\\\Provider\\\\CustomTag\\:\\:\\$customTagConfigurationMapper \\(Ibexa\\\\FieldTypeRichText\\\\Configuration\\\\UI\\\\Mapper\\\\CustomTag\\) does not accept Ibexa\\\\FieldTypeRichText\\\\Configuration\\\\UI\\\\Mapper\\\\CustomTemplateConfigMapper\\.$#"
-			count: 1
-			path: src/lib/Configuration/Provider/CustomTag.php
-
-		-
 			message: "#^Method Ibexa\\\\FieldTypeRichText\\\\Configuration\\\\UI\\\\Mapper\\\\CustomStyle\\:\\:__construct\\(\\) has parameter \\$customStylesConfiguration with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/lib/Configuration/UI/Mapper/CustomStyle.php
@@ -349,76 +339,6 @@ parameters:
 			message: "#^Property Ibexa\\\\FieldTypeRichText\\\\Configuration\\\\UI\\\\Mapper\\\\CustomStyle\\:\\:\\$packages is never read, only written\\.$#"
 			count: 1
 			path: src/lib/Configuration/UI/Mapper/CustomStyle.php
-
-		-
-			message: "#^Method Ibexa\\\\FieldTypeRichText\\\\Configuration\\\\UI\\\\Mapper\\\\CustomTag\\:\\:__construct\\(\\) has parameter \\$customTagAttributeMappers with no value type specified in iterable type Traversable\\.$#"
-			count: 1
-			path: src/lib/Configuration/UI/Mapper/CustomTag.php
-
-		-
-			message: "#^Method Ibexa\\\\FieldTypeRichText\\\\Configuration\\\\UI\\\\Mapper\\\\CustomTag\\:\\:__construct\\(\\) has parameter \\$customTagsConfiguration with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/lib/Configuration/UI/Mapper/CustomTag.php
-
-		-
-			message: "#^Method Ibexa\\\\FieldTypeRichText\\\\Configuration\\\\UI\\\\Mapper\\\\CustomTag\\:\\:mapConfig\\(\\) has parameter \\$enabledCustomTags with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/lib/Configuration/UI/Mapper/CustomTag.php
-
-		-
-			message: "#^Method Ibexa\\\\FieldTypeRichText\\\\Configuration\\\\UI\\\\Mapper\\\\CustomTag\\:\\:mapConfig\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/lib/Configuration/UI/Mapper/CustomTag.php
-
-		-
-			message: "#^Method Ibexa\\\\FieldTypeRichText\\\\Configuration\\\\UI\\\\Mapper\\\\CustomTag\\:\\:translateLabels\\(\\) has parameter \\$config with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/lib/Configuration/UI/Mapper/CustomTag.php
-
-		-
-			message: "#^Method Ibexa\\\\FieldTypeRichText\\\\Configuration\\\\UI\\\\Mapper\\\\CustomTag\\:\\:translateLabels\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/lib/Configuration/UI/Mapper/CustomTag.php
-
-		-
-			message: "#^Property Ibexa\\\\FieldTypeRichText\\\\Configuration\\\\UI\\\\Mapper\\\\CustomTag\\:\\:\\$customTagAttributeMappers \\(array\\<Ibexa\\\\FieldTypeRichText\\\\Configuration\\\\UI\\\\Mapper\\\\CustomTag\\\\AttributeMapper\\>\\) does not accept Traversable\\.$#"
-			count: 1
-			path: src/lib/Configuration/UI/Mapper/CustomTag.php
-
-		-
-			message: "#^Property Ibexa\\\\FieldTypeRichText\\\\Configuration\\\\UI\\\\Mapper\\\\CustomTag\\:\\:\\$customTagsConfiguration type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/lib/Configuration/UI/Mapper/CustomTag.php
-
-		-
-			message: "#^Method Ibexa\\\\FieldTypeRichText\\\\Configuration\\\\UI\\\\Mapper\\\\CustomTag\\\\AttributeMapper\\:\\:mapConfig\\(\\) has parameter \\$customTagAttributeProperties with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/lib/Configuration/UI/Mapper/CustomTag/AttributeMapper.php
-
-		-
-			message: "#^Method Ibexa\\\\FieldTypeRichText\\\\Configuration\\\\UI\\\\Mapper\\\\CustomTag\\\\AttributeMapper\\:\\:mapConfig\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/lib/Configuration/UI/Mapper/CustomTag/AttributeMapper.php
-
-		-
-			message: "#^Method Ibexa\\\\FieldTypeRichText\\\\Configuration\\\\UI\\\\Mapper\\\\CustomTag\\\\ChoiceAttributeMapper\\:\\:mapConfig\\(\\) has parameter \\$customTagAttributeProperties with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/lib/Configuration/UI/Mapper/CustomTag/ChoiceAttributeMapper.php
-
-		-
-			message: "#^Method Ibexa\\\\FieldTypeRichText\\\\Configuration\\\\UI\\\\Mapper\\\\CustomTag\\\\ChoiceAttributeMapper\\:\\:mapConfig\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/lib/Configuration/UI/Mapper/CustomTag/ChoiceAttributeMapper.php
-
-		-
-			message: "#^Method Ibexa\\\\FieldTypeRichText\\\\Configuration\\\\UI\\\\Mapper\\\\CustomTag\\\\CommonAttributeMapper\\:\\:mapConfig\\(\\) has parameter \\$customTagAttributeProperties with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/lib/Configuration/UI/Mapper/CustomTag/CommonAttributeMapper.php
-
-		-
-			message: "#^Method Ibexa\\\\FieldTypeRichText\\\\Configuration\\\\UI\\\\Mapper\\\\CustomTag\\\\CommonAttributeMapper\\:\\:mapConfig\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/lib/Configuration/UI/Mapper/CustomTag/CommonAttributeMapper.php
 
 		-
 			message: "#^Method Ibexa\\\\FieldTypeRichText\\\\Configuration\\\\UI\\\\Mapper\\\\CustomTemplateConfigMapper\\:\\:mapConfig\\(\\) has parameter \\$enabledCustomTemplates with no value type specified in iterable type array\\.$#"
@@ -1394,10 +1314,7 @@ parameters:
 			message: "#^Cannot access property \\$id on Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Field\\|null\\.$#"
 			count: 1
 			path: tests/integration/Repository/RichTextFieldTypeIntegrationTest.php
-		-
-			message: "#^Cannot call method fetchOne\\(\\) on Doctrine\\\\DBAL\\\\ForwardCompatibility\\\\Result\\|int\\|string\\.$#"
-			count: 1
-			path: tests/integration/Repository/RichTextFieldTypeIntegrationTest.php
+
 		-
 			message: "#^Cannot access property \\$value on Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Field\\|null\\.$#"
 			count: 1
@@ -1410,6 +1327,11 @@ parameters:
 
 		-
 			message: "#^Cannot call method fetchAll\\(\\) on Doctrine\\\\DBAL\\\\ForwardCompatibility\\\\Result\\|int\\|string\\.$#"
+			count: 1
+			path: tests/integration/Repository/RichTextFieldTypeIntegrationTest.php
+
+		-
+			message: "#^Cannot call method fetchOne\\(\\) on Doctrine\\\\DBAL\\\\ForwardCompatibility\\\\Result\\|int\\|string\\.$#"
 			count: 1
 			path: tests/integration/Repository/RichTextFieldTypeIntegrationTest.php
 
