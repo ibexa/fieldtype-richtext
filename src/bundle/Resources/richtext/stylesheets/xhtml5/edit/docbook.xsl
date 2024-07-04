@@ -9,6 +9,9 @@
     version="1.0">
   <xsl:output indent="yes" encoding="UTF-8"/>
 
+  <xsl:key name="ids" match="*[@id]" use="@id"/>
+  <xsl:key name="ids" match="ezxhtml5:a[@name]" use="@name"/>
+
   <xsl:template match="/ezxhtml5:section">
     <section xmlns="http://docbook.org/ns/docbook"
              xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -100,13 +103,30 @@
     </xsl:choose>
   </xsl:template>
 
+  <xsl:template name="addUniqueIdAttribute">
+    <xsl:param name="attribute"/>
+
+    <xsl:if test="$attribute">
+      <xsl:choose>
+        <xsl:when test="count(key('ids', $attribute)) &gt; 1">
+          <xsl:attribute name="xml:id">
+            <xsl:value-of select="concat($attribute, '_', generate-id(.))"/>
+          </xsl:attribute>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:attribute name="xml:id">
+            <xsl:value-of select="$attribute"/>
+          </xsl:attribute>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:if>
+  </xsl:template>
+
   <xsl:template match="ezxhtml5:p" name="paragraph">
     <para>
-      <xsl:if test="@id">
-        <xsl:attribute name="xml:id">
-          <xsl:value-of select="@id"/>
-        </xsl:attribute>
-      </xsl:if>
+      <xsl:call-template name="addUniqueIdAttribute">
+        <xsl:with-param name="attribute" select="@id"/>
+      </xsl:call-template>
       <xsl:if test="@class">
         <xsl:attribute name="ezxhtml:class">
           <xsl:value-of select="@class"/>
@@ -140,11 +160,9 @@
 
   <xsl:template match="ezxhtml5:pre">
     <xsl:element name="programlisting">
-      <xsl:if test="@id">
-        <xsl:attribute name="xml:id">
-          <xsl:value-of select="@id"/>
-        </xsl:attribute>
-      </xsl:if>
+      <xsl:call-template name="addUniqueIdAttribute">
+        <xsl:with-param name="attribute" select="@id"/>
+      </xsl:call-template>
       <xsl:if test="@class">
         <xsl:attribute name="ezxhtml:class">
           <xsl:value-of select="@class"/>
@@ -258,11 +276,9 @@
           </xsl:otherwise>
         </xsl:choose>
       </xsl:attribute>
-      <xsl:if test="@id">
-        <xsl:attribute name="xml:id">
-          <xsl:value-of select="@id"/>
-        </xsl:attribute>
-      </xsl:if>
+      <xsl:call-template name="addUniqueIdAttribute">
+        <xsl:with-param name="attribute" select="@id"/>
+      </xsl:call-template>
       <xsl:if test="@title">
         <xsl:attribute name="xlink:title">
           <xsl:value-of select="@title"/>
@@ -283,13 +299,13 @@
   <xsl:template name="link.anchor">
     <xsl:param name="attribute"/>
     <anchor>
-      <xsl:attribute name="xml:id">
-        <xsl:value-of select="$attribute"/>
-      </xsl:attribute>
+      <xsl:call-template name="addUniqueIdAttribute">
+        <xsl:with-param name="attribute" select="$attribute"/>
+      </xsl:call-template>
     </anchor>
   </xsl:template>
 
-  <xsl:template match="ezxhtml5:a[not(@name=preceding::ezxhtml5:a/@name)]">
+  <xsl:template match="ezxhtml5:a">
     <xsl:choose>
       <xsl:when test="@href">
         <xsl:call-template name="link.href"/>
@@ -322,11 +338,9 @@
           <xsl:value-of select="@class"/>
         </xsl:attribute>
       </xsl:if>
-      <xsl:if test="@id">
-        <xsl:attribute name="xml:id">
-          <xsl:value-of select="@id"/>
-        </xsl:attribute>
-      </xsl:if>
+      <xsl:call-template name="addUniqueIdAttribute">
+        <xsl:with-param name="attribute" select="@id"/>
+      </xsl:call-template>
       <xsl:if test="contains( @style, 'text-align:' )">
         <xsl:variable name="textAlign">
           <xsl:call-template name="extractTextAlignValue">
@@ -349,11 +363,9 @@
 
   <xsl:template match="ezxhtml5:ol">
     <orderedlist>
-      <xsl:if test="@id">
-        <xsl:attribute name="xml:id">
-          <xsl:value-of select="@id"/>
-        </xsl:attribute>
-      </xsl:if>
+      <xsl:call-template name="addUniqueIdAttribute">
+        <xsl:with-param name="attribute" select="@id"/>
+      </xsl:call-template>
       <xsl:if test="@class">
         <xsl:attribute name="ezxhtml:class">
           <xsl:value-of select="@class"/>
@@ -376,11 +388,9 @@
 
   <xsl:template match="ezxhtml5:ul">
     <itemizedlist>
-      <xsl:if test="@id">
-        <xsl:attribute name="xml:id">
-          <xsl:value-of select="@id"/>
-        </xsl:attribute>
-      </xsl:if>
+      <xsl:call-template name="addUniqueIdAttribute">
+        <xsl:with-param name="attribute" select="@id"/>
+      </xsl:call-template>
       <xsl:if test="@class">
         <xsl:attribute name="ezxhtml:class">
           <xsl:value-of select="@class"/>
@@ -430,11 +440,9 @@
       </xsl:choose>
     </xsl:variable>
     <xsl:element name="{$tablename}" namespace="http://docbook.org/ns/docbook">
-      <xsl:if test="@id">
-        <xsl:attribute name="xml:id">
-          <xsl:value-of select="@id"/>
-        </xsl:attribute>
-      </xsl:if>
+      <xsl:call-template name="addUniqueIdAttribute">
+        <xsl:with-param name="attribute" select="@id"/>
+      </xsl:call-template>
       <xsl:if test="@class">
         <xsl:attribute name="class">
           <xsl:value-of select="@class"/>
@@ -665,11 +673,9 @@
   </xsl:template>
 
   <xsl:template name="addCommonEmbedAttributes">
-    <xsl:if test="@id">
-      <xsl:attribute name="xml:id">
-        <xsl:value-of select="@id"/>
-      </xsl:attribute>
-    </xsl:if>
+    <xsl:call-template name="addUniqueIdAttribute">
+      <xsl:with-param name="attribute" select="@id"/>
+    </xsl:call-template>
     <xsl:if test="@data-href">
       <xsl:attribute name="xlink:href">
         <xsl:value-of select="@data-href"/>
@@ -712,11 +718,9 @@
           <xsl:value-of select="@title"/>
         </xsl:attribute>
       </xsl:if>
-      <xsl:if test="@id">
-        <xsl:attribute name="xml:id">
-          <xsl:value-of select="@id"/>
-        </xsl:attribute>
-      </xsl:if>
+      <xsl:call-template name="addUniqueIdAttribute">
+        <xsl:with-param name="attribute" select="@id"/>
+      </xsl:call-template>
       <xsl:if test="@class">
         <xsl:attribute name="ezxhtml:class">
           <xsl:value-of select="@class"/>
@@ -761,10 +765,10 @@
           <xsl:value-of select="@class"/>
         </xsl:attribute>
       </xsl:if>
-      <xsl:if test="@id">
-        <xsl:attribute name="xml:id">
-          <xsl:value-of select="@id"/>
-        </xsl:attribute>
+      <xsl:if test="@data-ezelement='eztemplate'">
+        <xsl:call-template name="addUniqueIdAttribute">
+          <xsl:with-param name="attribute" select="@id"/>
+        </xsl:call-template>
       </xsl:if>
       <xsl:if test="contains( @style, 'text-align:' )">
         <xsl:variable name="textAlign">
