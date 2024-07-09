@@ -125,7 +125,12 @@ const VIEWPORT_TOP_OFFSET_DISTRACTION_FREE_MODE = 0;
             const wrapper = this.getHTMLDocumentFragment(container.closest('.ibexa-data-source').querySelector('textarea').value);
             const section = wrapper.childNodes[0];
             const { toolbar, extraPlugins = [], extraConfig = {} } = window.ibexa.richText.CKEditor;
-            const locale = new Intl.Locale(doc.querySelector('meta[name="LanguageCode"]').content);
+            let locale;
+            try{
+                locale  = new Intl.Locale(doc.querySelector('meta[name="LanguageCode"]').content);
+            }catch (e){
+                locale  = new Intl.Locale('eng-GB');
+            }
             const blockCustomStyles = Object.entries(ibexa.richText.customStyles)
                 .filter(([, customStyleConfig]) => !customStyleConfig.inline)
                 .map(([customStyleName, customStyleConfig]) => {
