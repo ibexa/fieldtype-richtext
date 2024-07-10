@@ -16,14 +16,28 @@ use Ibexa\FieldTypeRichText\Configuration\UI\Mapper\CustomTemplateConfigMapper;
  * Custom Tags configuration provider.
  *
  * @internal For internal use by RichText package
+ *
+ * @phpstan-type TConfigOutput array{
+ *     label: string,
+ *     description: string,
+ *     isInline: bool,
+ *     icon?: string,
+ *     attributes?: array<string, TConfigAttributeOutput>
+ * }
+ * @phpstan-type TConfigAttributeOutput array{
+ *     type: string,
+ *     required: bool,
+ *     defaultValue: mixed,
+ *     label: string,
+ *     choices?: array<string>,
+ *     choicesLabel?: array<string, string>,
+ * }
  */
 final class CustomTag implements Provider
 {
-    /** @var \Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface */
-    private $configResolver;
+    private ConfigResolverInterface $configResolver;
 
-    /** @var \Ibexa\FieldTypeRichText\Configuration\UI\Mapper\CustomTag */
-    private $customTagConfigurationMapper;
+    private CustomTemplateConfigMapper $customTagConfigurationMapper;
 
     public function __construct(
         ConfigResolverInterface $configResolver,
@@ -39,7 +53,7 @@ final class CustomTag implements Provider
     }
 
     /**
-     * @return array RichText Custom Tags config
+     * @phpstan-return array<TConfigOutput> RichText Custom Tags config
      */
     public function getConfiguration(): array
     {

@@ -30,7 +30,7 @@ final class ChoiceAttributeMapper extends CommonAttributeMapper implements Attri
     ): array {
         $parentConfig = parent::mapConfig($tagName, $attributeName, $customTagAttributeProperties);
 
-        $parentConfig['choices'] = $customTagAttributeProperties['choices'];
+        $parentConfig['choices'] = $customTagAttributeProperties['choices'] ?? [];
         $parentConfig['choicesLabel'] = [];
 
         foreach ($parentConfig['choices'] as $choice) {
