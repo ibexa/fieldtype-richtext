@@ -12,26 +12,23 @@ namespace Ibexa\FieldTypeRichText\Configuration\UI\Mapper\CustomTag;
  * Map RichText Custom Tag attribute of supported type to proper UI config.
  *
  * @internal For internal use by RichText package
+ *
+ * @phpstan-import-type TConfigAttribute from \Ibexa\FieldTypeRichText\Configuration\UI\Mapper\CustomTag
+ * @phpstan-import-type TConfigAttributeOutput from \Ibexa\FieldTypeRichText\Configuration\UI\Mapper\CustomTag
  */
 interface AttributeMapper
 {
     /**
      * Check if mapper supports given Custom Tag attribute type.
-     *
-     * @param string $attributeType
-     *
-     * @return bool
      */
     public function supports(string $attributeType): bool;
 
     /**
      * Map Configuration for the given Custom Tag attribute type.
      *
-     * @param string $tagName
-     * @param string $attributeName
-     * @param array $customTagAttributeProperties
+     * @phpstan-param TConfigAttribute $customTagAttributeProperties
      *
-     * @return array Mapped attribute configuration
+     * @phpstan-return TConfigAttributeOutput Mapped attribute configuration
      */
     public function mapConfig(
         string $tagName,
