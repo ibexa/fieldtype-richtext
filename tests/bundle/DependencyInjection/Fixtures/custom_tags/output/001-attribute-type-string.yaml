@@ -9,3 +9,9 @@ custom_tags:
                 default_value: 'abc'
         is_inline: false
 custom_styles: []
+enabled_attribute_types:
+    - 'number'
+    - 'string'
+    - 'boolean'
+    - 'choice'
+    - 'link'

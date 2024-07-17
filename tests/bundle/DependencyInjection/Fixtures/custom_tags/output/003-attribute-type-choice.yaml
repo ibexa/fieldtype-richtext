@@ -10,3 +10,9 @@ custom_tags:
                 choices: ['choice-1', 'choice-2']
         is_inline: false
 custom_styles: []
+enabled_attribute_types:
+    - 'number'
+    - 'string'
+    - 'boolean'
+    - 'choice'
+    - 'link'
