@@ -46,7 +46,7 @@ EOT;
     /**
      * @see \Ibexa\Core\FieldType\Value
      */
-    public function __toString()
+    public function __toString(): string
     {
         return isset($this->xml) ? (string)$this->xml->saveXML() : self::EMPTY_VALUE;
     }

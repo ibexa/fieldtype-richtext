@@ -10,6 +10,7 @@ namespace Ibexa\Bundle\FieldTypeRichText\DependencyInjection;
 
 use Ibexa\Contracts\Core\Container\Encore\ConfigurationDumper as IbexaEncoreConfigurationDumper;
 use Ibexa\Contracts\FieldTypeRichText\Configuration\Provider;
+use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Config\Resource\FileResource;
@@ -39,7 +40,7 @@ class IbexaFieldTypeRichTextExtension extends Extension implements PrependExtens
         ],
     ];
 
-    public function getAlias()
+    public function getAlias(): string
     {
         return self::EXTENSION_NAME;
     }
@@ -193,7 +194,7 @@ class IbexaFieldTypeRichTextExtension extends Extension implements PrependExtens
         ]);
     }
 
-    public function getConfiguration(array $config, ContainerBuilder $container)
+    public function getConfiguration(array $config, ContainerBuilder $container): ?ConfigurationInterface
     {
         return new Configuration();
     }
