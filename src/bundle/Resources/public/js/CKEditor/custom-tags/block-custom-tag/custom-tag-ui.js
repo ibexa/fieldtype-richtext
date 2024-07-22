@@ -120,6 +120,14 @@ class IbexaCustomTagUI extends Plugin {
                 newValues[name] = attributeView.fieldView.element.value;
             });
 
+            Object.entries(this.formView.attributeViews).forEach(([name, attributeView]) => {
+                if (newValues[name] !== undefined) {
+                    return;
+                }
+
+                newValues[name] = attributeView.fieldView.element.value;
+            });
+
             this.editor.model.change((writer) => {
                 writer.setAttribute('values', newValues, modelElement);
             });
