@@ -62,7 +62,7 @@ class IbexaCustomAttributesCommand extends Command {
 
             const commonAncestor = selectedBlock.getCommonAncestor(nextBlock);
 
-            return commonAncestor.name === 'tableRow';
+            return commonAncestor.name === 'tableRow' || commonAncestor.name === 'tableCell';
         });
 
         return !areBlocksInSameRow && isTableRow;
