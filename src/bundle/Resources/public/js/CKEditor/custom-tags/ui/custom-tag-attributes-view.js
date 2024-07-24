@@ -60,6 +60,8 @@ class IbexaCustomTagAttributesView extends View {
 
         Object.entries(attributes).forEach(([name, config]) => {
             const value = values[name] === null || values[name] === undefined || values[name] === '' ? '-' : values[name];
+            const getValueLabelMethods = window.ibexa.richText.CKEditor.customTags.getValueLabelMethods || {};
+            const valueLabel = getValueLabelMethods[name] && value !== '-' ? getValueLabelMethods[name](value, config) : value;
 
             children.push({
                 tag: 'div',
@@ -79,7 +81,7 @@ class IbexaCustomTagAttributesView extends View {
                         attributes: {
                             class: 'ibexa-custom-tag-attributes__item-value',
                         },
-                        children: [value],
+                        children: [valueLabel],
                     },
                 ],
             });
