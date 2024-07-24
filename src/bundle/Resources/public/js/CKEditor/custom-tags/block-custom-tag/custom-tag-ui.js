@@ -112,12 +112,13 @@ class IbexaCustomTagUI extends Plugin {
 
             Object.keys(values).forEach((name) => {
                 const attributeView = this.formView.attributeViews[name];
+                const getValue = this.formView.getValueMethods[this.config.attributes[name].type];
 
-                if (!attributeView) {
+                if (!attributeView || !getValue) {
                     return;
                 }
 
-                newValues[name] = attributeView.fieldView.element.value;
+                newValues[name] = getValue(attributeView);
             });
 
             this.editor.model.change((writer) => {

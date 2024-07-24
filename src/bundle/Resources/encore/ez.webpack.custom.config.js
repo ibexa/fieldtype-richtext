@@ -14,6 +14,7 @@ Encore.addEntry('ibexa-richtext-onlineeditor-js', [path.resolve(__dirname, '../p
 
 Encore.addAliases({
     '@ckeditor': path.resolve('./public/bundles/ibexaadminuiassets/vendors/@ckeditor'),
+    '@fieldtype-richtext': path.resolve('./vendor/ibexa/fieldtype-richtext'),
 });
 
 const customConfig = Encore.getWebpackConfig();
