@@ -133,6 +133,10 @@ class IbexaCustomTagUI extends Plugin {
             this.hideForm();
         });
 
+        this.listenTo(formView, 'ibexa-ckeditor-update-balloon-position', () => {
+            this.balloon.updatePosition(this.getBalloonPositionData());
+        });
+
         return formView;
     }
 

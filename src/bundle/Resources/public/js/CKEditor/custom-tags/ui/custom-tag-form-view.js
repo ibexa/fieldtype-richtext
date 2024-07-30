@@ -185,7 +185,9 @@ class IbexaCustomTagFormView extends View {
                 }
 
                 const createAttribute = createAttributeMethod.bind(this);
-                const attributeView = createAttribute(config, this.locale);
+                const attributeView = createAttribute(config, this.locale, name);
+
+                attributeView.delegate('ibexa-ckeditor-update-balloon-position').to(this, 'ibexa-ckeditor-update-balloon-position');
 
                 this.attributeViews[name] = attributeView;
 
