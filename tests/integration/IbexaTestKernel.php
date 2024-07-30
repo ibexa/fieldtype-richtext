@@ -23,7 +23,6 @@ use Ibexa\Contracts\Test\Core\IbexaTestKernel as BaseIbexaTestKernel;
 use Ibexa\Core\Persistence\Cache\Identifier\CacheIdentifierGeneratorInterface;
 use Knp\Bundle\MenuBundle\KnpMenuBundle;
 use Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle;
-use Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle;
 use Symfony\Component\Cache\Adapter\TagAwareAdapterInterface;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\Config\Resource\FileResource;
@@ -41,7 +40,6 @@ final class IbexaTestKernel extends BaseIbexaTestKernel
         yield new LexikJWTAuthenticationBundle();
         yield new HautelookTemplatedUriBundle();
         yield new WebpackEncoreBundle();
-        yield new SwiftmailerBundle();
         yield new KnpMenuBundle();
 
         yield new IbexaRestBundle();
