@@ -110,13 +110,7 @@ class IbexaCustomTagUI extends Plugin {
 
             this.isNew = false;
 
-            Object.keys(values).forEach((name) => {
-                const attributeView = this.formView.attributeViews[name];
-
-                if (!attributeView) {
-                    return;
-                }
-
+            Object.entries(this.formView.attributeViews).forEach(([name, attributeView]) => {
                 newValues[name] = attributeView.fieldView.element.value;
             });
 
