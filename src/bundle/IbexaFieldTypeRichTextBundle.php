@@ -13,6 +13,7 @@ use Ibexa\Bundle\FieldTypeRichText\DependencyInjection\Compiler\RichTextHtml5Con
 use Ibexa\Bundle\FieldTypeRichText\DependencyInjection\Configuration\Parser\FieldType\RichText;
 use Ibexa\Bundle\FieldTypeRichText\DependencyInjection\IbexaFieldTypeRichTextExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
@@ -47,7 +48,7 @@ class IbexaFieldTypeRichTextBundle extends Bundle
         return $container->getExtension('ibexa');
     }
 
-    public function getContainerExtension()
+    public function getContainerExtension(): ?ExtensionInterface
     {
         if (!isset($this->extension)) {
             $this->extension = new IbexaFieldTypeRichTextExtension();
