@@ -129,6 +129,9 @@ const VIEWPORT_TOP_OFFSET_DISTRACTION_FREE_MODE = 0;
             try {
                 locale = new Intl.Locale(doc.querySelector('meta[name="LanguageCode"]').content);
             } catch (e) {
+                console.warn(
+                    `Unsupported LanguageCode '${doc.querySelector('meta[name="LanguageCode"]').content}' - using fallback 'eng-GB'.`,
+                );
                 locale = new Intl.Locale('eng-GB');
             }
             const blockCustomStyles = Object.entries(ibexa.richText.customStyles)
