@@ -229,7 +229,37 @@ class RichTextTest extends TestCase
                 [
                     new ValidationError(
                         "Validation of XML content failed:\n" .
-                        '/section/para/link: using scripts in links is not allowed',
+                        '/section/para/link: links must start with one of: http://, https://, mailto:, ezcontent://, ezlocation://, #',
+                        null,
+                        [],
+                        'xml'
+                    ),
+                ],
+            ],
+            [
+                '<?xml version="1.0" encoding="UTF-8"?>
+<section xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ezxhtml="http://ez.no/xmlns/ezpublish/docbook/xhtml" xmlns:ezcustom="http://ez.no/xmlns/ezpublish/docbook/custom" version="5.0-variant ezpublish-1.0">
+  <para><link xlink:href="jAvAsCriPt:alert(\'XSS\');">link</link></para>
+</section>',
+                [
+                    new ValidationError(
+                        "Validation of XML content failed:\n" .
+                        '/section/para/link: links must start with one of: http://, https://, mailto:, ezcontent://, ezlocation://, #',
+                        null,
+                        [],
+                        'xml'
+                    ),
+                ],
+            ],
+            [
+                '<?xml version="1.0" encoding="UTF-8"?>
+<section xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ezxhtml="http://ez.no/xmlns/ezpublish/docbook/xhtml" xmlns:ezcustom="http://ez.no/xmlns/ezpublish/docbook/custom" version="5.0-variant ezpublish-1.0">
+  <para><link xlink:href="https://example.com/foo&lt;bar">link</link></para>
+</section>',
+                [
+                    new ValidationError(
+                        "Validation of XML content failed:\n" .
+                        '/section/para/link: using characters [< > "] in links is not allowed',
                         null,
                         [],
                         'xml'
@@ -244,7 +274,7 @@ class RichTextTest extends TestCase
                 [
                     new ValidationError(
                         "Validation of XML content failed:\n" .
-                        '/section/para/link: using scripts in links is not allowed',
+                        '/section/para/link: links must start with one of: http://, https://, mailto:, ezcontent://, ezlocation://, #',
                         null,
                         [],
                         'xml'
