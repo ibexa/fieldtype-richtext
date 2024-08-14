@@ -229,7 +229,7 @@ class RichTextTest extends TestCase
                 [
                     new ValidationError(
                         "Validation of XML content failed:\n" .
-                        '/section/para/link: links must start with one of: http://, https://, mailto:, ezcontent://, ezlocation://, #',
+                        '/section/para/link: links must start with one of: http://, https://, mailto:, ezcontent://, ezlocation://, ezremote://, ezurl://, #',
                         null,
                         [],
                         'xml'
@@ -244,7 +244,7 @@ class RichTextTest extends TestCase
                 [
                     new ValidationError(
                         "Validation of XML content failed:\n" .
-                        '/section/para/link: links must start with one of: http://, https://, mailto:, ezcontent://, ezlocation://, #',
+                        '/section/para/link: links must start with one of: http://, https://, mailto:, ezcontent://, ezlocation://, ezremote://, ezurl://, #',
                         null,
                         [],
                         'xml'
@@ -274,7 +274,7 @@ class RichTextTest extends TestCase
                 [
                     new ValidationError(
                         "Validation of XML content failed:\n" .
-                        '/section/para/link: links must start with one of: http://, https://, mailto:, ezcontent://, ezlocation://, #',
+                        '/section/para/link: links must start with one of: http://, https://, mailto:, ezcontent://, ezlocation://, ezremote://, ezurl://, #',
                         null,
                         [],
                         'xml'

@@ -258,8 +258,10 @@
                       starts-with(translate(@*[name()='xlink:href'], $upperCase, $lowerCase), 'mailto:') or
                       starts-with(translate(@*[name()='xlink:href'], $upperCase, $lowerCase), 'ezcontent://') or
                       starts-with(translate(@*[name()='xlink:href'], $upperCase, $lowerCase), 'ezlocation://') or
+                      starts-with(translate(@*[name()='xlink:href'], $upperCase, $lowerCase), 'ezremote://') or
+                      starts-with(translate(@*[name()='xlink:href'], $upperCase, $lowerCase), 'ezurl://') or
                       starts-with(translate(@*[name()='xlink:href'], $upperCase, $lowerCase), '#')"
-                mode="schematron-get-full-path-2">links must start with one of: http://, https://, mailto:, ezcontent://, ezlocation://, #</s:assert>
+                mode="schematron-get-full-path-2">links must start with one of: http://, https://, mailto:, ezcontent://, ezlocation://, ezremote://, ezurl://, #</s:assert>
       <s:assert test="not(contains(@*[name()='xlink:href'], '&lt;') or
                           contains(@*[name()='xlink:href'], '&gt;') or
                           contains(@*[name()='xlink:href'], '&quot;'))"
