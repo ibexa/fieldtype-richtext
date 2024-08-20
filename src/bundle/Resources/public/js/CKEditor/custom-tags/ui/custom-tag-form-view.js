@@ -19,9 +19,9 @@ class IbexaCustomTagFormView extends View {
         this.saveButtonView = this.createButton('Save', null, 'ck-button-save', 'save-custom-tag');
         this.cancelButtonView = this.createButton('Cancel', null, 'ck-button-cancel', 'cancel-custom-tag');
 
-        const attributeRenderMethods = window.ibexa.richText.CKEditor.customTags.attributeRenderMethods || {};
-        const setValueMethods = window.ibexa.richText.CKEditor.customTags.setValueMethods || {};
-        const getValueMethods = window.ibexa.richText.CKEditor.customTags.getValueMethods || {};
+        const attributeRenderMethods = window.ibexa.richText.CKEditor.customTags?.attributeRenderMethods || {};
+        const setValueMethods = window.ibexa.richText.CKEditor.customTags?.setValueMethods || {};
+        const getValueMethods = window.ibexa.richText.CKEditor.customTags?.getValueMethods || {};
 
         this.attributeViews = {};
         this.attributeRenderMethods = {
