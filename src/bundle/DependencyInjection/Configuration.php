@@ -18,18 +18,19 @@ class Configuration extends SiteAccessConfiguration
 {
     public const CUSTOM_TAG_ATTRIBUTE_TYPES = ['number', 'string', 'boolean', 'choice', 'link'];
 
-    /**
-     * Generates the configuration tree builder.
-     *
-     * @return \Symfony\Component\Config\Definition\Builder\TreeBuilder The tree builder
-     */
-    public function getConfigTreeBuilder()
+    public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder(IbexaFieldTypeRichTextExtension::EXTENSION_NAME);
 
         $rootNode = $treeBuilder->getRootNode();
 
         $sections = $rootNode->children();
+
+        $rootNode
+            ->children()
+                ->booleanNode('expose_config_as_global')->defaultFalse()->end()
+            ->end();
+
         $this
             ->addEnabledAttributeTypesSection($sections);
         $this

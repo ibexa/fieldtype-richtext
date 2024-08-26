@@ -22,13 +22,20 @@ final class RichTextConfigurationExtension extends AbstractExtension implements 
     /** @var \Ibexa\Contracts\FieldTypeRichText\Configuration\ProviderService */
     private $configurationProvider;
 
-    public function __construct(ProviderService $configurationProvider)
+    private bool $exposeGlobals;
+
+    public function __construct(ProviderService $configurationProvider, bool $exposeGlobals = false)
     {
         $this->configurationProvider = $configurationProvider;
+        $this->exposeGlobals = $exposeGlobals;
     }
 
     public function getGlobals(): array
     {
+        if (!$this->exposeGlobals) {
+            return [];
+        }
+
         $config = $this->configurationProvider->getConfiguration();
 
         return [
