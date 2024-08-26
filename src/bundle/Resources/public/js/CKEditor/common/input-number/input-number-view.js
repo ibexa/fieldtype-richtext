@@ -23,6 +23,8 @@ export default class InputNumberView extends InputTextView {
                 readonly: bindTemplate.to('isReadOnly'),
                 'aria-invalid': bindTemplate.if('hasError', true),
                 'aria-describedby': bindTemplate.to('ariaDescribedById'),
+                min: bindTemplate.to('min'),
+                max: bindTemplate.to('max'),
             },
             on: {
                 input: bindTemplate.to('input'),
