@@ -82,6 +82,7 @@ class IbexaFieldTypeRichTextExtension extends Extension implements PrependExtens
         $loader->load('configuration.yaml');
         $loader->load('api.yaml');
         $loader->load('command.yaml');
+        $loader->load('controller.yaml');
 
         $configuration = $this->getConfiguration($configs, $container);
         $config = $this->processConfiguration($configuration, $configs);
