@@ -55,6 +55,9 @@ jobs:
                   extensions: pdo_sqlite, gd
                   tools: cs2pr
 
+            - name: Require ibexa/core#421 dev branch
+              run: composer req --no-update ibexa/core:"dev-fix-sqlite-sequence-range as 4.6.x-dev"
+
             - uses: ./.github/actions/composer-install
 
             - name: Setup problem matchers for PHPUnit
