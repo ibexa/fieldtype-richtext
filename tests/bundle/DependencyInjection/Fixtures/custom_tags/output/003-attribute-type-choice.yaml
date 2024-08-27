@@ -16,4 +16,4 @@ enabled_attribute_types:
     - 'boolean'
     - 'choice'
     - 'link'
-expose_config_as_global: false
+expose_config_as_global: true

@@ -36,6 +36,14 @@ final class RichTextConfigurationExtension extends AbstractExtension implements 
             return [];
         }
 
+        trigger_deprecation(
+            'ibexa/fieldtype-richtext',
+            '4.6',
+            'Richtext configuration as global Twig variable is deprecated and will be removed in 5.0. '
+            . 'Set bundle\'s configuration "ibexa_fieldtype_richtext.expose_config_as_global to false '
+            . 'and acquire RichText configuration via REST API instead.',
+        );
+
         $config = $this->configurationProvider->getConfiguration();
 
         return [
