@@ -19,6 +19,10 @@ class IbexaCustomTagFormView extends View {
         this.saveButtonView = this.createButton('Save', null, 'ck-button-save', 'save-custom-tag');
         this.cancelButtonView = this.createButton('Cancel', null, 'ck-button-cancel', 'cancel-custom-tag');
 
+        const attributeRenderMethods = window.ibexa.richText.CKEditor.customTags?.attributeRenderMethods || {};
+        const setValueMethods = window.ibexa.richText.CKEditor.customTags?.setValueMethods || {};
+        const getValueMethods = window.ibexa.richText.CKEditor.customTags?.getValueMethods || {};
+
         this.attributeViews = {};
         this.attributeRenderMethods = {
             string: this.createTextInput,
@@ -26,6 +30,7 @@ class IbexaCustomTagFormView extends View {
             choice: this.createDropdown,
             boolean: this.createBoolean,
             link: this.createTextInput,
+            ...attributeRenderMethods,
         };
         this.setValueMethods = {
             string: this.setStringValue,
@@ -33,6 +38,16 @@ class IbexaCustomTagFormView extends View {
             choice: this.setChoiceValue,
             boolean: this.setBooleanValue,
             link: this.setStringValue,
+            ...setValueMethods,
+        };
+
+        this.getValueMethods = {
+            string: this.getStringValue,
+            number: this.getNumberValue,
+            choice: this.getChoiceValue,
+            boolean: this.getBooleanValue,
+            link: this.getStringValue,
+            ...getValueMethods,
         };
     }
 
@@ -75,6 +90,22 @@ class IbexaCustomTagFormView extends View {
         attributeView.fieldView.element.value = value;
         attributeView.fieldView.set('value', value);
         attributeView.fieldView.set('isEmpty', false);
+    }
+
+    getNumberValue(attributeView) {
+        return attributeView.fieldView.element.value;
+    }
+
+    getStringValue(attributeView) {
+        return attributeView.fieldView.element.value;
+    }
+
+    getChoiceValue(attributeView) {
+        return attributeView.fieldView.element.value;
+    }
+
+    getBooleanValue(attributeView) {
+        return attributeView.fieldView.element.value;
     }
 
     setChildren(childrenData, label) {
@@ -154,7 +185,9 @@ class IbexaCustomTagFormView extends View {
                 }
 
                 const createAttribute = createAttributeMethod.bind(this);
-                const attributeView = createAttribute(config);
+                const attributeView = createAttribute(config, this.locale, name);
+
+                attributeView.delegate('ibexa-ckeditor-update-balloon-position').to(this, 'ibexa-ckeditor-update-balloon-position');
 
                 this.attributeViews[name] = attributeView;
 
