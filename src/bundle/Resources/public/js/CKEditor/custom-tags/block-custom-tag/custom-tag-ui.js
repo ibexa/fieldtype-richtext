@@ -111,7 +111,13 @@ class IbexaCustomTagUI extends Plugin {
             this.isNew = false;
 
             Object.entries(this.formView.attributeViews).forEach(([name, attributeView]) => {
-                newValues[name] = attributeView.fieldView.element.value;
+                const getValue = this.formView.getValueMethods[this.config.attributes[name].type];
+
+                if (!getValue) {
+                    return;
+                }
+
+                newValues[name] = getValue(attributeView);
             });
 
             this.editor.model.change((writer) => {
@@ -124,6 +130,10 @@ class IbexaCustomTagUI extends Plugin {
 
         this.listenTo(formView, 'cancel-custom-tag', () => {
             this.hideForm();
+        });
+
+        this.listenTo(formView, 'ibexa-ckeditor-update-balloon-position', () => {
+            this.balloon.updatePosition(this.getBalloonPositionData());
         });
 
         return formView;
