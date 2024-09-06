@@ -90,6 +90,7 @@ class IbexaInlineCustomTagUI extends Plugin {
             position: this.getBalloonPositionData(),
         });
 
+        this.setFormFieldsNodeHeight();
         this.balloon.updatePosition(this.getBalloonPositionData());
     }
 
@@ -113,6 +114,21 @@ class IbexaInlineCustomTagUI extends Plugin {
         const range = viewDocument.selection.getFirstRange();
 
         return { target: view.domConverter.viewRangeToDom(range) };
+    }
+
+    setFormFieldsNodeHeight() {
+        const { innerHeight: windowHeight } = window;
+        const { top: panelTopPosition } = this.balloon.view;
+        const { element: panelNode } = this.balloon.view;
+        const headerNode = panelNode.querySelector('.ibexa-ckeditor-balloon-form__header');
+        const formFieldsNode = panelNode.querySelector('.ibexa-ckeditor-balloon-form__fields');
+        const actionNode = panelNode.querySelector('.ibexa-ckeditor-balloon-form__actions');
+        const isPanelOverTopWindowEdge = panelTopPosition < 0;
+        const maxHeightValue = isPanelOverTopWindowEdge
+            ? formFieldsNode.offsetHeight - Math.abs(panelTopPosition)
+            : windowHeight - panelTopPosition - headerNode.offsetHeight - actionNode.offsetHeight;
+
+        formFieldsNode.style.maxHeight = `${maxHeightValue}px`;
     }
 
     addInlineCustomTag() {
