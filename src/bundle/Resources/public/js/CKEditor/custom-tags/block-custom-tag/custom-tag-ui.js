@@ -150,6 +150,7 @@ class IbexaCustomTagUI extends Plugin {
             position: { target },
         });
 
+        this.setPanelContentMaxHeight();
         this.balloon.updatePosition({ target });
     }
 
@@ -183,6 +184,7 @@ class IbexaCustomTagUI extends Plugin {
             position: this.getBalloonPositionData(),
         });
 
+        this.setPanelContentMaxHeight();
         this.balloon.updatePosition(this.getBalloonPositionData());
     }
 
@@ -215,6 +217,23 @@ class IbexaCustomTagUI extends Plugin {
         const range = viewDocument.selection.getFirstRange();
 
         return { target: view.domConverter.viewRangeToDom(range) };
+    }
+
+    setPanelContentMaxHeight() {
+        const { innerHeight: windowHeight } = window;
+        const { top: panelTopPosition } = this.balloon.view;
+        const { element: panelNode } = this.balloon.view;
+        const panelHeader = panelNode.querySelector('.ibexa-custom-tag-panel-header');
+        const panelContent = panelNode.querySelector('.ibexa-custom-tag-panel-content');
+        const panelFooter = panelNode.querySelector('.ibexa-custom-tag-panel-footer');
+        const panelHeaderHeight = panelHeader?.offsetHeight || 0;
+        const panelFooterHeight = panelFooter?.offsetHeight || 0;
+        const isPanelOverTopWindowEdge = panelTopPosition < 0;
+        const maxHeightValue = isPanelOverTopWindowEdge
+            ? panelContent.offsetHeight - Math.abs(panelTopPosition)
+            : windowHeight - panelTopPosition - panelHeaderHeight - panelFooterHeight;
+
+        panelContent.style.maxHeight = `${maxHeightValue}px`;
     }
 
     addCustomTag() {
