@@ -118,13 +118,12 @@ class IbexaInlineCustomTagUI extends Plugin {
 
     setPanelContentMaxHeight() {
         const { innerHeight: windowHeight } = window;
-        const { top: panelTopPosition } = this.balloon.view;
-        const { element: panelNode } = this.balloon.view;
+        const { top: panelTopPosition, element: panelNode } = this.balloon.view;
         const panelHeader = panelNode.querySelector('.ibexa-custom-tag-panel-header');
         const panelContent = panelNode.querySelector('.ibexa-custom-tag-panel-content');
         const panelFooter = panelNode.querySelector('.ibexa-custom-tag-panel-footer');
-        const panelHeaderHeight = panelHeader?.offsetHeight || 0;
-        const panelFooterHeight = panelFooter?.offsetHeight || 0;
+        const panelHeaderHeight = panelHeader?.offsetHeight ?? 0;
+        const panelFooterHeight = panelFooter?.offsetHeight ?? 0;
         const isPanelOverTopWindowEdge = panelTopPosition < 0;
         const maxHeightValue = isPanelOverTopWindowEdge
             ? panelContent.offsetHeight - Math.abs(panelTopPosition)
