@@ -2,6 +2,7 @@ import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
 import clickOutsideHandler from '@ckeditor/ckeditor5-ui/src/bindings/clickoutsidehandler';
 import ClickObserver from '@ckeditor/ckeditor5-engine/src/view/observer/clickobserver';
 
+import { setPanelContentMaxHeight } from '../helpers/panel-helper';
 import IbexaCustomTagFormView from '../ui/custom-tag-form-view';
 import IbexaCustomTagAttributesView from '../ui/custom-tag-attributes-view';
 import IbexaButtonView from '../../common/button-view/button-view';
@@ -150,7 +151,7 @@ class IbexaCustomTagUI extends Plugin {
             position: { target },
         });
 
-        this.setPanelContentMaxHeight();
+        setPanelContentMaxHeight(this.balloon.view);
         this.balloon.updatePosition({ target });
     }
 
@@ -184,7 +185,7 @@ class IbexaCustomTagUI extends Plugin {
             position: this.getBalloonPositionData(),
         });
 
-        this.setPanelContentMaxHeight();
+        setPanelContentMaxHeight(this.balloon.view);
         this.balloon.updatePosition(this.getBalloonPositionData());
     }
 
@@ -217,22 +218,6 @@ class IbexaCustomTagUI extends Plugin {
         const range = viewDocument.selection.getFirstRange();
 
         return { target: view.domConverter.viewRangeToDom(range) };
-    }
-
-    setPanelContentMaxHeight() {
-        const { innerHeight: windowHeight } = window;
-        const { top: panelTopPosition, element: panelNode } = this.balloon.view;
-        const panelHeader = panelNode.querySelector('.ibexa-custom-tag-panel-header');
-        const panelContent = panelNode.querySelector('.ibexa-custom-tag-panel-content');
-        const panelFooter = panelNode.querySelector('.ibexa-custom-tag-panel-footer');
-        const panelHeaderHeight = panelHeader?.offsetHeight ?? 0;
-        const panelFooterHeight = panelFooter?.offsetHeight ?? 0;
-        const isPanelOverTopWindowEdge = panelTopPosition < 0;
-        const maxHeightValue = isPanelOverTopWindowEdge
-            ? panelContent.offsetHeight - Math.abs(panelTopPosition)
-            : windowHeight - panelTopPosition - panelHeaderHeight - panelFooterHeight;
-
-        panelContent.style.maxHeight = `${maxHeightValue}px`;
     }
 
     addCustomTag() {
