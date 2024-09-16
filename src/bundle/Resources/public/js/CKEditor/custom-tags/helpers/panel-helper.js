@@ -4,6 +4,11 @@ const setPanelContentMaxHeight = (balloonView) => {
     const panelHeader = panelNode.querySelector('.ibexa-custom-tag-panel-header');
     const panelContent = panelNode.querySelector('.ibexa-custom-tag-panel-content');
     const panelFooter = panelNode.querySelector('.ibexa-custom-tag-panel-footer');
+
+    if (!panelContent) {
+        return;
+    }
+
     const panelHeaderHeight = panelHeader?.offsetHeight ?? 0;
     const panelFooterHeight = panelFooter?.offsetHeight ?? 0;
     const isPanelOverTopWindowEdge = panelTopPosition < 0;

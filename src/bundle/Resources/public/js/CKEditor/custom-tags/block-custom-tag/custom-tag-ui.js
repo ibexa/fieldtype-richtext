@@ -81,6 +81,8 @@ class IbexaCustomTagUI extends Plugin {
             this.showForm();
         });
 
+        setPanelContentMaxHeight(this.balloon.view);
+
         return attributesView;
     }
 
