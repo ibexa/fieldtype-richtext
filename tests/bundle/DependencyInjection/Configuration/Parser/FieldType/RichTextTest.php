@@ -69,7 +69,7 @@ class RichTextTest extends AbstractParserTestCase
 
             $extensionAlias = $extension->getAlias();
             // when loading extension, pass only relevant configuration
-            $extensionConfig = isset($configs[$extensionAlias]) ? $configs[$extensionAlias] : [];
+            $extensionConfig = $configs[$extensionAlias] ?? [];
 
             $extension->load([$extensionConfig], $this->container);
         }

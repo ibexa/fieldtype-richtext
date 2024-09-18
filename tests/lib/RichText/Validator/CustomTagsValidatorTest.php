@@ -14,16 +14,11 @@ use PHPUnit\Framework\TestCase;
 use Symfony\Component\Yaml\Yaml;
 
 /**
- * Test RichText CustomTagsValidator.
- *
- * @see \Ibexa\FieldTypeRichText\FieldType\RichText\CustomTagsValidator
+ * @covers \Ibexa\FieldTypeRichText\FieldType\RichText\CustomTagsValidator
  */
-class CustomTagsValidatorTest extends TestCase
+final class CustomTagsValidatorTest extends TestCase
 {
-    /**
-     * @var \Ibexa\FieldTypeRichText\RichText\Validator\CustomTagsValidator
-     */
-    private $validator;
+    private CustomTagsValidator $validator;
 
     public function setUp(): void
     {
@@ -36,8 +31,6 @@ class CustomTagsValidatorTest extends TestCase
 
     /**
      * Test validating DocBook document containing Custom Tags.
-     *
-     * @covers \Ibexa\FieldTypeRichText\RichText\CustomTagsValidator::validateDocument
      *
      * @dataProvider providerForTestValidateDocument
      *
