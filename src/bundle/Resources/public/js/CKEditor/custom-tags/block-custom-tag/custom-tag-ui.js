@@ -19,6 +19,22 @@ class IbexaCustomTagUI extends Plugin {
         this.addCustomTag = this.addCustomTag.bind(this);
 
         this.isNew = false;
+        this.lastClassListValue = null;
+        this.observer = new MutationObserver((mutationList) => {
+            for (const mutation of mutationList) {
+                if (this.lastClassListValue !== mutation.target.classList.value) {
+                    if (this.lastClassListValue !== null) {
+                        setPanelContentMaxHeight(this.balloon.view);
+                    }
+
+                    this.lastClassListValue =  mutation.target.classList.value;
+                }
+              }
+        });
+
+        this.observer.observe(this.balloon.view.element, {
+            attributes: true,
+        });
     }
 
     isCustomTagSelected(eventData) {
