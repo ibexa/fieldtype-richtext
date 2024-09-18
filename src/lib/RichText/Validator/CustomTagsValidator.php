@@ -88,7 +88,7 @@ class CustomTagsValidator implements ValidatorInterface
                     continue;
                 }
 
-                if (!in_array($attributeName, $nonEmptyAttributes)) {
+                if (!in_array($attributeName, $nonEmptyAttributes, true)) {
                     $errors[] = "The attribute '{$attributeName}' of RichText Custom Tag '{$tagName}' cannot be empty";
                 }
             }
