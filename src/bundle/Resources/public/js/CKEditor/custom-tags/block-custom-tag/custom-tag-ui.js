@@ -27,9 +27,9 @@ class IbexaCustomTagUI extends Plugin {
                         setPanelContentMaxHeight(this.balloon.view);
                     }
 
-                    this.lastClassListValue =  mutation.target.classList.value;
+                    this.lastClassListValue = mutation.target.classList.value;
                 }
-              }
+            }
         });
 
         this.observer.observe(this.balloon.view.element, {
