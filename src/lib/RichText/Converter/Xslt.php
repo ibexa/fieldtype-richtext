@@ -22,33 +22,29 @@ class Xslt extends XmlBase implements Converter
 {
     /**
      * Path to stylesheet to use.
-     *
-     * @var string
      */
-    protected $stylesheet;
+    protected string $stylesheet;
 
     /**
      * Array of XSL stylesheets to add to the main one, grouped by priority.
      *
-     * @var array
+     * @var array<int, array<string>>
      */
-    protected $customStylesheets = [];
+    protected array $customStylesheets = [];
 
     private XSLTProcessor $xsltProcessor;
 
     /**
-     * Constructor.
-     *
      * @param string $stylesheet Stylesheet to use for conversion
-     * @param array $customStylesheets Array of XSL stylesheets. Each entry consists in a hash having "path" and "priority" keys.
+     * @param array<array{priority: int, path: string}> $customStylesheets Array of XSL stylesheets. Each entry consists in a hash having "path" and "priority" keys.
      */
-    public function __construct($stylesheet, array $customStylesheets = [])
+    public function __construct(string $stylesheet, array $customStylesheets = [])
     {
         $this->stylesheet = $stylesheet;
 
         // Grouping stylesheets by priority.
         foreach ($customStylesheets as $customStylesheet) {
-            $this->customStylesheets[$customStylesheet['priority']][] = $customStylesheet['path'];
+            $this->customStylesheets[(int)$customStylesheet['priority']][] = $customStylesheet['path'];
         }
     }
 
@@ -56,10 +52,9 @@ class Xslt extends XmlBase implements Converter
      * Returns the XSLTProcessor to use to transform internal XML to HTML5.
      *
      * @throws \RuntimeException
-     *
-     * @return \XSLTProcessor
+     * @throws \DOMException
      */
-    protected function getXSLTProcessor()
+    protected function getXSLTProcessor(): XSLTProcessor
     {
         if (isset($this->xsltProcessor)) {
             return $this->xsltProcessor;
@@ -99,30 +94,23 @@ class Xslt extends XmlBase implements Converter
      * The order is from the lowest priority to the highest since in case of a conflict,
      * the last loaded XSL template always wins.
      *
-     * @return array
+     * @return list<string>
      */
-    protected function getSortedCustomStylesheets()
+    protected function getSortedCustomStylesheets(): array
     {
-        $sortedStylesheets = [];
         ksort($this->customStylesheets);
-        foreach ($this->customStylesheets as $stylesheets) {
-            $sortedStylesheets = array_merge($sortedStylesheets, $stylesheets);
-        }
 
-        return $sortedStylesheets;
+        // flatten [priority => stylesheet[]] array to return a simple list
+        return array_merge(...$this->customStylesheets);
     }
 
     /**
      * Performs conversion of the given $document using XSLT stylesheet.
      *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException if stylesheet is not found
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException if document does not transform
-     *
-     * @param \DOMDocument $document
-     *
-     * @return \DOMDocument
+     * @throws \DOMException
+     * @throws \Ibexa\Core\Base\Exceptions\InvalidArgumentException
      */
-    public function convert(DOMDocument $document)
+    public function convert(DOMDocument $xmlDoc): DOMDocument
     {
         if (!file_exists($this->stylesheet)) {
             throw new InvalidArgumentException(
@@ -135,11 +123,11 @@ class Xslt extends XmlBase implements Converter
 
         $this->startRecordingErrors();
 
-        $document = $processor->transformToDoc($document);
+        $document = $processor->transformToDoc($xmlDoc);
 
         $errors = $this->collectErrors();
 
-        if (!empty($errors)) {
+        if (!empty($errors) || $document === false) {
             throw new InvalidArgumentException(
                 '$xmlDoc',
                 'Transformation of XML content failed: ' . implode("\n", $errors)
