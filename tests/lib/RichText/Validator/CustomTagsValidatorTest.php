@@ -178,6 +178,7 @@ DOCBOOK
                 ),
                 [
                     'Missing RichText Custom Tag name',
+                    "Missing configuration for RichText CustomTag: 'undefined_tag'",
                     "Missing attribute name for RichText Custom Tag 'video'",
                     "The attribute 'title' of RichText Custom Tag 'video' cannot be empty",
                     "The attribute 'width' of RichText Custom Tag 'video' cannot be empty",
@@ -185,31 +186,6 @@ DOCBOOK
                 ],
             ],
         ];
-    }
-
-    /**
-     * Test that defined but not configured yet Custom Tag doesn't cause validation error.
-     */
-    public function testValidateDocumentAcceptsLegacyTags()
-    {
-        $document = $this->createDocument(
-            <<<DOCBOOK
-<?xml version="1.0" encoding="UTF-8"?>
-<section xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink"
-         xmlns:ezxhtml="http://ibexa.co/xmlns/dxp/docbook/xhtml"
-         xmlns:ezcustom="http://ibexa.co/xmlns/dxp/docbook/custom"
-         version="5.0-variant ezpublish-1.0">
-  <eztemplate name="undefined_tag">
-    <ezcontent>Undefined</ezcontent>
-    <ezconfig>
-      <ezvalue key="title">Test</ezvalue>
-    </ezconfig>
-  </eztemplate>
-</section>
-DOCBOOK
-        );
-
-        self::assertEmpty($this->validator->validateDocument($document));
     }
 
     /**
