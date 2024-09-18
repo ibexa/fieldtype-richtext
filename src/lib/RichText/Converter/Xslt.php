@@ -34,6 +34,8 @@ class Xslt extends XmlBase implements Converter
      */
     protected $customStylesheets = [];
 
+    private XSLTProcessor $xsltProcessor;
+
     /**
      * Constructor.
      *
