@@ -456,6 +456,36 @@ parameters:
 			path: src/lib/FieldType/RichText/RichTextStorage.php
 
 		-
+			message: "#^Offset 1 does not exist on array\\{0\\?\\: string, 1\\?\\: ''\\|'ezremote\\://', 2\\?\\: string, 3\\?\\: string\\}\\.$#"
+			count: 1
+			path: src/lib/FieldType/RichText/RichTextStorage.php
+
+		-
+			message: "#^Offset 1 does not exist on array\\{0\\?\\: string, 1\\?\\: string, 2\\?\\: string\\}\\.$#"
+			count: 1
+			path: src/lib/FieldType/RichText/RichTextStorage.php
+
+		-
+			message: "#^Offset 2 does not exist on array\\{0\\?\\: string, 1\\: 'ezremote\\://', 2\\?\\: string, 3\\?\\: string\\}\\.$#"
+			count: 1
+			path: src/lib/FieldType/RichText/RichTextStorage.php
+
+		-
+			message: "#^Offset 2 does not exist on array\\{0\\?\\: string, 1\\?\\: ''\\|'ezremote\\://', 2\\?\\: string, 3\\?\\: string\\}\\.$#"
+			count: 2
+			path: src/lib/FieldType/RichText/RichTextStorage.php
+
+		-
+			message: "#^Offset 2 does not exist on array\\{0\\?\\: string, 1\\?\\: string, 2\\?\\: string\\}\\.$#"
+			count: 1
+			path: src/lib/FieldType/RichText/RichTextStorage.php
+
+		-
+			message: "#^Offset 3 does not exist on array\\{0\\?\\: string, 1\\?\\: ''\\|'ezremote\\://', 2\\?\\: string, 3\\?\\: string\\}\\.$#"
+			count: 1
+			path: src/lib/FieldType/RichText/RichTextStorage.php
+
+		-
 			message: "#^Parameter \\#1 \\$source of method DOMDocument\\:\\:loadXML\\(\\) expects string, array\\|bool\\|float\\|int\\|string\\|null given\\.$#"
 			count: 2
 			path: src/lib/FieldType/RichText/RichTextStorage.php
@@ -626,6 +656,21 @@ parameters:
 			path: src/lib/RichText/Converter/Link.php
 
 		-
+			message: "#^Offset 1 does not exist on array\\{0\\?\\: string, 1\\?\\: string, 2\\?\\: string, 3\\?\\: string\\}\\.$#"
+			count: 1
+			path: src/lib/RichText/Converter/Link.php
+
+		-
+			message: "#^Offset 2 does not exist on array\\{0\\?\\: string, 1\\?\\: string, 2\\?\\: string, 3\\?\\: string\\}\\.$#"
+			count: 1
+			path: src/lib/RichText/Converter/Link.php
+
+		-
+			message: "#^Offset 3 does not exist on array\\{0\\?\\: string, 1\\?\\: string, 2\\?\\: string, 3\\?\\: string\\}\\.$#"
+			count: 1
+			path: src/lib/RichText/Converter/Link.php
+
+		-
 			message: "#^Parameter \\#1 \\$locationId of method Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\LocationService\\:\\:loadLocation\\(\\) expects int, int\\|null given\\.$#"
 			count: 1
 			path: src/lib/RichText/Converter/Link.php
@@ -767,6 +812,21 @@ parameters:
 
 		-
 			message: "#^Method Ibexa\\\\FieldTypeRichText\\\\RichText\\\\Converter\\\\Render\\\\Embed\\:\\:processTag\\(\\) has parameter \\$tagName with no type specified\\.$#"
+			count: 1
+			path: src/lib/RichText/Converter/Render/Embed.php
+
+		-
+			message: "#^Offset 1 does not exist on array\\{0\\?\\: string, 1\\?\\: 'ezcontent'\\|'ezlocation', 2\\?\\: numeric\\-string\\}\\.$#"
+			count: 1
+			path: src/lib/RichText/Converter/Render/Embed.php
+
+		-
+			message: "#^Offset 2 does not exist on array\\{0\\?\\: string, 1\\: 'ezcontent', 2\\?\\: numeric\\-string\\}\\.$#"
+			count: 1
+			path: src/lib/RichText/Converter/Render/Embed.php
+
+		-
+			message: "#^Offset 2 does not exist on array\\{0\\?\\: string, 1\\: 'ezlocation', 2\\?\\: numeric\\-string\\}\\.$#"
 			count: 1
 			path: src/lib/RichText/Converter/Render/Embed.php
 
@@ -951,6 +1011,16 @@ parameters:
 			path: src/lib/RichText/RelationProcessor.php
 
 		-
+			message: "#^Offset 1 does not exist on array\\{0\\?\\: string, 1\\?\\: non\\-empty\\-string, 2\\?\\: string, 3\\?\\: string\\}\\.$#"
+			count: 1
+			path: src/lib/RichText/RelationProcessor.php
+
+		-
+			message: "#^Offset 2 does not exist on array\\{0\\?\\: string, 1\\?\\: non\\-empty\\-string, 2\\?\\: string, 3\\?\\: string\\}\\.$#"
+			count: 1
+			path: src/lib/RichText/RelationProcessor.php
+
+		-
 			message: "#^Cannot call method error\\(\\) on Psr\\\\Log\\\\LoggerInterface\\|null\\.$#"
 			count: 13
 			path: src/lib/RichText/Renderer.php
@@ -1077,6 +1147,16 @@ parameters:
 
 		-
 			message: "#^Method Ibexa\\\\FieldTypeRichText\\\\RichText\\\\Validator\\\\InternalLinkValidator\\:\\:validateDocument\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/lib/RichText/Validator/InternalLinkValidator.php
+
+		-
+			message: "#^Offset 1 does not exist on array\\{0\\?\\: string, 1\\?\\: non\\-empty\\-string, 2\\?\\: string, 3\\?\\: string\\}\\.$#"
+			count: 1
+			path: src/lib/RichText/Validator/InternalLinkValidator.php
+
+		-
+			message: "#^Offset 2 does not exist on array\\{0\\?\\: string, 1\\?\\: non\\-empty\\-string, 2\\?\\: string, 3\\?\\: string\\}\\.$#"
 			count: 1
 			path: src/lib/RichText/Validator/InternalLinkValidator.php
 
