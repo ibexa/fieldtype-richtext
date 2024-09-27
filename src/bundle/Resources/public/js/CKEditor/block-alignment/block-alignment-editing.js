@@ -25,6 +25,7 @@ class IbexaCustomAttributesEditing extends Plugin {
         const { model } = this.editor;
 
         model.schema.extend('embedImage', { allowAttributes: 'data-ezalign' });
+        model.schema.extend('customTag', { allowAttributes: 'data-ezalign' });
 
         this.defineConverters();
 

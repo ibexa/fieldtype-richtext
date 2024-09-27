@@ -41,23 +41,10 @@ class IbexaCustomTagEditing extends Plugin {
                 const header = downcastWriter.createUIElement('div', { class: 'ibexa-custom-tag__header' }, function (domDocument) {
                     const domElement = this.toDomElement(domDocument);
                     const customTagConfig = window.ibexa.richText.customTags[customTagName];
-                    const attributesButton = `<button type="button" class="ibexa-btn ibexa-btn--ghost ibexa-btn--small ibexa-btn--no-text ibexa-btn--show-custom-tag-attributes">
-                        <svg class="ibexa-icon ibexa-icon--small ibexa-icon--secondary">
-                            <use xlink:href="${window.ibexa.helpers.icon.getIconPath('settings-block')}"></use>
-                        </svg>
-                    </button>`;
 
                     domElement.innerHTML = `
                         <div class="ibexa-custom-tag__header-title" data-cke-tooltip-text="${customTagConfig.label}">
                             ${customTagConfig.label}
-                        </div>
-                        <div class="ibexa-custom-tag__header-actions">
-                            ${Object.keys(customTagConfig.attributes).length ? attributesButton : ''}
-                            <button type="button" class="ibexa-btn ibexa-btn--ghost ibexa-btn--small ibexa-btn--no-text ibexa-btn--remove-custom-tag">
-                                <svg class="ibexa-icon ibexa-icon--small ibexa-icon--secondary">
-                                    <use xlink:href="${window.ibexa.helpers.icon.getIconPath('trash')}"></use>
-                                </svg>
-                            </button>
                         </div>
                     `;
 
