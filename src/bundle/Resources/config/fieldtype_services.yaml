@@ -73,7 +73,6 @@ services:
 
     # Note: should typically be the last one as it produces embeddable fragment
     Ibexa\FieldTypeRichText\RichText\Converter\Xslt:
-        class: Ibexa\FieldTypeRichText\RichText\Converter\Xslt
         arguments: ['%ibexa.field_type.richtext.converter.output.xhtml5.fragment.resources%']
         tags:
             - {name: ibexa.field_type.richtext.converter.output.xhtml5, priority: 100}

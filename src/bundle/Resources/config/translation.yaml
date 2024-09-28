@@ -4,13 +4,6 @@ services:
         autoconfigure: true
         public: false
 
-    Ibexa\FieldTypeRichText\Translation\Extractor\OnlineEditorCustomAttributesExtractor:
-        deprecated: 'Since ibexa/fieldtype-richtext 4.6.7 the "%service_id%" service is deprecated, will be removed in 5.0.0'
-        arguments:
-            $siteAccessList: '%ibexa.site_access.list%'
-        tags:
-            - { name: jms_translation.extractor, alias: ez_online_editor_attributes }
-
     Ibexa\FieldTypeRichText\Translation\Extractor\CustomTagExtractor:
         arguments:
             $customTags: '%ibexa.field_type.richtext.custom_tags%'

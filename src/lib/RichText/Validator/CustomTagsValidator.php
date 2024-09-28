@@ -57,11 +57,7 @@ class CustomTagsValidator implements ValidatorInterface
             }
 
             if (!isset($this->customTagsConfiguration[$tagName])) {
-                @trigger_error(
-                    "Configuration for RichText Custom Tag '{$tagName}' not found. " .
-                    'Custom Tags configuration is required since 7.1, its lack will result in validation error in 8.x',
-                    E_USER_DEPRECATED
-                );
+                $errors[] = "Missing configuration for RichText CustomTag: '$tagName'";
                 continue;
             }
 
@@ -92,7 +88,7 @@ class CustomTagsValidator implements ValidatorInterface
                     continue;
                 }
 
-                if (!in_array($attributeName, $nonEmptyAttributes)) {
+                if (!in_array($attributeName, $nonEmptyAttributes, true)) {
                     $errors[] = "The attribute '{$attributeName}' of RichText Custom Tag '{$tagName}' cannot be empty";
                 }
             }

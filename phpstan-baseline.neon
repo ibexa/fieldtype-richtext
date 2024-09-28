@@ -891,11 +891,6 @@ parameters:
 			path: src/lib/RichText/Converter/Render/Template.php
 
 		-
-			message: "#^Access to an undefined property Ibexa\\\\FieldTypeRichText\\\\RichText\\\\Converter\\\\Xslt\\:\\:\\$xsltProcessor\\.$#"
-			count: 1
-			path: src/lib/RichText/Converter/Xslt.php
-
-		-
 			message: "#^Cannot access property \\$firstChild on DOMElement\\|null\\.$#"
 			count: 1
 			path: src/lib/RichText/Converter/Xslt.php
@@ -906,27 +901,7 @@ parameters:
 			path: src/lib/RichText/Converter/Xslt.php
 
 		-
-			message: "#^Method Ibexa\\\\FieldTypeRichText\\\\RichText\\\\Converter\\\\Xslt\\:\\:__construct\\(\\) has parameter \\$customStylesheets with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/lib/RichText/Converter/Xslt.php
-
-		-
-			message: "#^Method Ibexa\\\\FieldTypeRichText\\\\RichText\\\\Converter\\\\Xslt\\:\\:convert\\(\\) should return DOMDocument but returns DOMDocument\\|false\\.$#"
-			count: 1
-			path: src/lib/RichText/Converter/Xslt.php
-
-		-
-			message: "#^Method Ibexa\\\\FieldTypeRichText\\\\RichText\\\\Converter\\\\Xslt\\:\\:getSortedCustomStylesheets\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/lib/RichText/Converter/Xslt.php
-
-		-
 			message: "#^Parameter \\#1 \\$source of method DOMDocument\\:\\:loadXML\\(\\) expects string, string\\|false given\\.$#"
-			count: 1
-			path: src/lib/RichText/Converter/Xslt.php
-
-		-
-			message: "#^Property Ibexa\\\\FieldTypeRichText\\\\RichText\\\\Converter\\\\Xslt\\:\\:\\$customStylesheets type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/lib/RichText/Converter/Xslt.php
 
@@ -1244,11 +1219,6 @@ parameters:
 			message: "#^Property Ibexa\\\\FieldTypeRichText\\\\RichText\\\\XmlBase\\:\\:\\$errorTypes type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/lib/RichText/XmlBase.php
-
-		-
-			message: "#^Parameter \\#2 \\$desc of method Ibexa\\\\FieldTypeRichText\\\\Translation\\\\Extractor\\\\OnlineEditorCustomAttributesExtractor\\:\\:createMessage\\(\\) expects string, int\\|string given\\.$#"
-			count: 1
-			path: src/lib/Translation/Extractor/OnlineEditorCustomAttributesExtractor.php
 
 		-
 			message: "#^Property Ibexa\\\\FieldTypeRichText\\\\Validator\\\\Constraints\\\\RichText\\:\\:\\$message has no type specified\\.$#"
@@ -2932,11 +2902,6 @@ parameters:
 
 		-
 			message: "#^Method Ibexa\\\\Tests\\\\FieldTypeRichText\\\\RichText\\\\Validator\\\\CustomTagsValidatorTest\\:\\:testValidateDocument\\(\\) has parameter \\$expectedErrors with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: tests/lib/RichText/Validator/CustomTagsValidatorTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\FieldTypeRichText\\\\RichText\\\\Validator\\\\CustomTagsValidatorTest\\:\\:testValidateDocumentAcceptsLegacyTags\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: tests/lib/RichText/Validator/CustomTagsValidatorTest.php
 
