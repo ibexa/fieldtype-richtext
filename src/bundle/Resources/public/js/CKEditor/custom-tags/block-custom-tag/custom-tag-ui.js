@@ -89,8 +89,6 @@ class IbexaCustomTagUI extends Plugin {
             this.showForm();
         });
 
-        setPanelContentMaxHeight(this.balloon.view);
-
         return attributesView;
     }
 
@@ -161,7 +159,6 @@ class IbexaCustomTagUI extends Plugin {
             position: { target },
         });
 
-        setPanelContentMaxHeight(this.balloon.view);
         this.balloon.updatePosition({ target });
     }
 
@@ -195,7 +192,6 @@ class IbexaCustomTagUI extends Plugin {
             position: this.getBalloonPositionData(),
         });
 
-        setPanelContentMaxHeight(this.balloon.view);
         this.balloon.updatePosition(this.getBalloonPositionData());
     }
 
