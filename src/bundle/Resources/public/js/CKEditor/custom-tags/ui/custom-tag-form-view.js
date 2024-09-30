@@ -121,7 +121,7 @@ class IbexaCustomTagFormView extends View {
                 {
                     tag: 'div',
                     attributes: {
-                        class: 'ibexa-ckeditor-balloon-form__header',
+                        class: 'ibexa-ckeditor-balloon-form__header ibexa-custom-tag-panel-header',
                     },
                     children: [label],
                 },
@@ -134,14 +134,14 @@ class IbexaCustomTagFormView extends View {
                         {
                             tag: 'div',
                             attributes: {
-                                class: 'ibexa-ckeditor-balloon-form__fields',
+                                class: 'ibexa-ckeditor-balloon-form__fields ibexa-custom-tag-panel-content',
                             },
                             children: this.children,
                         },
                         {
                             tag: 'div',
                             attributes: {
-                                class: 'ibexa-ckeditor-balloon-form__actions',
+                                class: 'ibexa-ckeditor-balloon-form__actions ibexa-custom-tag-panel-footer',
                             },
                             children: [this.saveButtonView, this.cancelButtonView],
                         },
