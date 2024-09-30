@@ -17,6 +17,10 @@
             font-weight: bold;
         }
 
+        &__items {
+            overflow: auto;
+        }
+
         &__item {
             padding: calculateRem(8px) calculateRem(16px);
         }

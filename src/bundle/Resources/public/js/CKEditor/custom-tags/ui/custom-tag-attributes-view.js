@@ -33,11 +33,12 @@ class IbexaCustomTagAttributesView extends View {
 
         buttonView.delegate('execute').to(this, 'edit-attributes');
 
+        const items = [];
         const children = [
             {
                 tag: 'div',
                 attributes: {
-                    class: 'ibexa-custom-tag-attributes__header',
+                    class: 'ibexa-custom-tag-attributes__header ibexa-custom-tag-panel-header',
                 },
                 children: [
                     {
@@ -63,7 +64,7 @@ class IbexaCustomTagAttributesView extends View {
             const getValueLabelMethods = window.ibexa.richText.CKEditor.customTags?.getValueLabelMethods || {};
             const valueLabel = getValueLabelMethods[name] && value !== '-' ? getValueLabelMethods[name](value, config) : value;
 
-            children.push({
+            items.push({
                 tag: 'div',
                 attributes: {
                     class: 'ibexa-custom-tag-attributes__item',
@@ -85,6 +86,14 @@ class IbexaCustomTagAttributesView extends View {
                     },
                 ],
             });
+        });
+
+        children.push({
+            tag: 'div',
+            attributes: {
+                class: 'ibexa-custom-tag-attributes__items ibexa-custom-tag-panel-content',
+            },
+            children: items,
         });
 
         return children;

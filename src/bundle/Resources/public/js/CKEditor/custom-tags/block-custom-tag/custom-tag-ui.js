@@ -2,6 +2,7 @@ import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
 import clickOutsideHandler from '@ckeditor/ckeditor5-ui/src/bindings/clickoutsidehandler';
 import ClickObserver from '@ckeditor/ckeditor5-engine/src/view/observer/clickobserver';
 
+import { setPanelContentMaxHeight } from '../helpers/panel-helper';
 import IbexaCustomTagFormView from '../ui/custom-tag-form-view';
 import IbexaCustomTagAttributesView from '../ui/custom-tag-attributes-view';
 import IbexaButtonView from '../../common/button-view/button-view';
@@ -18,6 +19,14 @@ class IbexaCustomTagUI extends Plugin {
         this.addCustomTag = this.addCustomTag.bind(this);
 
         this.isNew = false;
+
+        let timeoutId = null;
+        this.listenTo(this.balloon.view, 'change:top', () => {
+            clearTimeout(timeoutId);
+            timeoutId = setTimeout(() => {
+                setPanelContentMaxHeight(this.balloon.view);
+            }, 0);
+        });
     }
 
     isCustomTagSelected(eventData) {
