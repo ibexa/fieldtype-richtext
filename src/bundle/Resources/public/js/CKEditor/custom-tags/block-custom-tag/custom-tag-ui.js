@@ -29,22 +29,10 @@ class IbexaCustomTagUI extends Plugin {
         });
     }
 
-    isCustomTagSelected(eventData) {
+    isCustomTagSelected() {
         const modelElement = this.editor.model.document.selection.getSelectedElement();
 
-        return (
-            !!eventData.domTarget.closest(`[data-ezname="${this.componentName}"]`) &&
-            modelElement?.name === 'customTag' &&
-            modelElement?.getAttribute('customTagName') === this.componentName
-        );
-    }
-
-    isRemoveButtonClicked(eventData) {
-        return !!eventData.domTarget.closest('.ibexa-btn--remove-custom-tag');
-    }
-
-    isShowAttributesButtonClicked(eventData) {
-        return !!eventData.domTarget.closest('.ibexa-btn--show-custom-tag-attributes');
+        return modelElement?.name === 'customTag' && modelElement?.getAttribute('customTagName') === this.componentName;
     }
 
     hasAttributes() {
@@ -54,15 +42,9 @@ class IbexaCustomTagUI extends Plugin {
     enableUserBalloonInteractions() {
         const viewDocument = this.editor.editing.view.document;
 
-        this.listenTo(viewDocument, 'click', (eventInfo, eventData) => {
-            if (this.isCustomTagSelected(eventData)) {
-                if (this.isRemoveButtonClicked(eventData)) {
-                    this.removeCustomTag();
-                }
-
-                if (this.isShowAttributesButtonClicked(eventData)) {
-                    this.showAttributes(eventData.domTarget);
-                }
+        this.listenTo(viewDocument, 'ibexa-show-custom-tag-settings', () => {
+            if (this.isCustomTagSelected()) {
+                this.showAttributes(viewDocument.selection.getSelectedElement());
             }
         });
 
@@ -159,7 +141,7 @@ class IbexaCustomTagUI extends Plugin {
             position: { target },
         });
 
-        this.balloon.updatePosition({ target });
+        this.balloon.updatePosition(this.getBalloonPositionData());
     }
 
     hideAttributes() {

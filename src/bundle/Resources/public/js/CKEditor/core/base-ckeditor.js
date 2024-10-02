@@ -205,6 +205,16 @@ const VIEWPORT_TOP_OFFSET_DISTRACTION_FREE_MODE = 0;
                         'ibexaRemoveElement',
                     ],
                 },
+                customTag: {
+                    toolbar: [
+                        'ibexaBlockLeftAlignment',
+                        'ibexaBlockCenterAlignment',
+                        'ibexaBlockRightAlignment',
+                        '|',
+                        'ibexaCustomTagSettings',
+                        'ibexaRemoveElement',
+                    ],
+                },
                 heading: {
                     options: [
                         { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },

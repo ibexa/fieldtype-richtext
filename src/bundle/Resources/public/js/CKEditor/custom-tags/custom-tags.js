@@ -4,6 +4,8 @@ import IbexaCustomTagsUI from './block-custom-tag/custom-tag-ui';
 import IbexaInlineCustomTagsUI from './inline-custom-tag/inline-custom-tag-ui';
 import IbexaCustomTagsEditing from './block-custom-tag/custom-tag-editing';
 import IbexaInlineCustomTagsEditing from './inline-custom-tag/inline-custom-tag-editing';
+import IbexaCustomTagsToolbar from './block-custom-tag/custom-tag-toolbar';
+import IbexaCustomTagSettingsUI from './block-custom-tag/custom-tag-settings-ui';
 
 class IbexaCustomTags extends Plugin {
     static get requires() {
@@ -56,7 +58,14 @@ class IbexaCustomTags extends Plugin {
             };
         });
 
-        return [...blockCustomTagsUI, ...inlineCustomTagsUI, IbexaCustomTagsEditing, IbexaInlineCustomTagsEditing];
+        return [
+            ...blockCustomTagsUI,
+            ...inlineCustomTagsUI,
+            IbexaCustomTagsEditing,
+            IbexaInlineCustomTagsEditing,
+            IbexaCustomTagsToolbar,
+            IbexaCustomTagSettingsUI,
+        ];
     }
 }
 
