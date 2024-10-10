@@ -19,10 +19,16 @@
             };
             return t;
         }(doc, 'script', 'twitter-wjs'));
-        const tweetContainer = doc.querySelector('.tweet-container[data-url="{{ params.tweet_url }}"]');
-        const tweetUrlParts = tweetContainer.dataset.url.split('/');
-        const tweetId = tweetUrlParts[tweetUrlParts.length - 1];
-        global.twttr.ready(function () {
+        const initTwitterWidget = () => {
+            const tweetContainer = doc.querySelector('.tweet-container[data-url="{{ params.tweet_url }}"]');
+
+            if (!tweetContainer) {
+                return;
+            }
+
+            const tweetUrlParts = tweetContainer.dataset.url.split('/');
+            const tweetId = tweetUrlParts[tweetUrlParts.length - 1];
+
             global.twttr.widgets.createTweet(
                 tweetId,
                 tweetContainer,
@@ -37,6 +43,12 @@
                     'dnt': '{{ params.dnt is defined ? params.dnt : '' }}',
                 }
             );
+        }
+        global.twttr.ready(function () {
+            initTwitterWidget();
+        });
+        doc.body.addEventListener('ibexa-post-update-blocks-preview', () => {
+            initTwitterWidget();
         });
     })(window, window.document);
 </script>
