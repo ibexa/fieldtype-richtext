@@ -42,7 +42,7 @@ class RichTextStorage extends GatewayBasedStorage
     /**
      * @see \Ibexa\Contracts\Core\FieldType\FieldStorage
      */
-    public function storeFieldData(VersionInfo $versionInfo, Field $field, array $context)
+    public function storeFieldData(VersionInfo $versionInfo, Field $field)
     {
         $document = new DOMDocument();
         $document->loadXML($field->value->data);
@@ -128,12 +128,8 @@ class RichTextStorage extends GatewayBasedStorage
 
     /**
      * Modifies $field if needed, using external data (like for Urls).
-     *
-     * @param \Ibexa\Contracts\Core\Persistence\Content\VersionInfo $versionInfo
-     * @param \Ibexa\Contracts\Core\Persistence\Content\Field $field
-     * @param array $context
      */
-    public function getFieldData(VersionInfo $versionInfo, Field $field, array $context)
+    public function getFieldData(VersionInfo $versionInfo, Field $field)
     {
         $document = new DOMDocument();
         $document->loadXML($field->value->data);
@@ -186,7 +182,7 @@ class RichTextStorage extends GatewayBasedStorage
         $field->value->data = $document->saveXML();
     }
 
-    public function deleteFieldData(VersionInfo $versionInfo, array $fieldIds, array $context)
+    public function deleteFieldData(VersionInfo $versionInfo, array $fieldIds)
     {
         foreach ($fieldIds as $fieldId) {
             $this->gateway->unlinkUrl($fieldId, $versionInfo->versionNo);
@@ -201,9 +197,5 @@ class RichTextStorage extends GatewayBasedStorage
     public function hasFieldData()
     {
         return true;
-    }
-
-    public function getIndexData(VersionInfo $versionInfo, Field $field, array $context)
-    {
     }
 }

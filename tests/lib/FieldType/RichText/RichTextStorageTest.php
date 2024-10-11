@@ -95,8 +95,7 @@ class RichTextStorageTest extends TestCase
         $storage = $this->getPartlyMockedStorage($gateway);
         $storage->getFieldData(
             $versionInfo,
-            $field,
-            $this->getContext()
+            $field
         );
 
         self::assertEquals(
@@ -238,8 +237,7 @@ class RichTextStorageTest extends TestCase
         $storage = $this->getPartlyMockedStorage($gateway);
         $result = $storage->storeFieldData(
             $versionInfo,
-            $field,
-            $this->getContext()
+            $field
         );
 
         self::assertEquals(
@@ -345,8 +343,7 @@ class RichTextStorageTest extends TestCase
         $storage = $this->getPartlyMockedStorage($gateway);
         $storage->storeFieldData(
             $versionInfo,
-            $field,
-            $this->getContext()
+            $field
         );
     }
 
@@ -366,8 +363,7 @@ class RichTextStorageTest extends TestCase
 
         $storage->deleteFieldData(
             $versionInfo,
-            $fieldIds,
-            $this->getContext()
+            $fieldIds
         );
     }
 
@@ -387,14 +383,6 @@ class RichTextStorageTest extends TestCase
             )
             ->setMethods(null)
             ->getMock();
-    }
-
-    /**
-     * @return array
-     */
-    protected function getContext()
-    {
-        return ['context'];
     }
 
     /**
