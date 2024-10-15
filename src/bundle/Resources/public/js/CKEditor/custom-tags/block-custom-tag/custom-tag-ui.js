@@ -19,6 +19,7 @@ class IbexaCustomTagUI extends Plugin {
         this.addCustomTag = this.addCustomTag.bind(this);
 
         this.isNew = false;
+        this.activeModelElement = null;
 
         let timeoutId = null;
         this.listenTo(this.balloon.view, 'change:top', () => {
