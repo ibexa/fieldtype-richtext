@@ -281,14 +281,15 @@ const VIEWPORT_TOP_OFFSET_DISTRACTION_FREE_MODE = 0;
                         '.ibexa-field-edit__distraction-free-mode-control-container .ibexa-field-edit__distraction-free-mode-btns',
                     );
 
-                    if (distractionFreeModeControlNodeBtn === null) {
-                        return;
-                    }
-
                     const dataSourceNode = fieldEditNode.querySelector('.ibexa-data-source');
-                    const { offsetWidth: distractionFreeModeControlNodeBtnWidth } = distractionFreeModeControlNodeBtn;
                     const { offsetWidth: dataSourceNodeWidth } = dataSourceNode;
-                    const toolbarNodeMaxWidth = dataSourceNodeWidth - distractionFreeModeControlNodeBtnWidth;
+                    let toolbarNodeMaxWidth = dataSourceNodeWidth;
+
+                    if (distractionFreeModeControlNodeBtn !== null) {
+                        const { offsetWidth: distractionFreeModeControlNodeBtnWidth } = distractionFreeModeControlNodeBtn;
+
+                        toolbarNodeMaxWidth = dataSourceNodeWidth - distractionFreeModeControlNodeBtnWidth;
+                    }
 
                     toolbarNode.style.maxWidth = `${toolbarNodeMaxWidth}px`;
                 };
