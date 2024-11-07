@@ -33,24 +33,6 @@ class RichTextConverterExtension extends AbstractExtension
     {
         return [
             new TwigFilter(
-                'ez_richtext_to_html5',
-                [$this, 'richTextToHtml5'],
-                [
-                    'is_safe' => ['html'],
-                    'deprecated' => '4.0',
-                    'alternative' => 'ibexa_richtext_to_html5',
-                ]
-            ),
-            new TwigFilter(
-                'ez_richtext_to_html5_edit',
-                [$this, 'richTextToHtml5Edit'],
-                [
-                    'is_safe' => ['html'],
-                    'deprecated' => '4.0',
-                    'alternative' => 'ibexa_richtext_to_html5_edit',
-                ]
-            ),
-            new TwigFilter(
                 'ibexa_richtext_to_html5',
                 [$this, 'richTextToHtml5'],
                 ['is_safe' => ['html']]
