@@ -416,11 +416,6 @@ parameters:
 			path: src/lib/FieldType/RichText/RichTextStorage.php
 
 		-
-			message: "#^Method Ibexa\\\\FieldTypeRichText\\\\FieldType\\\\RichText\\\\RichTextStorage\\:\\:deleteFieldData\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/lib/FieldType/RichText/RichTextStorage.php
-
-		-
 			message: "#^Method Ibexa\\\\FieldTypeRichText\\\\FieldType\\\\RichText\\\\RichTextStorage\\:\\:deleteFieldData\\(\\) has parameter \\$fieldIds with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/lib/FieldType/RichText/RichTextStorage.php
@@ -432,26 +427,6 @@ parameters:
 
 		-
 			message: "#^Method Ibexa\\\\FieldTypeRichText\\\\FieldType\\\\RichText\\\\RichTextStorage\\:\\:getFieldData\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/FieldType/RichText/RichTextStorage.php
-
-		-
-			message: "#^Method Ibexa\\\\FieldTypeRichText\\\\FieldType\\\\RichText\\\\RichTextStorage\\:\\:getFieldData\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/lib/FieldType/RichText/RichTextStorage.php
-
-		-
-			message: "#^Method Ibexa\\\\FieldTypeRichText\\\\FieldType\\\\RichText\\\\RichTextStorage\\:\\:getIndexData\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/lib/FieldType/RichText/RichTextStorage.php
-
-		-
-			message: "#^Method Ibexa\\\\FieldTypeRichText\\\\FieldType\\\\RichText\\\\RichTextStorage\\:\\:getIndexData\\(\\) should return array\\<Ibexa\\\\Contracts\\\\Core\\\\Search\\\\Field\\> but return statement is missing\\.$#"
-			count: 1
-			path: src/lib/FieldType/RichText/RichTextStorage.php
-
-		-
-			message: "#^Method Ibexa\\\\FieldTypeRichText\\\\FieldType\\\\RichText\\\\RichTextStorage\\:\\:storeFieldData\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/lib/FieldType/RichText/RichTextStorage.php
 
@@ -1704,11 +1679,6 @@ parameters:
 			message: "#^Property Ibexa\\\\Tests\\\\FieldTypeRichText\\\\FieldType\\\\RichText\\\\Gateway\\\\DoctrineStorageTest\\:\\:\\$storageGateway \\(Ibexa\\\\FieldTypeRichText\\\\FieldType\\\\RichText\\\\RichTextStorage\\\\Gateway\\\\DoctrineStorage\\) in isset\\(\\) is not nullable\\.$#"
 			count: 1
 			path: tests/lib/FieldType/RichText/Gateway/DoctrineStorageTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\FieldTypeRichText\\\\FieldType\\\\RichText\\\\RichTextStorageTest\\:\\:getContext\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: tests/lib/FieldType/RichText/RichTextStorageTest.php
 
 		-
 			message: "#^Method Ibexa\\\\Tests\\\\FieldTypeRichText\\\\FieldType\\\\RichText\\\\RichTextStorageTest\\:\\:groupLinksData\\(\\) return type has no value type specified in iterable type array\\.$#"
