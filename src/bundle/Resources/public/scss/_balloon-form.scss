@@ -10,11 +10,14 @@
         }
 
         &__fields {
-            overflow: auto;
             padding: calculateRem(8px) calculateRem(16px);
 
             &--attributes {
                 border-bottom: calculateRem(1px) solid $ibexa-color-light;
+            }
+
+            &--overflow-with-scroll {
+                overflow: auto;
             }
 
             .ck-labeled-field-view {

@@ -134,7 +134,7 @@ class IbexaCustomTagFormView extends View {
                         {
                             tag: 'div',
                             attributes: {
-                                class: 'ibexa-ckeditor-balloon-form__fields ibexa-custom-tag-panel-content',
+                                class: 'ibexa-ckeditor-balloon-form__fields ibexa-ckeditor-balloon-form__fields--overflow-with-scroll ibexa-custom-tag-panel-content',
                             },
                             children: this.children,
                         },
