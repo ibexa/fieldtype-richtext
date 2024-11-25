@@ -16,10 +16,6 @@
                 border-bottom: calculateRem(1px) solid $ibexa-color-light;
             }
 
-            &--overflow-with-scroll {
-                overflow: auto;
-            }
-
             .ck-labeled-field-view {
                 margin-bottom: calculateRem(12px);
 

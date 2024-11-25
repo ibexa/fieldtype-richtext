@@ -2,7 +2,7 @@ import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
 import clickOutsideHandler from '@ckeditor/ckeditor5-ui/src/bindings/clickoutsidehandler';
 import ClickObserver from '@ckeditor/ckeditor5-engine/src/view/observer/clickobserver';
 
-import { setPanelContentMaxHeight } from '../helpers/panel-helper';
+import { setPanelContentMaxHeight } from '../../helpers/custom-panel-helper';
 import IbexaCustomTagFormView from '../ui/custom-tag-form-view';
 import IbexaCustomTagAttributesView from '../ui/custom-tag-attributes-view';
 import IbexaButtonView from '../../common/button-view/button-view';
