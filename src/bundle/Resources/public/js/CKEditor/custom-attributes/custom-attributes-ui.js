@@ -19,6 +19,7 @@ class IbexaAttributesUI extends Plugin {
         this.showForm = this.showForm.bind(this);
 
         let timeoutId = null;
+
         this.listenTo(this.balloon.view, 'change:top', () => {
             clearTimeout(timeoutId);
             timeoutId = setTimeout(() => {
