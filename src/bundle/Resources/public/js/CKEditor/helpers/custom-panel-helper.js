@@ -1,17 +1,18 @@
 const setPanelContentMaxHeight = (balloonView) => {
     const MIN_HEIGHT_VALUE = 100;
     const MARGIN = 50;
+    const BOTTOM_ARROW_CLASSES = ['ck-balloon-panel_arrow_s', 'ck-balloon-panel_arrow_se', 'ck-balloon-panel_arrow_sw'];
     const { innerHeight: windowHeight } = window;
     const { element: panelNode } = balloonView;
-    const panelHeader = panelNode.querySelector('.ibexa-custom-tag-panel-header');
-    const panelContent = panelNode.querySelector('.ibexa-custom-tag-panel-content');
-    const panelFooter = panelNode.querySelector('.ibexa-custom-tag-panel-footer');
+    const panelHeader = panelNode.querySelector('.ibexa-custom-panel__header');
+    const panelContent = panelNode.querySelector('.ibexa-custom-panel__content');
+    const panelFooter = panelNode.querySelector('.ibexa-custom-panel__footer');
 
     if (!panelContent) {
         return;
     }
 
-    const isBalloonAbovePivot = panelNode.classList.contains('ck-balloon-panel_arrow_s');
+    const isBalloonAbovePivot = [...panelNode.classList].some((className) => BOTTOM_ARROW_CLASSES.includes(className));
     const panelInitialHeight = panelNode.offsetHeight;
     const panelTopPosition = parseInt(panelNode.style.top, 10);
     const panelHeaderHeight = panelHeader?.offsetHeight ?? 0;

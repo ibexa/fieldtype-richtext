@@ -1,0 +1,41 @@
+.ibexa-custom-panel {
+    min-width: calculateRem(320px);
+
+    &__content {
+        &--overflow-with-scroll {
+            overflow: auto;
+
+            &.ibexa-ckeditor-balloon-form__fields {
+                .ck.ck-labeled-field-view {
+                    .ck.ck-input {
+                        width: 100%;
+                    }
+
+                    .ck.ck-dropdown {
+                        width: 100%;
+
+                        .ck.ck-button {
+                            display: block;
+
+                            .ck.ck-button__label {
+                                width: calc(100% - calculateRem(20px));
+                                height: fit-content;
+                                white-space: normal;
+                                overflow: hidden;
+                            }
+                        }
+                    }
+
+                    .ck-dropdown__panel-visible {
+                        position: static;
+                        bottom: 0;
+                        height: fit-content;
+                        max-height: 100%;
+                        border: none;
+                        box-shadow: none;
+                    }
+                }
+            }
+        }
+    }
+}

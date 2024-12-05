@@ -44,13 +44,13 @@ class IbexaCustomAttributesFormView extends View {
         this.setTemplate({
             tag: 'div',
             attributes: {
-                class: 'ibexa-ckeditor-balloon-form',
+                class: 'ibexa-ckeditor-balloon-form ibexa-custom-panel',
             },
             children: [
                 {
                     tag: 'div',
                     attributes: {
-                        class: 'ibexa-ckeditor-balloon-form__header',
+                        class: 'ibexa-ckeditor-balloon-form__header ibexa-custom-panel__header',
                     },
                     children: ['Custom Attributes'],
                 },
@@ -63,14 +63,14 @@ class IbexaCustomAttributesFormView extends View {
                         {
                             tag: 'div',
                             attributes: {
-                                class: 'ibexa-ckeditor-balloon-form__fields',
+                                class: 'ibexa-ckeditor-balloon-form__fields ibexa-custom-panel__content ibexa-custom-panel__content--overflow-with-scroll',
                             },
                             children: this.children,
                         },
                         {
                             tag: 'div',
                             attributes: {
-                                class: 'ibexa-ckeditor-balloon-form__actions',
+                                class: 'ibexa-ckeditor-balloon-form__actions ibexa-custom-panel__footer',
                             },
                             children: [this.saveButtonView, this.revertButtonView, this.cancelButtonView],
                         },

@@ -38,7 +38,7 @@ class IbexaCustomTagAttributesView extends View {
             {
                 tag: 'div',
                 attributes: {
-                    class: 'ibexa-custom-tag-attributes__header ibexa-custom-tag-panel-header',
+                    class: 'ibexa-custom-tag-attributes__header ibexa-custom-panel__header',
                 },
                 children: [
                     {
@@ -91,7 +91,7 @@ class IbexaCustomTagAttributesView extends View {
         children.push({
             tag: 'div',
             attributes: {
-                class: 'ibexa-custom-tag-attributes__items ibexa-custom-tag-panel-content',
+                class: 'ibexa-custom-tag-attributes__items ibexa-custom-panel__content',
             },
             children: items,
         });
