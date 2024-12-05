@@ -3,6 +3,7 @@ import clickOutsideHandler from '@ckeditor/ckeditor5-ui/src/bindings/clickoutsid
 
 import IbexaCustomAttributesFormView from './ui/custom-attributes-form-view';
 import IbexaButtonView from '../common/button-view/button-view';
+import { setPanelContentMaxHeight } from '../helpers/custom-panel-helper';
 
 import { getCustomAttributesElementConfig, getCustomClassesElementConfig } from './helpers/config-helper';
 
@@ -16,6 +17,15 @@ class IbexaAttributesUI extends Plugin {
         this.formView = this.createFormView();
 
         this.showForm = this.showForm.bind(this);
+
+        let timeoutId = null;
+
+        this.listenTo(this.balloon.view, 'change:top', () => {
+            clearTimeout(timeoutId);
+            timeoutId = setTimeout(() => {
+                setPanelContentMaxHeight(this.balloon.view);
+            }, 0);
+        });
     }
 
     getModelElement() {

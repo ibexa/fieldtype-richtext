@@ -2,7 +2,7 @@ import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
 import clickOutsideHandler from '@ckeditor/ckeditor5-ui/src/bindings/clickoutsidehandler';
 import ClickObserver from '@ckeditor/ckeditor5-engine/src/view/observer/clickobserver';
 
-import { setPanelContentMaxHeight } from '../helpers/panel-helper';
+import { setPanelContentMaxHeight } from '../../helpers/custom-panel-helper';
 import IbexaCustomTagFormView from '../ui/custom-tag-form-view';
 import IbexaCustomTagAttributesView from '../ui/custom-tag-attributes-view';
 import IbexaButtonView from '../../common/button-view/button-view';
@@ -19,6 +19,7 @@ class IbexaCustomTagUI extends Plugin {
         this.addCustomTag = this.addCustomTag.bind(this);
 
         this.isNew = false;
+        this.activeModelElement = null;
 
         let timeoutId = null;
         this.listenTo(this.balloon.view, 'change:top', () => {
@@ -95,8 +96,7 @@ class IbexaCustomTagUI extends Plugin {
         const formView = new IbexaCustomTagFormView({ locale: this.editor.locale });
 
         this.listenTo(formView, 'save-custom-tag', () => {
-            const modelElement = this.editor.model.document.selection.getSelectedElement();
-            const values = modelElement.getAttribute('values');
+            const values = this.activeModelElement.getAttribute('values');
             const newValues = { ...values };
 
             this.isNew = false;
@@ -112,7 +112,7 @@ class IbexaCustomTagUI extends Plugin {
             });
 
             this.editor.model.change((writer) => {
-                writer.setAttribute('values', newValues, modelElement);
+                writer.setAttribute('values', newValues, this.activeModelElement);
             });
 
             this.reinitAttributesView();
@@ -151,8 +151,9 @@ class IbexaCustomTagUI extends Plugin {
     }
 
     showForm() {
-        const modelElement = this.editor.model.document.selection.getSelectedElement();
-        const values = modelElement.getAttribute('values');
+        this.activeModelElement = this.editor.model.document.selection.getSelectedElement();
+
+        const values = this.activeModelElement.getAttribute('values');
         const parsedValues = Object.entries(values).reduce((output, [key, value]) => {
             if (this.config.attributes[key]?.type === 'boolean') {
                 return {
@@ -189,14 +190,14 @@ class IbexaCustomTagUI extends Plugin {
     }
 
     removeCustomTag() {
-        const modelElement = this.editor.model.document.selection.getSelectedElement();
-
         this.editor.model.change((writer) => {
             if (this.balloon.hasView(this.attributesView)) {
                 this.hideAttributes();
             }
 
-            writer.remove(modelElement);
+            writer.remove(this.activeModelElement);
+
+            this.activeModelElement = null;
         });
     }
 
@@ -209,13 +210,16 @@ class IbexaCustomTagUI extends Plugin {
     }
 
     addCustomTag() {
+        if (this.balloon.hasView(this.formView)) {
+            return;
+        }
+
         const values = Object.entries(this.config.attributes).reduce((outputValues, [attributeName, config]) => {
             outputValues[attributeName] = config.defaultValue;
 
             return outputValues;
         }, {});
 
-        this.editor.focus();
         this.editor.execute('insertIbexaCustomTag', { customTagName: this.componentName, values });
 
         if (this.hasAttributes()) {
