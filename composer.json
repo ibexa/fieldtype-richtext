@@ -6,6 +6,9 @@
         "ezsystems/ezplatform-richtext": "*"
     },
     "require": {
+        "babdev/pagerfanta-bundle": "v4.5.0 as v2.11.0",
+        "jms/translation-bundle": "2.4.0 as 1.7.0",
+        "willdurand/js-translation-bundle": "6.1.0 as 4.0.2",
         "php": " >=8.3",
         "ext-dom": "*",
         "ext-libxml": "*",
