@@ -32,20 +32,24 @@ class IbexaCustomAttributesCommand extends Command {
     cleanClasses(modelElement, classes) {
         Object.keys(classes).forEach((elementName) => {
             const configName = findConfigName(modelElement.name);
-            const selectedCustomClasses = modelElement.getAttribute('custom-classes') ?? '';
+            const selectedCustomClasses = modelElement.getAttribute('custom-classes')?.split(' ') ?? [];
             const elementCustomClassesConfig = classes[configName];
+            const filteredSelectedCustomClasses = selectedCustomClasses.filter(
+                (className) => !elementCustomClassesConfig || className !== elementCustomClassesConfig.predefinedClass,
+            );
+
             const hasOwnCustomClasses =
                 elementCustomClassesConfig &&
-                selectedCustomClasses
-                    .split(' ')
-                    .every((selectedCustomClass) => elementCustomClassesConfig.choices.includes(selectedCustomClass));
-
-            if (elementName === configName || hasOwnCustomClasses) {
-                return;
-            }
+                filteredSelectedCustomClasses.every((selectedCustomClass) =>
+                    elementCustomClassesConfig.choices.includes(selectedCustomClass),
+                );
 
             this.editor.model.change((writer) => {
-                writer.removeAttribute('custom-classes', modelElement);
+                if (elementName !== configName && !hasOwnCustomClasses) {
+                    writer.removeAttribute('custom-classes', modelElement);
+                } else if (selectedCustomClasses.length !== filteredSelectedCustomClasses.length) {
+                    writer.setAttribute('custom-classes', filteredSelectedCustomClasses.join(' '), modelElement);
+                }
             });
         });
     }
