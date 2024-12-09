@@ -52,6 +52,14 @@ const getCustomClassesElementConfig = (elementName) => {
 
     return config[configName];
 };
+const addPredefinedClassToConfig = (elementName, className) => {
+    const configName = findConfigName(elementName);
+    const config = window.ibexa.richText.alloyEditor.classes[configName];
+
+    if (config) {
+        config.predefinedClass = className;
+    }
+};
 
 export {
     getCustomAttributesConfig,
@@ -59,4 +67,5 @@ export {
     getCustomAttributesElementConfig,
     getCustomClassesElementConfig,
     findConfigName,
+    addPredefinedClassToConfig,
 };
