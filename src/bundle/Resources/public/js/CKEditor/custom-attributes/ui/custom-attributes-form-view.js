@@ -7,6 +7,8 @@ import Collection from '@ckeditor/ckeditor5-utils/src/collection';
 import { createLabeledInputText, createLabeledDropdown } from '@ckeditor/ckeditor5-ui/src/labeledfield/utils';
 import { addListToDropdown } from '@ckeditor/ckeditor5-ui/src/dropdown/utils';
 
+import { getTranslator } from '@ibexa-admin-ui/src/bundle/Resources/public/js/scripts/helpers/context.helper';
+
 import { createLabeledInputNumber } from '../../common/input-number/utils';
 import { createLabeledSwitchButton } from '../../common/switch-button/utils';
 
@@ -191,10 +193,22 @@ class IbexaCustomAttributesFormView extends View {
     }
 
     createDropdown(config) {
+        const Translator = getTranslator();
         const labeledDropdown = new LabeledFieldView(this.locale, createLabeledDropdown);
         const itemsList = new Collection();
 
         labeledDropdown.label = config.label;
+
+        if (!config.multiple && !config.required) {
+            itemsList.add({
+                type: 'button',
+                model: new Model({
+                    withText: true,
+                    label: Translator.trans(/*@Desc("None")*/ 'dropdown.none.label', {}, 'ck_editor'),
+                    value: null,
+                }),
+            });
+        }
 
         config.choices.forEach((choice) => {
             itemsList.add({
@@ -219,9 +233,7 @@ class IbexaCustomAttributesFormView extends View {
 
             labeledDropdown.fieldView.element.value = value;
 
-            if (event.source.value) {
-                labeledDropdown.set('isEmpty', false);
-            }
+            labeledDropdown.set('isEmpty', !event.source.value);
         });
 
         return labeledDropdown;
