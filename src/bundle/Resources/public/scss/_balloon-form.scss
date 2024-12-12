@@ -21,15 +21,17 @@
 
                 .ck-input-text {
                     border-radius: calculateRem(5px);
+                    width: 100%;
                 }
 
                 .ck.ck-dropdown {
                     border: calculateRem(1px) solid $ibexa-color-dark-200;
                     border-radius: calculateRem(5px);
+                    width: 100%;
 
                     .ck-button.ck-dropdown__button {
                         .ck-button__label {
-                            width: calculateRem(198px);
+                            width: 100%;
                             display: inline-block;
                         }
                     }
