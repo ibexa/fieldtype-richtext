@@ -56,6 +56,11 @@
         <target state="new">Custom tag toolbar</target>
         <note>key: custom_tag.toolbar.label</note>
       </trans-unit>
+      <trans-unit id="544c548dcc8ae0e549e5e027fc48a7b072bc8872" resname="dropdown.none.label">
+        <source>None</source>
+        <target state="new">None</target>
+        <note>key: dropdown.none.label</note>
+      </trans-unit>
       <trans-unit id="3b257be2c6dd1f7bf0d5c70e64c22bf5b298dbbf" resname="elements_path.list.label">
         <source>list</source>
         <target state="new">list</target>
