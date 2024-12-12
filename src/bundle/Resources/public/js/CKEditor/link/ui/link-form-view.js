@@ -8,6 +8,7 @@ import { addListToDropdown } from '@ckeditor/ckeditor5-ui/src/dropdown/utils';
 
 import { createLabeledSwitchButton } from '../../common/switch-button/utils';
 import { createLabeledInputNumber } from '../../common/input-number/utils';
+import { addMultivalueSupport } from '../../common/multivalue-dropdown/utils';
 import { getCustomAttributesConfig, getCustomClassesConfig } from '../../custom-attributes/helpers/config-helper';
 
 class IbexaLinkFormView extends View {
@@ -271,7 +272,7 @@ class IbexaLinkFormView extends View {
 
         config.choices.forEach((choice) => {
             itemsList.add({
-                type: 'button',
+                type: config.multiple ? 'switchbutton' : 'button',
                 model: new Model({
                     withText: true,
                     label: choice,
@@ -282,8 +283,19 @@ class IbexaLinkFormView extends View {
 
         addListToDropdown(labeledDropdown.fieldView, itemsList);
 
+        if (config.multiple) {
+            addMultivalueSupport(labeledDropdown, config);
+        }
+
         this.listenTo(labeledDropdown.fieldView, 'execute', (event) => {
-            const value = this.getNewValue(event.source.value, config.multiple, labeledDropdown.fieldView.element.value);
+            const dropdownValue = labeledDropdown.fieldView.element.value;
+            const value = this.getNewValue(event.source.value, config.multiple, dropdownValue);
+
+            if (config.multiple) {
+                const isSelected = value.length > dropdownValue.length;
+
+                event.source.children.get(0).element.checked = isSelected;
+            }
 
             labeledDropdown.fieldView.buttonView.set({
                 label: value,
