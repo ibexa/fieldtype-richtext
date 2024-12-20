@@ -59,7 +59,7 @@ class IbexaLinkUI extends Plugin {
 
             this.isNew = false;
 
-            this.editor.execute('insertIbexaLink', { href: url, title, target, ibexaLinkClasses, ibexaLinkAttributes });
+            this.editor.execute('insertIbexaLink', { href: encodeURI(url), title, target, ibexaLinkClasses, ibexaLinkAttributes });
             this.hideForm();
         });
 

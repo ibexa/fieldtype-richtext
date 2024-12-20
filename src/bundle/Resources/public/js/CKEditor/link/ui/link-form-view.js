@@ -122,7 +122,7 @@ class IbexaLinkFormView extends View {
     }
 
     setValues({ url, title, target, ibexaLinkClasses, ibexaLinkAttributes = {} }) {
-        this.setStringValue(this.urlInputView, url);
+        this.setStringValue(this.urlInputView, decodeURI(url));
         this.setStringValue(this.titleView, title);
 
         this.targetSwitcherView.fieldView.element.value = !!target;
