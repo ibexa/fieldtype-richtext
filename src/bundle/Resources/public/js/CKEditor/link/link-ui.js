@@ -109,7 +109,7 @@ class IbexaLinkUI extends Plugin {
         };
 
         if (customClassesLinkConfig) {
-            const defaultCustomClasses = customClassesLinkConfig?.defaultValue ?? '';
+            const defaultCustomClasses = this.isNew && customClassesLinkConfig ? customClassesLinkConfig.defaultValue : '';
             const classesValue = link?.getAttribute('class') ?? defaultCustomClasses;
 
             values.ibexaLinkClasses = classesValue;
@@ -117,7 +117,9 @@ class IbexaLinkUI extends Plugin {
 
         if (customAttributesLinkConfig) {
             const attributesValues = Object.entries(customAttributesLinkConfig).reduce((output, [name, config]) => {
-                output[name] = link?.getAttribute(`data-ezattribute-${name}`) ?? config.defaultValue;
+                const defaultCustomAttributeValue = this.isNew ? config.defaultValue : '';
+
+                output[name] = link?.getAttribute(`data-ezattribute-${name}`) ?? defaultCustomAttributeValue;
 
                 return output;
             }, {});

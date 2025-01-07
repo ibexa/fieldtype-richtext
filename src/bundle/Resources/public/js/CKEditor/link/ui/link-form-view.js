@@ -228,7 +228,7 @@ class IbexaLinkFormView extends View {
         const children = this.createCollection();
 
         if (customClasses && Object.keys(customClasses).length !== 0) {
-            const classesView = this.createDropdown(customClasses);
+            const classesView = this.createDropdown(customClasses, true);
 
             this.classesView = classesView;
             this.customClasses = customClasses;
@@ -245,7 +245,7 @@ class IbexaLinkFormView extends View {
                 }
 
                 const createAttribute = createAttributeMethod.bind(this);
-                const attributeView = createAttribute(config);
+                const attributeView = createAttribute(config, true);
 
                 this.attributeViews[`ibexaLink${name}`] = attributeView;
 
@@ -269,7 +269,7 @@ class IbexaLinkFormView extends View {
         return children;
     }
 
-    createDropdown(config) {
+    createDropdown(config, isCustomAttribute = false) {
         const Translator = getTranslator();
         const labeledDropdown = new LabeledFieldView(this.locale, createLabeledDropdown);
         const itemsList = new Collection();
@@ -282,7 +282,7 @@ class IbexaLinkFormView extends View {
                 model: new Model({
                     withText: true,
                     label: Translator.trans(/*@Desc("None")*/ 'dropdown.none.label', {}, 'ck_editor'),
-                    value: null,
+                    value: '',
                 }),
             });
         }
@@ -313,11 +313,13 @@ class IbexaLinkFormView extends View {
             labeledDropdown.set('isEmpty', !event.source.value);
         });
 
-        this.listenTo(this.removeCustomAttributesButtonView, 'execute', () => {
-            labeledDropdown.fieldView.element.value = null;
+        if (isCustomAttribute) {
+            this.listenTo(this.removeCustomAttributesButtonView, 'execute', () => {
+                labeledDropdown.fieldView.element.value = '';
 
-            labeledDropdown.set('isEmpty', true);
-        });
+                labeledDropdown.set('isEmpty', true);
+            });
+        }
 
         return labeledDropdown;
     }
@@ -340,33 +342,39 @@ class IbexaLinkFormView extends View {
         return [...selectedItems].join(' ');
     }
 
-    createTextInput({ label }) {
+    createTextInput({ label }, isCustomAttribute = false) {
         const labeledInput = new LabeledFieldView(this.locale, createLabeledInputText);
 
         labeledInput.label = label;
 
-        this.listenTo(this.removeCustomAttributesButtonView, 'execute', () => {
-            labeledInput.fieldView.reset();
-            labeledInput.set('isEmpty', true);
-        });
+        if (isCustomAttribute) {
+            this.listenTo(this.removeCustomAttributesButtonView, 'execute', () => {
+                labeledInput.fieldView.reset();
+                labeledInput.set('value', null);
+                labeledInput.set('isEmpty', true);
+            });
+        }
 
         return labeledInput;
     }
 
-    createNumberInput(config) {
+    createNumberInput(config, isCustomAttribute = false) {
         const labeledInput = new LabeledFieldView(this.locale, createLabeledInputNumber);
 
         labeledInput.label = config.label;
 
-        this.listenTo(this.removeCustomAttributesButtonView, 'execute', () => {
-            labeledInput.fieldView.reset();
-            labeledInput.set('isEmpty', true);
-        });
+        if (isCustomAttribute) {
+            this.listenTo(this.removeCustomAttributesButtonView, 'execute', () => {
+                labeledInput.fieldView.reset();
+                labeledInput.set('value', null);
+                labeledInput.set('isEmpty', true);
+            });
+        }
 
         return labeledInput;
     }
 
-    createBoolean({ label }) {
+    createBoolean({ label }, isCustomAttribute = false) {
         const labeledSwitch = new LabeledFieldView(this.locale, createLabeledSwitchButton);
 
         this.listenTo(labeledSwitch.fieldView, 'execute', () => {
@@ -380,11 +388,13 @@ class IbexaLinkFormView extends View {
         labeledSwitch.label = label;
         labeledSwitch.fieldView.set('isEmpty', false);
 
-        this.listenTo(this.removeCustomAttributesButtonView, 'execute', () => {
-            labeledSwitch.fieldView.element.value = false;
-            labeledSwitch.fieldView.set('value', false);
-            labeledSwitch.fieldView.isOn = false;
-        });
+        if (isCustomAttribute) {
+            this.listenTo(this.removeCustomAttributesButtonView, 'execute', () => {
+                labeledSwitch.fieldView.element.value = false;
+                labeledSwitch.fieldView.set('value', false);
+                labeledSwitch.fieldView.isOn = false;
+            });
+        }
 
         return labeledSwitch;
     }
