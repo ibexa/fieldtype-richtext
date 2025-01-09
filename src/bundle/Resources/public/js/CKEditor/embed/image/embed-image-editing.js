@@ -5,6 +5,9 @@ import Widget from '@ckeditor/ckeditor5-widget/src/widget';
 import IbexaEmbedImageCommand from './embed-image-command';
 
 import { findContent } from '../../services/content-service';
+import { addPredefinedClassToConfig } from '../../custom-attributes/helpers/config-helper';
+
+const CONTAINER_CLASS = 'ibexa-embed-type-image';
 
 class IbexaEmbedImageEditing extends Plugin {
     static get requires() {
@@ -17,6 +20,8 @@ class IbexaEmbedImageEditing extends Plugin {
         this.loadImagePreview = this.loadImagePreview.bind(this);
         this.loadImageVariation = this.loadImageVariation.bind(this);
         this.getSetting = this.getSetting.bind(this);
+
+        addPredefinedClassToConfig('embedImage', CONTAINER_CLASS);
     }
 
     loadImagePreview(modelElement) {
@@ -89,7 +94,7 @@ class IbexaEmbedImageEditing extends Plugin {
                     const container = downcastWriter.createContainerElement('div', {
                         'data-ezelement': 'ezembed',
                         'data-ezview': 'embed',
-                        class: 'ibexa-embed-type-image',
+                        class: CONTAINER_CLASS,
                     });
 
                     this.loadImagePreview(modelElement);
@@ -136,7 +141,7 @@ class IbexaEmbedImageEditing extends Plugin {
                     'data-href': `ezcontent://${modelElement.getAttribute('contentId')}`,
                     'data-ezelement': 'ezembed',
                     'data-ezview': 'embed',
-                    class: 'ibexa-embed-type-image',
+                    class: CONTAINER_CLASS,
                 });
                 const config = downcastWriter.createUIElement('span', { 'data-ezelement': 'ezconfig' }, function (domDocument) {
                     const domElement = this.toDomElement(domDocument);
@@ -177,7 +182,7 @@ class IbexaEmbedImageEditing extends Plugin {
                 attributes: {
                     'data-ezelement': 'ezembed',
                 },
-                classes: 'ibexa-embed-type-image',
+                classes: CONTAINER_CLASS,
             },
             model: (viewElement, { writer: upcastWriter }) => {
                 const href = viewElement.getAttribute('data-href');
