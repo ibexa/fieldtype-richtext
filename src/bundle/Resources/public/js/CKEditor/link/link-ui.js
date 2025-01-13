@@ -72,9 +72,24 @@ class IbexaLinkUI extends Plugin {
     }
 
     removeAttributes(writer, element) {
+        const { link: customAttributesLinkConfig } = getCustomAttributesConfig();
+        const { link: customClassesLinkConfig } = getCustomClassesConfig();
+
         writer.removeAttribute('ibexaLinkHref', element);
         writer.removeAttribute('ibexaLinkTitle', element);
         writer.removeAttribute('ibexaLinkTarget', element);
+
+        if (customClassesLinkConfig) {
+            writer.removeAttribute('ibexaLinkClasses', element);
+        }
+
+        if (customAttributesLinkConfig) {
+            const attributes = Object.keys(customAttributesLinkConfig);
+
+            attributes.forEach((attribute) => {
+                writer.removeAttribute(`ibexaLink${attribute}`, element);
+            });
+        }
     }
 
     removeLink() {
@@ -109,7 +124,7 @@ class IbexaLinkUI extends Plugin {
         };
 
         if (customClassesLinkConfig) {
-            const defaultCustomClasses = this.isNew && customClassesLinkConfig ? customClassesLinkConfig.defaultValue : '';
+            const defaultCustomClasses = this.isNew ? customClassesLinkConfig.defaultValue : '';
             const classesValue = link?.getAttribute('class') ?? defaultCustomClasses;
 
             values.ibexaLinkClasses = classesValue;

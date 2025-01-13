@@ -136,7 +136,7 @@ class IbexaLinkFormView extends View {
         this.targetSwitcherView.fieldView.isOn = !!target;
         this.targetSwitcherView.fieldView.set('isEmpty', false);
 
-        if (ibexaLinkClasses) {
+        if (ibexaLinkClasses !== undefined) {
             this.setChoiceValue(this.classesView, ibexaLinkClasses);
         }
 
