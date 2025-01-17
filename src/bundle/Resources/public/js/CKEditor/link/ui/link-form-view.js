@@ -6,6 +6,8 @@ import Collection from '@ckeditor/ckeditor5-utils/src/collection';
 import { createLabeledInputText, createLabeledDropdown } from '@ckeditor/ckeditor5-ui/src/labeledfield/utils';
 import { addListToDropdown } from '@ckeditor/ckeditor5-ui/src/dropdown/utils';
 
+import { getTranslator } from '@ibexa-admin-ui/src/bundle/Resources/public/js/scripts/helpers/context.helper';
+
 import { createLabeledSwitchButton } from '../../common/switch-button/utils';
 import { createLabeledInputNumber } from '../../common/input-number/utils';
 import { getCustomAttributesConfig, getCustomClassesConfig } from '../../custom-attributes/helpers/config-helper';
@@ -19,6 +21,7 @@ class IbexaLinkFormView extends View {
 
         this.saveButtonView = this.createButton('Save', null, 'ck-button-save', 'save-link');
         this.cancelButtonView = this.createButton('Remove link', null, 'ck-button-cancel', 'remove-link');
+        this.removeCustomAttributesButtonView = this.createButton('Remove attributes', null, 'ck-button-cancel');
         this.selectContentButtonView = this.createButton('Select content', null, 'ibexa-btn--select-content');
         this.urlInputView = this.createTextInput({ label: 'Link to' });
         this.titleView = this.createTextInput({ label: 'Title' });
@@ -42,6 +45,7 @@ class IbexaLinkFormView extends View {
         const customAttributesLinkConfig = customAttributesConfig.link;
         const customClassesLinkConfig = customClassesConfig.link;
         const customAttributesDefinitions = [];
+        const actionBtns = [this.saveButtonView, this.cancelButtonView];
 
         this.children = this.createFormChildren();
         this.attributesChildren = this.createFromAttributesChildren(customAttributesLinkConfig, customClassesLinkConfig);
@@ -63,6 +67,8 @@ class IbexaLinkFormView extends View {
 
                 children: this.attributesChildren,
             });
+
+            actionBtns.push(this.removeCustomAttributesButtonView);
         }
 
         this.setTemplate({
@@ -107,7 +113,7 @@ class IbexaLinkFormView extends View {
                             attributes: {
                                 class: 'ibexa-ckeditor-balloon-form__actions',
                             },
-                            children: [this.saveButtonView, this.cancelButtonView],
+                            children: actionBtns,
                         },
                     ],
                 },
@@ -130,7 +136,7 @@ class IbexaLinkFormView extends View {
         this.targetSwitcherView.fieldView.isOn = !!target;
         this.targetSwitcherView.fieldView.set('isEmpty', false);
 
-        if (ibexaLinkClasses) {
+        if (ibexaLinkClasses !== undefined) {
             this.setChoiceValue(this.classesView, ibexaLinkClasses);
         }
 
@@ -222,7 +228,7 @@ class IbexaLinkFormView extends View {
         const children = this.createCollection();
 
         if (customClasses && Object.keys(customClasses).length !== 0) {
-            const classesView = this.createDropdown(customClasses);
+            const classesView = this.createDropdown(customClasses, true);
 
             this.classesView = classesView;
             this.customClasses = customClasses;
@@ -239,7 +245,7 @@ class IbexaLinkFormView extends View {
                 }
 
                 const createAttribute = createAttributeMethod.bind(this);
-                const attributeView = createAttribute(config);
+                const attributeView = createAttribute(config, true);
 
                 this.attributeViews[`ibexaLink${name}`] = attributeView;
 
@@ -263,11 +269,23 @@ class IbexaLinkFormView extends View {
         return children;
     }
 
-    createDropdown(config) {
+    createDropdown(config, isCustomAttribute = false) {
+        const Translator = getTranslator();
         const labeledDropdown = new LabeledFieldView(this.locale, createLabeledDropdown);
         const itemsList = new Collection();
 
         labeledDropdown.label = config.label;
+
+        if (!config.multiple && !config.required) {
+            itemsList.add({
+                type: 'button',
+                model: new Model({
+                    withText: true,
+                    label: Translator.trans(/*@Desc("None")*/ 'dropdown.none.label', {}, 'ck_editor'),
+                    value: '',
+                }),
+            });
+        }
 
         config.choices.forEach((choice) => {
             itemsList.add({
@@ -292,10 +310,16 @@ class IbexaLinkFormView extends View {
 
             labeledDropdown.fieldView.element.value = value;
 
-            if (event.source.value) {
-                labeledDropdown.set('isEmpty', false);
-            }
+            labeledDropdown.set('isEmpty', !event.source.value);
         });
+
+        if (isCustomAttribute) {
+            this.listenTo(this.removeCustomAttributesButtonView, 'execute', () => {
+                labeledDropdown.fieldView.element.value = '';
+
+                labeledDropdown.set('isEmpty', true);
+            });
+        }
 
         return labeledDropdown;
     }
@@ -318,23 +342,39 @@ class IbexaLinkFormView extends View {
         return [...selectedItems].join(' ');
     }
 
-    createTextInput({ label }) {
+    createTextInput({ label }, isCustomAttribute = false) {
         const labeledInput = new LabeledFieldView(this.locale, createLabeledInputText);
 
         labeledInput.label = label;
 
+        if (isCustomAttribute) {
+            this.listenTo(this.removeCustomAttributesButtonView, 'execute', () => {
+                labeledInput.fieldView.reset();
+                labeledInput.set('value', null);
+                labeledInput.set('isEmpty', true);
+            });
+        }
+
         return labeledInput;
     }
 
-    createNumberInput(config) {
+    createNumberInput(config, isCustomAttribute = false) {
         const labeledInput = new LabeledFieldView(this.locale, createLabeledInputNumber);
 
         labeledInput.label = config.label;
 
+        if (isCustomAttribute) {
+            this.listenTo(this.removeCustomAttributesButtonView, 'execute', () => {
+                labeledInput.fieldView.reset();
+                labeledInput.set('value', null);
+                labeledInput.set('isEmpty', true);
+            });
+        }
+
         return labeledInput;
     }
 
-    createBoolean({ label }) {
+    createBoolean({ label }, isCustomAttribute = false) {
         const labeledSwitch = new LabeledFieldView(this.locale, createLabeledSwitchButton);
 
         this.listenTo(labeledSwitch.fieldView, 'execute', () => {
@@ -347,6 +387,14 @@ class IbexaLinkFormView extends View {
 
         labeledSwitch.label = label;
         labeledSwitch.fieldView.set('isEmpty', false);
+
+        if (isCustomAttribute) {
+            this.listenTo(this.removeCustomAttributesButtonView, 'execute', () => {
+                labeledSwitch.fieldView.element.value = false;
+                labeledSwitch.fieldView.set('value', false);
+                labeledSwitch.fieldView.isOn = false;
+            });
+        }
 
         return labeledSwitch;
     }
