@@ -28,6 +28,7 @@
                     border: calculateRem(1px) solid $ibexa-color-dark-200;
                     border-radius: calculateRem(5px);
                     width: 100%;
+                    max-width: calculateRem(288px);
 
                     .ibexa-ckeditor-dropdown-selected-items {
                         display: flex;
@@ -83,6 +84,7 @@
                             }
 
                             .ibexa-ckeditor-input--checkbox {
+                                flex-shrink: 0;
                                 appearance: none;
                                 position: relative;
                                 display: inline-block;
@@ -193,10 +195,6 @@
                     background-color: $ibexa-color-light;
                     box-shadow: none;
                 }
-            }
-
-            &.ck-button-revert {
-                margin-right: calculateRem(8px);
             }
 
             &.ck-button-cancel,

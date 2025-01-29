@@ -302,7 +302,7 @@ class IbexaLinkFormView extends View {
         addListToDropdown(labeledDropdown.fieldView, itemsList);
 
         if (config.multiple) {
-            addMultivalueSupport(labeledDropdown, config);
+            addMultivalueSupport(labeledDropdown, config, this);
         }
 
         this.listenTo(labeledDropdown.fieldView, 'execute', (event) => {

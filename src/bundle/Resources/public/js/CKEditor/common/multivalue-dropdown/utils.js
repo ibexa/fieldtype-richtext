@@ -3,7 +3,7 @@ import ListView from '@ckeditor/ckeditor5-ui/src/list/listview';
 
 import ChipsButtonView from '../../common/chips-button-view/chips-button-view';
 
-export const addMultivalueSupport = (labeledDropdown, config) => {
+export const addMultivalueSupport = (labeledDropdown, config, listenerView) => {
     labeledDropdown.fieldView.panelView.extendTemplate({
         attributes: {
             class: 'ck-dropdown__panel--multiple',
@@ -34,5 +34,9 @@ export const addMultivalueSupport = (labeledDropdown, config) => {
             });
             item.children.get(0).children.add(inputView, 0);
         });
+    });
+
+    listenerView.on('ibexa-ckeditor:custom-attributes:recalculate-chips', () => {
+        labeledDropdown.fieldView.buttonView.labelView.rerenderChips();
     });
 };

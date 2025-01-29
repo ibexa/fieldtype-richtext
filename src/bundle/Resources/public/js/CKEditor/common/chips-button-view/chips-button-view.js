@@ -21,43 +21,50 @@ export default class IbexaChipsButtonView extends View {
         });
 
         this.listenTo(this, 'change:text', (event, item, value) => {
-            const container = event.source.element;
-            const selectedItems = value.split(' ').filter((selectedItem) => selectedItem !== '');
-            let showOverflow = false;
-            let currentIndex = 0;
+            this.fitChips(event.source.element, value);
+        });
+    }
 
-            this.children.clear();
+    rerenderChips() {
+        this.fitChips(this.element, this.text ?? '');
+    }
 
-            while (!showOverflow && currentIndex < selectedItems.length) {
-                const selectedItem = selectedItems[currentIndex];
-                const chip = this.createChip(selectedItem);
+    fitChips(container, value) {
+        const selectedItems = value.split(' ').filter((selectedItem) => selectedItem !== '');
+        let showOverflow = false;
+        let currentIndex = 0;
 
-                this.children.add(chip);
+        this.children.clear();
 
-                showOverflow = container.scrollWidth > container.offsetWidth;
-                currentIndex++;
+        while (!showOverflow && currentIndex < selectedItems.length) {
+            const selectedItem = selectedItems[currentIndex];
+            const chip = this.createChip(selectedItem);
 
-                if (showOverflow) {
-                    this.children.remove(this.children.last);
-                }
-            }
+            this.children.add(chip);
+
+            showOverflow = container.scrollWidth > container.offsetWidth;
+            currentIndex++;
 
             if (showOverflow) {
-                const overflownItems = selectedItems.length - currentIndex + 1;
-                let overflowChip = this.createChip(`+${overflownItems}`);
+                this.children.remove(this.children.last);
+            }
+        }
+
+        if (showOverflow) {
+            const overflownItems = selectedItems.length - currentIndex + 1;
+            let overflowChip = this.createChip(`+${overflownItems}`);
+
+            this.children.add(overflowChip);
+
+            if (container.scrollWidth > container.offsetWidth) {
+                this.children.remove(this.children.last);
+                this.children.remove(this.children.last);
+
+                overflowChip = this.createChip(`+${overflownItems + 1}`);
 
                 this.children.add(overflowChip);
-
-                if (container.scrollWidth > container.offsetWidth) {
-                    this.children.remove(this.children.last);
-                    this.children.remove(this.children.last);
-
-                    overflowChip = this.createChip(`+${overflownItems + 1}`);
-
-                    this.children.add(overflowChip);
-                }
             }
-        });
+        }
     }
 
     createChip(text) {
