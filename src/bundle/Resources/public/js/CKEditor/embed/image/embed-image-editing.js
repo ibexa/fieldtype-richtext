@@ -4,9 +4,8 @@ import Widget from '@ckeditor/ckeditor5-widget/src/widget';
 
 import IbexaEmbedImageCommand from './embed-image-command';
 
-import { getCustomClassesConfig } from '../../custom-attributes/helpers/config-helper';
 import { findContent } from '../../services/content-service';
-import { addPredefinedClassToConfig } from '../../custom-attributes/helpers/config-helper';
+import { getCustomClassesConfig, addPredefinedClassToConfig } from '../../custom-attributes/helpers/config-helper';
 
 const CONTAINER_CLASS = 'ibexa-embed-type-image';
 
