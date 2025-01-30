@@ -213,6 +213,7 @@ class IbexaEmbedImageEditing extends Plugin {
                     upcastWriter.setAttribute('ibexaLinkHref', link.getAttribute('href'), modelElement);
                     upcastWriter.setAttribute('ibexaLinkTitle', link.getAttribute('title') ?? '', modelElement);
                     upcastWriter.setAttribute('ibexaLinkTarget', link.getAttribute('target') ?? '', modelElement);
+                    upcastWriter.setAttribute('ibexaLinkClasses', link.getAttribute('class') ?? '', modelElement);
                 }
 
                 return modelElement;
