@@ -1,11 +1,6 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Method Ibexa\\\\Bundle\\\\FieldTypeRichText\\\\DependencyInjection\\\\Compiler\\\\RichTextHtml5ConverterPass\\:\\:process\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/bundle/DependencyInjection/Compiler/RichTextHtml5ConverterPass.php
-
-		-
 			message: "#^Method Ibexa\\\\Bundle\\\\FieldTypeRichText\\\\DependencyInjection\\\\Compiler\\\\RichTextHtml5ConverterPass\\:\\:setConverterDefinitions\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/bundle/DependencyInjection/Compiler/RichTextHtml5ConverterPass.php
@@ -111,11 +106,6 @@ parameters:
 			path: src/bundle/DependencyInjection/IbexaFieldTypeRichTextExtension.php
 
 		-
-			message: "#^Method Ibexa\\\\Bundle\\\\FieldTypeRichText\\\\DependencyInjection\\\\IbexaFieldTypeRichTextExtension\\:\\:prepend\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/bundle/DependencyInjection/IbexaFieldTypeRichTextExtension.php
-
-		-
 			message: "#^Method Ibexa\\\\Bundle\\\\FieldTypeRichText\\\\DependencyInjection\\\\IbexaFieldTypeRichTextExtension\\:\\:registerRichTextConfiguration\\(\\) has parameter \\$config with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/bundle/DependencyInjection/IbexaFieldTypeRichTextExtension.php
@@ -164,11 +154,6 @@ parameters:
 			message: "#^Parameter \\#1 \\$resource of class Symfony\\\\Component\\\\Config\\\\Resource\\\\FileResource constructor expects string, string\\|false given\\.$#"
 			count: 2
 			path: src/bundle/DependencyInjection/IbexaFieldTypeRichTextExtension.php
-
-		-
-			message: "#^Method Ibexa\\\\Bundle\\\\FieldTypeRichText\\\\IbexaFieldTypeRichTextBundle\\:\\:build\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/bundle/IbexaFieldTypeRichTextBundle.php
 
 		-
 			message: "#^Method Ibexa\\\\Bundle\\\\FieldTypeRichText\\\\IbexaFieldTypeRichTextBundle\\:\\:getCoreExtension\\(\\) should return Ibexa\\\\Bundle\\\\Core\\\\DependencyInjection\\\\IbexaCoreExtension but returns Symfony\\\\Component\\\\DependencyInjection\\\\Extension\\\\ExtensionInterface\\.$#"
