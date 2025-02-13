@@ -118,9 +118,9 @@ class IbexaLinkUI extends Plugin {
         const customClassesLinkConfig = customClassesConfig.link;
         const link = this.findLinkElement();
         const values = {
-            url: link ? link.getAttribute('href') : '',
-            title: link ? link.getAttribute('title') : '',
-            target: link ? link.getAttribute('target') : '',
+            url: link?.getAttribute('href') ?? '',
+            title: link?.getAttribute('title') ?? '',
+            target: link?.getAttribute('target') ?? '',
         };
 
         if (customClassesLinkConfig) {
