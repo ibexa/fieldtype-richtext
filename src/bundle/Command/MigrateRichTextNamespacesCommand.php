@@ -10,15 +10,15 @@ namespace Ibexa\Bundle\FieldTypeRichText\Command;
 
 use Ibexa\FieldTypeRichText\Persistence\MigrateRichTextNamespacesHandlerInterface;
 use Symfony\Component\Cache\Adapter\TagAwareAdapterInterface;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
+#[AsCommand(name: 'ibexa:migrate:richtext-namespaces')]
 final class MigrateRichTextNamespacesCommand extends Command
 {
-    protected static $defaultName = 'ibexa:migrate:richtext-namespaces';
-
     private MigrateRichTextNamespacesHandlerInterface $handler;
 
     private TagAwareAdapterInterface $cache;
