@@ -24,7 +24,7 @@ final class YoutubeIdExtractorExtension extends AbstractExtension
         return [
             new TwigFunction(
                 'ibexa_richtext_youtube_extract_id',
-                [$this, 'extractId']
+                $this->extractId(...)
             ),
         ];
     }

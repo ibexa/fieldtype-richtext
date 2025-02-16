@@ -566,11 +566,6 @@ parameters:
 			path: src/lib/Form/Mapper/RichTextFormMapper.php
 
 		-
-			message: "#^Method Ibexa\\\\FieldTypeRichText\\\\Form\\\\Type\\\\RichTextFieldType\\:\\:buildForm\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/Form/Type/RichTextFieldType.php
-
-		-
 			message: "#^Method Ibexa\\\\FieldTypeRichText\\\\Form\\\\Type\\\\RichTextFieldType\\:\\:getName\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/lib/Form/Type/RichTextFieldType.php

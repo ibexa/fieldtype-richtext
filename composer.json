@@ -37,6 +37,7 @@
         "ibexa/design-engine": "~5.0.x-dev",
         "ibexa/doctrine-schema": "~5.0.x-dev",
         "ibexa/notifications": "~5.0.x-dev",
+        "ibexa/rector": "~5.0.x-dev",
         "ibexa/search": "~5.0.x-dev",
         "ibexa/solr": "~5.0.x-dev",
         "ibexa/test-core": "~5.0.x-dev",
