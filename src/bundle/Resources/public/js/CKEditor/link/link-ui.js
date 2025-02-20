@@ -49,7 +49,7 @@ class IbexaLinkUI extends Plugin {
                 return;
             }
 
-            if (noRangeSelection) {
+            if (noRangeSelection || !this.isNew) {
                 const range = this.getLinkRange();
 
                 this.editor.model.change((writer) => {
