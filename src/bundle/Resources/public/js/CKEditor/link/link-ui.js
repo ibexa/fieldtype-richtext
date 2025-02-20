@@ -201,10 +201,20 @@ class IbexaLinkUI extends Plugin {
         });
     }
 
+    isLinkElement(element) {
+        return element.is('attributeElement') && !!element.hasAttribute('href');
+    }
+
     findLinkElement() {
+        const modelElement = this.editor.editing.view.document.selection.getSelectedElement();
+
+        if (modelElement && this.isLinkElement(modelElement)) {
+            return modelElement;
+        }
+
         const position = this.editor.editing.view.document.selection.getFirstPosition();
         const ancestors = position.getAncestors();
-        const link = ancestors.find((ancestor) => ancestor.is('attributeElement') && !!ancestor.hasAttribute('href'));
+        const link = ancestors.find(this.isLinkElement);
 
         return link;
     }

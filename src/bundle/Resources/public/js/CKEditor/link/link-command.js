@@ -20,8 +20,16 @@ class IbexaLinkCommand extends Command {
         const modelElement = this.editor.model.document.selection.getSelectedElement();
         const isValidElement = modelElement && this.editor.model.schema.checkAttribute(modelElement, 'ibexaLinkHref');
         const validRanges = this.editor.model.schema.getValidRanges(this.editor.model.document.selection.getRanges(), 'ibexaLinkHref');
+        const selectedContent = this.editor.model.getSelectedContent(this.editor.model.document.selection);
+        let isPartOfLinkSelected = false;
 
-        this.isEnabled = isValidElement || !validRanges.next().done;
+        if (selectedContent.childCount === 1) {
+            const selectedElement = selectedContent.getChild(0);
+
+            isPartOfLinkSelected = selectedElement.hasAttribute('ibexaLinkHref');
+        }
+
+        this.isEnabled = isValidElement || (!validRanges.next().done && !isPartOfLinkSelected);
     }
 
     setAttributes(writer, linkData, element) {
