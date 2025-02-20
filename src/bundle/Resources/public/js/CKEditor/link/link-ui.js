@@ -206,10 +206,10 @@ class IbexaLinkUI extends Plugin {
     }
 
     findLinkElement() {
-        const modelElement = this.editor.editing.view.document.selection.getSelectedElement();
+        const viewElement = this.editor.editing.view.document.selection.getSelectedElement();
 
-        if (modelElement && this.isLinkElement(modelElement)) {
-            return modelElement;
+        if (viewElement && this.isLinkElement(viewElement)) {
+            return viewElement;
         }
 
         const position = this.editor.editing.view.document.selection.getFirstPosition();
