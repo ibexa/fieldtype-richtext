@@ -13,7 +13,7 @@ use Twig\Extension\AbstractExtension;
 use Twig\Extension\GlobalsInterface;
 
 /**
- * Twig extension exposing RichText Configuration as ez_richtext_config global Twig variable.
+ * Twig extension exposing RichText Configuration as ibexa_richtext_config global Twig variable.
  *
  * @internal To access configuration use \Ibexa\Contracts\FieldTypeRichText\Configuration\ProviderService
  */
@@ -32,8 +32,6 @@ final class RichTextConfigurationExtension extends AbstractExtension implements 
         $config = $this->configurationProvider->getConfiguration();
 
         return [
-            /** @deprecated ez_richtext_config is deprecated since 4.0, use ibexa_richtext_config instead */
-            'ez_richtext_config' => $config,
             'ibexa_richtext_config' => $config,
         ];
     }
