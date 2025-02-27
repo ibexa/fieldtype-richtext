@@ -17,11 +17,18 @@ class IbexaLinkCommand extends Command {
     }
 
     refresh() {
-        const modelElement = this.editor.model.document.selection.getSelectedElement();
-        const isValidElement = modelElement && this.editor.model.schema.checkAttribute(modelElement, 'ibexaLinkHref');
-        const validRanges = this.editor.model.schema.getValidRanges(this.editor.model.document.selection.getRanges(), 'ibexaLinkHref');
+        const {
+            model: {
+                schema,
+                document: { selection },
+            },
+        } = this.editor;
+        const modelElement = selection.getSelectedElement();
+        const isValidElement = modelElement && schema.checkAttribute(modelElement, 'ibexaLinkHref');
+        const validRanges = schema.getValidRanges(selection.getRanges(), 'ibexaLinkHref');
+        const isInsideLink = selection.hasAttribute('ibexaLinkHref');
 
-        this.isEnabled = isValidElement || !validRanges.next().done;
+        this.isEnabled = isValidElement || isInsideLink || !validRanges.next().done;
     }
 
     setAttributes(writer, linkData, element) {

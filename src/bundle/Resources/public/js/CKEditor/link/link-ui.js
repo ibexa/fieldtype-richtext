@@ -49,7 +49,7 @@ class IbexaLinkUI extends Plugin {
                 return;
             }
 
-            if (noRangeSelection) {
+            if (noRangeSelection || !this.isNew) {
                 const range = this.getLinkRange();
 
                 this.editor.model.change((writer) => {
@@ -118,9 +118,9 @@ class IbexaLinkUI extends Plugin {
         const customClassesLinkConfig = customClassesConfig.link;
         const link = this.findLinkElement();
         const values = {
-            url: link ? link.getAttribute('href') : '',
-            title: link ? link.getAttribute('title') : '',
-            target: link ? link.getAttribute('target') : '',
+            url: link?.getAttribute('href') ?? '',
+            title: link?.getAttribute('title') ?? '',
+            target: link?.getAttribute('target') ?? '',
         };
 
         if (customClassesLinkConfig) {
@@ -201,10 +201,20 @@ class IbexaLinkUI extends Plugin {
         });
     }
 
+    isLinkElement(element) {
+        return element.is('attributeElement') && !!element.hasAttribute('href');
+    }
+
     findLinkElement() {
+        const viewElement = this.editor.editing.view.document.selection.getSelectedElement();
+
+        if (viewElement && this.isLinkElement(viewElement)) {
+            return viewElement;
+        }
+
         const position = this.editor.editing.view.document.selection.getFirstPosition();
         const ancestors = position.getAncestors();
-        const link = ancestors.find((ancestor) => ancestor.is('attributeElement') && !!ancestor.hasAttribute('href'));
+        const link = ancestors.find(this.isLinkElement);
 
         return link;
     }
