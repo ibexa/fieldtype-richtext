@@ -1176,6 +1176,11 @@ parameters:
 			path: src/lib/RichText/XmlBase.php
 
 		-
+			message: "#^Parameter \\#2 \\$desc of method Ibexa\\\\FieldTypeRichText\\\\Translation\\\\Extractor\\\\OnlineEditorCustomAttributesExtractor\\:\\:createMessage\\(\\) expects string, int\\|string given\\.$#"
+			count: 1
+			path: src/lib/Translation/Extractor/OnlineEditorCustomAttributesExtractor.php
+
+		-
 			message: "#^Property Ibexa\\\\FieldTypeRichText\\\\Validator\\\\Constraints\\\\RichText\\:\\:\\$message has no type specified\\.$#"
 			count: 1
 			path: src/lib/Validator/Constraints/RichText.php
