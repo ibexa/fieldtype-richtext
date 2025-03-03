@@ -31,7 +31,7 @@
         "twig/twig": "^3.0"
     },
     "require-dev": {
-        "dama/doctrine-test-bundle": "^6.7.5",
+        "dama/doctrine-test-bundle": "^8.2",
         "ibexa/admin-ui": "~5.0.x-dev",
         "ibexa/code-style": "~2.0.0",
         "ibexa/design-engine": "~5.0.x-dev",
@@ -42,8 +42,8 @@
         "ibexa/solr": "~5.0.x-dev",
         "ibexa/test-core": "~5.0.x-dev",
         "ibexa/user": "~5.0.x-dev",
-        "matthiasnoback/symfony-config-test": "^4.1",
-        "matthiasnoback/symfony-dependency-injection-test": "^4.1",
+        "matthiasnoback/symfony-config-test": "^5.0",
+        "matthiasnoback/symfony-dependency-injection-test": "^5.0",
         "phpstan/phpstan": "^2.0",
         "phpstan/phpstan-phpunit": "^2.0",
         "phpstan/phpstan-symfony": "^2.0",
