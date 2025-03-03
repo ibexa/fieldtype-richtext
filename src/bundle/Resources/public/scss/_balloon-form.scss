@@ -132,6 +132,7 @@
                 }
 
                 .ck.ck-button.ck-switchbutton {
+                    margin-top: calculateRem(8px);
                     background: transparent;
 
                     &.ck-on {
