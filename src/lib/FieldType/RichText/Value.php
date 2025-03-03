@@ -35,12 +35,7 @@ EOT;
      */
     public function __construct($xml = null)
     {
-        if ($xml instanceof DOMDocument) {
-            $this->xml = $xml;
-        } else {
-            $this->xml = new DOMDocument();
-            $this->xml->loadXML($xml === null ? self::EMPTY_VALUE : $xml);
-        }
+        $this->xml = $this->normalizeXML($xml);
     }
 
     /**
@@ -49,6 +44,39 @@ EOT;
     public function __toString()
     {
         return isset($this->xml) ? (string)$this->xml->saveXML() : self::EMPTY_VALUE;
+    }
+
+    /**
+     * @param \DOMDocument|string $xml
+     */
+    private function normalizeXML($xml): DOMDocument
+    {
+        if ($xml instanceof DOMDocument) {
+            return $xml;
+        }
+
+        if ($xml === null || $xml === self::EMPTY_VALUE) {
+            return $this->getEmptyXML();
+        }
+
+        $value = new DOMDocument();
+        $value->loadXML($xml);
+
+        return $value;
+    }
+
+    /**
+     * Returns DOM document with empty value.
+     */
+    private function getEmptyXML(): DOMDocument
+    {
+        static $value = null;
+        if ($value === null) {
+            $value = new DOMDocument();
+            $value->loadXML(self::EMPTY_VALUE);
+        }
+
+        return clone $value;
     }
 }
 
