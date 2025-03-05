@@ -143,6 +143,13 @@ class IbexaAttributesUI extends Plugin {
         });
 
         this.balloon.updatePosition(this.getBalloonPositionData());
+
+        clickOutsideHandler({
+            emitter: this.formView,
+            activator: () => this.balloon.hasView(this.formView),
+            contextElements: [this.balloon.view.element],
+            callback: () => this.hideForm(),
+        });
     }
 
     getBalloonPositionData() {
@@ -169,13 +176,6 @@ class IbexaAttributesUI extends Plugin {
             this.listenTo(buttonView, 'execute', this.showForm);
 
             return buttonView;
-        });
-
-        clickOutsideHandler({
-            emitter: this.formView,
-            activator: () => this.balloon.hasView(this.formView),
-            contextElements: [this.balloon.view.element],
-            callback: () => this.hideForm(),
         });
     }
 }
