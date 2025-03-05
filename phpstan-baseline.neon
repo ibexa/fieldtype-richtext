@@ -655,18 +655,6 @@ parameters:
 			path: src/lib/FieldType/RichText/Type.php
 
 		-
-			message: '#^Instanceof between DOMDocument and DOMDocument will always evaluate to true\.$#'
-			identifier: instanceof.alwaysTrue
-			count: 2
-			path: src/lib/FieldType/RichText/Type.php
-
-		-
-			message: '#^Method Ibexa\\FieldTypeRichText\\FieldType\\RichText\\Type\:\:checkValueStructure\(\) has Ibexa\\Contracts\\Core\\Repository\\Exceptions\\InvalidArgumentException in PHPDoc @throws tag but it''s not thrown\.$#'
-			identifier: throws.unusedType
-			count: 1
-			path: src/lib/FieldType/RichText/Type.php
-
-		-
 			message: '#^Method Ibexa\\FieldTypeRichText\\FieldType\\RichText\\Type\:\:checkValueStructure\(\) has no return type specified\.$#'
 			identifier: missingType.return
 			count: 1
@@ -808,12 +796,6 @@ parameters:
 			message: '#^Argument of an invalid type DOMNodeList\<DOMNode\>\|false supplied for foreach, only iterables are supported\.$#'
 			identifier: foreach.nonIterable
 			count: 1
-			path: src/lib/RichText/Converter/Link.php
-
-		-
-			message: '#^If condition is always true\.$#'
-			identifier: if.alwaysTrue
-			count: 4
 			path: src/lib/RichText/Converter/Link.php
 
 		-
@@ -1093,18 +1075,6 @@ parameters:
 			path: src/lib/RichText/Converter/Render/Template.php
 
 		-
-			message: '#^Strict comparison using \!\=\= between string and null will always evaluate to true\.$#'
-			identifier: notIdentical.alwaysTrue
-			count: 1
-			path: src/lib/RichText/Converter/Render/Template.php
-
-		-
-			message: '#^Strict comparison using \=\=\= between DOMNode and false will always evaluate to false\.$#'
-			identifier: identical.alwaysFalse
-			count: 1
-			path: src/lib/RichText/Converter/Render/Template.php
-
-		-
 			message: '#^Access to an undefined property Ibexa\\FieldTypeRichText\\RichText\\Converter\\Xslt\:\:\$xsltProcessor\.$#'
 			identifier: property.notFound
 			count: 1
@@ -1167,12 +1137,6 @@ parameters:
 		-
 			message: '#^Property Ibexa\\FieldTypeRichText\\RichText\\ConverterDispatcher\:\:\$mapping \(array\<Ibexa\\Contracts\\FieldTypeRichText\\RichText\\Converter\>\) does not accept array\<Ibexa\\Contracts\\FieldTypeRichText\\RichText\\Converter\|null\>\.$#'
 			identifier: assign.propertyType
-			count: 1
-			path: src/lib/RichText/ConverterDispatcher.php
-
-		-
-			message: '#^Strict comparison using \=\=\= between Ibexa\\Contracts\\FieldTypeRichText\\RichText\\Converter and null will always evaluate to false\.$#'
-			identifier: identical.alwaysFalse
 			count: 1
 			path: src/lib/RichText/ConverterDispatcher.php
 
@@ -1537,12 +1501,6 @@ parameters:
 			path: src/lib/RichText/Validator/ValidatorDispatcher.php
 
 		-
-			message: '#^Strict comparison using \=\=\= between Ibexa\\FieldTypeRichText\\eZ\\RichText\\Validator and null will always evaluate to false\.$#'
-			identifier: identical.alwaysFalse
-			count: 1
-			path: src/lib/RichText/Validator/ValidatorDispatcher.php
-
-		-
 			message: '#^Method Ibexa\\FieldTypeRichText\\RichText\\XmlBase\:\:startRecordingErrors\(\) has no return type specified\.$#'
 			identifier: missingType.return
 			count: 1
@@ -1705,28 +1663,10 @@ parameters:
 			path: tests/bundle/DependencyInjection/IbexaFieldTypeRichTextExtensionTest.php
 
 		-
-			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Twig\\\\TwigFunction'' and Twig\\TwigFunction will always evaluate to true\.$#'
-			identifier: method.alreadyNarrowedType
-			count: 1
-			path: tests/bundle/Templating/Twig/Extension/YoutubeIdExtractorExtensionTest.php
-
-		-
-			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertIsArray\(\) with array\<Twig\\TwigFunction\> will always evaluate to true\.$#'
-			identifier: method.alreadyNarrowedType
-			count: 1
-			path: tests/bundle/Templating/Twig/Extension/YoutubeIdExtractorExtensionTest.php
-
-		-
 			message: '#^Method Ibexa\\Tests\\Bundle\\FieldTypeRichText\\Templating\\Twig\\Extension\\YoutubeIdExtractorExtensionTest\:\:getYouTubeUrls\(\) return type has no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
 			path: tests/bundle/Templating/Twig/Extension/YoutubeIdExtractorExtensionTest.php
-
-		-
-			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''DOMDocument'' and DOMDocument will always evaluate to true\.$#'
-			identifier: method.alreadyNarrowedType
-			count: 1
-			path: tests/integration/Repository/RichTextFieldTypeIntegrationTest.php
 
 		-
 			message: '#^Cannot access property \$id on Ibexa\\Contracts\\Core\\Repository\\Values\\Content\\Field\|null\.$#'
@@ -3079,18 +3019,6 @@ parameters:
 			path: tests/lib/RichText/Converter/Xslt/BaseTest.php
 
 		-
-			message: '#^Strict comparison using \!\=\= between array\<string\> and null will always evaluate to true\.$#'
-			identifier: notIdentical.alwaysTrue
-			count: 1
-			path: tests/lib/RichText/Converter/Xslt/BaseTest.php
-
-		-
-			message: '#^Variable \$validator in isset\(\) always exists and is not nullable\.$#'
-			identifier: isset.variable
-			count: 1
-			path: tests/lib/RichText/Converter/Xslt/BaseTest.php
-
-		-
 			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Converter\\Xslt\\DebugRenderer\:\:renderContentEmbed\(\) has parameter \$parameters with no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
@@ -3197,12 +3125,6 @@ parameters:
 			identifier: assign.propertyType
 			count: 1
 			path: tests/lib/RichText/Converter/Xslt/Xhtml5ToDocbookTest.php
-
-		-
-			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''DOMDocument'' and DOMDocument will always evaluate to true\.$#'
-			identifier: method.alreadyNarrowedType
-			count: 1
-			path: tests/lib/RichText/DOMDocumentFactoryTest.php
 
 		-
 			message: '#^Call to method expects\(\) on an unknown class Ibexa\\FieldTypeRichText\\RichText\\ValidatorInterface\.$#'
@@ -3317,12 +3239,6 @@ parameters:
 			identifier: missingType.iterableValue
 			count: 1
 			path: tests/lib/RichText/RelationProcessorTest.php
-
-		-
-			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertNull\(\) with string will always evaluate to false\.$#'
-			identifier: method.impossibleType
-			count: 9
-			path: tests/lib/RichText/RendererTest.php
 
 		-
 			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\RendererTest\:\:getContentMock\(\) has no return type specified\.$#'
@@ -3681,12 +3597,6 @@ parameters:
 		-
 			message: '#^Property Ibexa\\Tests\\FieldTypeRichText\\RichText\\Validator\\DocbookTest\:\:\$validator has unknown class Ibexa\\FieldTypeRichText\\RichText\\ValidatorInterface as its type\.$#'
 			identifier: class.notFound
-			count: 1
-			path: tests/lib/RichText/Validator/DocbookTest.php
-
-		-
-			message: '#^Strict comparison using \!\=\= between array\<string\> and null will always evaluate to true\.$#'
-			identifier: notIdentical.alwaysTrue
 			count: 1
 			path: tests/lib/RichText/Validator/DocbookTest.php
 
