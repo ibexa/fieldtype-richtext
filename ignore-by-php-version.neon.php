@@ -13,6 +13,10 @@ if (PHP_VERSION_ID < 80000) {
     $includes[] = __DIR__ . '/ignore-gte-php8.0-errors.neon';
 }
 
+if (PHP_VERSION_ID > 80100) {
+    $includes[] = __DIR__ . '/ignore-gte-php8.1-errors.neon';
+}
+
 $config = [];
 $config['includes'] = $includes;
 

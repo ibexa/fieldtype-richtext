@@ -1375,12 +1375,6 @@ parameters:
 			path: src/lib/RichText/Renderer.php
 
 		-
-			message: '#^Strict comparison using \!\=\= between DOMNodeList\<DOMNode\> and null will always evaluate to true\.$#'
-			identifier: notIdentical.alwaysTrue
-			count: 1
-			path: src/lib/RichText/TextExtractor/FullTextExtractor.php
-
-		-
 			message: '#^Cannot access property \$textContent on DOMNode\|null\.$#'
 			identifier: property.nonObject
 			count: 1
