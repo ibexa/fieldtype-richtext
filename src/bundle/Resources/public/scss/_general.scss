@@ -17,6 +17,10 @@
             outline-color: $ibexa-color-primary;
             outline: none;
             border: calculateRem(1px) solid $ibexa-color-primary;
+
+            .ck.ck-widget__type-around > .ck-widget__type-around__button {
+                background: $ibexa-color-primary;
+            }
         }
 
         &.ck-widget_with-selection-handle .ck-widget__selection-handle,
