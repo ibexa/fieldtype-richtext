@@ -238,7 +238,7 @@
         z-index: calc(var(--ck-z-modal) + 50);
 
         &.ck-balloon-panel_with-arrow {
-            z-index: calc(var(--ck-z-modal) + 1);
+            z-index: calc(var(--ck-z-modal) + 55);
         }
 
         &.ck-balloon-panel {
