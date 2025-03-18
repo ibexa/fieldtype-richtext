@@ -19,7 +19,7 @@ class DOMDocumentFactoryTest extends TestCase
     /**
      * @var \Ibexa\FieldTypeRichText\RichText\DOMDocumentFactory
      */
-    private $domDocumentFactory;
+    private DOMDocumentFactory $domDocumentFactory;
 
     /**
      * {@inheritdoc}

@@ -11,12 +11,15 @@ namespace Ibexa\Tests\FieldTypeRichText\RichText\Converter;
 use DOMDocument;
 use Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo as APIContentInfo;
 use Ibexa\Contracts\Core\Repository\Values\Content\Location as APILocation;
+use Ibexa\Core\Base\Exceptions\NotFoundException;
 use Ibexa\Core\Base\Exceptions\NotFoundException as APINotFoundException;
+use Ibexa\Core\Base\Exceptions\UnauthorizedException;
 use Ibexa\Core\Base\Exceptions\UnauthorizedException as APIUnauthorizedException;
 use Ibexa\Core\MVC\Symfony\Routing\UrlAliasRouter;
 use Ibexa\Core\Repository\ContentService;
 use Ibexa\Core\Repository\LocationService;
 use Ibexa\FieldTypeRichText\RichText\Converter\Link;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Routing\RouterInterface;
@@ -30,7 +33,7 @@ class LinkTest extends TestCase
     /**
      * @return \PHPUnit\Framework\MockObject\MockObject
      */
-    protected function getMockContentService()
+    protected function getMockContentService(): MockObject
     {
         return $this->createMock(ContentService::class);
     }
@@ -38,7 +41,7 @@ class LinkTest extends TestCase
     /**
      * @return \PHPUnit\Framework\MockObject\MockObject
      */
-    protected function getMockLocationService()
+    protected function getMockLocationService(): MockObject
     {
         return $this->createMock(LocationService::class);
     }
@@ -46,7 +49,7 @@ class LinkTest extends TestCase
     /**
      * @return \PHPUnit\Framework\MockObject\MockObject
      */
-    protected function getMockRouter()
+    protected function getMockRouter(): MockObject
     {
         return $this->createMock(RouterInterface::class);
     }
@@ -54,7 +57,7 @@ class LinkTest extends TestCase
     /**
      * @return array
      */
-    public function providerLinkXmlSample()
+    public function providerLinkXmlSample(): array
     {
         return [
             [
@@ -113,7 +116,7 @@ class LinkTest extends TestCase
      *
      * @dataProvider providerLinkXmlSample
      */
-    public function testLink($input, $output)
+    public function testLink(string $input, string $output): void
     {
         $inputDocument = new DOMDocument();
         $inputDocument->loadXML($input);
@@ -144,7 +147,7 @@ class LinkTest extends TestCase
     /**
      * @return array
      */
-    public function providerLocationLink()
+    public function providerLocationLink(): array
     {
         return [
             [
@@ -209,7 +212,7 @@ class LinkTest extends TestCase
      *
      * @dataProvider providerLocationLink
      */
-    public function testConvertLocationLink($input, $output, $locationId, $urlResolved)
+    public function testConvertLocationLink(string $input, string $output, int $locationId, string $urlResolved): void
     {
         $inputDocument = new DOMDocument();
         $inputDocument->loadXML($input);
@@ -243,7 +246,7 @@ class LinkTest extends TestCase
     /**
      * @return array
      */
-    public function providerBadLocationLink()
+    public function providerBadLocationLink(): array
     {
         return [
             [
@@ -314,7 +317,7 @@ class LinkTest extends TestCase
      *
      * @dataProvider providerBadLocationLink
      */
-    public function testConvertBadLocationLink($input, $output, $locationId, $exception, $logType, $logMessage)
+    public function testConvertBadLocationLink(string $input, string $output, int $locationId, NotFoundException|UnauthorizedException $exception, string $logType, string $logMessage): void
     {
         $inputDocument = new DOMDocument();
         $inputDocument->loadXML($input);
@@ -347,7 +350,7 @@ class LinkTest extends TestCase
     /**
      * @return array
      */
-    public function providerContentLink()
+    public function providerContentLink(): array
     {
         return [
             [
@@ -412,7 +415,7 @@ class LinkTest extends TestCase
      *
      * @dataProvider providerContentLink
      */
-    public function testConvertContentLink($input, $output, $contentId, $urlResolved)
+    public function testConvertContentLink(string $input, string $output, int $contentId, string $urlResolved): void
     {
         $locationId = 106;
         $inputDocument = new DOMDocument();
@@ -458,7 +461,7 @@ class LinkTest extends TestCase
     /**
      * @return array
      */
-    public function providerBadContentLink()
+    public function providerBadContentLink(): array
     {
         return [
             [
@@ -529,7 +532,7 @@ class LinkTest extends TestCase
      *
      * @dataProvider providerBadContentLink
      */
-    public function testConvertBadContentLink($input, $output, $contentId, $exception, $logType, $logMessage)
+    public function testConvertBadContentLink(string $input, string $output, int $contentId, NotFoundException|UnauthorizedException $exception, string $logType, string $logMessage): void
     {
         $inputDocument = new DOMDocument();
         $inputDocument->loadXML($input);

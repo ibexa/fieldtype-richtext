@@ -16,10 +16,7 @@ use Symfony\Component\Validator\ConstraintValidator;
 
 class RichTextValidator extends ConstraintValidator
 {
-    /**
-     * @var \Ibexa\Contracts\FieldTypeRichText\RichText\InputHandlerInterface
-     */
-    private $inputHandler;
+    private InputHandlerInterface $inputHandler;
 
     /**
      * @param \Ibexa\Contracts\FieldTypeRichText\RichText\InputHandlerInterface

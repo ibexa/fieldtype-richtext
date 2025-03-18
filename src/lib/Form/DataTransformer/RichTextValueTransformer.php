@@ -18,13 +18,12 @@ use Symfony\Component\Form\DataTransformerInterface;
  */
 class RichTextValueTransformer implements DataTransformerInterface
 {
-    /** @var \Ibexa\Contracts\Core\Repository\FieldType */
-    private $fieldType;
+    private FieldType $fieldType;
 
     /**
      * @var \Ibexa\Contracts\FieldTypeRichText\RichText\Converter Converter
      */
-    protected $docbookToXhtml5EditConverter;
+    protected Converter $docbookToXhtml5EditConverter;
 
     public function __construct(FieldType $fieldType, Converter $docbookToXhtml5EditConverter)
     {

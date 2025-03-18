@@ -29,9 +29,9 @@ class AggregateProviderTest extends TestCase
         $providers = [];
         foreach ($configuration as $providerName => $providerConfiguration) {
             $providers[] = new class($providerName, $providerConfiguration) implements Provider {
-                private $name;
+                private string $name;
 
-                private $configuration;
+                private array $configuration;
 
                 public function __construct(string $name, array $configuration)
                 {

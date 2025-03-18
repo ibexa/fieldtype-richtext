@@ -16,7 +16,7 @@ class InvalidXmlException extends InvalidArgumentException
     /**
      * @var \LibXMLError[]
      */
-    private $errors;
+    private array $errors;
 
     /**
      * @param string $argumentName

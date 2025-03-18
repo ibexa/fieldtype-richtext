@@ -20,20 +20,11 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class RichTextType extends AbstractType
 {
-    /**
-     * @var \Ibexa\FieldTypeRichText\RichText\DOMDocumentFactory
-     */
-    private $domDocumentFactory;
+    private DOMDocumentFactory $domDocumentFactory;
 
-    /**
-     * @var \Ibexa\Contracts\FieldTypeRichText\RichText\InputHandlerInterface
-     */
-    private $inputHandler;
+    private InputHandlerInterface $inputHandler;
 
-    /**
-     * @var \Ibexa\Contracts\FieldTypeRichText\RichText\Converter
-     */
-    private $docbookToXhtml5EditConverter;
+    private Converter $docbookToXhtml5EditConverter;
 
     /**
      * @param \Ibexa\FieldTypeRichText\RichText\DOMDocumentFactory $domDocumentFactory

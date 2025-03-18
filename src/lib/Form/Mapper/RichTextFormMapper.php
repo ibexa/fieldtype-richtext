@@ -16,7 +16,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class RichTextFormMapper implements FieldValueFormMapperInterface
 {
-    public function mapFieldValueForm(FormInterface $fieldForm, FieldData $data)
+    public function mapFieldValueForm(FormInterface $fieldForm, FieldData $data): void
     {
         $fieldDefinition = $data->fieldDefinition;
         $formConfig = $fieldForm->getConfig();
@@ -36,7 +36,7 @@ class RichTextFormMapper implements FieldValueFormMapperInterface
     /**
      * Fake method to set the translation domain for the extractor.
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
             ->setDefaults([

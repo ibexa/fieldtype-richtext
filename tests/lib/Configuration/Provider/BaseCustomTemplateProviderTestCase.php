@@ -9,11 +9,12 @@ declare(strict_types=1);
 namespace Ibexa\Tests\FieldTypeRichText\Configuration\Provider;
 
 use Ibexa\FieldTypeRichText\Configuration\UI\Mapper\CustomTemplateConfigMapper;
+use PHPUnit\Framework\MockObject\MockObject;
 
 abstract class BaseCustomTemplateProviderTestCase extends BaseProviderTestCase
 {
     /** @var \PHPUnit\Framework\MockObject\MockObject|\Ibexa\FieldTypeRichText\Configuration\UI\Mapper\CustomStyle */
-    protected $mapper;
+    protected MockObject $mapper;
 
     abstract protected function getExpectedCustomTemplatesConfiguration(): array;
 
@@ -29,7 +30,7 @@ abstract class BaseCustomTemplateProviderTestCase extends BaseProviderTestCase
     /**
      * @covers \Ibexa\Contracts\FieldTypeRichText\Configuration\Provider::getConfiguration
      */
-    final public function testGetConfiguration()
+    final public function testGetConfiguration(): void
     {
         $provider = $this->createProvider();
 

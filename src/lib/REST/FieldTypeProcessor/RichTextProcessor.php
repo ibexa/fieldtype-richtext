@@ -14,10 +14,7 @@ use Ibexa\Contracts\Rest\FieldTypeProcessor;
 
 class RichTextProcessor extends FieldTypeProcessor
 {
-    /**
-     * @var \Ibexa\Contracts\FieldTypeRichText\RichText\Converter
-     */
-    protected $docbookToXhtml5EditConverter;
+    protected Converter $docbookToXhtml5EditConverter;
 
     public function __construct(Converter $docbookToXhtml5EditConverter)
     {

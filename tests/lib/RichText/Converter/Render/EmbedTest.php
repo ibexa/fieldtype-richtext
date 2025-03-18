@@ -11,6 +11,7 @@ namespace Ibexa\Tests\FieldTypeRichText\RichText\Converter\Render;
 use DOMDocument;
 use Ibexa\Contracts\FieldTypeRichText\RichText\RendererInterface;
 use Ibexa\FieldTypeRichText\RichText\Converter\Render\Embed;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 
@@ -851,7 +852,7 @@ class EmbedTest extends TestCase
         self::assertEquals($expectedDocument, $document);
     }
 
-    protected function getConverter()
+    protected function getConverter(): Embed
     {
         return new Embed(
             $this->rendererMock,
@@ -867,7 +868,7 @@ class EmbedTest extends TestCase
     /**
      * @return \PHPUnit\Framework\MockObject\MockObject|\Ibexa\FieldTypeRichText\RichText\RendererInterface
      */
-    protected function getRendererMock()
+    protected function getRendererMock(): MockObject
     {
         return $this->createMock(RendererInterface::class);
     }
@@ -880,7 +881,7 @@ class EmbedTest extends TestCase
     /**
      * @return \PHPUnit\Framework\MockObject\MockObject|\LoggerInterface
      */
-    protected function getLoggerMock()
+    protected function getLoggerMock(): MockObject
     {
         return $this->createMock(LoggerInterface::class);
     }

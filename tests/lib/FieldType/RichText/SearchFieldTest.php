@@ -19,7 +19,7 @@ use PHPUnit\Framework\TestCase;
 final class SearchFieldTest extends TestCase
 {
     /** @var \Ibexa\FieldTypeRichText\FieldType\RichText\SearchField */
-    private $searchField;
+    private SearchField $searchField;
 
     /** @var \Ibexa\Contracts\FieldTypeRichText\RichText\TextExtractorInterface&\PHPUnit\Framework\MockObject\MockObject */
     private TextExtractorInterface $shortTextExtractor;

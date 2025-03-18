@@ -15,7 +15,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class OnlineEditorTest extends TestCase
 {
     /** @var \Ibexa\FieldTypeRichText\Configuration\UI\Mapper\OnlineEditorConfigMapper */
-    private $mapper;
+    private OnlineEditor $mapper;
 
     public function setUp(): void
     {

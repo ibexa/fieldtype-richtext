@@ -32,49 +32,25 @@ class Renderer implements RendererInterface
     /**
      * @var \Ibexa\Core\Repository\Repository
      */
-    protected $repository;
+    protected Repository $repository;
 
     private PermissionResolver $permissionResolver;
 
-    /**
-     * @var string
-     */
-    protected $tagConfigurationNamespace;
+    protected string $tagConfigurationNamespace;
 
-    /**
-     * @var string
-     */
-    protected $styleConfigurationNamespace;
+    protected string $styleConfigurationNamespace;
 
-    /**
-     * @var string
-     */
-    protected $embedConfigurationNamespace;
+    protected string $embedConfigurationNamespace;
 
-    /**
-     * @var \Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface
-     */
-    protected $configResolver;
+    protected ConfigResolverInterface $configResolver;
 
-    /**
-     * @var \Twig\Environment
-     */
-    protected $templateEngine;
+    protected Environment $templateEngine;
 
-    /**
-     * @var \Psr\Log\LoggerInterface|null
-     */
-    protected $logger;
+    protected LoggerInterface $logger;
 
-    /**
-     * @var array
-     */
-    private $customTagsConfiguration;
+    private array $customTagsConfiguration;
 
-    /**
-     * @var array
-     */
-    private $customStylesConfiguration;
+    private array $customStylesConfiguration;
 
     public function __construct(
         Repository $repository,
@@ -110,7 +86,7 @@ class Renderer implements RendererInterface
         try {
             /** @var \Ibexa\Contracts\Core\Repository\Values\Content\Content $content */
             $content = $this->repository->sudo(
-                static function (Repository $repository) use ($contentId) {
+                static function (Repository $repository) use ($contentId): \Ibexa\Contracts\Core\Repository\Values\Content\Content {
                     return $repository->getContentService()->loadContent((int)$contentId);
                 }
             );
@@ -273,7 +249,7 @@ class Renderer implements RendererInterface
      *
      * @return string
      */
-    protected function render($templateReference, array $parameters)
+    protected function render($templateReference, array $parameters): string
     {
         return $this->templateEngine->render(
             $templateReference,
@@ -326,7 +302,7 @@ class Renderer implements RendererInterface
      *
      * @return string|null
      */
-    protected function getTagTemplateName($identifier, $isInline)
+    protected function getTagTemplateName(string $identifier, $isInline)
     {
         if (isset($this->customTagsConfiguration[$identifier])) {
             return $this->customTagsConfiguration[$identifier]['template'];
@@ -457,11 +433,11 @@ class Renderer implements RendererInterface
      *
      * @return \Ibexa\Contracts\Core\Repository\Values\Content\Location
      */
-    protected function checkLocation($id)
+    protected function checkLocation(int $id)
     {
         /** @var \Ibexa\Contracts\Core\Repository\Values\Content\Location $location */
         $location = $this->repository->sudo(
-            static function (Repository $repository) use ($id) {
+            static function (Repository $repository) use ($id): \Ibexa\Contracts\Core\Repository\Values\Content\Location {
                 return $repository->getLocationService()->loadLocation($id);
             }
         );

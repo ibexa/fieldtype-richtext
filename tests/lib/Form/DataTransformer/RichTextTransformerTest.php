@@ -17,19 +17,20 @@ use Ibexa\Contracts\FieldTypeRichText\RichText\InputHandlerInterface;
 use Ibexa\FieldTypeRichText\Form\DataTransformer\RichTextTransformer;
 use Ibexa\FieldTypeRichText\RichText\DOMDocumentFactory;
 use Ibexa\FieldTypeRichText\RichText\XMLSanitizer;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 
 class RichTextTransformerTest extends TestCase
 {
     /** @var \Ibexa\FieldTypeRichText\RichText\InputHandlerInterface|\PHPUnit\Framework\MockObject\MockObject */
-    private $inputHandler;
+    private MockObject $inputHandler;
 
     /** @var \Ibexa\FieldTypeRichText\RichText\Converter|\PHPUnit\Framework\MockObject\MockObject */
-    private $docbook2xhtml5editConverter;
+    private MockObject $docbook2xhtml5editConverter;
 
     /** @var \Ibexa\FieldTypeRichText\Form\DataTransformer\RichTextTransformer */
-    private $richTextTransformer;
+    private RichTextTransformer $richTextTransformer;
 
     protected function setUp(): void
     {
@@ -62,7 +63,7 @@ class RichTextTransformerTest extends TestCase
         $this->docbook2xhtml5editConverter
             ->expects(self::once())
             ->method('convert')
-            ->willReturnCallback(function (DOMDocument $doc) use ($inputXML, $outputDocument) {
+            ->willReturnCallback(function (DOMDocument $doc) use ($inputXML, $outputDocument): \DOMDocument {
                 $this->assertXmlStringEqualsXmlString($inputXML, $doc->saveXML());
 
                 return $outputDocument;
@@ -132,7 +133,7 @@ class RichTextTransformerTest extends TestCase
         $this->richTextTransformer->reverseTransform($value);
     }
 
-    public function dataProviderForReverseTransformTransformationFailedException()
+    public function dataProviderForReverseTransformTransformationFailedException(): array
     {
         return [
             [$this->createMock(NotFoundException::class)],

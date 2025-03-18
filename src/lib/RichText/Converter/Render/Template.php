@@ -25,15 +25,9 @@ class Template extends Render implements Converter
 {
     public const LITERAL_LAYOUT_LINE_BREAK = "\n";
 
-    /**
-     * @var \Ibexa\Contracts\FieldTypeRichText\RichText\Converter
-     */
-    private $richTextConverter;
+    private Converter $richTextConverter;
 
-    /**
-     * @var \Psr\Log\LoggerInterface
-     */
-    private $logger;
+    private LoggerInterface $logger;
 
     /**
      * RichText Template converter constructor.
@@ -60,7 +54,7 @@ class Template extends Render implements Converter
      *
      * @return \DOMDocument
      */
-    public function convert(DOMDocument $document)
+    public function convert(DOMDocument $document): DOMDocument
     {
         $xpath = new DOMXPath($document);
         $xpath->registerNamespace('docbook', 'http://docbook.org/ns/docbook');
@@ -141,7 +135,7 @@ class Template extends Render implements Converter
      *
      * @return string
      */
-    protected function getCustomTemplateContent(DOMNode $node)
+    protected function getCustomTemplateContent(DOMNode $node): string
     {
         $innerDoc = new DOMDocument();
 

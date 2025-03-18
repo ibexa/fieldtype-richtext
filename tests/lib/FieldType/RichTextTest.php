@@ -18,6 +18,7 @@ use Ibexa\Core\Base\Exceptions\NotFoundException;
 use Ibexa\Core\FieldType\ValidationError;
 use Ibexa\Core\FieldType\Value as CoreValue;
 use Ibexa\Core\Persistence\TransformationProcessor;
+use Ibexa\FieldTypeRichText\FieldType\RichText\Type;
 use Ibexa\FieldTypeRichText\FieldType\RichText\Type as RichTextType;
 use Ibexa\FieldTypeRichText\FieldType\RichText\Value;
 use Ibexa\FieldTypeRichText\RichText\ConverterDispatcher;
@@ -28,6 +29,7 @@ use Ibexa\FieldTypeRichText\RichText\RelationProcessor;
 use Ibexa\FieldTypeRichText\RichText\Validator\Validator;
 use Ibexa\FieldTypeRichText\RichText\Validator\ValidatorDispatcher;
 use Ibexa\FieldTypeRichText\RichText\XMLSanitizer;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 
@@ -40,7 +42,7 @@ class RichTextTest extends TestCase
     /**
      * @return \Ibexa\FieldTypeRichText\FieldType\RichText\Type
      */
-    protected function getFieldType()
+    protected function getFieldType(): Type
     {
         $inputHandler = new InputHandler(
             new DOMDocumentFactory(new XMLSanitizer()),
@@ -69,7 +71,7 @@ class RichTextTest extends TestCase
     /**
      * @return \PHPUnit\Framework\MockObject\MockObject
      */
-    protected function getTransformationProcessorMock()
+    protected function getTransformationProcessorMock(): MockObject
     {
         return $this->getMockForAbstractClass(
             TransformationProcessor::class,
@@ -84,7 +86,7 @@ class RichTextTest extends TestCase
     /**
      * @covers \Ibexa\Core\FieldType\FieldType::getValidatorConfigurationSchema
      */
-    public function testValidatorConfigurationSchema()
+    public function testValidatorConfigurationSchema(): void
     {
         $fieldType = $this->getFieldType();
         self::assertEmpty(
@@ -96,7 +98,7 @@ class RichTextTest extends TestCase
     /**
      * @covers \Ibexa\Core\FieldType\FieldType::getSettingsSchema
      */
-    public function testSettingsSchema()
+    public function testSettingsSchema(): void
     {
         $fieldType = $this->getFieldType();
         self::assertSame(
@@ -109,14 +111,14 @@ class RichTextTest extends TestCase
     /**
      * @covers \Ibexa\FieldTypeRichText\FieldType\RichText\Type::acceptValue
      */
-    public function testAcceptValueInvalidType()
+    public function testAcceptValueInvalidType(): void
     {
         $this->expectException(ApiInvalidArgumentException::class);
 
         $this->getFieldType()->acceptValue($this->createMock(CoreValue::class));
     }
 
-    public static function providerForTestAcceptValueValidFormat()
+    public static function providerForTestAcceptValueValidFormat(): array
     {
         return [
             [
@@ -141,13 +143,13 @@ class RichTextTest extends TestCase
      *
      * @dataProvider providerForTestAcceptValueValidFormat
      */
-    public function testAcceptValueValidFormat($input)
+    public function testAcceptValueValidFormat(string $input): void
     {
         $fieldType = $this->getFieldType();
         $fieldType->acceptValue($input);
     }
 
-    public static function providerForTestAcceptValueInvalidFormat()
+    public static function providerForTestAcceptValueInvalidFormat(): array
     {
         return [
             [
@@ -172,7 +174,7 @@ class RichTextTest extends TestCase
      *
      * @dataProvider providerForTestAcceptValueInvalidFormat
      */
-    public function testAcceptValueInvalidFormat($input, Exception $expectedException)
+    public function testAcceptValueInvalidFormat(string $input, Exception $expectedException): void
     {
         try {
             $fieldType = $this->getFieldType();
@@ -189,7 +191,7 @@ class RichTextTest extends TestCase
         }
     }
 
-    public function providerForTestValidate()
+    public function providerForTestValidate(): array
     {
         return [
             [
@@ -291,7 +293,7 @@ class RichTextTest extends TestCase
      * @param string $xmlString
      * @param array $expectedValidationErrors
      */
-    public function testValidate($xmlString, array $expectedValidationErrors)
+    public function testValidate(string $xmlString, array $expectedValidationErrors): void
     {
         $fieldType = $this->getFieldType();
         $value = new Value($xmlString);
@@ -307,7 +309,7 @@ class RichTextTest extends TestCase
     /**
      * @covers \Ibexa\FieldTypeRichText\FieldType\RichText\Type::toPersistenceValue
      */
-    public function testToPersistenceValue()
+    public function testToPersistenceValue(): void
     {
         $xmlString = '<?xml version="1.0" encoding="UTF-8"?>
 <section xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
@@ -328,7 +330,7 @@ class RichTextTest extends TestCase
      *
      * @dataProvider providerForTestGetName
      */
-    public function testGetName($xmlString, $expectedName)
+    public function testGetName(string $xmlString, string $expectedName): void
     {
         $value = new Value($xmlString);
 
@@ -343,7 +345,7 @@ class RichTextTest extends TestCase
      * @todo format does not really matter for the method tested, but the fixtures here should be replaced
      * by valid docbook anyway
      */
-    public static function providerForTestGetName()
+    public static function providerForTestGetName(): array
     {
         return [
             [
@@ -433,7 +435,7 @@ class RichTextTest extends TestCase
      *
      * @covers \Ibexa\FieldTypeRichText\FieldType\RichText\Type::getRelations
      */
-    public function testGetRelations()
+    public function testGetRelations(): void
     {
         $xml = <<<EOT
 <?xml version="1.0" encoding="UTF-8"?>
@@ -469,7 +471,7 @@ EOT;
      *
      * @return string
      */
-    protected function getAbsolutePath($relativePath)
+    protected function getAbsolutePath(string $relativePath): string
     {
         $absolutePath = realpath(__DIR__ . '/../../../' . $relativePath);
         if (false === $absolutePath) {
@@ -479,12 +481,12 @@ EOT;
         return $absolutePath;
     }
 
-    protected function provideFieldTypeIdentifier()
+    protected function provideFieldTypeIdentifier(): string
     {
         return 'ezrichtext';
     }
 
-    public function provideDataForGetName()
+    public function provideDataForGetName(): array
     {
         return [];
     }

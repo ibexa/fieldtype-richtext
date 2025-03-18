@@ -19,11 +19,10 @@ use Ibexa\FieldTypeRichText\Configuration\UI\Mapper\CustomTemplateConfigMapper;
  */
 final class CustomStyle implements Provider
 {
-    /** @var \Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface */
-    private $configResolver;
+    private ConfigResolverInterface $configResolver;
 
     /** @var \Ibexa\FieldTypeRichText\Configuration\UI\Mapper\CustomStyle */
-    private $customStyleConfigurationMapper;
+    private CustomTemplateConfigMapper $customStyleConfigurationMapper;
 
     public function __construct(
         ConfigResolverInterface $configResolver,

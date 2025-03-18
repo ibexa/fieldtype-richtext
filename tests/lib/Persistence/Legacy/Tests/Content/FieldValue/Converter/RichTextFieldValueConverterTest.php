@@ -29,7 +29,7 @@ class RichTextFieldValueConverterTest extends TestCase
     /**
      * @var string
      */
-    private $docbookString;
+    private string $docbookString;
 
     protected function setUp(): void
     {

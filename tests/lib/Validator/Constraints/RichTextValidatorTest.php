@@ -14,6 +14,7 @@ use Ibexa\FieldTypeRichText\RichText\Exception\InvalidXmlException;
 use Ibexa\FieldTypeRichText\Validator\Constraints\RichText;
 use Ibexa\FieldTypeRichText\Validator\Constraints\RichTextValidator;
 use LibXMLError;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
@@ -23,17 +24,17 @@ class RichTextValidatorTest extends TestCase
     /**
      * @var \Ibexa\FieldTypeRichText\RichText\InputHandlerInterface|\PHPUnit\Framework\MockObject\MockObject
      */
-    private $inputHandler;
+    private MockObject $inputHandler;
 
     /**
      * @var \Symfony\Component\Validator\Context\ExecutionContextInterface|\PHPUnit\Framework\MockObject\MockObject
      */
-    private $executionContext;
+    private MockObject $executionContext;
 
     /**
      * @var \Ibexa\FieldTypeRichText\Validator\Constraints\RichTextValidator
      */
-    private $validator;
+    private RichTextValidator $validator;
 
     protected function setUp(): void
     {
@@ -137,7 +138,7 @@ class RichTextValidatorTest extends TestCase
 
     private function fetchErrorMessages(array $errors): array
     {
-        return array_map(static function (LibXMLError $error) {
+        return array_map(static function (LibXMLError $error): string {
             return $error->message;
         }, $errors);
     }

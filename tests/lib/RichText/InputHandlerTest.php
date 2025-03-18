@@ -18,6 +18,7 @@ use Ibexa\FieldTypeRichText\RichText\InputHandler;
 use Ibexa\FieldTypeRichText\RichText\Normalizer;
 use Ibexa\FieldTypeRichText\RichText\RelationProcessor;
 use Ibexa\FieldTypeRichText\RichText\XMLSanitizer;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 class InputHandlerTest extends TestCase
@@ -25,37 +26,37 @@ class InputHandlerTest extends TestCase
     /**
      * @var \Ibexa\FieldTypeRichText\RichText\DOMDocumentFactory|\PHPUnit\Framework\MockObject\MockObject
      */
-    private $domDocumentFactory;
+    private DOMDocumentFactory $domDocumentFactory;
 
     /**
      * @var \Ibexa\FieldTypeRichText\RichText\ConverterDispatcher|\PHPUnit\Framework\MockObject\MockObject
      */
-    private $converter;
+    private MockObject $converter;
 
     /**
      * @var \Ibexa\FieldTypeRichText\RichText\Normalizer|\PHPUnit\Framework\MockObject\MockObject
      */
-    private $normalizer;
+    private MockObject $normalizer;
 
     /**
      * @var \Ibexa\FieldTypeRichText\RichText\ValidatorInterface|\PHPUnit\Framework\MockObject\MockObject
      */
-    private $schemaValidator;
+    private MockObject $schemaValidator;
 
     /**
      * @var \Ibexa\FieldTypeRichText\RichText\ValidatorInterface|\PHPUnit\Framework\MockObject\MockObject
      */
-    private $docbookValidator;
+    private MockObject $docbookValidator;
 
     /**
      * @var \Ibexa\FieldTypeRichText\RichText\RelationProcessor
      */
-    private $relationProcessor;
+    private RelationProcessor $relationProcessor;
 
     /**
      * @var \Ibexa\FieldTypeRichText\RichText\InputHandler|\PHPUnit\Framework\MockObject\MockObject
      */
-    private $inputHandler;
+    private InputHandler $inputHandler;
 
     /**
      * {@inheritdoc}
@@ -116,7 +117,7 @@ class InputHandlerTest extends TestCase
         $inputHandler
             ->expects(self::once())
             ->method('fromDocument')
-            ->willReturnCallback(function (DOMDocument $document) use ($inputXml, $outputDocument) {
+            ->willReturnCallback(function (DOMDocument $document) use ($inputXml, $outputDocument): \PHPUnit\Framework\MockObject\MockObject {
                 $this->assertEquals($inputXml, $document->saveXML());
 
                 return $outputDocument;

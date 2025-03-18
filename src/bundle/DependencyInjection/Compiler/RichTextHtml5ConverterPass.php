@@ -20,7 +20,7 @@ use Symfony\Component\DependencyInjection\Reference;
  */
 class RichTextHtml5ConverterPass implements CompilerPassInterface
 {
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         if ($container->hasDefinition('ibexa.richtext.converter.output.xhtml5')) {
             $html5OutputConverterDefinition = $container->getDefinition('ibexa.richtext.converter.output.xhtml5');
@@ -68,7 +68,7 @@ class RichTextHtml5ConverterPass implements CompilerPassInterface
      *
      * @return \Symfony\Component\DependencyInjection\Reference[]
      */
-    protected function sortConverters(array $convertersByPriority)
+    protected function sortConverters(array $convertersByPriority): array
     {
         ksort($convertersByPriority);
 
