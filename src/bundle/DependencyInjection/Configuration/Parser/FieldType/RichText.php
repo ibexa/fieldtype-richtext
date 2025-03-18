@@ -56,7 +56,7 @@ class RichText extends AbstractFieldTypeParser
      *
      * @param \Symfony\Component\Config\Definition\Builder\NodeBuilder $nodeBuilder Node just under ezpublish.system.<siteaccess>
      */
-    public function addFieldTypeSemanticConfig(NodeBuilder $nodeBuilder)
+    public function addFieldTypeSemanticConfig(NodeBuilder $nodeBuilder): void
     {
         $nodeBuilder
             ->arrayNode('embed')
@@ -234,7 +234,7 @@ class RichText extends AbstractFieldTypeParser
      *
      * @return \Symfony\Component\Config\Definition\Builder\ScalarNodeDefinition
      */
-    protected function getTemplateNodeDefinition($info, $example)
+    protected function getTemplateNodeDefinition(string $info, string|array $example): ScalarNodeDefinition
     {
         $templateNodeDefinition = new ScalarNodeDefinition('template');
         $templateNodeDefinition
@@ -246,7 +246,7 @@ class RichText extends AbstractFieldTypeParser
         return $templateNodeDefinition;
     }
 
-    public function mapConfig(array &$scopeSettings, $currentScope, ContextualizerInterface $contextualizer)
+    public function mapConfig(array &$scopeSettings, $currentScope, ContextualizerInterface $contextualizer): void
     {
         if (!empty($scopeSettings['fieldtypes'])) {
             // Workaround to be able to use Contextualizer::mapConfigArray() which only supports first level entries.
@@ -284,7 +284,7 @@ class RichText extends AbstractFieldTypeParser
         }
     }
 
-    public function postMap(array $config, ContextualizerInterface $contextualizer)
+    public function postMap(array $config, ContextualizerInterface $contextualizer): void
     {
         $contextualizer->mapConfigArray('fieldtypes.ezrichtext.custom_tags', $config);
         $contextualizer->mapConfigArray('fieldtypes.ezrichtext.custom_styles', $config);
@@ -308,7 +308,7 @@ class RichText extends AbstractFieldTypeParser
      */
     private function buildOnlineEditorConfiguration(NodeBuilder $nodeBuilder): void
     {
-        $invalidChoiceCallback = static function (array $v) {
+        $invalidChoiceCallback = static function (array $v): void {
             $message = sprintf(
                 'The default value must be one of the possible choices: %s, instead of "%s" ',
                 implode(', ', $v[self::CHOICES_NODE_KEY]),
@@ -323,7 +323,7 @@ class RichText extends AbstractFieldTypeParser
                 ->useAttributeAsKey(self::ELEMENT_NODE_KEY)
                 ->arrayPrototype()
                     ->validate()
-                        ->ifTrue(static function (array $v) {
+                        ->ifTrue(static function (array $v): bool {
                             return !empty($v[self::DEFAULT_VALUE_NODE_KEY])
                                 && !in_array($v[self::DEFAULT_VALUE_NODE_KEY], $v[self::CHOICES_NODE_KEY]);
                         })
@@ -396,7 +396,7 @@ class RichText extends AbstractFieldTypeParser
      */
     private function getAttributesValidatorCallback(callable $invalidChoiceCallback): callable
     {
-        return static function (array $v) use ($invalidChoiceCallback) {
+        return static function (array $v) use ($invalidChoiceCallback): array {
             if ($v[self::ATTRIBUTE_TYPE_NODE_KEY] === self::ATTRIBUTE_TYPE_CHOICE
                 && !empty($v[self::DEFAULT_VALUE_NODE_KEY])
                 && !in_array($v[self::DEFAULT_VALUE_NODE_KEY], $v[self::CHOICES_NODE_KEY])

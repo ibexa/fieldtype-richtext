@@ -14,7 +14,7 @@ use PHPUnit\Framework\TestCase;
 
 class DocumentTypeDefinitionTest extends TestCase
 {
-    public function providerForTestNormalize()
+    public function providerForTestNormalize(): array
     {
         return [
             [
@@ -86,7 +86,7 @@ xmlns="http://ibexa.co/namespaces/ezpublish5/xhtml5/edit">
      * @param string $dtdPath
      * @param string $input
      */
-    public function testAccept($documentElement, $namespace, $dtdPath, $input)
+    public function testAccept(string $documentElement, string $namespace, string $dtdPath, string $input): void
     {
         $normalizer = $this->getNormalizer($documentElement, $namespace, $dtdPath);
 
@@ -101,7 +101,7 @@ xmlns="http://ibexa.co/namespaces/ezpublish5/xhtml5/edit">
      * @param string $dtdPath
      * @param string $input Ignored
      */
-    public function testAcceptNoXmlDeclaration($documentElement, $namespace, $dtdPath, $input)
+    public function testAcceptNoXmlDeclaration(string $documentElement, string $namespace, string $dtdPath, string $input): void
     {
         $normalizer = $this->getNormalizer($documentElement, $namespace, $dtdPath);
 
@@ -127,7 +127,7 @@ XML
      * @param string $expectedOutput
      * @param string $expectedSaved
      */
-    public function testNormalize($documentElement, $namespace, $dtdPath, $input, $expectedOutput, $expectedSaved)
+    public function testNormalize(string $documentElement, string $namespace, string $dtdPath, string $input, string $expectedOutput, string $expectedSaved): void
     {
         $normalizer = $this->getNormalizer($documentElement, $namespace, $dtdPath);
 
@@ -143,7 +143,7 @@ XML
         self::assertEquals($expectedDocument, $normalizedDocument);
     }
 
-    public function providerForTestRefuse()
+    public function providerForTestRefuse(): array
     {
         return [
             [
@@ -205,14 +205,14 @@ XML
      * @param string $dtdPath
      * @param string $input
      */
-    public function testRefuse($documentElement, $namespace, $dtdPath, $input)
+    public function testRefuse(string $documentElement, string $namespace, string $dtdPath, string $input): void
     {
         $normalizer = $this->getNormalizer($documentElement, $namespace, $dtdPath);
 
         self::assertFalse($normalizer->accept($input));
     }
 
-    protected function getNormalizer($documentElement, $namespace, $dtdPath)
+    protected function getNormalizer($documentElement, $namespace, $dtdPath): DocumentTypeDefinition
     {
         return new DocumentTypeDefinition($documentElement, $namespace, $dtdPath);
     }

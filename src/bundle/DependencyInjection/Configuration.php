@@ -135,7 +135,7 @@ class Configuration extends SiteAccessConfiguration
                                 ->end()
                                 ->validate()
                                     ->ifTrue(
-                                        static function ($v) {
+                                        static function ($v): bool {
                                             return $v['type'] === 'choice' && !empty($v['required']) && empty($v['choices']);
                                         }
                                     )
@@ -143,7 +143,7 @@ class Configuration extends SiteAccessConfiguration
                                 ->end()
                                 ->validate()
                                     ->ifTrue(
-                                        static function ($v) {
+                                        static function ($v): bool {
                                             return !empty($v['choices']) && $v['type'] !== 'choice';
                                         }
                                     )
