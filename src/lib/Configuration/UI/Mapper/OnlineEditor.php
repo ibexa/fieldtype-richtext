@@ -20,8 +20,7 @@ final class OnlineEditor implements OnlineEditorConfigMapper
     /** @var \Symfony\Component\Translation\TranslatorInterface */
     private $translator;
 
-    /** @var string */
-    private $translationDomain;
+    private string $translationDomain;
 
     public function __construct(TranslatorInterface $translator, string $translationDomain)
     {

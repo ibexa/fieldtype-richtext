@@ -20,7 +20,7 @@ class Aggregate extends Normalizer
      *
      * @var \Ibexa\FieldTypeRichText\RichText\Normalizer[]
      */
-    protected $normalizers = [];
+    protected array $normalizers;
 
     /**
      * @param \Ibexa\FieldTypeRichText\RichText\Normalizer[] $normalizers An array of Normalizers, sorted by priority
@@ -39,7 +39,7 @@ class Aggregate extends Normalizer
      *
      * @return bool
      */
-    public function accept($input)
+    public function accept($input): bool
     {
         return true;
     }

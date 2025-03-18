@@ -42,10 +42,8 @@ class DocumentTypeDefinition extends Normalizer
 
     /**
      * Holds computed regular expression pattern for matching and replacement.
-     *
-     * @var string
      */
-    private $expression;
+    private ?string $expression = null;
 
     public function __construct($documentElement, $namespace, $dtdPath)
     {
@@ -62,7 +60,7 @@ class DocumentTypeDefinition extends Normalizer
      *
      * @return bool
      */
-    public function accept($input)
+    public function accept($input): bool
     {
         if (preg_match($this->getExpression(), $input, $matches)) {
             return true;
@@ -78,7 +76,7 @@ class DocumentTypeDefinition extends Normalizer
      *
      * @return string
      */
-    public function normalize($input)
+    public function normalize($input): ?string
     {
         return preg_replace(
             $this->getExpression(),

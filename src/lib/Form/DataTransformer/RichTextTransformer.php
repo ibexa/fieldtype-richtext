@@ -19,20 +19,11 @@ use Symfony\Component\Form\Exception\TransformationFailedException;
 
 class RichTextTransformer implements DataTransformerInterface
 {
-    /**
-     * @var \Ibexa\FieldTypeRichText\RichText\DOMDocumentFactory
-     */
-    private $domDocumentFactory;
+    private DOMDocumentFactory $domDocumentFactory;
 
-    /**
-     * @var \Ibexa\Contracts\FieldTypeRichText\RichText\InputHandlerInterface
-     */
-    private $inputHandler;
+    private InputHandlerInterface $inputHandler;
 
-    /**
-     * @var \Ibexa\Contracts\FieldTypeRichText\RichText\Converter
-     */
-    private $docbook2xhtml5editConverter;
+    private Converter $docbook2xhtml5editConverter;
 
     /**
      * @param \Ibexa\FieldTypeRichText\RichText\DOMDocumentFactory $domDocumentFactory

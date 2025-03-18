@@ -22,25 +22,13 @@ use Symfony\Component\Routing\RouterInterface;
 
 class Link implements Converter
 {
-    /**
-     * @var \Ibexa\Contracts\Core\Repository\LocationService
-     */
-    protected $locationService;
+    protected LocationService $locationService;
 
-    /**
-     * @var \Ibexa\Contracts\Core\Repository\ContentService
-     */
-    protected $contentService;
+    protected ContentService $contentService;
 
-    /**
-     * @var \Symfony\Component\Routing\RouterInterface
-     */
-    protected $router;
+    protected RouterInterface $router;
 
-    /**
-     * @var \Psr\Log\LoggerInterface
-     */
-    protected $logger;
+    protected ?LoggerInterface $logger;
 
     public function __construct(
         LocationService $locationService,

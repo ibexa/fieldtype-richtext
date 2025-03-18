@@ -22,7 +22,7 @@ class DoctrineStorageTest extends TestCase
      */
     protected $storageGateway;
 
-    public function testGetContentIds()
+    public function testGetContentIds(): void
     {
         $this->insertDatabaseFixture(__DIR__ . '/_fixtures/contentobjects.php');
 

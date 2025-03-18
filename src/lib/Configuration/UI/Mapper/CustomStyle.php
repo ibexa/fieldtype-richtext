@@ -19,17 +19,13 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 final class CustomStyle implements CustomTemplateConfigMapper
 {
-    /** @var array */
-    private $customStylesConfiguration;
+    private array $customStylesConfiguration;
 
-    /** @var \Symfony\Contracts\Translation\TranslatorInterface */
-    private $translator;
+    private TranslatorInterface $translator;
 
-    /** @var \Symfony\Component\Asset\Packages */
-    private $packages;
+    private Packages $packages;
 
-    /** @var string */
-    private $translationDomain;
+    private string $translationDomain;
 
     public function __construct(
         array $customStylesConfiguration,

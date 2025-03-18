@@ -27,10 +27,7 @@ use RuntimeException;
  */
 class Type extends FieldType implements TranslationContainerInterface
 {
-    /**
-     * @var \Ibexa\Contracts\FieldTypeRichText\RichText\InputHandlerInterface
-     */
-    private $inputHandler;
+    private InputHandlerInterface $inputHandler;
 
     private TextExtractorInterface $textExtractor;
 
@@ -165,7 +162,7 @@ class Type extends FieldType implements TranslationContainerInterface
      */
     public function validate(FieldDefinition $fieldDefinition, SPIValue $value)
     {
-        return array_map(static function ($error) {
+        return array_map(static function (string $error): ValidationError {
             return new ValidationError("Validation of XML content failed:\n" . $error, null, [], 'xml');
         }, $this->inputHandler->validate($value->xml));
     }
