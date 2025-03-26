@@ -2305,6 +2305,18 @@ parameters:
 			path: tests/lib/FieldType/RichText/RichTextStorageTest.php
 
 		-
+			message: '#^Method PHPUnit\\Framework\\MockObject\\Builder\\InvocationMocker\:\:willReturnOnConsecutiveCalls\(\) invoked with unpacked array with possibly string key, but it''s not allowed because of @no\-named\-arguments\.$#'
+			identifier: argument.named
+			count: 1
+			path: tests/lib/FieldType/RichText/RichTextStorageTest.php
+
+		-
+			message: '#^Method PHPUnit\\Framework\\MockObject\\Builder\\InvocationMocker\:\:withConsecutive\(\) invoked with unpacked array with possibly string key, but it''s not allowed because of @no\-named\-arguments\.$#'
+			identifier: argument.named
+			count: 1
+			path: tests/lib/FieldType/RichText/RichTextStorageTest.php
+
+		-
 			message: '#^Property Ibexa\\Tests\\FieldTypeRichText\\FieldType\\RichText\\RichTextStorageTest\:\:\$gatewayMock \(Ibexa\\FieldTypeRichText\\FieldType\\RichText\\RichTextStorage\\Gateway&PHPUnit\\Framework\\MockObject\\MockObject\) in isset\(\) is not nullable\.$#'
 			identifier: isset.property
 			count: 1
@@ -2821,6 +2833,18 @@ parameters:
 			path: tests/lib/RichText/Converter/Render/EmbedTest.php
 
 		-
+			message: '#^Method PHPUnit\\Framework\\MockObject\\Builder\\InvocationMocker\:\:willReturnOnConsecutiveCalls\(\) invoked with unpacked array with possibly string key, but it''s not allowed because of @no\-named\-arguments\.$#'
+			identifier: argument.named
+			count: 2
+			path: tests/lib/RichText/Converter/Render/EmbedTest.php
+
+		-
+			message: '#^Method PHPUnit\\Framework\\MockObject\\Builder\\InvocationMocker\:\:withConsecutive\(\) invoked with unpacked array with possibly string key, but it''s not allowed because of @no\-named\-arguments\.$#'
+			identifier: argument.named
+			count: 2
+			path: tests/lib/RichText/Converter/Render/EmbedTest.php
+
+		-
 			message: '#^Parameter \#1 \$renderer of class Ibexa\\FieldTypeRichText\\RichText\\Converter\\Render\\Embed constructor expects Ibexa\\Contracts\\FieldTypeRichText\\RichText\\RendererInterface, Ibexa\\FieldTypeRichText\\RichText\\RendererInterface&PHPUnit\\Framework\\MockObject\\MockObject given\.$#'
 			identifier: argument.type
 			count: 1
@@ -2902,6 +2926,18 @@ parameters:
 			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Converter\\Render\\TemplateTest\:\:testConvert\(\) has parameter \$expectedRenderParams with no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
+			path: tests/lib/RichText/Converter/Render/TemplateTest.php
+
+		-
+			message: '#^Method PHPUnit\\Framework\\MockObject\\Builder\\InvocationMocker\:\:willReturnOnConsecutiveCalls\(\) invoked with unpacked array with possibly string key, but it''s not allowed because of @no\-named\-arguments\.$#'
+			identifier: argument.named
+			count: 2
+			path: tests/lib/RichText/Converter/Render/TemplateTest.php
+
+		-
+			message: '#^Method PHPUnit\\Framework\\MockObject\\Builder\\InvocationMocker\:\:withConsecutive\(\) invoked with unpacked array with possibly string key, but it''s not allowed because of @no\-named\-arguments\.$#'
+			identifier: argument.named
+			count: 2
 			path: tests/lib/RichText/Converter/Render/TemplateTest.php
 
 		-
@@ -3610,6 +3646,18 @@ parameters:
 			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\RendererTest\:\:testRenderTagWithTemplate\(\) has parameter \$templateEngineTemplate with no type specified\.$#'
 			identifier: missingType.parameter
 			count: 1
+			path: tests/lib/RichText/RendererTest.php
+
+		-
+			message: '#^Method PHPUnit\\Framework\\MockObject\\Builder\\InvocationMocker\:\:willReturnOnConsecutiveCalls\(\) invoked with unpacked array with possibly string key, but it''s not allowed because of @no\-named\-arguments\.$#'
+			identifier: argument.named
+			count: 6
+			path: tests/lib/RichText/RendererTest.php
+
+		-
+			message: '#^Method PHPUnit\\Framework\\MockObject\\Builder\\InvocationMocker\:\:withConsecutive\(\) invoked with unpacked array with possibly string key, but it''s not allowed because of @no\-named\-arguments\.$#'
+			identifier: argument.named
+			count: 6
 			path: tests/lib/RichText/RendererTest.php
 
 		-
