@@ -85,7 +85,7 @@ abstract class BaseTest extends TestCase
      *
      * @dataProvider providerForTestConvert
      */
-    public function testConvert($inputFile, $outputFile)
+    public function testConvert($inputFile, string $outputFile): void
     {
         $endsWith = '.lossy.xml';
         if (substr_compare($inputFile, $endsWith, -strlen($endsWith), strlen($endsWith)) === 0) {

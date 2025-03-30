@@ -13,6 +13,7 @@ use Ibexa\Contracts\FieldTypeRichText\RichText\Converter;
 use Ibexa\Contracts\FieldTypeRichText\RichText\RendererInterface;
 use Ibexa\FieldTypeRichText\RichText\Converter\Aggregate;
 use Ibexa\FieldTypeRichText\RichText\Converter\Render\Template;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 class TemplateTest extends TestCase
@@ -34,7 +35,10 @@ class TemplateTest extends TestCase
         parent::setUp();
     }
 
-    public function providerForTestConvert()
+    /**
+     * @return array{DOMDocument, DOMDocument, mixed}[]
+     */
+    public function providerForTestConvert(): array
     {
         $data = [];
 
@@ -155,7 +159,7 @@ class TemplateTest extends TestCase
         ];
     }
 
-    protected function getConverter()
+    protected function getConverter(): Template
     {
         return new Template(
             $this->rendererMock,
@@ -169,7 +173,7 @@ class TemplateTest extends TestCase
     /**
      * @return \Ibexa\FieldTypeRichText\RichText\RendererInterface|\PHPUnit\Framework\MockObject\MockObject
      */
-    protected function getRendererMock()
+    protected function getRendererMock(): MockObject
     {
         return $this->createMock(RendererInterface::class);
     }
@@ -177,7 +181,7 @@ class TemplateTest extends TestCase
     /**
      * @return \Ibexa\FieldTypeRichText\RichText\Converter|\PHPUnit\Framework\MockObject\MockObject
      */
-    protected function getConverterMock()
+    protected function getConverterMock(): MockObject
     {
         return $this->createMock(Converter::class);
     }

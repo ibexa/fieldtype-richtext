@@ -14,7 +14,7 @@ use PHPUnit\Framework\TestCase;
 
 class DocbookTest extends TestCase
 {
-    public function providerForTestValidate()
+    public function providerForTestValidate(): array
     {
         return [
             [
@@ -155,7 +155,7 @@ class DocbookTest extends TestCase
     /**
      * @dataProvider providerForTestValidate
      */
-    public function testValidate($input, $expectedErrors)
+    public function testValidate(string $input, array $expectedErrors): void
     {
         $document = new DOMDocument();
         $document->loadXML($input);
@@ -193,7 +193,7 @@ class DocbookTest extends TestCase
      *
      * @return string[]
      */
-    protected function getConversionValidationSchemas()
+    protected function getConversionValidationSchemas(): array
     {
         return [
             __DIR__ . '/../../../../src/bundle/Resources/richtext/schemas/docbook/ezpublish.rng',

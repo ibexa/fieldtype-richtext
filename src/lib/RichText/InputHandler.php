@@ -16,35 +16,17 @@ use Ibexa\FieldTypeRichText\FieldType\RichText\Value;
 
 class InputHandler implements InputHandlerInterface
 {
-    /**
-     * @var \Ibexa\FieldTypeRichText\RichText\DOMDocumentFactory
-     */
-    private $domDocumentFactory;
+    private DOMDocumentFactory $domDocumentFactory;
 
-    /**
-     * @var \Ibexa\FieldTypeRichText\RichText\ConverterDispatcher
-     */
-    private $converter;
+    private ConverterDispatcher $converter;
 
-    /**
-     * @var \Ibexa\FieldTypeRichText\RichText\Normalizer
-     */
-    private $normalizer;
+    private Normalizer $normalizer;
 
-    /**
-     * @var \Ibexa\Contracts\FieldTypeRichText\RichText\ValidatorInterface
-     */
-    private $schemaValidator;
+    private ValidatorInterface $schemaValidator;
 
-    /**
-     * @var \Ibexa\Contracts\FieldTypeRichText\RichText\ValidatorInterface
-     */
-    private $docbookValidator;
+    private ValidatorInterface $docbookValidator;
 
-    /**
-     * @var \Ibexa\FieldTypeRichText\RichText\RelationProcessor
-     */
-    private $relationProcessor;
+    private RelationProcessor $relationProcessor;
 
     /**
      * @param \Ibexa\FieldTypeRichText\RichText\DOMDocumentFactory $domDocumentFactory

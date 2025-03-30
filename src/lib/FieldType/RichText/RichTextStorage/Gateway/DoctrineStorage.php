@@ -14,10 +14,7 @@ use Ibexa\FieldTypeRichText\FieldType\RichText\RichTextStorage\Gateway;
 
 class DoctrineStorage extends Gateway
 {
-    /**
-     * @var \Doctrine\DBAL\Connection
-     */
-    protected $connection;
+    protected Connection $connection;
 
     public function __construct(UrlGateway $urlGateway, Connection $connection)
     {
@@ -34,7 +31,7 @@ class DoctrineStorage extends Gateway
      *
      * @return int[] An array of Content ids, with remote ids as keys
      */
-    public function getContentIds(array $remoteIds)
+    public function getContentIds(array $remoteIds): array
     {
         $objectRemoteIdMap = [];
 

@@ -21,7 +21,7 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
  */
 class IbexaFieldTypeRichTextBundle extends Bundle
 {
-    public function build(ContainerBuilder $container)
+    public function build(ContainerBuilder $container): void
     {
         parent::build($container);
 
@@ -33,7 +33,7 @@ class IbexaFieldTypeRichTextBundle extends Bundle
         $this->registerConfigParser($container);
     }
 
-    public function registerConfigParser(ContainerBuilder $container)
+    public function registerConfigParser(ContainerBuilder $container): void
     {
         $this->getCoreExtension($container)->addConfigParser(new RichText());
     }

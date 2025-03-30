@@ -37,7 +37,7 @@ final class CustomTagsValidatorTest extends TestCase
      * @param \DOMDocument $document
      * @param array $expectedErrors
      */
-    public function testValidateDocument(DOMDocument $document, array $expectedErrors)
+    public function testValidateDocument(DOMDocument $document, array $expectedErrors): void
     {
         self::assertEquals(
             $expectedErrors,
@@ -52,7 +52,7 @@ final class CustomTagsValidatorTest extends TestCase
      *
      * @return array
      */
-    public function providerForTestValidateDocument()
+    public function providerForTestValidateDocument(): array
     {
         return [
             [
@@ -186,7 +186,7 @@ DOCBOOK
      *
      * @return \DOMDocument
      */
-    protected function createDocument($source)
+    protected function createDocument($source): DOMDocument
     {
         $document = new DOMDocument();
 

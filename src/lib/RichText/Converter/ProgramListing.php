@@ -27,7 +27,7 @@ class ProgramListing implements Converter
      *
      * @return \DOMDocument
      */
-    public function convert(DOMDocument $document)
+    public function convert(DOMDocument $document): DOMDocument
     {
         $xpath = new DOMXPath($document);
         $xpathExpression = '//ns:pre';
