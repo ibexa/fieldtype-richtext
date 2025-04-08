@@ -52,6 +52,9 @@ services:
 
     EzSystems\EzPlatformRichText\eZ\RichText\DOMDocumentFactory:
         public: false
+        
+    Ibexa\FieldTypeRichText\RichText\XMLSanitizer:
+        public: false
 
     EzSystems\EzPlatformRichText\eZ\RichText\InputHandler:
         arguments:

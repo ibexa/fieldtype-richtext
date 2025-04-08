@@ -26,6 +26,7 @@ use EzSystems\EzPlatformRichText\eZ\RichText\Normalizer\Aggregate;
 use EzSystems\EzPlatformRichText\eZ\RichText\RelationProcessor;
 use EzSystems\EzPlatformRichText\eZ\RichText\Validator\Validator;
 use EzSystems\EzPlatformRichText\eZ\RichText\Validator\ValidatorDispatcher;
+use Ibexa\FieldTypeRichText\RichText\XMLSanitizer;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 
@@ -41,7 +42,7 @@ class RichTextTest extends TestCase
     protected function getFieldType()
     {
         $inputHandler = new InputHandler(
-            new DOMDocumentFactory(),
+            new DOMDocumentFactory(new XMLSanitizer()),
             new ConverterDispatcher([
                 'http://docbook.org/ns/docbook' => null,
             ]),

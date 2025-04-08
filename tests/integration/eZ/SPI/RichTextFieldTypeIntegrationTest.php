@@ -17,6 +17,7 @@ use EzSystems\EzPlatformRichText\eZ\FieldType\RichText\Type;
 use EzSystems\EzPlatformRichText\eZ\RichText;
 use EzSystems\EzPlatformRichText\eZ\FieldType\RichText\RichTextStorage\Gateway\DoctrineStorage;
 use EzSystems\EzPlatformRichText\eZ\Persistence\Legacy\RichTextFieldValueConverter;
+use Ibexa\FieldTypeRichText\RichText\XMLSanitizer;
 
 /**
  * Integration test for legacy storage field types.
@@ -58,7 +59,7 @@ class RichTextFieldTypeIntegrationTest extends BaseIntegrationTest
     public function getCustomHandler()
     {
         $inputHandler = new RichText\InputHandler(
-            new RichText\DOMDocumentFactory(),
+            new RichText\DOMDocumentFactory(new XMLSanitizer()),
             new RichText\ConverterDispatcher([]),
             new RichText\Normalizer\Aggregate(),
             new RichText\Validator\ValidatorDispatcher([

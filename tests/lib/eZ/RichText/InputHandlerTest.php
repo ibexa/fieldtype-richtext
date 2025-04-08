@@ -17,6 +17,7 @@ use EzSystems\EzPlatformRichText\eZ\RichText\InputHandler;
 use EzSystems\EzPlatformRichText\eZ\RichText\Normalizer;
 use EzSystems\EzPlatformRichText\eZ\RichText\RelationProcessor;
 use EzSystems\EzPlatformRichText\eZ\RichText\ValidatorInterface;
+use Ibexa\FieldTypeRichText\RichText\XMLSanitizer;
 use PHPUnit\Framework\TestCase;
 
 class InputHandlerTest extends TestCase
@@ -61,7 +62,7 @@ class InputHandlerTest extends TestCase
      */
     protected function setUp(): void
     {
-        $this->domDocumentFactory = new DOMDocumentFactory();
+        $this->domDocumentFactory = new DOMDocumentFactory(new XMLSanitizer());
         $this->converter = $this->createMock(ConverterDispatcher::class);
         $this->normalizer = $this->createMock(Normalizer::class);
         $this->schemaValidator = $this->createMock(ValidatorInterface::class);

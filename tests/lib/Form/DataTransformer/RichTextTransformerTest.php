@@ -15,6 +15,7 @@ use eZ\Publish\API\Repository\Exceptions\InvalidArgumentException;
 use EzSystems\EzPlatformRichText\eZ\RichText\Converter;
 use EzSystems\EzPlatformRichText\eZ\RichText\DOMDocumentFactory;
 use EzSystems\EzPlatformRichText\eZ\RichText\InputHandlerInterface;
+use Ibexa\FieldTypeRichText\RichText\XMLSanitizer;
 use EzSystems\EzPlatformRichText\Form\DataTransformer\RichTextTransformer;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\Exception\TransformationFailedException;
@@ -37,7 +38,7 @@ class RichTextTransformerTest extends TestCase
 
         $this->richTextTransformer = new RichTextTransformer(
             // DOMDocumentFactory is final
-            new DOMDocumentFactory(),
+            new DOMDocumentFactory(new XMLSanitizer()),
             $this->inputHandler,
             $this->docbook2xhtml5editConverter
         );
