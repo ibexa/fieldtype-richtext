@@ -1,29 +1,43 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformRichText\Configuration\Provider;
+namespace Ibexa\FieldTypeRichText\Configuration\Provider;
 
-use eZ\Publish\Core\MVC\ConfigResolverInterface;
-use EzSystems\EzPlatformRichText\Configuration\UI\Mapper\CustomTemplateConfigMapper;
-use EzSystems\EzPlatformRichText\SPI\Configuration\Provider;
+use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
+use Ibexa\Contracts\FieldTypeRichText\Configuration\Provider;
+use Ibexa\FieldTypeRichText\Configuration\UI\Mapper\CustomTemplateConfigMapper;
 
 /**
  * Custom Tags configuration provider.
  *
  * @internal For internal use by RichText package
+ *
+ * @phpstan-type TConfigOutput array{
+ *     label: string,
+ *     description: string,
+ *     isInline: bool,
+ *     icon?: string,
+ *     attributes?: array<string, TConfigAttributeOutput>
+ * }
+ * @phpstan-type TConfigAttributeOutput array{
+ *     type: string,
+ *     required: bool,
+ *     defaultValue: mixed,
+ *     label: string,
+ *     choices?: array<string>,
+ *     choicesLabel?: array<string, string>,
+ * }
  */
 final class CustomTag implements Provider
 {
-    /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
-    private $configResolver;
+    private ConfigResolverInterface $configResolver;
 
-    /** @var \EzSystems\EzPlatformRichText\Configuration\UI\Mapper\CustomTag */
-    private $customTagConfigurationMapper;
+    private CustomTemplateConfigMapper $customTagConfigurationMapper;
 
     public function __construct(
         ConfigResolverInterface $configResolver,
@@ -39,7 +53,7 @@ final class CustomTag implements Provider
     }
 
     /**
-     * @return array RichText Custom Tags config
+     * @phpstan-return array<TConfigOutput> RichText Custom Tags config
      */
     public function getConfiguration(): array
     {
@@ -52,3 +66,5 @@ final class CustomTag implements Provider
         return [];
     }
 }
+
+class_alias(CustomTag::class, 'EzSystems\EzPlatformRichText\Configuration\Provider\CustomTag');

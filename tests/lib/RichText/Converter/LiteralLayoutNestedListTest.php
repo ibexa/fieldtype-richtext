@@ -1,16 +1,16 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
 namespace Ibexa\Tests\FieldTypeRichText\RichText\Converter;
 
+use DOMDocument;
 use Ibexa\FieldTypeRichText\RichText\Converter\LiteralLayoutNestedList;
 use PHPUnit\Framework\TestCase;
-use DOMDocument;
 
 /**
  * @covers \Ibexa\FieldTypeRichText\RichText\Converter\LiteralLayoutNestedList

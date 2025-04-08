@@ -17,8 +17,8 @@
         <note>key: ezrichtext.custom_tags.ezfacebook.attributes.width.label</note>
       </trans-unit>
       <trans-unit id="04a09b59ee06e7996670b684a9ca256d792992d2" resname="ezrichtext.custom_tags.ezfacebook.description">
-        <source>Add a Facebook post</source>
-        <target>Add a Facebook post</target>
+        <source>Embed Facebook post</source>
+        <target>Embed Facebook post</target>
         <note>key: ezrichtext.custom_tags.ezfacebook.description</note>
       </trans-unit>
       <trans-unit id="48fc0ce4ff40934d1fff06a56055c9ad73f634f4" resname="ezrichtext.custom_tags.ezfacebook.label">
@@ -26,10 +26,20 @@
         <target>Facebook</target>
         <note>key: ezrichtext.custom_tags.ezfacebook.label</note>
       </trans-unit>
+      <trans-unit id="a711cbe9c11ea82cc8ad02c93af5727dceb8b34d" resname="ezrichtext.custom_tags.eztwitter.attributes.cards.choice.hidden.label">
+        <source>Hidden</source>
+        <target>Hidden</target>
+        <note>key: ezrichtext.custom_tags.eztwitter.attributes.cards.choice.hidden.label</note>
+      </trans-unit>
       <trans-unit id="b7ef5c07f5cbc982f23e547bc1e1326752853018" resname="ezrichtext.custom_tags.eztwitter.attributes.cards.label">
         <source>Cards</source>
         <target>Cards</target>
         <note>key: ezrichtext.custom_tags.eztwitter.attributes.cards.label</note>
+      </trans-unit>
+      <trans-unit id="333d02160158768833ecf1aa1bde5b60a9c3f7d1" resname="ezrichtext.custom_tags.eztwitter.attributes.conversation.choice.none.label">
+        <source>None</source>
+        <target>None</target>
+        <note>key: ezrichtext.custom_tags.eztwitter.attributes.conversation.choice.none.label</note>
       </trans-unit>
       <trans-unit id="5671ef11994be024b75d6360144708538714d952" resname="ezrichtext.custom_tags.eztwitter.attributes.conversation.label">
         <source>Conversation</source>
@@ -37,19 +47,29 @@
         <note>key: ezrichtext.custom_tags.eztwitter.attributes.conversation.label</note>
       </trans-unit>
       <trans-unit id="7fa382eb492f241c0377d64e8ad5c8ab8aa740fb" resname="ezrichtext.custom_tags.eztwitter.attributes.dnt.label">
-        <source>DNT</source>
-        <target>DNT</target>
+        <source>Don't target</source>
+        <target>Don't target</target>
         <note>key: ezrichtext.custom_tags.eztwitter.attributes.dnt.label</note>
       </trans-unit>
       <trans-unit id="df37139c5dd99f14d3e1390341bd49d11da3d5ba" resname="ezrichtext.custom_tags.eztwitter.attributes.lang.label">
-        <source>Lang</source>
-        <target>Lang</target>
+        <source>Language code</source>
+        <target>Language code</target>
         <note>key: ezrichtext.custom_tags.eztwitter.attributes.lang.label</note>
       </trans-unit>
       <trans-unit id="9dfc2154505a7ab82c6ab07c110e0f6170513fc9" resname="ezrichtext.custom_tags.eztwitter.attributes.link_color.label">
         <source>Link color</source>
         <target>Link color</target>
         <note>key: ezrichtext.custom_tags.eztwitter.attributes.link_color.label</note>
+      </trans-unit>
+      <trans-unit id="708de039c84f0c302306526df2a893cdc5f3ba88" resname="ezrichtext.custom_tags.eztwitter.attributes.theme.choice.dark.label">
+        <source>Dark</source>
+        <target>Dark</target>
+        <note>key: ezrichtext.custom_tags.eztwitter.attributes.theme.choice.dark.label</note>
+      </trans-unit>
+      <trans-unit id="bc7cb500be683ba8dca30d588849d49acde30377" resname="ezrichtext.custom_tags.eztwitter.attributes.theme.choice.light.label">
+        <source>Light</source>
+        <target>Light</target>
+        <note>key: ezrichtext.custom_tags.eztwitter.attributes.theme.choice.light.label</note>
       </trans-unit>
       <trans-unit id="38dcf6fd48a4264ead1cce0e8e69f71211fa7670" resname="ezrichtext.custom_tags.eztwitter.attributes.theme.label">
         <source>Theme</source>
@@ -67,13 +87,13 @@
         <note>key: ezrichtext.custom_tags.eztwitter.attributes.width.label</note>
       </trans-unit>
       <trans-unit id="c1fd25ffc048cf47e9bc6bcaae98dd86abb2a7dd" resname="ezrichtext.custom_tags.eztwitter.description">
-        <source>Add a tweet</source>
-        <target>Add a tweet</target>
+        <source>Embed X post</source>
+        <target>Embed X post</target>
         <note>key: ezrichtext.custom_tags.eztwitter.description</note>
       </trans-unit>
       <trans-unit id="3d7387b1935640d467dc4070c0a9fe4c35d81e52" resname="ezrichtext.custom_tags.eztwitter.label">
-        <source>Twitter</source>
-        <target>Twitter</target>
+        <source>X</source>
+        <target>X</target>
         <note>key: ezrichtext.custom_tags.eztwitter.label</note>
       </trans-unit>
       <trans-unit id="605cb001f1553455c945e45234d73b47cf1417b1" resname="ezrichtext.custom_tags.ezyoutube.attributes.autoplay.label">
@@ -86,11 +106,6 @@
         <target>Height</target>
         <note>key: ezrichtext.custom_tags.ezyoutube.attributes.height.label</note>
       </trans-unit>
-      <trans-unit id="2282c002afb8b1db2089f35ee742131d298913c1" resname="ezrichtext.custom_tags.ezyoutube.attributes.title.label">
-        <source>Title</source>
-        <target>Title</target>
-        <note>key: ezrichtext.custom_tags.ezyoutube.attributes.title.label</note>
-      </trans-unit>
       <trans-unit id="65fc0855d568f69246fa41e8f447617d3ec051e3" resname="ezrichtext.custom_tags.ezyoutube.attributes.video_url.label">
         <source>Video URL</source>
         <target>Video URL</target>
@@ -102,8 +117,8 @@
         <note>key: ezrichtext.custom_tags.ezyoutube.attributes.width.label</note>
       </trans-unit>
       <trans-unit id="8f9f4c953fc856ffdd89f2584789096bc29cd806" resname="ezrichtext.custom_tags.ezyoutube.description">
-        <source>Add a YouTube video</source>
-        <target>Add a YouTube video</target>
+        <source>Embed YouTube video</source>
+        <target>Embed YouTube video</target>
         <note>key: ezrichtext.custom_tags.ezyoutube.description</note>
       </trans-unit>
       <trans-unit id="522f743b7ab00a525b5d5501de4c59bdeca967a4" resname="ezrichtext.custom_tags.ezyoutube.label">

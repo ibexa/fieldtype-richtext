@@ -1,16 +1,16 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformRichText\Form\Type;
+namespace Ibexa\FieldTypeRichText\Form\Type;
 
-use eZ\Publish\API\Repository\FieldTypeService;
-use EzSystems\EzPlatformRichText\eZ\RichText\Converter;
-use EzSystems\EzPlatformRichText\Form\DataTransformer\RichTextValueTransformer;
+use Ibexa\Contracts\Core\Repository\FieldTypeService;
+use Ibexa\Contracts\FieldTypeRichText\RichText\Converter;
+use Ibexa\FieldTypeRichText\Form\DataTransformer\RichTextValueTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -20,10 +20,10 @@ use Symfony\Component\Form\FormBuilderInterface;
  */
 class RichTextFieldType extends AbstractType
 {
-    /** @var FieldTypeService */
+    /** @var \Ibexa\Contracts\Core\Repository\FieldTypeService */
     protected $fieldTypeService;
 
-    /** @var Converter */
+    /** @var \Ibexa\Contracts\FieldTypeRichText\RichText\Converter */
     protected $docbookToXhtml5EditConverter;
 
     public function __construct(FieldTypeService $fieldTypeService, Converter $docbookToXhtml5EditConverter)
@@ -55,3 +55,5 @@ class RichTextFieldType extends AbstractType
         ));
     }
 }
+
+class_alias(RichTextFieldType::class, 'EzSystems\EzPlatformRichText\Form\Type\RichTextFieldType');

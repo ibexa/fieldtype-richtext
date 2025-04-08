@@ -3,7 +3,7 @@ imports:
 
 parameters:
     # set via compiler pass
-    ezplatform.ezrichtext.alloy_editor: []
+    ibexa.field_type.richtext.alloy_editor: []
 
 services:
     _defaults:
@@ -11,18 +11,46 @@ services:
         autoconfigure: true
         public: false
 
-    EzSystems\EzPlatformRichText\Configuration\Provider\CustomStyle:
+    Ibexa\FieldTypeRichText\Configuration\Provider\CustomStyle:
         arguments:
-            $customStyleConfigurationMapper: '@EzSystems\EzPlatformRichText\Configuration\UI\Mapper\CustomStyle'
+            $customStyleConfigurationMapper: '@Ibexa\FieldTypeRichText\Configuration\UI\Mapper\CustomStyle'
 
-    EzSystems\EzPlatformRichText\Configuration\Provider\CustomTag:
+    ibexa.field_type_rich_text.configuration.provider.custom_style.configurable:
+        class: Ibexa\FieldTypeRichText\Configuration\Provider\ConfigurableProvider
+        decorates: Ibexa\FieldTypeRichText\Configuration\Provider\CustomStyle
         arguments:
-            $customTagConfigurationMapper: '@EzSystems\EzPlatformRichText\Configuration\UI\Mapper\CustomTag'
+            $configurators: !tagged_iterator ibexa.field_type.richtext.configuration.custom_style.configurator
 
-    EzSystems\EzPlatformRichText\Configuration\Provider\AlloyEditor:
+    Ibexa\FieldTypeRichText\Configuration\Provider\CustomTag:
         arguments:
-            $alloyEditorConfiguration: '%ezplatform.ezrichtext.alloy_editor%'
+            $customTagConfigurationMapper: '@Ibexa\FieldTypeRichText\Configuration\UI\Mapper\CustomTag'
 
-    EzSystems\EzPlatformRichText\Configuration\AggregateProvider:
+    ibexa.field_type_rich_text.configuration.provider.custom_tag.configurable:
+        class: Ibexa\FieldTypeRichText\Configuration\Provider\ConfigurableProvider
+        decorates: Ibexa\FieldTypeRichText\Configuration\Provider\CustomTag
         arguments:
-            $providers: !tagged ezplatform.ezrichtext.configuration.provider
+            $configurators: !tagged_iterator ibexa.field_type.richtext.configuration.custom_tag.configurator
+
+    Ibexa\FieldTypeRichText\Configuration\Provider\AlloyEditor:
+        arguments:
+            $alloyEditorConfiguration: '%ibexa.field_type.richtext.alloy_editor%'
+
+    ibexa.field_type_rich_text.configuration.provider.alloy_editor.configurable:
+        class: Ibexa\FieldTypeRichText\Configuration\Provider\ConfigurableProvider
+        decorates: Ibexa\FieldTypeRichText\Configuration\Provider\AlloyEditor
+        arguments:
+            $configurators: !tagged_iterator ibexa.field_type.richtext.configuration.alloy_editor.configurator
+
+    Ibexa\FieldTypeRichText\Configuration\Provider\CKEditor:
+        arguments:
+            $customStylesConfiguration: '%ibexa.field_type.richtext.custom_styles%'
+
+    ibexa.field_type_rich_text.configuration.provider.ck_editor.configurable:
+        class: Ibexa\FieldTypeRichText\Configuration\Provider\ConfigurableProvider
+        decorates: Ibexa\FieldTypeRichText\Configuration\Provider\CKEditor
+        arguments:
+            $configurators: !tagged_iterator ibexa.field_type.richtext.configuration.ck_editor.configurator
+
+    Ibexa\FieldTypeRichText\Configuration\AggregateProvider:
+        arguments:
+            $providers: !tagged ibexa.field_type.richtext.configuration.provider

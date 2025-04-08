@@ -1,8 +1,8 @@
-{% trans_default_domain "content_fields" %}
+{% trans_default_domain 'ibexa_content_fields' %}
 
-{% extends "@EzPublishCore/content_fields.html.twig" %}
+{% extends "@IbexaCore/content_fields.html.twig" %}
 
 {% block ezrichtext_field %}
-    {%- set field_value = field.value.xml|ez_richtext_to_html5 -%}
+    {%- set field_value = field.value.xml|ibexa_richtext_to_html5 -%}
     {{ block( 'simple_block_field' ) }}
 {% endblock %}

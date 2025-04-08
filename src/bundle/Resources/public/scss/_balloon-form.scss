@@ -1,0 +1,279 @@
+.ck.ck-reset_all {
+    .ibexa-ckeditor-balloon-form {
+        position: relative;
+
+        &__header {
+            border-top-left-radius: $ibexa-border-radius;
+            border-top-right-radius: $ibexa-border-radius;
+            padding: calculateRem(2px) calculateRem(16px);
+            font-weight: bold;
+        }
+
+        &__fields {
+            padding: calculateRem(8px) calculateRem(16px);
+
+            &--attributes {
+                border-bottom: calculateRem(1px) solid $ibexa-color-light;
+            }
+
+            .ck-labeled-field-view {
+                margin-bottom: calculateRem(12px);
+
+                .ck-input-text {
+                    border-radius: calculateRem(5px);
+                    width: 100%;
+                }
+
+                .ck.ck-dropdown {
+                    border: calculateRem(1px) solid $ibexa-color-dark-200;
+                    border-radius: calculateRem(5px);
+                    width: 100%;
+                    max-width: calculateRem(288px);
+
+                    .ibexa-ckeditor-dropdown-selected-items {
+                        display: flex;
+                        align-items: center;
+                        flex-wrap: nowrap;
+                        width: calculateRem(198px);
+                        overflow: hidden;
+                        position: relative;
+
+                        &__item {
+                            display: inline-block;
+                            white-space: nowrap;
+                            background: $ibexa-color-light-300;
+                            border: calculateRem(1px) solid $ibexa-color-light-300;
+                            border-radius: $ibexa-border-radius;
+                            margin-right: calculateRem(4px);
+                            font-size: calculateRem(12px);
+                            line-height: calculateRem(16px);
+                            padding: 0 calculateRem(8px);
+                        }
+                    }
+
+                    .ck-list {
+                        padding: calculateRem(4px);
+
+                        &__item {
+                            border-radius: $ibexa-border-radius;
+
+                            &:hover {
+                                color: $ibexa-color-dark;
+                                background-color: $ibexa-color-light-300;
+
+                                .ck-button {
+                                    background-color: transparent;
+                                }
+                            }
+                        }
+                    }
+
+                    .ck-button.ck-dropdown__button {
+                        .ck-button {
+                            &__label {
+                                width: 100%;
+                                display: inline-block;
+                            }
+                        }
+                    }
+
+                    .ck-dropdown__panel--multiple {
+                        .ck.ck-button {
+                            &__toggle {
+                                display: none;
+                            }
+
+                            .ibexa-ckeditor-input--checkbox {
+                                flex-shrink: 0;
+                                appearance: none;
+                                position: relative;
+                                display: inline-block;
+                                cursor: pointer;
+                                outline: none;
+                                border: calculateRem(1px) solid $ibexa-color-dark-300;
+                                width: calculateRem(16px);
+                                height: calculateRem(16px);
+                                border-radius: calculateRem(2px);
+                                margin-right: calculateRem(16px);
+
+                                &::after {
+                                    content: ' ';
+                                    position: absolute;
+                                    top: calculateRem(3px);
+                                    left: calculateRem(3px);
+                                    display: block;
+                                    width: calculateRem(8px);
+                                    height: calculateRem(5px);
+                                    border-left: calculateRem(2px) solid transparent;
+                                    border-bottom: calculateRem(2px) solid transparent;
+                                    transform: rotate(-45deg);
+                                }
+
+                                &:hover {
+                                    border-color: $ibexa-color-primary;
+                                }
+
+                                &:focus {
+                                    border-color: $ibexa-color-primary;
+                                    box-shadow: 0 0 0 calculateRem(4px) rgba($ibexa-color-primary, 0.25);
+                                }
+
+                                &:checked {
+                                    border-color: $ibexa-color-primary;
+                                    background-color: $ibexa-color-primary;
+
+                                    &::after {
+                                        border-color: $ibexa-color-white;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .ck.ck-button.ck-switchbutton {
+                    margin-top: calculateRem(8px);
+                    background: transparent;
+
+                    &.ck-on {
+                        .ck-button__toggle {
+                            &__inner {
+                                transform: translate(calculateRem(20px), calculateRem(2px));
+                            }
+                        }
+                    }
+
+                    .ck-button__toggle {
+                        border-radius: $ibexa-border-radius;
+                        height: calculateRem(16px);
+
+                        &__inner {
+                            border-radius: 50%;
+                            width: calculateRem(10px);
+                            height: calculateRem(10px);
+                            transform: translate(calculateRem(2px), calculateRem(2px));
+                        }
+                    }
+                }
+            }
+        }
+
+        &__separator {
+            margin-bottom: calculateRem(12px);
+            color: $ibexa-color-dark-400;
+        }
+
+        .ck.ck-button {
+            cursor: pointer;
+
+            & + .ck-button {
+                margin-left: calculateRem(8px);
+            }
+
+            &.ck-button-save {
+                color: $ibexa-color-white;
+                fill: $ibexa-color-white;
+                background-image: $ibexa-gradient-danger-primary;
+                border-width: 0;
+                padding: calculateRem(0px) calculateRem(16px);
+                border-radius: $ibexa-border-radius;
+
+                &:hover {
+                    color: $ibexa-color-white;
+                    box-shadow:
+                        0 0 0 transparent,
+                        $ibexa-btn-hover-box-shadow;
+                }
+
+                &:hover:focus {
+                    box-shadow: $ibexa-btn-focus-box-shadow, $ibexa-btn-hover-box-shadow;
+                }
+
+                &:disabled {
+                    color: $ibexa-color-dark-400;
+                    fill: $ibexa-color-dark-400;
+                    background-image: none;
+                    background-color: $ibexa-color-light;
+                    box-shadow: none;
+                }
+            }
+
+            &.ck-button-cancel,
+            &.ck-button-revert,
+            &.ibexa-btn--select-content {
+                color: $ibexa-color-primary;
+                fill: $ibexa-color-primary;
+                background-color: $ibexa-color-white;
+                border-color: $ibexa-color-primary;
+                padding: calculateRem(0px) calculateRem(16px);
+                border-radius: $ibexa-border-radius;
+
+                &:hover,
+                &:focus {
+                    color: $ibexa-color-primary;
+                }
+
+                &:hover {
+                    background-color: $ibexa-color-primary-200;
+                }
+
+                &:disabled {
+                    color: $ibexa-color-dark-400;
+                    fill: $ibexa-color-dark-400;
+                    border-color: $ibexa-color-dark-200;
+                    background-color: $ibexa-color-light-300;
+                }
+            }
+
+            &.ibexa-btn--select-content {
+                margin-bottom: calculateRem(12px);
+            }
+        }
+
+        &__actions {
+            padding: calculateRem(8px) calculateRem(16px);
+        }
+    }
+
+    .ck-toolbar-container {
+        z-index: calc(var(--ck-z-modal) + 50);
+
+        &.ck-balloon-panel_with-arrow {
+            z-index: calc(var(--ck-z-modal) + 55);
+        }
+
+        &.ck-balloon-panel {
+            box-shadow: calculateRem(0px) calculateRem(2px) calculateRem(8px) 0 rgba($ibexa-color-light, 0.15);
+
+            .ck.ck-toolbar {
+                padding: calculateRem(4px);
+            }
+
+            .ck-toolbar__items {
+                .ck-button {
+                    padding: calculateRem(8px);
+                    margin: 0;
+
+                    &.ck-insert-table-dropdown-grid-box {
+                        padding: 0;
+                        margin: var(--ck-insert-table-dropdown-box-margin);
+                    }
+                }
+                .ck-dropdown {
+                    padding: 0;
+                    margin: 0;
+                }
+            }
+        }
+    }
+
+    &.ck-body--distraction-free-mode-active {
+        .ck-balloon-panel_visible {
+            z-index: 1080;
+        }
+
+        .ck-balloon-panel_with-arrow {
+            z-index: 1081;
+        }
+    }
+}

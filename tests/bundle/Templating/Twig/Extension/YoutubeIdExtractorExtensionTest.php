@@ -1,14 +1,14 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
-namespace EzSystems\Tests\EzPlatformRichTextBundle\Templating\Twig\Extension;
+namespace Ibexa\Tests\Bundle\FieldTypeRichText\Templating\Twig\Extension;
 
-use EzSystems\EzPlatformRichTextBundle\Templating\Twig\Extension\YoutubeIdExtractorExtension;
+use Ibexa\Bundle\FieldTypeRichText\Templating\Twig\Extension\YoutubeIdExtractorExtension;
 use PHPUnit\Framework\TestCase;
 use Twig\TwigFunction;
 
@@ -40,7 +40,7 @@ class YoutubeIdExtractorExtensionTest extends TestCase
     }
 
     /**
-     * @covers \EzSystems\EzPlatformRichTextBundle\Templating\Twig\Extension\YoutubeIdExtractorExtension::extractId
+     * @covers \Ibexa\Bundle\FieldTypeRichText\Templating\Twig\Extension\YoutubeIdExtractorExtension::extractId
      *
      * @dataProvider getYouTubeUrls
      *
@@ -55,18 +55,7 @@ class YoutubeIdExtractorExtensionTest extends TestCase
     }
 
     /**
-     * @covers \EzSystems\EzPlatformRichTextBundle\Templating\Twig\Extension\YoutubeIdExtractorExtension::getName
-     */
-    public function testGetName(): void
-    {
-        $subject = new YoutubeIdExtractorExtension();
-        $result = $subject->getName();
-        $this->assertIsString($result);
-        $this->assertEquals('ezrichtext.youtube_extract_id', $result);
-    }
-
-    /**
-     * @covers \EzSystems\EzPlatformRichTextBundle\Templating\Twig\Extension\YoutubeIdExtractorExtension::getFunctions
+     * @covers \Ibexa\Bundle\FieldTypeRichText\Templating\Twig\Extension\YoutubeIdExtractorExtension::getFunctions
      */
     public function testGetFunctions(): void
     {
@@ -75,6 +64,8 @@ class YoutubeIdExtractorExtensionTest extends TestCase
         $result = $subject->getFunctions();
         $this->assertIsArray($result);
         $this->assertInstanceOf(TwigFunction::class, $result[0]);
-        $this->assertEquals('ez_richtext_youtube_extract_id', $result[0]->getName());
+        $this->assertEquals('ibexa_richtext_youtube_extract_id', $result[0]->getName());
     }
 }
+
+class_alias(YoutubeIdExtractorExtensionTest::class, 'EzSystems\Tests\EzPlatformRichTextBundle\Templating\Twig\Extension\YoutubeIdExtractorExtensionTest');

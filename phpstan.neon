@@ -9,8 +9,13 @@ parameters:
     paths:
         - src
         - tests
+    treatPhpDocTypesAsCertain: false
     ignoreErrors:
         -
             message: "#^Cannot call method (fetchOne|fetchAll|fetchAllAssociative|fetchAssociative|fetchAllKeyValue)\\(\\) on Doctrine\\\\DBAL\\\\ForwardCompatibility\\\\Result\\|int\\|string\\.$#"
+            paths:
+                - src/*
+        -
+            message: "#Cannot cast Doctrine\\\\DBAL\\\\ForwardCompatibility\\\\Result\\|int\\|string to int.#"
             paths:
                 - src/*

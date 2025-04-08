@@ -1,20 +1,22 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformRichTextBundle\DependencyInjection;
+namespace Ibexa\Bundle\FieldTypeRichText\DependencyInjection;
 
-use eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Configuration\SiteAccessAware\Configuration as SiteAccessConfiguration;
+use Ibexa\Bundle\Core\DependencyInjection\Configuration\SiteAccessAware\Configuration as SiteAccessConfiguration;
 use Symfony\Component\Config\Definition\Builder\NodeBuilder;
+use Symfony\Component\Config\Definition\Builder\NodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
+use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 
 class Configuration extends SiteAccessConfiguration
 {
-    const CUSTOM_TAG_ATTRIBUTE_TYPES = ['number', 'string', 'boolean', 'choice', 'link'];
+    public const CUSTOM_TAG_ATTRIBUTE_TYPES = ['number', 'string', 'boolean', 'choice', 'link'];
 
     /**
      * Generates the configuration tree builder.
@@ -23,20 +25,66 @@ class Configuration extends SiteAccessConfiguration
      */
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder('ezrichtext');
+        $treeBuilder = new TreeBuilder(IbexaFieldTypeRichTextExtension::EXTENSION_NAME);
 
         $rootNode = $treeBuilder->getRootNode();
 
         $sections = $rootNode->children();
         $this
+            ->addEnabledAttributeTypesSection($sections);
+        $this
             ->addCustomTagsSection($sections);
         $this
             ->addCustomStylesSection($sections);
         $this
-            ->addAlloyEditorSection($sections)
+            ->addAlloyEditorSection($sections);
+
+        $this
+            ->validateAttributeTypes($rootNode)
             ->end();
 
         return $treeBuilder;
+    }
+
+    private function addEnabledAttributeTypesSection(NodeBuilder $richTextNode): NodeBuilder
+    {
+        return $richTextNode
+                ->arrayNode('enabled_attribute_types')
+                    ->defaultValue(self::CUSTOM_TAG_ATTRIBUTE_TYPES)
+                    ->scalarPrototype()
+                    ->end()
+                ->end()
+        ;
+    }
+
+    private function validateAttributeTypes(NodeDefinition $rootNode): NodeDefinition
+    {
+        return $rootNode
+            ->validate()
+            ->ifTrue(static function (array $v): bool {
+                if (!isset($v['enabled_attribute_types']) || !isset($v['custom_tags'])) {
+                    return false;
+                }
+                $enabledTypes = $v['enabled_attribute_types'];
+                foreach ($v['custom_tags'] as $tagIdentifier => $tag) {
+                    foreach ($tag['attributes'] as $attribute) {
+                        if (!in_array($attribute['type'], $enabledTypes, true)) {
+                            throw new InvalidConfigurationException(
+                                sprintf(
+                                    'The value "%s" is not allowed for path "ibexa_fieldtype_richtext.custom_tags.%s.attributes.campaign.type". Allowed values: %s',
+                                    $attribute['type'],
+                                    $tagIdentifier,
+                                    implode(', ', array_map(static fn ($type): string => "\"$type\"", $enabledTypes))
+                                )
+                            );
+                        }
+                    }
+                }
+
+                return false;
+            })
+            ->then(static fn (array $v): array => $v)
+            ->end();
     }
 
     /**
@@ -75,7 +123,7 @@ class Configuration extends SiteAccessConfiguration
                             ->arrayPrototype()
                                 ->beforeNormalization()
                                     ->always(
-                                        function ($v) {
+                                        static function ($v) {
                                             // Workaround: set empty value to be able to unset it later on (see validation for "choices")
                                             if (!isset($v['choices'])) {
                                                 $v['choices'] = [];
@@ -87,7 +135,7 @@ class Configuration extends SiteAccessConfiguration
                                 ->end()
                                 ->validate()
                                     ->ifTrue(
-                                        function ($v) {
+                                        static function ($v) {
                                             return $v['type'] === 'choice' && !empty($v['required']) && empty($v['choices']);
                                         }
                                     )
@@ -95,16 +143,15 @@ class Configuration extends SiteAccessConfiguration
                                 ->end()
                                 ->validate()
                                     ->ifTrue(
-                                        function ($v) {
+                                        static function ($v) {
                                             return !empty($v['choices']) && $v['type'] !== 'choice';
                                         }
                                     )
                                     ->thenInvalid('List of choices is supported by choices type only.')
                                 ->end()
                                 ->children()
-                                    ->enumNode('type')
+                                    ->scalarNode('type')
                                         ->isRequired()
-                                        ->values(static::CUSTOM_TAG_ATTRIBUTE_TYPES)
                                     ->end()
                                     ->booleanNode('required')
                                         ->defaultFalse()
@@ -159,7 +206,7 @@ class Configuration extends SiteAccessConfiguration
                         ->end()
                     ->end()
                 ->end()
-            ;
+        ;
     }
 
     /**
@@ -211,6 +258,8 @@ class Configuration extends SiteAccessConfiguration
                         ->end()
                     ->end()
                 ->end()
-            ;
+        ;
     }
 }
+
+class_alias(Configuration::class, 'EzSystems\EzPlatformRichTextBundle\DependencyInjection\Configuration');

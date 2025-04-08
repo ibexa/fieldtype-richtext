@@ -1,0 +1,9 @@
+services:
+    Ibexa\FieldTypeRichText\FieldType\RichText\Type:
+        public: true # @todo should be private
+        parent: Ibexa\Core\FieldType\FieldType
+        arguments:
+            $textExtractor: '@Ibexa\FieldTypeRichText\RichText\TextExtractor\ShortTextExtractor'
+            $inputHandler: '@Ibexa\FieldTypeRichText\RichText\InputHandler'
+        tags:
+            - {name: ibexa.field_type, alias: ezrichtext}

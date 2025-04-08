@@ -1,34 +1,34 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
-namespace EzSystems\Tests\EzPlatformRichText\Form\DataTransformer;
+namespace Ibexa\Tests\FieldTypeRichText\Form\DataTransformer;
 
 use DOMDocument;
 use Exception;
-use eZ\Publish\API\Repository\Exceptions\NotFoundException;
-use eZ\Publish\API\Repository\Exceptions\InvalidArgumentException;
-use EzSystems\EzPlatformRichText\eZ\RichText\Converter;
-use EzSystems\EzPlatformRichText\eZ\RichText\DOMDocumentFactory;
-use EzSystems\EzPlatformRichText\eZ\RichText\InputHandlerInterface;
+use Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException;
+use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
+use Ibexa\Contracts\FieldTypeRichText\RichText\Converter;
+use Ibexa\Contracts\FieldTypeRichText\RichText\InputHandlerInterface;
+use Ibexa\FieldTypeRichText\Form\DataTransformer\RichTextTransformer;
+use Ibexa\FieldTypeRichText\RichText\DOMDocumentFactory;
 use Ibexa\FieldTypeRichText\RichText\XMLSanitizer;
-use EzSystems\EzPlatformRichText\Form\DataTransformer\RichTextTransformer;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 
 class RichTextTransformerTest extends TestCase
 {
-    /** @var \EzSystems\EzPlatformRichText\eZ\RichText\InputHandlerInterface|\PHPUnit\Framework\MockObject\MockObject */
+    /** @var \Ibexa\FieldTypeRichText\RichText\InputHandlerInterface|\PHPUnit\Framework\MockObject\MockObject */
     private $inputHandler;
 
-    /** @var \EzSystems\EzPlatformRichText\eZ\RichText\Converter|\PHPUnit\Framework\MockObject\MockObject */
+    /** @var \Ibexa\FieldTypeRichText\RichText\Converter|\PHPUnit\Framework\MockObject\MockObject */
     private $docbook2xhtml5editConverter;
 
-    /** @var \EzSystems\EzPlatformRichText\Form\DataTransformer\RichTextTransformer */
+    /** @var \Ibexa\FieldTypeRichText\Form\DataTransformer\RichTextTransformer */
     private $richTextTransformer;
 
     protected function setUp(): void
@@ -45,12 +45,12 @@ class RichTextTransformerTest extends TestCase
     }
 
     /**
-     * @covers \EzSystems\EzPlatformRichText\Form\DataTransformer\RichTextTransformer::transform
+     * @covers \Ibexa\FieldTypeRichText\Form\DataTransformer\RichTextTransformer::transform
      */
     public function testTransform(): void
     {
         $outputXML = '<?xml version="1.0" encoding="UTF-8"?>' . PHP_EOL
-            . '<section xmlns="http://ez.no/namespaces/ezpublish5/xhtml5/edit"><p>This is a paragraph.</p></section>';
+            . '<section xmlns="http://ibexa.co/namespaces/ezpublish5/xhtml5/edit"><p>This is a paragraph.</p></section>';
 
         $outputDocument = new DOMDocument();
         $outputDocument->loadXML($outputXML);
@@ -72,7 +72,7 @@ class RichTextTransformerTest extends TestCase
     }
 
     /**
-     * @covers \EzSystems\EzPlatformRichText\Form\DataTransformer\RichTextTransformer::transform
+     * @covers \Ibexa\FieldTypeRichText\Form\DataTransformer\RichTextTransformer::transform
      */
     public function testTransformThrowsTransformationFailedException(): void
     {
@@ -83,12 +83,12 @@ class RichTextTransformerTest extends TestCase
     }
 
     /**
-     * @covers \EzSystems\EzPlatformRichText\Form\DataTransformer\RichTextTransformer::reverseTransform
+     * @covers \Ibexa\FieldTypeRichText\Form\DataTransformer\RichTextTransformer::reverseTransform
      */
     public function testReverseTransform(): void
     {
         $inputXML = '<?xml version="1.0" encoding="UTF-8"?>' . PHP_EOL . '
-            <section xmlns="http://ez.no/namespaces/ezpublish5/xhtml5/edit">
+            <section xmlns="http://ibexa.co/namespaces/ezpublish5/xhtml5/edit">
               <p>This is a paragraph.</p>
             </section>
             ';
@@ -113,7 +113,7 @@ class RichTextTransformerTest extends TestCase
     }
 
     /**
-     * @covers \EzSystems\EzPlatformRichText\Form\DataTransformer\RichTextTransformer::reverseTransform
+     * @covers \Ibexa\FieldTypeRichText\Form\DataTransformer\RichTextTransformer::reverseTransform
      *
      * @dataProvider dataProviderForReverseTransformTransformationFailedException
      */
@@ -140,3 +140,5 @@ class RichTextTransformerTest extends TestCase
         ];
     }
 }
+
+class_alias(RichTextTransformerTest::class, 'EzSystems\Tests\EzPlatformRichText\Form\DataTransformer\RichTextTransformerTest');

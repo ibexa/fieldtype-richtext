@@ -1,22 +1,19 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformRichText\Translation\Extractor;
+namespace Ibexa\FieldTypeRichText\Translation\Extractor;
 
-use eZ\Publish\Core\MVC\ConfigResolverInterface;
-use EzSystems\EzPlatformRichTextBundle\DependencyInjection\Configuration\Parser\FieldType\RichText;
-use JMS\TranslationBundle\Model\MessageCatalogue;
+use Ibexa\Bundle\FieldTypeRichText\DependencyInjection\Configuration\Parser\FieldType\RichText;
+use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 use JMS\TranslationBundle\Model\Message\XliffMessage;
+use JMS\TranslationBundle\Model\MessageCatalogue;
 use JMS\TranslationBundle\Translation\ExtractorInterface;
 
-/**
- * Generates translation strings for limitation types.
- */
 final class OnlineEditorCustomAttributesExtractor implements ExtractorInterface
 {
     private const MESSAGE_DOMAIN = 'online_editor';
@@ -24,7 +21,7 @@ final class OnlineEditorCustomAttributesExtractor implements ExtractorInterface
     private const CLASS_LABEL_MESSAGE_ID = 'ezrichtext.classes.class.label';
 
     /**
-     * @var \eZ\Publish\Core\MVC\ConfigResolverInterface
+     * @var \Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface
      */
     private $configResolver;
 
@@ -34,7 +31,7 @@ final class OnlineEditorCustomAttributesExtractor implements ExtractorInterface
     private $siteAccessList;
 
     /**
-     * @param \eZ\Publish\Core\MVC\ConfigResolverInterface $configResolver
+     * @param \Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface $configResolver
      * @param string[] $siteAccessList
      */
     public function __construct(ConfigResolverInterface $configResolver, array $siteAccessList)
@@ -55,7 +52,7 @@ final class OnlineEditorCustomAttributesExtractor implements ExtractorInterface
         $catalogue->add($this->createMessage(self::CLASS_LABEL_MESSAGE_ID, 'Class'));
 
         foreach ($this->siteAccessList as $scope) {
-            if (!$this->configResolver->hasParameter(RichText::ATTRIBUTES_SA_SETTINGS_ID)) {
+            if (!$this->configResolver->hasParameter(RichText::ATTRIBUTES_SA_SETTINGS_ID, null, $scope)) {
                 continue;
             }
             $this->extractMessagesForScope($catalogue, $scope);
@@ -111,3 +108,5 @@ final class OnlineEditorCustomAttributesExtractor implements ExtractorInterface
         }
     }
 }
+
+class_alias(OnlineEditorCustomAttributesExtractor::class, 'EzSystems\EzPlatformRichText\Translation\Extractor\OnlineEditorCustomAttributesExtractor');

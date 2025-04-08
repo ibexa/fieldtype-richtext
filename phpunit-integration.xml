@@ -1,0 +1,27 @@
+<phpunit
+    backupGlobals="false"
+    backupStaticAttributes="false"
+    bootstrap="tests/integration/bootstrap.php"
+    convertErrorsToExceptions="true"
+    convertNoticesToExceptions="true"
+    convertWarningsToExceptions="true"
+    beStrictAboutTestsThatDoNotTestAnything="true"
+    colors="true"
+    failOnWarning="true"
+>
+  <testsuites>
+    <testsuite name="integration_persistence">
+      <directory>tests/integration/Persistence</directory>
+    </testsuite>
+    <testsuite name="integration_translation_extraction">
+      <file>tests/integration/TranslationTest.php</file>
+    </testsuite>
+  </testsuites>
+  <php>
+    <env name="DATABASE_URL" value="sqlite://i@i/test.db" />
+    <env name="KERNEL_CLASS" value="Ibexa\Tests\Integration\FieldTypeRichText\IbexaTestKernel" />
+  </php>
+  <extensions>
+    <extension class="DAMA\DoctrineTestBundle\PHPUnit\PHPUnitExtension" />
+  </extensions>
+</phpunit>
