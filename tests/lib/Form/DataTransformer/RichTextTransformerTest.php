@@ -16,6 +16,7 @@ use Ibexa\Contracts\FieldTypeRichText\RichText\Converter;
 use Ibexa\Contracts\FieldTypeRichText\RichText\InputHandlerInterface;
 use Ibexa\FieldTypeRichText\Form\DataTransformer\RichTextTransformer;
 use Ibexa\FieldTypeRichText\RichText\DOMDocumentFactory;
+use Ibexa\FieldTypeRichText\RichText\XMLSanitizer;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 
@@ -37,7 +38,7 @@ class RichTextTransformerTest extends TestCase
 
         $this->richTextTransformer = new RichTextTransformer(
             // DOMDocumentFactory is final
-            new DOMDocumentFactory(),
+            new DOMDocumentFactory(new XMLSanitizer()),
             $this->inputHandler,
             $this->docbook2xhtml5editConverter
         );

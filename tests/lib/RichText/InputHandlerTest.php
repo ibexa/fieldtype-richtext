@@ -17,6 +17,7 @@ use Ibexa\FieldTypeRichText\RichText\DOMDocumentFactory;
 use Ibexa\FieldTypeRichText\RichText\InputHandler;
 use Ibexa\FieldTypeRichText\RichText\Normalizer;
 use Ibexa\FieldTypeRichText\RichText\RelationProcessor;
+use Ibexa\FieldTypeRichText\RichText\XMLSanitizer;
 use PHPUnit\Framework\TestCase;
 
 class InputHandlerTest extends TestCase
@@ -61,7 +62,7 @@ class InputHandlerTest extends TestCase
      */
     protected function setUp(): void
     {
-        $this->domDocumentFactory = new DOMDocumentFactory();
+        $this->domDocumentFactory = new DOMDocumentFactory(new XMLSanitizer());
         $this->converter = $this->createMock(ConverterDispatcher::class);
         $this->normalizer = $this->createMock(Normalizer::class);
         $this->schemaValidator = $this->createMock(ValidatorInterface::class);

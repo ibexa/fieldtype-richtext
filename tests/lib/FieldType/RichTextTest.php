@@ -27,6 +27,7 @@ use Ibexa\FieldTypeRichText\RichText\Normalizer\Aggregate;
 use Ibexa\FieldTypeRichText\RichText\RelationProcessor;
 use Ibexa\FieldTypeRichText\RichText\Validator\Validator;
 use Ibexa\FieldTypeRichText\RichText\Validator\ValidatorDispatcher;
+use Ibexa\FieldTypeRichText\RichText\XMLSanitizer;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 
@@ -42,7 +43,7 @@ class RichTextTest extends TestCase
     protected function getFieldType()
     {
         $inputHandler = new InputHandler(
-            new DOMDocumentFactory(),
+            new DOMDocumentFactory(new XMLSanitizer()),
             new ConverterDispatcher([
                 'http://docbook.org/ns/docbook' => null,
             ]),

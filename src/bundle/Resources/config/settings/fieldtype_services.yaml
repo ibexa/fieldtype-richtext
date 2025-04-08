@@ -53,6 +53,9 @@ services:
     Ibexa\FieldTypeRichText\RichText\DOMDocumentFactory:
         public: false
 
+    Ibexa\FieldTypeRichText\RichText\XMLSanitizer:
+        public: false
+
     Ibexa\FieldTypeRichText\RichText\InputHandler:
         arguments:
             - '@Ibexa\FieldTypeRichText\RichText\DOMDocumentFactory'
