@@ -168,10 +168,14 @@ class IbexaLinkUI extends Plugin {
     }
 
     addLink() {
-        this.editor.focus();
-        this.editor.execute('insertIbexaLink', { href: '', title: '', target: '' });
+        const link = this.findLinkElement();
 
-        this.isNew = true;
+        if (!link) {
+            this.editor.focus();
+            this.editor.execute('insertIbexaLink', { href: '', title: '', target: '' });
+
+            this.isNew = true;
+        }
 
         this.showForm();
     }
