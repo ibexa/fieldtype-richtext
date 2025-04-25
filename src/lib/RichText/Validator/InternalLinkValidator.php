@@ -23,17 +23,8 @@ class InternalLinkValidator implements ValidatorInterface
 {
     private Handler $contentHandler;
 
-    /**
-     * @var \Ibexa\Contracts\Core\Persistence\Content\Location\Handler;
-     */
     private LocationHandler $locationHandler;
 
-    /**
-     * InternalLinkValidator constructor.
-     *
-     * @param \Ibexa\Contracts\Core\Persistence\Content\Handler $contentHandler
-     * @param \Ibexa\Contracts\Core\Persistence\Content\Location\Handler $locationHandler
-     */
     public function __construct(ContentHandler $contentHandler, LocationHandler $locationHandler)
     {
         $this->contentHandler = $contentHandler;

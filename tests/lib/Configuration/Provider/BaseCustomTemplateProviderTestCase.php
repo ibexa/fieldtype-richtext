@@ -13,8 +13,7 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 abstract class BaseCustomTemplateProviderTestCase extends BaseProviderTestCase
 {
-    /** @var \PHPUnit\Framework\MockObject\MockObject|\Ibexa\FieldTypeRichText\Configuration\UI\Mapper\CustomStyle */
-    protected MockObject $mapper;
+    protected CustomTemplateConfigMapper&MockObject $mapper;
 
     abstract protected function getExpectedCustomTemplatesConfiguration(): array;
 

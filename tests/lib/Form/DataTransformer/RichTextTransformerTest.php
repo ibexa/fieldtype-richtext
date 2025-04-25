@@ -23,13 +23,10 @@ use Symfony\Component\Form\Exception\TransformationFailedException;
 
 class RichTextTransformerTest extends TestCase
 {
-    /** @var \Ibexa\FieldTypeRichText\RichText\InputHandlerInterface|\PHPUnit\Framework\MockObject\MockObject */
-    private MockObject $inputHandler;
+    private InputHandlerInterface&MockObject $inputHandler;
 
-    /** @var \Ibexa\FieldTypeRichText\RichText\Converter|\PHPUnit\Framework\MockObject\MockObject */
-    private MockObject $docbook2xhtml5editConverter;
+    private Converter&MockObject $docbook2xhtml5editConverter;
 
-    /** @var \Ibexa\FieldTypeRichText\Form\DataTransformer\RichTextTransformer */
     private RichTextTransformer $richTextTransformer;
 
     protected function setUp(): void

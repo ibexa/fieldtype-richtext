@@ -13,6 +13,7 @@ use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
 use Ibexa\Contracts\Core\Repository\PermissionResolver;
 use Ibexa\Contracts\Core\Repository\Repository;
 use Ibexa\Contracts\Core\Repository\Values\Content\Content;
+use Ibexa\Contracts\Core\Repository\Values\Content\Location;
 use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 use Ibexa\Contracts\FieldTypeRichText\RichText\RendererInterface;
 use Psr\Log\LoggerInterface;
@@ -86,7 +87,7 @@ class Renderer implements RendererInterface
         try {
             /** @var \Ibexa\Contracts\Core\Repository\Values\Content\Content $content */
             $content = $this->repository->sudo(
-                static function (Repository $repository) use ($contentId): \Ibexa\Contracts\Core\Repository\Values\Content\Content {
+                static function (Repository $repository) use ($contentId): Content {
                     return $repository->getContentService()->loadContent((int)$contentId);
                 }
             );
@@ -437,7 +438,7 @@ class Renderer implements RendererInterface
     {
         /** @var \Ibexa\Contracts\Core\Repository\Values\Content\Location $location */
         $location = $this->repository->sudo(
-            static function (Repository $repository) use ($id): \Ibexa\Contracts\Core\Repository\Values\Content\Location {
+            static function (Repository $repository) use ($id): Location {
                 return $repository->getLocationService()->loadLocation($id);
             }
         );

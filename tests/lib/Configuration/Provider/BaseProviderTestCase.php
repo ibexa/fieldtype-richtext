@@ -15,8 +15,7 @@ use PHPUnit\Framework\TestCase;
 
 abstract class BaseProviderTestCase extends TestCase
 {
-    /** @var \PHPUnit\Framework\MockObject\MockObject|\Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface */
-    protected MockObject $configResolver;
+    protected ConfigResolverInterface&MockObject $configResolver;
 
     public function setUp(): void
     {

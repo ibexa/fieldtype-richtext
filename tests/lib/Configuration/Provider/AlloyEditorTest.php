@@ -17,8 +17,7 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 class AlloyEditorTest extends BaseProviderTestCase
 {
-    /** @var \PHPUnit\Framework\MockObject\MockObject|\Ibexa\FieldTypeRichText\Configuration\UI\Mapper\OnlineEditorConfigMapper */
-    private MockObject $mapper;
+    private OnlineEditorConfigMapper&MockObject $mapper;
 
     public function setUp(): void
     {

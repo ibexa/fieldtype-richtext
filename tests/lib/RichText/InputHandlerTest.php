@@ -23,44 +23,20 @@ use PHPUnit\Framework\TestCase;
 
 class InputHandlerTest extends TestCase
 {
-    /**
-     * @var \Ibexa\FieldTypeRichText\RichText\DOMDocumentFactory|\PHPUnit\Framework\MockObject\MockObject
-     */
     private DOMDocumentFactory $domDocumentFactory;
 
-    /**
-     * @var \Ibexa\FieldTypeRichText\RichText\ConverterDispatcher|\PHPUnit\Framework\MockObject\MockObject
-     */
-    private MockObject $converter;
+    private ConverterDispatcher&MockObject $converter;
 
-    /**
-     * @var \Ibexa\FieldTypeRichText\RichText\Normalizer|\PHPUnit\Framework\MockObject\MockObject
-     */
-    private MockObject $normalizer;
+    private Normalizer&MockObject $normalizer;
 
-    /**
-     * @var \Ibexa\FieldTypeRichText\RichText\ValidatorInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
-    private MockObject $schemaValidator;
+    private ValidatorInterface&MockObject $schemaValidator;
 
-    /**
-     * @var \Ibexa\FieldTypeRichText\RichText\ValidatorInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
-    private MockObject $docbookValidator;
+    private ValidatorInterface&MockObject $docbookValidator;
 
-    /**
-     * @var \Ibexa\FieldTypeRichText\RichText\RelationProcessor
-     */
     private RelationProcessor $relationProcessor;
 
-    /**
-     * @var \Ibexa\FieldTypeRichText\RichText\InputHandler|\PHPUnit\Framework\MockObject\MockObject
-     */
     private InputHandler $inputHandler;
 
-    /**
-     * {@inheritdoc}
-     */
     protected function setUp(): void
     {
         $this->domDocumentFactory = new DOMDocumentFactory(new XMLSanitizer());
@@ -117,7 +93,7 @@ class InputHandlerTest extends TestCase
         $inputHandler
             ->expects(self::once())
             ->method('fromDocument')
-            ->willReturnCallback(function (DOMDocument $document) use ($inputXml, $outputDocument): \PHPUnit\Framework\MockObject\MockObject {
+            ->willReturnCallback(function (DOMDocument $document) use ($inputXml, $outputDocument): DOMDocument {
                 $this->assertEquals($inputXml, $document->saveXML());
 
                 return $outputDocument;
