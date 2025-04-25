@@ -179,11 +179,13 @@ class RichTextStorage extends GatewayBasedStorage
         $field->value->data = $document->saveXML();
     }
 
-    public function deleteFieldData(VersionInfo $versionInfo, array $fieldIds): void
+    public function deleteFieldData(VersionInfo $versionInfo, array $fieldIds): bool
     {
         foreach ($fieldIds as $fieldId) {
             $this->gateway->unlinkUrl($fieldId, $versionInfo->versionNo);
         }
+
+        return true;
     }
 
     /**

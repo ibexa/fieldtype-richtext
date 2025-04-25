@@ -430,16 +430,14 @@ class Renderer implements RendererInterface
      *
      * @throws \Symfony\Component\Security\Core\Exception\AccessDeniedException
      *
-     * @param int|string $id
-     *
      * @return \Ibexa\Contracts\Core\Repository\Values\Content\Location
      */
-    protected function checkLocation(int $id)
+    protected function checkLocation(int|string $id)
     {
         /** @var \Ibexa\Contracts\Core\Repository\Values\Content\Location $location */
         $location = $this->repository->sudo(
             static function (Repository $repository) use ($id): Location {
-                return $repository->getLocationService()->loadLocation($id);
+                return $repository->getLocationService()->loadLocation((int) $id);
             }
         );
 

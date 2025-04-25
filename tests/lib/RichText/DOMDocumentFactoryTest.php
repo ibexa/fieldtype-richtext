@@ -16,14 +16,8 @@ use PHPUnit\Framework\TestCase;
 
 class DOMDocumentFactoryTest extends TestCase
 {
-    /**
-     * @var \Ibexa\FieldTypeRichText\RichText\DOMDocumentFactory
-     */
     private DOMDocumentFactory $domDocumentFactory;
 
-    /**
-     * {@inheritdoc}
-     */
     protected function setUp(): void
     {
         $this->domDocumentFactory = new DOMDocumentFactory(new XMLSanitizer());

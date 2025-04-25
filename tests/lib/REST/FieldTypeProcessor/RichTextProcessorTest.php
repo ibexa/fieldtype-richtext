@@ -16,6 +16,13 @@ use PHPUnit\Framework\TestCase;
 
 class RichTextProcessorTest extends TestCase
 {
+    protected Converter&MockObject $converter;
+
+    protected function setUp(): void
+    {
+        $this->converter = $this->createMock(Converter::class);
+    }
+
     public function testPostProcessValueHash(): void
     {
         $processor = $this->getProcessor();
@@ -54,18 +61,8 @@ EOT;
         );
     }
 
-    /**
-     * @var \Ibexa\FieldTypeRichText\RichText\Converter|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected ?MockObject $converter = null;
-
-    /**
-     * @return \Ibexa\FieldTypeRichText\REST\FieldTypeProcessor\RichTextProcessor
-     */
     protected function getProcessor(): RichTextProcessor
     {
-        $this->converter = $this->createMock(Converter::class);
-
         return new RichTextProcessor($this->converter);
     }
 }

@@ -14,6 +14,9 @@ use PHPUnit\Framework\TestCase;
 
 class DocumentTypeDefinitionTest extends TestCase
 {
+    /**
+     * @phpstan-return list<array{string, string, string, string, string, string}>
+     */
     public function providerForTestNormalize(): array
     {
         return [
@@ -131,7 +134,7 @@ XML
     {
         $normalizer = $this->getNormalizer($documentElement, $namespace, $dtdPath);
 
-        $output = $normalizer->normalize($input);
+        $output = (string)$normalizer->normalize($input);
 
         self::assertEquals($expectedOutput, $output);
 
@@ -143,6 +146,9 @@ XML
         self::assertEquals($expectedDocument, $normalizedDocument);
     }
 
+    /**
+     * @phpstan-return list<array{string, string, string, string}>
+     */
     public function providerForTestRefuse(): array
     {
         return [

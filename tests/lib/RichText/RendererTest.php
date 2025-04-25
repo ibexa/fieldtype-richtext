@@ -679,6 +679,9 @@ class RendererTest extends TestCase
         );
     }
 
+    /**
+     * @phpstan-return list<array{\Exception}>
+     */
     public function providerForTestRenderContentEmbedNotFound(): array
     {
         return [
@@ -761,6 +764,9 @@ class RendererTest extends TestCase
         $renderer->renderContentEmbed($contentId, 'embedTest', ['parameters'], true);
     }
 
+    /**
+     * @phpstan-return list<array{bool, \Exception|null, mixed[], mixed[], string|null, string|null, string|null}>
+     */
     public function providerForTestRenderContentWithTemplate(): array
     {
         $contentId = 42;
@@ -1323,6 +1329,9 @@ class RendererTest extends TestCase
         );
     }
 
+    /**
+     * @phpstan-return list<array{\Exception}>
+     */
     public function providerForTestRenderLocationEmbedNotFound(): array
     {
         return [
@@ -1389,6 +1398,9 @@ class RendererTest extends TestCase
         $renderer->renderLocationEmbed($locationId, 'embedTest', ['parameters'], true);
     }
 
+    /**
+     * @phpstan-return list<array{bool, \Exception|null, mixed[], mixed[], string|null, string|null, string|null}>
+     */
     public function providerForTestRenderLocationWithTemplate(): array
     {
         $locationId = 42;

@@ -118,6 +118,9 @@ class RichTextTest extends TestCase
         $this->getFieldType()->acceptValue($this->createMock(CoreValue::class));
     }
 
+    /**
+     * @phpstan-return list<array{string}>
+     */
     public static function providerForTestAcceptValueValidFormat(): array
     {
         return [
@@ -149,6 +152,9 @@ class RichTextTest extends TestCase
         $fieldType->acceptValue($input);
     }
 
+    /**
+     * @phpstan-return list<array{string, \Exception}>
+     */
     public static function providerForTestAcceptValueInvalidFormat(): array
     {
         return [
@@ -191,6 +197,9 @@ class RichTextTest extends TestCase
         }
     }
 
+    /**
+     * @phpstan-return list<array{string, \Ibexa\Contracts\Core\FieldType\ValidationError[]}>
+     */
     public function providerForTestValidate(): array
     {
         return [
@@ -344,6 +353,8 @@ class RichTextTest extends TestCase
     /**
      * @todo format does not really matter for the method tested, but the fixtures here should be replaced
      * by valid docbook anyway
+     *
+     * @phpstan-return list<array{string, string}>
      */
     public static function providerForTestGetName(): array
     {
@@ -484,10 +495,5 @@ EOT;
     protected function provideFieldTypeIdentifier(): string
     {
         return 'ezrichtext';
-    }
-
-    public function provideDataForGetName(): array
-    {
-        return [];
     }
 }

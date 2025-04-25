@@ -293,20 +293,14 @@ EOT
 
     /**
      * Get update field externals data.
-     *
-     * @return array
      */
-    public function getValidUpdateFieldData()
+    public function getValidUpdateFieldData(): RichTextValue
     {
         return new RichTextValue($this->updatedDOMValue);
     }
 
     /**
      * Get externals updated field data values.
-     *
-     * This is a PHPUnit data provider
-     *
-     * @return array
      */
     public function assertUpdatedFieldDataLoadedCorrect(Field $field): void
     {
@@ -502,6 +496,8 @@ EOT;
      * This is a PHP Unit data provider
      *
      * @see testConvertReomoteObjectIdToObjectId()
+     *
+     * @phpstan-return list<array{string, string}>
      */
     public function providerForTestConvertRemoteObjectIdToObjectId(): array
     {

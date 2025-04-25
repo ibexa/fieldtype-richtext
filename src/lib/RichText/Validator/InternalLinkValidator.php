@@ -80,6 +80,8 @@ class InternalLinkValidator implements ValidatorInterface
      */
     public function validate($scheme, $id): bool
     {
+        $id = (int) $id;
+
         try {
             switch ($scheme) {
                 case 'ezcontent':

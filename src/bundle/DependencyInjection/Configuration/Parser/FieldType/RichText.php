@@ -228,13 +228,7 @@ class RichText extends AbstractFieldTypeParser
         $this->buildOnlineEditorConfiguration($nodeBuilder);
     }
 
-    /**
-     * @param string $info
-     * @param string $example
-     *
-     * @return \Symfony\Component\Config\Definition\Builder\ScalarNodeDefinition
-     */
-    protected function getTemplateNodeDefinition(string $info, string|array $example): ScalarNodeDefinition
+    protected function getTemplateNodeDefinition(string $info, string $example): ScalarNodeDefinition
     {
         $templateNodeDefinition = new ScalarNodeDefinition('template');
         $templateNodeDefinition

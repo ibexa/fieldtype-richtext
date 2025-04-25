@@ -18,11 +18,9 @@ use PHPUnit\Framework\TestCase;
 
 class InternalLinkValidatorTest extends TestCase
 {
-    /** @var \Ibexa\Contracts\Core\Persistence\Content\Handler|\PHPUnit\Framework\MockObject\MockObject */
-    private ?MockObject $contentHandler = null;
+    private ContentHandler&MockObject $contentHandler;
 
-    /** @var \Ibexa\Contracts\Core\Persistence\Content\Location\Handler|\PHPUnit\Framework\MockObject\MockObject */
-    private ?MockObject $locationHandler = null;
+    private LocationHandler&MockObject $locationHandler;
 
     /**
      * @before
@@ -39,7 +37,7 @@ class InternalLinkValidatorTest extends TestCase
         $this->expectExceptionMessage("Argument 'eznull' is invalid: The provided scheme 'eznull' is not supported.");
 
         $validator = $this->getInternalLinkValidator();
-        $validator->validate('eznull', 1);
+        $validator->validate('eznull', '1');
     }
 
     public function testValidateEzContentWithExistingContentId(): void
@@ -52,7 +50,7 @@ class InternalLinkValidatorTest extends TestCase
             ->method('loadContentInfo')
             ->with($contentId);
 
-        self::assertTrue($validator->validate('ezcontent', $contentId));
+        self::assertTrue($validator->validate('ezcontent', (string)$contentId));
     }
 
     public function testValidateEzContentNonExistingContentId(): void
@@ -68,7 +66,7 @@ class InternalLinkValidatorTest extends TestCase
             ->with($contentId)
             ->willThrowException($exception);
 
-        self::assertFalse($validator->validate('ezcontent', $contentId));
+        self::assertFalse($validator->validate('ezcontent', (string)$contentId));
     }
 
     public function testValidateEzLocationWithExistingLocationId(): void
@@ -82,7 +80,7 @@ class InternalLinkValidatorTest extends TestCase
             ->method('load')
             ->with($locationId);
 
-        self::assertTrue($validator->validate('ezlocation', $locationId));
+        self::assertTrue($validator->validate('ezlocation', (string)$locationId));
     }
 
     public function testValidateEzLocationWithNonExistingLocationId(): void
@@ -98,7 +96,7 @@ class InternalLinkValidatorTest extends TestCase
             ->with($locationId)
             ->willThrowException($exception);
 
-        self::assertFalse($validator->validate('ezlocation', $locationId));
+        self::assertFalse($validator->validate('ezlocation', (string)$locationId));
     }
 
     public function testValidateEzRemoteWithExistingRemoteId(): void
@@ -287,10 +285,7 @@ class InternalLinkValidatorTest extends TestCase
         self::assertContains(sprintf($format, $contentId), $errors);
     }
 
-    /**
-     * @return \Ibexa\FieldTypeRichText\FieldType\RichText\InternalLinkValidator|\PHPUnit\Framework\MockObject\MockObject
-     */
-    private function getInternalLinkValidator(array $methods = null): MockObject
+    private function getInternalLinkValidator(array $methods = null): InternalLinkValidator&MockObject
     {
         return $this->getMockBuilder(InternalLinkValidator::class)
             ->setMethods($methods)

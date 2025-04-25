@@ -37,18 +37,6 @@ parameters:
 			path: src/bundle/DependencyInjection/Configuration.php
 
 		-
-			message: '#^Method Ibexa\\Bundle\\FieldTypeRichText\\DependencyInjection\\Configuration\\Parser\\FieldType\\RichText\:\:addFieldTypeSemanticConfig\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: src/bundle/DependencyInjection/Configuration/Parser/FieldType/RichText.php
-
-		-
-			message: '#^Method Ibexa\\Bundle\\FieldTypeRichText\\DependencyInjection\\Configuration\\Parser\\FieldType\\RichText\:\:mapConfig\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: src/bundle/DependencyInjection/Configuration/Parser/FieldType/RichText.php
-
-		-
 			message: '#^Method Ibexa\\Bundle\\FieldTypeRichText\\DependencyInjection\\Configuration\\Parser\\FieldType\\RichText\:\:mapConfig\(\) has parameter \$scopeSettings with no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
@@ -111,12 +99,6 @@ parameters:
 		-
 			message: '#^Method Ibexa\\Bundle\\FieldTypeRichText\\DependencyInjection\\IbexaFieldTypeRichTextExtension\:\:getToolbarsBySiteAccess\(\) return type has no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
-			count: 1
-			path: src/bundle/DependencyInjection/IbexaFieldTypeRichTextExtension.php
-
-		-
-			message: '#^Method Ibexa\\Bundle\\FieldTypeRichText\\DependencyInjection\\IbexaFieldTypeRichTextExtension\:\:load\(\) has no return type specified\.$#'
-			identifier: missingType.return
 			count: 1
 			path: src/bundle/DependencyInjection/IbexaFieldTypeRichTextExtension.php
 
@@ -189,12 +171,6 @@ parameters:
 		-
 			message: '#^Method Ibexa\\Bundle\\FieldTypeRichText\\IbexaFieldTypeRichTextBundle\:\:getCoreExtension\(\) should return Ibexa\\Bundle\\Core\\DependencyInjection\\IbexaCoreExtension but returns Symfony\\Component\\DependencyInjection\\Extension\\ExtensionInterface\.$#'
 			identifier: return.type
-			count: 1
-			path: src/bundle/IbexaFieldTypeRichTextBundle.php
-
-		-
-			message: '#^Method Ibexa\\Bundle\\FieldTypeRichText\\IbexaFieldTypeRichTextBundle\:\:registerConfigParser\(\) has no return type specified\.$#'
-			identifier: missingType.return
 			count: 1
 			path: src/bundle/IbexaFieldTypeRichTextBundle.php
 
@@ -487,69 +463,9 @@ parameters:
 			path: src/lib/FieldType/RichText/RichTextStorage.php
 
 		-
-			message: '#^Method Ibexa\\FieldTypeRichText\\FieldType\\RichText\\RichTextStorage\:\:deleteFieldData\(\) should return bool but return statement is missing\.$#'
-			identifier: return.missing
-			count: 1
-			path: src/lib/FieldType/RichText/RichTextStorage.php
-
-		-
-			message: '#^Method Ibexa\\FieldTypeRichText\\FieldType\\RichText\\RichTextStorage\:\:getFieldData\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: src/lib/FieldType/RichText/RichTextStorage.php
-
-		-
-			message: '#^Offset 1 might not exist on array\{0\?\: string, 1\?\: ''''\|''ezremote\://'', 2\?\: string, 3\?\: string\}\.$#'
-			identifier: offsetAccess.notFound
-			count: 1
-			path: src/lib/FieldType/RichText/RichTextStorage.php
-
-		-
-			message: '#^Offset 1 might not exist on array\{0\?\: string, 1\?\: string, 2\?\: string\}\.$#'
-			identifier: offsetAccess.notFound
-			count: 1
-			path: src/lib/FieldType/RichText/RichTextStorage.php
-
-		-
-			message: '#^Offset 2 might not exist on array\{0\?\: string, 1\: ''ezremote\://'', 2\?\: string, 3\?\: string\}\.$#'
-			identifier: offsetAccess.notFound
-			count: 1
-			path: src/lib/FieldType/RichText/RichTextStorage.php
-
-		-
-			message: '#^Offset 2 might not exist on array\{0\?\: string, 1\?\: ''''\|''ezremote\://'', 2\?\: string, 3\?\: string\}\.$#'
-			identifier: offsetAccess.notFound
-			count: 2
-			path: src/lib/FieldType/RichText/RichTextStorage.php
-
-		-
-			message: '#^Offset 2 might not exist on array\{0\?\: string, 1\?\: string, 2\?\: string\}\.$#'
-			identifier: offsetAccess.notFound
-			count: 1
-			path: src/lib/FieldType/RichText/RichTextStorage.php
-
-		-
-			message: '#^Offset 3 might not exist on array\{0\?\: string, 1\?\: ''''\|''ezremote\://'', 2\?\: string, 3\?\: string\}\.$#'
-			identifier: offsetAccess.notFound
-			count: 1
-			path: src/lib/FieldType/RichText/RichTextStorage.php
-
-		-
 			message: '#^Parameter \#1 \$source of method DOMDocument\:\:loadXML\(\) expects string, array\|bool\|float\|int\|string\|null given\.$#'
 			identifier: argument.type
 			count: 2
-			path: src/lib/FieldType/RichText/RichTextStorage.php
-
-		-
-			message: '#^Property Ibexa\\FieldTypeRichText\\FieldType\\RichText\\RichTextStorage\:\:\$logger \(Psr\\Log\\LoggerInterface\) does not accept Psr\\Log\\LoggerInterface\|null\.$#'
-			identifier: assign.propertyType
-			count: 1
-			path: src/lib/FieldType/RichText/RichTextStorage.php
-
-		-
-			message: '#^Property Ibexa\\FieldTypeRichText\\FieldType\\RichText\\RichTextStorage\:\:\$logger \(Psr\\Log\\LoggerInterface\) in isset\(\) is not nullable\.$#'
-			identifier: isset.property
-			count: 1
 			path: src/lib/FieldType/RichText/RichTextStorage.php
 
 		-
@@ -573,18 +489,6 @@ parameters:
 		-
 			message: '#^Method Ibexa\\FieldTypeRichText\\FieldType\\RichText\\RichTextStorage\\Gateway\:\:getUrlIdMap\(\) return type has no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
-			count: 1
-			path: src/lib/FieldType/RichText/RichTextStorage/Gateway.php
-
-		-
-			message: '#^Method Ibexa\\FieldTypeRichText\\FieldType\\RichText\\RichTextStorage\\Gateway\:\:linkUrl\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: src/lib/FieldType/RichText/RichTextStorage/Gateway.php
-
-		-
-			message: '#^Method Ibexa\\FieldTypeRichText\\FieldType\\RichText\\RichTextStorage\\Gateway\:\:unlinkUrl\(\) has no return type specified\.$#'
-			identifier: missingType.return
 			count: 1
 			path: src/lib/FieldType/RichText/RichTextStorage/Gateway.php
 
@@ -667,18 +571,6 @@ parameters:
 			path: src/lib/Form/DataTransformer/RichTextValueTransformer.php
 
 		-
-			message: '#^Method Ibexa\\FieldTypeRichText\\Form\\Mapper\\RichTextFormMapper\:\:configureOptions\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: src/lib/Form/Mapper/RichTextFormMapper.php
-
-		-
-			message: '#^Method Ibexa\\FieldTypeRichText\\Form\\Mapper\\RichTextFormMapper\:\:mapFieldValueForm\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: src/lib/Form/Mapper/RichTextFormMapper.php
-
-		-
 			message: '#^Method Ibexa\\FieldTypeRichText\\Form\\Mapper\\RichTextFormMapper\:\:mapFieldValueForm\(\) has parameter \$fieldForm with generic interface Symfony\\Component\\Form\\FormInterface but does not specify its types\: TData$#'
 			identifier: missingType.generics
 			count: 1
@@ -691,40 +583,10 @@ parameters:
 			path: src/lib/Form/Type/RichTextFieldType.php
 
 		-
-			message: '#^Method Ibexa\\FieldTypeRichText\\Form\\Type\\RichTextFieldType\:\:getName\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: src/lib/Form/Type/RichTextFieldType.php
-
-		-
 			message: '#^Class Ibexa\\FieldTypeRichText\\Form\\Type\\RichTextType extends generic class Symfony\\Component\\Form\\AbstractType but does not specify its types\: TData$#'
 			identifier: missingType.generics
 			count: 1
 			path: src/lib/Form/Type/RichTextType.php
-
-		-
-			message: '#^Method Ibexa\\FieldTypeRichText\\Persistence\\Legacy\\RichTextFieldValueConverter\:\:toFieldDefinition\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: src/lib/Persistence/Legacy/RichTextFieldValueConverter.php
-
-		-
-			message: '#^Method Ibexa\\FieldTypeRichText\\Persistence\\Legacy\\RichTextFieldValueConverter\:\:toFieldValue\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: src/lib/Persistence/Legacy/RichTextFieldValueConverter.php
-
-		-
-			message: '#^Method Ibexa\\FieldTypeRichText\\Persistence\\Legacy\\RichTextFieldValueConverter\:\:toStorageFieldDefinition\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: src/lib/Persistence/Legacy/RichTextFieldValueConverter.php
-
-		-
-			message: '#^Method Ibexa\\FieldTypeRichText\\Persistence\\Legacy\\RichTextFieldValueConverter\:\:toStorageValue\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: src/lib/Persistence/Legacy/RichTextFieldValueConverter.php
 
 		-
 			message: '#^Property Ibexa\\Core\\Persistence\\Legacy\\Content\\StorageFieldValue\:\:\$dataText \(string\) does not accept array\|bool\|float\|int\|string\|null\.$#'
@@ -745,32 +607,8 @@ parameters:
 			path: src/lib/RichText/Converter/Link.php
 
 		-
-			message: '#^Offset 1 might not exist on array\{0\?\: string, 1\?\: string, 2\?\: string, 3\?\: string\}\.$#'
-			identifier: offsetAccess.notFound
-			count: 1
-			path: src/lib/RichText/Converter/Link.php
-
-		-
-			message: '#^Offset 2 might not exist on array\{0\?\: string, 1\?\: string, 2\?\: string, 3\?\: string\}\.$#'
-			identifier: offsetAccess.notFound
-			count: 1
-			path: src/lib/RichText/Converter/Link.php
-
-		-
-			message: '#^Offset 3 might not exist on array\{0\?\: string, 1\?\: string, 2\?\: string, 3\?\: string\}\.$#'
-			identifier: offsetAccess.notFound
-			count: 1
-			path: src/lib/RichText/Converter/Link.php
-
-		-
 			message: '#^Parameter \#1 \$locationId of method Ibexa\\Contracts\\Core\\Repository\\LocationService\:\:loadLocation\(\) expects int, int\|null given\.$#'
 			identifier: argument.type
-			count: 1
-			path: src/lib/RichText/Converter/Link.php
-
-		-
-			message: '#^Property Ibexa\\FieldTypeRichText\\RichText\\Converter\\Link\:\:\$logger \(Psr\\Log\\LoggerInterface\) does not accept Psr\\Log\\LoggerInterface\|null\.$#'
-			identifier: assign.propertyType
 			count: 1
 			path: src/lib/RichText/Converter/Link.php
 
@@ -901,12 +739,6 @@ parameters:
 			path: src/lib/RichText/Converter/Render/Embed.php
 
 		-
-			message: '#^Method Ibexa\\FieldTypeRichText\\RichText\\Converter\\Render\\Embed\:\:extractLinkParameters\(\) should return array but returns null\.$#'
-			identifier: return.type
-			count: 2
-			path: src/lib/RichText/Converter/Render/Embed.php
-
-		-
 			message: '#^Method Ibexa\\FieldTypeRichText\\RichText\\Converter\\Render\\Embed\:\:extractParameters\(\) has parameter \$tagName with no type specified\.$#'
 			identifier: missingType.parameter
 			count: 1
@@ -933,24 +765,6 @@ parameters:
 		-
 			message: '#^Method Ibexa\\FieldTypeRichText\\RichText\\Converter\\Render\\Embed\:\:processTag\(\) has parameter \$tagName with no type specified\.$#'
 			identifier: missingType.parameter
-			count: 1
-			path: src/lib/RichText/Converter/Render/Embed.php
-
-		-
-			message: '#^Offset 1 might not exist on array\{0\?\: string, 1\?\: ''ezcontent''\|''ezlocation'', 2\?\: numeric\-string\}\.$#'
-			identifier: offsetAccess.notFound
-			count: 1
-			path: src/lib/RichText/Converter/Render/Embed.php
-
-		-
-			message: '#^Offset 2 might not exist on array\{0\?\: string, 1\: ''ezcontent'', 2\?\: numeric\-string\}\.$#'
-			identifier: offsetAccess.notFound
-			count: 1
-			path: src/lib/RichText/Converter/Render/Embed.php
-
-		-
-			message: '#^Offset 2 might not exist on array\{0\?\: string, 1\: ''ezlocation'', 2\?\: numeric\-string\}\.$#'
-			identifier: offsetAccess.notFound
 			count: 1
 			path: src/lib/RichText/Converter/Render/Embed.php
 
@@ -1063,12 +877,6 @@ parameters:
 			path: src/lib/RichText/ConverterDispatcher.php
 
 		-
-			message: '#^Method Ibexa\\FieldTypeRichText\\RichText\\ConverterDispatcher\:\:addConverter\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: src/lib/RichText/ConverterDispatcher.php
-
-		-
 			message: '#^Property Ibexa\\FieldTypeRichText\\RichText\\ConverterDispatcher\:\:\$mapping \(array\<Ibexa\\Contracts\\FieldTypeRichText\\RichText\\Converter\>\) does not accept array\<Ibexa\\Contracts\\FieldTypeRichText\\RichText\\Converter\|null\>\.$#'
 			identifier: assign.propertyType
 			count: 1
@@ -1117,12 +925,6 @@ parameters:
 			path: src/lib/RichText/Normalizer/DocumentTypeDefinition.php
 
 		-
-			message: '#^Method Ibexa\\FieldTypeRichText\\RichText\\Normalizer\\DocumentTypeDefinition\:\:normalize\(\) should return string but returns string\|null\.$#'
-			identifier: return.type
-			count: 1
-			path: src/lib/RichText/Normalizer/DocumentTypeDefinition.php
-
-		-
 			message: '#^Argument of an invalid type DOMNodeList\<DOMNode\>\|false supplied for foreach, only iterables are supported\.$#'
 			identifier: foreach.nonIterable
 			count: 1
@@ -1145,30 +947,6 @@ parameters:
 			identifier: missingType.iterableValue
 			count: 1
 			path: src/lib/RichText/RelationProcessor.php
-
-		-
-			message: '#^Offset 1 might not exist on array\{0\?\: string, 1\?\: non\-empty\-string, 2\?\: string, 3\?\: string\}\.$#'
-			identifier: offsetAccess.notFound
-			count: 1
-			path: src/lib/RichText/RelationProcessor.php
-
-		-
-			message: '#^Offset 2 might not exist on array\{0\?\: string, 1\?\: non\-empty\-string, 2\?\: string, 3\?\: string\}\.$#'
-			identifier: offsetAccess.notFound
-			count: 1
-			path: src/lib/RichText/RelationProcessor.php
-
-		-
-			message: '#^Cannot call method error\(\) on Psr\\Log\\LoggerInterface\|null\.$#'
-			identifier: method.nonObject
-			count: 13
-			path: src/lib/RichText/Renderer.php
-
-		-
-			message: '#^Cannot call method warning\(\) on Psr\\Log\\LoggerInterface\|null\.$#'
-			identifier: method.nonObject
-			count: 6
-			path: src/lib/RichText/Renderer.php
 
 		-
 			message: '#^Method Ibexa\\FieldTypeRichText\\RichText\\Renderer\:\:__construct\(\) has parameter \$customStylesConfiguration with no value type specified in iterable type array\.$#'
@@ -1227,12 +1005,6 @@ parameters:
 		-
 			message: '#^Method Ibexa\\FieldTypeRichText\\RichText\\Renderer\:\:renderTemplate\(\) has parameter \$parameters with no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
-			count: 1
-			path: src/lib/RichText/Renderer.php
-
-		-
-			message: '#^Parameter \#1 \$locationId of method Ibexa\\Contracts\\Core\\Repository\\LocationService\:\:loadLocation\(\) expects int, int\|string given\.$#'
-			identifier: argument.type
 			count: 1
 			path: src/lib/RichText/Renderer.php
 
@@ -1303,30 +1075,6 @@ parameters:
 			path: src/lib/RichText/Validator/InternalLinkValidator.php
 
 		-
-			message: '#^Offset 1 might not exist on array\{0\?\: string, 1\?\: non\-empty\-string, 2\?\: string, 3\?\: string\}\.$#'
-			identifier: offsetAccess.notFound
-			count: 1
-			path: src/lib/RichText/Validator/InternalLinkValidator.php
-
-		-
-			message: '#^Offset 2 might not exist on array\{0\?\: string, 1\?\: non\-empty\-string, 2\?\: string, 3\?\: string\}\.$#'
-			identifier: offsetAccess.notFound
-			count: 1
-			path: src/lib/RichText/Validator/InternalLinkValidator.php
-
-		-
-			message: '#^PHPDoc tag @var has invalid value \(\\Ibexa\\Contracts\\Core\\Persistence\\Content\\Location\\Handler;\)\: Unexpected token ";", expected TOKEN_HORIZONTAL_WS at offset 74 on line 2$#'
-			identifier: phpDoc.parseError
-			count: 1
-			path: src/lib/RichText/Validator/InternalLinkValidator.php
-
-		-
-			message: '#^Property Ibexa\\FieldTypeRichText\\RichText\\Validator\\InternalLinkValidator\:\:\$locationHandler has no type specified\.$#'
-			identifier: missingType.property
-			count: 1
-			path: src/lib/RichText/Validator/InternalLinkValidator.php
-
-		-
 			message: '#^Argument of an invalid type DOMNodeList\<DOMNode\>\|false supplied for foreach, only iterables are supported\.$#'
 			identifier: foreach.nonIterable
 			count: 1
@@ -1363,12 +1111,6 @@ parameters:
 			path: src/lib/RichText/Validator/ValidatorAggregate.php
 
 		-
-			message: '#^Property Ibexa\\FieldTypeRichText\\RichText\\Validator\\ValidatorAggregate\:\:\$validators \(array\<Ibexa\\Contracts\\FieldTypeRichText\\RichText\\ValidatorInterface\>\) does not accept iterable\.$#'
-			identifier: assign.propertyType
-			count: 1
-			path: src/lib/RichText/Validator/ValidatorAggregate.php
-
-		-
 			message: '#^Call to method validate\(\) on an unknown class Ibexa\\FieldTypeRichText\\eZ\\RichText\\Validator\.$#'
 			identifier: class.notFound
 			count: 1
@@ -1378,12 +1120,6 @@ parameters:
 			message: '#^Cannot call method lookupNamespaceURI\(\) on DOMElement\|null\.$#'
 			identifier: method.nonObject
 			count: 2
-			path: src/lib/RichText/Validator/ValidatorDispatcher.php
-
-		-
-			message: '#^Method Ibexa\\FieldTypeRichText\\RichText\\Validator\\ValidatorDispatcher\:\:addValidator\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
 			path: src/lib/RichText/Validator/ValidatorDispatcher.php
 
 		-
@@ -1453,12 +1189,6 @@ parameters:
 			path: src/lib/Validator/Constraints/RichTextValidator.php
 
 		-
-			message: '#^Method Ibexa\\Tests\\Bundle\\FieldTypeRichText\\DependencyInjection\\Compiler\\RichTextHtml5ConverterPassTest\:\:testCollectProviders\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/bundle/DependencyInjection/Compiler/RichTextHtml5ConverterPassTest.php
-
-		-
 			message: '#^Method Ibexa\\Tests\\Bundle\\FieldTypeRichText\\DependencyInjection\\Configuration\\ConfigurationTest\:\:providerForTestProcessingConfiguration\(\) return type has no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
@@ -1513,32 +1243,8 @@ parameters:
 			path: tests/bundle/DependencyInjection/Configuration/Parser/FieldType/RichTextTest.php
 
 		-
-			message: '#^Method Ibexa\\Tests\\Bundle\\FieldTypeRichText\\DependencyInjection\\Configuration\\Parser\\FieldType\\RichTextTest\:\:richTextSettingsProvider\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/bundle/DependencyInjection/Configuration/Parser/FieldType/RichTextTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\Bundle\\FieldTypeRichText\\DependencyInjection\\Configuration\\Parser\\FieldType\\RichTextTest\:\:testDefaultContentSettings\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/bundle/DependencyInjection/Configuration/Parser/FieldType/RichTextTest.php
-
-		-
 			message: '#^Method Ibexa\\Tests\\Bundle\\FieldTypeRichText\\DependencyInjection\\Configuration\\Parser\\FieldType\\RichTextTest\:\:testOnlineEditorInvalidSettingsThrowException\(\) has parameter \$config with no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
-			count: 1
-			path: tests/bundle/DependencyInjection/Configuration/Parser/FieldType/RichTextTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\Bundle\\FieldTypeRichText\\DependencyInjection\\Configuration\\Parser\\FieldType\\RichTextTest\:\:testRichTextCustomTagsInvalidSettings\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/bundle/DependencyInjection/Configuration/Parser/FieldType/RichTextTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\Bundle\\FieldTypeRichText\\DependencyInjection\\Configuration\\Parser\\FieldType\\RichTextTest\:\:testRichTextSettings\(\) has no return type specified\.$#'
-			identifier: missingType.return
 			count: 1
 			path: tests/bundle/DependencyInjection/Configuration/Parser/FieldType/RichTextTest.php
 
@@ -1627,36 +1333,6 @@ parameters:
 			path: tests/integration/Repository/RichTextFieldTypeIntegrationTest.php
 
 		-
-			message: '#^Method Ibexa\\Tests\\Integration\\FieldTypeRichText\\Repository\\RichTextFieldTypeIntegrationTest\:\:__construct\(\) has parameter \$name with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/integration/Repository/RichTextFieldTypeIntegrationTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\Integration\\FieldTypeRichText\\Repository\\RichTextFieldTypeIntegrationTest\:\:assertCopiedFieldDataLoadedCorrectly\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/integration/Repository/RichTextFieldTypeIntegrationTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\Integration\\FieldTypeRichText\\Repository\\RichTextFieldTypeIntegrationTest\:\:assertFieldDataLoadedCorrect\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/integration/Repository/RichTextFieldTypeIntegrationTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\Integration\\FieldTypeRichText\\Repository\\RichTextFieldTypeIntegrationTest\:\:assertUpdatedFieldDataLoadedCorrect\(\) return type has no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: tests/integration/Repository/RichTextFieldTypeIntegrationTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\Integration\\FieldTypeRichText\\Repository\\RichTextFieldTypeIntegrationTest\:\:assertUpdatedFieldDataLoadedCorrect\(\) should return array but return statement is missing\.$#'
-			identifier: return.missing
-			count: 1
-			path: tests/integration/Repository/RichTextFieldTypeIntegrationTest.php
-
-		-
 			message: '#^Method Ibexa\\Tests\\Integration\\FieldTypeRichText\\Repository\\RichTextFieldTypeIntegrationTest\:\:checkSearchEngineSupport\(\) has no return type specified\.$#'
 			identifier: missingType.return
 			count: 1
@@ -1677,18 +1353,6 @@ parameters:
 		-
 			message: '#^Method Ibexa\\Tests\\Integration\\FieldTypeRichText\\Repository\\RichTextFieldTypeIntegrationTest\:\:getSettingsSchema\(\) return type has no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
-			count: 1
-			path: tests/integration/Repository/RichTextFieldTypeIntegrationTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\Integration\\FieldTypeRichText\\Repository\\RichTextFieldTypeIntegrationTest\:\:getValidUpdateFieldData\(\) return type has no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: tests/integration/Repository/RichTextFieldTypeIntegrationTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\Integration\\FieldTypeRichText\\Repository\\RichTextFieldTypeIntegrationTest\:\:getValidUpdateFieldData\(\) should return array but returns Ibexa\\FieldTypeRichText\\FieldType\\RichText\\Value\.$#'
-			identifier: return.type
 			count: 1
 			path: tests/integration/Repository/RichTextFieldTypeIntegrationTest.php
 
@@ -1729,12 +1393,6 @@ parameters:
 			path: tests/integration/Repository/RichTextFieldTypeIntegrationTest.php
 
 		-
-			message: '#^Method Ibexa\\Tests\\Integration\\FieldTypeRichText\\Repository\\RichTextFieldTypeIntegrationTest\:\:providerForTestConvertRemoteObjectIdToObjectId\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/integration/Repository/RichTextFieldTypeIntegrationTest.php
-
-		-
 			message: '#^Method Ibexa\\Tests\\Integration\\FieldTypeRichText\\Repository\\RichTextFieldTypeIntegrationTest\:\:providerForTestCreateContentWithInvalidCustomTag\(\) return type has no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
@@ -1771,24 +1429,6 @@ parameters:
 			path: tests/integration/Repository/RichTextFieldTypeIntegrationTest.php
 
 		-
-			message: '#^Method Ibexa\\Tests\\Integration\\FieldTypeRichText\\Repository\\RichTextFieldTypeIntegrationTest\:\:testCreateContentWithInvalidCustomTag\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/integration/Repository/RichTextFieldTypeIntegrationTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\Integration\\FieldTypeRichText\\Repository\\RichTextFieldTypeIntegrationTest\:\:testCreateContentWithValidCustomTag\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/integration/Repository/RichTextFieldTypeIntegrationTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\Integration\\FieldTypeRichText\\Repository\\RichTextFieldTypeIntegrationTest\:\:testFromHash\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/integration/Repository/RichTextFieldTypeIntegrationTest.php
-
-		-
 			message: '#^Method Ibexa\\Tests\\Integration\\FieldTypeRichText\\Repository\\RichTextFieldTypeIntegrationTest\:\:testFromHash\(\) has parameter \$expectedValue with no type specified\.$#'
 			identifier: missingType.parameter
 			count: 1
@@ -1797,18 +1437,6 @@ parameters:
 		-
 			message: '#^Method Ibexa\\Tests\\Integration\\FieldTypeRichText\\Repository\\RichTextFieldTypeIntegrationTest\:\:testFromHash\(\) has parameter \$hash with no type specified\.$#'
 			identifier: missingType.parameter
-			count: 1
-			path: tests/integration/Repository/RichTextFieldTypeIntegrationTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\Integration\\FieldTypeRichText\\Repository\\RichTextFieldTypeIntegrationTest\:\:testInternalLinkValidatorIgnoresMissingRelationOnNotUpdatedField\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/integration/Repository/RichTextFieldTypeIntegrationTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\Integration\\FieldTypeRichText\\Repository\\RichTextFieldTypeIntegrationTest\:\:testInternalLinkValidatorReturnsErrorOnMissingRelationInUpdatedField\(\) has no return type specified\.$#'
-			identifier: missingType.return
 			count: 1
 			path: tests/integration/Repository/RichTextFieldTypeIntegrationTest.php
 
@@ -1843,38 +1471,8 @@ parameters:
 			path: tests/integration/Repository/SetupFactory/SolrLegacySetupFactory.php
 
 		-
-			message: '#^Method Ibexa\\Contracts\\FieldTypeRichText\\Configuration\\Provider@anonymous/tests/lib/Configuration/AggregateProviderTest\.php\:31\:\:__construct\(\) has parameter \$configuration with no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: tests/lib/Configuration/AggregateProviderTest.php
-
-		-
-			message: '#^Method Ibexa\\Contracts\\FieldTypeRichText\\Configuration\\Provider@anonymous/tests/lib/Configuration/AggregateProviderTest\.php\:31\:\:getConfiguration\(\) return type has no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: tests/lib/Configuration/AggregateProviderTest.php
-
-		-
 			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\Configuration\\AggregateProviderTest\:\:getConfiguration\(\) return type has no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
-			count: 1
-			path: tests/lib/Configuration/AggregateProviderTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\Configuration\\AggregateProviderTest\:\:testGetConfiguration\(\) has parameter \$configuration with no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: tests/lib/Configuration/AggregateProviderTest.php
-
-		-
-			message: '#^Property Ibexa\\Contracts\\FieldTypeRichText\\Configuration\\Provider@anonymous/tests/lib/Configuration/AggregateProviderTest\.php\:31\:\:\$configuration has no type specified\.$#'
-			identifier: missingType.property
-			count: 1
-			path: tests/lib/Configuration/AggregateProviderTest.php
-
-		-
-			message: '#^Property Ibexa\\Contracts\\FieldTypeRichText\\Configuration\\Provider@anonymous/tests/lib/Configuration/AggregateProviderTest\.php\:31\:\:\$name has no type specified\.$#'
-			identifier: missingType.property
 			count: 1
 			path: tests/lib/Configuration/AggregateProviderTest.php
 
@@ -1885,20 +1483,8 @@ parameters:
 			path: tests/lib/Configuration/Provider/AlloyEditorTest.php
 
 		-
-			message: '#^Call to an undefined method Ibexa\\FieldTypeRichText\\Configuration\\UI\\Mapper\\CustomStyle\|PHPUnit\\Framework\\MockObject\\MockObject\:\:expects\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: tests/lib/Configuration/Provider/BaseCustomTemplateProviderTestCase.php
-
-		-
 			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\Configuration\\Provider\\BaseCustomTemplateProviderTestCase\:\:getExpectedCustomTemplatesConfiguration\(\) return type has no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
-			count: 1
-			path: tests/lib/Configuration/Provider/BaseCustomTemplateProviderTestCase.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\Configuration\\Provider\\BaseCustomTemplateProviderTestCase\:\:testGetConfiguration\(\) has no return type specified\.$#'
-			identifier: missingType.return
 			count: 1
 			path: tests/lib/Configuration/Provider/BaseCustomTemplateProviderTestCase.php
 
@@ -1921,32 +1507,14 @@ parameters:
 			path: tests/lib/Configuration/Provider/CustomStyleProviderTest.php
 
 		-
-			message: '#^Parameter \#2 \$customStyleConfigurationMapper of class Ibexa\\FieldTypeRichText\\Configuration\\Provider\\CustomStyle constructor expects Ibexa\\FieldTypeRichText\\Configuration\\UI\\Mapper\\CustomTemplateConfigMapper, Ibexa\\FieldTypeRichText\\Configuration\\UI\\Mapper\\CustomStyle\|PHPUnit\\Framework\\MockObject\\MockObject given\.$#'
-			identifier: argument.type
-			count: 1
-			path: tests/lib/Configuration/Provider/CustomStyleProviderTest.php
-
-		-
 			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\Configuration\\Provider\\CustomTagProviderTest\:\:getExpectedCustomTemplatesConfiguration\(\) return type has no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
 			path: tests/lib/Configuration/Provider/CustomTagProviderTest.php
 
 		-
-			message: '#^Parameter \#2 \$customTagConfigurationMapper of class Ibexa\\FieldTypeRichText\\Configuration\\Provider\\CustomTag constructor expects Ibexa\\FieldTypeRichText\\Configuration\\UI\\Mapper\\CustomTemplateConfigMapper, Ibexa\\FieldTypeRichText\\Configuration\\UI\\Mapper\\CustomStyle\|PHPUnit\\Framework\\MockObject\\MockObject given\.$#'
-			identifier: argument.type
-			count: 1
-			path: tests/lib/Configuration/Provider/CustomTagProviderTest.php
-
-		-
 			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\Configuration\\UI\\Config\\Mapper\\CustomTagTest\:\:providerForTestMapConfig\(\) return type has no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
-			count: 1
-			path: tests/lib/Configuration/UI/Config/Mapper/CustomTagTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\Configuration\\UI\\Config\\Mapper\\CustomTagTest\:\:testMapConfig\(\) has no return type specified\.$#'
-			identifier: missingType.return
 			count: 1
 			path: tests/lib/Configuration/UI/Config/Mapper/CustomTagTest.php
 
@@ -1967,12 +1535,6 @@ parameters:
 			identifier: missingType.iterableValue
 			count: 1
 			path: tests/lib/Configuration/UI/Config/Mapper/CustomTagTest.php
-
-		-
-			message: '#^Call to an undefined method Symfony\\Contracts\\Translation\\TranslatorInterface\:\:expects\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: tests/lib/Configuration/UI/Config/Mapper/OnlineEditorTest.php
 
 		-
 			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\Configuration\\UI\\Config\\Mapper\\OnlineEditorTest\:\:getSemanticConfigurationForMapCssClassesConfiguration\(\) return type has no value type specified in iterable type array\.$#'
@@ -2011,18 +1573,6 @@ parameters:
 			path: tests/lib/Configuration/UI/Config/Mapper/OnlineEditorTest.php
 
 		-
-			message: '#^PHPDoc tag @var with type Symfony\\Contracts\\Translation\\TranslatorInterface is not subtype of native type PHPUnit\\Framework\\MockObject\\MockObject\.$#'
-			identifier: varTag.nativeType
-			count: 1
-			path: tests/lib/Configuration/UI/Config/Mapper/OnlineEditorTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\FieldType\\RichText\\Gateway\\DoctrineStorageTest\:\:testGetContentIds\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/FieldType/RichText/Gateway/DoctrineStorageTest.php
-
-		-
 			message: '#^Property Ibexa\\Tests\\FieldTypeRichText\\FieldType\\RichText\\Gateway\\DoctrineStorageTest\:\:\$storageGateway \(Ibexa\\FieldTypeRichText\\FieldType\\RichText\\RichTextStorage\\Gateway\\DoctrineStorage\) in isset\(\) is not nullable\.$#'
 			identifier: isset.property
 			count: 1
@@ -2031,132 +1581,6 @@ parameters:
 		-
 			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\FieldType\\RichText\\RichTextStorageTest\:\:groupLinksData\(\) return type has no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
-			count: 1
-			path: tests/lib/FieldType/RichText/RichTextStorageTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\FieldType\\RichText\\RichTextStorageTest\:\:providerForTestGetFieldData\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/FieldType/RichText/RichTextStorageTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\FieldType\\RichText\\RichTextStorageTest\:\:providerForTestStoreFieldData\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/FieldType/RichText/RichTextStorageTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\FieldType\\RichText\\RichTextStorageTest\:\:providerForTestStoreFieldDataThrowsNotFoundException\(\) return type has no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: tests/lib/FieldType/RichText/RichTextStorageTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\FieldType\\RichText\\RichTextStorageTest\:\:testGetFieldData\(\) has parameter \$linkIds with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/FieldType/RichText/RichTextStorageTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\FieldType\\RichText\\RichTextStorageTest\:\:testGetFieldData\(\) has parameter \$linkUrls with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/FieldType/RichText/RichTextStorageTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\FieldType\\RichText\\RichTextStorageTest\:\:testGetFieldData\(\) has parameter \$updatedXmlString with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/FieldType/RichText/RichTextStorageTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\FieldType\\RichText\\RichTextStorageTest\:\:testGetFieldData\(\) has parameter \$xmlString with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/FieldType/RichText/RichTextStorageTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\FieldType\\RichText\\RichTextStorageTest\:\:testStoreFieldData\(\) has parameter \$contentIds with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/FieldType/RichText/RichTextStorageTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\FieldType\\RichText\\RichTextStorageTest\:\:testStoreFieldData\(\) has parameter \$insertLinks with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/FieldType/RichText/RichTextStorageTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\FieldType\\RichText\\RichTextStorageTest\:\:testStoreFieldData\(\) has parameter \$isUpdated with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/FieldType/RichText/RichTextStorageTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\FieldType\\RichText\\RichTextStorageTest\:\:testStoreFieldData\(\) has parameter \$linkIds with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/FieldType/RichText/RichTextStorageTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\FieldType\\RichText\\RichTextStorageTest\:\:testStoreFieldData\(\) has parameter \$linkUrls with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/FieldType/RichText/RichTextStorageTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\FieldType\\RichText\\RichTextStorageTest\:\:testStoreFieldData\(\) has parameter \$remoteIds with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/FieldType/RichText/RichTextStorageTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\FieldType\\RichText\\RichTextStorageTest\:\:testStoreFieldData\(\) has parameter \$updatedXmlString with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/FieldType/RichText/RichTextStorageTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\FieldType\\RichText\\RichTextStorageTest\:\:testStoreFieldData\(\) has parameter \$xmlString with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/FieldType/RichText/RichTextStorageTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\FieldType\\RichText\\RichTextStorageTest\:\:testStoreFieldDataThrowsNotFoundException\(\) has parameter \$contentIds with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/FieldType/RichText/RichTextStorageTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\FieldType\\RichText\\RichTextStorageTest\:\:testStoreFieldDataThrowsNotFoundException\(\) has parameter \$insertLinks with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/FieldType/RichText/RichTextStorageTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\FieldType\\RichText\\RichTextStorageTest\:\:testStoreFieldDataThrowsNotFoundException\(\) has parameter \$linkIds with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/FieldType/RichText/RichTextStorageTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\FieldType\\RichText\\RichTextStorageTest\:\:testStoreFieldDataThrowsNotFoundException\(\) has parameter \$linkUrls with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/FieldType/RichText/RichTextStorageTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\FieldType\\RichText\\RichTextStorageTest\:\:testStoreFieldDataThrowsNotFoundException\(\) has parameter \$remoteIds with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/FieldType/RichText/RichTextStorageTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\FieldType\\RichText\\RichTextStorageTest\:\:testStoreFieldDataThrowsNotFoundException\(\) has parameter \$xmlString with no type specified\.$#'
-			identifier: missingType.parameter
 			count: 1
 			path: tests/lib/FieldType/RichText/RichTextStorageTest.php
 
@@ -2173,140 +1597,14 @@ parameters:
 			path: tests/lib/FieldType/RichText/RichTextStorageTest.php
 
 		-
-			message: '#^Property Ibexa\\Tests\\FieldTypeRichText\\FieldType\\RichText\\RichTextStorageTest\:\:\$gatewayMock \(Ibexa\\FieldTypeRichText\\FieldType\\RichText\\RichTextStorage\\Gateway&PHPUnit\\Framework\\MockObject\\MockObject\) in isset\(\) is not nullable\.$#'
-			identifier: isset.property
-			count: 1
-			path: tests/lib/FieldType/RichText/RichTextStorageTest.php
-
-		-
-			message: '#^Property Ibexa\\Tests\\FieldTypeRichText\\FieldType\\RichText\\RichTextStorageTest\:\:\$loggerMock \(PHPUnit\\Framework\\MockObject\\MockObject&Psr\\Log\\LoggerInterface\) in isset\(\) is not nullable\.$#'
-			identifier: isset.property
-			count: 1
-			path: tests/lib/FieldType/RichText/RichTextStorageTest.php
-
-		-
 			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\FieldType\\RichText\\SearchFieldTest\:\:getDataForTestGetIndexData\(\) return type has no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
 			path: tests/lib/FieldType/RichText/SearchFieldTest.php
 
 		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\FieldType\\RichTextTest\:\:provideDataForGetName\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/FieldType/RichTextTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\FieldType\\RichTextTest\:\:provideFieldTypeIdentifier\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/FieldType/RichTextTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\FieldType\\RichTextTest\:\:providerForTestAcceptValueInvalidFormat\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/FieldType/RichTextTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\FieldType\\RichTextTest\:\:providerForTestAcceptValueValidFormat\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/FieldType/RichTextTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\FieldType\\RichTextTest\:\:providerForTestGetName\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/FieldType/RichTextTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\FieldType\\RichTextTest\:\:providerForTestValidate\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/FieldType/RichTextTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\FieldType\\RichTextTest\:\:testAcceptValueInvalidFormat\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/FieldType/RichTextTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\FieldType\\RichTextTest\:\:testAcceptValueInvalidFormat\(\) has parameter \$input with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/FieldType/RichTextTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\FieldType\\RichTextTest\:\:testAcceptValueInvalidType\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/FieldType/RichTextTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\FieldType\\RichTextTest\:\:testAcceptValueValidFormat\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/FieldType/RichTextTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\FieldType\\RichTextTest\:\:testAcceptValueValidFormat\(\) has parameter \$input with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/FieldType/RichTextTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\FieldType\\RichTextTest\:\:testGetName\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/FieldType/RichTextTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\FieldType\\RichTextTest\:\:testGetName\(\) has parameter \$expectedName with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/FieldType/RichTextTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\FieldType\\RichTextTest\:\:testGetName\(\) has parameter \$xmlString with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/FieldType/RichTextTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\FieldType\\RichTextTest\:\:testGetRelations\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/FieldType/RichTextTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\FieldType\\RichTextTest\:\:testSettingsSchema\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/FieldType/RichTextTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\FieldType\\RichTextTest\:\:testToPersistenceValue\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/FieldType/RichTextTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\FieldType\\RichTextTest\:\:testValidate\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/FieldType/RichTextTest.php
-
-		-
 			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\FieldType\\RichTextTest\:\:testValidate\(\) has parameter \$expectedValidationErrors with no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
-			count: 1
-			path: tests/lib/FieldType/RichTextTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\FieldType\\RichTextTest\:\:testValidatorConfigurationSchema\(\) has no return type specified\.$#'
-			identifier: missingType.return
 			count: 1
 			path: tests/lib/FieldType/RichTextTest.php
 
@@ -2335,76 +1633,10 @@ parameters:
 			path: tests/lib/FieldType/RichTextTest.php
 
 		-
-			message: '#^Call to method expects\(\) on an unknown class Ibexa\\FieldTypeRichText\\RichText\\Converter\.$#'
-			identifier: class.notFound
-			count: 1
-			path: tests/lib/Form/DataTransformer/RichTextTransformerTest.php
-
-		-
-			message: '#^Call to method expects\(\) on an unknown class Ibexa\\FieldTypeRichText\\RichText\\InputHandlerInterface\.$#'
-			identifier: class.notFound
-			count: 2
-			path: tests/lib/Form/DataTransformer/RichTextTransformerTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\Form\\DataTransformer\\RichTextTransformerTest\:\:dataProviderForReverseTransformTransformationFailedException\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/Form/DataTransformer/RichTextTransformerTest.php
-
-		-
 			message: '#^Parameter \#2 \$actualXml of method PHPUnit\\Framework\\Assert\:\:assertXmlStringEqualsXmlString\(\) expects DOMDocument\|string, string\|false given\.$#'
 			identifier: argument.type
 			count: 1
 			path: tests/lib/Form/DataTransformer/RichTextTransformerTest.php
-
-		-
-			message: '#^Property Ibexa\\Tests\\FieldTypeRichText\\Form\\DataTransformer\\RichTextTransformerTest\:\:\$docbook2xhtml5editConverter \(Ibexa\\FieldTypeRichText\\RichText\\Converter&PHPUnit\\Framework\\MockObject\\MockObject\) does not accept Ibexa\\Contracts\\FieldTypeRichText\\RichText\\Converter&PHPUnit\\Framework\\MockObject\\MockObject\.$#'
-			identifier: assign.propertyType
-			count: 1
-			path: tests/lib/Form/DataTransformer/RichTextTransformerTest.php
-
-		-
-			message: '#^Property Ibexa\\Tests\\FieldTypeRichText\\Form\\DataTransformer\\RichTextTransformerTest\:\:\$docbook2xhtml5editConverter has unknown class Ibexa\\FieldTypeRichText\\RichText\\Converter as its type\.$#'
-			identifier: class.notFound
-			count: 1
-			path: tests/lib/Form/DataTransformer/RichTextTransformerTest.php
-
-		-
-			message: '#^Property Ibexa\\Tests\\FieldTypeRichText\\Form\\DataTransformer\\RichTextTransformerTest\:\:\$inputHandler \(Ibexa\\FieldTypeRichText\\RichText\\InputHandlerInterface&PHPUnit\\Framework\\MockObject\\MockObject\) does not accept Ibexa\\Contracts\\FieldTypeRichText\\RichText\\InputHandlerInterface&PHPUnit\\Framework\\MockObject\\MockObject\.$#'
-			identifier: assign.propertyType
-			count: 1
-			path: tests/lib/Form/DataTransformer/RichTextTransformerTest.php
-
-		-
-			message: '#^Property Ibexa\\Tests\\FieldTypeRichText\\Form\\DataTransformer\\RichTextTransformerTest\:\:\$inputHandler has unknown class Ibexa\\FieldTypeRichText\\RichText\\InputHandlerInterface as its type\.$#'
-			identifier: class.notFound
-			count: 1
-			path: tests/lib/Form/DataTransformer/RichTextTransformerTest.php
-
-		-
-			message: '#^Call to method expects\(\) on an unknown class Ibexa\\FieldTypeRichText\\RichText\\Converter\.$#'
-			identifier: class.notFound
-			count: 1
-			path: tests/lib/REST/FieldTypeProcessor/RichTextProcessorTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\REST\\FieldTypeProcessor\\RichTextProcessorTest\:\:testPostProcessValueHash\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/REST/FieldTypeProcessor/RichTextProcessorTest.php
-
-		-
-			message: '#^Property Ibexa\\Tests\\FieldTypeRichText\\REST\\FieldTypeProcessor\\RichTextProcessorTest\:\:\$converter \(Ibexa\\FieldTypeRichText\\RichText\\Converter&PHPUnit\\Framework\\MockObject\\MockObject\) does not accept Ibexa\\Contracts\\FieldTypeRichText\\RichText\\Converter&PHPUnit\\Framework\\MockObject\\MockObject\.$#'
-			identifier: assign.propertyType
-			count: 1
-			path: tests/lib/REST/FieldTypeProcessor/RichTextProcessorTest.php
-
-		-
-			message: '#^Property Ibexa\\Tests\\FieldTypeRichText\\REST\\FieldTypeProcessor\\RichTextProcessorTest\:\:\$converter has unknown class Ibexa\\FieldTypeRichText\\RichText\\Converter as its type\.$#'
-			identifier: class.notFound
-			count: 1
-			path: tests/lib/REST/FieldTypeProcessor/RichTextProcessorTest.php
 
 		-
 			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Converter\\AggregateTest\:\:providerConvertWithLinkInCustomTag\(\) return type has no value type specified in iterable type array\.$#'
@@ -2443,168 +1675,6 @@ parameters:
 			path: tests/lib/RichText/Converter/LinkTest.php
 
 		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Converter\\LinkTest\:\:testConvertBadContentLink\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/RichText/Converter/LinkTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Converter\\LinkTest\:\:testConvertBadContentLink\(\) has parameter \$contentId with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/RichText/Converter/LinkTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Converter\\LinkTest\:\:testConvertBadContentLink\(\) has parameter \$exception with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/RichText/Converter/LinkTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Converter\\LinkTest\:\:testConvertBadContentLink\(\) has parameter \$input with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/RichText/Converter/LinkTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Converter\\LinkTest\:\:testConvertBadContentLink\(\) has parameter \$logMessage with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/RichText/Converter/LinkTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Converter\\LinkTest\:\:testConvertBadContentLink\(\) has parameter \$logType with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/RichText/Converter/LinkTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Converter\\LinkTest\:\:testConvertBadContentLink\(\) has parameter \$output with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/RichText/Converter/LinkTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Converter\\LinkTest\:\:testConvertBadLocationLink\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/RichText/Converter/LinkTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Converter\\LinkTest\:\:testConvertBadLocationLink\(\) has parameter \$exception with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/RichText/Converter/LinkTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Converter\\LinkTest\:\:testConvertBadLocationLink\(\) has parameter \$input with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/RichText/Converter/LinkTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Converter\\LinkTest\:\:testConvertBadLocationLink\(\) has parameter \$locationId with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/RichText/Converter/LinkTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Converter\\LinkTest\:\:testConvertBadLocationLink\(\) has parameter \$logMessage with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/RichText/Converter/LinkTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Converter\\LinkTest\:\:testConvertBadLocationLink\(\) has parameter \$logType with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/RichText/Converter/LinkTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Converter\\LinkTest\:\:testConvertBadLocationLink\(\) has parameter \$output with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/RichText/Converter/LinkTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Converter\\LinkTest\:\:testConvertContentLink\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/RichText/Converter/LinkTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Converter\\LinkTest\:\:testConvertContentLink\(\) has parameter \$contentId with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/RichText/Converter/LinkTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Converter\\LinkTest\:\:testConvertContentLink\(\) has parameter \$input with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/RichText/Converter/LinkTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Converter\\LinkTest\:\:testConvertContentLink\(\) has parameter \$output with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/RichText/Converter/LinkTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Converter\\LinkTest\:\:testConvertContentLink\(\) has parameter \$urlResolved with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/RichText/Converter/LinkTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Converter\\LinkTest\:\:testConvertLocationLink\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/RichText/Converter/LinkTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Converter\\LinkTest\:\:testConvertLocationLink\(\) has parameter \$input with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/RichText/Converter/LinkTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Converter\\LinkTest\:\:testConvertLocationLink\(\) has parameter \$locationId with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/RichText/Converter/LinkTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Converter\\LinkTest\:\:testConvertLocationLink\(\) has parameter \$output with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/RichText/Converter/LinkTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Converter\\LinkTest\:\:testConvertLocationLink\(\) has parameter \$urlResolved with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/RichText/Converter/LinkTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Converter\\LinkTest\:\:testLink\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/RichText/Converter/LinkTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Converter\\LinkTest\:\:testLink\(\) has parameter \$input with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/RichText/Converter/LinkTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Converter\\LinkTest\:\:testLink\(\) has parameter \$output with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/RichText/Converter/LinkTest.php
-
-		-
 			message: '#^Parameter \#1 \$locationService of class Ibexa\\FieldTypeRichText\\RichText\\Converter\\Link constructor expects Ibexa\\Contracts\\Core\\Repository\\LocationService, PHPUnit\\Framework\\MockObject\\MockObject given\.$#'
 			identifier: argument.type
 			count: 5
@@ -2632,12 +1702,6 @@ parameters:
 			message: '#^Call to method expects\(\) on an unknown class Ibexa\\FieldTypeRichText\\RichText\\RendererInterface\.$#'
 			identifier: class.notFound
 			count: 3
-			path: tests/lib/RichText/Converter/Render/EmbedTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Converter\\Render\\EmbedTest\:\:getConverter\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
 			path: tests/lib/RichText/Converter/Render/EmbedTest.php
 
 		-
@@ -2731,12 +1795,6 @@ parameters:
 			path: tests/lib/RichText/Converter/Render/TemplateTest.php
 
 		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Converter\\Render\\TemplateTest\:\:getConverter\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/RichText/Converter/Render/TemplateTest.php
-
-		-
 			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Converter\\Render\\TemplateTest\:\:getConverterMock\(\) has invalid return type Ibexa\\FieldTypeRichText\\RichText\\Converter\.$#'
 			identifier: class.notFound
 			count: 1
@@ -2769,12 +1827,6 @@ parameters:
 		-
 			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Converter\\Render\\TemplateTest\:\:provideConvertRenderValues\(\) return type has no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
-			count: 1
-			path: tests/lib/RichText/Converter/Render/TemplateTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Converter\\Render\\TemplateTest\:\:providerForTestConvert\(\) has no return type specified\.$#'
-			identifier: missingType.return
 			count: 1
 			path: tests/lib/RichText/Converter/Render/TemplateTest.php
 
@@ -2935,12 +1987,6 @@ parameters:
 			path: tests/lib/RichText/Converter/Xslt/BaseTest.php
 
 		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Converter\\Xslt\\BaseTest\:\:testConvert\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/RichText/Converter/Xslt/BaseTest.php
-
-		-
 			message: '#^Parameter \#1 \$source of method DOMDocument\:\:loadXML\(\) expects string, string\|false given\.$#'
 			identifier: argument.type
 			count: 1
@@ -3079,52 +2125,10 @@ parameters:
 			path: tests/lib/RichText/Converter/Xslt/Xhtml5ToDocbookTest.php
 
 		-
-			message: '#^Call to method expects\(\) on an unknown class Ibexa\\FieldTypeRichText\\RichText\\ValidatorInterface\.$#'
-			identifier: class.notFound
-			count: 3
-			path: tests/lib/RichText/InputHandlerTest.php
-
-		-
-			message: '#^Property Ibexa\\Tests\\FieldTypeRichText\\RichText\\InputHandlerTest\:\:\$docbookValidator \(Ibexa\\FieldTypeRichText\\RichText\\ValidatorInterface&PHPUnit\\Framework\\MockObject\\MockObject\) does not accept Ibexa\\Contracts\\FieldTypeRichText\\RichText\\ValidatorInterface&PHPUnit\\Framework\\MockObject\\MockObject\.$#'
-			identifier: assign.propertyType
+			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''DOMDocument'' and DOMDocument will always evaluate to true\.$#'
+			identifier: staticMethod.alreadyNarrowedType
 			count: 1
-			path: tests/lib/RichText/InputHandlerTest.php
-
-		-
-			message: '#^Property Ibexa\\Tests\\FieldTypeRichText\\RichText\\InputHandlerTest\:\:\$docbookValidator has unknown class Ibexa\\FieldTypeRichText\\RichText\\ValidatorInterface as its type\.$#'
-			identifier: class.notFound
-			count: 1
-			path: tests/lib/RichText/InputHandlerTest.php
-
-		-
-			message: '#^Property Ibexa\\Tests\\FieldTypeRichText\\RichText\\InputHandlerTest\:\:\$domDocumentFactory \(Ibexa\\FieldTypeRichText\\RichText\\DOMDocumentFactory\|PHPUnit\\Framework\\MockObject\\MockObject\) is never assigned PHPUnit\\Framework\\MockObject\\MockObject so it can be removed from the property type\.$#'
-			identifier: property.unusedType
-			count: 1
-			path: tests/lib/RichText/InputHandlerTest.php
-
-		-
-			message: '#^Property Ibexa\\Tests\\FieldTypeRichText\\RichText\\InputHandlerTest\:\:\$inputHandler \(Ibexa\\FieldTypeRichText\\RichText\\InputHandler&PHPUnit\\Framework\\MockObject\\MockObject\) does not accept Ibexa\\FieldTypeRichText\\RichText\\InputHandler\.$#'
-			identifier: assign.propertyType
-			count: 1
-			path: tests/lib/RichText/InputHandlerTest.php
-
-		-
-			message: '#^Property Ibexa\\Tests\\FieldTypeRichText\\RichText\\InputHandlerTest\:\:\$schemaValidator \(Ibexa\\FieldTypeRichText\\RichText\\ValidatorInterface&PHPUnit\\Framework\\MockObject\\MockObject\) does not accept Ibexa\\Contracts\\FieldTypeRichText\\RichText\\ValidatorInterface&PHPUnit\\Framework\\MockObject\\MockObject\.$#'
-			identifier: assign.propertyType
-			count: 1
-			path: tests/lib/RichText/InputHandlerTest.php
-
-		-
-			message: '#^Property Ibexa\\Tests\\FieldTypeRichText\\RichText\\InputHandlerTest\:\:\$schemaValidator has unknown class Ibexa\\FieldTypeRichText\\RichText\\ValidatorInterface as its type\.$#'
-			identifier: class.notFound
-			count: 1
-			path: tests/lib/RichText/InputHandlerTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Normalizer\\DocumentTypeDefinitionTest\:\:getNormalizer\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/RichText/Normalizer/DocumentTypeDefinitionTest.php
+			path: tests/lib/RichText/DOMDocumentFactoryTest.php
 
 		-
 			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Normalizer\\DocumentTypeDefinitionTest\:\:getNormalizer\(\) has parameter \$documentElement with no type specified\.$#'
@@ -3145,42 +2149,6 @@ parameters:
 			path: tests/lib/RichText/Normalizer/DocumentTypeDefinitionTest.php
 
 		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Normalizer\\DocumentTypeDefinitionTest\:\:providerForTestNormalize\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/RichText/Normalizer/DocumentTypeDefinitionTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Normalizer\\DocumentTypeDefinitionTest\:\:providerForTestRefuse\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/RichText/Normalizer/DocumentTypeDefinitionTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Normalizer\\DocumentTypeDefinitionTest\:\:testAccept\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/RichText/Normalizer/DocumentTypeDefinitionTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Normalizer\\DocumentTypeDefinitionTest\:\:testAcceptNoXmlDeclaration\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/RichText/Normalizer/DocumentTypeDefinitionTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Normalizer\\DocumentTypeDefinitionTest\:\:testNormalize\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/RichText/Normalizer/DocumentTypeDefinitionTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Normalizer\\DocumentTypeDefinitionTest\:\:testRefuse\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/RichText/Normalizer/DocumentTypeDefinitionTest.php
-
-		-
 			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\RelationProcessorTest\:\:dateProviderForGetRelations\(\) return type has no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
@@ -3191,12 +2159,6 @@ parameters:
 			identifier: missingType.iterableValue
 			count: 1
 			path: tests/lib/RichText/RelationProcessorTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\RendererTest\:\:getContentMock\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/RichText/RendererTest.php
 
 		-
 			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\RendererTest\:\:getContentMock\(\) has parameter \$mainLocationId with no type specified\.$#'
@@ -3211,80 +2173,8 @@ parameters:
 			path: tests/lib/RichText/RendererTest.php
 
 		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\RendererTest\:\:providerForTestRenderContentEmbedNotFound\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/RichText/RendererTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\RendererTest\:\:providerForTestRenderContentWithTemplate\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/RichText/RendererTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\RendererTest\:\:providerForTestRenderLocationEmbedNotFound\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/RichText/RendererTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\RendererTest\:\:providerForTestRenderLocationWithTemplate\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/RichText/RendererTest.php
-
-		-
 			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\RendererTest\:\:providerForTestRenderTagWithTemplate\(\) return type has no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
-			count: 1
-			path: tests/lib/RichText/RendererTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\RendererTest\:\:testRenderContentEmbed\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/RichText/RendererTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\RendererTest\:\:testRenderContentEmbedAccessDenied\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/RichText/RendererTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\RendererTest\:\:testRenderContentEmbedHidden\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/RichText/RendererTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\RendererTest\:\:testRenderContentEmbedNoTemplateConfigured\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/RichText/RendererTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\RendererTest\:\:testRenderContentEmbedNoTemplateFound\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/RichText/RendererTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\RendererTest\:\:testRenderContentEmbedNotFound\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/RichText/RendererTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\RendererTest\:\:testRenderContentEmbedThrowsException\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/RichText/RendererTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\RendererTest\:\:testRenderContentEmbedTrashed\(\) has no return type specified\.$#'
-			identifier: missingType.return
 			count: 1
 			path: tests/lib/RichText/RendererTest.php
 
@@ -3295,86 +2185,8 @@ parameters:
 			path: tests/lib/RichText/RendererTest.php
 
 		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\RendererTest\:\:testRenderContentWithTemplate\(\) has parameter \$deniedException with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/RichText/RendererTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\RendererTest\:\:testRenderContentWithTemplate\(\) has parameter \$isInline with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/RichText/RendererTest.php
-
-		-
 			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\RendererTest\:\:testRenderContentWithTemplate\(\) has parameter \$loggerParams with no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
-			count: 1
-			path: tests/lib/RichText/RendererTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\RendererTest\:\:testRenderContentWithTemplate\(\) has parameter \$renderResult with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/RichText/RendererTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\RendererTest\:\:testRenderContentWithTemplate\(\) has parameter \$renderTemplate with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/RichText/RendererTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\RendererTest\:\:testRenderContentWithTemplate\(\) has parameter \$templateEngineTemplate with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/RichText/RendererTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\RendererTest\:\:testRenderLocationEmbed\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/RichText/RendererTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\RendererTest\:\:testRenderLocationEmbedAccessDenied\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/RichText/RendererTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\RendererTest\:\:testRenderLocationEmbedInvisible\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/RichText/RendererTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\RendererTest\:\:testRenderLocationEmbedNoTemplateConfigured\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/RichText/RendererTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\RendererTest\:\:testRenderLocationEmbedNoTemplateFound\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/RichText/RendererTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\RendererTest\:\:testRenderLocationEmbedNotFound\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/RichText/RendererTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\RendererTest\:\:testRenderLocationEmbedThrowsException\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/RichText/RendererTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\RendererTest\:\:testRenderLocationWithTemplate\(\) has no return type specified\.$#'
-			identifier: missingType.return
 			count: 1
 			path: tests/lib/RichText/RendererTest.php
 
@@ -3385,56 +2197,8 @@ parameters:
 			path: tests/lib/RichText/RendererTest.php
 
 		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\RendererTest\:\:testRenderLocationWithTemplate\(\) has parameter \$deniedException with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/RichText/RendererTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\RendererTest\:\:testRenderLocationWithTemplate\(\) has parameter \$isInline with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/RichText/RendererTest.php
-
-		-
 			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\RendererTest\:\:testRenderLocationWithTemplate\(\) has parameter \$loggerParams with no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
-			count: 1
-			path: tests/lib/RichText/RendererTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\RendererTest\:\:testRenderLocationWithTemplate\(\) has parameter \$renderResult with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/RichText/RendererTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\RendererTest\:\:testRenderLocationWithTemplate\(\) has parameter \$renderTemplate with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/RichText/RendererTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\RendererTest\:\:testRenderLocationWithTemplate\(\) has parameter \$templateEngineTemplate with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/RichText/RendererTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\RendererTest\:\:testRenderTag\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/RichText/RendererTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\RendererTest\:\:testRenderTagNoTemplateConfigured\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/RichText/RendererTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\RendererTest\:\:testRenderTagNoTemplateFound\(\) has no return type specified\.$#'
-			identifier: missingType.return
 			count: 1
 			path: tests/lib/RichText/RendererTest.php
 
@@ -3445,38 +2209,8 @@ parameters:
 			path: tests/lib/RichText/RendererTest.php
 
 		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\RendererTest\:\:testRenderTagWithTemplate\(\) has parameter \$isInline with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/RichText/RendererTest.php
-
-		-
 			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\RendererTest\:\:testRenderTagWithTemplate\(\) has parameter \$loggerParams with no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
-			count: 1
-			path: tests/lib/RichText/RendererTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\RendererTest\:\:testRenderTagWithTemplate\(\) has parameter \$renderResult with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/RichText/RendererTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\RendererTest\:\:testRenderTagWithTemplate\(\) has parameter \$renderTemplate with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/RichText/RendererTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\RendererTest\:\:testRenderTagWithTemplate\(\) has parameter \$tagName with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/RichText/RendererTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\RendererTest\:\:testRenderTagWithTemplate\(\) has parameter \$templateEngineTemplate with no type specified\.$#'
-			identifier: missingType.parameter
 			count: 1
 			path: tests/lib/RichText/RendererTest.php
 
@@ -3499,104 +2233,14 @@ parameters:
 			path: tests/lib/RichText/Validator/CustomTagsValidatorTest.php
 
 		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Validator\\CustomTagsValidatorTest\:\:testValidateDocument\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/RichText/Validator/CustomTagsValidatorTest.php
-
-		-
 			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Validator\\CustomTagsValidatorTest\:\:testValidateDocument\(\) has parameter \$expectedErrors with no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
 			path: tests/lib/RichText/Validator/CustomTagsValidatorTest.php
 
 		-
-			message: '#^Call to method validateDocument\(\) on an unknown class Ibexa\\FieldTypeRichText\\RichText\\ValidatorInterface\.$#'
-			identifier: class.notFound
-			count: 1
-			path: tests/lib/RichText/Validator/DocbookTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Validator\\DocbookTest\:\:getConversionValidator\(\) has invalid return type Ibexa\\FieldTypeRichText\\RichText\\ValidatorInterface\.$#'
-			identifier: class.notFound
-			count: 1
-			path: tests/lib/RichText/Validator/DocbookTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Validator\\DocbookTest\:\:providerForTestValidate\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/RichText/Validator/DocbookTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Validator\\DocbookTest\:\:testValidate\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/RichText/Validator/DocbookTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Validator\\DocbookTest\:\:testValidate\(\) has parameter \$expectedErrors with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/RichText/Validator/DocbookTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Validator\\DocbookTest\:\:testValidate\(\) has parameter \$input with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/RichText/Validator/DocbookTest.php
-
-		-
-			message: '#^Property Ibexa\\Tests\\FieldTypeRichText\\RichText\\Validator\\DocbookTest\:\:\$validator \(Ibexa\\FieldTypeRichText\\RichText\\ValidatorInterface\) does not accept Ibexa\\FieldTypeRichText\\RichText\\Validator\\Validator\.$#'
-			identifier: assign.propertyType
-			count: 1
-			path: tests/lib/RichText/Validator/DocbookTest.php
-
-		-
-			message: '#^Property Ibexa\\Tests\\FieldTypeRichText\\RichText\\Validator\\DocbookTest\:\:\$validator has unknown class Ibexa\\FieldTypeRichText\\RichText\\ValidatorInterface as its type\.$#'
-			identifier: class.notFound
-			count: 1
-			path: tests/lib/RichText/Validator/DocbookTest.php
-
-		-
-			message: '#^Call to method expects\(\) on an unknown class Ibexa\\FieldTypeRichText\\FieldType\\RichText\\InternalLinkValidator\.$#'
-			identifier: class.notFound
-			count: 7
-			path: tests/lib/RichText/Validator/InternalLinkValidatorTest.php
-
-		-
-			message: '#^Call to method validate\(\) on an unknown class Ibexa\\FieldTypeRichText\\FieldType\\RichText\\InternalLinkValidator\.$#'
-			identifier: class.notFound
-			count: 7
-			path: tests/lib/RichText/Validator/InternalLinkValidatorTest.php
-
-		-
-			message: '#^Call to method validateDocument\(\) on an unknown class Ibexa\\FieldTypeRichText\\FieldType\\RichText\\InternalLinkValidator\.$#'
-			identifier: class.notFound
-			count: 7
-			path: tests/lib/RichText/Validator/InternalLinkValidatorTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Validator\\InternalLinkValidatorTest\:\:assertContainsEzContentInvalidLinkError\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/RichText/Validator/InternalLinkValidatorTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Validator\\InternalLinkValidatorTest\:\:assertContainsEzContentInvalidLinkError\(\) has parameter \$contentId with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/RichText/Validator/InternalLinkValidatorTest.php
-
-		-
 			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Validator\\InternalLinkValidatorTest\:\:assertContainsEzContentInvalidLinkError\(\) has parameter \$errors with no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
-			count: 1
-			path: tests/lib/RichText/Validator/InternalLinkValidatorTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Validator\\InternalLinkValidatorTest\:\:assertContainsEzLocationInvalidLinkError\(\) has no return type specified\.$#'
-			identifier: missingType.return
 			count: 1
 			path: tests/lib/RichText/Validator/InternalLinkValidatorTest.php
 
@@ -3607,152 +2251,14 @@ parameters:
 			path: tests/lib/RichText/Validator/InternalLinkValidatorTest.php
 
 		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Validator\\InternalLinkValidatorTest\:\:assertContainsEzLocationInvalidLinkError\(\) has parameter \$locationId with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/RichText/Validator/InternalLinkValidatorTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Validator\\InternalLinkValidatorTest\:\:assertContainsEzRemoteInvalidLinkError\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/RichText/Validator/InternalLinkValidatorTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Validator\\InternalLinkValidatorTest\:\:assertContainsEzRemoteInvalidLinkError\(\) has parameter \$contentId with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/RichText/Validator/InternalLinkValidatorTest.php
-
-		-
 			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Validator\\InternalLinkValidatorTest\:\:assertContainsEzRemoteInvalidLinkError\(\) has parameter \$errors with no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
 			path: tests/lib/RichText/Validator/InternalLinkValidatorTest.php
 
 		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Validator\\InternalLinkValidatorTest\:\:createInputDocument\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/RichText/Validator/InternalLinkValidatorTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Validator\\InternalLinkValidatorTest\:\:createInputDocument\(\) has parameter \$id with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/RichText/Validator/InternalLinkValidatorTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Validator\\InternalLinkValidatorTest\:\:createInputDocument\(\) has parameter \$scheme with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/RichText/Validator/InternalLinkValidatorTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Validator\\InternalLinkValidatorTest\:\:getInternalLinkValidator\(\) has invalid return type Ibexa\\FieldTypeRichText\\FieldType\\RichText\\InternalLinkValidator\.$#'
-			identifier: class.notFound
-			count: 1
-			path: tests/lib/RichText/Validator/InternalLinkValidatorTest.php
-
-		-
 			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Validator\\InternalLinkValidatorTest\:\:getInternalLinkValidator\(\) has parameter \$methods with no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
-			count: 1
-			path: tests/lib/RichText/Validator/InternalLinkValidatorTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Validator\\InternalLinkValidatorTest\:\:getInternalLinkValidator\(\) should return Ibexa\\FieldTypeRichText\\FieldType\\RichText\\InternalLinkValidator&PHPUnit\\Framework\\MockObject\\MockObject but returns Ibexa\\FieldTypeRichText\\RichText\\Validator\\InternalLinkValidator&PHPUnit\\Framework\\MockObject\\MockObject\.$#'
-			identifier: return.type
-			count: 1
-			path: tests/lib/RichText/Validator/InternalLinkValidatorTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Validator\\InternalLinkValidatorTest\:\:setupInternalLinkValidator\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/RichText/Validator/InternalLinkValidatorTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Validator\\InternalLinkValidatorTest\:\:testValidateDocumentEzContentExistingContentId\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/RichText/Validator/InternalLinkValidatorTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Validator\\InternalLinkValidatorTest\:\:testValidateDocumentEzContentExistingLocationId\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/RichText/Validator/InternalLinkValidatorTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Validator\\InternalLinkValidatorTest\:\:testValidateDocumentEzContentNonExistingContentId\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/RichText/Validator/InternalLinkValidatorTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Validator\\InternalLinkValidatorTest\:\:testValidateDocumentEzContentNonExistingLocationId\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/RichText/Validator/InternalLinkValidatorTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Validator\\InternalLinkValidatorTest\:\:testValidateDocumentEzRemoteExistingId\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/RichText/Validator/InternalLinkValidatorTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Validator\\InternalLinkValidatorTest\:\:testValidateDocumentEzRemoteNonExistingId\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/RichText/Validator/InternalLinkValidatorTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Validator\\InternalLinkValidatorTest\:\:testValidateDocumentSkipMissingTargetId\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/RichText/Validator/InternalLinkValidatorTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Validator\\InternalLinkValidatorTest\:\:testValidateEzContentNonExistingContentId\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/RichText/Validator/InternalLinkValidatorTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Validator\\InternalLinkValidatorTest\:\:testValidateEzContentWithExistingContentId\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/RichText/Validator/InternalLinkValidatorTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Validator\\InternalLinkValidatorTest\:\:testValidateEzLocationWithExistingLocationId\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/RichText/Validator/InternalLinkValidatorTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Validator\\InternalLinkValidatorTest\:\:testValidateEzLocationWithNonExistingLocationId\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/RichText/Validator/InternalLinkValidatorTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Validator\\InternalLinkValidatorTest\:\:testValidateEzRemoteWithExistingRemoteId\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/RichText/Validator/InternalLinkValidatorTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Validator\\InternalLinkValidatorTest\:\:testValidateEzRemoteWithNonExistingRemoteId\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/RichText/Validator/InternalLinkValidatorTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Validator\\InternalLinkValidatorTest\:\:testValidateFailOnNotSupportedSchema\(\) has no return type specified\.$#'
-			identifier: missingType.return
 			count: 1
 			path: tests/lib/RichText/Validator/InternalLinkValidatorTest.php
 

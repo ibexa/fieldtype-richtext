@@ -130,6 +130,9 @@ class RichTextTransformerTest extends TestCase
         $this->richTextTransformer->reverseTransform($value);
     }
 
+    /**
+     * @phpstan-return list<array{\Exception}>
+     */
     public function dataProviderForReverseTransformTransformationFailedException(): array
     {
         return [

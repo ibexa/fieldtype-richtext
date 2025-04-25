@@ -14,12 +14,16 @@ use Ibexa\Contracts\Core\Persistence\Content\FieldValue;
 use Ibexa\Contracts\Core\Persistence\Content\VersionInfo;
 use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
 use Ibexa\FieldTypeRichText\FieldType\RichText\RichTextStorage;
+use Ibexa\FieldTypeRichText\FieldType\RichText\RichTextStorage\Gateway;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 
 class RichTextStorageTest extends TestCase
 {
+    /**
+     * @phpstan-return list<array{string, string, int[], array<int, string>}>
+     */
     public function providerForTestGetFieldData(): array
     {
         return [
@@ -64,6 +68,9 @@ class RichTextStorageTest extends TestCase
 
     /**
      * @dataProvider providerForTestGetFieldData
+     *
+     * @param int[] $linkIds
+     * @param array<int, string> $linkUrls
      */
     public function testGetFieldData(string $xmlString, string $updatedXmlString, array $linkIds, array $linkUrls): void
     {
@@ -105,6 +112,9 @@ class RichTextStorageTest extends TestCase
         );
     }
 
+    /**
+     * @return list<array{string, string, string[], array<string, int>, array<string, int>, string[], array<string, int>, bool}>
+     */
     public function providerForTestStoreFieldData(): array
     {
         return [
@@ -175,6 +185,12 @@ class RichTextStorageTest extends TestCase
 
     /**
      * @dataProvider providerForTestStoreFieldData
+     *
+     * @param string[] $linkUrls
+     * @param array<string, int> $linkIds
+     * @param array<string, int> $insertLinks
+     * @param string[] $remoteIds
+     * @param array<string, int> $contentIds
      */
     public function testStoreFieldData(
         string $xmlString,
@@ -280,6 +296,9 @@ class RichTextStorageTest extends TestCase
         ];
     }
 
+    /**
+     * @return list<array{string, string[], array<string, int>, array<int, array{url: string, id: int}>, string[], array<string, int>}>
+     */
     public function providerForTestStoreFieldDataThrowsNotFoundException(): array
     {
         return [
@@ -302,6 +321,12 @@ class RichTextStorageTest extends TestCase
 
     /**
      * @dataProvider providerForTestStoreFieldDataThrowsNotFoundException
+     *
+     * @param string[] $linkUrls
+     * @param array<string, int> $linkIds
+     * @param array<int, array{url: string, id: int}> $insertLinks
+     * @param string[] $remoteIds
+     * @param array<string, int> $contentIds
      */
     public function testStoreFieldDataThrowsNotFoundException(
         string $xmlString,
@@ -368,12 +393,7 @@ class RichTextStorageTest extends TestCase
         );
     }
 
-    /**
-     * @param \Ibexa\Contracts\Core\FieldType\StorageGateway $gateway
-     *
-     * @return \Ibexa\FieldTypeRichText\FieldType\RichText\RichTextStorage|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected function getPartlyMockedStorage(StorageGateway $gateway): MockObject
+    protected function getPartlyMockedStorage(StorageGateway $gateway): RichTextStorage
     {
         return $this->getMockBuilder(RichTextStorage::class)
             ->setConstructorArgs(
@@ -386,15 +406,9 @@ class RichTextStorageTest extends TestCase
             ->getMock();
     }
 
-    /**
-     * @var \Psr\Log\LoggerInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected ?MockObject $loggerMock = null;
+    protected (LoggerInterface&MockObject)|null $loggerMock = null;
 
-    /**
-     * @return \Psr\Log\LoggerInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected function getLoggerMock()
+    protected function getLoggerMock(): LoggerInterface&MockObject
     {
         if (!isset($this->loggerMock)) {
             $this->loggerMock = $this->getMockForAbstractClass(
@@ -405,18 +419,12 @@ class RichTextStorageTest extends TestCase
         return $this->loggerMock;
     }
 
-    /**
-     * @var \Ibexa\FieldTypeRichText\FieldType\RichText\RichTextStorage\Gateway|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected ?MockObject $gatewayMock = null;
+    protected (Gateway&MockObject)|null $gatewayMock = null;
 
-    /**
-     * @return \Ibexa\FieldTypeRichText\FieldType\RichText\RichTextStorage\Gateway|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected function getGatewayMock()
+    protected function getGatewayMock(): Gateway&MockObject
     {
         if (!isset($this->gatewayMock)) {
-            $this->gatewayMock = $this->createMock(RichTextStorage\Gateway::class);
+            $this->gatewayMock = $this->createMock(Gateway::class);
         }
 
         return $this->gatewayMock;

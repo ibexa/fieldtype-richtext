@@ -266,6 +266,9 @@ class RichTextTest extends AbstractParserTestCase
         }
     }
 
+    /**
+     * @phpstan-return list<array{array<string, mixed>, array<string, mixed>}>
+     */
     public function richTextSettingsProvider(): array
     {
         return [
