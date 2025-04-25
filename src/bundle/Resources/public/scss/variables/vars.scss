@@ -3,3 +3,13 @@ $ibexa-border-radius-small: calculateRem(5px);
 
 $ibexa-text-font-size: calculateRem(16px);
 $ibexa-text-font-size-small: calculateRem(12px);
+
+$ibexa-font-family:
+    'Noto Sans',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    'Helvetica Neue',
+    Arial,
+    sans-serif !default;
