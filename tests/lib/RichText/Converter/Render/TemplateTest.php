@@ -13,19 +13,14 @@ use Ibexa\Contracts\FieldTypeRichText\RichText\Converter;
 use Ibexa\Contracts\FieldTypeRichText\RichText\RendererInterface;
 use Ibexa\FieldTypeRichText\RichText\Converter\Aggregate;
 use Ibexa\FieldTypeRichText\RichText\Converter\Render\Template;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 class TemplateTest extends TestCase
 {
-    /**
-     * @var \Ibexa\FieldTypeRichText\RichText\RendererInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $rendererMock;
+    protected RendererInterface&MockObject $rendererMock;
 
-    /**
-     * @var \Ibexa\FieldTypeRichText\RichText\Converter|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $converterMock;
+    protected Converter&MockObject $converterMock;
 
     public function setUp(): void
     {
@@ -34,7 +29,10 @@ class TemplateTest extends TestCase
         parent::setUp();
     }
 
-    public function providerForTestConvert()
+    /**
+     * @return array{DOMDocument, DOMDocument, mixed}[]
+     */
+    public function providerForTestConvert(): array
     {
         $data = [];
 
@@ -155,7 +153,7 @@ class TemplateTest extends TestCase
         ];
     }
 
-    protected function getConverter()
+    protected function getConverter(): Template
     {
         return new Template(
             $this->rendererMock,
@@ -166,18 +164,12 @@ class TemplateTest extends TestCase
         );
     }
 
-    /**
-     * @return \Ibexa\FieldTypeRichText\RichText\RendererInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected function getRendererMock()
+    protected function getRendererMock(): RendererInterface&MockObject
     {
         return $this->createMock(RendererInterface::class);
     }
 
-    /**
-     * @return \Ibexa\FieldTypeRichText\RichText\Converter|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected function getConverterMock()
+    protected function getConverterMock(): Converter&MockObject
     {
         return $this->createMock(Converter::class);
     }

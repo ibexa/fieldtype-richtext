@@ -35,17 +35,11 @@ class RichTextFieldTypeIntegrationTest extends SearchBaseIntegrationTest
 {
     use RelationSearchBaseIntegrationTestTrait;
 
-    /**
-     * @var \DOMDocument
-     */
-    private $createdDOMValue;
+    private DOMDocument $createdDOMValue;
 
-    /**
-     * @var \DOMDocument
-     */
-    private $updatedDOMValue;
+    private DOMDocument $updatedDOMValue;
 
-    public function __construct($name = null, array $data = [], $dataName = '')
+    public function __construct(?string $name = null, array $data = [], $dataName = '')
     {
         $this->createdDOMValue = new DOMDocument();
         $this->createdDOMValue->loadXML(
@@ -251,7 +245,7 @@ EOT
      *
      * @param \Ibexa\Contracts\Core\Repository\Values\Content\Field $field
      */
-    public function assertFieldDataLoadedCorrect(Field $field)
+    public function assertFieldDataLoadedCorrect(Field $field): void
     {
         self::assertInstanceOf(
             RichTextValue::class,
@@ -299,22 +293,16 @@ EOT
 
     /**
      * Get update field externals data.
-     *
-     * @return array
      */
-    public function getValidUpdateFieldData()
+    public function getValidUpdateFieldData(): RichTextValue
     {
         return new RichTextValue($this->updatedDOMValue);
     }
 
     /**
      * Get externals updated field data values.
-     *
-     * This is a PHPUnit data provider
-     *
-     * @return array
      */
-    public function assertUpdatedFieldDataLoadedCorrect(Field $field)
+    public function assertUpdatedFieldDataLoadedCorrect(Field $field): void
     {
         self::assertInstanceOf(
             RichTextValue::class,
@@ -363,7 +351,7 @@ EOT
      *
      * @param \Ibexa\Contracts\Core\Repository\Values\Content\Field $field
      */
-    public function assertCopiedFieldDataLoadedCorrectly(Field $field)
+    public function assertCopiedFieldDataLoadedCorrectly(Field $field): void
     {
         self::assertInstanceOf(
             RichTextValue::class,
@@ -451,7 +439,7 @@ EOT
      * @todo: Requires correct registered FieldTypeService, needs to be
      *        maintained!
      */
-    public function testFromHash($hash, $expectedValue = null)
+    public function testFromHash($hash, $expectedValue = null): void
     {
         $richTextValue = $this
             ->getRepository()
@@ -508,8 +496,10 @@ EOT;
      * This is a PHP Unit data provider
      *
      * @see testConvertReomoteObjectIdToObjectId()
+     *
+     * @phpstan-return list<array{string, string}>
      */
-    public function providerForTestConvertRemoteObjectIdToObjectId()
+    public function providerForTestConvertRemoteObjectIdToObjectId(): array
     {
         $remoteId = '[RemoteId]';
         $objectId = '[ObjectId]';
@@ -790,7 +780,7 @@ EOT;
      *
      * @dataProvider providerForTestCreateContentWithValidCustomTag
      */
-    public function testCreateContentWithValidCustomTag($xmlDocumentPath)
+    public function testCreateContentWithValidCustomTag($xmlDocumentPath): void
     {
         $validXmlDocument = $this->createDocument($xmlDocumentPath);
         $this->createContent(new RichTextValue($validXmlDocument));
@@ -801,7 +791,7 @@ EOT;
      *
      * @return array
      */
-    public function providerForTestCreateContentWithValidCustomTag()
+    public function providerForTestCreateContentWithValidCustomTag(): array
     {
         $data = [];
         $iterator = new DirectoryIterator(__DIR__ . '/_fixtures/ezrichtext/custom_tags/valid');
@@ -824,8 +814,8 @@ EOT;
      */
     public function testCreateContentWithInvalidCustomTag(
         $xmlDocumentPath,
-        $expectedValidationMessage
-    ) {
+        string $expectedValidationMessage
+    ): void {
         try {
             $invalidXmlDocument = $this->createDocument($xmlDocumentPath);
             $this->createContent(new RichTextValue($invalidXmlDocument));
@@ -843,7 +833,7 @@ EOT;
      *
      * @return array
      */
-    public function providerForTestCreateContentWithInvalidCustomTag()
+    public function providerForTestCreateContentWithInvalidCustomTag(): array
     {
         $data = [
             [
@@ -868,7 +858,7 @@ EOT;
      *
      * @return \DOMDocument
      */
-    protected function createDocument($filename)
+    protected function createDocument($filename): DOMDocument
     {
         $document = new DOMDocument();
 
@@ -890,7 +880,7 @@ EOT;
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ForbiddenException
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
      */
-    private function prepareInternalLinkValidatorBrokenLinksTestCase(Repository $repository)
+    private function prepareInternalLinkValidatorBrokenLinksTestCase(Repository $repository): array
     {
         $contentService = $repository->getContentService();
         $locationService = $repository->getLocationService();
@@ -939,7 +929,7 @@ EOT;
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
      */
-    public function testInternalLinkValidatorIgnoresMissingRelationOnNotUpdatedField()
+    public function testInternalLinkValidatorIgnoresMissingRelationOnNotUpdatedField(): void
     {
         $repository = $this->getRepository();
         $contentService = $repository->getContentService();
@@ -967,7 +957,7 @@ EOT;
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ContentFieldValidationException
      */
-    public function testInternalLinkValidatorReturnsErrorOnMissingRelationInUpdatedField()
+    public function testInternalLinkValidatorReturnsErrorOnMissingRelationInUpdatedField(): void
     {
         $repository = $this->getRepository();
         $contentService = $repository->getContentService();
@@ -1054,7 +1044,7 @@ XML
      *
      * @return \DOMDocument
      */
-    private function getDocumentWithLocationLink(Location $location)
+    private function getDocumentWithLocationLink(Location $location): DOMDocument
     {
         $document = new DOMDocument();
         $document->loadXML(

@@ -17,6 +17,7 @@ use Ibexa\Contracts\Core\Repository\Values\Content\Location;
 use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 use Ibexa\Core\Base\Exceptions\NotFoundException;
 use Ibexa\FieldTypeRichText\RichText\Renderer;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -37,7 +38,7 @@ class RendererTest extends TestCase
         parent::setUp();
     }
 
-    public function testRenderTag()
+    public function testRenderTag(): void
     {
         $renderer = $this->getMockedRenderer(['render', 'getTagTemplateName']);
         $name = 'tag';
@@ -78,7 +79,7 @@ class RendererTest extends TestCase
         );
     }
 
-    public function testRenderTagNoTemplateConfigured()
+    public function testRenderTagNoTemplateConfigured(): void
     {
         $renderer = $this->getMockedRenderer(['render', 'getTagTemplateName']);
         $name = 'tag';
@@ -109,7 +110,7 @@ class RendererTest extends TestCase
         );
     }
 
-    public function testRenderTagNoTemplateFound()
+    public function testRenderTagNoTemplateFound(): void
     {
         $renderer = $this->getMockedRenderer(['render', 'getTagTemplateName']);
         $name = 'tag';
@@ -291,13 +292,13 @@ class RendererTest extends TestCase
      * @dataProvider providerForTestRenderTagWithTemplate
      */
     public function testRenderTagWithTemplate(
-        $tagName,
+        string $tagName,
         array $configResolverParams,
         array $loggerParams,
-        $templateEngineTemplate,
-        $renderTemplate,
-        $isInline,
-        $renderResult
+        ?string $templateEngineTemplate,
+        ?string $renderTemplate,
+        bool $isInline,
+        ?string $renderResult
     ): void {
         $renderer = $this->getMockedRenderer(['render']);
         $parameters = ['parameters'];
@@ -384,7 +385,7 @@ class RendererTest extends TestCase
         );
     }
 
-    public function testRenderContentEmbed()
+    public function testRenderContentEmbed(): void
     {
         $renderer = $this->getMockedRenderer(['render', 'checkContentPermissions', 'getEmbedTemplateName']);
         $contentId = 42;
@@ -441,7 +442,7 @@ class RendererTest extends TestCase
         );
     }
 
-    public function testRenderContentEmbedNoTemplateConfigured()
+    public function testRenderContentEmbedNoTemplateConfigured(): void
     {
         $renderer = $this->getMockedRenderer(['render', 'checkContentPermissions', 'getEmbedTemplateName']);
         $contentId = 42;
@@ -489,7 +490,7 @@ class RendererTest extends TestCase
         );
     }
 
-    public function testRenderContentEmbedNoTemplateFound()
+    public function testRenderContentEmbedNoTemplateFound(): void
     {
         $renderer = $this->getMockedRenderer(['render', 'checkContentPermissions', 'getEmbedTemplateName']);
         $contentId = 42;
@@ -542,7 +543,7 @@ class RendererTest extends TestCase
         );
     }
 
-    public function testRenderContentEmbedAccessDenied()
+    public function testRenderContentEmbedAccessDenied(): void
     {
         $renderer = $this->getMockedRenderer(['render', 'checkContentPermissions', 'getEmbedTemplateName']);
         $contentId = 42;
@@ -600,7 +601,7 @@ class RendererTest extends TestCase
         );
     }
 
-    public function testRenderContentEmbedTrashed()
+    public function testRenderContentEmbedTrashed(): void
     {
         $renderer = $this->getMockedRenderer(['checkContentPermissions']);
         $contentId = 42;
@@ -637,7 +638,7 @@ class RendererTest extends TestCase
         );
     }
 
-    public function testRenderContentEmbedHidden()
+    public function testRenderContentEmbedHidden(): void
     {
         $renderer = $this->getMockedRenderer(['checkContentPermissions']);
         $contentId = 42;
@@ -678,7 +679,10 @@ class RendererTest extends TestCase
         );
     }
 
-    public function providerForTestRenderContentEmbedNotFound()
+    /**
+     * @phpstan-return list<array{\Exception}>
+     */
+    public function providerForTestRenderContentEmbedNotFound(): array
     {
         return [
             [new NotFoundException('Content', 42)],
@@ -689,7 +693,7 @@ class RendererTest extends TestCase
     /**
      * @dataProvider providerForTestRenderContentEmbedNotFound
      */
-    public function testRenderContentEmbedNotFound(Exception $exception)
+    public function testRenderContentEmbedNotFound(Exception $exception): void
     {
         $renderer = $this->getMockedRenderer(['render', 'checkContentPermissions', 'getEmbedTemplateName']);
         $contentId = 42;
@@ -735,7 +739,7 @@ class RendererTest extends TestCase
         );
     }
 
-    public function testRenderContentEmbedThrowsException()
+    public function testRenderContentEmbedThrowsException(): void
     {
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('Something threw up');
@@ -760,7 +764,10 @@ class RendererTest extends TestCase
         $renderer->renderContentEmbed($contentId, 'embedTest', ['parameters'], true);
     }
 
-    public function providerForTestRenderContentWithTemplate()
+    /**
+     * @phpstan-return list<array{bool, \Exception|null, mixed[], mixed[], string|null, string|null, string|null}>
+     */
+    public function providerForTestRenderContentWithTemplate(): array
     {
         $contentId = 42;
 
@@ -956,13 +963,13 @@ class RendererTest extends TestCase
      * @dataProvider providerForTestRenderContentWithTemplate
      */
     public function testRenderContentWithTemplate(
-        $isInline,
-        $deniedException,
+        bool $isInline,
+        ?AccessDeniedException $deniedException,
         array $configResolverParams,
         array $loggerParams,
-        $templateEngineTemplate,
-        $renderTemplate,
-        $renderResult
+        ?string $templateEngineTemplate,
+        ?string $renderTemplate,
+        ?string $renderResult
     ): void {
         $renderer = $this->getMockedRenderer(['render', 'checkContentPermissions']);
         $contentId = 42;
@@ -1073,7 +1080,7 @@ class RendererTest extends TestCase
         );
     }
 
-    public function testRenderLocationEmbed()
+    public function testRenderLocationEmbed(): void
     {
         $renderer = $this->getMockedRenderer(['render', 'checkLocation', 'getEmbedTemplateName']);
         $locationId = 42;
@@ -1129,7 +1136,7 @@ class RendererTest extends TestCase
         );
     }
 
-    public function testRenderLocationEmbedNoTemplateConfigured()
+    public function testRenderLocationEmbedNoTemplateConfigured(): void
     {
         $renderer = $this->getMockedRenderer(['render', 'checkLocation', 'getEmbedTemplateName']);
         $locationId = 42;
@@ -1176,7 +1183,7 @@ class RendererTest extends TestCase
         );
     }
 
-    public function testRenderLocationEmbedNoTemplateFound()
+    public function testRenderLocationEmbedNoTemplateFound(): void
     {
         $renderer = $this->getMockedRenderer(['render', 'checkLocation', 'getEmbedTemplateName']);
         $locationId = 42;
@@ -1229,7 +1236,7 @@ class RendererTest extends TestCase
         );
     }
 
-    public function testRenderLocationEmbedAccessDenied()
+    public function testRenderLocationEmbedAccessDenied(): void
     {
         $renderer = $this->getMockedRenderer(['render', 'checkLocation', 'getEmbedTemplateName']);
         $locationId = 42;
@@ -1279,7 +1286,7 @@ class RendererTest extends TestCase
         );
     }
 
-    public function testRenderLocationEmbedInvisible()
+    public function testRenderLocationEmbedInvisible(): void
     {
         $renderer = $this->getMockedRenderer(['render', 'checkLocation', 'getEmbedTemplateName']);
         $locationId = 42;
@@ -1322,7 +1329,10 @@ class RendererTest extends TestCase
         );
     }
 
-    public function providerForTestRenderLocationEmbedNotFound()
+    /**
+     * @phpstan-return list<array{\Exception}>
+     */
+    public function providerForTestRenderLocationEmbedNotFound(): array
     {
         return [
             [new NotFoundException('Location', 42)],
@@ -1333,7 +1343,7 @@ class RendererTest extends TestCase
     /**
      * @dataProvider providerForTestRenderLocationEmbedNotFound
      */
-    public function testRenderLocationEmbedNotFound(Exception $exception)
+    public function testRenderLocationEmbedNotFound(Exception $exception): void
     {
         $renderer = $this->getMockedRenderer(['render', 'checkLocation', 'getEmbedTemplateName']);
         $locationId = 42;
@@ -1371,7 +1381,7 @@ class RendererTest extends TestCase
         );
     }
 
-    public function testRenderLocationEmbedThrowsException()
+    public function testRenderLocationEmbedThrowsException(): void
     {
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('Something threw up');
@@ -1388,7 +1398,10 @@ class RendererTest extends TestCase
         $renderer->renderLocationEmbed($locationId, 'embedTest', ['parameters'], true);
     }
 
-    public function providerForTestRenderLocationWithTemplate()
+    /**
+     * @phpstan-return list<array{bool, \Exception|null, mixed[], mixed[], string|null, string|null, string|null}>
+     */
+    public function providerForTestRenderLocationWithTemplate(): array
     {
         $locationId = 42;
 
@@ -1580,14 +1593,14 @@ class RendererTest extends TestCase
      * @dataProvider providerForTestRenderLocationWithTemplate
      */
     public function testRenderLocationWithTemplate(
-        $isInline,
-        $deniedException,
+        bool $isInline,
+        ?AccessDeniedException $deniedException,
         array $configResolverParams,
         array $loggerParams,
-        $templateEngineTemplate,
-        $renderTemplate,
-        $renderResult
-    ) {
+        ?string $templateEngineTemplate,
+        ?string $renderTemplate,
+        ?string $renderResult
+    ): void {
         $renderer = $this->getMockedRenderer(['render', 'checkLocation']);
         $locationId = 42;
         $viewType = 'embedTest';
@@ -1701,7 +1714,7 @@ class RendererTest extends TestCase
      *
      * @return \Ibexa\FieldTypeRichText\RichText\Renderer|\PHPUnit\Framework\MockObject\MockObject
      */
-    protected function getMockedRenderer(array $methods = [])
+    protected function getMockedRenderer(array $methods = []): MockObject
     {
         return $this->getMockBuilder(Renderer::class)
             ->setConstructorArgs(
@@ -1788,7 +1801,7 @@ class RendererTest extends TestCase
         return $this->createMock(LoaderInterface::class);
     }
 
-    protected function getContentMock($mainLocationId)
+    protected function getContentMock($mainLocationId): MockObject
     {
         $contentInfoMock = $this->createMock(ContentInfo::class);
         $contentInfoMock

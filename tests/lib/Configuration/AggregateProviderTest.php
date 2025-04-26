@@ -22,17 +22,21 @@ class AggregateProviderTest extends TestCase
      *
      * @dataProvider getConfiguration
      *
-     * @param array $configuration
+     * @param array<string, array<string, mixed>> $configuration
      */
     public function testGetConfiguration(array $configuration): void
     {
         $providers = [];
         foreach ($configuration as $providerName => $providerConfiguration) {
             $providers[] = new class($providerName, $providerConfiguration) implements Provider {
-                private $name;
+                private string $name;
 
-                private $configuration;
+                /** @var array<string, mixed> */
+                private array $configuration;
 
+                /**
+                 * @param array<string, mixed> $configuration
+                 */
                 public function __construct(string $name, array $configuration)
                 {
                     $this->name = $name;
@@ -44,6 +48,9 @@ class AggregateProviderTest extends TestCase
                     return $this->name;
                 }
 
+                /**
+                 * @return array<string, mixed>
+                 */
                 public function getConfiguration(): array
                 {
                     return $this->configuration;

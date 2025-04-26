@@ -11,11 +11,19 @@ namespace Ibexa\Tests\FieldTypeRichText\REST\FieldTypeProcessor;
 use DOMDocument;
 use Ibexa\Contracts\FieldTypeRichText\RichText\Converter;
 use Ibexa\FieldTypeRichText\REST\FieldTypeProcessor\RichTextProcessor;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 class RichTextProcessorTest extends TestCase
 {
-    public function testPostProcessValueHash()
+    protected Converter&MockObject $converter;
+
+    protected function setUp(): void
+    {
+        $this->converter = $this->createMock(Converter::class);
+    }
+
+    public function testPostProcessValueHash(): void
     {
         $processor = $this->getProcessor();
 
@@ -53,18 +61,8 @@ EOT;
         );
     }
 
-    /**
-     * @var \Ibexa\FieldTypeRichText\RichText\Converter|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $converter;
-
-    /**
-     * @return \Ibexa\FieldTypeRichText\REST\FieldTypeProcessor\RichTextProcessor
-     */
-    protected function getProcessor()
+    protected function getProcessor(): RichTextProcessor
     {
-        $this->converter = $this->createMock(Converter::class);
-
         return new RichTextProcessor($this->converter);
     }
 }

@@ -18,7 +18,7 @@ use Ibexa\Contracts\FieldTypeRichText\Configuration\ProviderService;
 final class AggregateProvider implements ProviderService
 {
     /** @var \Ibexa\Contracts\FieldTypeRichText\Configuration\Provider[]|iterable */
-    private $providers;
+    private iterable $providers;
 
     /**
      * @param \Ibexa\Contracts\FieldTypeRichText\Configuration\Provider[] $providers

@@ -10,12 +10,12 @@ namespace Ibexa\Tests\FieldTypeRichText\Configuration\Provider;
 
 use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 use Ibexa\Contracts\FieldTypeRichText\Configuration\Provider;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 abstract class BaseProviderTestCase extends TestCase
 {
-    /** @var \PHPUnit\Framework\MockObject\MockObject|\Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface */
-    protected $configResolver;
+    protected ConfigResolverInterface&MockObject $configResolver;
 
     public function setUp(): void
     {

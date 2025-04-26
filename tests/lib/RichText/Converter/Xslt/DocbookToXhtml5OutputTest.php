@@ -35,7 +35,7 @@ class DocbookToXhtml5OutputTest extends BaseTest
      *
      * @return array
      */
-    public function getFixtureSubdirectories()
+    public function getFixtureSubdirectories(): array
     {
         return [
             'input' => 'docbook',
@@ -48,7 +48,7 @@ class DocbookToXhtml5OutputTest extends BaseTest
      *
      * @return string
      */
-    protected function getConversionTransformationStylesheet()
+    protected function getConversionTransformationStylesheet(): string
     {
         return __DIR__ . '/../../../../../src/bundle/Resources/richtext/stylesheets/docbook/xhtml5/output/xhtml5.xsl';
     }
@@ -75,7 +75,7 @@ class DocbookToXhtml5OutputTest extends BaseTest
      *
      * @return array
      */
-    protected function getCustomConversionTransformationStylesheets()
+    protected function getCustomConversionTransformationStylesheets(): array
     {
         return [
             [

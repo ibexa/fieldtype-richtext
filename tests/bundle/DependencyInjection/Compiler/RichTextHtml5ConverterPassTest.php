@@ -29,7 +29,7 @@ class RichTextHtml5ConverterPassTest extends AbstractCompilerPassTestCase
         $container->addCompilerPass(new RichTextHtml5ConverterPass());
     }
 
-    public function testCollectProviders()
+    public function testCollectProviders(): void
     {
         $configurationResolver = new Definition();
         $this->setDefinition(

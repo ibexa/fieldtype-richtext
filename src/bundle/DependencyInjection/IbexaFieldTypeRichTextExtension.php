@@ -53,7 +53,7 @@ class IbexaFieldTypeRichTextExtension extends Extension implements PrependExtens
      *
      * @throws \Exception
      */
-    public function load(array $configs, ContainerBuilder $container)
+    public function load(array $configs, ContainerBuilder $container): void
     {
         $settingsLoader = new Loader\YamlFileLoader(
             $container,
@@ -141,7 +141,7 @@ class IbexaFieldTypeRichTextExtension extends Extension implements PrependExtens
      *
      * @throws \Exception
      */
-    public function prepend(ContainerBuilder $container)
+    public function prepend(ContainerBuilder $container): void
     {
         $this->prependIbexaConfiguration($container);
         $this->prependEzRichTextConfiguration($container);

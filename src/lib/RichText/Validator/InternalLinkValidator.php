@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace Ibexa\FieldTypeRichText\RichText\Validator;
 
 use DOMDocument;
+use Ibexa\Contracts\Core\Persistence\Content\Handler;
 use Ibexa\Contracts\Core\Persistence\Content\Handler as ContentHandler;
 use Ibexa\Contracts\Core\Persistence\Content\Location\Handler as LocationHandler;
 use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
@@ -20,22 +21,10 @@ use Ibexa\Core\Base\Exceptions\InvalidArgumentException;
  */
 class InternalLinkValidator implements ValidatorInterface
 {
-    /**
-     * @var \Ibexa\Contracts\Core\Persistence\Content\Handler
-     */
-    private $contentHandler;
+    private Handler $contentHandler;
 
-    /**
-     * @var \Ibexa\Contracts\Core\Persistence\Content\Location\Handler;
-     */
-    private $locationHandler;
+    private LocationHandler $locationHandler;
 
-    /**
-     * InternalLinkValidator constructor.
-     *
-     * @param \Ibexa\Contracts\Core\Persistence\Content\Handler $contentHandler
-     * @param \Ibexa\Contracts\Core\Persistence\Content\Location\Handler $locationHandler
-     */
     public function __construct(ContentHandler $contentHandler, LocationHandler $locationHandler)
     {
         $this->contentHandler = $contentHandler;
@@ -89,18 +78,18 @@ class InternalLinkValidator implements ValidatorInterface
      *
      * @return bool
      */
-    public function validate($scheme, $id)
+    public function validate($scheme, $id): bool
     {
         try {
             switch ($scheme) {
                 case 'ezcontent':
-                    $this->contentHandler->loadContentInfo($id);
+                    $this->contentHandler->loadContentInfo((int) $id);
                     break;
                 case 'ezremote':
                     $this->contentHandler->loadContentInfoByRemoteId($id);
                     break;
                 case 'ezlocation':
-                    $this->locationHandler->load($id);
+                    $this->locationHandler->load((int) $id);
                     break;
                 default:
                     throw new InvalidArgumentException($scheme, "The provided scheme '{$scheme}' is not supported.");
@@ -122,7 +111,7 @@ class InternalLinkValidator implements ValidatorInterface
      *
      * @return string
      */
-    private function getInvalidLinkError($scheme, $url)
+    private function getInvalidLinkError(string $scheme, $url): string
     {
         switch ($scheme) {
             case 'ezcontent':
@@ -142,7 +131,7 @@ class InternalLinkValidator implements ValidatorInterface
      *
      * @return string
      */
-    private function getXPathForLinkTag($tagName)
+    private function getXPathForLinkTag(string $tagName): string
     {
         return "//docbook:{$tagName}[starts-with(@xlink:href, 'ezcontent://') or starts-with(@xlink:href, 'ezlocation://') or starts-with(@xlink:href, 'ezremote://')]";
     }

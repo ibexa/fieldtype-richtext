@@ -14,7 +14,7 @@ use Ibexa\Contracts\FieldTypeRichText\RichText\ValidatorInterface;
 class ValidatorAggregate implements ValidatorInterface
 {
     /** @var \Ibexa\Contracts\FieldTypeRichText\RichText\ValidatorInterface[] */
-    private $validators;
+    private iterable $validators;
 
     /**
      * @param iterable $validators

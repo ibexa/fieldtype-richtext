@@ -9,12 +9,18 @@ declare(strict_types=1);
 namespace Ibexa\Tests\FieldTypeRichText\RichText\Validator;
 
 use DOMDocument;
+use Ibexa\Contracts\FieldTypeRichText\RichText\ValidatorInterface;
 use Ibexa\FieldTypeRichText\RichText\Validator\Validator;
 use PHPUnit\Framework\TestCase;
 
 class DocbookTest extends TestCase
 {
-    public function providerForTestValidate()
+    protected ?ValidatorInterface $validator = null;
+
+    /**
+     * @phpstan-return list<array{string, string[]}>
+     */
+    public function providerForTestValidate(): array
     {
         return [
             [
@@ -154,8 +160,10 @@ class DocbookTest extends TestCase
 
     /**
      * @dataProvider providerForTestValidate
+     *
+     * @param string[] $expectedErrors
      */
-    public function testValidate($input, $expectedErrors)
+    public function testValidate(string $input, array $expectedErrors): void
     {
         $document = new DOMDocument();
         $document->loadXML($input);
@@ -170,19 +178,10 @@ class DocbookTest extends TestCase
         }
     }
 
-    /**
-     * @var \Ibexa\FieldTypeRichText\RichText\ValidatorInterface
-     */
-    protected $validator;
-
-    /**
-     * @return \Ibexa\FieldTypeRichText\RichText\ValidatorInterface
-     */
-    protected function getConversionValidator()
+    protected function getConversionValidator(): ValidatorInterface
     {
-        $validationSchema = $this->getConversionValidationSchemas();
-        if ($validationSchema !== null && $this->validator === null) {
-            $this->validator = new Validator($validationSchema);
+        if ($this->validator === null) {
+            $this->validator = new Validator($this->getConversionValidationSchemas());
         }
 
         return $this->validator;
@@ -193,7 +192,7 @@ class DocbookTest extends TestCase
      *
      * @return string[]
      */
-    protected function getConversionValidationSchemas()
+    protected function getConversionValidationSchemas(): array
     {
         return [
             __DIR__ . '/../../../../src/bundle/Resources/richtext/schemas/docbook/ezpublish.rng',

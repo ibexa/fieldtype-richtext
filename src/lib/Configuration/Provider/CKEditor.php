@@ -22,11 +22,9 @@ final class CKEditor implements Provider
     private const SEPARATOR = '|';
     private const CUSTOM_STYLE_INLINE = 'ibexaCustomStyleInline';
 
-    /** @var \Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface */
-    private $configResolver;
+    private ConfigResolverInterface $configResolver;
 
-    /** @var array */
-    private $customStylesConfiguration;
+    private array $customStylesConfiguration;
 
     public function __construct(
         ConfigResolverInterface $configResolver,

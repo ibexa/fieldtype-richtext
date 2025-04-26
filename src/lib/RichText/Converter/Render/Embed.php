@@ -22,10 +22,7 @@ use Psr\Log\LoggerInterface;
  */
 class Embed extends Render implements Converter
 {
-    /**
-     * @var \Psr\Log\LoggerInterface|null
-     */
-    protected $logger;
+    protected ?LoggerInterface $logger;
 
     /**
      * Maps embed tag names to their default views.
@@ -121,7 +118,7 @@ class Embed extends Render implements Converter
      *
      * @return array
      */
-    protected function extractParameters(DOMElement $embed, $tagName)
+    protected function extractParameters(DOMElement $embed, $tagName): array
     {
         if (!$viewType = $embed->getAttribute('view')) {
             $viewType = $this->tagDefaultViewMap[$tagName];
@@ -168,7 +165,7 @@ class Embed extends Render implements Converter
      *
      * @return array
      */
-    protected function extractLinkParameters(DOMElement $embed)
+    protected function extractLinkParameters(DOMElement $embed): ?array
     {
         $links = $embed->getElementsByTagName('ezlink');
 
@@ -307,7 +304,7 @@ class Embed extends Render implements Converter
      *
      * @return \DOMDocument
      */
-    public function convert(DOMDocument $document)
+    public function convert(DOMDocument $document): DOMDocument
     {
         $this->processTag($document, 'ezembed', false);
         $this->processTag($document, 'ezembedinline', true);

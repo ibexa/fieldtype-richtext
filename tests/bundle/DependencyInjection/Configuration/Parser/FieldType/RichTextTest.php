@@ -22,10 +22,8 @@ class RichTextTest extends AbstractParserTestCase
 {
     /**
      * Multidimensional array of configuration of multiple extensions ([extension => config]).
-     *
-     * @var array
      */
-    private $extensionsConfig;
+    private ?array $extensionsConfig = null;
 
     /**
      * Get test configuration for multiple extensions.
@@ -94,7 +92,7 @@ class RichTextTest extends AbstractParserTestCase
         return $this->getExtensionsConfig();
     }
 
-    public function testDefaultContentSettings()
+    public function testDefaultContentSettings(): void
     {
         $this->configureAndLoad();
 
@@ -120,7 +118,7 @@ class RichTextTest extends AbstractParserTestCase
     /**
      * Test Rich Text Custom Tags invalid settings, like enabling undefined Custom Tag.
      */
-    public function testRichTextCustomTagsInvalidSettings()
+    public function testRichTextCustomTagsInvalidSettings(): void
     {
         $this->expectException(InvalidConfigurationException::class);
         $this->expectExceptionMessage('Unknown RichText Custom Tag \'foo\'');
@@ -251,7 +249,7 @@ class RichTextTest extends AbstractParserTestCase
      *
      * @throws \Exception
      */
-    public function testRichTextSettings(array $config, array $expected)
+    public function testRichTextSettings(array $config, array $expected): void
     {
         $this->configureAndLoad(
             [
@@ -268,7 +266,10 @@ class RichTextTest extends AbstractParserTestCase
         }
     }
 
-    public function richTextSettingsProvider()
+    /**
+     * @phpstan-return list<array{array<string, mixed>, array<string, mixed>}>
+     */
+    public function richTextSettingsProvider(): array
     {
         return [
             [

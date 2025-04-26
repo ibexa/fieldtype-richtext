@@ -26,7 +26,7 @@ class Validator extends XmlBase implements ValidatorInterface
      *
      * @var string[]
      */
-    protected $schemas;
+    protected array $schemas;
 
     /**
      * @param string[] $schemas Paths to schema files to use for validation
@@ -117,7 +117,7 @@ class Validator extends XmlBase implements ValidatorInterface
      *
      * @return string[]
      */
-    protected function schematronValidate(DOMDocument $document, $filename)
+    protected function schematronValidate(DOMDocument $document, $filename): array
     {
         $stylesheet = $this->loadFile($filename);
         $xsltProcessor = new XSLTProcessor();
@@ -146,7 +146,7 @@ class Validator extends XmlBase implements ValidatorInterface
      *
      * @return string
      */
-    protected function formatSVRLFailure(DOMElement $failedAssert)
+    protected function formatSVRLFailure(DOMElement $failedAssert): string
     {
         $location = $failedAssert->getAttribute('location');
 

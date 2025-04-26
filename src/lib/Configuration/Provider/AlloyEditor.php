@@ -20,14 +20,11 @@ use Ibexa\FieldTypeRichText\Configuration\UI\Mapper\OnlineEditorConfigMapper;
  */
 final class AlloyEditor implements Provider
 {
-    /** @var array */
-    private $alloyEditorConfiguration;
+    private array $alloyEditorConfiguration;
 
-    /** @var \Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface */
-    private $configResolver;
+    private ConfigResolverInterface $configResolver;
 
-    /** @var \Ibexa\FieldTypeRichText\Configuration\UI\Mapper\OnlineEditorConfigMapper */
-    private $onlineEditorConfigMapper;
+    private OnlineEditorConfigMapper $onlineEditorConfigMapper;
 
     public function __construct(
         array $alloyEditorConfiguration,

@@ -14,12 +14,10 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class OnlineEditorTest extends TestCase
 {
-    /** @var \Ibexa\FieldTypeRichText\Configuration\UI\Mapper\OnlineEditorConfigMapper */
-    private $mapper;
+    private OnlineEditor $mapper;
 
     public function setUp(): void
     {
-        /** @var \Symfony\Contracts\Translation\TranslatorInterface $translatorMock */
         $translatorMock = $this->createMock(TranslatorInterface::class);
         $translatorMock
             ->expects(self::any())

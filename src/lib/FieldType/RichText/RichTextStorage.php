@@ -19,10 +19,7 @@ use Psr\Log\LoggerInterface;
 
 class RichTextStorage extends GatewayBasedStorage
 {
-    /**
-     * @var \Psr\Log\LoggerInterface
-     */
-    protected $logger;
+    protected ?LoggerInterface $logger;
 
     /**
      * @var \Ibexa\FieldTypeRichText\FieldType\RichText\RichTextStorage\Gateway
@@ -129,7 +126,7 @@ class RichTextStorage extends GatewayBasedStorage
     /**
      * Modifies $field if needed, using external data (like for Urls).
      */
-    public function getFieldData(VersionInfo $versionInfo, Field $field)
+    public function getFieldData(VersionInfo $versionInfo, Field $field): void
     {
         $document = new DOMDocument();
         $document->loadXML($field->value->data);
@@ -182,11 +179,13 @@ class RichTextStorage extends GatewayBasedStorage
         $field->value->data = $document->saveXML();
     }
 
-    public function deleteFieldData(VersionInfo $versionInfo, array $fieldIds)
+    public function deleteFieldData(VersionInfo $versionInfo, array $fieldIds): bool
     {
         foreach ($fieldIds as $fieldId) {
             $this->gateway->unlinkUrl($fieldId, $versionInfo->versionNo);
         }
+
+        return true;
     }
 
     /**

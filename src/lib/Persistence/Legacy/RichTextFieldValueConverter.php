@@ -23,7 +23,7 @@ class RichTextFieldValueConverter implements Converter
      * @param \Ibexa\Contracts\Core\Persistence\Content\FieldValue $value
      * @param \Ibexa\Core\Persistence\Legacy\Content\StorageFieldValue $storageFieldValue
      */
-    public function toStorageValue(FieldValue $value, StorageFieldValue $storageFieldValue)
+    public function toStorageValue(FieldValue $value, StorageFieldValue $storageFieldValue): void
     {
         $storageFieldValue->dataText = $value->data;
         $storageFieldValue->sortKeyString = $value->sortKey;
@@ -35,7 +35,7 @@ class RichTextFieldValueConverter implements Converter
      * @param \Ibexa\Core\Persistence\Legacy\Content\StorageFieldValue $value
      * @param \Ibexa\Contracts\Core\Persistence\Content\FieldValue $fieldValue
      */
-    public function toFieldValue(StorageFieldValue $value, FieldValue $fieldValue)
+    public function toFieldValue(StorageFieldValue $value, FieldValue $fieldValue): void
     {
         $fieldValue->data = $value->dataText ?: Value::EMPTY_VALUE;
         $fieldValue->sortKey = $value->sortKeyString;
@@ -47,7 +47,7 @@ class RichTextFieldValueConverter implements Converter
      * @param \Ibexa\Contracts\Core\Persistence\Content\Type\FieldDefinition $fieldDefinition
      * @param \Ibexa\Core\Persistence\Legacy\Content\StorageFieldDefinition $storageDefinition
      */
-    public function toStorageFieldDefinition(FieldDefinition $fieldDefinition, StorageFieldDefinition $storageDefinition)
+    public function toStorageFieldDefinition(FieldDefinition $fieldDefinition, StorageFieldDefinition $storageDefinition): void
     {
         // Nothing to store
     }
@@ -58,7 +58,7 @@ class RichTextFieldValueConverter implements Converter
      * @param \Ibexa\Core\Persistence\Legacy\Content\StorageFieldDefinition $storageDefinition
      * @param \Ibexa\Contracts\Core\Persistence\Content\Type\FieldDefinition $fieldDefinition
      */
-    public function toFieldDefinition(StorageFieldDefinition $storageDefinition, FieldDefinition $fieldDefinition)
+    public function toFieldDefinition(StorageFieldDefinition $storageDefinition, FieldDefinition $fieldDefinition): void
     {
         $fieldDefinition->defaultValue->data = Value::EMPTY_VALUE;
     }

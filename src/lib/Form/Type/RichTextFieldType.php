@@ -20,11 +20,9 @@ use Symfony\Component\Form\FormBuilderInterface;
  */
 class RichTextFieldType extends AbstractType
 {
-    /** @var \Ibexa\Contracts\Core\Repository\FieldTypeService */
-    protected $fieldTypeService;
+    protected FieldTypeService $fieldTypeService;
 
-    /** @var \Ibexa\Contracts\FieldTypeRichText\RichText\Converter */
-    protected $docbookToXhtml5EditConverter;
+    protected Converter $docbookToXhtml5EditConverter;
 
     public function __construct(FieldTypeService $fieldTypeService, Converter $docbookToXhtml5EditConverter)
     {
@@ -32,7 +30,7 @@ class RichTextFieldType extends AbstractType
         $this->docbookToXhtml5EditConverter = $docbookToXhtml5EditConverter;
     }
 
-    public function getName()
+    public function getName(): string
     {
         return $this->getBlockPrefix();
     }

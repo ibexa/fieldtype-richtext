@@ -35,7 +35,7 @@ class Xhtml5ToDocbookTest extends BaseTest
      *
      * @return array
      */
-    public function getFixtureSubdirectories()
+    public function getFixtureSubdirectories(): array
     {
         return [
             'input' => 'xhtml5/edit',
@@ -48,7 +48,7 @@ class Xhtml5ToDocbookTest extends BaseTest
      *
      * @return string
      */
-    protected function getConversionTransformationStylesheet()
+    protected function getConversionTransformationStylesheet(): string
     {
         return __DIR__ . '/../../../../../src/bundle/Resources/richtext/stylesheets/xhtml5/edit/docbook.xsl';
     }
@@ -75,7 +75,7 @@ class Xhtml5ToDocbookTest extends BaseTest
      *
      * @return array
      */
-    protected function getCustomConversionTransformationStylesheets()
+    protected function getCustomConversionTransformationStylesheets(): array
     {
         return [
             [
@@ -90,7 +90,7 @@ class Xhtml5ToDocbookTest extends BaseTest
      *
      * @return string[]
      */
-    protected function getConversionValidationSchema()
+    protected function getConversionValidationSchema(): array
     {
         return [
             __DIR__ . '/_fixtures/docbook/custom_schemas/youtube.rng',

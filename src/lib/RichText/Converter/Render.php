@@ -18,10 +18,7 @@ use Ibexa\Contracts\FieldTypeRichText\RichText\RendererInterface;
  */
 abstract class Render
 {
-    /**
-     * @var \Ibexa\Contracts\FieldTypeRichText\RichText\RendererInterface
-     */
-    protected $renderer;
+    protected RendererInterface $renderer;
 
     public function __construct(RendererInterface $renderer)
     {

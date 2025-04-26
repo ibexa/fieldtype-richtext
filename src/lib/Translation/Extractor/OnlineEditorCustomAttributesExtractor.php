@@ -20,15 +20,12 @@ final class OnlineEditorCustomAttributesExtractor implements ExtractorInterface
     private const ATTRIBUTES_MESSAGE_ID_PREFIX = 'ezrichtext.attributes';
     private const CLASS_LABEL_MESSAGE_ID = 'ezrichtext.classes.class.label';
 
-    /**
-     * @var \Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface
-     */
-    private $configResolver;
+    private ConfigResolverInterface $configResolver;
 
     /**
      * @var string[]
      */
-    private $siteAccessList;
+    private array $siteAccessList;
 
     /**
      * @param \Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface $configResolver
