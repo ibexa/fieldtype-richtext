@@ -80,18 +80,16 @@ class InternalLinkValidator implements ValidatorInterface
      */
     public function validate($scheme, $id): bool
     {
-        $id = (int) $id;
-
         try {
             switch ($scheme) {
                 case 'ezcontent':
-                    $this->contentHandler->loadContentInfo($id);
+                    $this->contentHandler->loadContentInfo((int) $id);
                     break;
                 case 'ezremote':
                     $this->contentHandler->loadContentInfoByRemoteId($id);
                     break;
                 case 'ezlocation':
-                    $this->locationHandler->load($id);
+                    $this->locationHandler->load((int) $id);
                     break;
                 default:
                     throw new InvalidArgumentException($scheme, "The provided scheme '{$scheme}' is not supported.");
