@@ -36,7 +36,7 @@ class RichTextValueTransformer implements DataTransformerInterface
      *
      * @return string
      */
-    public function transform($value)
+    public function transform(mixed $value): string
     {
         if (!$value instanceof Value) {
             return '';
@@ -50,7 +50,7 @@ class RichTextValueTransformer implements DataTransformerInterface
      *
      * @return \Ibexa\FieldTypeRichText\FieldType\RichText\Value|null
      */
-    public function reverseTransform($value)
+    public function reverseTransform(mixed $value): ?Value
     {
         if ($value === null || empty($value)) {
             return $this->fieldType->getEmptyValue();
