@@ -1597,12 +1597,6 @@ parameters:
 			path: tests/lib/FieldType/RichText/RichTextStorageTest.php
 
 		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\FieldType\\RichText\\SearchFieldTest\:\:getDataForTestGetIndexData\(\) return type has no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: tests/lib/FieldType/RichText/SearchFieldTest.php
-
-		-
 			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\FieldType\\RichTextTest\:\:testValidate\(\) has parameter \$expectedValidationErrors with no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
@@ -1610,12 +1604,6 @@ parameters:
 
 		-
 			message: '#^Parameter \#1 \$converterMap of class Ibexa\\FieldTypeRichText\\RichText\\ConverterDispatcher constructor expects array\<Ibexa\\Contracts\\FieldTypeRichText\\RichText\\Converter\>, array\<string, null\> given\.$#'
-			identifier: argument.type
-			count: 1
-			path: tests/lib/FieldType/RichTextTest.php
-
-		-
-			message: '#^Parameter \#1 \$transformationProcessor of method Ibexa\\Core\\FieldType\\FieldType\:\:setTransformationProcessor\(\) expects Ibexa\\Core\\Persistence\\TransformationProcessor, PHPUnit\\Framework\\MockObject\\MockObject given\.$#'
 			identifier: argument.type
 			count: 1
 			path: tests/lib/FieldType/RichTextTest.php
@@ -1663,27 +1651,9 @@ parameters:
 			path: tests/lib/RichText/Converter/LinkTest.php
 
 		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Converter\\LinkTest\:\:providerLinkXmlSample\(\) return type has no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: tests/lib/RichText/Converter/LinkTest.php
-
-		-
 			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Converter\\LinkTest\:\:providerLocationLink\(\) return type has no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
-			path: tests/lib/RichText/Converter/LinkTest.php
-
-		-
-			message: '#^Parameter \#1 \$locationService of class Ibexa\\FieldTypeRichText\\RichText\\Converter\\Link constructor expects Ibexa\\Contracts\\Core\\Repository\\LocationService, PHPUnit\\Framework\\MockObject\\MockObject given\.$#'
-			identifier: argument.type
-			count: 5
-			path: tests/lib/RichText/Converter/LinkTest.php
-
-		-
-			message: '#^Parameter \#2 \$contentService of class Ibexa\\FieldTypeRichText\\RichText\\Converter\\Link constructor expects Ibexa\\Contracts\\Core\\Repository\\ContentService, PHPUnit\\Framework\\MockObject\\MockObject given\.$#'
-			identifier: argument.type
-			count: 5
 			path: tests/lib/RichText/Converter/LinkTest.php
 
 		-
@@ -1691,42 +1661,6 @@ parameters:
 			identifier: argument.type
 			count: 4
 			path: tests/lib/RichText/Converter/LinkTest.php
-
-		-
-			message: '#^Parameter \#3 \$router of class Ibexa\\FieldTypeRichText\\RichText\\Converter\\Link constructor expects Symfony\\Component\\Routing\\RouterInterface, PHPUnit\\Framework\\MockObject\\MockObject given\.$#'
-			identifier: argument.type
-			count: 5
-			path: tests/lib/RichText/Converter/LinkTest.php
-
-		-
-			message: '#^Call to method expects\(\) on an unknown class Ibexa\\FieldTypeRichText\\RichText\\RendererInterface\.$#'
-			identifier: class.notFound
-			count: 3
-			path: tests/lib/RichText/Converter/Render/EmbedTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Converter\\Render\\EmbedTest\:\:getLoggerMock\(\) has invalid return type LoggerInterface\.$#'
-			identifier: class.notFound
-			count: 1
-			path: tests/lib/RichText/Converter/Render/EmbedTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Converter\\Render\\EmbedTest\:\:getLoggerMock\(\) should return LoggerInterface&PHPUnit\\Framework\\MockObject\\MockObject but returns PHPUnit\\Framework\\MockObject\\MockObject&Psr\\Log\\LoggerInterface\.$#'
-			identifier: return.type
-			count: 1
-			path: tests/lib/RichText/Converter/Render/EmbedTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Converter\\Render\\EmbedTest\:\:getRendererMock\(\) has invalid return type Ibexa\\FieldTypeRichText\\RichText\\RendererInterface\.$#'
-			identifier: class.notFound
-			count: 1
-			path: tests/lib/RichText/Converter/Render/EmbedTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Converter\\Render\\EmbedTest\:\:getRendererMock\(\) should return Ibexa\\FieldTypeRichText\\RichText\\RendererInterface&PHPUnit\\Framework\\MockObject\\MockObject but returns Ibexa\\Contracts\\FieldTypeRichText\\RichText\\RendererInterface&PHPUnit\\Framework\\MockObject\\MockObject\.$#'
-			identifier: return.type
-			count: 1
-			path: tests/lib/RichText/Converter/Render/EmbedTest.php
 
 		-
 			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Converter\\Render\\EmbedTest\:\:providerForTestConvert\(\) return type has no value type specified in iterable type array\.$#'
@@ -1765,60 +1699,6 @@ parameters:
 			path: tests/lib/RichText/Converter/Render/EmbedTest.php
 
 		-
-			message: '#^Parameter \#1 \$renderer of class Ibexa\\FieldTypeRichText\\RichText\\Converter\\Render\\Embed constructor expects Ibexa\\Contracts\\FieldTypeRichText\\RichText\\RendererInterface, Ibexa\\FieldTypeRichText\\RichText\\RendererInterface&PHPUnit\\Framework\\MockObject\\MockObject given\.$#'
-			identifier: argument.type
-			count: 1
-			path: tests/lib/RichText/Converter/Render/EmbedTest.php
-
-		-
-			message: '#^Property Ibexa\\Tests\\FieldTypeRichText\\RichText\\Converter\\Render\\EmbedTest\:\:\$loggerMock \(PHPUnit\\Framework\\MockObject\\MockObject&Psr\\Log\\LoggerInterface\) does not accept LoggerInterface&PHPUnit\\Framework\\MockObject\\MockObject\.$#'
-			identifier: assign.propertyType
-			count: 1
-			path: tests/lib/RichText/Converter/Render/EmbedTest.php
-
-		-
-			message: '#^Property Ibexa\\Tests\\FieldTypeRichText\\RichText\\Converter\\Render\\EmbedTest\:\:\$rendererMock has unknown class Ibexa\\FieldTypeRichText\\RichText\\RendererInterface as its type\.$#'
-			identifier: class.notFound
-			count: 1
-			path: tests/lib/RichText/Converter/Render/EmbedTest.php
-
-		-
-			message: '#^Call to method expects\(\) on an unknown class Ibexa\\FieldTypeRichText\\RichText\\Converter\.$#'
-			identifier: class.notFound
-			count: 1
-			path: tests/lib/RichText/Converter/Render/TemplateTest.php
-
-		-
-			message: '#^Call to method expects\(\) on an unknown class Ibexa\\FieldTypeRichText\\RichText\\RendererInterface\.$#'
-			identifier: class.notFound
-			count: 3
-			path: tests/lib/RichText/Converter/Render/TemplateTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Converter\\Render\\TemplateTest\:\:getConverterMock\(\) has invalid return type Ibexa\\FieldTypeRichText\\RichText\\Converter\.$#'
-			identifier: class.notFound
-			count: 1
-			path: tests/lib/RichText/Converter/Render/TemplateTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Converter\\Render\\TemplateTest\:\:getConverterMock\(\) should return Ibexa\\FieldTypeRichText\\RichText\\Converter&PHPUnit\\Framework\\MockObject\\MockObject but returns Ibexa\\Contracts\\FieldTypeRichText\\RichText\\Converter&PHPUnit\\Framework\\MockObject\\MockObject\.$#'
-			identifier: return.type
-			count: 1
-			path: tests/lib/RichText/Converter/Render/TemplateTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Converter\\Render\\TemplateTest\:\:getRendererMock\(\) has invalid return type Ibexa\\FieldTypeRichText\\RichText\\RendererInterface\.$#'
-			identifier: class.notFound
-			count: 1
-			path: tests/lib/RichText/Converter/Render/TemplateTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Converter\\Render\\TemplateTest\:\:getRendererMock\(\) should return Ibexa\\FieldTypeRichText\\RichText\\RendererInterface&PHPUnit\\Framework\\MockObject\\MockObject but returns Ibexa\\Contracts\\FieldTypeRichText\\RichText\\RendererInterface&PHPUnit\\Framework\\MockObject\\MockObject\.$#'
-			identifier: return.type
-			count: 1
-			path: tests/lib/RichText/Converter/Render/TemplateTest.php
-
-		-
 			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Converter\\Render\\TemplateTest\:\:provideConvertRenderValues\(\) has parameter \$expectedValues with no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
@@ -1846,36 +1726,6 @@ parameters:
 			message: '#^Method PHPUnit\\Framework\\MockObject\\Builder\\InvocationMocker\:\:withConsecutive\(\) invoked with unpacked array with possibly string key, but it''s not allowed because of @no\-named\-arguments\.$#'
 			identifier: argument.named
 			count: 2
-			path: tests/lib/RichText/Converter/Render/TemplateTest.php
-
-		-
-			message: '#^Parameter \#1 \$converters of class Ibexa\\FieldTypeRichText\\RichText\\Converter\\Aggregate constructor expects array\<Ibexa\\Contracts\\FieldTypeRichText\\RichText\\Converter\>, array\<int, \(Ibexa\\FieldTypeRichText\\RichText\\Converter&PHPUnit\\Framework\\MockObject\\MockObject\)\|Ibexa\\FieldTypeRichText\\RichText\\Converter\\Render\\Template\> given\.$#'
-			identifier: argument.type
-			count: 1
-			path: tests/lib/RichText/Converter/Render/TemplateTest.php
-
-		-
-			message: '#^Parameter \#1 \$renderer of class Ibexa\\FieldTypeRichText\\RichText\\Converter\\Render\\Template constructor expects Ibexa\\Contracts\\FieldTypeRichText\\RichText\\RendererInterface, Ibexa\\FieldTypeRichText\\RichText\\RendererInterface&PHPUnit\\Framework\\MockObject\\MockObject given\.$#'
-			identifier: argument.type
-			count: 2
-			path: tests/lib/RichText/Converter/Render/TemplateTest.php
-
-		-
-			message: '#^Parameter \#2 \$richTextConverter of class Ibexa\\FieldTypeRichText\\RichText\\Converter\\Render\\Template constructor expects Ibexa\\Contracts\\FieldTypeRichText\\RichText\\Converter, Ibexa\\FieldTypeRichText\\RichText\\Converter&PHPUnit\\Framework\\MockObject\\MockObject given\.$#'
-			identifier: argument.type
-			count: 1
-			path: tests/lib/RichText/Converter/Render/TemplateTest.php
-
-		-
-			message: '#^Property Ibexa\\Tests\\FieldTypeRichText\\RichText\\Converter\\Render\\TemplateTest\:\:\$converterMock has unknown class Ibexa\\FieldTypeRichText\\RichText\\Converter as its type\.$#'
-			identifier: class.notFound
-			count: 1
-			path: tests/lib/RichText/Converter/Render/TemplateTest.php
-
-		-
-			message: '#^Property Ibexa\\Tests\\FieldTypeRichText\\RichText\\Converter\\Render\\TemplateTest\:\:\$rendererMock has unknown class Ibexa\\FieldTypeRichText\\RichText\\RendererInterface as its type\.$#'
-			identifier: class.notFound
-			count: 1
 			path: tests/lib/RichText/Converter/Render/TemplateTest.php
 
 		-
@@ -2263,12 +2113,6 @@ parameters:
 			path: tests/lib/RichText/Validator/InternalLinkValidatorTest.php
 
 		-
-			message: '#^Call to method expects\(\) on an unknown class Ibexa\\FieldTypeRichText\\RichText\\InputHandlerInterface\.$#'
-			identifier: class.notFound
-			count: 6
-			path: tests/lib/Validator/Constraints/RichTextValidatorTest.php
-
-		-
 			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\Validator\\Constraints\\RichTextValidatorTest\:\:createInvalidXmlExceptionMock\(\) has parameter \$errors with no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
@@ -2283,17 +2127,5 @@ parameters:
 		-
 			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\Validator\\Constraints\\RichTextValidatorTest\:\:fetchErrorMessages\(\) return type has no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
-			count: 1
-			path: tests/lib/Validator/Constraints/RichTextValidatorTest.php
-
-		-
-			message: '#^Property Ibexa\\Tests\\FieldTypeRichText\\Validator\\Constraints\\RichTextValidatorTest\:\:\$inputHandler \(Ibexa\\FieldTypeRichText\\RichText\\InputHandlerInterface&PHPUnit\\Framework\\MockObject\\MockObject\) does not accept Ibexa\\Contracts\\FieldTypeRichText\\RichText\\InputHandlerInterface&PHPUnit\\Framework\\MockObject\\MockObject\.$#'
-			identifier: assign.propertyType
-			count: 1
-			path: tests/lib/Validator/Constraints/RichTextValidatorTest.php
-
-		-
-			message: '#^Property Ibexa\\Tests\\FieldTypeRichText\\Validator\\Constraints\\RichTextValidatorTest\:\:\$inputHandler has unknown class Ibexa\\FieldTypeRichText\\RichText\\InputHandlerInterface as its type\.$#'
-			identifier: class.notFound
 			count: 1
 			path: tests/lib/Validator/Constraints/RichTextValidatorTest.php

@@ -18,15 +18,9 @@ use PHPUnit\Framework\TestCase;
 
 class TemplateTest extends TestCase
 {
-    /**
-     * @var \Ibexa\FieldTypeRichText\RichText\RendererInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $rendererMock;
+    protected RendererInterface&MockObject $rendererMock;
 
-    /**
-     * @var \Ibexa\FieldTypeRichText\RichText\Converter|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $converterMock;
+    protected Converter&MockObject $converterMock;
 
     public function setUp(): void
     {
@@ -170,18 +164,12 @@ class TemplateTest extends TestCase
         );
     }
 
-    /**
-     * @return \Ibexa\FieldTypeRichText\RichText\RendererInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected function getRendererMock(): MockObject
+    protected function getRendererMock(): RendererInterface&MockObject
     {
         return $this->createMock(RendererInterface::class);
     }
 
-    /**
-     * @return \Ibexa\FieldTypeRichText\RichText\Converter|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected function getConverterMock(): MockObject
+    protected function getConverterMock(): Converter&MockObject
     {
         return $this->createMock(Converter::class);
     }

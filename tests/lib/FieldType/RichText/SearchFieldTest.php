@@ -14,19 +14,20 @@ use Ibexa\Contracts\Core\Persistence\Content\Type\FieldDefinition;
 use Ibexa\Contracts\Core\Search;
 use Ibexa\Contracts\FieldTypeRichText\RichText\TextExtractorInterface;
 use Ibexa\FieldTypeRichText\FieldType\RichText\SearchField;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 final class SearchFieldTest extends TestCase
 {
-    /** @var \Ibexa\FieldTypeRichText\FieldType\RichText\SearchField */
     private SearchField $searchField;
 
-    /** @var \Ibexa\Contracts\FieldTypeRichText\RichText\TextExtractorInterface&\PHPUnit\Framework\MockObject\MockObject */
-    private TextExtractorInterface $shortTextExtractor;
+    private TextExtractorInterface&MockObject $shortTextExtractor;
 
-    /** @var \Ibexa\Contracts\FieldTypeRichText\RichText\TextExtractorInterface&\PHPUnit\Framework\MockObject\MockObject */
-    private TextExtractorInterface $fullTextExtractor;
+    private TextExtractorInterface&MockObject $fullTextExtractor;
 
+    /**
+     * @return array<string, array{string, \Ibexa\Contracts\Core\Search\Field[], string[]}>
+     */
     public function getDataForTestGetIndexData(): array
     {
         $simpleStubShortTextValue = 'Welcome to Ibexa';

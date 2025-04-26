@@ -68,10 +68,7 @@ class RichTextTest extends TestCase
         return $fieldType;
     }
 
-    /**
-     * @return \PHPUnit\Framework\MockObject\MockObject
-     */
-    protected function getTransformationProcessorMock(): MockObject
+    protected function getTransformationProcessorMock(): TransformationProcessor&MockObject
     {
         return $this->getMockForAbstractClass(
             TransformationProcessor::class,

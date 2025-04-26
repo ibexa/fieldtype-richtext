@@ -21,19 +21,10 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 class RichTextValidatorTest extends TestCase
 {
-    /**
-     * @var \Ibexa\FieldTypeRichText\RichText\InputHandlerInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
-    private MockObject $inputHandler;
+    private InputHandlerInterface&MockObject $inputHandler;
 
-    /**
-     * @var \Symfony\Component\Validator\Context\ExecutionContextInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
-    private MockObject $executionContext;
+    private ExecutionContextInterface&MockObject $executionContext;
 
-    /**
-     * @var \Ibexa\FieldTypeRichText\Validator\Constraints\RichTextValidator
-     */
     private RichTextValidator $validator;
 
     protected function setUp(): void

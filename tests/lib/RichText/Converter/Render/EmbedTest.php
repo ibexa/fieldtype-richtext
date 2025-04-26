@@ -17,6 +17,10 @@ use Psr\Log\LoggerInterface;
 
 class EmbedTest extends TestCase
 {
+    protected RendererInterface&MockObject $rendererMock;
+
+    protected LoggerInterface&MockObject $loggerMock;
+
     public function setUp(): void
     {
         $this->rendererMock = $this->getRendererMock();
@@ -860,28 +864,12 @@ class EmbedTest extends TestCase
         );
     }
 
-    /**
-     * @var \Ibexa\FieldTypeRichText\RichText\RendererInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $rendererMock;
-
-    /**
-     * @return \PHPUnit\Framework\MockObject\MockObject|\Ibexa\FieldTypeRichText\RichText\RendererInterface
-     */
-    protected function getRendererMock(): MockObject
+    protected function getRendererMock(): RendererInterface&MockObject
     {
         return $this->createMock(RendererInterface::class);
     }
 
-    /**
-     * @var \Psr\Log\LoggerInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $loggerMock;
-
-    /**
-     * @return \PHPUnit\Framework\MockObject\MockObject|\LoggerInterface
-     */
-    protected function getLoggerMock(): MockObject
+    protected function getLoggerMock(): LoggerInterface&MockObject
     {
         return $this->createMock(LoggerInterface::class);
     }
