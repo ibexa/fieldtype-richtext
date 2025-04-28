@@ -1,4 +1,4 @@
-import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
+import { Plugin } from 'ckeditor5';
 
 import IbexaBlockAlignmentUI from './block-alignment-ui';
 import IbexaBlockAlignmentEditing from './block-alignment-editing';

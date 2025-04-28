@@ -1,4 +1,4 @@
-import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
+import { Plugin } from 'ckeditor5';
 
 import IbexaCustomStylesInlineUI from './custom-style-inline-ui';
 import IbexaCustomStylesInlineEditing from './custom-style-inline-editing';

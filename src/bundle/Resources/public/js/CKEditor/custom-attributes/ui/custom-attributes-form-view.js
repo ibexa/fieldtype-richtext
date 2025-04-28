@@ -1,11 +1,13 @@
-import View from '@ckeditor/ckeditor5-ui/src/view';
-import ButtonView from '@ckeditor/ckeditor5-ui/src/button/buttonview';
-import LabeledFieldView from '@ckeditor/ckeditor5-ui/src/labeledfield/labeledfieldview';
-
-import Model from '@ckeditor/ckeditor5-ui/src/model';
-import Collection from '@ckeditor/ckeditor5-utils/src/collection';
-import { createLabeledInputText, createLabeledDropdown } from '@ckeditor/ckeditor5-ui/src/labeledfield/utils';
-import { addListToDropdown } from '@ckeditor/ckeditor5-ui/src/dropdown/utils';
+import {
+    View,
+    ButtonView,
+    LabeledFieldView,
+    ViewModel,
+    Collection,
+    createLabeledInputText,
+    createLabeledDropdown,
+    addListToDropdown,
+} from 'ckeditor5';
 
 import { getTranslator } from '@ibexa-admin-ui/src/bundle/Resources/public/js/scripts/helpers/context.helper';
 
@@ -203,7 +205,7 @@ class IbexaCustomAttributesFormView extends View {
         if (!config.multiple && !config.required) {
             itemsList.add({
                 type: 'button',
-                model: new Model({
+                model: new ViewModel({
                     withText: true,
                     label: Translator.trans(/*@Desc("None")*/ 'dropdown.none.label', {}, 'ck_editor'),
                     value: null,
@@ -214,7 +216,7 @@ class IbexaCustomAttributesFormView extends View {
         config.choices.forEach((choice) => {
             itemsList.add({
                 type: config.multiple ? 'switchbutton' : 'button',
-                model: new Model({
+                model: new ViewModel({
                     withText: true,
                     label: choice,
                     value: choice,

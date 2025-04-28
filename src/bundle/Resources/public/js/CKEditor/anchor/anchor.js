@@ -1,4 +1,4 @@
-import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
+import { Plugin } from 'ckeditor5';
 
 import IbexaAnchorUI from './anchor-ui';
 import IbexaAnchorEditing from './anchor-editing';

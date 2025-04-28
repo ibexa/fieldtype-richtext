@@ -1,5 +1,4 @@
-import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
-import Widget from '@ckeditor/ckeditor5-widget/src/widget';
+import { Plugin, Widget } from 'ckeditor5';
 
 import IbexaBlockAlignmentCommand from './block-alignment-command';
 

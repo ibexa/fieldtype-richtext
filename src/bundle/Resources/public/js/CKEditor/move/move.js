@@ -1,4 +1,4 @@
-import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
+import { Plugin } from 'ckeditor5';
 
 import IbexaMoveUpUI from './move-up-ui';
 import IbexaMoveDownUI from './move-down-ui';

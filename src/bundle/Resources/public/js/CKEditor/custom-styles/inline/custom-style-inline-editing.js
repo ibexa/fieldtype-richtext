@@ -1,7 +1,5 @@
-import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
-import Widget from '@ckeditor/ckeditor5-widget/src/widget';
+import { Plugin, Widget, AttributeCommand } from 'ckeditor5';
 
-import AttributeCommand from '@ckeditor/ckeditor5-basic-styles/src/attributecommand';
 import IbexaCustomStyleInlineCommand from './custom-style-inline-command';
 
 class IbexaCustomStyleInlineEditing extends Plugin {
