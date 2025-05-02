@@ -19,7 +19,7 @@ class LegacySetupFactory extends CoreLegacySetupFactory
 {
     use RichTextSetupFactoryTrait;
 
-    protected function externalBuildContainer(ContainerBuilder $containerBuilder)
+    protected function externalBuildContainer(ContainerBuilder $containerBuilder): void
     {
         parent::externalBuildContainer($containerBuilder);
 
