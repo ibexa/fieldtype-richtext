@@ -44,7 +44,7 @@ class DoctrineStorage extends Gateway
                 )
                 ->from('ezcontentobject')
                 ->where($query->expr()->in('remote_id', ':remoteIds'))
-                ->setParameter(':remoteIds', $remoteIds, Connection::PARAM_STR_ARRAY)
+                ->setParameter('remoteIds', $remoteIds, Connection::PARAM_STR_ARRAY)
             ;
 
             $statement = $query->executeQuery();
