@@ -47,8 +47,8 @@ class DoctrineStorage extends Gateway
                 ->setParameter(':remoteIds', $remoteIds, Connection::PARAM_STR_ARRAY)
             ;
 
-            $statement = $query->execute();
-            foreach ($statement->fetchAll(\PDO::FETCH_ASSOC) as $row) {
+            $statement = $query->executeQuery();
+            foreach ($statement->fetchAllAssociative() as $row) {
                 $objectRemoteIdMap[$row['remote_id']] = $row['id'];
             }
         }
