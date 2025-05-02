@@ -9,7 +9,6 @@ declare(strict_types=1);
 namespace Ibexa\Tests\Integration\FieldTypeRichText\Repository;
 
 use DirectoryIterator;
-use Doctrine\DBAL\FetchMode;
 use Doctrine\DBAL\ParameterType;
 use DOMDocument;
 use Ibexa\Contracts\Core\Repository\Exceptions\ContentFieldValidationException;
@@ -694,10 +693,10 @@ EOT;
             )
             ->from(DoctrineDatabase::URL_TABLE)
             ->where('url = :url')
-            ->setParameter(':url', $link, ParameterType::STRING)
+            ->setParameter('url', $link, ParameterType::STRING)
         ;
 
-        $id = $query->execute()->fetchOne();
+        $id = $query->executeQuery()->fetchOne();
 
         if ($id === false) {
             throw new NotFoundException('ezurl', $link);
@@ -760,18 +759,18 @@ EOT;
             ->from('ezurl_object_link')
             ->where('contentobject_attribute_id = :contentobject_attribute_id')
             ->andWhere('contentobject_attribute_version = :contentobject_attribute_version')
-            ->setParameter(':contentobject_attribute_version', $versionNo, ParameterType::INTEGER)
+            ->setParameter('contentobject_attribute_version', $versionNo, ParameterType::INTEGER)
             ->setParameter(
-                ':contentobject_attribute_id',
+                'contentobject_attribute_id',
                 $contentObjectAttributeId,
                 ParameterType::INTEGER
             );
 
-        $statement = $query->execute();
+        $statement = $query->executeQuery();
 
         return array_map(
             'intval',
-            array_column($statement->fetchAll(FetchMode::ASSOCIATIVE), 'url_id')
+            array_column($statement->fetchAllAssociative(), 'url_id')
         );
     }
 
