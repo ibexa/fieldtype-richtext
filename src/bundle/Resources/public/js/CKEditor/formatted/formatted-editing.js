@@ -2,6 +2,8 @@ import { Plugin, UpcastWriter, Widget } from 'ckeditor5';
 
 import IbexaFormattedCommand from './formatted-command';
 
+// copied from ckeditor5-code-block/src/utils
+// CKE does not provide a way to import it
 function rawSnippetTextToViewDocumentFragment(writer, text) {
     const fragment = writer.createDocumentFragment();
     const textLines = text.split('\n');
