@@ -1,4 +1,4 @@
-import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
+import { Plugin } from 'ckeditor5';
 
 import IbexaCustomTagsUI from './block-custom-tag/custom-tag-ui';
 import IbexaInlineCustomTagsUI from './inline-custom-tag/inline-custom-tag-ui';

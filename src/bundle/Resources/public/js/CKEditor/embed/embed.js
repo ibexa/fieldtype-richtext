@@ -1,4 +1,4 @@
-import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
+import { Plugin } from 'ckeditor5';
 
 import IbexaEmbedContentEditing from './content/embed-editing';
 import IbexaEmbedContentInlineEditing from './content-inline/embed-inline-editing';

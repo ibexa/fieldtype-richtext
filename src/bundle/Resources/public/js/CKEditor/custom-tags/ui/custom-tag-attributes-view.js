@@ -1,4 +1,5 @@
-import View from '@ckeditor/ckeditor5-ui/src/view';
+import { View } from 'ckeditor5';
+
 import IbexaButtonView from '../../common/button-view/button-view';
 
 class IbexaCustomTagAttributesView extends View {

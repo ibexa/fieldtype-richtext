@@ -1,7 +1,4 @@
-import View from '@ckeditor/ckeditor5-ui/src/view';
-import ButtonView from '@ckeditor/ckeditor5-ui/src/button/buttonview';
-import LabeledFieldView from '@ckeditor/ckeditor5-ui/src/labeledfield/labeledfieldview';
-import { createLabeledInputText } from '@ckeditor/ckeditor5-ui/src/labeledfield/utils';
+import { View, ButtonView, LabeledFieldView, createLabeledInputText } from 'ckeditor5';
 
 class IbexaLinkFormView extends View {
     constructor(props) {
