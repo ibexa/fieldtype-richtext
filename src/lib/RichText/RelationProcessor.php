@@ -11,6 +11,7 @@ namespace Ibexa\FieldTypeRichText\RichText;
 use DOMDocument;
 use DOMXPath;
 use Ibexa\Contracts\Core\Repository\Values\Content\Relation;
+use Ibexa\Contracts\Core\Repository\Values\Content\RelationType;
 
 final class RelationProcessor
 {
@@ -50,8 +51,8 @@ final class RelationProcessor
     public function getRelations(DOMDocument $doc): array
     {
         return [
-            Relation::LINK => $this->getRelatedObjectIds($doc, self::LINK_TAG_NAMES),
-            Relation::EMBED => $this->getRelatedObjectIds($doc, self::EMBED_TAG_NAMES),
+            RelationType::LINK->value => $this->getRelatedObjectIds($doc, self::LINK_TAG_NAMES),
+            RelationType::EMBED->value => $this->getRelatedObjectIds($doc, self::EMBED_TAG_NAMES),
         ];
     }
 

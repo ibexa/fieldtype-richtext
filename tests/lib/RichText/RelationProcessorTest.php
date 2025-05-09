@@ -9,7 +9,7 @@ declare(strict_types=1);
 namespace Ibexa\Tests\FieldTypeRichText\RichText;
 
 use DOMDocument;
-use Ibexa\Contracts\Core\Repository\Values\Content\Relation;
+use Ibexa\Contracts\Core\Repository\Values\Content\RelationType;
 use Ibexa\FieldTypeRichText\RichText\RelationProcessor;
 use PHPUnit\Framework\TestCase;
 
@@ -53,11 +53,11 @@ EOT;
             [
                 $this->createDOMDocument($xml),
                 [
-                    Relation::LINK => [
+                    RelationType::LINK->value => [
                         'locationIds' => [72, 61],
                         'contentIds' => [70, 75],
                     ],
-                    Relation::EMBED => [
+                    RelationType::EMBED->value => [
                         'locationIds' => [],
                         'contentIds' => [],
                     ],

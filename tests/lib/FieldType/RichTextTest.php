@@ -10,7 +10,7 @@ namespace Ibexa\Tests\FieldTypeRichText\FieldType;
 
 use Exception;
 use Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException as ApiInvalidArgumentException;
-use Ibexa\Contracts\Core\Repository\Values\Content\Relation;
+use Ibexa\Contracts\Core\Repository\Values\Content\RelationType;
 use Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition as APIFieldDefinition;
 use Ibexa\Contracts\FieldTypeRichText\RichText\TextExtractorInterface;
 use Ibexa\Core\Base\Exceptions\InvalidArgumentException;
@@ -461,11 +461,11 @@ EOT;
         $fieldType = $this->getFieldType();
         self::assertEquals(
             [
-                Relation::LINK => [
+                RelationType::LINK->value => [
                     'locationIds' => [72, 61],
                     'contentIds' => [70, 75],
                 ],
-                Relation::EMBED => [
+                RelationType::EMBED->value => [
                     'locationIds' => [],
                     'contentIds' => [],
                 ],

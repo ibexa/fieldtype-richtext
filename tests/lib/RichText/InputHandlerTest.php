@@ -9,7 +9,7 @@ declare(strict_types=1);
 namespace Ibexa\Tests\FieldTypeRichText\RichText;
 
 use DOMDocument;
-use Ibexa\Contracts\Core\Repository\Values\Content\Relation;
+use Ibexa\Contracts\Core\Repository\Values\Content\RelationType;
 use Ibexa\Contracts\FieldTypeRichText\RichText\ValidatorInterface;
 use Ibexa\Core\Base\Exceptions\InvalidArgumentException;
 use Ibexa\FieldTypeRichText\RichText\ConverterDispatcher;
@@ -172,11 +172,11 @@ EOT;
         $document->loadXML($xml);
 
         self::assertEquals([
-            Relation::LINK => [
+            RelationType::LINK->value => [
                 'locationIds' => [72, 61],
                 'contentIds' => [70, 75],
             ],
-            Relation::EMBED => [
+            RelationType::EMBED->value => [
                 'locationIds' => [],
                 'contentIds' => [],
             ],
