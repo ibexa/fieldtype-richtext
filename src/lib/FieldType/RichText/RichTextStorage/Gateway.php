@@ -46,6 +46,8 @@ abstract class Gateway extends StorageGateway
      */
     public function getIdUrlMap(array $ids)
     {
+        $ids = array_map(intval(...), $ids);
+
         return $this->urlGateway->getIdUrlMap($ids);
     }
 
@@ -84,7 +86,7 @@ abstract class Gateway extends StorageGateway
      */
     public function linkUrl($urlId, $fieldId, $versionNo): void
     {
-        $this->urlGateway->linkUrl($urlId, $fieldId, $versionNo);
+        $this->urlGateway->linkUrl((int)$urlId, (int)$fieldId, $versionNo);
     }
 
     /**
@@ -96,6 +98,6 @@ abstract class Gateway extends StorageGateway
      */
     public function unlinkUrl($fieldId, $versionNo, array $excludeUrlIds = []): void
     {
-        $this->urlGateway->unlinkUrl($fieldId, $versionNo, $excludeUrlIds);
+        $this->urlGateway->unlinkUrl((int)$fieldId, $versionNo, $excludeUrlIds);
     }
 }

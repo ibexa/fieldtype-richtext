@@ -12,6 +12,7 @@ use DOMDocument;
 use DOMXPath;
 use Ibexa\Contracts\Core\FieldType\GatewayBasedStorage;
 use Ibexa\Contracts\Core\FieldType\StorageGateway;
+use Ibexa\Contracts\Core\FieldType\StorageGatewayInterface;
 use Ibexa\Contracts\Core\Persistence\Content\Field;
 use Ibexa\Contracts\Core\Persistence\Content\VersionInfo;
 use Ibexa\Core\Base\Exceptions\NotFoundException;
@@ -24,7 +25,7 @@ class RichTextStorage extends GatewayBasedStorage
     /**
      * @var \Ibexa\FieldTypeRichText\FieldType\RichText\RichTextStorage\Gateway
      */
-    protected $gateway;
+    protected StorageGatewayInterface $gateway;
 
     /**
      * @param \Ibexa\Contracts\Core\FieldType\StorageGateway $gateway
