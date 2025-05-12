@@ -54,6 +54,6 @@ class IbexaFieldTypeRichTextBundle extends Bundle
             $this->extension = new IbexaFieldTypeRichTextExtension();
         }
 
-        return $this->extension;
+        return $this->extension ?: null;
     }
 }
