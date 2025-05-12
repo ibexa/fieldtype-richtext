@@ -1,11 +1,13 @@
-import View from '@ckeditor/ckeditor5-ui/src/view';
-import ButtonView from '@ckeditor/ckeditor5-ui/src/button/buttonview';
-import LabeledFieldView from '@ckeditor/ckeditor5-ui/src/labeledfield/labeledfieldview';
-
-import Model from '@ckeditor/ckeditor5-ui/src/model';
-import Collection from '@ckeditor/ckeditor5-utils/src/collection';
-import { createLabeledInputText, createLabeledDropdown } from '@ckeditor/ckeditor5-ui/src/labeledfield/utils';
-import { addListToDropdown } from '@ckeditor/ckeditor5-ui/src/dropdown/utils';
+import {
+    View,
+    ButtonView,
+    LabeledFieldView,
+    ViewModel,
+    Collection,
+    createLabeledInputText,
+    createLabeledDropdown,
+    addListToDropdown,
+} from 'ckeditor5';
 
 import { createLabeledInputNumber } from '../../common/input-number/utils';
 import { createLabeledSwitchButton } from '../../common/switch-button/utils';
@@ -207,7 +209,7 @@ class IbexaCustomTagFormView extends View {
         config.choices.forEach((choice) => {
             itemsList.add({
                 type: 'button',
-                model: new Model({
+                model: new ViewModel({
                     withText: true,
                     label: config.choicesLabel[choice],
                     value: choice,

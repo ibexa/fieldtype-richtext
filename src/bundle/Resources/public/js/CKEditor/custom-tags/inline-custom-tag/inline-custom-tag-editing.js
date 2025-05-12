@@ -1,7 +1,4 @@
-import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
-import Widget from '@ckeditor/ckeditor5-widget/src/widget';
-import { toWidget } from '@ckeditor/ckeditor5-widget/src/utils';
-import Element from '@ckeditor/ckeditor5-engine/src/view/element';
+import { Plugin, Widget, toWidget, Element } from 'ckeditor5';
 
 import IbexaInlineCustomTagCommand from './inline-custom-tag-command';
 

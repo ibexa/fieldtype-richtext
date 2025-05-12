@@ -1,4 +1,4 @@
-import SwitchButtonView from '@ckeditor/ckeditor5-ui/src/button/switchbuttonview';
+import { SwitchButtonView } from 'ckeditor5';
 
 export function createLabeledSwitchButton(labeledFieldView, viewUid, statusUid) {
     const switchButtonView = new SwitchButtonView(labeledFieldView.locale);

@@ -1,7 +1,4 @@
-import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
-import clickOutsideHandler from '@ckeditor/ckeditor5-ui/src/bindings/clickoutsidehandler';
-import ClickObserver from '@ckeditor/ckeditor5-engine/src/view/observer/clickobserver';
-import findAttributeRange from '@ckeditor/ckeditor5-typing/src/utils/findattributerange';
+import { Plugin, clickOutsideHandler, ClickObserver, findAttributeRange } from 'ckeditor5';
 
 import IbexaLinkFormView from './ui/link-form-view';
 import IbexaButtonView from '../common/button-view/button-view';

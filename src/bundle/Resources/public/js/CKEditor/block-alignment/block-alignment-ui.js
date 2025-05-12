@@ -1,5 +1,4 @@
-import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
-import ClickObserver from '@ckeditor/ckeditor5-engine/src/view/observer/clickobserver';
+import { Plugin, ClickObserver } from 'ckeditor5';
 
 import IbexaButtonView from '../common/button-view/button-view';
 

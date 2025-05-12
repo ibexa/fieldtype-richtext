@@ -1,4 +1,4 @@
-import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
+import { Plugin } from 'ckeditor5';
 
 import IbexaUploadImageEditing from './upload-image-editing';
 import IbexaUploadImageUI from './upload-image-ui';

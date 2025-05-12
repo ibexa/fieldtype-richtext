@@ -1,4 +1,4 @@
-import IconView from '@ckeditor/ckeditor5-ui/src/icon/iconview';
+import { IconView } from 'ckeditor5';
 
 export default class IbexaIconView extends IconView {
     render() {
