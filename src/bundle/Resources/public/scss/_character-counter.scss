@@ -1,3 +1,5 @@
+@use 'functions/calculate.rem' as *;
+
 .ibexa-character-counter {
     position: relative;
     border-bottom-left-radius: calculateRem(5px);

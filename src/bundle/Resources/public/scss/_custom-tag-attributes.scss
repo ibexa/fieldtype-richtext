@@ -1,3 +1,7 @@
+@use 'variables/vars' as *;
+@use 'variables/colors' as *;
+@use 'functions/calculate.rem' as *;
+
 .ibexa-custom-tag-attributes {
     .ck.ck-reset_all & {
         min-width: calculateRem(400px);

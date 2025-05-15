@@ -1,7 +1,7 @@
-@import './public/bundles/ibexaadminui/scss/polyfill/div';
+@use '@ibexa-admin-ui/src/bundle/Resources/public/scss/polyfill/div' as *;
 
 @function calculateRem($size) {
     $remSize: div($size, 16px);
 
-    @return #{$remSize}rem;
+    @return $remSize + 0rem;
 }
