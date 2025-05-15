@@ -1,3 +1,7 @@
+@use 'variables/vars' as *;
+@use 'variables/colors' as *;
+@use 'functions/calculate.rem' as *;
+
 .ibexa-richtext-tools {
     display: flex;
     justify-content: space-between;

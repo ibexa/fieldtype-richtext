@@ -1,3 +1,7 @@
+@use 'variables/vars' as *;
+@use 'variables/colors' as *;
+@use 'functions/calculate.rem' as *;
+
 .ibexa-field-edit--ezrichtext .ibexa-data-source,
 .ibexa-data-source--richtext {
     border: calculateRem(1px) solid $ibexa-color-dark-200;

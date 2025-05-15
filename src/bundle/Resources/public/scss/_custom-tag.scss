@@ -1,3 +1,7 @@
+@use 'variables/vars' as *;
+@use 'variables/colors' as *;
+@use 'functions/calculate.rem' as *;
+
 .ibexa-custom-tag {
     position: relative;
     padding: calculateRem(32px) calculateRem(10px) calculateRem(10px);
