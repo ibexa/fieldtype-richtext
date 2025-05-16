@@ -53,4 +53,4 @@ services:
 
     Ibexa\FieldTypeRichText\Configuration\AggregateProvider:
         arguments:
-            $providers: !tagged ibexa.field_type.richtext.configuration.provider
+            $providers: !tagged_iterator ibexa.field_type.richtext.configuration.provider
