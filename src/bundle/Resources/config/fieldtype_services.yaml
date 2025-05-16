@@ -85,7 +85,7 @@ services:
 
     Ibexa\FieldTypeRichText\RichText\Validator\ValidatorAggregate:
         class: Ibexa\FieldTypeRichText\RichText\Validator\ValidatorAggregate
-        arguments: [!tagged ibexa.field_type.richtext.validator.input.xhtml5]
+        arguments: [!tagged_iterator ibexa.field_type.richtext.validator.input.xhtml5]
 
     ibexa.richtext.validator.docbook:
         class: Ibexa\FieldTypeRichText\RichText\Validator\Validator
