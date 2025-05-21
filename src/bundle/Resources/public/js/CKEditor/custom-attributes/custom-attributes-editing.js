@@ -57,15 +57,21 @@ class IbexaCustomAttributesEditing extends Plugin {
                     });
 
                     this.editor.conversion.for('upcast').add((dispatcher) => {
-                        dispatcher.on('element:li', (event, data, conversionApi) => {
-                            Object.assign(data, conversionApi.convertChildren(data.viewItem, data.modelCursor));
+                        const customAttributeUpcastConverter = (event, data, conversionApi) => {
+                            if (!data.modelRange) {
+                                Object.assign(data, conversionApi.convertChildren(data.viewItem, data.modelCursor));
+                            }
 
-                            const listParent = data.viewItem.parent;
-                            const listItem = data.modelRange.start.nodeAfter || data.modelRange.end.nodeBefore;
+                            const listParent = data.viewItem;
                             const attributeValue = listParent.getAttribute(`data-ezattribute-${customAttributeName}`);
 
-                            conversionApi.writer.setAttribute(`list-${customAttributeName}`, attributeValue, listItem);
-                        });
+                            for (const listItem of data.modelRange.getItems({ shallow: true })) {
+                                conversionApi.writer.setAttribute(`list-${customAttributeName}`, attributeValue, listItem);
+                            }
+                        };
+
+                        dispatcher.on('element:ul', customAttributeUpcastConverter);
+                        dispatcher.on('element:ol', customAttributeUpcastConverter);
                     });
 
                     return;
@@ -122,15 +128,21 @@ class IbexaCustomAttributesEditing extends Plugin {
         });
 
         this.editor.conversion.for('upcast').add((dispatcher) => {
-            dispatcher.on('element:li', (event, data, conversionApi) => {
-                Object.assign(data, conversionApi.convertChildren(data.viewItem, data.modelCursor));
+            const customClassesUpcastConverter = (event, data, conversionApi) => {
+                if (!data.modelRange) {
+                    Object.assign(data, conversionApi.convertChildren(data.viewItem, data.modelCursor));
+                }
 
-                const listParent = data.viewItem.parent;
-                const listItem = data.modelRange.start.nodeAfter || data.modelRange.end.nodeBefore;
+                const listParent = data.viewItem;
                 const classes = listParent.getAttribute('class');
 
-                conversionApi.writer.setAttribute('list-custom-classes', classes, listItem);
-            });
+                for (const listItem of data.modelRange.getItems({ shallow: true })) {
+                    conversionApi.writer.setAttribute('list-custom-classes', classes, listItem);
+                }
+            };
+
+            dispatcher.on('element:ul', customClassesUpcastConverter);
+            dispatcher.on('element:ol', customClassesUpcastConverter);
         });
     }
 
