@@ -58,6 +58,8 @@ class IbexaCustomAttributesEditing extends Plugin {
 
                     this.editor.conversion.for('upcast').add((dispatcher) => {
                         dispatcher.on('element:li', (event, data, conversionApi) => {
+                            Object.assign(data, conversionApi.convertChildren(data.viewItem, data.modelCursor));
+
                             const listParent = data.viewItem.parent;
                             const listItem = data.modelRange.start.nodeAfter || data.modelRange.end.nodeBefore;
                             const attributeValue = listParent.getAttribute(`data-ezattribute-${customAttributeName}`);
@@ -121,6 +123,8 @@ class IbexaCustomAttributesEditing extends Plugin {
 
         this.editor.conversion.for('upcast').add((dispatcher) => {
             dispatcher.on('element:li', (event, data, conversionApi) => {
+                Object.assign(data, conversionApi.convertChildren(data.viewItem, data.modelCursor));
+
                 const listParent = data.viewItem.parent;
                 const listItem = data.modelRange.start.nodeAfter || data.modelRange.end.nodeBefore;
                 const classes = listParent.getAttribute('class');
