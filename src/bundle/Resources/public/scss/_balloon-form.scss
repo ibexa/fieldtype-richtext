@@ -236,10 +236,10 @@
     }
 
     .ck-toolbar-container {
-        z-index: calc(var(--ck-z-modal) + 50);
+        z-index: calc(var(--ck-z-panel) + 50);
 
         &.ck-balloon-panel_with-arrow {
-            z-index: calc(var(--ck-z-modal) + 55);
+            z-index: calc(var(--ck-z-panel) + 55);
         }
 
         &.ck-balloon-panel {
