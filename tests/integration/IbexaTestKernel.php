@@ -17,6 +17,7 @@ use Ibexa\Bundle\FieldTypeRichText\IbexaFieldTypeRichTextBundle;
 use Ibexa\Bundle\Notifications\IbexaNotificationsBundle;
 use Ibexa\Bundle\Rest\IbexaRestBundle;
 use Ibexa\Bundle\Search\IbexaSearchBundle;
+use Ibexa\Bundle\TwigComponents\IbexaTwigComponentsBundle;
 use Ibexa\Bundle\User\IbexaUserBundle;
 use Ibexa\Contracts\FieldTypeRichText\Persistence\Legacy\MigrateRichTextNamespaces\GatewayInterface;
 use Ibexa\Contracts\Test\Core\IbexaTestKernel as BaseIbexaTestKernel;
@@ -49,6 +50,7 @@ final class IbexaTestKernel extends BaseIbexaTestKernel
         yield new IbexaDesignEngineBundle();
         yield new IbexaAdminUiBundle();
         yield new IbexaNotificationsBundle();
+        yield new IbexaTwigComponentsBundle();
 
         yield new IbexaFieldTypeRichTextBundle();
         yield new DAMADoctrineTestBundle();

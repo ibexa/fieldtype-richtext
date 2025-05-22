@@ -41,6 +41,7 @@
         "ibexa/search": "~5.0.x-dev",
         "ibexa/solr": "~5.0.x-dev",
         "ibexa/test-core": "~5.0.x-dev",
+        "ibexa/twig-components": "~5.0.x-dev",
         "ibexa/user": "~5.0.x-dev",
         "matthiasnoback/symfony-config-test": "^5.0",
         "matthiasnoback/symfony-dependency-injection-test": "^5.0",
