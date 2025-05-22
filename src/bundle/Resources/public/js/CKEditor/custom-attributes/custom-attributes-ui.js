@@ -1,5 +1,4 @@
-import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
-import clickOutsideHandler from '@ckeditor/ckeditor5-ui/src/bindings/clickoutsidehandler';
+import { Plugin, clickOutsideHandler } from 'ckeditor5';
 
 import IbexaCustomAttributesFormView from './ui/custom-attributes-form-view';
 import IbexaButtonView from '../common/button-view/button-view';

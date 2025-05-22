@@ -1,4 +1,4 @@
-import ButtonView from '@ckeditor/ckeditor5-ui/src/button/buttonview';
+import { ButtonView } from 'ckeditor5';
 
 import IbexaIconView from '../icon-view/icon-view';
 
@@ -7,5 +7,7 @@ export default class IbexaButtonView extends ButtonView {
         super(locale);
 
         this.iconView = new IbexaIconView();
+
+        this.iconView.bind('content').to(this, 'icon');
     }
 }

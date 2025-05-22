@@ -1,4 +1,4 @@
-import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
+import { Plugin } from 'ckeditor5';
 
 import IbexaCustomAttributesUI from './custom-attributes-ui';
 import IbexaCustomAttributesEditing from './custom-attributes-editing';

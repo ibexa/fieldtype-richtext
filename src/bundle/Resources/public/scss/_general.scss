@@ -291,7 +291,7 @@
     }
 
     &.ck-toolbar-container.ck-balloon-panel {
-        z-index: var(--ck-z-modal) - 1;
+        z-index: var(--ck-z-panel) - 1;
     }
 
     &.ck-toolbar-container &.ck-toolbar {
@@ -311,6 +311,6 @@
     }
 
     .ck-body-wrapper &.ck-balloon-panel {
-        z-index: calc(var(--ck-z-modal) + 100);
+        z-index: calc(var(--ck-z-panel) + 100);
     }
 }

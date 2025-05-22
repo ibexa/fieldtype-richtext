@@ -1,7 +1,4 @@
-import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
-import { createDropdown, addListToDropdown } from '@ckeditor/ckeditor5-ui/src/dropdown/utils';
-import Model from '@ckeditor/ckeditor5-ui/src/model';
-import Collection from '@ckeditor/ckeditor5-utils/src/collection';
+import { Plugin, createDropdown, addListToDropdown, ViewModel, Collection } from 'ckeditor5';
 
 class IbexaEmbedImageVariationsUI extends Plugin {
     constructor(props) {
@@ -35,7 +32,7 @@ class IbexaEmbedImageVariationsUI extends Plugin {
             Object.keys(window.ibexa.adminUiConfig.imageVariations).forEach((variation) => {
                 itemDefinitions.add({
                     type: 'button',
-                    model: new Model({
+                    model: new ViewModel({
                         label: variation,
                         variation: variation,
                         withText: true,

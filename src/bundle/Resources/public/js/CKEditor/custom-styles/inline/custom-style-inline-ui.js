@@ -1,7 +1,4 @@
-import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
-import { createDropdown, addListToDropdown } from '@ckeditor/ckeditor5-ui/src/dropdown/utils';
-import Model from '@ckeditor/ckeditor5-ui/src/model';
-import Collection from '@ckeditor/ckeditor5-utils/src/collection';
+import { Plugin, createDropdown, addListToDropdown, ViewModel, Collection } from 'ckeditor5';
 
 const { Translator, ibexa } = window;
 
@@ -17,7 +14,7 @@ class IbexaCustomStyleInlineUI extends Plugin {
         const customStyleInlineCommand = editor.commands.get('ibexaCustomStyleInline');
         const buttonDef = {
             type: 'button',
-            model: new Model({
+            model: new ViewModel({
                 label: config.label,
                 tooltip: true,
                 isToggleable: true,

@@ -1,4 +1,4 @@
-import InputTextView from '@ckeditor/ckeditor5-ui/src/inputtext/inputtextview';
+import { InputTextView } from 'ckeditor5';
 
 export default class InputNumberView extends InputTextView {
     constructor(locale) {

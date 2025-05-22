@@ -14,21 +14,23 @@ import IbexaRemoveElement from '../remove-element/remove-element';
 import IbexaBlockAlignment from '../block-alignment/block-alignment';
 import IbexaUploadImage from '../upload-image/upload-image';
 
-import CKEditor from '@ckeditor/ckeditor5-editor-inline/src/inlineeditor';
-import Essentials from '@ckeditor/ckeditor5-essentials/src/essentials';
-import Alignment from '@ckeditor/ckeditor5-alignment/src/alignment';
-import Heading from '@ckeditor/ckeditor5-heading/src/heading';
-import ListProperties from '@ckeditor/ckeditor5-list/src/listproperties';
-import Table from '@ckeditor/ckeditor5-table/src/table';
-import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar';
-import Bold from '@ckeditor/ckeditor5-basic-styles/src/bold';
-import Italic from '@ckeditor/ckeditor5-basic-styles/src/italic';
-import Underline from '@ckeditor/ckeditor5-basic-styles/src/underline';
-import Subscript from '@ckeditor/ckeditor5-basic-styles/src/subscript';
-import Superscript from '@ckeditor/ckeditor5-basic-styles/src/superscript';
-import Strikethrough from '@ckeditor/ckeditor5-basic-styles/src/strikethrough';
-import BlockQuote from '@ckeditor/ckeditor5-block-quote/src/blockquote';
-import ContextualBalloon from '@ckeditor/ckeditor5-ui/src/panel/balloon/contextualballoon';
+import {
+    InlineEditor,
+    Essentials,
+    Alignment,
+    Heading,
+    ListProperties,
+    Table,
+    TableToolbar,
+    Bold,
+    Italic,
+    Underline,
+    Subscript,
+    Superscript,
+    Strikethrough,
+    BlockQuote,
+    ContextualBalloon,
+} from 'ckeditor5';
 
 const VIEWPORT_TOP_OFFSET = 102;
 const VIEWPORT_TOP_OFFSET_DISTRACTION_FREE_MODE = 0;
@@ -156,6 +158,7 @@ const VIEWPORT_TOP_OFFSET_DISTRACTION_FREE_MODE = 0;
             }
 
             const config = {
+                licenseKey: 'GPL',
                 initialData: section.innerHTML,
                 plugins: [
                     Essentials,
@@ -242,7 +245,7 @@ const VIEWPORT_TOP_OFFSET_DISTRACTION_FREE_MODE = 0;
 
             doc.body.dispatchEvent(customEvent);
 
-            CKEditor.create(container, config).then((editor) => {
+            InlineEditor.create(container, config).then((editor) => {
                 this.editor = editor;
 
                 const editableElement = this.editor.editing.view.getDomRoot();

@@ -1,5 +1,4 @@
-import View from '@ckeditor/ckeditor5-ui/src/view';
-import ListView from '@ckeditor/ckeditor5-ui/src/list/listview';
+import { View, ListView } from 'ckeditor5';
 
 import ChipsButtonView from '../../common/chips-button-view/chips-button-view';
 

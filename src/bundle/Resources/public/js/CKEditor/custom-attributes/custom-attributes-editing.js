@@ -1,5 +1,4 @@
-import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
-import Widget from '@ckeditor/ckeditor5-widget/src/widget';
+import { Plugin, Widget } from 'ckeditor5';
 
 import IbexaCustomAttributesCommand from './custom-attributes-command';
 import { getCustomAttributesConfig, getCustomClassesConfig } from './helpers/config-helper';
@@ -58,13 +57,21 @@ class IbexaCustomAttributesEditing extends Plugin {
                     });
 
                     this.editor.conversion.for('upcast').add((dispatcher) => {
-                        dispatcher.on('element:li', (event, data, conversionApi) => {
-                            const listParent = data.viewItem.parent;
-                            const listItem = data.modelRange.start.nodeAfter || data.modelRange.end.nodeBefore;
+                        const customAttributeUpcastConverter = (event, data, conversionApi) => {
+                            if (!data.modelRange) {
+                                Object.assign(data, conversionApi.convertChildren(data.viewItem, data.modelCursor));
+                            }
+
+                            const listParent = data.viewItem;
                             const attributeValue = listParent.getAttribute(`data-ezattribute-${customAttributeName}`);
 
-                            conversionApi.writer.setAttribute(`list-${customAttributeName}`, attributeValue, listItem);
-                        });
+                            for (const listItem of data.modelRange.getItems({ shallow: true })) {
+                                conversionApi.writer.setAttribute(`list-${customAttributeName}`, attributeValue, listItem);
+                            }
+                        };
+
+                        dispatcher.on('element:ul', customAttributeUpcastConverter);
+                        dispatcher.on('element:ol', customAttributeUpcastConverter);
                     });
 
                     return;
@@ -121,13 +128,21 @@ class IbexaCustomAttributesEditing extends Plugin {
         });
 
         this.editor.conversion.for('upcast').add((dispatcher) => {
-            dispatcher.on('element:li', (event, data, conversionApi) => {
-                const listParent = data.viewItem.parent;
-                const listItem = data.modelRange.start.nodeAfter || data.modelRange.end.nodeBefore;
+            const customClassesUpcastConverter = (event, data, conversionApi) => {
+                if (!data.modelRange) {
+                    Object.assign(data, conversionApi.convertChildren(data.viewItem, data.modelCursor));
+                }
+
+                const listParent = data.viewItem;
                 const classes = listParent.getAttribute('class');
 
-                conversionApi.writer.setAttribute('list-custom-classes', classes, listItem);
-            });
+                for (const listItem of data.modelRange.getItems({ shallow: true })) {
+                    conversionApi.writer.setAttribute('list-custom-classes', classes, listItem);
+                }
+            };
+
+            dispatcher.on('element:ul', customClassesUpcastConverter);
+            dispatcher.on('element:ol', customClassesUpcastConverter);
         });
     }
 
