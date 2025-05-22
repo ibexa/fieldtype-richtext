@@ -1,12 +1,8 @@
-@import './variables/colors';
-@import './functions/calculate.rem';
-@import './variables/vars';
-
-@import 'general';
-@import 'custom-tag';
-@import 'custom-tag-attributes';
-@import 'custom-panel';
-@import 'elements-path';
-@import 'tools';
-@import 'character-counter';
-@import 'balloon-form';
+@use 'general';
+@use 'custom-tag';
+@use 'custom-tag-attributes';
+@use 'custom-panel';
+@use 'elements-path';
+@use 'tools';
+@use 'character-counter';
+@use 'balloon-form';

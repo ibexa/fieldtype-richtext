@@ -1,3 +1,7 @@
+@use 'variables/vars' as *;
+@use 'variables/colors' as *;
+@use 'functions/calculate.rem' as *;
+
 .ck.ck-reset_all {
     .ibexa-ckeditor-balloon-form {
         position: relative;

@@ -1,3 +1,5 @@
+@use 'functions/calculate.rem' as *;
+
 .ibexa-custom-panel {
     min-width: calculateRem(320px);
 
