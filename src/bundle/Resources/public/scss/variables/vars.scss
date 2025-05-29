@@ -1,3 +1,5 @@
+@use '../functions/calculate.rem' as *;
+
 $ibexa-border-radius: calculateRem(10px);
 $ibexa-border-radius-small: calculateRem(5px);
 

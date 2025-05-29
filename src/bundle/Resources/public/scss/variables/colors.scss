@@ -1,3 +1,5 @@
+@use '../functions/calculate.rem' as *;
+
 // Ibexa colors
 $ibexa-color-black: #000000 !default;
 $ibexa-color-white: #ffffff !default;
