@@ -6,8 +6,10 @@
  */
 declare(strict_types=1);
 
+use Ibexa\Core\Persistence\Legacy\Content\Gateway;
+
 return [
-    'ezcontentobject' => [
+    Gateway::CONTENT_ITEM_TABLE => [
         0 => [
             'contentclass_id' => '3',
             'current_version' => '1',
