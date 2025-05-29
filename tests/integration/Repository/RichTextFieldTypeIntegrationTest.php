@@ -756,7 +756,7 @@ EOT;
             ->select(
                 $connection->quoteIdentifier('url_id')
             )
-            ->from('ezurl_object_link')
+            ->from(DoctrineDatabase::URL_LINK_TABLE)
             ->where('contentobject_attribute_id = :contentobject_attribute_id')
             ->andWhere('contentobject_attribute_version = :contentobject_attribute_version')
             ->setParameter('contentobject_attribute_version', $versionNo, ParameterType::INTEGER)
