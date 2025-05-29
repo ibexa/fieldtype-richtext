@@ -10,13 +10,13 @@ namespace Ibexa\FieldTypeRichText\Persistence\Legacy\MigrateRichTextNamespaces\G
 
 use Doctrine\DBAL\Connection;
 use Ibexa\Contracts\FieldTypeRichText\Persistence\Legacy\MigrateRichTextNamespaces\AbstractGateway;
+use Ibexa\Core\Persistence\Legacy\Content\Gateway;
 
 /**
  * @internal
  */
 final class DoctrineDatabase extends AbstractGateway
 {
-    private const TABLE_CONTENT_ATTRIBUTE = 'ezcontentobject_attribute';
     private const COLUMN_DATA_TEXT = 'data_text';
     private const FIELD_TYPE_IDENTIFIER = 'ezrichtext';
 
@@ -31,7 +31,7 @@ final class DoctrineDatabase extends AbstractGateway
     {
         $queryBuilder = $this->connection->createQueryBuilder();
         $queryBuilder
-            ->update(self::TABLE_CONTENT_ATTRIBUTE)
+            ->update(Gateway::CONTENT_FIELD_TABLE)
             ->set(
                 self::COLUMN_DATA_TEXT,
                 $this->addReplaceStatement($queryBuilder, self::COLUMN_DATA_TEXT, $values)

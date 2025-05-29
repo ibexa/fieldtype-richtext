@@ -10,6 +10,7 @@ namespace Ibexa\FieldTypeRichText\FieldType\RichText\RichTextStorage\Gateway;
 
 use Doctrine\DBAL\Connection;
 use Ibexa\Core\FieldType\Url\UrlStorage\Gateway as UrlGateway;
+use Ibexa\Core\Persistence\Legacy\Content\Gateway as ContentGateway;
 use Ibexa\FieldTypeRichText\FieldType\RichText\RichTextStorage\Gateway;
 
 class DoctrineStorage extends Gateway
@@ -42,7 +43,7 @@ class DoctrineStorage extends Gateway
                     $this->connection->quoteIdentifier('id'),
                     $this->connection->quoteIdentifier('remote_id')
                 )
-                ->from('ezcontentobject')
+                ->from(ContentGateway::CONTENT_ITEM_TABLE)
                 ->where($query->expr()->in('remote_id', ':remoteIds'))
                 ->setParameter('remoteIds', $remoteIds, Connection::PARAM_STR_ARRAY)
             ;
