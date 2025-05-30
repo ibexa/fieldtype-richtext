@@ -37,7 +37,7 @@ final class OnlineEditor implements OnlineEditorConfigMapper
         foreach ($semanticConfiguration as $elementName => $elementConfiguration) {
             $label = $this->translator->trans(
                 /** @Ignore */
-                'ezrichtext.classes.class.label',
+                'ibexa_richtext.classes.class.label',
                 [],
                 $this->translationDomain
             );
@@ -74,7 +74,7 @@ final class OnlineEditor implements OnlineEditorConfigMapper
 
                 $config['label'] = $this->translator->trans(
                     /** @Ignore */
-                    "ezrichtext.attributes.{$elementName}.{$attributeName}.label",
+                    "ibexa_richtext.attributes.{$elementName}.{$attributeName}.label",
                     [],
                     $this->translationDomain
                 );

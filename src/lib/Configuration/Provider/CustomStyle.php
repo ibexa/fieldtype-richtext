@@ -42,9 +42,9 @@ final class CustomStyle implements Provider
      */
     public function getConfiguration(): array
     {
-        if ($this->configResolver->hasParameter('fieldtypes.ezrichtext.custom_styles')) {
+        if ($this->configResolver->hasParameter('fieldtypes.ibexa_richtext.custom_styles')) {
             return $this->customStyleConfigurationMapper->mapConfig(
-                $this->configResolver->getParameter('fieldtypes.ezrichtext.custom_styles')
+                $this->configResolver->getParameter('fieldtypes.ibexa_richtext.custom_styles')
             );
         }
 

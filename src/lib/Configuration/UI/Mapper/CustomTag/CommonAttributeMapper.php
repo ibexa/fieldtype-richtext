@@ -32,7 +32,7 @@ class CommonAttributeMapper implements AttributeMapper
         array $customTagAttributeProperties
     ): array {
         return [
-            'label' => "ezrichtext.custom_tags.{$tagName}.attributes.{$attributeName}.label",
+            'label' => "ibexa_richtext.custom_tags.{$tagName}.attributes.{$attributeName}.label",
             'type' => $customTagAttributeProperties['type'],
             'required' => $customTagAttributeProperties['required'],
             'defaultValue' => $customTagAttributeProperties['default_value'],

@@ -18,7 +18,7 @@ class Html5Input extends XsltConverter
 {
     public function __construct(string $stylesheet, ConfigResolverInterface $configResolver)
     {
-        $customStylesheets = $configResolver->getParameter('fieldtypes.ezrichtext.input_custom_xsl');
+        $customStylesheets = $configResolver->getParameter('fieldtypes.ibexa_richtext.input_custom_xsl');
         $customStylesheets = $customStylesheets ?: [];
         parent::__construct($stylesheet, $customStylesheets);
     }

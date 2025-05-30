@@ -128,7 +128,7 @@ final class CKEditor implements Provider
 
     private function hasInlineCustomStyles(): bool
     {
-        $enabledCustomStyles = $this->getSiteAccessConfigArray('fieldtypes.ezrichtext.custom_styles');
+        $enabledCustomStyles = $this->getSiteAccessConfigArray('fieldtypes.ibexa_richtext.custom_styles');
 
         return 0 !== count(array_filter(
             $this->customStylesConfiguration,

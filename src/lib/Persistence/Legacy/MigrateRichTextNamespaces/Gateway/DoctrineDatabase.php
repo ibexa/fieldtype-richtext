@@ -40,7 +40,7 @@ final class DoctrineDatabase extends AbstractGateway
                 $queryBuilder->expr()->eq(
                     'data_type_string',
                     $queryBuilder->createPositionalParameter(
-                        self::FIELD_TYPE_IDENTIFIER
+                        self::FIELD_TYPE_IDENTIFIER //TODO migration needed
                     )
                 )
             );

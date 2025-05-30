@@ -19,10 +19,10 @@ use Symfony\Component\Config\Definition\Builder\ScalarNodeDefinition;
  */
 class RichText extends AbstractFieldTypeParser
 {
-    public const CLASSES_SA_SETTINGS_ID = 'fieldtypes.ezrichtext.classes';
+    public const CLASSES_SA_SETTINGS_ID = 'fieldtypes.ibexa_richtext.classes';
     private const CLASSES_NODE_KEY = 'classes';
 
-    public const ATTRIBUTES_SA_SETTINGS_ID = 'fieldtypes.ezrichtext.attributes';
+    public const ATTRIBUTES_SA_SETTINGS_ID = 'fieldtypes.ibexa_richtext.attributes';
     private const ATTRIBUTES_NODE_KEY = 'attributes';
     private const ATTRIBUTE_TYPE_NODE_KEY = 'type';
     private const ATTRIBUTE_TYPE_CHOICE = 'choice';
@@ -31,7 +31,7 @@ class RichText extends AbstractFieldTypeParser
     private const ATTRIBUTE_TYPE_NUMBER = 'number';
 
     private const TOOLBAR_NODE_KEY = 'toolbar';
-    public const TOOLBARS_SA_SETTINGS_ID = 'fieldtypes.ezrichtext.' . self::TOOLBAR_NODE_KEY;
+    public const TOOLBARS_SA_SETTINGS_ID = 'fieldtypes.ibexa_richtext.' . self::TOOLBAR_NODE_KEY;
 
     // constants common for OE custom classes and data attributes configuration
     private const ELEMENT_NODE_KEY = 'element';
@@ -48,7 +48,7 @@ class RichText extends AbstractFieldTypeParser
      */
     public function getFieldTypeIdentifier()
     {
-        return 'ezrichtext';
+        return 'ibexa_richtext';
     }
 
     /**
@@ -180,14 +180,14 @@ class RichText extends AbstractFieldTypeParser
         // RichText Custom Tags configuration (list of Custom Tags enabled for current SiteAccess scope)
         $nodeBuilder
             ->arrayNode('custom_tags')
-                ->info('List of RichText Custom Tags enabled for the current scope. The Custom Tags must be defined in ezpublish.ezrichtext.custom_tags Node.')
+                ->info('List of RichText Custom Tags enabled for the current scope. The Custom Tags must be defined in ezpublish.ibexa_richtext.custom_tags Node.')
                 ->scalarPrototype()->end()
             ->end();
 
         // RichText Custom Styles configuration (list of Custom Styles enabled for current SiteAccess scope)
         $nodeBuilder
             ->arrayNode('custom_styles')
-                ->info('List of RichText Custom Styles enabled for the current scope. The Custom Styles must be defined in ezpublish.ezrichtext.custom_styles Node.')
+                ->info('List of RichText Custom Styles enabled for the current scope. The Custom Styles must be defined in ezpublish.ibexa_richtext.custom_styles Node.')
                 ->scalarPrototype()->end()
             ->end();
 
@@ -244,22 +244,22 @@ class RichText extends AbstractFieldTypeParser
     {
         if (!empty($scopeSettings['fieldtypes'])) {
             // Workaround to be able to use Contextualizer::mapConfigArray() which only supports first level entries.
-            if (isset($scopeSettings['fieldtypes']['ezrichtext']['custom_tags'])) {
-                $scopeSettings['fieldtypes.ezrichtext.custom_tags'] = $scopeSettings['fieldtypes']['ezrichtext']['custom_tags'];
-                unset($scopeSettings['fieldtypes']['ezrichtext']['custom_tags']);
+            if (isset($scopeSettings['fieldtypes']['ibexa_richtext']['custom_tags'])) {
+                $scopeSettings['fieldtypes.ibexa_richtext.custom_tags'] = $scopeSettings['fieldtypes']['ibexa_richtext']['custom_tags'];
+                unset($scopeSettings['fieldtypes']['ibexa_richtext']['custom_tags']);
             }
 
-            if (isset($scopeSettings['fieldtypes']['ezrichtext']['custom_styles'])) {
-                $scopeSettings['fieldtypes.ezrichtext.custom_styles'] = $scopeSettings['fieldtypes']['ezrichtext']['custom_styles'];
-                unset($scopeSettings['fieldtypes']['ezrichtext']['custom_styles']);
+            if (isset($scopeSettings['fieldtypes']['ibexa_richtext']['custom_styles'])) {
+                $scopeSettings['fieldtypes.ibexa_richtext.custom_styles'] = $scopeSettings['fieldtypes']['ibexa_richtext']['custom_styles'];
+                unset($scopeSettings['fieldtypes']['ibexa_richtext']['custom_styles']);
             }
 
-            if (isset($scopeSettings['fieldtypes']['ezrichtext']['embed'])) {
-                foreach ($scopeSettings['fieldtypes']['ezrichtext']['embed'] as $type => $embedSettings) {
+            if (isset($scopeSettings['fieldtypes']['ibexa_richtext']['embed'])) {
+                foreach ($scopeSettings['fieldtypes']['ibexa_richtext']['embed'] as $type => $embedSettings) {
                     $contextualizer->setContextualParameter(
-                        "fieldtypes.ezrichtext.embed.{$type}",
+                        "fieldtypes.ibexa_richtext.embed.{$type}",
                         $currentScope,
-                        $scopeSettings['fieldtypes']['ezrichtext']['embed'][$type]
+                        $scopeSettings['fieldtypes']['ibexa_richtext']['embed'][$type]
                     );
                 }
             }
@@ -270,9 +270,9 @@ class RichText extends AbstractFieldTypeParser
                 self::TOOLBAR_NODE_KEY => self::TOOLBARS_SA_SETTINGS_ID,
             ];
             foreach ($onlineEditorSettingsMap as $key => $settingsId) {
-                if (isset($scopeSettings['fieldtypes']['ezrichtext'][$key])) {
-                    $scopeSettings[$settingsId] = $scopeSettings['fieldtypes']['ezrichtext'][$key];
-                    unset($scopeSettings['fieldtypes']['ezrichtext'][$key]);
+                if (isset($scopeSettings['fieldtypes']['ibexa_richtext'][$key])) {
+                    $scopeSettings[$settingsId] = $scopeSettings['fieldtypes']['ibexa_richtext'][$key];
+                    unset($scopeSettings['fieldtypes']['ibexa_richtext'][$key]);
                 }
             }
         }
@@ -280,12 +280,12 @@ class RichText extends AbstractFieldTypeParser
 
     public function postMap(array $config, ContextualizerInterface $contextualizer): void
     {
-        $contextualizer->mapConfigArray('fieldtypes.ezrichtext.custom_tags', $config);
-        $contextualizer->mapConfigArray('fieldtypes.ezrichtext.custom_styles', $config);
+        $contextualizer->mapConfigArray('fieldtypes.ibexa_richtext.custom_tags', $config);
+        $contextualizer->mapConfigArray('fieldtypes.ibexa_richtext.custom_styles', $config);
         $contextualizer->mapConfigArray(self::TOOLBARS_SA_SETTINGS_ID, $config);
-        $contextualizer->mapConfigArray('fieldtypes.ezrichtext.output_custom_xsl', $config);
-        $contextualizer->mapConfigArray('fieldtypes.ezrichtext.edit_custom_xsl', $config);
-        $contextualizer->mapConfigArray('fieldtypes.ezrichtext.input_custom_xsl', $config);
+        $contextualizer->mapConfigArray('fieldtypes.ibexa_richtext.output_custom_xsl', $config);
+        $contextualizer->mapConfigArray('fieldtypes.ibexa_richtext.edit_custom_xsl', $config);
+        $contextualizer->mapConfigArray('fieldtypes.ibexa_richtext.input_custom_xsl', $config);
         $contextualizer->mapConfigArray(self::CLASSES_SA_SETTINGS_ID, $config);
         // merge attributes of the same element from different scopes
         $contextualizer->mapConfigArray(
