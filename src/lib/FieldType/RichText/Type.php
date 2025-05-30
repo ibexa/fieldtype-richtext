@@ -46,7 +46,7 @@ class Type extends FieldType implements TranslationContainerInterface
      */
     public function getFieldTypeIdentifier()
     {
-        return 'ezrichtext';
+        return 'ibexa_richtext';
     }
 
     /**
@@ -290,7 +290,7 @@ class Type extends FieldType implements TranslationContainerInterface
     public static function getTranslationMessages(): array
     {
         return [
-            (new Message('ezrichtext.name', 'ibexa_fieldtypes'))->setDesc('Rich text'),
+            (new Message('ibexa_richtext.name', 'ibexa_fieldtypes'))->setDesc('Rich text'),
         ];
     }
 }

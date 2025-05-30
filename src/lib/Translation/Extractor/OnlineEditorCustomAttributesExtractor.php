@@ -17,8 +17,8 @@ use JMS\TranslationBundle\Translation\ExtractorInterface;
 final class OnlineEditorCustomAttributesExtractor implements ExtractorInterface
 {
     private const MESSAGE_DOMAIN = 'online_editor';
-    private const ATTRIBUTES_MESSAGE_ID_PREFIX = 'ezrichtext.attributes';
-    private const CLASS_LABEL_MESSAGE_ID = 'ezrichtext.classes.class.label';
+    private const ATTRIBUTES_MESSAGE_ID_PREFIX = 'ibexa_richtext.attributes';
+    private const CLASS_LABEL_MESSAGE_ID = 'ibexa_richtext.classes.class.label';
 
     private ConfigResolverInterface $configResolver;
 

@@ -17,7 +17,7 @@
         <ini name="error_reporting" value="-1" />
     </php>
     <testsuites>
-        <testsuite name="ezrichtext_field_type_solr_integration">
+        <testsuite name="ibexa_richtext_field_type_solr_integration">
             <file>tests/integration/Repository/RichTextFieldTypeIntegrationTest.php</file>
         </testsuite>
     </testsuites>

@@ -6,4 +6,4 @@ services:
             $textExtractor: '@Ibexa\FieldTypeRichText\RichText\TextExtractor\ShortTextExtractor'
             $inputHandler: '@Ibexa\FieldTypeRichText\RichText\InputHandler'
         tags:
-            - {name: ibexa.field_type, alias: ezrichtext}
+            - {name: ibexa.field_type, alias: ibexa_richtext, legacy_alias: ezrichtext}

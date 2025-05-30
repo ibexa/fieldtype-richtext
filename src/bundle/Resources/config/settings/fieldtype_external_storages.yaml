@@ -2,5 +2,5 @@ services:
     Ibexa\FieldTypeRichText\FieldType\RichText\RichTextStorage:
         arguments: ['@Ibexa\FieldTypeRichText\FieldType\RichText\RichTextStorage\Gateway\DoctrineStorage']
         tags:
-            - {name: ibexa.field_type.storage.external.handler, alias: ezrichtext}
+            - {name: ibexa.field_type.storage.external.handler, alias: ibexa_richtext}
         public: true

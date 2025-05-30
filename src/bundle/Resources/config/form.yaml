@@ -19,5 +19,5 @@ services:
 
     Ibexa\FieldTypeRichText\Form\Mapper\RichTextFormMapper:
         tags:
-            - { name: ibexa.admin_ui.field_type.form.mapper.value, fieldType: ezrichtext }
+            - { name: ibexa.admin_ui.field_type.form.mapper.value, fieldType: ibexa_richtext }
 

@@ -16,9 +16,9 @@ use JMS\TranslationBundle\Translation\ExtractorInterface;
  */
 final class CustomTagExtractor implements ExtractorInterface
 {
-    private const CUSTOM_TAG_LABEL = 'ezrichtext.custom_tags.%s.label';
-    private const CUSTOM_TAG_DESCRIPTION = 'ezrichtext.custom_tags.%s.description';
-    private const ATTRIBUTE_LABEL = 'ezrichtext.custom_tags.%s.attributes.%s.label';
+    private const CUSTOM_TAG_LABEL = 'ibexa_richtext.custom_tags.%s.label';
+    private const CUSTOM_TAG_DESCRIPTION = 'ibexa_richtext.custom_tags.%s.description';
+    private const ATTRIBUTE_LABEL = 'ibexa_richtext.custom_tags.%s.attributes.%s.label';
 
     /** @var array<string, mixed> */
     private array $customTags;

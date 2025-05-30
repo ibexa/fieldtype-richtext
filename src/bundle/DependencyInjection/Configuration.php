@@ -92,7 +92,7 @@ class Configuration extends SiteAccessConfiguration
      *
      * The configuration is available at:
      * <code>
-     * ezrichtext:
+     * ibexa_richtext:
      *     custom_tags:
      * </code>
      *
@@ -181,7 +181,7 @@ class Configuration extends SiteAccessConfiguration
      * The configuration is available at:
      * <code>
      * ezpublish:
-     *     ezrichtext:
+     *     ibexa_richtext:
      *         custom_styles:
      * </code>
      *
@@ -215,7 +215,7 @@ class Configuration extends SiteAccessConfiguration
      * The configuration is available at:
      * <code>
      * ezpublish:
-     *     ezrichtext:
+     *     ibexa_richtext:
      *         alloy_editor:
      *             extra_plugins: [plugin1, plugin2]
      *             extra_buttons:

@@ -17,7 +17,7 @@ services:
             $allowlist: ['ezyoutube', 'eztwitter', 'ezfacebook']
         tags:
             -   name: jms_translation.extractor
-                alias: ibexa.translation_extractor.field_type.ezrichtext.custom_tags
+                alias: ibexa.translation_extractor.field_type.ibexa_richtext.custom_tags
 
     Ibexa\FieldTypeRichText\Translation\Extractor\ChoiceAttributeExtractor:
         arguments:
@@ -26,4 +26,4 @@ services:
             $allowlist: ['ezyoutube', 'eztwitter', 'ezfacebook']
         tags:
             -   name: jms_translation.extractor
-                alias: ibexa.translation_extractor.field_type.ezrichtext.custom_tags.choices
+                alias: ibexa.translation_extractor.field_type.ibexa_richtext.custom_tags.choices

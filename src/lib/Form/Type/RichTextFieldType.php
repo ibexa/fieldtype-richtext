@@ -16,7 +16,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Form Type representing ezrichtext field type.
+ * Form Type representing ibexa_richtext field type.
  */
 class RichTextFieldType extends AbstractType
 {
@@ -37,7 +37,7 @@ class RichTextFieldType extends AbstractType
 
     public function getBlockPrefix(): string
     {
-        return 'ezplatform_fieldtype_ezrichtext';
+        return 'ezplatform_fieldtype_ibexa_richtext';
     }
 
     public function getParent(): ?string
@@ -48,7 +48,7 @@ class RichTextFieldType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->addModelTransformer(new RichTextValueTransformer(
-            $this->fieldTypeService->getFieldType('ezrichtext'),
+            $this->fieldTypeService->getFieldType('ibexa_richtext'),
             $this->docbookToXhtml5EditConverter
         ));
     }
