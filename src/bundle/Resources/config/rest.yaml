@@ -8,4 +8,4 @@ services:
         arguments:
             - '@Ibexa\FieldTypeRichText\RichText\Converter\Html5Edit'
         tags:
-            - { name: ibexa.rest.field_type.processor, alias: ezrichtext }
+            - { name: ibexa.rest.field_type.processor, alias: ibexa_richtext }

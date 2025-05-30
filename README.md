@@ -4,7 +4,7 @@ This package is part of [Ibexa DXP](https://ibexa.co).
 
 To use this package, [install Ibexa DXP](https://doc.ibexa.co/en/latest/install/).
 
-This package contains the RichText (`ezrichtext`) Field Type for [Ibexa DXP](https://ibexa.co).
+This package contains the RichText (`ibexa_richtext`) Field Type for [Ibexa DXP](https://ibexa.co).
 It is a Field Type for supporting rich formatted text stored in a structured XML format.
 
 ## COPYRIGHT

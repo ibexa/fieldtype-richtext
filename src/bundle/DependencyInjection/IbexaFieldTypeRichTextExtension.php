@@ -144,7 +144,7 @@ class IbexaFieldTypeRichTextExtension extends Extension implements PrependExtens
     public function prepend(ContainerBuilder $container): void
     {
         $this->prependIbexaConfiguration($container);
-        $this->prependEzRichTextConfiguration($container);
+        $this->prependIbexaRichTextConfiguration($container);
         $this->prependBazingaJsTranslationConfiguration($container);
         $this->prependJMSTranslation($container);
     }
@@ -156,9 +156,9 @@ class IbexaFieldTypeRichTextExtension extends Extension implements PrependExtens
         $container->addResource(new FileResource($coreExtensionConfigFile));
     }
 
-    private function prependEzRichTextConfiguration(ContainerBuilder $container): void
+    private function prependIbexaRichTextConfiguration(ContainerBuilder $container): void
     {
-        $richTextExtensionConfigFile = realpath(__DIR__ . '/../Resources/config/prepend/ezrichtext.yaml');
+        $richTextExtensionConfigFile = realpath(__DIR__ . '/../Resources/config/prepend/ibexa_richtext.yaml');
         $container->prependExtensionConfig(self::EXTENSION_NAME, Yaml::parseFile($richTextExtensionConfigFile));
         $container->addResource(new FileResource($richTextExtensionConfigFile));
     }
@@ -186,8 +186,8 @@ class IbexaFieldTypeRichTextExtension extends Extension implements PrependExtens
                     'output_format' => 'xliff',
                     'excluded_dirs' => ['Behat', 'Tests', 'node_modules'],
                     'extractors' => [
-                        'ibexa.translation_extractor.field_type.ezrichtext.custom_tags',
-                        'ibexa.translation_extractor.field_type.ezrichtext.custom_tags.choices',
+                        'ibexa.translation_extractor.field_type.ibexa_richtext.custom_tags',
+                        'ibexa.translation_extractor.field_type.ibexa_richtext.custom_tags.choices',
                     ],
                 ],
             ],
@@ -219,7 +219,7 @@ class IbexaFieldTypeRichTextExtension extends Extension implements PrependExtens
         $definedCustomTemplates = array_keys($config);
         // iterate manually through available Scopes as scope context is not available
         foreach ($availableSiteAccesses as $siteAccessName) {
-            $enabledTemplatesParamName = "{$namespace}.{$siteAccessName}.fieldtypes.ezrichtext.{$nodeName}";
+            $enabledTemplatesParamName = "{$namespace}.{$siteAccessName}.fieldtypes.ibexa_richtext.{$nodeName}";
             if (!$container->hasParameter($enabledTemplatesParamName)) {
                 continue;
             }
@@ -260,7 +260,7 @@ class IbexaFieldTypeRichTextExtension extends Extension implements PrependExtens
     private function getToolbarsBySiteAccess(array $availableSiteAccesses, ContainerBuilder $container): iterable
     {
         foreach ($availableSiteAccesses as $siteAccessName) {
-            $paramName = "ibexa.site_access.config.{$siteAccessName}.fieldtypes.ezrichtext.toolbars";
+            $paramName = "ibexa.site_access.config.{$siteAccessName}.fieldtypes.ibexa_richtext.toolbars";
             if (!$container->hasParameter($paramName)) {
                 continue;
             }
