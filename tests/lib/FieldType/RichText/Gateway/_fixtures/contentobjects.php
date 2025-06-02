@@ -11,7 +11,7 @@ use Ibexa\Core\Persistence\Legacy\Content\Gateway;
 return [
     Gateway::CONTENT_ITEM_TABLE => [
         0 => [
-            'contentclass_id' => '3',
+            'content_type_id' => '3',
             'current_version' => '1',
             'id' => '4',
             'initial_language_id' => '2',
@@ -25,7 +25,7 @@ return [
             'status' => '1',
         ],
         1 => [
-            'contentclass_id' => '4',
+            'content_type_id' => '4',
             'current_version' => '2',
             'id' => '10',
             'initial_language_id' => '2',
