@@ -22,7 +22,7 @@ use Ibexa\Core\Persistence\Legacy\URL\Gateway\DoctrineDatabase;
 use Ibexa\Core\Repository\Values\Content\Relation;
 use Ibexa\FieldTypeRichText\FieldType\RichText\Value as RichTextValue;
 use Ibexa\Tests\Integration\Core\Repository\FieldType\RelationSearchBaseIntegrationTestTrait;
-use Ibexa\Tests\Integration\Core\Repository\FieldType\SearchBaseIntegrationTest;
+use Ibexa\Tests\Integration\Core\Repository\FieldType\SearchBaseIntegrationTestCase;
 
 /**
  * Integration test for use field type.
@@ -30,7 +30,7 @@ use Ibexa\Tests\Integration\Core\Repository\FieldType\SearchBaseIntegrationTest;
  * @group integration
  * @group field-type
  */
-class RichTextFieldTypeIntegrationTest extends SearchBaseIntegrationTest
+class RichTextFieldTypeIntegrationTest extends SearchBaseIntegrationTestCase
 {
     use RelationSearchBaseIntegrationTestTrait;
 
