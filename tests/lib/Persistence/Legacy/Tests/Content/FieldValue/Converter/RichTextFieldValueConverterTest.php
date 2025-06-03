@@ -17,7 +17,7 @@ use PHPUnit\Framework\TestCase;
  * Test case for RichText converter in Legacy storage.
  *
  * @group fieldType
- * @group ezrichtext
+ * @group ibexa_richtext
  */
 class RichTextFieldValueConverterTest extends TestCase
 {

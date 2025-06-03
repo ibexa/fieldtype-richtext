@@ -30,6 +30,6 @@ class CustomTagProviderTest extends BaseCustomTemplateProviderTestCase
 
     protected function getCustomTemplateSiteAccessConfigParamName(): string
     {
-        return 'fieldtypes.ezrichtext.custom_tags';
+        return 'fieldtypes.ibexa_richtext.custom_tags';
     }
 }

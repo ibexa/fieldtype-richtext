@@ -98,7 +98,7 @@ final class SearchFieldTest extends TestCase
         $field = new Field(
             [
                 'id' => 1,
-                'type' => 'ezrichtext',
+                'type' => 'ibexa_richtext',
                 'value' => new FieldValue(['data' => $docBookXml]),
             ]
         );

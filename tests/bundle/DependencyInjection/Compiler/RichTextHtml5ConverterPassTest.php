@@ -39,19 +39,19 @@ class RichTextHtml5ConverterPassTest extends AbstractCompilerPassTestCase
 
         $configurationProvider = new Definition();
         $configurationProvider->addTag('ibexa.field_type.richtext.converter.output.xhtml5');
-        $this->setDefinition('ezrichtext.converter.test1', $configurationProvider);
+        $this->setDefinition('ibexa_richtext.converter.test1', $configurationProvider);
 
         $configurationProvider = new Definition();
         $configurationProvider->addTag('ibexa.field_type.richtext.converter.output.xhtml5', ['priority' => 10]);
-        $this->setDefinition('ezrichtext.converter.test2', $configurationProvider);
+        $this->setDefinition('ibexa_richtext.converter.test2', $configurationProvider);
 
         $configurationProvider = new Definition();
         $configurationProvider->addTag('ibexa.field_type.richtext.converter.output.xhtml5', ['priority' => 5]);
-        $this->setDefinition('ezrichtext.converter.test3', $configurationProvider);
+        $this->setDefinition('ibexa_richtext.converter.test3', $configurationProvider);
 
         $configurationProvider = new Definition();
         $configurationProvider->addTag('ibexa.field_type.richtext.converter.output.xhtml5', ['priority' => 5]);
-        $this->setDefinition('ezrichtext.converter.test4', $configurationProvider);
+        $this->setDefinition('ibexa_richtext.converter.test4', $configurationProvider);
 
         $this->compile();
 
@@ -59,10 +59,10 @@ class RichTextHtml5ConverterPassTest extends AbstractCompilerPassTestCase
             'ibexa.richtext.converter.output.xhtml5',
             0,
             [
-                new Reference('ezrichtext.converter.test1'),
-                new Reference('ezrichtext.converter.test3'),
-                new Reference('ezrichtext.converter.test4'),
-                new Reference('ezrichtext.converter.test2'),
+                new Reference('ibexa_richtext.converter.test1'),
+                new Reference('ibexa_richtext.converter.test3'),
+                new Reference('ibexa_richtext.converter.test4'),
+                new Reference('ibexa_richtext.converter.test2'),
             ]
         );
     }

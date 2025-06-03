@@ -35,7 +35,7 @@ use RuntimeException;
 
 /**
  * @group fieldType
- * @group ezrichtext
+ * @group ibexa_richtext
  */
 class RichTextTest extends TestCase
 {
@@ -491,6 +491,6 @@ EOT;
 
     protected function provideFieldTypeIdentifier(): string
     {
-        return 'ezrichtext';
+        return 'ibexa_richtext';
     }
 }

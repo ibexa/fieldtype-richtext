@@ -149,7 +149,7 @@ EOT
      */
     public function getTypeName()
     {
-        return 'ezrichtext';
+        return 'ibexa_richtext';
     }
 
     /**
@@ -579,7 +579,7 @@ EOT;
 
         $fieldCreate = $contentTypeService->newFieldDefinitionCreateStruct(
             'description',
-            'ezrichtext'
+            'ibexa_richtext'
         );
         $fieldCreate->names = ['eng-GB' => 'Title'];
         $fieldCreate->fieldGroup = 'main';
@@ -722,7 +722,7 @@ EOT;
 
         $fieldDefinitionCreateStruct = $contentTypeService->newFieldDefinitionCreateStruct(
             'description',
-            'ezrichtext'
+            'ibexa_richtext'
         );
         $fieldDefinitionCreateStruct->names = ['eng-GB' => 'Title'];
         $fieldDefinitionCreateStruct->fieldGroup = 'main';
@@ -793,7 +793,7 @@ EOT;
     public function providerForTestCreateContentWithValidCustomTag(): array
     {
         $data = [];
-        $iterator = new DirectoryIterator(__DIR__ . '/_fixtures/ezrichtext/custom_tags/valid');
+        $iterator = new DirectoryIterator(__DIR__ . '/_fixtures/ibexa_richtext/custom_tags/valid');
         foreach ($iterator as $fileInfo) {
             if ($fileInfo->isFile() && $fileInfo->getExtension() === 'xml') {
                 $data[] = [
@@ -836,15 +836,15 @@ EOT;
     {
         $data = [
             [
-                __DIR__ . '/_fixtures/ezrichtext/custom_tags/invalid/equation.xml',
+                __DIR__ . '/_fixtures/ibexa_richtext/custom_tags/invalid/equation.xml',
                 "Validation of XML content failed:\nThe attribute 'processor' of RichText Custom Tag 'equation' cannot be empty",
             ],
             [
-                __DIR__ . '/_fixtures/ezrichtext/custom_tags/invalid/video.xml',
+                __DIR__ . '/_fixtures/ibexa_richtext/custom_tags/invalid/video.xml',
                 "Validation of XML content failed:\nUnknown attribute 'unknown_attribute' of RichText Custom Tag 'video'",
             ],
             [
-                __DIR__ . '/_fixtures/ezrichtext/custom_tags/invalid/nested.xml',
+                __DIR__ . '/_fixtures/ibexa_richtext/custom_tags/invalid/nested.xml',
                 "Validation of XML content failed:\nUnknown attribute 'typo' of RichText Custom Tag 'equation'",
             ],
         ];
@@ -1062,7 +1062,7 @@ XML
     {
         if ($this->getSetupFactory() instanceof SetupFactory\LegacySetupFactory) {
             self::markTestSkipped(
-                "'ezrichtext' field type is not searchable with Legacy Search Engine"
+                "'ibexa_richtext' field type is not searchable with Legacy Search Engine"
             );
         }
     }

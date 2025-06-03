@@ -18,7 +18,7 @@ use Ibexa\Core\Persistence\Legacy\Content\Gateway;
 final class DoctrineDatabase extends AbstractGateway
 {
     private const COLUMN_DATA_TEXT = 'data_text';
-    private const FIELD_TYPE_IDENTIFIER = 'ezrichtext';
+    private const FIELD_TYPE_IDENTIFIER = 'ibexa_richtext';
 
     private Connection $connection;
 
