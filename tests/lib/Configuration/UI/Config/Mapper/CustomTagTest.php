@@ -68,7 +68,7 @@ class CustomTagTest extends TestCase
             [
                 [
                     'ezyoutube' => [
-                        'template' => '@ibexadesign/fields/ezrichtext/custom_tags/ezyoutube.html.twig',
+                        'template' => '@ibexadesign/fields/ibexa_richtext/custom_tags/ezyoutube.html.twig',
                         'icon' => '/bundles/ibexaadminuiassets/vendors/webalys/streamlineicons/all-icons.svg#video',
                         'is_inline' => false,
                         'attributes' => [
@@ -90,7 +90,7 @@ class CustomTagTest extends TestCase
                         ],
                     ],
                     'eztwitter' => [
-                        'template' => '@ibexadesign/fields/ezrichtext/custom_tags/eztwitter.html.twig',
+                        'template' => '@ibexadesign/fields/ibexa_richtext/custom_tags/eztwitter.html.twig',
                         'icon' => '/bundles/ibexaadminuiassets/vendors/webalys/streamlineicons/all-icons.svg#twitter',
                         'is_inline' => false,
                         'attributes' => [
@@ -114,25 +114,25 @@ class CustomTagTest extends TestCase
                 ['ezyoutube', 'eztwitter'],
                 [
                     'ezyoutube' => [
-                        'label' => 'ezrichtext.custom_tags.ezyoutube.label',
-                        'description' => 'ezrichtext.custom_tags.ezyoutube.description',
+                        'label' => 'ibexa_richtext.custom_tags.ezyoutube.label',
+                        'description' => 'ibexa_richtext.custom_tags.ezyoutube.description',
                         'icon' => '/bundles/ibexaadminuiassets/vendors/webalys/streamlineicons/all-icons.svg#video',
                         'isInline' => false,
                         'attributes' => [
                             'width' => [
-                                'label' => 'ezrichtext.custom_tags.ezyoutube.attributes.width.label',
+                                'label' => 'ibexa_richtext.custom_tags.ezyoutube.attributes.width.label',
                                 'type' => 'number',
                                 'required' => true,
                                 'defaultValue' => 640,
                             ],
                             'height' => [
-                                'label' => 'ezrichtext.custom_tags.ezyoutube.attributes.height.label',
+                                'label' => 'ibexa_richtext.custom_tags.ezyoutube.attributes.height.label',
                                 'type' => 'number',
                                 'required' => true,
                                 'defaultValue' => 360,
                             ],
                             'autoplay' => [
-                                'label' => 'ezrichtext.custom_tags.ezyoutube.attributes.autoplay.label',
+                                'label' => 'ibexa_richtext.custom_tags.ezyoutube.attributes.autoplay.label',
                                 'type' => 'boolean',
                                 'required' => false,
                                 'defaultValue' => false,
@@ -140,19 +140,19 @@ class CustomTagTest extends TestCase
                         ],
                     ],
                     'eztwitter' => [
-                        'label' => 'ezrichtext.custom_tags.eztwitter.label',
-                        'description' => 'ezrichtext.custom_tags.eztwitter.description',
+                        'label' => 'ibexa_richtext.custom_tags.eztwitter.label',
+                        'description' => 'ibexa_richtext.custom_tags.eztwitter.description',
                         'icon' => '/bundles/ibexaadminuiassets/vendors/webalys/streamlineicons/all-icons.svg#twitter',
                         'isInline' => false,
                         'attributes' => [
                             'tweet_url' => [
-                                'label' => 'ezrichtext.custom_tags.eztwitter.attributes.tweet_url.label',
+                                'label' => 'ibexa_richtext.custom_tags.eztwitter.attributes.tweet_url.label',
                                 'type' => 'string',
                                 'required' => true,
                                 'defaultValue' => null,
                             ],
                             'cards' => [
-                                'label' => 'ezrichtext.custom_tags.eztwitter.attributes.cards.label',
+                                'label' => 'ibexa_richtext.custom_tags.eztwitter.attributes.cards.label',
                                 'type' => 'choice',
                                 'required' => false,
                                 'defaultValue' => '',

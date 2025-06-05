@@ -64,21 +64,21 @@ class OnlineEditorTest extends TestCase
                         'required' => true,
                         'defaultValue' => 'class1',
                         'multiple' => true,
-                        'label' => 'ezrichtext.classes.class.label',
+                        'label' => 'ibexa_richtext.classes.class.label',
                     ],
                     'table' => [
                         'choices' => ['class1', 'class2'],
                         'required' => false,
                         'defaultValue' => 'class2',
                         'multiple' => false,
-                        'label' => 'ezrichtext.classes.class.label',
+                        'label' => 'ibexa_richtext.classes.class.label',
                     ],
                     'heading' => [
                         'choices' => ['class1', 'class2'],
                         'required' => false,
                         'defaultValue' => null,
                         'multiple' => false,
-                        'label' => 'ezrichtext.classes.class.label',
+                        'label' => 'ibexa_richtext.classes.class.label',
                     ],
                 ],
             ],
@@ -138,7 +138,7 @@ class OnlineEditorTest extends TestCase
                 [
                     'paragraph' => [
                         'select-multiple-attr' => [
-                            'label' => 'ezrichtext.attributes.paragraph.select-multiple-attr.label',
+                            'label' => 'ibexa_richtext.attributes.paragraph.select-multiple-attr.label',
                             'type' => 'choice',
                             'multiple' => true,
                             'required' => true,
@@ -146,7 +146,7 @@ class OnlineEditorTest extends TestCase
                             'defaultValue' => 'value2',
                         ],
                         'select-single-attr' => [
-                            'label' => 'ezrichtext.attributes.paragraph.select-single-attr.label',
+                            'label' => 'ibexa_richtext.attributes.paragraph.select-single-attr.label',
                             'type' => 'choice',
                             'multiple' => false,
                             'required' => true,
@@ -156,13 +156,13 @@ class OnlineEditorTest extends TestCase
                     ],
                     'heading' => [
                         'boolean-attr' => [
-                            'label' => 'ezrichtext.attributes.heading.boolean-attr.label',
+                            'label' => 'ibexa_richtext.attributes.heading.boolean-attr.label',
                             'type' => 'boolean',
                             'required' => false,
                             'defaultValue' => true,
                         ],
                         'text-attr' => [
-                            'label' => 'ezrichtext.attributes.heading.text-attr.label',
+                            'label' => 'ibexa_richtext.attributes.heading.text-attr.label',
                             'type' => 'string',
                             'defaultValue' => 'foo',
                             'required' => true,
@@ -170,7 +170,7 @@ class OnlineEditorTest extends TestCase
                     ],
                     'tr' => [
                         'number-attr' => [
-                            'label' => 'ezrichtext.attributes.tr.number-attr.label',
+                            'label' => 'ibexa_richtext.attributes.tr.number-attr.label',
                             'type' => 'number',
                             'defaultValue' => 1,
                             'required' => true,

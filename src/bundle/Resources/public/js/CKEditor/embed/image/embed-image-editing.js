@@ -29,7 +29,7 @@ class IbexaEmbedImageEditing extends Plugin {
 
         findContent({ token, siteaccess, contentId }, (contents) => {
             const fields = contents[0].CurrentVersion.Version.Fields.field;
-            const fieldImage = fields.find((field) => field.fieldTypeIdentifier === 'ezimage');
+            const fieldImage = fields.find((field) => field.fieldTypeIdentifier === 'ibexa_image');
             const size = modelElement.getAttribute('size');
             const variationHref = fieldImage.fieldValue.variations[size].href;
 

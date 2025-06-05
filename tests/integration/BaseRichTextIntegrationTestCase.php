@@ -21,7 +21,7 @@ abstract class BaseRichTextIntegrationTestCase extends IbexaKernelTestCase
     private const FIELD_DEFINITION_IDENTIFIER = 'contents';
     private const DEFAULT_LANGUAGE_CODE = 'eng-US';
 
-    private const FIELD_TYPE_IDENTIFIER = 'ezrichtext';
+    private const FIELD_TYPE_IDENTIFIER = 'ibexa_richtext';
 
     protected ContentService $contentService;
 

@@ -97,14 +97,14 @@ class RichTextTest extends AbstractParserTestCase
         $this->configureAndLoad();
 
         $this->assertConfigResolverParameterValue(
-            'fieldtypes.ezrichtext.tags.default',
+            'fieldtypes.ibexa_richtext.tags.default',
             [
                 'template' => '@IbexaFieldTypeRichText/RichText/tag/default.html.twig',
             ],
             'ibexa_demo_site'
         );
         $this->assertConfigResolverParameterValue(
-            'fieldtypes.ezrichtext.output_custom_xsl',
+            'fieldtypes.ibexa_richtext.output_custom_xsl',
             [
                 0 => [
                     'path' => '%kernel.project_dir%/vendor/ibexa/fieldtype-richtext/src/bundle/Resources/richtext/stylesheets/docbook/xhtml5/output/core.xsl',
@@ -129,7 +129,7 @@ class RichTextTest extends AbstractParserTestCase
                     'system' => [
                         'ibexa_demo_site' => [
                             'fieldtypes' => [
-                                'ezrichtext' => [
+                                'ibexa_richtext' => [
                                     'custom_tags' => ['foo'],
                                 ],
                             ],
@@ -139,7 +139,7 @@ class RichTextTest extends AbstractParserTestCase
             ]
         );
         $this->assertConfigResolverParameterValue(
-            'fieldtypes.ezrichtext.custom_tags',
+            'fieldtypes.ibexa_richtext.custom_tags',
             ['foo'],
             'ibexa_demo_site'
         );
@@ -168,7 +168,7 @@ class RichTextTest extends AbstractParserTestCase
                     'system' => [
                         'ibexa_demo_site' => [
                             'fieldtypes' => [
-                                'ezrichtext' => $config,
+                                'ibexa_richtext' => $config,
                             ],
                         ],
                     ],
@@ -275,19 +275,19 @@ class RichTextTest extends AbstractParserTestCase
             [
                 [
                     'fieldtypes' => [
-                        'ezrichtext' => [
+                        'ibexa_richtext' => [
                             'custom_tags' => ['video', 'equation'],
                         ],
                     ],
                 ],
                 [
-                    'fieldtypes.ezrichtext.custom_tags' => ['video', 'equation'],
+                    'fieldtypes.ibexa_richtext.custom_tags' => ['video', 'equation'],
                 ],
             ],
             [
                 [
                     'fieldtypes' => [
-                        'ezrichtext' => [
+                        'ibexa_richtext' => [
                             'embed' => [
                                 'content' => [
                                     'template' => 'MyBundle:FieldType/RichText/embed:content.html.twig',
@@ -314,7 +314,7 @@ class RichTextTest extends AbstractParserTestCase
                     ],
                 ],
                 [
-                    'fieldtypes.ezrichtext.embed.content' => [
+                    'fieldtypes.ibexa_richtext.embed.content' => [
                         'template' => 'MyBundle:FieldType/RichText/embed:content.html.twig',
                         'config' => [
                             'have' => [
@@ -324,7 +324,7 @@ class RichTextTest extends AbstractParserTestCase
                             ],
                         ],
                     ],
-                    'fieldtypes.ezrichtext.embed.location_inline_denied' => [
+                    'fieldtypes.ibexa_richtext.embed.location_inline_denied' => [
                         'template' => 'MyBundle:FieldType/RichText/embed:location_inline_denied.html.twig',
                         'config' => [
                             'have' => [
@@ -339,7 +339,7 @@ class RichTextTest extends AbstractParserTestCase
             [
                 [
                     'fieldtypes' => [
-                        'ezrichtext' => [
+                        'ibexa_richtext' => [
                             'classes' => [
                                 'paragraph' => [
                                     'choices' => ['class1', 'class2'],
@@ -355,7 +355,7 @@ class RichTextTest extends AbstractParserTestCase
                     ],
                 ],
                 [
-                    'fieldtypes.ezrichtext.classes' => [
+                    'fieldtypes.ibexa_richtext.classes' => [
                         'paragraph' => [
                             'choices' => ['class1', 'class2'],
                             'required' => true,
@@ -373,7 +373,7 @@ class RichTextTest extends AbstractParserTestCase
             [
                 [
                     'fieldtypes' => [
-                        'ezrichtext' => [
+                        'ibexa_richtext' => [
                             'attributes' => [
                                 'paragraph' => [
                                     'select-single-attr' => [
@@ -393,7 +393,7 @@ class RichTextTest extends AbstractParserTestCase
                     ],
                 ],
                 [
-                    'fieldtypes.ezrichtext.attributes' => [
+                    'fieldtypes.ibexa_richtext.attributes' => [
                         'paragraph' => [
                             'select-single-attr' => [
                                 'choices' => ['class1', 'class2'],

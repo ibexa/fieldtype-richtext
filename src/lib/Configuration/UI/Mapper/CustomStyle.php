@@ -60,7 +60,7 @@ final class CustomStyle implements CustomTemplateConfigMapper
             $config[$styleName]['inline'] = $customStyleConfiguration['inline'];
             $config[$styleName]['label'] = $this->translator->trans(
                 /** @Ignore */
-                sprintf('ezrichtext.custom_styles.%s.label', $styleName),
+                sprintf('ibexa_richtext.custom_styles.%s.label', $styleName),
                 [],
                 $this->translationDomain
             );

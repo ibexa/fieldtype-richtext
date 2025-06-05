@@ -57,9 +57,9 @@ final class CustomTag implements Provider
      */
     public function getConfiguration(): array
     {
-        if ($this->configResolver->hasParameter('fieldtypes.ezrichtext.custom_tags')) {
+        if ($this->configResolver->hasParameter('fieldtypes.ibexa_richtext.custom_tags')) {
             return $this->customTagConfigurationMapper->mapConfig(
-                $this->configResolver->getParameter('fieldtypes.ezrichtext.custom_tags')
+                $this->configResolver->getParameter('fieldtypes.ibexa_richtext.custom_tags')
             );
         }
 

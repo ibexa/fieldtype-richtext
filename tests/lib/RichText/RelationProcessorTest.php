@@ -15,7 +15,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @group fieldType
- * @group ezrichtext
+ * @group ibexa_richtext
  */
 class RelationProcessorTest extends TestCase
 {

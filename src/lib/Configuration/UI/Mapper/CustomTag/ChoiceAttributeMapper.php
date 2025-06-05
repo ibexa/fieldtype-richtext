@@ -34,7 +34,7 @@ final class ChoiceAttributeMapper extends CommonAttributeMapper implements Attri
         $parentConfig['choicesLabel'] = [];
 
         foreach ($parentConfig['choices'] as $choice) {
-            $parentConfig['choicesLabel'][$choice] = "ezrichtext.custom_tags.{$tagName}.attributes.{$attributeName}.choices.{$choice}.label";
+            $parentConfig['choicesLabel'][$choice] = "ibexa_richtext.custom_tags.{$tagName}.attributes.{$attributeName}.choices.{$choice}.label";
         }
 
         return $parentConfig;

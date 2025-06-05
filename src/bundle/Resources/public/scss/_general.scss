@@ -2,7 +2,7 @@
 @use 'variables/colors' as *;
 @use 'functions/calculate.rem' as *;
 
-.ibexa-field-edit--ezrichtext .ibexa-data-source,
+.ibexa-field-edit--ibexa_richtext .ibexa-data-source,
 .ibexa-data-source--richtext {
     border: calculateRem(1px) solid $ibexa-color-dark-200;
     border-radius: $ibexa-border-radius;
@@ -245,7 +245,7 @@
     }
 }
 
-.ibexa-field-edit--ezrichtext.ibexa-field-edit--nontranslatable .ibexa-data-source {
+.ibexa-field-edit--ibexa_richtext.ibexa-field-edit--nontranslatable .ibexa-data-source {
     .ibexa-data-source__richtext {
         color: $ibexa-color-dark-300;
         background-color: $ibexa-color-light-300;
@@ -259,7 +259,7 @@
     }
 }
 
-.ibexa-field-edit--ezrichtext {
+.ibexa-field-edit--ibexa_richtext {
     .ibexa-data-source__richtext.ck.ck-editor__editable.ck-rounded-corners:not(.ck-editor__nested-editable) {
         border-radius: $ibexa-border-radius $ibexa-border-radius 0 0;
     }

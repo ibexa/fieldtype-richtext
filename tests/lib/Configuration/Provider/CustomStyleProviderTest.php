@@ -30,6 +30,6 @@ class CustomStyleProviderTest extends BaseCustomTemplateProviderTestCase
 
     protected function getCustomTemplateSiteAccessConfigParamName(): string
     {
-        return 'fieldtypes.ezrichtext.custom_styles';
+        return 'fieldtypes.ibexa_richtext.custom_styles';
     }
 }

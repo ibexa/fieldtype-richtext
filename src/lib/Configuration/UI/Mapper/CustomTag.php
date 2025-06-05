@@ -102,8 +102,8 @@ final class CustomTag implements CustomTemplateConfigMapper
             $customTagConfiguration = $this->customTagsConfiguration[$tagName];
 
             $config[$tagName] = [
-                'label' => "ezrichtext.custom_tags.{$tagName}.label",
-                'description' => "ezrichtext.custom_tags.{$tagName}.description",
+                'label' => "ibexa_richtext.custom_tags.{$tagName}.label",
+                'description' => "ibexa_richtext.custom_tags.{$tagName}.description",
                 'isInline' => $customTagConfiguration['is_inline'],
             ];
 

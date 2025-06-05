@@ -4,4 +4,4 @@ services:
             $shortTextExtractor: '@Ibexa\FieldTypeRichText\RichText\TextExtractor\ShortTextExtractor'
             $fullTextExtractor: '@Ibexa\FieldTypeRichText\RichText\TextExtractor\FullTextExtractor'
         tags:
-            - {name: ibexa.field_type.indexable, alias: ezrichtext}
+            - {name: ibexa.field_type.indexable, alias: ibexa_richtext}
