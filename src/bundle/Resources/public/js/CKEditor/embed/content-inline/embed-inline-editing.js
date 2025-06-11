@@ -6,8 +6,12 @@ import IbexaEmbedContentInlineCommand from './embed-inline-command';
 
 import { findContent } from '../../services/content-service';
 
+const { escapeHTML } = window.ibexa.helpers.text;
+const { dangerouslySetInnerHTML } = window.ibexa.helpers.dom;
+
 const renderPreview = (title, contentId, itemActionsContainer) => {
     const itemActionsHTML = itemActionsContainer?.outerHTML ?? '';
+    const titleHtmlEscaped = escapeHTML(title);
 
     return `<svg class="ibexa-icon ibexa-icon--medium ibexa-icon--secondary">
                 <use xlink:href="${window.ibexa.helpers.icon.getIconPath('embed')}"></use>
@@ -17,7 +21,7 @@ const renderPreview = (title, contentId, itemActionsContainer) => {
                 data-ibexa-update-content-id="${contentId}"
                 data-ibexa-update-source-data-path="Content.Name"
             >
-                ${title}
+                ${titleHtmlEscaped}
             </span>
             <span>
                 <button
@@ -65,8 +69,9 @@ class IbexaEmbedContentInlineEditing extends Plugin {
                     const preview = downcastWriter.createUIElement('span', { class: 'ibexa-embed-content' }, function (domDocument) {
                         const domElement = this.toDomElement(domDocument);
                         const itemActionsContainer = editor.sourceElement.parentNode.querySelector('.ibexa-embedded-item-actions');
+                        const previewRendered = renderPreview(modelElement.getAttribute('contentName'), null, itemActionsContainer);
 
-                        domElement.innerHTML = renderPreview(modelElement.getAttribute('contentName'), null, itemActionsContainer);
+                        dangerouslySetInnerHTML(domElement, previewRendered);
 
                         return domElement;
                     });
