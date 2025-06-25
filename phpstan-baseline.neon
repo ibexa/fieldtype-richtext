@@ -1639,12 +1639,6 @@ parameters:
 			path: tests/lib/RichText/Converter/LinkTest.php
 
 		-
-			message: '#^Parameter \#2 \$function of class Ibexa\\Core\\Base\\Exceptions\\UnauthorizedException constructor expects string, int given\.$#'
-			identifier: argument.type
-			count: 4
-			path: tests/lib/RichText/Converter/LinkTest.php
-
-		-
 			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Converter\\Render\\EmbedTest\:\:providerForTestConvert\(\) return type has no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1

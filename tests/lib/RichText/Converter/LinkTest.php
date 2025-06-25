@@ -275,7 +275,7 @@ class LinkTest extends TestCase
   </para>
 </section>',
                 106,
-                new APIUnauthorizedException('Location', 106),
+                new APIUnauthorizedException('content', 'read', ['Location' => 106]),
                 'notice',
                 'While generating links for richtext, unauthorized to load Location with ID 106',
             ],
@@ -295,7 +295,7 @@ class LinkTest extends TestCase
   </ezembed>
 </section>',
                 106,
-                new APIUnauthorizedException('Location', 106),
+                new APIUnauthorizedException('content', 'read', ['Location' => 106]),
                 'notice',
                 'While generating links for richtext, unauthorized to load Location with ID 106',
             ],
@@ -490,7 +490,7 @@ class LinkTest extends TestCase
   </para>
 </section>',
                 205,
-                new APIUnauthorizedException('Content', 205),
+                new APIUnauthorizedException('content', 'read', ['Content' => 205]),
                 'notice',
                 'While generating links for richtext, unauthorized to load Content object with ID 205',
             ],
@@ -510,7 +510,7 @@ class LinkTest extends TestCase
   </ezembed>
 </section>',
                 205,
-                new APIUnauthorizedException('Content', 205),
+                new APIUnauthorizedException('content', 'read', ['Content' => 205]),
                 'notice',
                 'While generating links for richtext, unauthorized to load Content object with ID 205',
             ],
