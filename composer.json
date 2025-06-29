@@ -23,9 +23,9 @@
         "symfony/http-kernel": "^7.3",
         "symfony/options-resolver": "^7.3",
         "symfony/security-core": "^7.3",
-        "symfony/templating": "^7.3",
+        "symfony/templating": "^6.4",
         "symfony/translation": "^7.3",
-        "symfony/translation-contracts": "^7.3",
+        "symfony/translation-contracts": "^3.0",
         "symfony/validator": "^7.3",
         "symfony/yaml": "^7.3",
         "twig/twig": "^3.0"
