@@ -6,6 +6,26 @@
     .ck.ck-content {
         min-height: calculateRem(100px);
         padding: 0 calculateRem(24px);
+
+        ol {
+            list-style-type: auto;
+
+            ol {
+                list-style-type: auto;
+
+                ol {
+                    list-style-type: auto;
+
+                    ol {
+                        list-style-type: auto;
+
+                        ol {
+                            list-style-type: auto;
+                        }
+                    }
+                }
+            }
+        }
     }
 
     .ck {
