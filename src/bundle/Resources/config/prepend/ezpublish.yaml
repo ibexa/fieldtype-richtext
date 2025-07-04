@@ -63,6 +63,8 @@ system:
                                 priority: 20
                             ibexaCustomAttributes:
                                 priority: 10
+                            specialCharacters:
+                                priority: 5
                     group5:
                         priority: 20
                         buttons:
