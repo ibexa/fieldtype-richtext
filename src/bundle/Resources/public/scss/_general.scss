@@ -176,6 +176,10 @@
         margin: calculateRem(16px) auto;
     }
 
+    [data-ezalign] + * {
+        clear: both;
+    }
+
     p {
         min-height: calculateRem(24px);
     }
