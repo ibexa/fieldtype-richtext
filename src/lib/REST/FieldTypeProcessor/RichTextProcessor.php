@@ -22,9 +22,9 @@ class RichTextProcessor extends FieldTypeProcessor
     }
 
     /**
-     * {@inheritdoc}
+     * @return array<mixed>
      */
-    public function postProcessValueHash($outgoingValueHash)
+    public function postProcessValueHash(mixed $outgoingValueHash): array
     {
         $document = new DOMDocument();
         $document->loadXML($outgoingValueHash['xml']);
