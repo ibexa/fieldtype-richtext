@@ -21,6 +21,9 @@ class RichTextProcessor extends FieldTypeProcessor
         $this->docbookToXhtml5EditConverter = $docbookToXhtml5EditConverter;
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function postProcessValueHash(mixed $outgoingValueHash): array
     {
         $document = new DOMDocument();
