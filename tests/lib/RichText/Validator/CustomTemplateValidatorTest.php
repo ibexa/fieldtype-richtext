@@ -9,42 +9,37 @@ declare(strict_types=1);
 namespace Ibexa\Tests\FieldTypeRichText\RichText\Validator;
 
 use DOMDocument;
-use Ibexa\FieldTypeRichText\RichText\Validator\CustomTagsValidator;
+use Ibexa\FieldTypeRichText\RichText\Validator\CustomTemplateValidator;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Yaml\Yaml;
 
 /**
- * Test RichText CustomTagsValidator.
+ * Test RichText CustomTemplateValidator.
  *
- * @see \Ibexa\FieldTypeRichText\FieldType\RichText\CustomTagsValidator
+ * @see \Ibexa\FieldTypeRichText\FieldType\RichText\CustomTemplateValidator
  */
-class CustomTagsValidatorTest extends TestCase
+class CustomTemplateValidatorTest extends TestCase
 {
-    /**
-     * @var \Ibexa\FieldTypeRichText\RichText\Validator\CustomTagsValidator
-     */
-    private $validator;
+    private CustomTemplateValidator $validator;
 
     public function setUp(): void
     {
         // reuse Custom Tags configuration from common test settings
         $commonSettings = Yaml::parseFile(__DIR__ . '/../../_settings/common.yaml');
         $customTagsConfiguration = $commonSettings['parameters']['ibexa.field_type.richtext.custom_tags'];
+        $customStylesConfiguration = $commonSettings['parameters']['ibexa.field_type.richtext.custom_styles'];
 
-        $this->validator = new CustomTagsValidator($customTagsConfiguration);
+        $this->validator = new CustomTemplateValidator($customTagsConfiguration, $customStylesConfiguration);
     }
 
     /**
      * Test validating DocBook document containing Custom Tags.
      *
-     * @covers \Ibexa\FieldTypeRichText\RichText\CustomTagsValidator::validateDocument
-     *
      * @dataProvider providerForTestValidateDocument
      *
-     * @param \DOMDocument $document
-     * @param array $expectedErrors
+     * @param list<string> $expectedErrors
      */
-    public function testValidateDocument(DOMDocument $document, array $expectedErrors)
+    public function testValidateDocument(DOMDocument $document, array $expectedErrors): void
     {
         self::assertEquals(
             $expectedErrors,
@@ -55,11 +50,11 @@ class CustomTagsValidatorTest extends TestCase
     /**
      * Data provider for testValidateDocument.
      *
-     * @see testValidateDocument
+     * @return list<array{DOMDocument, list<string>}>
      *
-     * @return array
+     * @see testValidateDocument
      */
-    public function providerForTestValidateDocument()
+    public function providerForTestValidateDocument(): array
     {
         return [
             [
@@ -101,6 +96,38 @@ DOCBOOK
                 [
                     "Missing attribute name for RichText Custom Tag 'video'",
                 ],
+            ],
+            [
+                $this->createDocument(
+                    <<<DOCBOOK
+<?xml version="1.0" encoding="UTF-8"?>
+<section xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink"
+         xmlns:ezxhtml="http://ibexa.co/xmlns/dxp/docbook/xhtml"
+         xmlns:ezcustom="http://ibexa.co/xmlns/dxp/docbook/custom"
+         version="5.0-variant ezpublish-1.0">
+  <eztemplate name="highlighted_block">
+    <ezcontent>Important content</ezcontent>
+  </eztemplate>
+</section>
+DOCBOOK
+                ),
+                [],
+            ],
+            [
+                $this->createDocument(
+                    <<<DOCBOOK
+<?xml version="1.0" encoding="UTF-8"?>
+<section xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink"
+         xmlns:ezxhtml="http://ibexa.co/xmlns/dxp/docbook/xhtml"
+         xmlns:ezcustom="http://ibexa.co/xmlns/dxp/docbook/custom"
+         version="5.0-variant ezpublish-1.0">
+  <eztemplate name="non_existing_style">
+    <ezcontent>Text</ezcontent>
+  </eztemplate>
+</section>
+DOCBOOK
+                ),
+                [],
             ],
             [
                 $this->createDocument(
@@ -190,7 +217,7 @@ DOCBOOK
     /**
      * Test that defined but not configured yet Custom Tag doesn't cause validation error.
      */
-    public function testValidateDocumentAcceptsLegacyTags()
+    public function testValidateDocumentAcceptsLegacyTags(): void
     {
         $document = $this->createDocument(
             <<<DOCBOOK
@@ -212,22 +239,17 @@ DOCBOOK
         self::assertEmpty($this->validator->validateDocument($document));
     }
 
-    /**
-     * @param string $source XML source
-     *
-     * @return \DOMDocument
-     */
-    protected function createDocument($source)
+    protected function createDocument(string $source): DOMDocument
     {
         $document = new DOMDocument();
 
         $document->preserveWhiteSpace = false;
         $document->formatOutput = false;
 
-        $document->loadXml($source, LIBXML_NOENT);
+        $document->loadXml($source, LIBXML_NONET);
 
         return $document;
     }
 }
 
-class_alias(CustomTagsValidatorTest::class, 'EzSystems\Tests\EzPlatformRichText\RichText\Validator\CustomTagsValidatorTest');
+class_alias(CustomTemplateValidator::class, 'EzSystems\Tests\EzPlatformRichText\RichText\Validator\CustomTagsValidatorTest');
