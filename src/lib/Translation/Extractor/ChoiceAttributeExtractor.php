@@ -16,8 +16,8 @@ use JMS\TranslationBundle\Translation\ExtractorInterface;
  */
 final class ChoiceAttributeExtractor implements ExtractorInterface
 {
-    private const CHOICE_ATTRIBUTE_TYPE = 'choice';
-    private const CHOICE_LABEL_KEY = 'ibexa_richtext.custom_tags.%s.attributes.%s.choice.%s.label';
+    private const string CHOICE_ATTRIBUTE_TYPE = 'choice';
+    private const string CHOICE_LABEL_KEY = 'ibexa_richtext.custom_tags.%s.attributes.%s.choice.%s.label';
 
     /** @var array<string, mixed> */
     private array $customTags;

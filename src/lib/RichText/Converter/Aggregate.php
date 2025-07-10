@@ -21,7 +21,7 @@ class Aggregate implements Converter
      *
      * @var \Ibexa\Contracts\FieldTypeRichText\RichText\Converter[]
      */
-    protected $converters = [];
+    protected array $converters = [];
 
     /**
      * @param \Ibexa\Contracts\FieldTypeRichText\RichText\Converter[] $converters An array of Converters, sorted by priority
@@ -33,12 +33,8 @@ class Aggregate implements Converter
 
     /**
      * Performs conversion of the given $document using configured converters.
-     *
-     * @param \DOMDocument $document
-     *
-     * @return \DOMDocument
      */
-    public function convert(DOMDocument $document)
+    public function convert(DOMDocument $document): DOMDocument
     {
         foreach ($this->converters as $converter) {
             $document = $converter->convert($document);

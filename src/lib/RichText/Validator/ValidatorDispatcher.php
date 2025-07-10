@@ -20,14 +20,14 @@ class ValidatorDispatcher implements ValidatorInterface
     /**
      * Mapping of namespaces to validators.
      *
-     * @var \Ibexa\FieldTypeRichText\eZ\RichText\Validator[]
+     * @var array<string, ValidatorInterface|null>
      */
-    protected $mapping = [];
+    protected array $mapping = [];
 
     /**
-     * @param \Ibexa\FieldTypeRichText\eZ\RichText\Validator[] $validatorMap
+     * @param array<string, ValidatorInterface|null> $validatorMap
      */
-    public function __construct($validatorMap)
+    public function __construct(array $validatorMap)
     {
         foreach ($validatorMap as $namespace => $validator) {
             $this->addValidator($namespace, $validator);
@@ -36,11 +36,8 @@ class ValidatorDispatcher implements ValidatorInterface
 
     /**
      * Adds validator mapping.
-     *
-     * @param string $namespace
-     * @param \Ibexa\FieldTypeRichText\eZ\RichText\Validator $validator
      */
-    public function addValidator($namespace, ValidatorInterface $validator = null): void
+    public function addValidator(string $namespace, ?ValidatorInterface $validator = null): void
     {
         $this->mapping[$namespace] = $validator;
     }
@@ -50,11 +47,9 @@ class ValidatorDispatcher implements ValidatorInterface
      *
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      *
-     * @param \DOMDocument $document
-     *
      * @return string[]
      */
-    public function dispatch(DOMDocument $document)
+    public function dispatch(DOMDocument $document): array
     {
         $documentNamespace = $document->documentElement->lookupNamespaceURI(null);
         // checking for null as ezxml has no default namespace...
@@ -68,16 +63,13 @@ class ValidatorDispatcher implements ValidatorInterface
                     return [];
                 }
 
-                return $validator->validate($document);
+                return $validator->validateDocument($document);
             }
         }
 
         throw new NotFoundException('Validator', $documentNamespace);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function validateDocument(DOMDocument $xmlDocument): array
     {
         return $this->dispatch($xmlDocument);

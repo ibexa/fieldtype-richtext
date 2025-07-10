@@ -26,13 +26,11 @@ abstract class Render
     }
 
     /**
-     * Extracts configuration hash from embed element.
+     * Extracts configuration hash from an embed element.
      *
-     * @param \DOMElement $embed
-     *
-     * @return array
+     * @return array<string, mixed>|string|null
      */
-    protected function extractConfiguration(DOMElement $embed)
+    protected function extractConfiguration(DOMElement $embed): array|string|null
     {
         $hash = [];
 
@@ -50,11 +48,9 @@ abstract class Render
     /**
      * Recursively extracts data from XML hash structure.
      *
-     * @param \DOMNode $configHash
-     *
-     * @return array|null
+     * @return array<string, mixed>|string|null
      */
-    protected function extractHash(DOMNode $configHash)
+    protected function extractHash(DOMNode $configHash): array|string|null
     {
         $hash = [];
 

@@ -16,9 +16,9 @@ use JMS\TranslationBundle\Translation\ExtractorInterface;
 
 final class OnlineEditorCustomAttributesExtractor implements ExtractorInterface
 {
-    private const MESSAGE_DOMAIN = 'online_editor';
-    private const ATTRIBUTES_MESSAGE_ID_PREFIX = 'ibexa_richtext.attributes';
-    private const CLASS_LABEL_MESSAGE_ID = 'ibexa_richtext.classes.class.label';
+    private const string MESSAGE_DOMAIN = 'online_editor';
+    private const string ATTRIBUTES_MESSAGE_ID_PREFIX = 'ibexa_richtext.attributes';
+    private const string CLASS_LABEL_MESSAGE_ID = 'ibexa_richtext.classes.class.label';
 
     private ConfigResolverInterface $configResolver;
 
@@ -28,7 +28,6 @@ final class OnlineEditorCustomAttributesExtractor implements ExtractorInterface
     private array $siteAccessList;
 
     /**
-     * @param \Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface $configResolver
      * @param string[] $siteAccessList
      */
     public function __construct(ConfigResolverInterface $configResolver, array $siteAccessList)
@@ -39,8 +38,6 @@ final class OnlineEditorCustomAttributesExtractor implements ExtractorInterface
 
     /**
      * Iterate over each scope and extract custom attributes label names.
-     *
-     * @return \JMS\TranslationBundle\Model\MessageCatalogue
      */
     public function extract(): MessageCatalogue
     {
@@ -58,12 +55,6 @@ final class OnlineEditorCustomAttributesExtractor implements ExtractorInterface
         return $catalogue;
     }
 
-    /**
-     * @param string $id
-     * @param string $desc
-     *
-     * @return \JMS\TranslationBundle\Model\Message\XliffMessage
-     */
     private function createMessage(string $id, string $desc): XliffMessage
     {
         $message = new XliffMessage($id, self::MESSAGE_DOMAIN);
@@ -78,9 +69,6 @@ final class OnlineEditorCustomAttributesExtractor implements ExtractorInterface
 
     /**
      * Extract messages from the given scope into the catalogue.
-     *
-     * @param \JMS\TranslationBundle\Model\MessageCatalogue $catalogue
-     * @param string $scope
      */
     private function extractMessagesForScope(MessageCatalogue $catalogue, string $scope): void
     {

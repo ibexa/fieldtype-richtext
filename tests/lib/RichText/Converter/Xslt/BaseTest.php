@@ -81,7 +81,6 @@ abstract class BaseTest extends TestCase
 
     /**
      * @param string $inputFile
-     * @param string $outputFile
      *
      * @dataProvider providerForTestConvert
      */

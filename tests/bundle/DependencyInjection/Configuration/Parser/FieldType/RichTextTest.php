@@ -27,8 +27,6 @@ class RichTextTest extends AbstractParserTestCase
 
     /**
      * Get test configuration for multiple extensions.
-     *
-     * @return array
      */
     private function getExtensionsConfig(): array
     {
@@ -47,7 +45,6 @@ class RichTextTest extends AbstractParserTestCase
     /**
      * Load Configuration for multiple defined extensions.
      *
-     * @param array $configurationValues
      *
      * @throws \Exception
      */
@@ -150,9 +147,6 @@ class RichTextTest extends AbstractParserTestCase
      *
      * @dataProvider getOnlineEditorInvalidSettings
      *
-     * @param array $config
-     * @param string $expectedExceptionMessage
-     *
      * @throws \Exception
      */
     public function testOnlineEditorInvalidSettingsThrowException(
@@ -180,7 +174,6 @@ class RichTextTest extends AbstractParserTestCase
     /**
      * Data provider for testOnlineEditorInvalidSettings.
      *
-     * @return array
      *
      * @see testOnlineEditorInvalidSettingsThrowException
      */
@@ -243,9 +236,6 @@ class RichTextTest extends AbstractParserTestCase
 
     /**
      * @dataProvider richTextSettingsProvider
-     *
-     * @param array $config
-     * @param array $expected
      *
      * @throws \Exception
      */

@@ -16,17 +16,11 @@ class ValidatorAggregate implements ValidatorInterface
     /** @var \Ibexa\Contracts\FieldTypeRichText\RichText\ValidatorInterface[] */
     private iterable $validators;
 
-    /**
-     * @param iterable $validators
-     */
     public function __construct(iterable $validators)
     {
         $this->validators = $validators;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function validateDocument(DOMDocument $xmlDocument): array
     {
         $validationErrors = [];

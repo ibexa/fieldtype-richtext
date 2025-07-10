@@ -20,14 +20,14 @@ class ConverterDispatcher
     /**
      * Mapping of namespaces to converters.
      *
-     * @var \Ibexa\Contracts\FieldTypeRichText\RichText\Converter[]
+     * @var array<string, \Ibexa\Contracts\FieldTypeRichText\RichText\Converter|null>
      */
-    protected $mapping = [];
+    protected array $mapping = [];
 
     /**
-     * @param \Ibexa\Contracts\FieldTypeRichText\RichText\Converter[] $converterMap
+     * @param array<string, \Ibexa\Contracts\FieldTypeRichText\RichText\Converter|null> $converterMap
      */
-    public function __construct($converterMap)
+    public function __construct(array $converterMap)
     {
         foreach ($converterMap as $namespace => $converter) {
             $this->addConverter($namespace, $converter);
@@ -36,11 +36,8 @@ class ConverterDispatcher
 
     /**
      * Adds converter mapping.
-     *
-     * @param string $namespace
-     * @param \Ibexa\Contracts\FieldTypeRichText\RichText\Converter|null $converter
      */
-    public function addConverter($namespace, Converter $converter = null): void
+    public function addConverter(string $namespace, ?Converter $converter = null): void
     {
         $this->mapping[$namespace] = $converter;
     }
@@ -49,12 +46,8 @@ class ConverterDispatcher
      * Dispatches DOMDocument to the namespace mapped converter.
      *
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     *
-     * @param \DOMDocument $document
-     *
-     * @return \DOMDocument
      */
-    public function dispatch(DOMDocument $document)
+    public function dispatch(DOMDocument $document): DOMDocument
     {
         $documentNamespace = $document->documentElement->lookupNamespaceURI(null);
         // checking for null as ezxml has no default namespace...

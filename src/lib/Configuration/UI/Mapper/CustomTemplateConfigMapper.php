@@ -13,5 +13,10 @@ namespace Ibexa\FieldTypeRichText\Configuration\UI\Mapper;
  */
 interface CustomTemplateConfigMapper
 {
+    /**
+     * @param array<string> $enabledCustomTemplates
+     *
+     * @return array<string, mixed>
+     */
     public function mapConfig(array $enabledCustomTemplates): array;
 }

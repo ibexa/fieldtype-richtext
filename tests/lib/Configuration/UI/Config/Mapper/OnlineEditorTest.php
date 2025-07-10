@@ -30,8 +30,6 @@ class OnlineEditorTest extends TestCase
      * Data provider for mapCssClassesConfiguration.
      *
      * @see testMapCssClassesConfiguration
-     *
-     * @return array
      */
     public function getSemanticConfigurationForMapCssClassesConfiguration(): array
     {
@@ -88,7 +86,6 @@ class OnlineEditorTest extends TestCase
     /**
      * Data provider for mapDataAttributesConfiguration.
      *
-     * @return array
      *
      * @see testMapDataAttributesConfiguration
      */
@@ -183,9 +180,6 @@ class OnlineEditorTest extends TestCase
 
     /**
      * @dataProvider getSemanticConfigurationForMapCssClassesConfiguration
-     *
-     * @param array $semanticConfiguration
-     * @param array $expectedMappedConfiguration
      */
     public function testMapCssClassesConfiguration(
         array $semanticConfiguration,
@@ -199,9 +193,6 @@ class OnlineEditorTest extends TestCase
 
     /**
      * @dataProvider getSemanticConfigurationForMapDataAttributesConfiguration
-     *
-     * @param array $semanticConfiguration
-     * @param array $expectedMappedConfiguration
      */
     public function testMapDataAttributesConfiguration(
         array $semanticConfiguration,

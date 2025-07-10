@@ -15,5 +15,5 @@ use Symfony\Component\Validator\Constraint;
  */
 class RichText extends Constraint
 {
-    public $message = 'Invalid value';
+    public string $message = 'Invalid value';
 }

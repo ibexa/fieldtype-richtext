@@ -19,9 +19,7 @@ class InvalidXmlException extends InvalidArgumentException
     private array $errors;
 
     /**
-     * @param string $argumentName
-     * @param array $errors
-     * @param \Throwable|null $previous
+     * @param list<\LibXMLError> $errors
      */
     public function __construct(string $argumentName, array $errors = [], Throwable $previous = null)
     {

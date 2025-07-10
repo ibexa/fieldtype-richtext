@@ -22,15 +22,9 @@ class RichTextStorage extends GatewayBasedStorage
 {
     protected ?LoggerInterface $logger;
 
-    /**
-     * @var \Ibexa\FieldTypeRichText\FieldType\RichText\RichTextStorage\Gateway
-     */
+    /** @var \Ibexa\FieldTypeRichText\FieldType\RichText\RichTextStorage\Gateway */
     protected StorageGatewayInterface $gateway;
 
-    /**
-     * @param \Ibexa\Contracts\Core\FieldType\StorageGateway $gateway
-     * @param \Psr\Log\LoggerInterface $logger
-     */
     public function __construct(StorageGateway $gateway, LoggerInterface $logger = null)
     {
         parent::__construct($gateway);
@@ -40,7 +34,7 @@ class RichTextStorage extends GatewayBasedStorage
     /**
      * @see \Ibexa\Contracts\Core\FieldType\FieldStorage
      */
-    public function storeFieldData(VersionInfo $versionInfo, Field $field)
+    public function storeFieldData(VersionInfo $versionInfo, Field $field): bool
     {
         $document = new DOMDocument();
         $document->loadXML($field->value->data);
@@ -94,8 +88,8 @@ class RichTextStorage extends GatewayBasedStorage
                 // Link the same URL only once
                 if (!isset($urlLinkSet[$url])) {
                     $this->gateway->linkUrl(
-                        $urlIdMap[$url],
-                        $field->id,
+                        (int)$urlIdMap[$url],
+                        (int)$field->id,
                         $versionInfo->versionNo
                     );
                     $urlLinkSet[$url] = true;
@@ -112,11 +106,9 @@ class RichTextStorage extends GatewayBasedStorage
         }
 
         $this->gateway->unlinkUrl(
-            $field->id,
+            (int)$field->id,
             $versionInfo->versionNo,
-            array_values(
-                $urlIdMap
-            )
+            array_values($urlIdMap),
         );
 
         $field->value->data = $document->saveXML();
@@ -180,6 +172,9 @@ class RichTextStorage extends GatewayBasedStorage
         $field->value->data = $document->saveXML();
     }
 
+    /**
+     * @param list<int> $fieldIds
+     */
     public function deleteFieldData(VersionInfo $versionInfo, array $fieldIds): bool
     {
         foreach ($fieldIds as $fieldId) {
@@ -190,11 +185,9 @@ class RichTextStorage extends GatewayBasedStorage
     }
 
     /**
-     * Checks if field type has external data to deal with.
-     *
-     * @return bool
+     * Checks if a field type has external data to deal with.
      */
-    public function hasFieldData()
+    public function hasFieldData(): bool
     {
         return true;
     }

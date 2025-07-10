@@ -28,10 +28,6 @@ class CustomTagTest extends TestCase
      * @covers \Ibexa\FieldTypeRichText\Configuration\UI\Mapper\CustomTag::mapConfig
      *
      * @dataProvider providerForTestMapConfig
-     *
-     * @param array $customTagsConfiguration
-     * @param array $enabledCustomTags
-     * @param array $expectedConfig
      */
     public function testMapConfig(
         array $customTagsConfiguration,
@@ -59,8 +55,6 @@ class CustomTagTest extends TestCase
 
     /**
      * Data provider for {@see testMapConfig}.
-     *
-     * @return array
      */
     public function providerForTestMapConfig(): array
     {

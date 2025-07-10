@@ -19,8 +19,8 @@ use Ibexa\Contracts\FieldTypeRichText\Configuration\Provider;
  */
 final class CKEditor implements Provider
 {
-    private const SEPARATOR = '|';
-    private const CUSTOM_STYLE_INLINE = 'ibexaCustomStyleInline';
+    private const string SEPARATOR = '|';
+    private const string CUSTOM_STYLE_INLINE = 'ibexaCustomStyleInline';
 
     private ConfigResolverInterface $configResolver;
 

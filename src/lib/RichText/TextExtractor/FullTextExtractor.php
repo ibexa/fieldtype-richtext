@@ -30,7 +30,7 @@ final class FullTextExtractor implements TextExtractorInterface
     {
         $text = '';
 
-        if ($node->childNodes !== null && $node->childNodes->count() > 0) {
+        if ($node->childNodes->count() > 0) {
             foreach ($node->childNodes as $child) {
                 $text .= $this->extractTextFromNode($child);
             }

@@ -21,7 +21,7 @@ interface ProviderService
     /**
      * Provide RichText package configuration in the form of associative multidimensional array.
      *
-     * @return array
+     * @return array<string, mixed>
      */
     public function getConfiguration(): array;
 }

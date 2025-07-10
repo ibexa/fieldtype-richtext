@@ -16,7 +16,7 @@ use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 
 class Configuration extends SiteAccessConfiguration
 {
-    public const CUSTOM_TAG_ATTRIBUTE_TYPES = ['number', 'string', 'boolean', 'choice', 'link'];
+    public const array CUSTOM_TAG_ATTRIBUTE_TYPES = ['number', 'string', 'boolean', 'choice', 'link'];
 
     /**
      * Generates the configuration tree builder.
@@ -95,12 +95,8 @@ class Configuration extends SiteAccessConfiguration
      * ibexa_richtext:
      *     custom_tags:
      * </code>
-     *
-     * @param \Symfony\Component\Config\Definition\Builder\NodeBuilder $ezRichTextNode
-     *
-     * @return \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition
      */
-    private function addCustomTagsSection(NodeBuilder $ezRichTextNode)
+    private function addCustomTagsSection(NodeBuilder $ezRichTextNode): NodeBuilder
     {
         return $ezRichTextNode
                 ->arrayNode('custom_tags')
@@ -184,12 +180,8 @@ class Configuration extends SiteAccessConfiguration
      *     ibexa_richtext:
      *         custom_styles:
      * </code>
-     *
-     * @param \Symfony\Component\Config\Definition\Builder\NodeBuilder $ezRichTextNode
-     *
-     * @return \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition
      */
-    private function addCustomStylesSection(NodeBuilder $ezRichTextNode)
+    private function addCustomStylesSection(NodeBuilder $ezRichTextNode): NodeBuilder
     {
         return $ezRichTextNode
                 ->arrayNode('custom_styles')
@@ -228,12 +220,8 @@ class Configuration extends SiteAccessConfiguration
      * Please note extra_buttons setting will be deprecated in eZ Platform 3.x.
      * The alternative and more flexible solution will be introduced.
      * So you will need to update Online Editor Extra Buttons as part of eZ Platform 3.x upgrade.
-     *
-     * @param \Symfony\Component\Config\Definition\Builder\NodeBuilder $ezRichTextNode
-     *
-     * @return \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition
      */
-    private function addAlloyEditorSection(NodeBuilder $ezRichTextNode)
+    private function addAlloyEditorSection(NodeBuilder $ezRichTextNode): NodeBuilder
     {
         return $ezRichTextNode
                 ->arrayNode('alloy_editor')

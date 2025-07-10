@@ -18,7 +18,7 @@ use RuntimeException;
  */
 final class XMLSanitizer
 {
-    public function sanitizeXMLString(string $xmlString): string
+    public function sanitizeXMLString(string $xmlString): ?string
     {
         $xmlString = $this->removeComments($xmlString);
         $xmlString = $this->removeDangerousTags($xmlString);
@@ -44,7 +44,7 @@ final class XMLSanitizer
         return $document;
     }
 
-    private function removeComments(string $xmlString): string
+    private function removeComments(string $xmlString): ?string
     {
         $xmlString = preg_replace('/<!--\s?.*?\s?-->/s', '', $xmlString);
 
@@ -55,8 +55,14 @@ final class XMLSanitizer
         return $xmlString;
     }
 
-    private function removeDangerousTags(string $xmlString): string
+    private function removeDangerousTags(?string $xmlString): ?string
     {
+        if ($xmlString === null) {
+            $this->throwRuntimeException(__METHOD__);
+        }
+
+        assert(is_string($xmlString));
+
         $xmlString = preg_replace('/<\s*(script|iframe|object|embed|style)[^>]*>.*?<\s*\/\s*\1\s*>/is', '', $xmlString);
 
         if ($xmlString === null) {
@@ -66,8 +72,14 @@ final class XMLSanitizer
         return $xmlString;
     }
 
-    private function sanitizeDocType(string $xmlString): string
+    private function sanitizeDocType(?string $xmlString): ?string
     {
+        if ($xmlString === null) {
+            $this->throwRuntimeException(__METHOD__);
+        }
+
+        assert(is_string($xmlString));
+
         $pattern = '/<\s*!DOCTYPE\s+(?<name>[^\s>]+)\s*(\[(?<entities>.*?)\]\s*)?>/is';
 
         if (!preg_match($pattern, $xmlString, $matches)) {
@@ -79,12 +91,16 @@ final class XMLSanitizer
         [$safeEntities, $removedEntities] = $this->filterEntitiesFromDocType($entitiesBlock);
 
         foreach ($removedEntities as $entity) {
+            assert(is_string($xmlString));
+
             $xmlString = preg_replace('/&' . preg_quote($entity, '/') . ';/i', '', $xmlString);
 
             if ($xmlString === null) {
                 $this->throwRuntimeException(__METHOD__);
             }
         }
+
+        assert(is_string($xmlString));
 
         $safeDocType = sprintf('<!DOCTYPE %s [ %s ]>', $docTypeName, implode("\n", $safeEntities));
         $xmlString = preg_replace($pattern, $safeDocType, $xmlString);
@@ -96,8 +112,14 @@ final class XMLSanitizer
         return $xmlString;
     }
 
-    private function removeEmptyDocType(string $xmlString): string
+    private function removeEmptyDocType(?string $xmlString): ?string
     {
+        if ($xmlString === null) {
+            $this->throwRuntimeException(__METHOD__);
+        }
+
+        assert(is_string($xmlString));
+
         $xmlString = preg_replace('/<\s*!DOCTYPE\s+[^\[\]>]*\[\s*\]>/is', '', $xmlString);
 
         if ($xmlString === null) {
@@ -143,7 +165,7 @@ final class XMLSanitizer
         }
 
         $entitiesToRemove = $this->resolveRecursiveEntities($entityDefinitions, $entitiesToRemove);
-        $safeEntities = array_filter($safeEntities, function ($line) use ($entitiesToRemove) {
+        $safeEntities = array_filter($safeEntities, function ($line) use ($entitiesToRemove): bool {
             return !$this->containsUnsafeEntity($line, $entitiesToRemove);
         });
 
@@ -183,9 +205,6 @@ final class XMLSanitizer
         return false;
     }
 
-    /**
-     * @return never
-     */
     private function throwRuntimeException(string $functionName): void
     {
         throw new RuntimeException(

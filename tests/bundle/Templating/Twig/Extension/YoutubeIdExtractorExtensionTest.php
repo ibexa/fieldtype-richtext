@@ -43,9 +43,6 @@ class YoutubeIdExtractorExtensionTest extends TestCase
      * @covers \Ibexa\Bundle\FieldTypeRichText\Templating\Twig\Extension\YoutubeIdExtractorExtension::extractId
      *
      * @dataProvider getYouTubeUrls
-     *
-     * @param string $input
-     * @param string|null $expected
      */
     public function testExtractId(string $input, ?string $expected): void
     {

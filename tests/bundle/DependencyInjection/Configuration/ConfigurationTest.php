@@ -18,8 +18,8 @@ final class ConfigurationTest extends TestCase
 {
     use ConfigurationTestCaseTrait;
 
-    private const INPUT_FIXTURES_DIR = __DIR__ . '/../Fixtures/custom_tags/input/';
-    private const OUTPUT_FIXTURES_DIR = __DIR__ . '/../Fixtures/custom_tags/output/';
+    private const string INPUT_FIXTURES_DIR = __DIR__ . '/../Fixtures/custom_tags/input/';
+    private const string OUTPUT_FIXTURES_DIR = __DIR__ . '/../Fixtures/custom_tags/output/';
 
     protected function getConfiguration(): Configuration
     {
@@ -32,8 +32,6 @@ final class ConfigurationTest extends TestCase
      * Fetches configs from the filesystem.
      *
      * @see testProcessingConfiguration
-     *
-     * @return iterable
      */
     public function providerForTestProcessingCustomTagsConfiguration(): iterable
     {
@@ -62,8 +60,6 @@ final class ConfigurationTest extends TestCase
      * Simple data provider for testProcessingConfiguration.
      *
      * @see testProcessingConfiguration
-     *
-     * @return array
      */
     public function providerForTestProcessingConfiguration(): array
     {
@@ -121,9 +117,6 @@ final class ConfigurationTest extends TestCase
     /**
      * @dataProvider providerForTestProcessingConfiguration
      * @dataProvider providerForTestProcessingCustomTagsConfiguration
-     *
-     * @param array $configurationValues
-     * @param array $expectedProcessedConfiguration
      */
     public function testProcessingConfiguration(
         array $configurationValues,

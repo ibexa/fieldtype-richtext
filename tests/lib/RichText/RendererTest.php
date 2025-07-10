@@ -407,8 +407,7 @@ class RendererTest extends TestCase
         $renderer
             ->expects(self::once())
             ->method('checkContentPermissions')
-            ->with($contentMock)
-            ->willReturn($contentMock);
+            ->with($contentMock);
 
         $renderer
             ->expects(self::once())
@@ -463,8 +462,7 @@ class RendererTest extends TestCase
         $renderer
             ->expects(self::once())
             ->method('checkContentPermissions')
-            ->with($contentMock)
-            ->willReturn($contentMock);
+            ->with($contentMock);
 
         $renderer
             ->expects(self::never())
@@ -994,8 +992,7 @@ class RendererTest extends TestCase
             $renderer
                 ->expects(self::once())
                 ->method('checkContentPermissions')
-                ->with($contentMock)
-                ->willReturn($contentMock);
+                ->with($contentMock);
         }
 
         if (!isset($renderTemplate)) {
@@ -1710,8 +1707,6 @@ class RendererTest extends TestCase
     }
 
     /**
-     * @param array $methods
-     *
      * @return \Ibexa\FieldTypeRichText\RichText\Renderer|\PHPUnit\Framework\MockObject\MockObject
      */
     protected function getMockedRenderer(array $methods = []): MockObject

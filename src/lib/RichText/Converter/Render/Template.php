@@ -23,19 +23,12 @@ use Psr\Log\NullLogger;
  */
 class Template extends Render implements Converter
 {
-    public const LITERAL_LAYOUT_LINE_BREAK = "\n";
+    public const string LITERAL_LAYOUT_LINE_BREAK = "\n";
 
     private Converter $richTextConverter;
 
     private LoggerInterface $logger;
 
-    /**
-     * RichText Template converter constructor.
-     *
-     * @param \Ibexa\Contracts\FieldTypeRichText\RichText\RendererInterface $renderer
-     * @param \Ibexa\Contracts\FieldTypeRichText\RichText\Converter $richTextConverter
-     * @param \Psr\Log\LoggerInterface $logger
-     */
     public function __construct(
         RendererInterface $renderer,
         Converter $richTextConverter,
@@ -49,10 +42,6 @@ class Template extends Render implements Converter
 
     /**
      * Injects rendered payloads into template elements.
-     *
-     * @param \DOMDocument $document
-     *
-     * @return \DOMDocument
      */
     public function convert(DOMDocument $document): DOMDocument
     {
@@ -70,12 +59,8 @@ class Template extends Render implements Converter
 
     /**
      * Processes given template $template in a given $document.
-     *
-     * @param \DOMDocument $document
-     * @param \DOMXPath $xpath
-     * @param \DOMElement $template
      */
-    protected function processTemplate(DOMDocument $document, DOMXPath $xpath, DOMElement $template)
+    protected function processTemplate(DOMDocument $document, DOMXPath $xpath, DOMElement $template): void
     {
         $templateName = $template->getAttribute('name');
         $templateType = $template->hasAttribute('type') ? $template->getAttribute('type') : 'tag';
@@ -130,10 +115,6 @@ class Template extends Render implements Converter
 
     /**
      * Returns XML fragment string for given converted $node.
-     *
-     * @param \DOMNode $node
-     *
-     * @return string
      */
     protected function getCustomTemplateContent(DOMNode $node): string
     {
@@ -161,11 +142,6 @@ class Template extends Render implements Converter
     /**
      * BC: wrap nested content containing line breaks with "literallayout" DocBook tag,
      * unless literallayout already exists.
-     *
-     * @param \DOMNode $rootNode
-     * @param \DOMNode $node
-     *
-     * @return \DOMNode
      */
     private function wrapContentWithLiteralLayout(DOMNode $rootNode, DOMNode $node): DOMNode
     {

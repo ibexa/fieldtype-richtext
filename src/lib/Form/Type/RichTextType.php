@@ -26,11 +26,6 @@ class RichTextType extends AbstractType
 
     private Converter $docbookToXhtml5EditConverter;
 
-    /**
-     * @param \Ibexa\FieldTypeRichText\RichText\DOMDocumentFactory $domDocumentFactory
-     * @param \Ibexa\Contracts\FieldTypeRichText\RichText\InputHandlerInterface $inputHandler
-     * @param \Ibexa\Contracts\FieldTypeRichText\RichText\Converter $docbookToXhtml5EditConverter
-     */
     public function __construct(
         DOMDocumentFactory $domDocumentFactory,
         InputHandlerInterface $inputHandler,
@@ -41,9 +36,6 @@ class RichTextType extends AbstractType
         $this->docbookToXhtml5EditConverter = $docbookToXhtml5EditConverter;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->addModelTransformer(new RichTextTransformer(
@@ -53,9 +45,6 @@ class RichTextType extends AbstractType
         ));
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
@@ -65,17 +54,11 @@ class RichTextType extends AbstractType
         ]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getParent(): string
     {
         return TextareaType::class;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix(): string
     {
         return 'richtext';

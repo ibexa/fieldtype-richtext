@@ -23,9 +23,6 @@ class RelationProcessorTest extends TestCase
      * @covers \Ibexa\FieldTypeRichText\RichText\RelationProcessor::getRelations
      *
      * @dataProvider dateProviderForGetRelations
-     *
-     * @param \DOMDocument $document
-     * @param array $expectedRelations
      */
     public function testGetRelations(DOMDocument $document, array $expectedRelations): void
     {

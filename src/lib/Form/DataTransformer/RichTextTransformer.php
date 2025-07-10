@@ -25,11 +25,6 @@ class RichTextTransformer implements DataTransformerInterface
 
     private Converter $docbook2xhtml5editConverter;
 
-    /**
-     * @param \Ibexa\FieldTypeRichText\RichText\DOMDocumentFactory $domDocumentFactory
-     * @param \Ibexa\Contracts\FieldTypeRichText\RichText\InputHandlerInterface $inputHandler
-     * @param \Ibexa\Contracts\FieldTypeRichText\RichText\Converter $docbook2xhtml5editConverter
-     */
     public function __construct(
         DOMDocumentFactory $domDocumentFactory,
         InputHandlerInterface $inputHandler,
@@ -40,10 +35,7 @@ class RichTextTransformer implements DataTransformerInterface
         $this->docbook2xhtml5editConverter = $docbook2xhtml5editConverter;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function transform($value): string
+    public function transform(mixed $value): string
     {
         if (!$value) {
             $value = Value::EMPTY_VALUE;
@@ -58,10 +50,7 @@ class RichTextTransformer implements DataTransformerInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function reverseTransform($value): string
+    public function reverseTransform(mixed $value): string
     {
         try {
             return $this->inputHandler->fromString($value)->saveXML();

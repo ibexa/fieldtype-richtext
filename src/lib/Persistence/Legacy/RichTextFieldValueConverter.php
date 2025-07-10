@@ -19,9 +19,6 @@ class RichTextFieldValueConverter implements Converter
 {
     /**
      * Converts data from $value to $storageFieldValue.
-     *
-     * @param \Ibexa\Contracts\Core\Persistence\Content\FieldValue $value
-     * @param \Ibexa\Core\Persistence\Legacy\Content\StorageFieldValue $storageFieldValue
      */
     public function toStorageValue(FieldValue $value, StorageFieldValue $storageFieldValue): void
     {
@@ -31,9 +28,6 @@ class RichTextFieldValueConverter implements Converter
 
     /**
      * Converts data from $value to $fieldValue.
-     *
-     * @param \Ibexa\Core\Persistence\Legacy\Content\StorageFieldValue $value
-     * @param \Ibexa\Contracts\Core\Persistence\Content\FieldValue $fieldValue
      */
     public function toFieldValue(StorageFieldValue $value, FieldValue $fieldValue): void
     {
@@ -43,23 +37,21 @@ class RichTextFieldValueConverter implements Converter
 
     /**
      * Converts field definition data from $fieldDefinition into $storageFieldDefinition.
-     *
-     * @param \Ibexa\Contracts\Core\Persistence\Content\Type\FieldDefinition $fieldDefinition
-     * @param \Ibexa\Core\Persistence\Legacy\Content\StorageFieldDefinition $storageDefinition
      */
-    public function toStorageFieldDefinition(FieldDefinition $fieldDefinition, StorageFieldDefinition $storageDefinition): void
-    {
+    public function toStorageFieldDefinition(
+        FieldDefinition $fieldDefinition,
+        StorageFieldDefinition $storageDefinition,
+    ): void {
         // Nothing to store
     }
 
     /**
      * Converts field definition data from $storageDefinition into $fieldDefinition.
-     *
-     * @param \Ibexa\Core\Persistence\Legacy\Content\StorageFieldDefinition $storageDefinition
-     * @param \Ibexa\Contracts\Core\Persistence\Content\Type\FieldDefinition $fieldDefinition
      */
-    public function toFieldDefinition(StorageFieldDefinition $storageDefinition, FieldDefinition $fieldDefinition): void
-    {
+    public function toFieldDefinition(
+        StorageFieldDefinition $storageDefinition,
+        FieldDefinition $fieldDefinition,
+    ): void {
         $fieldDefinition->defaultValue->data = Value::EMPTY_VALUE;
     }
 
@@ -69,10 +61,8 @@ class RichTextFieldValueConverter implements Converter
      * Returns the name of the index column the datatype uses, which is either
      * "sort_key_int" or "sort_key_string". This column is then used for
      * filtering and sorting for this type.
-     *
-     * @return string|false
      */
-    public function getIndexColumn()
+    public function getIndexColumn(): string
     {
         return 'sort_key_string';
     }
