@@ -151,7 +151,7 @@ class IbexaEmbedImageEditing extends Plugin {
                     const domElement = this.toDomElement(domDocument);
 
                     // note: do not reformat - configuration value for image embeds cannot contain whitespaces
-                    // eslint-disable-next-line
+
                     domElement.innerHTML = `<span data-ezelement="ezvalue" data-ezvalue-key="size">${modelElement.getAttribute('size')}</span>`; // prettier-ignore
 
                     return domElement;
