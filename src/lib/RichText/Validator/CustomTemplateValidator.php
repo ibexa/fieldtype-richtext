@@ -20,7 +20,7 @@ use Ibexa\Contracts\FieldTypeRichText\RichText\ValidatorInterface;
  * The Validator checks if the given XML reflects proper Custom Tags or Styles configuration,
  * mostly the existence of a specific Custom Tag or Style and their required attributes.
  */
-class CustomTemplateValidator implements ValidatorInterface
+final class CustomTemplateValidator implements ValidatorInterface
 {
     /**
      * Custom Tags global configuration (ibexa.richtext.custom_tags Semantic Config).
@@ -131,5 +131,3 @@ class CustomTemplateValidator implements ValidatorInterface
         return $errors;
     }
 }
-
-class_alias(CustomTemplateValidator::class, 'EzSystems\EzPlatformRichText\eZ\RichText\Validator\CustomTagsValidator');
