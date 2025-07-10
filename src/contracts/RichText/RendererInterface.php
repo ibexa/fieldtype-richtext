@@ -27,7 +27,7 @@ interface RendererInterface
      * @param array<mixed> $parameters
      */
     public function renderContentEmbed(
-        int|string $contentId,
+        int $contentId,
         string $viewType,
         array $parameters,
         bool $isInline,
@@ -37,7 +37,7 @@ interface RendererInterface
      * @param array<mixed> $parameters
      */
     public function renderLocationEmbed(
-        int|string $locationId,
+        int $locationId,
         string $viewType,
         array $parameters,
         bool $isInline,

@@ -84,7 +84,7 @@ class Renderer implements RendererInterface
         $this->customStylesConfiguration = $customStylesConfiguration;
     }
 
-    public function renderContentEmbed(int|string $contentId, string $viewType, array $parameters, bool $isInline): ?string
+    public function renderContentEmbed(int $contentId, string $viewType, array $parameters, bool $isInline): ?string
     {
         $isDenied = false;
 
@@ -92,7 +92,7 @@ class Renderer implements RendererInterface
             /** @var \Ibexa\Contracts\Core\Repository\Values\Content\Content $content */
             $content = $this->repository->sudo(
                 static function (Repository $repository) use ($contentId): Content {
-                    return $repository->getContentService()->loadContent((int)$contentId);
+                    return $repository->getContentService()->loadContent($contentId);
                 }
             );
 
@@ -156,7 +156,7 @@ class Renderer implements RendererInterface
         return $this->render($templateName, $parameters);
     }
 
-    public function renderLocationEmbed(string|int $locationId, string $viewType, array $parameters, bool $isInline): ?string
+    public function renderLocationEmbed(int $locationId, string $viewType, array $parameters, bool $isInline): ?string
     {
         $isDenied = false;
 

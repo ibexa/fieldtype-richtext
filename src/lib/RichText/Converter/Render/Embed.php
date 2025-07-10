@@ -79,7 +79,7 @@ class Embed extends Render implements Converter
             } elseif ($matches[1] === 'ezcontent') {
                 $parameters['id'] = (int) $matches[2];
                 $embedContent = $this->renderer->renderContentEmbed(
-                    $parameters['id'],
+                    (int)$parameters['id'],
                     $parameters['viewType'],
                     [
                         'embedParams' => $parameters,
@@ -89,7 +89,7 @@ class Embed extends Render implements Converter
             } elseif ($matches[1] === 'ezlocation') {
                 $parameters['id'] = (int) $matches[2];
                 $embedContent = $this->renderer->renderLocationEmbed(
-                    $parameters['id'],
+                    (int)$parameters['id'],
                     $parameters['viewType'],
                     [
                         'embedParams' => $parameters,
