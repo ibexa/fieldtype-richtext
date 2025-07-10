@@ -775,6 +775,8 @@ EOT;
 
     /**
      * Data provider for testCreateContentWithValidCustomTag.
+     *
+     * @return list<array{(string|false)}>
      */
     public function providerForTestCreateContentWithValidCustomTag(): array
     {
@@ -782,9 +784,7 @@ EOT;
         $iterator = new DirectoryIterator(__DIR__ . '/_fixtures/ibexa_richtext/custom_tags/valid');
         foreach ($iterator as $fileInfo) {
             if ($fileInfo->isFile() && $fileInfo->getExtension() === 'xml') {
-                $data[] = [
-                    $fileInfo->getRealPath(),
-                ];
+                $data[] = [$fileInfo->getRealPath()];
             }
         }
 
@@ -814,10 +814,12 @@ EOT;
 
     /**
      * Data provider for testCreateContentWithInvalidCustomTag.
+     *
+     * @return array<list<string>>
      */
     public function providerForTestCreateContentWithInvalidCustomTag(): array
     {
-        $data = [
+        return [
             [
                 __DIR__ . '/_fixtures/ibexa_richtext/custom_tags/invalid/equation.xml',
                 "Validation of XML content failed:\nThe attribute 'processor' of RichText Custom Tag 'equation' cannot be empty",
@@ -831,8 +833,6 @@ EOT;
                 "Validation of XML content failed:\nUnknown attribute 'typo' of RichText Custom Tag 'equation'",
             ],
         ];
-
-        return $data;
     }
 
     /**

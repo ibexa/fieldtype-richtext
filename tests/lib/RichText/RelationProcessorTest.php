@@ -37,13 +37,7 @@ class RelationProcessorTest extends TestCase
     }
 
     /**
-     * @return array<int, array{
-     *     0: DOMDocument,
-     *     1: array{
-     *         link: array{locationIds: array<int>, contentIds: array<int>},
-     *         embed: array{locationIds: array<int>, contentIds: array<int>}
-     *     }
-     * }>
+     * @return array<int, array<mixed>>
      */
     public function dateProviderForGetRelations(): array
     {

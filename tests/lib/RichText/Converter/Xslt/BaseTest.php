@@ -21,9 +21,9 @@ use PHPUnit\Framework\TestCase;
  */
 abstract class BaseTest extends TestCase
 {
-    protected Converter|null $converter;
+    protected ?Converter $converter = null;
 
-    protected ValidatorInterface|null $validator;
+    protected ?ValidatorInterface $validator = null;
 
     /**
      * Provider for conversion test.

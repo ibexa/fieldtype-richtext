@@ -34,6 +34,8 @@ class Embed extends Render implements Converter
 
     /**
      * Maps Docbook target to HTML target.
+     *
+     * @var array<string, string>
      */
     protected array $docbookToHtmlTargetMap = [
         'new' => '_blank',
@@ -48,8 +50,6 @@ class Embed extends Render implements Converter
 
     /**
      * Processes single embed element type (ezembed or ezembedinline).
-     *
-     * @param string $tagName name of the tag to extract
      */
     protected function processTag(DOMDocument $document, string $tagName, bool $isInline): void
     {
@@ -254,11 +254,11 @@ class Embed extends Render implements Converter
      *
      * After EmbedLinking converter pass this should be possible only for inline level embeds.
      */
-    protected function isLinkWrapped(DOMElement $element): bool
+    protected function isLinkWrapped(DOMNode|null $element): bool
     {
-        $parentNode = $element->parentNode;
+        $parentNode = $element?->parentNode;
 
-        if ($parentNode instanceof DOMDocument) {
+        if ($parentNode instanceof DOMDocument || $parentNode === null) {
             return false;
         } elseif ($parentNode->localName === 'link') {
             $childCount = 0;
