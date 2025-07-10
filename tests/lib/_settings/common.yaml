@@ -32,3 +32,11 @@ parameters:
                     required: true
                     default_value: 'latex'
                     choices: ['latex', 'tex']
+
+    ibexa.field_type.richtext.custom_styles:
+        highlighted_word:
+            template: 'MyBundle:FieldType/RichText/style:highlighted_word.html.twig'
+            inline: true
+        highlighted_block:
+            template: 'MyBundle:FieldType/RichText/style:highlighted_block.html.twig'
+            inline: false
