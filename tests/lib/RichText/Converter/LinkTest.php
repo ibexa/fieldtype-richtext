@@ -134,6 +134,9 @@ class LinkTest extends TestCase
         self::assertEquals($expectedOutputDocument, $outputDocument);
     }
 
+    /**
+     * @return array<array{string, string, int, string}>
+     */
     public function providerLocationLink(): array
     {
         return [
@@ -230,6 +233,9 @@ class LinkTest extends TestCase
         self::assertEquals($expectedOutputDocument, $outputDocument);
     }
 
+    /**
+     * @return array<array{string, string, int, \Exception, string}>
+     */
     public function providerBadLocationLink(): array
     {
         return [
@@ -331,6 +337,9 @@ class LinkTest extends TestCase
         self::assertEquals($expectedOutputDocument, $outputDocument);
     }
 
+    /**
+     * @return array<array{string, string, int, string}>
+     */
     public function providerContentLink(): array
     {
         return [
@@ -439,6 +448,9 @@ class LinkTest extends TestCase
         self::assertEquals($expectedOutputDocument, $outputDocument);
     }
 
+    /**
+     * @return array<array<mixed>>
+     */
     public function providerBadContentLink(): array
     {
         return [

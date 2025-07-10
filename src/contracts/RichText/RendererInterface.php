@@ -13,6 +13,10 @@ namespace Ibexa\Contracts\FieldTypeRichText\RichText;
  */
 interface RendererInterface
 {
+
+    /**
+     * @param array<mixed> $parameters
+     */
     public function renderTemplate(
         string $name,
         string $type,
@@ -20,6 +24,9 @@ interface RendererInterface
         bool $isInline,
     ): string|null;
 
+    /**
+     * @param array<mixed> $parameters
+     */
     public function renderContentEmbed(
         int|string $contentId,
         string $viewType,
@@ -27,6 +34,9 @@ interface RendererInterface
         bool $isInline,
     ): string|null;
 
+    /**
+     * @param array<mixed> $parameters
+     */
     public function renderLocationEmbed(
         int|string $locationId,
         string $viewType,

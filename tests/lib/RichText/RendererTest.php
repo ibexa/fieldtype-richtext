@@ -1707,9 +1707,9 @@ class RendererTest extends TestCase
     }
 
     /**
-     * @return \Ibexa\FieldTypeRichText\RichText\Renderer|\PHPUnit\Framework\MockObject\MockObject
+     * @param array<int, string> $methods
      */
-    protected function getMockedRenderer(array $methods = []): MockObject
+    protected function getMockedRenderer(array $methods = []): Renderer&MockObject
     {
         return $this->getMockBuilder(Renderer::class)
             ->setConstructorArgs(

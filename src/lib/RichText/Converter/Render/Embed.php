@@ -26,6 +26,8 @@ class Embed extends Render implements Converter
 
     /**
      * Maps embed tag names to their default views.
+     *
+     * @var array<string, string>
      */
     protected array $tagDefaultViewMap = [
         'ezembed' => 'embed',

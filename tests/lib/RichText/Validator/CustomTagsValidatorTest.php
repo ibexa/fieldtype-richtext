@@ -34,7 +34,7 @@ final class CustomTagsValidatorTest extends TestCase
      *
      * @dataProvider providerForTestValidateDocument
      *
-     * @param array<string> $expectedErrors
+     * @param array<int, string> $expectedErrors
      */
     public function testValidateDocument(DOMDocument $document, array $expectedErrors): void
     {

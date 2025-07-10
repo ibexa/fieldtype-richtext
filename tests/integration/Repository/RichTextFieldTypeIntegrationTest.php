@@ -371,6 +371,8 @@ EOT
      *      // ...
      * );
      * </code>
+     *
+     * @return list<array{RichTextValue, array{xml: string|false}}>
      */
     public function provideToHashData(): array
     {
@@ -835,10 +837,7 @@ EOT;
         ];
     }
 
-    /**
-     * @param string $filename
-     */
-    protected function createDocument($filename): DOMDocument
+    protected function createDocument(string $filename): DOMDocument
     {
         $document = new DOMDocument();
 
@@ -853,8 +852,7 @@ EOT;
     /**
      * Prepare Content structure with link to deleted Location.
      *
-     *
-     * @return array [$deletedLocation, $brokenContent]
+     * @return array{\Ibexa\Contracts\Core\Repository\Values\Content\Location, \Ibexa\Contracts\Core\Repository\Values\Content\Content}
      *
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ForbiddenException
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
@@ -949,7 +947,7 @@ EOT;
 
         // update field containing erroneous link to trigger validation
         /** @var \DOMDocument $document */
-        $document = $brokenContent->getField('data', 'eng-GB')->value->xml;
+        $document = $brokenContent->getField('data', 'eng-GB')?->getValue()->xml;
         $newParagraph = $document->createElement('para', 'Updated content');
         $document
             ->getElementsByTagName('section')->item(0)
