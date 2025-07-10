@@ -32,8 +32,6 @@ class DocbookToXhtml5OutputTest extends BaseTest
      *
      * Comments in fixtures are removed before conversion, so be free to use
      * comments inside fixtures for documentation as needed.
-     *
-     * @return array
      */
     public function getFixtureSubdirectories(): array
     {
@@ -45,8 +43,6 @@ class DocbookToXhtml5OutputTest extends BaseTest
 
     /**
      * Return the absolute path to conversion transformation stylesheet.
-     *
-     * @return string
      */
     protected function getConversionTransformationStylesheet(): string
     {
@@ -72,8 +68,6 @@ class DocbookToXhtml5OutputTest extends BaseTest
      *      ),
      *  )
      * </code>
-     *
-     * @return array
      */
     protected function getCustomConversionTransformationStylesheets(): array
     {

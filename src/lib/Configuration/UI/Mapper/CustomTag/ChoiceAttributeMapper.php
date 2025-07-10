@@ -20,9 +20,6 @@ final class ChoiceAttributeMapper extends CommonAttributeMapper implements Attri
         return 'choice' === $attributeType;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function mapConfig(
         string $tagName,
         string $attributeName,

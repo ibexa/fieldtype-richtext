@@ -34,24 +34,16 @@ class Aggregate extends Normalizer
      * Check if normalizer accepts given $input for normalization.
      *
      * This implementation always returns true.
-     *
-     * @param string $input
-     *
-     * @return bool
      */
-    public function accept($input): bool
+    public function accept(string $input): bool
     {
         return true;
     }
 
     /**
-     * Normalizes given $input by calling aggregated normalizers.
-     *
-     * @param string $input
-     *
-     * @return string
+     * Normalizes a given $input by calling aggregated normalizers.
      */
-    public function normalize($input)
+    public function normalize(string $input): string
     {
         foreach ($this->normalizers as $normalizer) {
             if ($normalizer->accept($input)) {

@@ -19,7 +19,6 @@ trait RichTextSetupFactoryTrait
     /**
      * Load RichText package container settings.
      *
-     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder
      *
      * @throws \Exception
      */

@@ -35,8 +35,6 @@ class EmbedTest extends TestCase
      *
      * Provided parameters:
      * <code>string $xmlString, string $expectedXmlString, array $errors, array $renderParams</code>
-     *
-     * @return array
      */
     public function providerForTestConvert(): array
     {
@@ -801,12 +799,6 @@ class EmbedTest extends TestCase
 
     /**
      * @dataProvider providerForTestConvert
-     *
-     * @param string $xmlString
-     * @param string $expectedXmlString
-     * @param array $errors
-     * @param array $renderContentEmbedParams
-     * @param array $renderLocationEmbedParams
      */
     public function testConvert(
         string $xmlString,

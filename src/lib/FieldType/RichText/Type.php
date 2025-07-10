@@ -41,10 +41,8 @@ class Type extends FieldType implements TranslationContainerInterface
 
     /**
      * Returns the field type identifier for this field type.
-     *
-     * @return string
      */
-    public function getFieldTypeIdentifier()
+    public function getFieldTypeIdentifier(): string
     {
         return 'ibexa_richtext';
     }
@@ -54,12 +52,6 @@ class Type extends FieldType implements TranslationContainerInterface
      *
      * It will be used to generate content name and url alias if current field is designated
      * to be used in the content name/urlAlias pattern.
-     *
-     * @param \Ibexa\Contracts\Core\FieldType\Value $value
-     * @param \Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition $fieldDefinition
-     * @param string $languageCode
-     *
-     * @return string
      */
     public function getName(SPIValue $value, FieldDefinition $fieldDefinition, string $languageCode): string
     {
@@ -78,16 +70,16 @@ class Type extends FieldType implements TranslationContainerInterface
             $result = $value->xml->documentElement->textContent;
         }
 
-        return trim(preg_replace(['/\n/', '/\s\s+/'], ' ', $result));
+        $result = preg_replace(['/\n/', '/\s\s+/'], ' ', (string)$result);
+
+        return trim((string)$result);
     }
 
     /**
-     * Returns the fallback default value of field type when no such default
+     * Returns the fallback default value of a field type when no such default
      * value is provided in the field definition in content types.
-     *
-     * @return \Ibexa\FieldTypeRichText\FieldType\RichText\Value
      */
-    public function getEmptyValue()
+    public function getEmptyValue(): Value
     {
         return new Value();
     }
@@ -95,11 +87,9 @@ class Type extends FieldType implements TranslationContainerInterface
     /**
      * Returns if the given $value is considered empty by the field type.
      *
-     * @param \Ibexa\FieldTypeRichText\FieldType\RichText\Value $value
-     *
-     * @return bool
+     * @param Value $value
      */
-    public function isEmptyValue(SPIValue $value)
+    public function isEmptyValue(SPIValue $value): bool
     {
         if ($value->xml === null) {
             return true;
@@ -109,13 +99,13 @@ class Type extends FieldType implements TranslationContainerInterface
     }
 
     /**
-     * Inspects given $inputValue and potentially converts it into a dedicated value object.
+     * Inspects a given $inputValue and potentially converts it into a dedicated value object.
      *
-     * @param \Ibexa\FieldTypeRichText\FieldType\RichText\Value|\DOMDocument|string $inputValue
+     * @param Value|\DOMDocument|string $inputValue
      *
-     * @return \Ibexa\FieldTypeRichText\FieldType\RichText\Value the potentially converted and structurally plausible value
+     * @return Value the potentially converted and structurally plausible value
      */
-    protected function createValueFromInput($inputValue)
+    protected function createValueFromInput(mixed $inputValue): mixed
     {
         if (is_string($inputValue)) {
             $inputValue = $this->inputHandler->fromString($inputValue);
@@ -129,13 +119,13 @@ class Type extends FieldType implements TranslationContainerInterface
     }
 
     /**
-     * Throws an exception if value structure is not of expected format.
+     * Throws an exception if a value structure is not of an expected format.
+     *
+     * @param Value $value
      *
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException if the value does not match the expected structure
-     *
-     * @param \Ibexa\FieldTypeRichText\FieldType\RichText\Value $value
      */
-    protected function checkValueStructure(BaseValue $value)
+    protected function checkValueStructure(BaseValue $value): void
     {
         if (!$value->xml instanceof DOMDocument) {
             throw new InvalidArgumentType(
@@ -153,14 +143,12 @@ class Type extends FieldType implements TranslationContainerInterface
      * that no validation errors occurred. Overwrite in derived types, if
      * validation is supported.
      *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
-     *
      * @param \Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition $fieldDefinition The field definition of the field
-     * @param \Ibexa\FieldTypeRichText\FieldType\RichText\Value $value The field value for which an action is performed
+     * @param Value $value The field value for which an action is performed
      *
      * @return \Ibexa\Contracts\Core\FieldType\ValidationError[]
      */
-    public function validate(FieldDefinition $fieldDefinition, SPIValue $value)
+    public function validate(FieldDefinition $fieldDefinition, SPIValue $value): array
     {
         return array_map(static function (string $error): ValidationError {
             return new ValidationError("Validation of XML content failed:\n" . $error, null, [], 'xml');
@@ -170,13 +158,11 @@ class Type extends FieldType implements TranslationContainerInterface
     /**
      * Returns information for FieldValue->$sortKey relevant to the field type.
      *
+     * @param Value $value
+     *
      * @see \Ibexa\Core\FieldType
-     *
-     * @param \Ibexa\FieldTypeRichText\FieldType\RichText\Value $value
-     *
-     * @return string|null
      */
-    protected function getSortInfo(BaseValue $value)
+    protected function getSortInfo(BaseValue $value): string
     {
         return $this->textExtractor->extractText($value->xml);
     }
@@ -186,11 +172,11 @@ class Type extends FieldType implements TranslationContainerInterface
      * $hash accepts the following keys:
      *  - xml (XML string which complies internal format).
      *
-     * @param mixed $hash
+     * @return Value
      *
-     * @return \Ibexa\FieldTypeRichText\FieldType\RichText\Value $value
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
      */
-    public function fromHash($hash)
+    public function fromHash(mixed $hash): SPIValue
     {
         if (!isset($hash['xml'])) {
             throw new RuntimeException("'xml' index is missing in hash.");
@@ -202,11 +188,11 @@ class Type extends FieldType implements TranslationContainerInterface
     /**
      * Converts a $Value to a hash.
      *
-     * @param \Ibexa\FieldTypeRichText\FieldType\RichText\Value $value
+     * @param Value $value
      *
-     * @return mixed
+     * @return array{xml: string}
      */
-    public function toHash(SPIValue $value)
+    public function toHash(SPIValue $value): array
     {
         return ['xml' => (string)$value];
     }
@@ -214,22 +200,16 @@ class Type extends FieldType implements TranslationContainerInterface
     /**
      * Creates a new Value object from persistence data.
      * $fieldValue->data is supposed to be a string.
-     *
-     * @param \Ibexa\Contracts\Core\Persistence\Content\FieldValue $fieldValue
-     *
-     * @return Value
      */
-    public function fromPersistenceValue(FieldValue $fieldValue)
+    public function fromPersistenceValue(FieldValue $fieldValue): Value
     {
         return new Value($fieldValue->data);
     }
 
     /**
-     * @param \Ibexa\FieldTypeRichText\FieldType\RichText\Value $value
-     *
-     * @return \Ibexa\Contracts\Core\Persistence\Content\FieldValue
+     * @param Value $value
      */
-    public function toPersistenceValue(SPIValue $value)
+    public function toPersistenceValue(SPIValue $value): FieldValue
     {
         return new FieldValue(
             [
@@ -242,10 +222,8 @@ class Type extends FieldType implements TranslationContainerInterface
 
     /**
      * Returns whether the field type is searchable.
-     *
-     * @return bool
      */
-    public function isSearchable()
+    public function isSearchable(): bool
     {
         return true;
     }
@@ -256,9 +234,7 @@ class Type extends FieldType implements TranslationContainerInterface
      * Not intended for \Ibexa\Contracts\Core\Repository\Values\Content\Relation::COMMON type relations,
      * there is a service API for handling those.
      *
-     * @param \Ibexa\Contracts\Core\FieldType\Value $value
-     *
-     * @return array hash with relation type as key and array of destination content ids as value.
+     * @return array<int, array{locationIds: array<int, int>, contentIds: array<int, int>}> hash with relation type as key and array of destination content ids as value.
      *
      * Example:
      * <code>
@@ -275,13 +251,13 @@ class Type extends FieldType implements TranslationContainerInterface
      *  )
      * </code>
      */
-    public function getRelations(SPIValue $value)
+    public function getRelations(SPIValue $fieldValue): array
     {
         $relations = [];
 
-        /** @var \Ibexa\FieldTypeRichText\FieldType\RichText\Value $value */
-        if ($value->xml instanceof DOMDocument) {
-            $relations = $this->inputHandler->getRelations($value->xml);
+        /** @var Value $fieldValue */
+        if ($fieldValue->xml instanceof DOMDocument) {
+            $relations = $this->inputHandler->getRelations($fieldValue->xml);
         }
 
         return $relations;

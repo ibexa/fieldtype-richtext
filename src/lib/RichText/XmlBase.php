@@ -20,30 +20,24 @@ abstract class XmlBase
     /**
      * When recording errors holds previous setting for libxml user error handling,
      * null otherwise.
-     *
-     * @var bool|null
      */
-    protected $useInternalErrors;
+    protected ?bool $useInternalErrors;
 
     /**
      * Textual mapping for libxml error type constants.
      *
-     * @var array
+     * @var array<int, string>
      */
-    protected $errorTypes = [
+    protected array $errorTypes = [
         LIBXML_ERR_WARNING => 'Warning',
         LIBXML_ERR_ERROR => 'Error',
         LIBXML_ERR_FATAL => 'Fatal error',
     ];
 
     /**
-     * Returns DOMDocument object loaded from given XML file $path.
-     *
-     * @param string $path
-     *
-     * @return \DOMDocument
+     * Returns DOMDocument object loaded from a given XML file $path.
      */
-    protected function loadFile($path)
+    protected function loadFile(string $path): DOMDocument
     {
         $document = new DOMDocument();
         $document->load($path);
@@ -55,12 +49,8 @@ abstract class XmlBase
      * Formats libxml error object as a string.
      *
      * Example: Error in 6:0: Expecting an element title, got nothing
-     *
-     * @param \LibXMLError $error
-     *
-     * @return string
      */
-    protected function formatLibXmlError(LibXMLError $error)
+    protected function formatLibXmlError(LibXMLError $error): string
     {
         return sprintf(
             '%s in %d:%d: %s',
@@ -77,7 +67,7 @@ abstract class XmlBase
      *
      * This method is intended to be used together with {@link collectErrors()}.
      */
-    protected function startRecordingErrors()
+    protected function startRecordingErrors(): void
     {
         $this->useInternalErrors = libxml_use_internal_errors(true);
         libxml_clear_errors();
@@ -97,7 +87,7 @@ abstract class XmlBase
      *
      * @return string[]
      */
-    protected function collectErrors()
+    protected function collectErrors(): array
     {
         if ($this->useInternalErrors === null) {
             throw new RuntimeException('Error recording not started');

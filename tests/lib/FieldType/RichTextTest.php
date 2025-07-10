@@ -12,7 +12,9 @@ use Exception;
 use Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException as ApiInvalidArgumentException;
 use Ibexa\Contracts\Core\Repository\Values\Content\RelationType;
 use Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition as APIFieldDefinition;
+use Ibexa\Contracts\FieldTypeRichText\RichText\Converter;
 use Ibexa\Contracts\FieldTypeRichText\RichText\TextExtractorInterface;
+use Ibexa\Contracts\FieldTypeRichText\RichText\ValidatorInterface;
 use Ibexa\Core\Base\Exceptions\InvalidArgumentException;
 use Ibexa\Core\Base\Exceptions\NotFoundException;
 use Ibexa\Core\FieldType\ValidationError;
@@ -39,19 +41,16 @@ use RuntimeException;
  */
 class RichTextTest extends TestCase
 {
-    /**
-     * @return \Ibexa\FieldTypeRichText\FieldType\RichText\Type
-     */
     protected function getFieldType(): Type
     {
         $inputHandler = new InputHandler(
             new DOMDocumentFactory(new XMLSanitizer()),
             new ConverterDispatcher([
-                'http://docbook.org/ns/docbook' => null,
+                'http://docbook.org/ns/docbook' => $this->createMock(Converter::class),
             ]),
             new Aggregate(),
             new ValidatorDispatcher([
-                'http://docbook.org/ns/docbook' => null,
+                'http://docbook.org/ns/docbook' => $this->createMock(ValidatorInterface::class),
             ]),
             new Validator([
                 $this->getAbsolutePath('src/bundle/Resources/richtext/schemas/docbook/ezpublish.rng'),
@@ -295,9 +294,6 @@ class RichTextTest extends TestCase
 
     /**
      * @dataProvider providerForTestValidate
-     *
-     * @param string $xmlString
-     * @param array $expectedValidationErrors
      */
     public function testValidate(string $xmlString, array $expectedValidationErrors): void
     {
@@ -474,11 +470,6 @@ EOT;
         );
     }
 
-    /**
-     * @param string $relativePath
-     *
-     * @return string
-     */
     protected function getAbsolutePath(string $relativePath): string
     {
         $absolutePath = realpath(__DIR__ . '/../../../' . $relativePath);

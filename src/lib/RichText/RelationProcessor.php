@@ -15,11 +15,11 @@ use Ibexa\Contracts\Core\Repository\Values\Content\RelationType;
 
 final class RelationProcessor
 {
-    private const EMBED_TAG_NAMES = [
+    private const array EMBED_TAG_NAMES = [
         'ezembedinline', 'ezembed',
     ];
 
-    private const LINK_TAG_NAMES = [
+    private const array LINK_TAG_NAMES = [
         'link', 'ezlink',
     ];
 
@@ -29,9 +29,8 @@ final class RelationProcessor
      * Not intended for \Ibexa\Contracts\Core\Repository\Values\Content\Relation::COMMON type relations,
      * there is a service API for handling those.
      *
-     * @param \DOMDocument $doc
      *
-     * @return array Hash with relation type as key and array of destination content ids as value.
+     * @return array<int, array{locationIds: array<int, int>, contentIds: array<int, int>}> Hash with relation type as key and array of destination content ids as value.
      *
      * Example:
      * <code>
@@ -57,10 +56,9 @@ final class RelationProcessor
     }
 
     /**
-     * @param \DOMDocument $xml
-     * @param array $tagNames
+     * @param list<string> $tagNames
      *
-     * @return array
+     * @return array{locationIds: array<int, int>, contentIds: array<int, int>}
      */
     private function getRelatedObjectIds(DOMDocument $xml, array $tagNames): array
     {

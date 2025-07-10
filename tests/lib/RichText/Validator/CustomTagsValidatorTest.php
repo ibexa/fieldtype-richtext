@@ -33,9 +33,6 @@ final class CustomTagsValidatorTest extends TestCase
      * Test validating DocBook document containing Custom Tags.
      *
      * @dataProvider providerForTestValidateDocument
-     *
-     * @param \DOMDocument $document
-     * @param array $expectedErrors
      */
     public function testValidateDocument(DOMDocument $document, array $expectedErrors): void
     {
@@ -49,8 +46,6 @@ final class CustomTagsValidatorTest extends TestCase
      * Data provider for testValidateDocument.
      *
      * @see testValidateDocument
-     *
-     * @return array
      */
     public function providerForTestValidateDocument(): array
     {
@@ -183,8 +178,6 @@ DOCBOOK
 
     /**
      * @param string $source XML source
-     *
-     * @return \DOMDocument
      */
     protected function createDocument($source): DOMDocument
     {

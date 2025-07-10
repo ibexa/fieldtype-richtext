@@ -131,7 +131,7 @@ final class CustomTag implements CustomTemplateConfigMapper
     }
 
     /**
-     * Get first available Custom Tag Attribute Type mapper.
+     * Get the first available Custom Tag Attribute Type mapper.
      */
     private function getAttributeTypeMapper(
         string $tagName,

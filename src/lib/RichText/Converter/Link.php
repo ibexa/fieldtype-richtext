@@ -34,7 +34,7 @@ class Link implements Converter
         LocationService $locationService,
         ContentService $contentService,
         RouterInterface $router,
-        LoggerInterface $logger = null
+        ?LoggerInterface $logger = null
     ) {
         $this->locationService = $locationService;
         $this->contentService = $contentService;
@@ -44,12 +44,8 @@ class Link implements Converter
 
     /**
      * Converts internal links (ezcontent:// and ezlocation://) to URLs.
-     *
-     * @param \DOMDocument $document
-     *
-     * @return \DOMDocument
      */
-    public function convert(DOMDocument $document)
+    public function convert(DOMDocument $document): DOMDocument
     {
         $document = clone $document;
 

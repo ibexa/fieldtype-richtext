@@ -38,13 +38,9 @@ class IbexaFieldTypeRichTextBundle extends Bundle
         $this->getCoreExtension($container)->addConfigParser(new RichText());
     }
 
-    /**
-     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
-     *
-     * @return \Ibexa\Bundle\Core\DependencyInjection\IbexaCoreExtension
-     */
     protected function getCoreExtension(ContainerBuilder $container): IbexaCoreExtension
     {
+        /** @var \Ibexa\Bundle\Core\DependencyInjection\IbexaCoreExtension */
         return $container->getExtension('ibexa');
     }
 

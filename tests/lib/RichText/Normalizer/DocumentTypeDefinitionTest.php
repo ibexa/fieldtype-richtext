@@ -83,11 +83,6 @@ xmlns="http://ibexa.co/namespaces/ezpublish5/xhtml5/edit">
 
     /**
      * @dataProvider providerForTestNormalize
-     *
-     * @param string $documentElement
-     * @param string $namespace
-     * @param string $dtdPath
-     * @param string $input
      */
     public function testAccept(string $documentElement, string $namespace, string $dtdPath, string $input): void
     {
@@ -99,9 +94,6 @@ xmlns="http://ibexa.co/namespaces/ezpublish5/xhtml5/edit">
     /**
      * @dataProvider providerForTestNormalize
      *
-     * @param string $documentElement
-     * @param string $namespace
-     * @param string $dtdPath
      * @param string $input Ignored
      */
     public function testAcceptNoXmlDeclaration(string $documentElement, string $namespace, string $dtdPath, string $input): void
@@ -122,13 +114,6 @@ XML
 
     /**
      * @dataProvider providerForTestNormalize
-     *
-     * @param string $documentElement
-     * @param string $namespace
-     * @param string $dtdPath
-     * @param string $input
-     * @param string $expectedOutput
-     * @param string $expectedSaved
      */
     public function testNormalize(string $documentElement, string $namespace, string $dtdPath, string $input, string $expectedOutput, string $expectedSaved): void
     {
@@ -205,11 +190,6 @@ XML
 
     /**
      * @dataProvider providerForTestRefuse
-     *
-     * @param string $documentElement
-     * @param string $namespace
-     * @param string $dtdPath
-     * @param string $input
      */
     public function testRefuse(string $documentElement, string $namespace, string $dtdPath, string $input): void
     {

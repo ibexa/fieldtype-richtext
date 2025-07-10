@@ -35,12 +35,9 @@ class SearchField implements Indexable
     /**
      * Get index data for field for search backend.
      *
-     * @param \Ibexa\Contracts\Core\Persistence\Content\Field $field
-     * @param \Ibexa\Contracts\Core\Persistence\Content\Type\FieldDefinition $fieldDefinition
-     *
      * @return \Ibexa\Contracts\Core\Search\Field[]
      */
-    public function getIndexData(Field $field, FieldDefinition $fieldDefinition)
+    public function getIndexData(Field $field, FieldDefinition $fieldDefinition): array
     {
         $document = new DOMDocument();
         $document->loadXML($field->value->data);
@@ -64,7 +61,7 @@ class SearchField implements Indexable
      *
      * @return \Ibexa\Contracts\Core\Search\FieldType[]
      */
-    public function getIndexDefinition()
+    public function getIndexDefinition(): array
     {
         return [
             'value' => new Search\FieldType\StringField(),
@@ -77,10 +74,8 @@ class SearchField implements Indexable
      * As field types can index multiple fields (see MapLocation field type's
      * implementation of this interface), this method is used to define default
      * field for matching. Default field is typically used by Field criterion.
-     *
-     * @return string
      */
-    public function getDefaultMatchField()
+    public function getDefaultMatchField(): string
     {
         return 'value';
     }
@@ -91,10 +86,8 @@ class SearchField implements Indexable
      * As field types can index multiple fields (see MapLocation field type's
      * implementation of this interface), this method is used to define default
      * field for sorting. Default field is typically used by Field sort clause.
-     *
-     * @return string
      */
-    public function getDefaultSortField()
+    public function getDefaultSortField(): string
     {
         return $this->getDefaultMatchField();
     }

@@ -38,7 +38,7 @@ final class CustomStyle implements Provider
     }
 
     /**
-     * @return array RichText Custom Styles config
+     * @return array<string, mixed> RichText Custom Styles config
      */
     public function getConfiguration(): array
     {
