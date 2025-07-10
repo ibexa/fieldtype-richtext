@@ -29,11 +29,11 @@ abstract class Gateway extends StorageGateway
      *
      * Non-existent ids are ignored.
      *
-     * @param array $remoteIds An array of Content remote ids
+     * @param array<string> $remoteIds An array of Content remote ids
      *
-     * @return array An array of Content ids, with remote ids as keys
+     * @return array<string, int> An array of Content ids, with remote ids as keys
      */
-    abstract public function getContentIds(array $remoteIds);
+    abstract public function getContentIds(array $remoteIds): array;
 
     /**
      * Returns a list of URLs for a list of URL ids.
@@ -42,9 +42,9 @@ abstract class Gateway extends StorageGateway
      *
      * @param int[]|string[] $ids An array of URL ids
      *
-     * @return array An array of URLs, with ids as keys
+     * @return array<int, string> array of URLs, with ids as keys
      */
-    public function getIdUrlMap(array $ids)
+    public function getIdUrlMap(array $ids): array
     {
         $ids = array_map(intval(...), $ids);
 
@@ -58,46 +58,36 @@ abstract class Gateway extends StorageGateway
      *
      * @param string[] $urls An array of URLs
      *
-     * @return array An array of URL ids, with URLs as keys
+     * @return array<string, int> An array of URL ids, with URLs as keys
      */
-    public function getUrlIdMap(array $urls)
+    public function getUrlIdMap(array $urls): array
     {
         return $this->urlGateway->getUrlIdMap($urls);
     }
 
     /**
      * Inserts a new $url and returns its id.
-     *
-     * @param string $url The URL to insert in the database
-     *
-     * @return int|string
      */
-    public function insertUrl($url)
+    public function insertUrl(string $url): int
     {
-        return $this->urlGateway->insertUrl($url);
+        return (int)$this->urlGateway->insertUrl($url);
     }
 
     /**
-     * Creates link to URL with $urlId for field with $fieldId in $versionNo.
-     *
-     * @param int|string $urlId
-     * @param int|string $fieldId
-     * @param int $versionNo
+     * Creates a link to URL with $urlId for field with $fieldId in $versionNo.
      */
-    public function linkUrl($urlId, $fieldId, $versionNo): void
+    public function linkUrl(int $urlId, int $fieldId, int $versionNo): void
     {
-        $this->urlGateway->linkUrl((int)$urlId, (int)$fieldId, $versionNo);
+        $this->urlGateway->linkUrl($urlId, $fieldId, $versionNo);
     }
 
     /**
-     * Removes link to URL for $fieldId in $versionNo and cleans up possibly orphaned URLs.
+     * Removes a link to URL for $fieldId in $versionNo and cleans up possibly orphaned URLs.
      *
-     * @param int|string $fieldId
-     * @param int $versionNo
      * @param int[] $excludeUrlIds
      */
-    public function unlinkUrl($fieldId, $versionNo, array $excludeUrlIds = []): void
+    public function unlinkUrl(int $fieldId, int $versionNo, array $excludeUrlIds = []): void
     {
-        $this->urlGateway->unlinkUrl((int)$fieldId, $versionNo, $excludeUrlIds);
+        $this->urlGateway->unlinkUrl($fieldId, $versionNo, $excludeUrlIds);
     }
 }

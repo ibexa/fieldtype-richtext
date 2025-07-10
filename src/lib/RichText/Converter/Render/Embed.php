@@ -27,9 +27,9 @@ class Embed extends Render implements Converter
     /**
      * Maps embed tag names to their default views.
      *
-     * @var array
+     * @var array<string, string>
      */
-    protected $tagDefaultViewMap = [
+    protected array $tagDefaultViewMap = [
         'ezembed' => 'embed',
         'ezembedinline' => 'embed-inline',
     ];
@@ -37,9 +37,9 @@ class Embed extends Render implements Converter
     /**
      * Maps Docbook target to HTML target.
      *
-     * @var array
+     * @var array<string, string>
      */
-    protected $docbookToHtmlTargetMap = [
+    protected array $docbookToHtmlTargetMap = [
         'new' => '_blank',
         'replace' => '_self',
     ];
@@ -52,12 +52,8 @@ class Embed extends Render implements Converter
 
     /**
      * Processes single embed element type (ezembed or ezembedinline).
-     *
-     * @param \DOMDocument $document
-     * @param $tagName string name of the tag to extract
-     * @param bool $isInline
      */
-    protected function processTag(DOMDocument $document, $tagName, $isInline)
+    protected function processTag(DOMDocument $document, string $tagName, bool $isInline): void
     {
         /** @var $embed \DOMElement */
         foreach ($document->getElementsByTagName($tagName) as $embed) {
@@ -83,7 +79,7 @@ class Embed extends Render implements Converter
             } elseif ($matches[1] === 'ezcontent') {
                 $parameters['id'] = (int) $matches[2];
                 $embedContent = $this->renderer->renderContentEmbed(
-                    $parameters['id'],
+                    (int)$parameters['id'],
                     $parameters['viewType'],
                     [
                         'embedParams' => $parameters,
@@ -93,7 +89,7 @@ class Embed extends Render implements Converter
             } elseif ($matches[1] === 'ezlocation') {
                 $parameters['id'] = (int) $matches[2];
                 $embedContent = $this->renderer->renderLocationEmbed(
-                    $parameters['id'],
+                    (int)$parameters['id'],
                     $parameters['viewType'],
                     [
                         'embedParams' => $parameters,
@@ -113,12 +109,9 @@ class Embed extends Render implements Converter
     /**
      * Extracts parameters from embed element.
      *
-     * @param \DOMElement $embed
-     * @param $tagName string name of the tag to extract
-     *
-     * @return array
+     * @return array<string, mixed>
      */
-    protected function extractParameters(DOMElement $embed, $tagName): array
+    protected function extractParameters(DOMElement $embed, string $tagName): array
     {
         if (!$viewType = $embed->getAttribute('view')) {
             $viewType = $this->tagDefaultViewMap[$tagName];
@@ -161,9 +154,7 @@ class Embed extends Render implements Converter
     /**
      * Extracts link parameters from embed element.
      *
-     * @param \DOMElement $embed
-     *
-     * @return array
+     * @return array<string, mixed>|null
      */
     protected function extractLinkParameters(DOMElement $embed): ?array
     {
@@ -250,10 +241,8 @@ class Embed extends Render implements Converter
 
     /**
      * Converts Docbook target to HTML target.
-     *
-     * @param string $docbookLinkTarget
      */
-    protected function mapLinkTarget($docbookLinkTarget)
+    protected function mapLinkTarget(string $docbookLinkTarget): ?string
     {
         if (isset($this->docbookToHtmlTargetMap[$docbookLinkTarget])) {
             return $this->docbookToHtmlTargetMap[$docbookLinkTarget];
@@ -266,16 +255,12 @@ class Embed extends Render implements Converter
      * Returns boolean signifying if the embed is contained in a link element of not.
      *
      * After EmbedLinking converter pass this should be possible only for inline level embeds.
-     *
-     * @param \DOMElement $element
-     *
-     * @return bool
      */
-    protected function isLinkWrapped(DOMElement $element)
+    protected function isLinkWrapped(DOMNode|null $element): bool
     {
-        $parentNode = $element->parentNode;
+        $parentNode = $element?->parentNode;
 
-        if ($parentNode instanceof DOMDocument) {
+        if ($parentNode instanceof DOMDocument || $parentNode === null) {
             return false;
         } elseif ($parentNode->localName === 'link') {
             $childCount = 0;
@@ -299,10 +284,6 @@ class Embed extends Render implements Converter
 
     /**
      * Injects rendered payloads into embed elements.
-     *
-     * @param \DOMDocument $document
-     *
-     * @return \DOMDocument
      */
     public function convert(DOMDocument $document): DOMDocument
     {
@@ -315,10 +296,7 @@ class Embed extends Render implements Converter
     /**
      * Extract /ezattribute/ezvalue elements from XML for the current embed node.
      *
-     * @param \DOMDocument $document
-     * @param \DOMNode $embedNode
-     *
-     * @return array
+     * @return array<string, mixed>
      */
     private function extractCustomDataAttributes(DOMDocument $document, DOMNode $embedNode): array
     {

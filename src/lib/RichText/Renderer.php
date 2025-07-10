@@ -27,12 +27,9 @@ use Twig\Environment;
  */
 class Renderer implements RendererInterface
 {
-    public const RESOURCE_TYPE_CONTENT = 0;
-    public const RESOURCE_TYPE_LOCATION = 1;
+    public const int RESOURCE_TYPE_CONTENT = 0;
+    public const int RESOURCE_TYPE_LOCATION = 1;
 
-    /**
-     * @var \Ibexa\Core\Repository\Repository
-     */
     protected Repository $repository;
 
     private PermissionResolver $permissionResolver;
@@ -49,10 +46,20 @@ class Renderer implements RendererInterface
 
     protected LoggerInterface $logger;
 
+    /**
+     * @var array<string, mixed>
+     */
     private array $customTagsConfiguration;
 
+    /**
+     * @var array<string, mixed>
+     */
     private array $customStylesConfiguration;
 
+    /**
+     * @param array<string, mixed> $customTagsConfiguration
+     * @param array<string, mixed> $customStylesConfiguration
+     */
     public function __construct(
         Repository $repository,
         ConfigResolverInterface $configResolver,
@@ -77,10 +84,7 @@ class Renderer implements RendererInterface
         $this->customStylesConfiguration = $customStylesConfiguration;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function renderContentEmbed($contentId, $viewType, array $parameters, $isInline)
+    public function renderContentEmbed(int $contentId, string $viewType, array $parameters, bool $isInline): ?string
     {
         $isDenied = false;
 
@@ -88,7 +92,7 @@ class Renderer implements RendererInterface
             /** @var \Ibexa\Contracts\Core\Repository\Values\Content\Content $content */
             $content = $this->repository->sudo(
                 static function (Repository $repository) use ($contentId): Content {
-                    return $repository->getContentService()->loadContent((int)$contentId);
+                    return $repository->getContentService()->loadContent($contentId);
                 }
             );
 
@@ -152,10 +156,7 @@ class Renderer implements RendererInterface
         return $this->render($templateName, $parameters);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function renderLocationEmbed($locationId, $viewType, array $parameters, $isInline)
+    public function renderLocationEmbed(int $locationId, string $viewType, array $parameters, bool $isInline): ?string
     {
         $isDenied = false;
 
@@ -212,16 +213,12 @@ class Renderer implements RendererInterface
         return $this->render($templateName, $parameters);
     }
 
-    public function renderTemplate($name, $type, array $parameters, $isInline)
+    public function renderTemplate(string $name, string $type, array $parameters, bool $isInline): ?string
     {
-        switch ($type) {
-            case 'style':
-                $templateName = $this->getStyleTemplateName($name, $isInline);
-                break;
-            case 'tag':
-            default:
-                $templateName = $this->getTagTemplateName($name, $isInline);
-        }
+        $templateName = match ($type) {
+            'style' => $this->getStyleTemplateName($name, $isInline),
+            default => $this->getTagTemplateName($name, $isInline),
+        };
 
         if ($templateName === null) {
             $this->logger->error(
@@ -245,12 +242,9 @@ class Renderer implements RendererInterface
     /**
      * Renders template $templateReference with given $parameters.
      *
-     * @param string $templateReference
-     * @param array $parameters
-     *
-     * @return string
+     * @param array<string, mixed> $parameters
      */
-    protected function render($templateReference, array $parameters): string
+    protected function render(string $templateReference, array $parameters): string
     {
         return $this->templateEngine->render(
             $templateReference,
@@ -259,14 +253,9 @@ class Renderer implements RendererInterface
     }
 
     /**
-     * Returns configured template name for the given Custom Style identifier.
-     *
-     * @param string $identifier
-     * @param bool $isInline
-     *
-     * @return string|null
+     * Returns a configured template name for the given Custom Style identifier.
      */
-    protected function getStyleTemplateName($identifier, $isInline)
+    protected function getStyleTemplateName(string $identifier, bool $isInline): ?string
     {
         if (!empty($this->customStylesConfiguration[$identifier]['template'])) {
             return $this->customStylesConfiguration[$identifier]['template'];
@@ -296,14 +285,9 @@ class Renderer implements RendererInterface
     }
 
     /**
-     * Returns configured template name for the given template tag identifier.
-     *
-     * @param string $identifier
-     * @param bool $isInline
-     *
-     * @return string|null
+     * Returns a configured template name for the given template tag identifier.
      */
-    protected function getTagTemplateName(string $identifier, $isInline)
+    protected function getTagTemplateName(string $identifier, bool $isInline): ?string
     {
         if (isset($this->customTagsConfiguration[$identifier])) {
             return $this->customTagsConfiguration[$identifier]['template'];
@@ -343,15 +327,9 @@ class Renderer implements RendererInterface
     }
 
     /**
-     * Returns configured template reference for the given embed parameters.
-     *
-     * @param $resourceType
-     * @param $isInline
-     * @param $isDenied
-     *
-     * @return string|null
+     * Returns a configured template reference for the given embed parameters.
      */
-    protected function getEmbedTemplateName($resourceType, $isInline, $isDenied)
+    protected function getEmbedTemplateName(int $resourceType, bool $isInline, bool $isDenied): ?string
     {
         $configurationReference = $this->embedConfigurationNamespace;
 
@@ -406,7 +384,7 @@ class Renderer implements RendererInterface
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\BadStateException
      */
-    protected function checkContentPermissions(Content $content)
+    protected function checkContentPermissions(Content $content): void
     {
         // Check both 'content/read' and 'content/view_embed'.
         if (
@@ -428,11 +406,10 @@ class Renderer implements RendererInterface
     /**
      * Checks embed permissions for the given Location $id and returns the Location.
      *
-     * @throws \Symfony\Component\Security\Core\Exception\AccessDeniedException
-     *
-     * @return \Ibexa\Contracts\Core\Repository\Values\Content\Location
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\BadStateException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
      */
-    protected function checkLocation(int|string $id)
+    protected function checkLocation(int|string $id): Location
     {
         /** @var \Ibexa\Contracts\Core\Repository\Values\Content\Location $location */
         $location = $this->repository->sudo(

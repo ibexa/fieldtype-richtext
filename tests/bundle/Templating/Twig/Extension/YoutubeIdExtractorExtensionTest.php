@@ -14,6 +14,9 @@ use Twig\TwigFunction;
 
 class YoutubeIdExtractorExtensionTest extends TestCase
 {
+    /**
+     * @return array<mixed>
+     */
     public function getYouTubeUrls(): array
     {
         return [
@@ -43,9 +46,6 @@ class YoutubeIdExtractorExtensionTest extends TestCase
      * @covers \Ibexa\Bundle\FieldTypeRichText\Templating\Twig\Extension\YoutubeIdExtractorExtension::extractId
      *
      * @dataProvider getYouTubeUrls
-     *
-     * @param string $input
-     * @param string|null $expected
      */
     public function testExtractId(string $input, ?string $expected): void
     {

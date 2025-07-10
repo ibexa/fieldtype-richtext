@@ -56,6 +56,9 @@ class AggregateTest extends TestCase
         self::assertEquals($expectedOutputDocument, $output, 'Xml is not converted as expected');
     }
 
+    /**
+     * @return array<int, array{0: string, 1: string}>
+     */
     public function providerConvertWithLinkInCustomTag(): array
     {
         return [

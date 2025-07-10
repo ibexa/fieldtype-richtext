@@ -21,9 +21,9 @@ use Ibexa\Contracts\FieldTypeRichText\RichText\Converter;
  */
 final class LiteralLayoutNestedList implements Converter
 {
-    private const FALLBACK_NAMESPACE = 'http://docbook.org/ns/docbook';
-    private const ORDERED_LIST_TAG = 'orderedlist';
-    private const ITEMIZED_LIST_TAG = 'itemizedlist';
+    private const string FALLBACK_NAMESPACE = 'http://docbook.org/ns/docbook';
+    private const string ORDERED_LIST_TAG = 'orderedlist';
+    private const string ITEMIZED_LIST_TAG = 'itemizedlist';
 
     /**
      * For all <itemizedList> and <orderedList> nested in the <literallayout>, move the list after the <literallayout>,

@@ -21,14 +21,8 @@ use PHPUnit\Framework\TestCase;
  */
 class RichTextFieldValueConverterTest extends TestCase
 {
-    /**
-     * @var \Ibexa\FieldTypeRichText\Persistence\Legacy\RichTextFieldValueConverter
-     */
-    protected $converter;
+    protected RichTextFieldValueConverter $converter;
 
-    /**
-     * @var string
-     */
     private string $docbookString;
 
     protected function setUp(): void

@@ -20,32 +20,26 @@ use Ibexa\FieldTypeRichText\RichText\Normalizer;
 class DocumentTypeDefinition extends Normalizer
 {
     /**
-     * Holds root element name of the accepted XML format.
-     *
-     * @var string
+     * Holds a root element name of the accepted XML format.
      */
-    private $documentElement;
+    private string $documentElement;
 
     /**
-     * Holds default namespace name of the accepted XML format.
-     *
-     * @var string
+     * Holds a default namespace name of the accepted XML format.
      */
-    private $namespace;
+    private string $namespace;
 
     /**
-     * Holds path to the DTD file.
-     *
-     * @var string
+     * Holds a path to the DTD file.
      */
-    private $dtdPath;
+    private string $dtdPath;
 
     /**
-     * Holds computed regular expression pattern for matching and replacement.
+     * Holds computed a regular expression pattern for matching and replacement.
      */
     private ?string $expression = null;
 
-    public function __construct($documentElement, $namespace, $dtdPath)
+    public function __construct(string $documentElement, string $namespace, string $dtdPath)
     {
         $this->documentElement = $documentElement;
         $this->namespace = $namespace;
@@ -55,12 +49,8 @@ class DocumentTypeDefinition extends Normalizer
     /**
      * Accept if $input looks like XML document, with configured document element
      * and default namespace, but without DTD.
-     *
-     * @param string $input
-     *
-     * @return bool
      */
-    public function accept($input): bool
+    public function accept(string $input): bool
     {
         if (preg_match($this->getExpression(), $input, $matches)) {
             return true;
@@ -70,27 +60,21 @@ class DocumentTypeDefinition extends Normalizer
     }
 
     /**
-     * Normalizes given $input by adding DTD with character entity definition.
-     *
-     * @param string $input
-     *
-     * @return string
+     * Normalizes a given $input by adding DTD with character entity definition.
      */
-    public function normalize($input): ?string
+    public function normalize(string $input): string
     {
-        return preg_replace(
+        return (string)preg_replace(
             $this->getExpression(),
             "\${1}\n" . file_get_contents($this->dtdPath) . '${3}',
-            $input
+            $input,
         );
     }
 
     /**
-     * Computes and returns regular expression pattern for matching and replacement.
-     *
-     * @return string
+     * Computes and returns a regular expression pattern for matching and replacement.
      */
-    private function getExpression()
+    private function getExpression(): string
     {
         if ($this->expression === null) {
             $this->expression =

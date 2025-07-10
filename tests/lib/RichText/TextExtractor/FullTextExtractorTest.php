@@ -17,6 +17,9 @@ final class FullTextExtractorTest extends BaseTest
         $this->textExtractor = new FullTextExtractor();
     }
 
+    /**
+     * @return array<string, array{0: string, 1: string}>
+     */
     public function providerForTestExtractText(): array
     {
         return [

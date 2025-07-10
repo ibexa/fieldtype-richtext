@@ -31,12 +31,18 @@ class EmbedTest extends TestCase
     /**
      * Data provider for testConvert.
      *
+     * @return array<array{
+     *     0: string,
+     *     1: string,
+     *     2: array<string>,
+     *     3: array{array<array<mixed>>, array<string>},
+     *     4: array{array<array<mixed>>, array<string>}
+     * }>
+     *
      * @see testConvert
      *
      * Provided parameters:
      * <code>string $xmlString, string $expectedXmlString, array $errors, array $renderParams</code>
-     *
-     * @return array
      */
     public function providerForTestConvert(): array
     {
@@ -802,11 +808,9 @@ class EmbedTest extends TestCase
     /**
      * @dataProvider providerForTestConvert
      *
-     * @param string $xmlString
-     * @param string $expectedXmlString
-     * @param array $errors
-     * @param array $renderContentEmbedParams
-     * @param array $renderLocationEmbedParams
+     * @param array<string> $errors
+     * @param array{array<array<mixed>>, array<string>} $renderContentEmbedParams
+     * @param array{array<array<mixed>>, array<string>} $renderLocationEmbedParams
      */
     public function testConvert(
         string $xmlString,

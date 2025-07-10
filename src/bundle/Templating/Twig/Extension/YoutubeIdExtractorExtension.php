@@ -16,9 +16,12 @@ use Twig\TwigFunction;
  */
 final class YoutubeIdExtractorExtension extends AbstractExtension
 {
-    private const YOUTUBE_ID_REGEX = '/(?:https?:)?(?:\/\/)?(?:[0-9A-Z-]+\.)?(?:youtu\.be\/|youtube(?:-nocookie)?\.com\S*?[^\w\s-])'
+    private const string YOUTUBE_ID_REGEX = '/(?:https?:)?(?:\/\/)?(?:[0-9A-Z-]+\.)?(?:youtu\.be\/|youtube(?:-nocookie)?\.com\S*?[^\w\s-])'
     . '(?P<id>[\w-]{11})(?=[^\w-]|$)(?![?=&+%\w.-]*(?:[\'"][^<>]*>|<\/a>))[?=&+%\w.-]*/i';
 
+    /**
+     * @return \Twig\TwigFunction[]
+     */
     public function getFunctions(): array
     {
         return [
@@ -31,8 +34,6 @@ final class YoutubeIdExtractorExtension extends AbstractExtension
 
     /**
      * Returns youtube video id.
-     *
-     * @return string|null
      */
     public function extractId(string $string): ?string
     {

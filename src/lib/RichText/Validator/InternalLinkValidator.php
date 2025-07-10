@@ -34,9 +34,7 @@ class InternalLinkValidator implements ValidatorInterface
     /**
      * Extracts and validate internal links.
      *
-     * @param \DOMDocument $xml
-     *
-     * @return array
+     * @return list<string>
      *
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
      */
@@ -72,13 +70,8 @@ class InternalLinkValidator implements ValidatorInterface
      * Validates following link formats: 'ezcontent://<contentId>', 'ezremote://<contentRemoteId>', 'ezlocation://<locationId>'.
      *
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException if given $scheme is not supported
-     *
-     * @param string $scheme
-     * @param string $id
-     *
-     * @return bool
      */
-    public function validate($scheme, $id): bool
+    public function validate(string $scheme, string $id): bool
     {
         try {
             switch ($scheme) {
@@ -105,13 +98,8 @@ class InternalLinkValidator implements ValidatorInterface
      * Builds error message for invalid url.
      *
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException if given $scheme is not supported
-     *
-     * @param string $scheme
-     * @param string $url
-     *
-     * @return string
      */
-    private function getInvalidLinkError(string $scheme, $url): string
+    private function getInvalidLinkError(string $scheme, string $url): string
     {
         switch ($scheme) {
             case 'ezcontent':
@@ -125,11 +113,7 @@ class InternalLinkValidator implements ValidatorInterface
     }
 
     /**
-     * Generates XPath expression for given link tag.
-     *
-     * @param string $tagName
-     *
-     * @return string
+     * Generates XPath expression for a given link tag.
      */
     private function getXPathForLinkTag(string $tagName): string
     {

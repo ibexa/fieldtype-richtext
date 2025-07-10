@@ -25,16 +25,16 @@ use Symfony\Component\Yaml\Yaml;
  */
 class IbexaFieldTypeRichTextExtension extends Extension implements PrependExtensionInterface
 {
-    public const EXTENSION_NAME = 'ibexa_fieldtype_richtext';
+    public const string EXTENSION_NAME = 'ibexa_fieldtype_richtext';
 
-    public const RICHTEXT_CUSTOM_STYLES_PARAMETER = 'ibexa.field_type.richtext.custom_styles';
-    public const RICHTEXT_CUSTOM_TAGS_PARAMETER = 'ibexa.field_type.richtext.custom_tags';
-    public const RICHTEXT_ALLOY_EDITOR_PARAMETER = 'ibexa.field_type.richtext.alloy_editor';
-    public const RICHTEXT_CONFIGURATION_PROVIDER_TAG = 'ibexa.field_type.richtext.configuration.provider';
+    public const string RICHTEXT_CUSTOM_STYLES_PARAMETER = 'ibexa.field_type.richtext.custom_styles';
+    public const string RICHTEXT_CUSTOM_TAGS_PARAMETER = 'ibexa.field_type.richtext.custom_tags';
+    public const string RICHTEXT_ALLOY_EDITOR_PARAMETER = 'ibexa.field_type.richtext.alloy_editor';
+    public const string RICHTEXT_CONFIGURATION_PROVIDER_TAG = 'ibexa.field_type.richtext.configuration.provider';
 
-    private const RICHTEXT_TEXT_TOOLBAR_NAME = 'text';
+    private const string RICHTEXT_TEXT_TOOLBAR_NAME = 'text';
 
-    private const WEBPACK_CONFIG_NAMES = [
+    private const array WEBPACK_CONFIG_NAMES = [
         'ibexa.richtext.config.manager.js' => [
             'ibexa.richtext.config.manager.js' => [],
         ],
@@ -48,8 +48,6 @@ class IbexaFieldTypeRichTextExtension extends Extension implements PrependExtens
     /**
      * Load Ibexa RichText Field Type Bundle configuration.
      *
-     * @param array $configs
-     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
      *
      * @throws \Exception
      */
@@ -95,9 +93,6 @@ class IbexaFieldTypeRichTextExtension extends Extension implements PrependExtens
 
     /**
      * Register parameters of global RichText configuration.
-     *
-     * @param array $config
-     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
      */
     private function registerRichTextConfiguration(array $config, ContainerBuilder $container): void
     {
@@ -105,6 +100,7 @@ class IbexaFieldTypeRichTextExtension extends Extension implements PrependExtens
         $customStylesConfig = $config['custom_styles'] ?? [];
         $alloyEditorConfig = $config['alloy_editor'] ?? [];
 
+        /** @var array<int, string> $availableSiteAccesses */
         $availableSiteAccesses = $container->hasParameter('ibexa.site_access.list')
             ? $container->getParameter('ibexa.site_access.list')
             : [];
@@ -136,8 +132,6 @@ class IbexaFieldTypeRichTextExtension extends Extension implements PrependExtens
 
     /**
      * Allow an extension to prepend the extension configurations.
-     *
-     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
      *
      * @throws \Exception
      */
@@ -171,9 +165,6 @@ class IbexaFieldTypeRichTextExtension extends Extension implements PrependExtens
         $container->addResource(new FileResource($configFile));
     }
 
-    /**
-     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
-     */
     private function prependJMSTranslation(ContainerBuilder $container): void
     {
         $container->prependExtensionConfig('jms_translation', [
@@ -202,11 +193,10 @@ class IbexaFieldTypeRichTextExtension extends Extension implements PrependExtens
     /**
      * Validate Custom Templates (Tags, Styles) SiteAccess-defined configuration against a global one.
      *
-     * @param array $availableSiteAccesses a list of available SiteAccesses
-     * @param array $config Custom Template configuration
+     * @param array<int, string> $availableSiteAccesses a list of available SiteAccesses
+     * @param array<string, mixed> $config Custom Template configuration
      * @param string $nodeName Custom Template node name
      * @param string $type Custom Template type name
-     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
      */
     private function validateCustomTemplatesConfig(
         array $availableSiteAccesses,
@@ -235,11 +225,10 @@ class IbexaFieldTypeRichTextExtension extends Extension implements PrependExtens
     }
 
     /**
-     * Validate presence of inline Custom Tags in Toolbars.
+     * Validate the presence of inline Custom Tags in Toolbars.
      *
-     * @param array $availableSiteAccesses a list of available SiteAccesses
-     * @param array $customTagsConfig Custom Tags configuration
-     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
+     * @param array<int, string> $availableSiteAccesses a list of available SiteAccesses
+     * @param array<int, string> $customTagsConfig Custom Tags configuration
      */
     private function validateInlineCustomTagToolbarsConfig(
         array $availableSiteAccesses,
@@ -284,6 +273,10 @@ class IbexaFieldTypeRichTextExtension extends Extension implements PrependExtens
         return array_keys($customTags);
     }
 
+    /**
+     * @param array<string, mixed> $toolbarContent
+     * @param array<int, string> $customTags
+     */
     private function checkForInlineTagsInToolbar(
         string $toolbarName,
         array $toolbarContent,

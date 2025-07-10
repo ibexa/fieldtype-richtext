@@ -31,11 +31,6 @@ class RichTextValueTransformer implements DataTransformerInterface
         $this->docbookToXhtml5EditConverter = $docbookToXhtml5EditConverter;
     }
 
-    /**
-     * @param mixed $value
-     *
-     * @return string
-     */
     public function transform(mixed $value): string
     {
         if (!$value instanceof Value) {
@@ -45,14 +40,9 @@ class RichTextValueTransformer implements DataTransformerInterface
         return $this->docbookToXhtml5EditConverter->convert($value->xml)->saveXML();
     }
 
-    /**
-     * @param mixed $value
-     *
-     * @return \Ibexa\FieldTypeRichText\FieldType\RichText\Value|null
-     */
     public function reverseTransform(mixed $value): ?Value
     {
-        if ($value === null || empty($value)) {
+        if (empty($value)) {
             return $this->fieldType->getEmptyValue();
         }
 

@@ -14,38 +14,32 @@ namespace Ibexa\Contracts\FieldTypeRichText\RichText;
 interface RendererInterface
 {
     /**
-     * Renders template.
-     *
-     * @param string $name
-     * @param string $type
-     * @param array $parameters
-     * @param bool $isInline
-     *
-     * @return string|null
+     * @param array<mixed> $parameters
      */
-    public function renderTemplate($name, $type, array $parameters, $isInline);
+    public function renderTemplate(
+        string $name,
+        string $type,
+        array $parameters,
+        bool $isInline,
+    ): string|null;
 
     /**
-     * Renders Content embed.
-     *
-     * @param int|string $contentId
-     * @param string $viewType
-     * @param array $parameters
-     * @param bool $isInline
-     *
-     * @return string|null
+     * @param array<mixed> $parameters
      */
-    public function renderContentEmbed($contentId, $viewType, array $parameters, $isInline);
+    public function renderContentEmbed(
+        int $contentId,
+        string $viewType,
+        array $parameters,
+        bool $isInline,
+    ): string|null;
 
     /**
-     * Renders Location embed.
-     *
-     * @param int|string $locationId
-     * @param string $viewType
-     * @param array $parameters
-     * @param bool $isInline
-     *
-     * @return string|null
+     * @param array<mixed> $parameters
      */
-    public function renderLocationEmbed($locationId, $viewType, array $parameters, $isInline);
+    public function renderLocationEmbed(
+        int $locationId,
+        string $viewType,
+        array $parameters,
+        bool $isInline,
+    ): string|null;
 }

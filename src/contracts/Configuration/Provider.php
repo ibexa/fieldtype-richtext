@@ -14,18 +14,16 @@ namespace Ibexa\Contracts\FieldTypeRichText\Configuration;
 interface Provider
 {
     /**
-     * Get configuration provider name.
+     * Get a configuration provider name.
      *
      * Should consist of letters, numbers, dashes, and underscores only.
-     *
-     * @return string
      */
     public function getName(): string;
 
     /**
      * Get configuration settings as an associative array.
      *
-     * @return array
+     * @return array<string, mixed>
      */
     public function getConfiguration(): array;
 }

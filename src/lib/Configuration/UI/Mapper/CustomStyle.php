@@ -19,6 +19,9 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 final class CustomStyle implements CustomTemplateConfigMapper
 {
+    /**
+     * @var array<string, mixed>
+     */
     private array $customStylesConfiguration;
 
     private TranslatorInterface $translator;
@@ -27,6 +30,9 @@ final class CustomStyle implements CustomTemplateConfigMapper
 
     private string $translationDomain;
 
+    /**
+     * @param array<string, mixed> $customStylesConfiguration
+     */
     public function __construct(
         array $customStylesConfiguration,
         TranslatorInterface $translator,
@@ -42,9 +48,9 @@ final class CustomStyle implements CustomTemplateConfigMapper
     /**
      * Map Configuration for the given list of enabled Custom Styles.
      *
-     * @param array $enabledCustomStyles
+     * @param array<string> $enabledCustomStyles
      *
-     * @return array Mapped configuration
+     * @return array<string, mixed> Mapped configuration
      */
     public function mapConfig(array $enabledCustomStyles): array
     {

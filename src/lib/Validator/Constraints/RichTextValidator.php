@@ -18,17 +18,11 @@ class RichTextValidator extends ConstraintValidator
 {
     private InputHandlerInterface $inputHandler;
 
-    /**
-     * @param \Ibexa\Contracts\FieldTypeRichText\RichText\InputHandlerInterface
-     */
     public function __construct(InputHandlerInterface $inputHandler)
     {
         $this->inputHandler = $inputHandler;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function validate(mixed $value, Constraint $constraint): void
     {
         if (is_string($value)) {

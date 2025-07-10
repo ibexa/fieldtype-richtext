@@ -15,6 +15,9 @@ use Ibexa\FieldTypeRichText\Configuration\Provider\CKEditor;
 
 final class CKEditorTest extends BaseProviderTestCase
 {
+    /**
+     * @param array<mixed> $customStylesConfiguration
+     */
     public function createProvider(
         ConfigResolverInterface $configResolver = null,
         array $customStylesConfiguration = []
@@ -448,6 +451,9 @@ final class CKEditorTest extends BaseProviderTestCase
         );
     }
 
+    /**
+     * @param array<mixed> $buttonsConfig
+     */
     private function buildTestToolbarReturnCallback(array $buttonsConfig): callable
     {
         return static function (string $paramName) use ($buttonsConfig): ?array {

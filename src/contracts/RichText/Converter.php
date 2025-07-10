@@ -16,11 +16,7 @@ use DOMDocument;
 interface Converter
 {
     /**
-     * Converts given $xmlDoc into another \DOMDocument object.
-     *
-     * @param \DOMDocument $xmlDoc
-     *
-     * @return \DOMDocument
+     * Converts a given $xmlDoc into another \DOMDocument object.
      */
-    public function convert(DOMDocument $xmlDoc);
+    public function convert(DOMDocument $xmlDoc): DomDocument;
 }

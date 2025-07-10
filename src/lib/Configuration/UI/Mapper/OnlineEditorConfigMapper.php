@@ -18,18 +18,18 @@ interface OnlineEditorConfigMapper
     /**
      * Map Online Editor custom CSS classes configuration.
      *
-     * @param array $semanticSemanticConfiguration
+     * @param array<string, array<string, mixed>> $semanticConfiguration
      *
-     * @return array
+     * @return array<string, array<string, mixed>>
      */
-    public function mapCssClassesConfiguration(array $semanticSemanticConfiguration): array;
+    public function mapCssClassesConfiguration(array $semanticConfiguration): array;
 
     /**
      * Map Online Editor custom data attributes classes configuration.
      *
-     * @param array $semanticConfiguration
+     * @param array<string, array<string, mixed>> $semanticConfiguration
      *
-     * @return array
+     * @return array<string, array<string, mixed>>
      */
     public function mapDataAttributesConfiguration(array $semanticConfiguration): array;
 }

@@ -24,8 +24,10 @@ class RelationProcessorTest extends TestCase
      *
      * @dataProvider dateProviderForGetRelations
      *
-     * @param \DOMDocument $document
-     * @param array $expectedRelations
+     * @param array{
+     *     link: array{locationIds: array<int>, contentIds: array<int>},
+     *     embed: array{locationIds: array<int>, contentIds: array<int>}
+     * } $expectedRelations
      */
     public function testGetRelations(DOMDocument $document, array $expectedRelations): void
     {
@@ -34,6 +36,9 @@ class RelationProcessorTest extends TestCase
         self::assertSame($expectedRelations, $actualProcessor);
     }
 
+    /**
+     * @return array<array<mixed>>
+     */
     public function dateProviderForGetRelations(): array
     {
         $xml = <<<EOT

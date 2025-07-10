@@ -22,13 +22,15 @@ class RichTextTest extends AbstractParserTestCase
 {
     /**
      * Multidimensional array of configuration of multiple extensions ([extension => config]).
+     *
+     * @var array<string, mixed>|null
      */
     private ?array $extensionsConfig = null;
 
     /**
      * Get test configuration for multiple extensions.
      *
-     * @return array
+     * @return array<string, mixed>
      */
     private function getExtensionsConfig(): array
     {
@@ -47,11 +49,11 @@ class RichTextTest extends AbstractParserTestCase
     /**
      * Load Configuration for multiple defined extensions.
      *
-     * @param array $configurationValues
+     * @param array<string, mixed> $configurationValues
      *
      * @throws \Exception
      */
-    protected function configureAndLoad(array $configurationValues = [])
+    protected function configureAndLoad(array $configurationValues = []): void
     {
         $bundle = new IbexaFieldTypeRichTextBundle();
         $bundle->build($this->container);
@@ -150,8 +152,7 @@ class RichTextTest extends AbstractParserTestCase
      *
      * @dataProvider getOnlineEditorInvalidSettings
      *
-     * @param array $config
-     * @param string $expectedExceptionMessage
+     * @param array<string, mixed> $config
      *
      * @throws \Exception
      */
@@ -180,7 +181,7 @@ class RichTextTest extends AbstractParserTestCase
     /**
      * Data provider for testOnlineEditorInvalidSettings.
      *
-     * @return array
+     * @return array<int, list<array<string, array<string, array<string, array<int|string, bool|list<string>|string>|string>>>|string>>
      *
      * @see testOnlineEditorInvalidSettingsThrowException
      */
@@ -244,8 +245,8 @@ class RichTextTest extends AbstractParserTestCase
     /**
      * @dataProvider richTextSettingsProvider
      *
-     * @param array $config
-     * @param array $expected
+     * @param array<string, mixed> $config
+     * @param array<string, mixed> $expected
      *
      * @throws \Exception
      */

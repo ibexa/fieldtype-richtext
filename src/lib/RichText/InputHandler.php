@@ -28,14 +28,6 @@ class InputHandler implements InputHandlerInterface
 
     private RelationProcessor $relationProcessor;
 
-    /**
-     * @param \Ibexa\FieldTypeRichText\RichText\DOMDocumentFactory $domDocumentFactory
-     * @param \Ibexa\FieldTypeRichText\RichText\ConverterDispatcher $inputConverter
-     * @param \Ibexa\FieldTypeRichText\RichText\Normalizer $inputNormalizer
-     * @param \Ibexa\Contracts\FieldTypeRichText\RichText\ValidatorInterface $schemaValidator
-     * @param \Ibexa\Contracts\FieldTypeRichText\RichText\ValidatorInterface $dockbookValidator
-     * @param \Ibexa\FieldTypeRichText\RichText\RelationProcessor $relationProcessor
-     */
     public function __construct(
         DOMDocumentFactory $domDocumentFactory,
         ConverterDispatcher $inputConverter,
@@ -52,9 +44,6 @@ class InputHandler implements InputHandlerInterface
         $this->relationProcessor = $relationProcessor;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function fromString(?string $inputValue = null): DOMDocument
     {
         if (empty($inputValue)) {
@@ -68,9 +57,6 @@ class InputHandler implements InputHandlerInterface
         return $this->fromDocument($this->domDocumentFactory->loadXMLString($inputValue));
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function fromDocument(DOMDocument $inputValue): DOMDocument
     {
         $errors = $this->schemaValidator->validateDocument($inputValue);
@@ -85,16 +71,13 @@ class InputHandler implements InputHandlerInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @return array<int, array{locationIds: array<int, int>, contentIds: array<int, int>}>
      */
     public function getRelations(DOMDocument $document): array
     {
         return $this->relationProcessor->getRelations($document);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function validate(DOMDocument $document): array
     {
         return $this->docbookValidator->validateDocument($document);

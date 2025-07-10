@@ -17,8 +17,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 final class OnlineEditor implements OnlineEditorConfigMapper
 {
-    /** @var \Symfony\Component\Translation\TranslatorInterface */
-    private $translator;
+    private TranslatorInterface $translator;
 
     private string $translationDomain;
 
@@ -28,9 +27,6 @@ final class OnlineEditor implements OnlineEditorConfigMapper
         $this->translationDomain = $translationDomain;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function mapCssClassesConfiguration(array $semanticConfiguration): array
     {
         $configuration = [];
@@ -53,9 +49,6 @@ final class OnlineEditor implements OnlineEditorConfigMapper
         return $configuration;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function mapDataAttributesConfiguration(array $semanticConfiguration): array
     {
         $configuration = [];

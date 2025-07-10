@@ -15,19 +15,11 @@ abstract class Normalizer
 {
     /**
      * Check if normalizer accepts given $input for normalization.
-     *
-     * @param string $input
-     *
-     * @return bool
      */
-    abstract public function accept($input);
+    abstract public function accept(string $input): bool;
 
     /**
-     * Normalizes given $input and returns the result.
-     *
-     * @param string $input
-     *
-     * @return string
+     * Normalizes a given $input and returns the result.
      */
-    abstract public function normalize($input);
+    abstract public function normalize(string $input): string;
 }

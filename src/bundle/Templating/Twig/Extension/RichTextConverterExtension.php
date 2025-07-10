@@ -28,6 +28,9 @@ class RichTextConverterExtension extends AbstractExtension
         $this->richTextEditConverter = $richTextEditConverter;
     }
 
+    /**
+     * @return \Twig\TwigFilter[]
+     */
     public function getFilters(): array
     {
         return [

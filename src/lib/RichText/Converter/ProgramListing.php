@@ -22,10 +22,6 @@ class ProgramListing implements Converter
     /**
      * CDATA's content cannot contain the sequence ']]>' as that will terminate the CDATA section.
      * So, if the end sequence ']]>' appears in the string, we split the text into multiple CDATA sections.
-     *
-     * @param \DOMDocument $document
-     *
-     * @return \DOMDocument
      */
     public function convert(DOMDocument $document): DOMDocument
     {

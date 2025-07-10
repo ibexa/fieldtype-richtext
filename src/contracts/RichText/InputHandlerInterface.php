@@ -13,45 +13,33 @@ use DOMDocument;
 interface InputHandlerInterface
 {
     /**
-     * Converts given XML String to the internal Rich Text representation.
-     *
-     * @param string|null $inputValue
+     * Converts a given XML String to the internal Rich Text representation.
      *
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
      * @throws \Ibexa\FieldTypeRichText\RichText\Exception\InvalidXmlException
-     *
-     * @return \DOMDocument
      */
     public function fromString(?string $inputValue = null): DOMDocument;
 
     /**
-     * Converts given DOMDocument to the internal Rich Text representation.
-     *
-     * @param \DOMDocument $inputValue
+     * Converts a given DOMDocument to the internal Rich Text representation.
      *
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
-     *
-     * @return \DOMDocument
      */
     public function fromDocument(DOMDocument $inputValue): DOMDocument;
 
     /**
      * Returns relation data extracted from given $document (internal representation).
      *
-     * @param \DOMDocument $document
-     *
-     * @return array
+     * @return array<int, array{locationIds: array<int, int>, contentIds: array<int, int>}>
      */
     public function getRelations(DOMDocument $document): array;
 
     /**
      * Validate the given $document (internal representation) and returns list of errors.
      *
-     * @param \DOMDocument $document
-     *
-     * @return array
+     * @return array<int, string>
      */
     public function validate(DOMDocument $document): array;
 }

@@ -39,9 +39,6 @@ use RuntimeException;
  */
 class RichTextTest extends TestCase
 {
-    /**
-     * @return \Ibexa\FieldTypeRichText\FieldType\RichText\Type
-     */
     protected function getFieldType(): Type
     {
         $inputHandler = new InputHandler(
@@ -295,9 +292,6 @@ class RichTextTest extends TestCase
 
     /**
      * @dataProvider providerForTestValidate
-     *
-     * @param string $xmlString
-     * @param array $expectedValidationErrors
      */
     public function testValidate(string $xmlString, array $expectedValidationErrors): void
     {
@@ -474,11 +468,6 @@ EOT;
         );
     }
 
-    /**
-     * @param string $relativePath
-     *
-     * @return string
-     */
     protected function getAbsolutePath(string $relativePath): string
     {
         $absolutePath = realpath(__DIR__ . '/../../../' . $relativePath);

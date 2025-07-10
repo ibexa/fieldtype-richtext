@@ -177,7 +177,7 @@ class TemplateTest extends TestCase
     /**
      * Expected Template parameters for each test fixture (key is a fixture name).
      */
-    public const FIXTURES_PARAMETERS = [
+    public const array FIXTURES_PARAMETERS = [
         '00-block' => [
             [
                 'name' => 'template1',

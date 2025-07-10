@@ -34,8 +34,7 @@ final class CustomTagsValidatorTest extends TestCase
      *
      * @dataProvider providerForTestValidateDocument
      *
-     * @param \DOMDocument $document
-     * @param array $expectedErrors
+     * @param array<int, string> $expectedErrors
      */
     public function testValidateDocument(DOMDocument $document, array $expectedErrors): void
     {
@@ -48,9 +47,12 @@ final class CustomTagsValidatorTest extends TestCase
     /**
      * Data provider for testValidateDocument.
      *
-     * @see testValidateDocument
+     * @return array<int, array{
+     *     0: DOMDocument,
+     *     1: array<string>
+     * }>
      *
-     * @return array
+     * @see testValidateDocument
      */
     public function providerForTestValidateDocument(): array
     {
@@ -183,10 +185,8 @@ DOCBOOK
 
     /**
      * @param string $source XML source
-     *
-     * @return \DOMDocument
      */
-    protected function createDocument($source): DOMDocument
+    protected function createDocument(string $source): DOMDocument
     {
         $document = new DOMDocument();
 

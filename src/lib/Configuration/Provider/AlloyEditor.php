@@ -42,7 +42,7 @@ final class AlloyEditor implements Provider
     }
 
     /**
-     * @return array AlloyEditor config
+     * @return array<string, mixed> AlloyEditor config
      */
     public function getConfiguration(): array
     {
@@ -56,7 +56,7 @@ final class AlloyEditor implements Provider
     }
 
     /**
-     * @return array Toolbars configuration
+     * @return array<string, array<string, mixed>> Toolbars configuration
      */
     private function getToolbars(): array
     {
@@ -89,7 +89,7 @@ final class AlloyEditor implements Provider
     }
 
     /**
-     * @return array Custom plugins
+     * @return array<string, mixed> Custom plugins
      */
     private function getExtraPlugins(): array
     {
@@ -99,7 +99,7 @@ final class AlloyEditor implements Provider
     /**
      * Get custom CSS classes defined by the SiteAccess-aware configuration.
      *
-     * @return array
+     * @return array<string, array<string, mixed>>
      */
     private function getCssClasses(): array
     {
@@ -110,8 +110,6 @@ final class AlloyEditor implements Provider
 
     /**
      * Get custom data attributes defined by the SiteAccess-aware configuration.
-     *
-     * @return array
      */
     private function getDataAttributes(): array
     {
@@ -130,10 +128,6 @@ final class AlloyEditor implements Provider
 
     /**
      * Get configuration array from the SiteAccess-aware configuration, checking first for its existence.
-     *
-     * @param string $paramName
-     *
-     * @return array
      */
     private function getSiteAccessConfigArray(string $paramName): array
     {

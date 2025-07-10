@@ -23,6 +23,9 @@ class CustomStyleProviderTest extends BaseCustomTemplateProviderTestCase
         return 'customStyles';
     }
 
+    /**
+     * @return array{paragraph: array{0: string}}
+     */
     protected function getExpectedCustomTemplatesConfiguration(): array
     {
         return ['paragraph' => ['style1']];

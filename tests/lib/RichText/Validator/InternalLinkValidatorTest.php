@@ -285,7 +285,10 @@ class InternalLinkValidatorTest extends TestCase
         self::assertContains(sprintf($format, $contentId), $errors);
     }
 
-    private function getInternalLinkValidator(array $methods = null): InternalLinkValidator&MockObject
+    /**
+     * @param list<string>|null $methods
+     */
+    private function getInternalLinkValidator(?array $methods = null): InternalLinkValidator&MockObject
     {
         return $this->getMockBuilder(InternalLinkValidator::class)
             ->setMethods($methods)

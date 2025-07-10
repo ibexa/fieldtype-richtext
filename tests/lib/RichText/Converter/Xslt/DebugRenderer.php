@@ -12,16 +12,22 @@ use Ibexa\Contracts\FieldTypeRichText\RichText\RendererInterface;
 
 final class DebugRenderer implements RendererInterface
 {
-    private const TEMPLATE_FORMAT = '<template-output name="%s" type="%s" is-inline="%s">%s</template-output>';
-    private const EMBED_CONTENT_FORMAT = '<embed-content-output content-id="%d" view-type="%s" is-inline="%s">%s</embed-content-output>';
-    private const EMBED_LOCATION_FORMAT = '<embed-location-output location-id="%d" view-type="%s" is-inline="%s">%s</embed-location-output>';
+    private const string TEMPLATE_FORMAT = '<template-output name="%s" type="%s" is-inline="%s">%s</template-output>';
+    private const string EMBED_CONTENT_FORMAT = '<embed-content-output content-id="%d" view-type="%s" is-inline="%s">%s</embed-content-output>';
+    private const string EMBED_LOCATION_FORMAT = '<embed-location-output location-id="%d" view-type="%s" is-inline="%s">%s</embed-location-output>';
 
-    public function renderTag($name, array $parameters, $isInline): string
+    /**
+     * @param array<string, mixed> $parameters
+     */
+    public function renderTag(string $name, array $parameters, bool $isInline): string
     {
         return $this->renderTemplate($name, 'tag', $parameters, $isInline);
     }
 
-    public function renderTemplate($name, $type, array $parameters, $isInline): string
+    /**
+     * @param array<string, mixed> $parameters
+     */
+    public function renderTemplate(string $name, string $type, array $parameters, bool $isInline): string
     {
         return sprintf(
             self::TEMPLATE_FORMAT,
@@ -32,7 +38,10 @@ final class DebugRenderer implements RendererInterface
         );
     }
 
-    public function renderContentEmbed($contentId, $viewType, array $parameters, $isInline): string
+    /**
+     * @param array<string, mixed> $parameters
+     */
+    public function renderContentEmbed(int|string $contentId, string $viewType, array $parameters, bool $isInline): string
     {
         return sprintf(
             self::EMBED_CONTENT_FORMAT,
@@ -43,7 +52,10 @@ final class DebugRenderer implements RendererInterface
         );
     }
 
-    public function renderLocationEmbed($locationId, $viewType, array $parameters, $isInline): string
+    /**
+     * @param array<string, mixed> $parameters
+     */
+    public function renderLocationEmbed(string|int $locationId, string $viewType, array $parameters, bool $isInline): string
     {
         return sprintf(
             self::EMBED_LOCATION_FORMAT,
@@ -54,6 +66,9 @@ final class DebugRenderer implements RendererInterface
         );
     }
 
+    /**
+     * @param array<string, mixed> $parameters
+     */
     private function serializeParameters(array $parameters): string
     {
         $lines = [];

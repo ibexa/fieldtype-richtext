@@ -19,34 +19,32 @@ use Symfony\Component\Config\Definition\Builder\ScalarNodeDefinition;
  */
 class RichText extends AbstractFieldTypeParser
 {
-    public const CLASSES_SA_SETTINGS_ID = 'fieldtypes.ibexa_richtext.classes';
-    private const CLASSES_NODE_KEY = 'classes';
+    public const string CLASSES_SA_SETTINGS_ID = 'fieldtypes.ibexa_richtext.classes';
+    private const string CLASSES_NODE_KEY = 'classes';
 
-    public const ATTRIBUTES_SA_SETTINGS_ID = 'fieldtypes.ibexa_richtext.attributes';
-    private const ATTRIBUTES_NODE_KEY = 'attributes';
-    private const ATTRIBUTE_TYPE_NODE_KEY = 'type';
-    private const ATTRIBUTE_TYPE_CHOICE = 'choice';
-    private const ATTRIBUTE_TYPE_BOOLEAN = 'boolean';
-    private const ATTRIBUTE_TYPE_STRING = 'string';
-    private const ATTRIBUTE_TYPE_NUMBER = 'number';
+    public const string ATTRIBUTES_SA_SETTINGS_ID = 'fieldtypes.ibexa_richtext.attributes';
+    private const string ATTRIBUTES_NODE_KEY = 'attributes';
+    private const string ATTRIBUTE_TYPE_NODE_KEY = 'type';
+    private const string ATTRIBUTE_TYPE_CHOICE = 'choice';
+    private const string ATTRIBUTE_TYPE_BOOLEAN = 'boolean';
+    private const string ATTRIBUTE_TYPE_STRING = 'string';
+    private const string ATTRIBUTE_TYPE_NUMBER = 'number';
 
-    private const TOOLBAR_NODE_KEY = 'toolbar';
-    public const TOOLBARS_SA_SETTINGS_ID = 'fieldtypes.ibexa_richtext.' . self::TOOLBAR_NODE_KEY;
+    private const string TOOLBAR_NODE_KEY = 'toolbar';
+    public const string TOOLBARS_SA_SETTINGS_ID = 'fieldtypes.ibexa_richtext.' . self::TOOLBAR_NODE_KEY;
 
     // constants common for OE custom classes and data attributes configuration
-    private const ELEMENT_NODE_KEY = 'element';
-    private const DEFAULT_VALUE_NODE_KEY = 'default_value';
-    private const CHOICES_NODE_KEY = 'choices';
-    private const REQUIRED_NODE_KEY = 'required';
-    private const MULTIPLE_NODE_KEY = 'multiple';
+    private const string ELEMENT_NODE_KEY = 'element';
+    private const string DEFAULT_VALUE_NODE_KEY = 'default_value';
+    private const string CHOICES_NODE_KEY = 'choices';
+    private const string REQUIRED_NODE_KEY = 'required';
+    private const string MULTIPLE_NODE_KEY = 'multiple';
 
     /**
      * Returns the fieldType identifier the config parser works for.
      * This is to create the right configuration node under system.<siteaccess_name>.fieldtypes.
-     *
-     * @return string
      */
-    public function getFieldTypeIdentifier()
+    public function getFieldTypeIdentifier(): string
     {
         return 'ibexa_richtext';
     }
@@ -240,6 +238,9 @@ class RichText extends AbstractFieldTypeParser
         return $templateNodeDefinition;
     }
 
+    /**
+     * @param string $currentScope
+     */
     public function mapConfig(array &$scopeSettings, $currentScope, ContextualizerInterface $contextualizer): void
     {
         if (!empty($scopeSettings['fieldtypes'])) {
@@ -297,8 +298,6 @@ class RichText extends AbstractFieldTypeParser
 
     /**
      * Build configuration nodes strictly related to Online Editor.
-     *
-     * @param \Symfony\Component\Config\Definition\Builder\NodeBuilder $nodeBuilder
      */
     private function buildOnlineEditorConfiguration(NodeBuilder $nodeBuilder): void
     {
@@ -383,10 +382,6 @@ class RichText extends AbstractFieldTypeParser
      * - if a custom data attribute is not of `choice` type, it must not define `choices` list,
      * - a `default_value` of custom data attribute must be the one from `choices` list,
      * - a custom data attribute of `boolean` type must not define `required` setting.
-     *
-     * @param callable $invalidChoiceCallback
-     *
-     * @return callable
      */
     private function getAttributesValidatorCallback(callable $invalidChoiceCallback): callable
     {

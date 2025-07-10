@@ -40,10 +40,9 @@ class RichTextHtml5ConverterPass implements CompilerPassInterface
     }
 
     /**
-     * @param array $taggedServiceIds
-     * @param \Symfony\Component\DependencyInjection\Definition $converterDefinition
+     * @param array<string, array<string, mixed>> $taggedServiceIds
      */
-    protected function setConverterDefinitions(array $taggedServiceIds, Definition $converterDefinition)
+    protected function setConverterDefinitions(array $taggedServiceIds, Definition $converterDefinition): void
     {
         $convertersByPriority = [];
         foreach ($taggedServiceIds as $id => $tags) {
@@ -64,7 +63,7 @@ class RichTextHtml5ConverterPass implements CompilerPassInterface
      * Transforms a two-dimensional array of converters, indexed by priority,
      * into a flat array of Reference objects.
      *
-     * @param array $convertersByPriority
+     * @param array<int, list<Reference>> $convertersByPriority
      *
      * @return \Symfony\Component\DependencyInjection\Reference[]
      */

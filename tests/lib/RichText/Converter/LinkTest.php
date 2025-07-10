@@ -135,7 +135,7 @@ class LinkTest extends TestCase
     }
 
     /**
-     * @return array
+     * @return array<array{string, string, int, string}>
      */
     public function providerLocationLink(): array
     {
@@ -234,7 +234,7 @@ class LinkTest extends TestCase
     }
 
     /**
-     * @return array
+     * @return array<array{string, string, int, \Exception, string}>
      */
     public function providerBadLocationLink(): array
     {
@@ -338,7 +338,7 @@ class LinkTest extends TestCase
     }
 
     /**
-     * @return array
+     * @return array<array{string, string, int, string}>
      */
     public function providerContentLink(): array
     {
@@ -449,7 +449,7 @@ class LinkTest extends TestCase
     }
 
     /**
-     * @return array
+     * @return array<array<mixed>>
      */
     public function providerBadContentLink(): array
     {
