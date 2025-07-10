@@ -451,6 +451,9 @@ final class CKEditorTest extends BaseProviderTestCase
         );
     }
 
+    /**
+     * @param array<mixed> $buttonsConfig
+     */
     private function buildTestToolbarReturnCallback(array $buttonsConfig): callable
     {
         return static function (string $paramName) use ($buttonsConfig): ?array {

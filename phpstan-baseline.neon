@@ -601,42 +601,6 @@ parameters:
 			path: tests/integration/Repository/SetupFactory/SolrLegacySetupFactory.php
 
 		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\Configuration\\Provider\\AlloyEditorTest\:\:buildTestToolbarReturnCallback\(\) has parameter \$buttonsConfig with no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: tests/lib/Configuration/Provider/AlloyEditorTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\Configuration\\Provider\\BaseCustomTemplateProviderTestCase\:\:getExpectedCustomTemplatesConfiguration\(\) return type has no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: tests/lib/Configuration/Provider/BaseCustomTemplateProviderTestCase.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\Configuration\\Provider\\CKEditorTest\:\:buildTestToolbarReturnCallback\(\) has parameter \$buttonsConfig with no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: tests/lib/Configuration/Provider/CKEditorTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\Configuration\\Provider\\CKEditorTest\:\:createProvider\(\) has parameter \$customStylesConfiguration with no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: tests/lib/Configuration/Provider/CKEditorTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\Configuration\\Provider\\CustomStyleProviderTest\:\:getExpectedCustomTemplatesConfiguration\(\) return type has no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: tests/lib/Configuration/Provider/CustomStyleProviderTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\Configuration\\Provider\\CustomTagProviderTest\:\:getExpectedCustomTemplatesConfiguration\(\) return type has no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: tests/lib/Configuration/Provider/CustomTagProviderTest.php
-
-		-
 			message: '#^Property Ibexa\\Tests\\FieldTypeRichText\\FieldType\\RichText\\Gateway\\DoctrineStorageTest\:\:\$storageGateway \(Ibexa\\FieldTypeRichText\\FieldType\\RichText\\RichTextStorage\\Gateway\\DoctrineStorage\) in isset\(\) is not nullable\.$#'
 			identifier: isset.property
 			count: 1

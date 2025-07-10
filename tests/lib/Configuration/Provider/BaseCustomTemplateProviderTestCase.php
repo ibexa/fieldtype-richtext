@@ -15,6 +15,9 @@ abstract class BaseCustomTemplateProviderTestCase extends BaseProviderTestCase
 {
     protected CustomTemplateConfigMapper&MockObject $mapper;
 
+    /**
+     * @return array<mixed>
+     */
     abstract protected function getExpectedCustomTemplatesConfiguration(): array;
 
     abstract protected function getCustomTemplateSiteAccessConfigParamName(): string;
