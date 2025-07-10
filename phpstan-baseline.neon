@@ -79,24 +79,6 @@ parameters:
 			path: src/bundle/DependencyInjection/IbexaFieldTypeRichTextExtension.php
 
 		-
-			message: '#^Method Ibexa\\Contracts\\FieldTypeRichText\\RichText\\RendererInterface\:\:renderContentEmbed\(\) has parameter \$parameters with no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/contracts/RichText/RendererInterface.php
-
-		-
-			message: '#^Method Ibexa\\Contracts\\FieldTypeRichText\\RichText\\RendererInterface\:\:renderLocationEmbed\(\) has parameter \$parameters with no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/contracts/RichText/RendererInterface.php
-
-		-
-			message: '#^Method Ibexa\\Contracts\\FieldTypeRichText\\RichText\\RendererInterface\:\:renderTemplate\(\) has parameter \$parameters with no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/contracts/RichText/RendererInterface.php
-
-		-
 			message: '#^Method Ibexa\\FieldTypeRichText\\Configuration\\Provider\\AlloyEditor\:\:__construct\(\) has parameter \$alloyEditorConfiguration with no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
@@ -379,18 +361,6 @@ parameters:
 			path: src/lib/RichText/Converter/Render/Embed.php
 
 		-
-			message: '#^Cannot access property \$childNodes on DOMNode\|null\.$#'
-			identifier: property.nonObject
-			count: 1
-			path: src/lib/RichText/Converter/Render/Embed.php
-
-		-
-			message: '#^Cannot access property \$localName on DOMNode\|null\.$#'
-			identifier: property.nonObject
-			count: 1
-			path: src/lib/RichText/Converter/Render/Embed.php
-
-		-
 			message: '#^Cannot call method error\(\) on Psr\\Log\\LoggerInterface\|null\.$#'
 			identifier: method.nonObject
 			count: 1
@@ -403,27 +373,9 @@ parameters:
 			path: src/lib/RichText/Converter/Render/Embed.php
 
 		-
-			message: '#^Parameter \#1 \$element of method Ibexa\\FieldTypeRichText\\RichText\\Converter\\Render\\Embed\:\:isLinkWrapped\(\) expects DOMElement, DOMNode\|null given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/lib/RichText/Converter/Render/Embed.php
-
-		-
 			message: '#^Parameter \#1 \$string of function substr expects string, string\|null given\.$#'
 			identifier: argument.type
 			count: 2
-			path: src/lib/RichText/Converter/Render/Embed.php
-
-		-
-			message: '#^Property Ibexa\\FieldTypeRichText\\RichText\\Converter\\Render\\Embed\:\:\$docbookToHtmlTargetMap type has no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/lib/RichText/Converter/Render/Embed.php
-
-		-
-			message: '#^Property Ibexa\\FieldTypeRichText\\RichText\\Converter\\Render\\Embed\:\:\$tagDefaultViewMap type has no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
 			path: src/lib/RichText/Converter/Render/Embed.php
 
 		-
@@ -509,24 +461,6 @@ parameters:
 			identifier: foreach.nonIterable
 			count: 1
 			path: src/lib/RichText/RelationProcessor.php
-
-		-
-			message: '#^Method Ibexa\\FieldTypeRichText\\RichText\\Renderer\:\:renderContentEmbed\(\) has parameter \$parameters with no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/lib/RichText/Renderer.php
-
-		-
-			message: '#^Method Ibexa\\FieldTypeRichText\\RichText\\Renderer\:\:renderLocationEmbed\(\) has parameter \$parameters with no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/lib/RichText/Renderer.php
-
-		-
-			message: '#^Method Ibexa\\FieldTypeRichText\\RichText\\Renderer\:\:renderTemplate\(\) has parameter \$parameters with no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/lib/RichText/Renderer.php
 
 		-
 			message: '#^Cannot access property \$textContent on DOMNode\|null\.$#'
@@ -643,30 +577,6 @@ parameters:
 			path: tests/integration/Repository/RichTextFieldTypeIntegrationTest.php
 
 		-
-			message: '#^Method Ibexa\\Tests\\Integration\\FieldTypeRichText\\Repository\\RichTextFieldTypeIntegrationTest\:\:prepareInternalLinkValidatorBrokenLinksTestCase\(\) return type has no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: tests/integration/Repository/RichTextFieldTypeIntegrationTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\Integration\\FieldTypeRichText\\Repository\\RichTextFieldTypeIntegrationTest\:\:provideToHashData\(\) return type has no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: tests/integration/Repository/RichTextFieldTypeIntegrationTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\Integration\\FieldTypeRichText\\Repository\\RichTextFieldTypeIntegrationTest\:\:providerForTestCreateContentWithInvalidCustomTag\(\) return type has no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: tests/integration/Repository/RichTextFieldTypeIntegrationTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\Integration\\FieldTypeRichText\\Repository\\RichTextFieldTypeIntegrationTest\:\:providerForTestCreateContentWithValidCustomTag\(\) return type has no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: tests/integration/Repository/RichTextFieldTypeIntegrationTest.php
-
-		-
 			message: '#^Parameter \#1 \$parentLocationId of method Ibexa\\Contracts\\Core\\Repository\\LocationService\:\:newLocationCreateStruct\(\) expects int, int\|null given\.$#'
 			identifier: argument.type
 			count: 1
@@ -769,48 +679,6 @@ parameters:
 			path: tests/lib/Form/DataTransformer/RichTextTransformerTest.php
 
 		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Converter\\LinkTest\:\:providerBadContentLink\(\) return type has no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: tests/lib/RichText/Converter/LinkTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Converter\\LinkTest\:\:providerBadLocationLink\(\) return type has no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: tests/lib/RichText/Converter/LinkTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Converter\\LinkTest\:\:providerContentLink\(\) return type has no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: tests/lib/RichText/Converter/LinkTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Converter\\LinkTest\:\:providerLocationLink\(\) return type has no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: tests/lib/RichText/Converter/LinkTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Converter\\Render\\EmbedTest\:\:testConvert\(\) has parameter \$errors with no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: tests/lib/RichText/Converter/Render/EmbedTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Converter\\Render\\EmbedTest\:\:testConvert\(\) has parameter \$renderContentEmbedParams with no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: tests/lib/RichText/Converter/Render/EmbedTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Converter\\Render\\EmbedTest\:\:testConvert\(\) has parameter \$renderLocationEmbedParams with no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: tests/lib/RichText/Converter/Render/EmbedTest.php
-
-		-
 			message: '#^Method PHPUnit\\Framework\\MockObject\\Builder\\InvocationMocker\:\:willReturnOnConsecutiveCalls\(\) invoked with unpacked array with possibly string key, but it''s not allowed because of @no\-named\-arguments\.$#'
 			identifier: argument.named
 			count: 2
@@ -907,20 +775,8 @@ parameters:
 			path: tests/lib/RichText/Normalizer/DocumentTypeDefinitionTest.php
 
 		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\RelationProcessorTest\:\:dateProviderForGetRelations\(\) should return array\<int, array\{DOMDocument, array\{link\: array\{locationIds\: array\<int\>, contentIds\: array\<int\>\}, embed\: array\{locationIds\: array\<int\>, contentIds\: array\<int\>\}\}\}\> but returns array\{array\{DOMDocument, array\{4\: array\{locationIds\: array\{72, 61\}, contentIds\: array\{70, 75\}\}, 2\: array\{locationIds\: array\{\}, contentIds\: array\{\}\}\}\}\}\.$#'
-			identifier: return.type
-			count: 1
-			path: tests/lib/RichText/RelationProcessorTest.php
-
-		-
 			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\RendererTest\:\:getContentMock\(\) has parameter \$mainLocationId with no type specified\.$#'
 			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/RichText/RendererTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\RendererTest\:\:getMockedRenderer\(\) has parameter \$methods with no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
 			count: 1
 			path: tests/lib/RichText/RendererTest.php
 

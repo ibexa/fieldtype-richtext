@@ -37,7 +37,7 @@ class RelationProcessorTest extends TestCase
     }
 
     /**
-     * @return array<int, array<mixed>>
+     * @return array<array<mixed>>
      */
     public function dateProviderForGetRelations(): array
     {
