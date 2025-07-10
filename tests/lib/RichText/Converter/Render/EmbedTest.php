@@ -807,7 +807,7 @@ class EmbedTest extends TestCase
 
     /**
      * @dataProvider providerForTestConvert
-     * 
+     *
      * @param array<string> $errors
      * @param array{array<array<mixed>>, array<string>} $renderContentEmbedParams
      * @param array{array<array<mixed>>, array<string>} $renderLocationEmbedParams

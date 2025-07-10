@@ -13,7 +13,6 @@ namespace Ibexa\Contracts\FieldTypeRichText\RichText;
  */
 interface RendererInterface
 {
-
     /**
      * @param array<mixed> $parameters
      */
