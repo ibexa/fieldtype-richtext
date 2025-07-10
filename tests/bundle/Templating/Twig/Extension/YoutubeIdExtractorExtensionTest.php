@@ -14,6 +14,9 @@ use Twig\TwigFunction;
 
 class YoutubeIdExtractorExtensionTest extends TestCase
 {
+    /**
+     * @return array<mixed>
+     */
     public function getYouTubeUrls(): array
     {
         return [

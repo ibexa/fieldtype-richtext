@@ -31,6 +31,8 @@ final class ConfigurationTest extends TestCase
      *
      * Fetches configs from the filesystem.
      *
+     * @return iterable<string, mixed>
+     *
      * @see testProcessingConfiguration
      */
     public function providerForTestProcessingCustomTagsConfiguration(): iterable
@@ -58,6 +60,8 @@ final class ConfigurationTest extends TestCase
 
     /**
      * Simple data provider for testProcessingConfiguration.
+     *
+     * @return array<string, mixed>
      *
      * @see testProcessingConfiguration
      */
@@ -117,6 +121,9 @@ final class ConfigurationTest extends TestCase
     /**
      * @dataProvider providerForTestProcessingConfiguration
      * @dataProvider providerForTestProcessingCustomTagsConfiguration
+     *
+     * @param array<string, mixed> $configurationValues
+     * @param array<string, mixed> $expectedProcessedConfiguration
      */
     public function testProcessingConfiguration(
         array $configurationValues,

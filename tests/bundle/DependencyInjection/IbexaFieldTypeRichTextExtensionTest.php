@@ -152,6 +152,9 @@ class IbexaFieldTypeRichTextExtensionTest extends AbstractExtensionTestCase
         $this->load($config);
     }
 
+    /**
+     * @return iterable<string, array<string|null>>
+     */
     public function inlineTagDataProvider(): iterable
     {
         yield 'Inline tag in normal toolbar' => [
