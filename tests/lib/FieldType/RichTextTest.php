@@ -46,11 +46,11 @@ class RichTextTest extends TestCase
         $inputHandler = new InputHandler(
             new DOMDocumentFactory(new XMLSanitizer()),
             new ConverterDispatcher([
-                'http://docbook.org/ns/docbook' => $this->createMock(Converter::class),
+                'http://docbook.org/ns/docbook' => null,
             ]),
             new Aggregate(),
             new ValidatorDispatcher([
-                'http://docbook.org/ns/docbook' => $this->createMock(ValidatorInterface::class),
+                'http://docbook.org/ns/docbook' => null,
             ]),
             new Validator([
                 $this->getAbsolutePath('src/bundle/Resources/richtext/schemas/docbook/ezpublish.rng'),
