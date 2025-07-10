@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\Tests\FieldTypeRichText\RichText\Converter\Xslt;
 
+use Ibexa\Contracts\FieldTypeRichText\RichText\Converter;
 use Ibexa\FieldTypeRichText\RichText\Converter\Aggregate;
 use Ibexa\FieldTypeRichText\RichText\Converter\LiteralLayoutNestedList;
 use Ibexa\FieldTypeRichText\RichText\Converter\ProgramListing;
@@ -32,6 +33,8 @@ class Xhtml5ToDocbookTest extends BaseTest
      *
      * Comments in fixtures are removed before conversion, so be free to use
      * comments inside fixtures for documentation as needed.
+     *
+     * @return array{input: string, output: string}
      */
     public function getFixtureSubdirectories(): array
     {
@@ -68,6 +71,8 @@ class Xhtml5ToDocbookTest extends BaseTest
      *      ),
      *  )
      * </code>
+     *
+     * @return array<array{path: string, priority: int}>
      */
     protected function getCustomConversionTransformationStylesheets(): array
     {
@@ -92,10 +97,7 @@ class Xhtml5ToDocbookTest extends BaseTest
         ];
     }
 
-    /**
-     * @return \Ibexa\FieldTypeRichText\RichText\Converter
-     */
-    protected function getConverter()
+    protected function getConverter(): Converter
     {
         if ($this->converter === null) {
             $this->converter = new Aggregate(

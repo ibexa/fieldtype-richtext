@@ -31,6 +31,14 @@ class EmbedTest extends TestCase
     /**
      * Data provider for testConvert.
      *
+     * @return array<array{
+     *     0: string,
+     *     1: string,
+     *     2: array<string>,
+     *     3: array{array<array<mixed>>, array<string>},
+     *     4: array{array<array<mixed>>, array<string>}
+     * }>
+     *
      * @see testConvert
      *
      * Provided parameters:

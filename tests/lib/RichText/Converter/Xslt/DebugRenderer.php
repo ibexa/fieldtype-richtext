@@ -16,11 +16,17 @@ final class DebugRenderer implements RendererInterface
     private const string EMBED_CONTENT_FORMAT = '<embed-content-output content-id="%d" view-type="%s" is-inline="%s">%s</embed-content-output>';
     private const string EMBED_LOCATION_FORMAT = '<embed-location-output location-id="%d" view-type="%s" is-inline="%s">%s</embed-location-output>';
 
+    /**
+     * @param array<string, mixed> $parameters
+     */
     public function renderTag(string $name, array $parameters, bool $isInline): string
     {
         return $this->renderTemplate($name, 'tag', $parameters, $isInline);
     }
 
+    /**
+     * @param array<string, mixed> $parameters
+     */
     public function renderTemplate(string $name, string $type, array $parameters, bool $isInline): string
     {
         return sprintf(
@@ -32,6 +38,9 @@ final class DebugRenderer implements RendererInterface
         );
     }
 
+    /**
+     * @param array<string, mixed> $parameters
+     */
     public function renderContentEmbed(int|string $contentId, string $viewType, array $parameters, bool $isInline): string
     {
         return sprintf(
@@ -43,6 +52,9 @@ final class DebugRenderer implements RendererInterface
         );
     }
 
+    /**
+     * @param array<string, mixed> $parameters
+     */
     public function renderLocationEmbed(string|int $locationId, string $viewType, array $parameters, bool $isInline): string
     {
         return sprintf(

@@ -10,6 +10,8 @@ namespace Ibexa\Tests\FieldTypeRichText\RichText\Converter\Xslt;
 
 use DOMDocument;
 use DOMXpath;
+use Ibexa\Contracts\FieldTypeRichText\RichText\Converter;
+use Ibexa\Contracts\FieldTypeRichText\RichText\ValidatorInterface;
 use Ibexa\FieldTypeRichText\RichText\Converter\Xslt;
 use Ibexa\FieldTypeRichText\RichText\Validator\Validator;
 use PHPUnit\Framework\TestCase;
@@ -19,22 +21,16 @@ use PHPUnit\Framework\TestCase;
  */
 abstract class BaseTest extends TestCase
 {
-    /**
-     * @var \Ibexa\FieldTypeRichText\RichText\Converter
-     */
-    protected $converter;
+    protected Converter|null $converter;
 
-    /**
-     * @var \Ibexa\FieldTypeRichText\RichText\Validator
-     */
-    protected $validator;
+    protected ValidatorInterface|null $validator;
 
     /**
      * Provider for conversion test.
      *
-     * @return array
+     * @return array<array{string, string}>
      */
-    public function providerForTestConvert()
+    public function providerForTestConvert(): array
     {
         $fixtureSubdirectories = $this->getFixtureSubdirectories();
 
@@ -69,7 +65,7 @@ abstract class BaseTest extends TestCase
         return $map;
     }
 
-    protected function removeComments(DOMDocument $document)
+    protected function removeComments(DOMDocument $document): void
     {
         $xpath = new DOMXpath($document);
         $nodes = $xpath->query('//comment()');
@@ -80,11 +76,9 @@ abstract class BaseTest extends TestCase
     }
 
     /**
-     * @param string $inputFile
-     *
      * @dataProvider providerForTestConvert
      */
-    public function testConvert($inputFile, string $outputFile): void
+    public function testConvert(string $inputFile, string $outputFile): void
     {
         $endsWith = '.lossy.xml';
         if (substr_compare($inputFile, $endsWith, -strlen($endsWith), strlen($endsWith)) === 0) {
@@ -106,7 +100,7 @@ abstract class BaseTest extends TestCase
 
         // Needed by some disabled output escaping (eg. legacy ezxml paragraph <line/> elements)
         $convertedDocumentNormalized = new DOMDocument();
-        $convertedDocumentNormalized->loadXML($convertedDocument->saveXML());
+        $convertedDocumentNormalized->loadXML((string)$convertedDocument->saveXML());
 
         self::assertEquals(
             $outputDocument,
@@ -130,24 +124,22 @@ abstract class BaseTest extends TestCase
         }
     }
 
-    /**
-     * @param string $xmlFile
-     *
-     * @return \DOMDocument
-     */
-    protected function createDocument($xmlFile)
+    protected function createDocument(string $xmlFile): DOMDocument
     {
         $document = new DOMDocument();
 
         $document->preserveWhiteSpace = false;
         $document->formatOutput = false;
 
-        $document->loadXml(file_get_contents($xmlFile), LIBXML_NOENT);
+        $document->loadXml((string)file_get_contents($xmlFile), LIBXML_NOENT);
 
         return $document;
     }
 
-    protected function formatValidationErrors($outputFile, array $errors)
+    /**
+     * @param array<int, string> $errors
+     */
+    protected function formatValidationErrors(string $outputFile, array $errors): string
     {
         $output = "\n";
         foreach ($errors as $error) {
@@ -162,10 +154,7 @@ abstract class BaseTest extends TestCase
         return $output;
     }
 
-    /**
-     * @return \Ibexa\FieldTypeRichText\RichText\Converter
-     */
-    protected function getConverter()
+    protected function getConverter(): Converter
     {
         if ($this->converter === null) {
             $this->converter = new Xslt(
@@ -177,13 +166,10 @@ abstract class BaseTest extends TestCase
         return $this->converter;
     }
 
-    /**
-     * @return \Ibexa\FieldTypeRichText\RichText\ValidatorInterface
-     */
-    protected function getConversionValidator()
+    protected function getConversionValidator(): ?ValidatorInterface
     {
         $validationSchema = $this->getConversionValidationSchema();
-        if ($validationSchema !== null && $this->validator === null) {
+        if ($this->validator === null) {
             $this->validator = new Validator($validationSchema);
         }
 
@@ -231,16 +217,14 @@ abstract class BaseTest extends TestCase
      *  );
      * </code>
      *
-     * @return array
+     * @return array{input: string, output: string}
      */
-    abstract public function getFixtureSubdirectories();
+    abstract public function getFixtureSubdirectories(): array;
 
     /**
      * Return the absolute path to conversion transformation stylesheet.
-     *
-     * @return string
      */
-    abstract protected function getConversionTransformationStylesheet();
+    abstract protected function getConversionTransformationStylesheet(): string;
 
     /**
      * Return custom XSLT stylesheets configuration.
@@ -262,9 +246,9 @@ abstract class BaseTest extends TestCase
      *  )
      * </code>
      *
-     * @return array
+     * @return array<array{path: string, priority: int}>
      */
-    protected function getCustomConversionTransformationStylesheets()
+    protected function getCustomConversionTransformationStylesheets(): array
     {
         return [];
     }
@@ -272,9 +256,9 @@ abstract class BaseTest extends TestCase
     /**
      * Return an array of absolute paths to conversion result validation schemas.
      *
-     * @return string[]
+     * @return array<string>
      */
-    protected function getConversionValidationSchema()
+    protected function getConversionValidationSchema(): array
     {
         return [];
     }

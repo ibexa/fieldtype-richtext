@@ -109,6 +109,9 @@ class RichTextValidatorTest extends TestCase
         $this->validator->validate($doc, new RichText());
     }
 
+    /**
+     * @param array<LibXMLError> $errors
+     */
     private function createInvalidXmlExceptionMock(array $errors): InvalidXmlException
     {
         $ex = $this->createMock(InvalidXmlException::class);
@@ -127,6 +130,11 @@ class RichTextValidatorTest extends TestCase
         return $error;
     }
 
+    /**
+     * @param array<LibXMLError> $errors
+     *
+     * @return array<string>
+     */
     private function fetchErrorMessages(array $errors): array
     {
         return array_map(static function (LibXMLError $error): string {

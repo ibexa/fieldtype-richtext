@@ -23,6 +23,11 @@ class RelationProcessorTest extends TestCase
      * @covers \Ibexa\FieldTypeRichText\RichText\RelationProcessor::getRelations
      *
      * @dataProvider dateProviderForGetRelations
+     *
+     * @param array{
+     *     link: array{locationIds: array<int>, contentIds: array<int>},
+     *     embed: array{locationIds: array<int>, contentIds: array<int>}
+     * } $expectedRelations
      */
     public function testGetRelations(DOMDocument $document, array $expectedRelations): void
     {
@@ -31,6 +36,15 @@ class RelationProcessorTest extends TestCase
         self::assertSame($expectedRelations, $actualProcessor);
     }
 
+    /**
+     * @return array<int, array{
+     *     0: DOMDocument,
+     *     1: array{
+     *         link: array{locationIds: array<int>, contentIds: array<int>},
+     *         embed: array{locationIds: array<int>, contentIds: array<int>}
+     *     }
+     * }>
+     */
     public function dateProviderForGetRelations(): array
     {
         $xml = <<<EOT

@@ -63,6 +63,9 @@ class AggregateProviderTest extends TestCase
         self::assertEquals($configuration, $providerService->getConfiguration());
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function getConfiguration(): array
     {
         return [

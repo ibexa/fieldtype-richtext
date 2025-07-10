@@ -19,7 +19,6 @@ trait RichTextSetupFactoryTrait
     /**
      * Load RichText package container settings.
      *
-     *
      * @throws \Exception
      */
     protected function loadRichTextSettings(ContainerBuilder $containerBuilder)

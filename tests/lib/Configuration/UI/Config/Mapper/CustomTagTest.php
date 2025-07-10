@@ -28,6 +28,10 @@ class CustomTagTest extends TestCase
      * @covers \Ibexa\FieldTypeRichText\Configuration\UI\Mapper\CustomTag::mapConfig
      *
      * @dataProvider providerForTestMapConfig
+     *
+     * @param array<mixed> $customTagsConfiguration
+     * @param array<int, string> $enabledCustomTags
+     * @param array<mixed> $expectedConfig
      */
     public function testMapConfig(
         array $customTagsConfiguration,
@@ -55,6 +59,12 @@ class CustomTagTest extends TestCase
 
     /**
      * Data provider for {@see testMapConfig}.
+     *
+     * @return array<int, array{
+     *     array<string, mixed>,
+     *     array<int, string>,
+     *     array<string, mixed>
+     * }>
      */
     public function providerForTestMapConfig(): array
     {
@@ -166,10 +176,7 @@ class CustomTagTest extends TestCase
         ];
     }
 
-    /**
-     * @return \PHPUnit\Framework\MockObject\MockObject|\Symfony\Contracts\Translation\TranslatorInterface
-     */
-    private function getTranslatorInterfaceMock(): MockObject
+    private function getTranslatorInterfaceMock(): TranslatorInterface&MockObject
     {
         $translatorInterfaceMock = $this->createMock(TranslatorInterface::class);
         $translatorInterfaceMock
@@ -181,10 +188,7 @@ class CustomTagTest extends TestCase
         return $translatorInterfaceMock;
     }
 
-    /**
-     * @return \PHPUnit\Framework\MockObject\MockObject|\Symfony\Component\Translation\TranslatorBagInterface
-     */
-    private function getTranslatorBagInterfaceMock(): MockObject
+    private function getTranslatorBagInterfaceMock(): TranslatorBagInterface&MockObject
     {
         $catalogueMock = $this->createMock(MessageCatalogueInterface::class);
         $catalogueMock
@@ -204,10 +208,7 @@ class CustomTagTest extends TestCase
         return $translatorBagInterfaceMock;
     }
 
-    /**
-     * @return \PHPUnit\Framework\MockObject\MockObject|\Symfony\Component\Asset\Packages
-     */
-    private function getPackagesMock(): MockObject
+    private function getPackagesMock(): Packages&MockObject
     {
         $packagesMock = $this->createMock(Packages::class);
         $packagesMock
