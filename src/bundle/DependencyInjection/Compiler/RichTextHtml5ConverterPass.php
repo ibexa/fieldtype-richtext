@@ -63,6 +63,8 @@ class RichTextHtml5ConverterPass implements CompilerPassInterface
      * Transforms a two-dimensional array of converters, indexed by priority,
      * into a flat array of Reference objects.
      *
+     * @param array<int, list<Reference>> $convertersByPriority
+     *
      * @return \Symfony\Component\DependencyInjection\Reference[]
      */
     protected function sortConverters(array $convertersByPriority): array

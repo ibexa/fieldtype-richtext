@@ -1,12 +1,6 @@
 parameters:
 	ignoreErrors:
 		-
-			message: '#^Method Ibexa\\Bundle\\FieldTypeRichText\\DependencyInjection\\Compiler\\RichTextHtml5ConverterPass\:\:sortConverters\(\) has parameter \$convertersByPriority with no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/bundle/DependencyInjection/Compiler/RichTextHtml5ConverterPass.php
-
-		-
 			message: '#^Method Ibexa\\Bundle\\FieldTypeRichText\\DependencyInjection\\Configuration\\Parser\\FieldType\\RichText\:\:mapConfig\(\) has parameter \$scopeSettings with no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
