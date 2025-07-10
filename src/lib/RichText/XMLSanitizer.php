@@ -18,7 +18,7 @@ use RuntimeException;
  */
 final class XMLSanitizer
 {
-    public function sanitizeXMLString(string $xmlString): ?string
+    public function sanitizeXMLString(string $xmlString): string
     {
         $xmlString = $this->removeComments($xmlString);
         $xmlString = $this->removeDangerousTags($xmlString);
@@ -44,7 +44,7 @@ final class XMLSanitizer
         return $document;
     }
 
-    private function removeComments(string $xmlString): ?string
+    private function removeComments(string $xmlString): string
     {
         $xmlString = preg_replace('/<!--\s?.*?\s?-->/s', '', $xmlString);
 
@@ -55,14 +55,8 @@ final class XMLSanitizer
         return $xmlString;
     }
 
-    private function removeDangerousTags(?string $xmlString): ?string
+    private function removeDangerousTags(string $xmlString): string
     {
-        if ($xmlString === null) {
-            $this->throwRuntimeException(__METHOD__);
-        }
-
-        assert(is_string($xmlString));
-
         $xmlString = preg_replace('/<\s*(script|iframe|object|embed|style)[^>]*>.*?<\s*\/\s*\1\s*>/is', '', $xmlString);
 
         if ($xmlString === null) {
@@ -72,14 +66,8 @@ final class XMLSanitizer
         return $xmlString;
     }
 
-    private function sanitizeDocType(?string $xmlString): ?string
+    private function sanitizeDocType(string $xmlString): string
     {
-        if ($xmlString === null) {
-            $this->throwRuntimeException(__METHOD__);
-        }
-
-        assert(is_string($xmlString));
-
         $pattern = '/<\s*!DOCTYPE\s+(?<name>[^\s>]+)\s*(\[(?<entities>.*?)\]\s*)?>/is';
 
         if (!preg_match($pattern, $xmlString, $matches)) {
@@ -112,14 +100,8 @@ final class XMLSanitizer
         return $xmlString;
     }
 
-    private function removeEmptyDocType(?string $xmlString): ?string
+    private function removeEmptyDocType(string $xmlString): string
     {
-        if ($xmlString === null) {
-            $this->throwRuntimeException(__METHOD__);
-        }
-
-        assert(is_string($xmlString));
-
         $xmlString = preg_replace('/<\s*!DOCTYPE\s+[^\[\]>]*\[\s*\]>/is', '', $xmlString);
 
         if ($xmlString === null) {
@@ -205,7 +187,7 @@ final class XMLSanitizer
         return false;
     }
 
-    private function throwRuntimeException(string $functionName): void
+    private function throwRuntimeException(string $functionName): never
     {
         throw new RuntimeException(
             sprintf('%s returned null for "$xmlString", error: %s', $functionName, preg_last_error_msg())
