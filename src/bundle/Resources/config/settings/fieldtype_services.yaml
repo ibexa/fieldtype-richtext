@@ -41,9 +41,11 @@ services:
         class: Ibexa\FieldTypeRichText\RichText\Normalizer\Aggregate
 
     # Symfony 3.4+ service definitions:
-    Ibexa\FieldTypeRichText\RichText\Validator\CustomTagsValidator:
+    Ibexa\FieldTypeRichText\RichText\Validator\CustomTemplateValidator:
         public: false
-        arguments: ['%ibexa.field_type.richtext.custom_tags%']
+        arguments:
+            $customTagsConfiguration: '%ibexa.field_type.richtext.custom_tags%'
+            $customStylesConfiguration: '%ibexa.field_type.richtext.custom_styles%'
         tags:
             - { name: ibexa.field_type.richtext.validator.input.xhtml5 }
 
