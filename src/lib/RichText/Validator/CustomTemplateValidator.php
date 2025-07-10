@@ -23,31 +23,15 @@ use Ibexa\Contracts\FieldTypeRichText\RichText\ValidatorInterface;
 final class CustomTemplateValidator implements ValidatorInterface
 {
     /**
-     * Custom Tags global configuration (ibexa.richtext.custom_tags Semantic Config).
-     *
-     * @var array<string,array{template:string, is_inline:bool, icon:string, attributes:array<string, array{type: string, required: bool, default_value: mixed}>}>
-     */
-    private array $customTagsConfiguration;
-
-    /**
-     * Custom Styles global configuration (ibexa.richtext.custom_styles Semantic Config).
-     *
-     * @var array<string,array{template:string,inline:bool}>
-     */
-    private array $customStylesConfiguration;
-
-    /**
      * CustomTemplateValidator constructor.
      *
      * @param array<string,array{template:string, is_inline:bool, icon:string, attributes:array<string, array{type: string, required: bool, default_value: mixed}>}> $customTagsConfiguration
      * @param array<string,array{template:string, inline:bool}> $customStylesConfiguration
      */
     public function __construct(
-        array $customTagsConfiguration,
-        array $customStylesConfiguration
+        private readonly array $customTagsConfiguration,
+        private readonly array $customStylesConfiguration
     ) {
-        $this->customTagsConfiguration = $customTagsConfiguration;
-        $this->customStylesConfiguration = $customStylesConfiguration;
     }
 
     /**
@@ -76,16 +60,12 @@ final class CustomTemplateValidator implements ValidatorInterface
                 }
 
                 if (!in_array($tagName, $configuredTemplateNames, true)) {
-                    @trigger_error(
-                        "Configuration for RichText Custom Tag or Custom Style '{$tagName}' not found. " .
-                        'Custom Tags and Custom Style configuration is required since 7.1, its lack will result in validation error in 8.x',
-                        E_USER_DEPRECATED
-                    );
+                    $errors[] = "Missing configuration for RichText CustomTag or CustomStyle: '$tagName'";
                     continue;
                 }
 
                 // Custom Styles does not have any attributes, so we can skip validation for them
-                if (isset($this->customStylesConfiguration[$tagName])) {
+                if(isset($this->customStylesConfiguration[$tagName])) {
                     continue;
                 }
 

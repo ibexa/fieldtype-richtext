@@ -14,11 +14,9 @@ use PHPUnit\Framework\TestCase;
 use Symfony\Component\Yaml\Yaml;
 
 /**
- * Test RichText CustomTemplateValidator.
- *
- * @see \Ibexa\FieldTypeRichText\FieldType\RichText\CustomTemplateValidator
+ * @covers \Ibexa\FieldTypeRichText\FieldType\RichText\CustomTemplateValidator
  */
-class CustomTemplateValidatorTest extends TestCase
+final class CustomTemplateValidatorTest extends TestCase
 {
     private CustomTemplateValidator $validator;
 
@@ -127,7 +125,9 @@ DOCBOOK
 </section>
 DOCBOOK
                 ),
-                [],
+                [
+                    "Missing configuration for RichText CustomTag or CustomStyle: 'non_existing_style'",
+                ],
             ],
             [
                 $this->createDocument(
@@ -205,6 +205,7 @@ DOCBOOK
                 ),
                 [
                     'Missing RichText Custom Tag name',
+                    "Missing configuration for RichText CustomTag or CustomStyle: 'undefined_tag'",
                     "Missing attribute name for RichText Custom Tag 'video'",
                     "The attribute 'title' of RichText Custom Tag 'video' cannot be empty",
                     "The attribute 'width' of RichText Custom Tag 'video' cannot be empty",
@@ -212,31 +213,6 @@ DOCBOOK
                 ],
             ],
         ];
-    }
-
-    /**
-     * Test that defined but not configured yet Custom Tag doesn't cause validation error.
-     */
-    public function testValidateDocumentAcceptsLegacyTags(): void
-    {
-        $document = $this->createDocument(
-            <<<DOCBOOK
-<?xml version="1.0" encoding="UTF-8"?>
-<section xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink"
-         xmlns:ezxhtml="http://ibexa.co/xmlns/dxp/docbook/xhtml"
-         xmlns:ezcustom="http://ibexa.co/xmlns/dxp/docbook/custom"
-         version="5.0-variant ezpublish-1.0">
-  <eztemplate name="undefined_tag">
-    <ezcontent>Undefined</ezcontent>
-    <ezconfig>
-      <ezvalue key="title">Test</ezvalue>
-    </ezconfig>
-  </eztemplate>
-</section>
-DOCBOOK
-        );
-
-        self::assertEmpty($this->validator->validateDocument($document));
     }
 
     protected function createDocument(string $source): DOMDocument
