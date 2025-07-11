@@ -1,4 +1,4 @@
-import { Plugin, Widget, toWidget, Element } from 'ckeditor5';
+import { Plugin, Widget, toWidget } from 'ckeditor5';
 
 import IbexaInlineCustomTagCommand from './inline-custom-tag-command';
 
@@ -90,7 +90,7 @@ class IbexaInlineCustomTagEditing extends Plugin {
                 const values = {};
 
                 for (const configValue of configValuesIterator) {
-                    if (configValue instanceof Element === false) {
+                    if (!configValue.is?.('element')) {
                         continue;
                     }
 
