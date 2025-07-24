@@ -6,6 +6,6 @@
         xmlns:ezcustom="http://ibexa.co/xmlns/dxp/docbook/custom"
         version="5.0-variant ezpublish-1.0">
     <para><anchor xml:id="top"/>some anchor with a name attribute.</para>
-    <para><anchor xml:id="bottom_idm5"/>some anchor with a name attribute.</para>
-    <para><anchor xml:id="bottom_idm7"/>another anchor with the same name attribute.</para>
+    <para><anchor xml:id="bottom_id1"/>some anchor with a name attribute.</para>
+    <para><anchor xml:id="bottom_id2"/>another anchor with the same name attribute.</para>
 </section>
