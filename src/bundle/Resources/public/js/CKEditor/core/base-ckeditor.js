@@ -29,6 +29,8 @@ import {
     Superscript,
     Strikethrough,
     BlockQuote,
+    SpecialCharacters,
+    SpecialCharactersEssentials,
     ContextualBalloon,
 } from 'ckeditor5';
 
@@ -174,6 +176,8 @@ const VIEWPORT_TOP_OFFSET_DISTRACTION_FREE_MODE = 0;
                     Superscript,
                     Strikethrough,
                     BlockQuote,
+                    SpecialCharacters,
+                    SpecialCharactersEssentials,
                     ContextualBalloon,
                     IbexaCharacterCounter,
                     IbexaElementsPath,
