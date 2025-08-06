@@ -12,7 +12,7 @@ import { createLabeledSwitchButton } from '../../common/switch-button/utils';
 import { createLabeledInputNumber } from '../../common/input-number/utils';
 import { addMultivalueSupport } from '../../common/multivalue-dropdown/utils';
 import { getCustomAttributesConfig, getCustomClassesConfig } from '../../custom-attributes/helpers/config-helper';
-
+import { decodeUrlQuery } from '../../helpers/url-helper';
 class IbexaLinkFormView extends View {
     constructor(props) {
         super(props);
@@ -129,7 +129,7 @@ class IbexaLinkFormView extends View {
     }
 
     setValues({ url, title, target, ibexaLinkClasses, ibexaLinkAttributes = {} }) {
-        this.setStringValue(this.urlInputView, url);
+        this.setStringValue(this.urlInputView, decodeUrlQuery(url));
         this.setStringValue(this.titleView, title);
 
         this.targetSwitcherView.fieldView.element.value = !!target;
