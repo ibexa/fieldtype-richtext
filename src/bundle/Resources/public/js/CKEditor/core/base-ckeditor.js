@@ -249,6 +249,7 @@ const VIEWPORT_TOP_OFFSET_DISTRACTION_FREE_MODE = 0;
             CKEditor.create(container, config).then((editor) => {
                 this.editor = editor;
 
+                const editableUIView = editor.ui.view.editable;
                 const editableElement = this.editor.editing.view.getDomRoot();
                 const editorToolbarPanelInstance = this.editor.ui.view.panel;
                 const initialData = this.getData();
@@ -322,6 +323,14 @@ const VIEWPORT_TOP_OFFSET_DISTRACTION_FREE_MODE = 0;
                         eventEditorToolbarPanelInstance.hide();
                         clearDataSourceHeight();
                     }
+                });
+
+                editableUIView.on('change:isFocused', (event) => {
+                    const containerDataSource =
+                        container.closest('.ibexa-field-edit--ezrichtext .ibexa-data-source') ??
+                        container.closest('.ibexa-data-source--richtext');
+
+                    containerDataSource.classList.toggle('ibexa-data-source--focused', event.source.isFocused);
                 });
 
                 editorToolbarPanelInstance.on('change:isVisible', ({ source: eventBalloonPanelViewInstance }) => {
