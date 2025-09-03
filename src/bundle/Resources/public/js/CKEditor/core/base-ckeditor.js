@@ -13,6 +13,7 @@ import IbexaMove from '../move/move';
 import IbexaRemoveElement from '../remove-element/remove-element';
 import IbexaBlockAlignment from '../block-alignment/block-alignment';
 import IbexaUploadImage from '../upload-image/upload-image';
+import IbexaSpecialCharacters from '../special-characters/special-characters';
 
 import {
     InlineEditor,
@@ -29,7 +30,6 @@ import {
     Superscript,
     Strikethrough,
     BlockQuote,
-    SpecialCharacters,
     SpecialCharactersEssentials,
     ContextualBalloon,
 } from 'ckeditor5';
@@ -176,7 +176,6 @@ const VIEWPORT_TOP_OFFSET_DISTRACTION_FREE_MODE = 0;
                     Superscript,
                     Strikethrough,
                     BlockQuote,
-                    SpecialCharacters,
                     SpecialCharactersEssentials,
                     ContextualBalloon,
                     IbexaCharacterCounter,
@@ -186,6 +185,7 @@ const VIEWPORT_TOP_OFFSET_DISTRACTION_FREE_MODE = 0;
                     IbexaFormatted,
                     IbexaCustomStylesInline,
                     IbexaCustomAttributes,
+                    IbexaSpecialCharacters,
                     IbexaLink,
                     IbexaAnchor,
                     IbexaMove,
