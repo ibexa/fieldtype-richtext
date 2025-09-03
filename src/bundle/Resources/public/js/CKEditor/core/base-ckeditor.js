@@ -13,6 +13,7 @@ import IbexaMove from '../move/move';
 import IbexaRemoveElement from '../remove-element/remove-element';
 import IbexaBlockAlignment from '../block-alignment/block-alignment';
 import IbexaUploadImage from '../upload-image/upload-image';
+import IbexaSpecialCharacters from '../special-characters/special-characters';
 
 import CKEditor from '@ckeditor/ckeditor5-editor-inline/src/inlineeditor';
 import Essentials from '@ckeditor/ckeditor5-essentials/src/essentials';
@@ -28,7 +29,6 @@ import Subscript from '@ckeditor/ckeditor5-basic-styles/src/subscript';
 import Superscript from '@ckeditor/ckeditor5-basic-styles/src/superscript';
 import Strikethrough from '@ckeditor/ckeditor5-basic-styles/src/strikethrough';
 import BlockQuote from '@ckeditor/ckeditor5-block-quote/src/blockquote';
-import SpecialCharacters from '@ckeditor/ckeditor5-special-characters/src/specialcharacters';
 import SpecialCharactersEssentials from '@ckeditor/ckeditor5-special-characters/src/specialcharactersessentials';
 import ContextualBalloon from '@ckeditor/ckeditor5-ui/src/panel/balloon/contextualballoon';
 
@@ -173,7 +173,6 @@ const VIEWPORT_TOP_OFFSET_DISTRACTION_FREE_MODE = 0;
                     Superscript,
                     Strikethrough,
                     BlockQuote,
-                    SpecialCharacters,
                     SpecialCharactersEssentials,
                     ContextualBalloon,
                     IbexaCharacterCounter,
@@ -183,6 +182,7 @@ const VIEWPORT_TOP_OFFSET_DISTRACTION_FREE_MODE = 0;
                     IbexaFormatted,
                     IbexaCustomStylesInline,
                     IbexaCustomAttributes,
+                    IbexaSpecialCharacters,
                     IbexaLink,
                     IbexaAnchor,
                     IbexaMove,
