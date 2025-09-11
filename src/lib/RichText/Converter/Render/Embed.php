@@ -47,7 +47,7 @@ class Embed extends Render implements Converter
         'replace' => '_self',
     ];
 
-    public function __construct(RendererInterface $renderer, LoggerInterface $logger = null)
+    public function __construct(RendererInterface $renderer, ?LoggerInterface $logger = null)
     {
         parent::__construct($renderer);
         $this->logger = $logger;

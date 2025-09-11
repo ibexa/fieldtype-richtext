@@ -33,7 +33,7 @@ class RichTextStorage extends GatewayBasedStorage
      * @param \Ibexa\Contracts\Core\FieldType\StorageGateway $gateway
      * @param \Psr\Log\LoggerInterface $logger
      */
-    public function __construct(StorageGateway $gateway, LoggerInterface $logger = null)
+    public function __construct(StorageGateway $gateway, ?LoggerInterface $logger = null)
     {
         parent::__construct($gateway);
         $this->logger = $logger;
