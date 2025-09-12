@@ -1,7 +1,4 @@
-import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
-import { createDropdown, addListToDropdown } from '@ckeditor/ckeditor5-ui/src/dropdown/utils';
-import Model from '@ckeditor/ckeditor5-ui/src/model';
-import Collection from '@ckeditor/ckeditor5-utils/src/collection';
+import { Plugin, createDropdown, addListToDropdown, Model, Collection } from 'ckeditor5';
 
 import IbexaButtonView from '../../common/button-view/button-view';
 import { findContent } from '../../services/content-service';
