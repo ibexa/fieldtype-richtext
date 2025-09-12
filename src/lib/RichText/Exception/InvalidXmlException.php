@@ -23,7 +23,7 @@ class InvalidXmlException extends InvalidArgumentException
      * @param array $errors
      * @param \Throwable|null $previous
      */
-    public function __construct(string $argumentName, array $errors = [], Throwable $previous = null)
+    public function __construct(string $argumentName, array $errors = [], ?Throwable $previous = null)
     {
         $messages = [];
         foreach ($errors as $error) {

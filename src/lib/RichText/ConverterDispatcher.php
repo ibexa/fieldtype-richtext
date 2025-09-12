@@ -40,7 +40,7 @@ class ConverterDispatcher
      * @param string $namespace
      * @param \Ibexa\Contracts\FieldTypeRichText\RichText\Converter|null $converter
      */
-    public function addConverter($namespace, Converter $converter = null)
+    public function addConverter($namespace, ?Converter $converter = null)
     {
         $this->mapping[$namespace] = $converter;
     }

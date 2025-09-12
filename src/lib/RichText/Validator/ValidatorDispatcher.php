@@ -40,7 +40,7 @@ class ValidatorDispatcher implements ValidatorInterface
      * @param string $namespace
      * @param \Ibexa\FieldTypeRichText\eZ\RichText\Validator $validator
      */
-    public function addValidator($namespace, ValidatorInterface $validator = null)
+    public function addValidator($namespace, ?ValidatorInterface $validator = null)
     {
         $this->mapping[$namespace] = $validator;
     }

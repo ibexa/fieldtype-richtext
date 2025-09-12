@@ -46,7 +46,7 @@ class Link implements Converter
         LocationService $locationService,
         ContentService $contentService,
         RouterInterface $router,
-        LoggerInterface $logger = null
+        ?LoggerInterface $logger = null
     ) {
         $this->locationService = $locationService;
         $this->contentService = $contentService;
