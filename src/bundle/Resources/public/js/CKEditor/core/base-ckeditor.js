@@ -203,9 +203,13 @@ const VIEWPORT_TOP_OFFSET_DISTRACTION_FREE_MODE = 0;
                 embedImage: {
                     toolbar: [
                         'imageVarations',
+                        '|',
                         'ibexaBlockLeftAlignment',
                         'ibexaBlockCenterAlignment',
                         'ibexaBlockRightAlignment',
+                        '|',
+                        'imageGoTo',
+                        'imageGoToEdit',
                         'ibexaRemoveElement',
                     ],
                 },

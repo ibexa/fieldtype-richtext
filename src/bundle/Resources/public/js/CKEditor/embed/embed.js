@@ -8,6 +8,8 @@ import IbexaEmbedContentInlineUI from './content-inline/embed-inline-ui';
 import IbexaEmbedImageUI from './image/embed-image-ui';
 import IbexaEmbedImageToolbar from './image/embed-image-toolbar';
 import IbexaEmbedImageVariationsUI from './image/embed-image-variations-ui';
+import IbexaEmbedImageGoToUI from './image/embed-image-go-to-ui';
+import IbexaEmbedImageGoToEditUI from './image/embed-image-go-to-edit-ui';
 
 class IbexaEmbed extends Plugin {
     static get requires() {
@@ -20,6 +22,8 @@ class IbexaEmbed extends Plugin {
             IbexaEmbedImageUI,
             IbexaEmbedImageToolbar,
             IbexaEmbedImageVariationsUI,
+            IbexaEmbedImageGoToUI,
+            IbexaEmbedImageGoToEditUI,
         ];
     }
 }
