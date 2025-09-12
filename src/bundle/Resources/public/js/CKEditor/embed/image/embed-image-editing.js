@@ -100,8 +100,13 @@ class IbexaEmbedImageEditing extends Plugin {
                         'data-ezview': 'embed',
                         class: CONTAINER_CLASS,
                     });
+                    const emdedItemsUpdateChannel = new BroadcastChannel('ibexa-emded-item-live-update');
 
                     this.loadImagePreview(modelElement);
+
+                    emdedItemsUpdateChannel.addEventListener('message', () => {
+                        this.loadImagePreview(modelElement);
+                    });
 
                     return toWidget(container, downcastWriter);
                 },

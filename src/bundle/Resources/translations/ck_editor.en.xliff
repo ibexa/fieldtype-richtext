@@ -81,6 +81,16 @@
         <target state="new">Formatted</target>
         <note>key: formatted_btn.label</note>
       </trans-unit>
+      <trans-unit id="590b85bd86144a6c872dcff6475c451319782fc7" resname="image_btn.edit.label">
+        <source>Edit</source>
+        <target state="new">Edit</target>
+        <note>key: image_btn.edit.label</note>
+      </trans-unit>
+      <trans-unit id="f0e038e4fa3206fe5b1c9b6366f88d335409cb1c" resname="image_btn.go_to.label">
+        <source>Go to image</source>
+        <target state="new">Go to image</target>
+        <note>key: image_btn.go_to.label</note>
+      </trans-unit>
       <trans-unit id="13cd849924dc9b21defaf1d6905241a4eb74e71a" resname="image_btn.label">
         <source>Image</source>
         <target state="new">Image</target>
