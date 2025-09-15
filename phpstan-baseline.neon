@@ -1261,7 +1261,7 @@ parameters:
 			path: src/lib/RichText/Validator/InternalLinkValidator.php
 
 		-
-			message: '#^PHPDoc tag @var has invalid value \(\\Ibexa\\Contracts\\Core\\Persistence\\Content\\Location\\Handler;\)\: Unexpected token ";", expected TOKEN_HORIZONTAL_WS at offset 75 on line 2$#'
+			message: '#^PHPDoc tag @var has invalid value \(\\Ibexa\\Contracts\\Core\\Persistence\\Content\\Location\\Handler;\)\: Unexpected token ";", expected TOKEN_HORIZONTAL_WS at offset 74 on line 2$#'
 			identifier: phpDoc.parseError
 			count: 1
 			path: src/lib/RichText/Validator/InternalLinkValidator.php
@@ -1393,7 +1393,7 @@ parameters:
 			path: src/lib/Validator/Constraints/RichText.php
 
 		-
-			message: '#^PHPDoc tag @param has invalid value \(\\Ibexa\\Contracts\\FieldTypeRichText\\RichText\\InputHandlerInterface\)\: Unexpected token "\\r\\n     ", expected variable at offset 84 on line 2$#'
+			message: '#^PHPDoc tag @param has invalid value \(\\Ibexa\\Contracts\\FieldTypeRichText\\RichText\\InputHandlerInterface\)\: Unexpected token "\\n     ", expected variable at offset 83 on line 2$#'
 			identifier: phpDoc.parseError
 			count: 1
 			path: src/lib/Validator/Constraints/RichTextValidator.php
