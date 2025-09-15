@@ -20,7 +20,7 @@ use Psr\Log\LoggerInterface;
 class RichTextStorage extends GatewayBasedStorage
 {
     /**
-     * @var \Psr\Log\LoggerInterface
+     * @var \Psr\Log\LoggerInterface|null
      */
     protected $logger;
 
@@ -31,9 +31,9 @@ class RichTextStorage extends GatewayBasedStorage
 
     /**
      * @param \Ibexa\Contracts\Core\FieldType\StorageGateway $gateway
-     * @param \Psr\Log\LoggerInterface $logger
+     * @param \Psr\Log\LoggerInterface|null $logger
      */
-    public function __construct(StorageGateway $gateway, LoggerInterface $logger = null)
+    public function __construct(StorageGateway $gateway, ?LoggerInterface $logger = null)
     {
         parent::__construct($gateway);
         $this->logger = $logger;

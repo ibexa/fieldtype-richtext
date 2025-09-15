@@ -553,18 +553,6 @@ parameters:
 			path: src/lib/FieldType/RichText/RichTextStorage.php
 
 		-
-			message: '#^Property Ibexa\\FieldTypeRichText\\FieldType\\RichText\\RichTextStorage\:\:\$logger \(Psr\\Log\\LoggerInterface\) does not accept Psr\\Log\\LoggerInterface\|null\.$#'
-			identifier: assign.propertyType
-			count: 1
-			path: src/lib/FieldType/RichText/RichTextStorage.php
-
-		-
-			message: '#^Property Ibexa\\FieldTypeRichText\\FieldType\\RichText\\RichTextStorage\:\:\$logger \(Psr\\Log\\LoggerInterface\) in isset\(\) is not nullable\.$#'
-			identifier: isset.property
-			count: 1
-			path: src/lib/FieldType/RichText/RichTextStorage.php
-
-		-
 			message: '#^Method Ibexa\\FieldTypeRichText\\FieldType\\RichText\\RichTextStorage\\Gateway\:\:getContentIds\(\) has parameter \$remoteIds with no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
@@ -1345,7 +1333,7 @@ parameters:
 			path: src/lib/RichText/Validator/ValidatorDispatcher.php
 
 		-
-			message: '#^PHPDoc tag @param for parameter \$validator with type Ibexa\\FieldTypeRichText\\eZ\\RichText\\Validator is not subtype of native type Ibexa\\Contracts\\FieldTypeRichText\\RichText\\ValidatorInterface\|null\.$#'
+			message: '#^PHPDoc tag @param for parameter \$validator with type Ibexa\\FieldTypeRichText\\eZ\\RichText\\Validator\|null is not subtype of native type Ibexa\\Contracts\\FieldTypeRichText\\RichText\\ValidatorInterface\|null\.$#'
 			identifier: parameter.phpDocType
 			count: 1
 			path: src/lib/RichText/Validator/ValidatorDispatcher.php
