@@ -40,7 +40,7 @@ class Template extends Render implements Converter
      *
      * @param \Ibexa\Contracts\FieldTypeRichText\RichText\RendererInterface $renderer
      * @param \Ibexa\Contracts\FieldTypeRichText\RichText\Converter $richTextConverter
-     * @param \Psr\Log\LoggerInterface $logger
+     * @param \Psr\Log\LoggerInterface|null $logger
      */
     public function __construct(
         RendererInterface $renderer,

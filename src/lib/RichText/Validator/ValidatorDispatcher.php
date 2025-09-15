@@ -38,7 +38,7 @@ class ValidatorDispatcher implements ValidatorInterface
      * Adds validator mapping.
      *
      * @param string $namespace
-     * @param \Ibexa\FieldTypeRichText\eZ\RichText\Validator $validator
+     * @param \Ibexa\FieldTypeRichText\eZ\RichText\Validator|null $validator
      */
     public function addValidator($namespace, ?ValidatorInterface $validator = null)
     {
