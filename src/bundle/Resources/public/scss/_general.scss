@@ -6,6 +6,7 @@
 .ibexa-data-source--richtext {
     border: calculateRem(1px) solid $ibexa-color-dark-200;
     border-radius: $ibexa-border-radius;
+    transition: all $ibexa-admin-transition-duration $ibexa-admin-transition;
 
     .ck.ck-content {
         min-height: calculateRem(100px);
@@ -265,6 +266,28 @@
             &::before {
                 left: calculateRem(-40px);
             }
+        }
+    }
+}
+
+.ibexa-data-source--richtext.ibexa-data-source,
+.ibexa-field-edit--ibexa_richtext .ibexa-data-source {
+    &:hover {
+        border-color: var(--ibexa-input-hover-border-color, #{$ibexa-color-primary});
+    }
+
+    &--focused {
+        border-color: var(--ibexa-input-focus-border-color, #{$ibexa-color-primary});
+        box-shadow: 0 0 0 calculateRem(4px) var(--ibexa-input-focus-shadow-color, #{rgba($ibexa-color-primary, 0.25)});
+
+        &.is-invalid {
+            box-shadow: none;
+            border-color: var(--ibexa-input-invalid-border-color, #{$ibexa-color-danger});
+        }
+
+        .ck.ck-editor__editable.ck-focused:not(.ck-editor__nested-editable) {
+            border: none;
+            box-shadow: none;
         }
     }
 }
