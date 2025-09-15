@@ -4,6 +4,9 @@ $ibexa-border-radius-small: calculateRem(5px);
 $ibexa-text-font-size: calculateRem(16px);
 $ibexa-text-font-size-small: calculateRem(12px);
 
+$ibexa-admin-transition: cubic-bezier(0.25, 0.8, 0.25, 1);
+$ibexa-admin-transition-duration: 0.4s;
+
 $ibexa-font-family:
     'Noto Sans',
     -apple-system,
