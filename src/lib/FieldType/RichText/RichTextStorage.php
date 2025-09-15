@@ -25,7 +25,7 @@ class RichTextStorage extends GatewayBasedStorage
     /** @var \Ibexa\FieldTypeRichText\FieldType\RichText\RichTextStorage\Gateway */
     protected StorageGatewayInterface $gateway;
 
-    public function __construct(StorageGateway $gateway, LoggerInterface $logger = null)
+    public function __construct(StorageGateway $gateway, ?LoggerInterface $logger = null)
     {
         parent::__construct($gateway);
         $this->logger = $logger;

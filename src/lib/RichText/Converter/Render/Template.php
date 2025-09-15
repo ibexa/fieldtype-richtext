@@ -32,7 +32,7 @@ class Template extends Render implements Converter
     public function __construct(
         RendererInterface $renderer,
         Converter $richTextConverter,
-        LoggerInterface $logger = null
+        ?LoggerInterface $logger = null
     ) {
         $this->richTextConverter = $richTextConverter;
         $this->logger = $logger ?? new NullLogger();

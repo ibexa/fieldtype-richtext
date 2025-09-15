@@ -68,7 +68,7 @@ class Renderer implements RendererInterface
         string $tagConfigurationNamespace,
         string $styleConfigurationNamespace,
         string $embedConfigurationNamespace,
-        LoggerInterface $logger = null,
+        ?LoggerInterface $logger = null,
         array $customTagsConfiguration = [],
         array $customStylesConfiguration = []
     ) {
