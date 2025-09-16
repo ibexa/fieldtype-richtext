@@ -334,7 +334,7 @@ const VIEWPORT_TOP_OFFSET_DISTRACTION_FREE_MODE = 0;
 
                 editableUIView.on('change:isFocused', (event) => {
                     const containerDataSource =
-                        container.closest('.ibexa-field-edit--ezrichtext .ibexa-data-source') ??
+                        container.closest('.ibexa-field-edit--ibexa_richtext .ibexa-data-source') ??
                         container.closest('.ibexa-data-source--richtext');
 
                     containerDataSource.classList.toggle('ibexa-data-source--focused', event.source.isFocused);
