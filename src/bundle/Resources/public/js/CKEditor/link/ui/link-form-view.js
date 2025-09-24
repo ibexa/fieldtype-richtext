@@ -27,6 +27,7 @@ class IbexaLinkFormView extends View {
         this.urlInputView = this.createTextInput({ label: 'Link to' });
         this.titleView = this.createTextInput({ label: 'Title' });
         this.targetSwitcherView = this.createBoolean({ label: 'Open in tab' });
+        this.siteAccessView = this.createDropdown({ label: 'Site access', choices: ['site', 'test'] }); //TODO
         this.attributeRenderMethods = {
             string: this.createTextInput,
             number: this.createNumberInput,
@@ -128,9 +129,10 @@ class IbexaLinkFormView extends View {
         this.listenTo(this.selectContentButtonView, 'execute', this.chooseContent);
     }
 
-    setValues({ url, title, target, ibexaLinkClasses, ibexaLinkAttributes = {} }) {
+    setValues({ url, title, target, siteaccess, ibexaLinkClasses, ibexaLinkAttributes = {} }) {
         this.setStringValue(this.urlInputView, url);
         this.setStringValue(this.titleView, title);
+        this.setChoiceValue(this.siteAccessView, siteaccess);
 
         this.targetSwitcherView.fieldView.element.value = !!target;
         this.targetSwitcherView.fieldView.set('value', !!target);
@@ -187,6 +189,7 @@ class IbexaLinkFormView extends View {
             url,
             title: this.titleView.fieldView.element.value,
             target: this.targetSwitcherView.fieldView.isOn ? '_blank' : '',
+            siteaccess: this.siteAccessView.fieldView.element.value,
         };
         const customClassesValue = this.classesView?.fieldView.element.value;
         const customAttributesValue = Object.entries(this.attributeViews).reduce((output, [name, view]) => {
@@ -266,6 +269,7 @@ class IbexaLinkFormView extends View {
         children.add(this.urlInputView);
         children.add(this.titleView);
         children.add(this.targetSwitcherView);
+        children.add(this.siteAccessView);
 
         return children;
     }

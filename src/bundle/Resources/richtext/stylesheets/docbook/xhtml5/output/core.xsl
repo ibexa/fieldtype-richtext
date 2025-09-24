@@ -255,6 +255,11 @@
               <xsl:value-of select="@xlink:title"/>
             </xsl:attribute>
           </xsl:if>
+          <xsl:if test="not(normalize-space(@xlink:siteaccess) = '')">
+            <xsl:attribute name="siteaccess">
+              <xsl:value-of select="@xlink:siteaccess"/>
+            </xsl:attribute>
+          </xsl:if>
           <xsl:if test="@ezxhtml:class">
             <xsl:attribute name="class">
               <xsl:value-of select="@ezxhtml:class"/>
