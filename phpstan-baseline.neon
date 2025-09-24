@@ -2581,27 +2581,9 @@ parameters:
 			path: tests/lib/RichText/Converter/LinkTest.php
 
 		-
-			message: '#^Parameter \#1 \$locationService of class Ibexa\\FieldTypeRichText\\RichText\\Converter\\Link constructor expects Ibexa\\Contracts\\Core\\Repository\\LocationService, PHPUnit\\Framework\\MockObject\\MockObject given\.$#'
-			identifier: argument.type
-			count: 5
-			path: tests/lib/RichText/Converter/LinkTest.php
-
-		-
-			message: '#^Parameter \#2 \$contentService of class Ibexa\\FieldTypeRichText\\RichText\\Converter\\Link constructor expects Ibexa\\Contracts\\Core\\Repository\\ContentService, PHPUnit\\Framework\\MockObject\\MockObject given\.$#'
-			identifier: argument.type
-			count: 5
-			path: tests/lib/RichText/Converter/LinkTest.php
-
-		-
 			message: '#^Parameter \#2 \$function of class Ibexa\\Core\\Base\\Exceptions\\UnauthorizedException constructor expects string, int given\.$#'
 			identifier: argument.type
 			count: 4
-			path: tests/lib/RichText/Converter/LinkTest.php
-
-		-
-			message: '#^Parameter \#3 \$router of class Ibexa\\FieldTypeRichText\\RichText\\Converter\\Link constructor expects Symfony\\Component\\Routing\\RouterInterface, PHPUnit\\Framework\\MockObject\\MockObject given\.$#'
-			identifier: argument.type
-			count: 5
 			path: tests/lib/RichText/Converter/LinkTest.php
 
 		-
