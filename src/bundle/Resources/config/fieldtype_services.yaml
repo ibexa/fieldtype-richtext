@@ -49,7 +49,6 @@ services:
             - '@ibexa.api.service.location'
             - '@ibexa.api.service.content'
             - '@router'
-            - '@Ibexa\AdminUi\Siteaccess\NonAdminSiteaccessResolver'
             - '@?logger'
         tags:
             - {name: ibexa.field_type.richtext.converter.output.xhtml5, priority: 0}

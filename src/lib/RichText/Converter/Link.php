@@ -10,7 +10,6 @@ namespace Ibexa\FieldTypeRichText\RichText\Converter;
 
 use DOMDocument;
 use DOMXPath;
-use Ibexa\AdminUi\Siteaccess\SiteaccessResolverInterface;
 use Ibexa\Contracts\Core\Repository\ContentService;
 use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException as APINotFoundException;
 use Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException as APIUnauthorizedException;
@@ -44,19 +43,15 @@ class Link implements Converter
      */
     protected $logger;
 
-    private SiteaccessResolverInterface $siteAccessResolver;
-
     public function __construct(
         LocationService $locationService,
         ContentService $contentService,
         RouterInterface $router,
-        SiteaccessResolverInterface $siteAccessResolver,
         ?LoggerInterface $logger = null
     ) {
         $this->locationService = $locationService;
         $this->contentService = $contentService;
         $this->router = $router;
-        $this->siteAccessResolver = $siteAccessResolver;
         $this->logger = $logger;
     }
 
@@ -153,7 +148,7 @@ class Link implements Converter
         ?string $siteaccess
     ): string {
         $params = ['location' => $location];
-        if ($siteaccess !== null) {
+        if (!empty($siteaccess)) {
             $params['siteaccess'] = $siteaccess;
         }
 
