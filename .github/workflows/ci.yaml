@@ -14,9 +14,9 @@ jobs:
         strategy:
             matrix:
                 php:
-                    - '8.0'
+                    - '8.1'
         steps:
-            - uses: actions/checkout@v3
+            - uses: actions/checkout@v5
 
             - name: Setup PHP Action
               uses: shivammathur/setup-php@v2
@@ -45,7 +45,7 @@ jobs:
                     - '8.1'
 
         steps:
-            - uses: actions/checkout@v3
+            - uses: actions/checkout@v5
 
             - name: Setup PHP Action
               uses: shivammathur/setup-php@v2
@@ -95,7 +95,7 @@ jobs:
                     - '8.1'
 
         steps:
-            -   uses: actions/checkout@v3
+            -   uses: actions/checkout@v5
 
             -   name: Setup PHP Action
                 uses: shivammathur/setup-php@v2
@@ -146,7 +146,7 @@ jobs:
                     - '8.1'
 
         steps:
-            -   uses: actions/checkout@v3
+            -   uses: actions/checkout@v5
 
             -   name: Setup PHP Action
                 uses: shivammathur/setup-php@v2
@@ -183,7 +183,7 @@ jobs:
                     --health-timeout 5s
                     --health-retries 10
         steps:
-            - uses: actions/checkout@v3
+            - uses: actions/checkout@v5
               with:
                   fetch-depth: 0
 

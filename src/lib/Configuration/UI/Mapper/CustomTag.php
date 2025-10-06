@@ -13,6 +13,7 @@ use RuntimeException;
 use Symfony\Component\Asset\Packages;
 use Symfony\Component\Translation\TranslatorBagInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use JMS\TranslationBundle\Annotation\Ignore;
 
 /**
  * RichText Custom Tag configuration mapper.
