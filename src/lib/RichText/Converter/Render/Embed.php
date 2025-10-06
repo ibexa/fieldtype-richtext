@@ -193,6 +193,7 @@ class Embed extends Render implements Converter
         $title = $link->getAttribute('xlink:title');
         $id = $link->getAttribute('xml:id');
         $class = $link->getAttribute('ezxhtml:class');
+        $siteAccess = $link->getAttribute('xlink:siteaccess');
 
         if (strpos($href, 'ezcontent://') === 0) {
             $resourceType = 'CONTENT';

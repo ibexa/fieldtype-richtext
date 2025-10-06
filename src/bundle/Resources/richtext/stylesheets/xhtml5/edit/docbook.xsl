@@ -284,6 +284,11 @@
           <xsl:value-of select="@title"/>
         </xsl:attribute>
       </xsl:if>
+      <xsl:if test="@siteaccess">
+        <xsl:attribute name="xlink:siteaccess">
+          <xsl:value-of select="@siteaccess"/>
+        </xsl:attribute>
+      </xsl:if>
       <xsl:if test="@class">
         <xsl:attribute name="ezxhtml:class">
           <xsl:value-of select="@class"/>
