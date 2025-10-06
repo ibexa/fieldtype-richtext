@@ -655,13 +655,17 @@ EOT;
         $contentUpdateStruct = $contentService->newContentUpdateStruct();
         $contentUpdateStruct->setField('description', $xmlDocument, 'eng-GB');
         $contentDraft = $contentService->updateContent(
-            $contentService->createContentDraft($content->contentInfo)->versionInfo,
+            $contentService->createContentDraft($content->getContentInfo())->getVersionInfo(),
             $contentUpdateStruct
         );
-        $content = $contentService->publishVersion($contentDraft->versionInfo);
+        $content = $contentService->publishVersion($contentDraft->getVersionInfo());
+        $field = $content->getField('description');
+
+        self::assertNotNull($field);
+
         $urlIdsAfterUpdate = $this->getUrlIdsForContentObjectAttributeIdAndVersionNo(
-            $content->getField('description')->id,
-            $content->contentInfo->currentVersionNo
+            $field->getId(),
+            $content->getContentInfo()->currentVersionNo
         );
 
         $urlId = $this->getUrlIdForLink($testLink);

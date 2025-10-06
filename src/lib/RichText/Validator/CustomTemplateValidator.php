@@ -65,7 +65,7 @@ final class CustomTemplateValidator implements ValidatorInterface
                 }
 
                 // Custom Styles does not have any attributes, so we can skip validation for them
-                if(isset($this->customStylesConfiguration[$tagName])) {
+                if (isset($this->customStylesConfiguration[$tagName])) {
                     continue;
                 }
 

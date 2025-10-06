@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace Ibexa\FieldTypeRichText\Configuration\UI\Mapper;
 
 use Ibexa\FieldTypeRichText\Configuration\UI\Mapper\CustomTag\AttributeMapper;
+use JMS\TranslationBundle\Annotation\Ignore;
 use RuntimeException;
 use Symfony\Component\Asset\Packages;
 use Symfony\Component\Translation\TranslatorBagInterface;

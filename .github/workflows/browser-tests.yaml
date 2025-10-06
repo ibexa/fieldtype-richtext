@@ -16,3 +16,6 @@ jobs:
             test-suite: '--profile=browser --suite=admin-ui --tags=@richtext'
         secrets:
             SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+            AUTOMATION_CLIENT_ID: ${{ secrets.AUTOMATION_CLIENT_ID }}
+            AUTOMATION_CLIENT_INSTALLATION: ${{ secrets.AUTOMATION_CLIENT_INSTALLATION }}
+            AUTOMATION_CLIENT_SECRET: ${{ secrets.AUTOMATION_CLIENT_SECRET }}
