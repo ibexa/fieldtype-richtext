@@ -4,6 +4,9 @@ import { toWidget, toWidgetEditable } from '@ckeditor/ckeditor5-widget/src/utils
 
 import IbexaCustomTagCommand from './custom-tag-command';
 
+const { escapeHTML, escapeHTMLAttribute } = window.ibexa.helpers.text;
+const { dangerouslySetInnerHTML } = window.ibexa.helpers.dom;
+
 class IbexaCustomTagEditing extends Plugin {
     static get requires() {
         return [Widget];
@@ -68,17 +71,17 @@ class IbexaCustomTagEditing extends Plugin {
                 const config = downcastWriter.createUIElement('span', { 'data-ezelement': 'ezconfig' }, function (domDocument) {
                     const domElement = this.toDomElement(domDocument);
 
-                    domElement.innerHTML = Object.entries(values).reduce((total, [attribute, value]) => {
-                        // Escaping
-                        // <script>alert("Hello! I am a script!");</script> --> &lt;script&gt;alert("Hello! I am a script!");&lt;/script&gt;
-                        const stringTempNode = domDocument.createElement('div');
-                        stringTempNode.appendChild(domDocument.createTextNode(value !== null ? value : ''));
-                        const attributeValue = stringTempNode.innerHTML;
+                    const attributesHTMLCode = Object.entries(values).reduce((total, [attributeName, value]) => {
+                        const attributeValue = value ?? '';
+                        const attributeValueEscaped = escapeHTML(attributeValue);
+                        const attributeNameAttributeEscaped = escapeHTMLAttribute(attributeName);
 
-                        const ezvalue = `<span data-ezelement="ezvalue" data-ezvalue-key="${attribute}">${attributeValue}</span>`;
+                        const ezvalue = `<span data-ezelement="ezvalue" data-ezvalue-key="${attributeNameAttributeEscaped}">${attributeValueEscaped}</span>`;
 
                         return `${total}${ezvalue}`;
                     }, '');
+
+                    dangerouslySetInnerHTML(domElement, attributesHTMLCode);
 
                     return domElement;
                 });
