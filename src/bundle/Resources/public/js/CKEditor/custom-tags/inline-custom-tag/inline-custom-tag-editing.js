@@ -2,6 +2,9 @@ import { Plugin, Widget, toWidget } from 'ckeditor5';
 
 import IbexaInlineCustomTagCommand from './inline-custom-tag-command';
 
+const { escapeHTML, escapeHTMLAttribute } = window.ibexa.helpers.text;
+const { dangerouslySetInnerHTML } = window.ibexa.helpers.dom;
+
 class IbexaInlineCustomTagEditing extends Plugin {
     static get requires() {
         return [Widget];
@@ -51,12 +54,16 @@ class IbexaInlineCustomTagEditing extends Plugin {
                 const config = downcastWriter.createUIElement('span', { 'data-ezelement': 'ezconfig' }, function (domDocument) {
                     const domElement = this.toDomElement(domDocument);
 
-                    domElement.innerHTML = Object.entries(values).reduce((total, [attribute, value]) => {
+                    const attributesHTMLCode = Object.entries(values).reduce((total, [attributeName, value]) => {
                         const attributeValue = value ?? '';
-                        const ezvalue = `<span data-ezelement="ezvalue" data-ezvalue-key="${attribute}">${attributeValue}</span>`;
+                        const attributeValueEscaped = escapeHTML(attributeValue);
+                        const attributeNameAttributeEscaped = escapeHTMLAttribute(attributeName);
+                        const ezvalue = `<span data-ezelement="ezvalue" data-ezvalue-key="${attributeNameAttributeEscaped}">${attributeValueEscaped}</span>`;
 
                         return `${total}${ezvalue}`;
                     }, '');
+
+                    dangerouslySetInnerHTML(domElement, attributesHTMLCode);
 
                     return domElement;
                 });

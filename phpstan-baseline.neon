@@ -175,7 +175,7 @@ parameters:
 			path: src/lib/Configuration/UI/Mapper/CustomTag.php
 
 		-
-			message: '#^Call to an undefined method DOMNode\:\:setAttribute\(\)\.$#'
+			message: '#^Call to an undefined method DOMNameSpaceNode\|DOMNode\:\:setAttribute\(\)\.$#'
 			identifier: method.notFound
 			count: 2
 			path: src/lib/FieldType/RichText/RichTextStorage.php
@@ -283,7 +283,7 @@ parameters:
 			path: src/lib/Persistence/Legacy/RichTextFieldValueConverter.php
 
 		-
-			message: '#^Argument of an invalid type DOMNodeList\<DOMNode\>\|false supplied for foreach, only iterables are supported\.$#'
+			message: '#^Argument of an invalid type DOMNodeList\<DOMNameSpaceNode\|DOMNode\>\|false supplied for foreach, only iterables are supported\.$#'
 			identifier: foreach.nonIterable
 			count: 1
 			path: src/lib/RichText/Converter/Link.php
@@ -295,7 +295,13 @@ parameters:
 			path: src/lib/RichText/Converter/Link.php
 
 		-
-			message: '#^Argument of an invalid type DOMNodeList\<DOMNode\>\|false supplied for foreach, only iterables are supported\.$#'
+			message: '#^Access to an undefined property DOMNameSpaceNode\|DOMNode\:\:\$textContent\.$#'
+			identifier: property.notFound
+			count: 2
+			path: src/lib/RichText/Converter/ProgramListing.php
+
+		-
+			message: '#^Argument of an invalid type DOMNodeList\<DOMNameSpaceNode\|DOMNode\>\|false supplied for foreach, only iterables are supported\.$#'
 			identifier: foreach.nonIterable
 			count: 1
 			path: src/lib/RichText/Converter/ProgramListing.php
@@ -331,19 +337,19 @@ parameters:
 			path: src/lib/RichText/Converter/Render.php
 
 		-
-			message: '#^Cannot access property \$length on DOMNodeList\<DOMNode\>\|false\.$#'
+			message: '#^Cannot access property \$length on DOMNodeList\<DOMNameSpaceNode\|DOMNode\>\|false\.$#'
 			identifier: property.nonObject
 			count: 1
 			path: src/lib/RichText/Converter/Render.php
 
 		-
-			message: '#^Cannot call method item\(\) on DOMNodeList\<DOMNode\>\|false\.$#'
+			message: '#^Cannot call method item\(\) on DOMNodeList\<DOMNameSpaceNode\|DOMNode\>\|false\.$#'
 			identifier: method.nonObject
 			count: 1
 			path: src/lib/RichText/Converter/Render.php
 
 		-
-			message: '#^Parameter \#1 \$configHash of method Ibexa\\FieldTypeRichText\\RichText\\Converter\\Render\:\:extractHash\(\) expects DOMNode, DOMNode\|null given\.$#'
+			message: '#^Parameter \#1 \$configHash of method Ibexa\\FieldTypeRichText\\RichText\\Converter\\Render\:\:extractHash\(\) expects DOMNode, DOMNameSpaceNode\|DOMNode\|null given\.$#'
 			identifier: argument.type
 			count: 1
 			path: src/lib/RichText/Converter/Render.php
@@ -355,7 +361,7 @@ parameters:
 			path: src/lib/RichText/Converter/Render.php
 
 		-
-			message: '#^Argument of an invalid type DOMNodeList\<DOMNode\>\|false supplied for foreach, only iterables are supported\.$#'
+			message: '#^Argument of an invalid type DOMNodeList\<DOMNameSpaceNode\|DOMNode\>\|false supplied for foreach, only iterables are supported\.$#'
 			identifier: foreach.nonIterable
 			count: 1
 			path: src/lib/RichText/Converter/Render/Embed.php
@@ -385,13 +391,13 @@ parameters:
 			path: src/lib/RichText/Converter/Render/Embed.php
 
 		-
-			message: '#^Argument of an invalid type DOMNodeList\<DOMNode\>\|false supplied for foreach, only iterables are supported\.$#'
+			message: '#^Argument of an invalid type DOMNodeList\<DOMNameSpaceNode\|DOMNode\>\|false supplied for foreach, only iterables are supported\.$#'
 			identifier: foreach.nonIterable
 			count: 2
 			path: src/lib/RichText/Converter/Render/Template.php
 
 		-
-			message: '#^Cannot access property \$length on DOMNodeList\<DOMNode\>\|false\.$#'
+			message: '#^Cannot access property \$length on DOMNodeList\<DOMNameSpaceNode\|DOMNode\>\|false\.$#'
 			identifier: property.nonObject
 			count: 1
 			path: src/lib/RichText/Converter/Render/Template.php
@@ -415,13 +421,19 @@ parameters:
 			path: src/lib/RichText/Converter/Render/Template.php
 
 		-
+			message: '#^Parameter \#1 \$node of method Ibexa\\FieldTypeRichText\\RichText\\Converter\\Render\\Template\:\:getCustomTemplateContent\(\) expects DOMNode, DOMNameSpaceNode\|DOMNode given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/lib/RichText/Converter/Render/Template.php
+
+		-
 			message: '#^Parameter \#1 \$string of function trim expects string, string\|false given\.$#'
 			identifier: argument.type
 			count: 1
 			path: src/lib/RichText/Converter/Render/Template.php
 
 		-
-			message: '#^Parameter \#3 \$template of method Ibexa\\FieldTypeRichText\\RichText\\Converter\\Render\\Template\:\:processTemplate\(\) expects DOMElement, DOMNode given\.$#'
+			message: '#^Parameter \#3 \$template of method Ibexa\\FieldTypeRichText\\RichText\\Converter\\Render\\Template\:\:processTemplate\(\) expects DOMElement, DOMNameSpaceNode\|DOMNode given\.$#'
 			identifier: argument.type
 			count: 1
 			path: src/lib/RichText/Converter/Render/Template.php
@@ -463,7 +475,7 @@ parameters:
 			path: src/lib/RichText/Exception/InvalidXmlException.php
 
 		-
-			message: '#^Argument of an invalid type DOMNodeList\<DOMNode\>\|false supplied for foreach, only iterables are supported\.$#'
+			message: '#^Argument of an invalid type DOMNodeList\<DOMNameSpaceNode\|DOMNode\>\|false supplied for foreach, only iterables are supported\.$#'
 			identifier: foreach.nonIterable
 			count: 1
 			path: src/lib/RichText/RelationProcessor.php
@@ -475,13 +487,13 @@ parameters:
 			path: src/lib/RichText/TextExtractor/ShortTextExtractor.php
 
 		-
-			message: '#^Argument of an invalid type DOMNodeList\<DOMNode\>\|false supplied for foreach, only iterables are supported\.$#'
+			message: '#^Argument of an invalid type DOMNodeList\<DOMNameSpaceNode\|DOMNode\>\|false supplied for foreach, only iterables are supported\.$#'
 			identifier: foreach.nonIterable
 			count: 1
 			path: src/lib/RichText/Validator/InternalLinkValidator.php
 
 		-
-			message: '#^Argument of an invalid type DOMNodeList\<DOMNode\>\|false supplied for foreach, only iterables are supported\.$#'
+			message: '#^Argument of an invalid type DOMNodeList\<DOMNameSpaceNode\|DOMNode\>\|false supplied for foreach, only iterables are supported\.$#'
 			identifier: foreach.nonIterable
 			count: 1
 			path: src/lib/RichText/Validator/Validator.php
@@ -499,7 +511,7 @@ parameters:
 			path: src/lib/RichText/Validator/Validator.php
 
 		-
-			message: '#^Parameter \#1 \$failedAssert of method Ibexa\\FieldTypeRichText\\RichText\\Validator\\Validator\:\:formatSVRLFailure\(\) expects DOMElement, DOMNode given\.$#'
+			message: '#^Parameter \#1 \$failedAssert of method Ibexa\\FieldTypeRichText\\RichText\\Validator\\Validator\:\:formatSVRLFailure\(\) expects DOMElement, DOMNameSpaceNode\|DOMNode given\.$#'
 			identifier: argument.type
 			count: 1
 			path: src/lib/RichText/Validator/Validator.php
@@ -521,6 +533,18 @@ parameters:
 			identifier: method.nonObject
 			count: 2
 			path: src/lib/RichText/Validator/ValidatorDispatcher.php
+
+		-
+			message: '#^Access to an undefined property DOMNameSpaceNode\|DOMNode\:\:\$textContent\.$#'
+			identifier: property.notFound
+			count: 1
+			path: src/lib/RichText/XMLSanitizer.php
+
+		-
+			message: '#^Parameter \#2 \$child of method DOMNode\:\:replaceChild\(\) expects TNode of DOMNode, DOMNameSpaceNode\|DOMNode given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/lib/RichText/XMLSanitizer.php
 
 		-
 			message: '#^Parameter \#2 \$desc of method Ibexa\\FieldTypeRichText\\Translation\\Extractor\\OnlineEditorCustomAttributesExtractor\:\:createMessage\(\) expects string, int\|string given\.$#'
@@ -685,19 +709,19 @@ parameters:
 			path: tests/lib/RichText/Converter/Xslt/BaseTest.php
 
 		-
-			message: '#^Cannot access property \$length on DOMNodeList\<DOMNode\>\|false\.$#'
+			message: '#^Cannot access property \$length on DOMNodeList\<DOMNameSpaceNode\|DOMNode\>\|false\.$#'
 			identifier: property.nonObject
 			count: 1
 			path: tests/lib/RichText/Converter/Xslt/BaseTest.php
 
 		-
-			message: '#^Cannot access property \$parentNode on DOMNode\|null\.$#'
+			message: '#^Cannot access property \$parentNode on DOMNameSpaceNode\|DOMNode\|null\.$#'
 			identifier: property.nonObject
 			count: 1
 			path: tests/lib/RichText/Converter/Xslt/BaseTest.php
 
 		-
-			message: '#^Cannot call method item\(\) on DOMNodeList\<DOMNode\>\|false\.$#'
+			message: '#^Cannot call method item\(\) on DOMNodeList\<DOMNameSpaceNode\|DOMNode\>\|false\.$#'
 			identifier: method.nonObject
 			count: 2
 			path: tests/lib/RichText/Converter/Xslt/BaseTest.php
