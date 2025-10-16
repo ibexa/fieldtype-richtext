@@ -5,3 +5,15 @@ parameters:
 			identifier: notIdentical.alwaysTrue
 			count: 1
 			path: src/lib/RichText/TextExtractor/FullTextExtractor.php
+
+		-
+			message: '#^Parameter \#2 \$child of method DOMNode\:\:replaceChild\(\) expects TNode of DOMNode, DOMNameSpaceNode\|DOMNode given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/lib/RichText/XMLSanitizer.php
+
+		-
+			message: '#^Cannot call method removeChild\(\) on DOMNode\|null\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: tests/lib/RichText/Converter/Xslt/BaseTest.php
