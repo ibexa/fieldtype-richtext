@@ -253,6 +253,11 @@
           <xsl:value-of select="@xlink:title"/>
         </xsl:attribute>
       </xsl:if>
+      <xsl:if test="@xlink:siteaccess">
+        <xsl:attribute name="siteaccess">
+          <xsl:value-of select="@xlink:siteaccess"/>
+        </xsl:attribute>
+      </xsl:if>
       <xsl:if test="@ezxhtml:class">
         <xsl:attribute name="class">
           <xsl:value-of select="@ezxhtml:class"/>
@@ -658,6 +663,11 @@
       <xsl:if test="@xlink:title">
         <xsl:attribute name="title">
           <xsl:value-of select="@xlink:title"/>
+        </xsl:attribute>
+      </xsl:if>
+      <xsl:if test="@xlink:siteaccess">
+        <xsl:attribute name="siteaccess">
+          <xsl:value-of select="@xlink:siteaccess"/>
         </xsl:attribute>
       </xsl:if>
       <xsl:if test="@ezxhtml:class">
