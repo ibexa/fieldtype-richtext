@@ -29,6 +29,7 @@ import Superscript from '@ckeditor/ckeditor5-basic-styles/src/superscript';
 import Strikethrough from '@ckeditor/ckeditor5-basic-styles/src/strikethrough';
 import BlockQuote from '@ckeditor/ckeditor5-block-quote/src/blockquote';
 import ContextualBalloon from '@ckeditor/ckeditor5-ui/src/panel/balloon/contextualballoon';
+import IbexaTable from '../table/table';
 
 const VIEWPORT_TOP_OFFSET = 102;
 const VIEWPORT_TOP_OFFSET_DISTRACTION_FREE_MODE = 0;
@@ -185,6 +186,7 @@ const VIEWPORT_TOP_OFFSET_DISTRACTION_FREE_MODE = 0;
                     IbexaRemoveElement,
                     IbexaBlockAlignment,
                     IbexaUploadImage,
+                    IbexaTable,
                     ...extraPlugins,
                 ],
                 toolbar: {
