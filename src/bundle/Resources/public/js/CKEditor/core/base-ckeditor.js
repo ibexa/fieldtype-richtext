@@ -14,6 +14,7 @@ import IbexaRemoveElement from '../remove-element/remove-element';
 import IbexaBlockAlignment from '../block-alignment/block-alignment';
 import IbexaUploadImage from '../upload-image/upload-image';
 import IbexaSpecialCharacters from '../special-characters/special-characters';
+import IbexaTable from '../table/table';
 
 import {
     InlineEditor,
@@ -192,6 +193,7 @@ const VIEWPORT_TOP_OFFSET_DISTRACTION_FREE_MODE = 0;
                     IbexaRemoveElement,
                     IbexaBlockAlignment,
                     IbexaUploadImage,
+                    IbexaTable,
                     ...extraPlugins,
                 ],
                 toolbar: {
