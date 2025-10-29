@@ -1,4 +1,4 @@
-import { Plugin } from 'ckeditor5';
+import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
 
 import { addPredefinedClassToConfig } from '../custom-attributes/helpers/config-helper';
 
