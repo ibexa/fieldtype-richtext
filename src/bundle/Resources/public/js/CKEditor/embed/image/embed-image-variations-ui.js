@@ -43,6 +43,7 @@ class IbexaEmbedImageVariationsUI extends Plugin {
             dropdownView.buttonView.set({
                 isOn: true,
                 withText: true,
+                label: this.getSelectedElement().getAttribute('size'),
             });
 
             addListToDropdown(dropdownView, itemDefinitions);
