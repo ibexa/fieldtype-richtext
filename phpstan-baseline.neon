@@ -409,7 +409,7 @@ parameters:
 			path: src/lib/Configuration/UI/Mapper/CustomStyle.php
 
 		-
-			message: '#^Method Ibexa\\FieldTypeRichText\\Configuration\\UI\\Mapper\\CustomTag\:\:translateLabels\(\) should return array\<string, array\{label\: string, description\: string, isInline\: bool, icon\?\: string, attributes\?\: array\<string, array\{type\: string, required\: bool, defaultValue\: mixed, label\: string, choices\?\: array\<string\>, choicesLabel\?\: array\<string, string\>\}\>\}\> but returns array\<string, array\{label\: string, description\: string, isInline\: bool, icon\?\: string, attributes\?\: array\<string, array\{label\: string\}\|array\{type\: string, required\: bool, defaultValue\: mixed, label\: string, choices\?\: array\<string\>, choicesLabel\?\: array\<string, string\>\}\>\}\>\.$#'
+			message: '#^Method Ibexa\\FieldTypeRichText\\Configuration\\UI\\Mapper\\CustomTag\:\:translateLabels\(\) should return array\<string, array\{label\: string, description\: string, isInline\: bool, icon\?\: string, attributes\?\: array\<string, array\{type\: string, required\: bool, defaultValue\: mixed, label\: string, choices\?\: array\<string\>, choicesLabel\?\: array\<string, string\>\}\>\}\> but returns array\<string, array\{label\: string, description\: string, isInline\: bool, icon\?\: string, attributes\?\: array\<string, array\{label\: string, choicesLabel\?\: non\-empty\-array\<string, string\>\}\|array\{type\: string, required\: bool, defaultValue\: mixed, label\: string, choices\?\: array\<string\>, choicesLabel\?\: array\<string, string\>\}\>\}\>\.$#'
 			identifier: return.type
 			count: 1
 			path: src/lib/Configuration/UI/Mapper/CustomTag.php
