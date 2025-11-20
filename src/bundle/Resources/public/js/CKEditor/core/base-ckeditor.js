@@ -252,106 +252,123 @@ const VIEWPORT_TOP_OFFSET_DISTRACTION_FREE_MODE = 0;
             const customEvent = new CustomEvent('ibexa-ckeditor:configure', {
                 detail: { container, config },
             });
+            const createCKEditor = () => {
+                InlineEditor.create(container, config).then((editor) => {
+                    this.editor = editor;
+
+                    const editableUIView = editor.ui.view.editable;
+                    const editableElement = this.editor.editing.view.getDomRoot();
+                    const editorToolbarPanelInstance = this.editor.ui.view.panel;
+                    const initialData = this.getData();
+                    const updateInput = (data, shouldFireInputEvent = true) => {
+                        const textarea = container.closest('.ibexa-data-source').querySelector('textarea');
+
+                        textarea.value = this.xhtmlify(data).replace(this.xhtmlNamespace, this.ezNamespace);
+
+                        if (shouldFireInputEvent) {
+                            textarea.dispatchEvent(new Event('input'));
+                        }
+                    };
+                    const setDataSourceHeight = (toolbarNode, fieldEditNode) => {
+                        const dataSourceNode = fieldEditNode.querySelector('.ibexa-data-source');
+                        const { height: toolbarHeight } = toolbarNode.getBoundingClientRect();
+                        const { top: dataSourceTop } = dataSourceNode.getBoundingClientRect();
+
+                        if (toolbarHeight > dataSourceTop) {
+                            const positionDiff = toolbarHeight - dataSourceTop;
+
+                            dataSourceNode.style.height = `calc(100% - ${positionDiff}px)`;
+                            dataSourceNode.style.marginTop = `${positionDiff}px`;
+                        }
+                    };
+                    const clearDataSourceHeight = () => {
+                        const fieldEditNode = editableElement.closest('.ibexa-field-edit');
+                        const dataSourceNode = fieldEditNode.querySelector('.ibexa-data-source');
+
+                        dataSourceNode.style.removeProperty('height');
+                        dataSourceNode.style.removeProperty('margin-top');
+                    };
+                    const setToolbarMaxWidth = (toolbarNode, fieldEditNode) => {
+                        const distractionFreeModeControlNodeBtn = fieldEditNode.querySelector(
+                            '.ibexa-field-edit__distraction-free-mode-control-container .ibexa-field-edit__distraction-free-mode-btns',
+                        );
+
+                        const dataSourceNode = fieldEditNode.querySelector('.ibexa-data-source');
+                        const { offsetWidth: dataSourceNodeWidth } = dataSourceNode;
+                        let toolbarNodeMaxWidth = dataSourceNodeWidth;
+
+                        if (distractionFreeModeControlNodeBtn !== null) {
+                            const { offsetWidth: distractionFreeModeControlNodeBtnWidth } = distractionFreeModeControlNodeBtn;
+
+                            toolbarNodeMaxWidth = dataSourceNodeWidth - distractionFreeModeControlNodeBtnWidth;
+                        }
+
+                        toolbarNode.style.maxWidth = `${toolbarNodeMaxWidth}px`;
+                    };
+
+                    updateInput(initialData, false);
+
+                    this.editor.model.document.on('change:data', () => {
+                        const data = this.getData();
+
+                        updateInput(data);
+                    });
+
+                    global.setTimeout(() => {
+                        if (this.editor.isReadOnly) {
+                            this.editor.destroy();
+
+                            const customEventFallback = new CustomEvent('ibexa-ckeditor:fallback-configuration', {
+                                detail: { container, config },
+                            });
+
+                            doc.body.dispatchEvent(customEventFallback);
+
+                            createCKEditor();
+                        }
+                    }, 2000);
+
+                    this.editor.on('set:distractionFreeModeActive', ({ source: eventEditorInstance }, name, value) => {
+                        const { ui: eventEditorUiInstance } = eventEditorInstance;
+                        const { panel: eventEditorToolbarPanelInstance } = eventEditorUiInstance.view;
+                        const toolbarPanelNode = eventEditorToolbarPanelInstance.element;
+                        const toolbarPanelsContainer = toolbarPanelNode.closest('.ck-body');
+
+                        eventEditorUiInstance.viewportOffset = {
+                            top: value ? VIEWPORT_TOP_OFFSET_DISTRACTION_FREE_MODE : this.viewportTopOffset,
+                        };
+
+                        toolbarPanelsContainer.classList.toggle('ck-body--distraction-free-mode-active');
+
+                        if (!value) {
+                            eventEditorToolbarPanelInstance.hide();
+                            clearDataSourceHeight();
+                        }
+                    });
+
+                    editableUIView.on('change:isFocused', (event) => {
+                        const containerDataSource =
+                            container.closest('.ibexa-field-edit--ibexa_richtext .ibexa-data-source') ??
+                            container.closest('.ibexa-data-source--richtext');
+
+                        containerDataSource.classList.toggle('ibexa-data-source--focused', event.source.isFocused);
+                    });
+
+                    editorToolbarPanelInstance.on('change:isVisible', ({ source: eventBalloonPanelViewInstance }) => {
+                        const fieldEditNode = editableElement.closest('.ibexa-field-edit');
+
+                        setToolbarMaxWidth(eventBalloonPanelViewInstance.element, fieldEditNode);
+
+                        if (editor?.distractionFreeModeActive) {
+                            setDataSourceHeight(eventBalloonPanelViewInstance.element, fieldEditNode);
+                        }
+                    });
+                });
+            };
 
             doc.body.dispatchEvent(customEvent);
 
-            InlineEditor.create(container, config).then((editor) => {
-                this.editor = editor;
-
-                const editableUIView = editor.ui.view.editable;
-                const editableElement = this.editor.editing.view.getDomRoot();
-                const editorToolbarPanelInstance = this.editor.ui.view.panel;
-                const initialData = this.getData();
-                const updateInput = (data, shouldFireInputEvent = true) => {
-                    const textarea = container.closest('.ibexa-data-source').querySelector('textarea');
-
-                    textarea.value = this.xhtmlify(data).replace(this.xhtmlNamespace, this.ezNamespace);
-
-                    if (shouldFireInputEvent) {
-                        textarea.dispatchEvent(new Event('input'));
-                    }
-                };
-                const setDataSourceHeight = (toolbarNode, fieldEditNode) => {
-                    const dataSourceNode = fieldEditNode.querySelector('.ibexa-data-source');
-                    const { height: toolbarHeight } = toolbarNode.getBoundingClientRect();
-                    const { top: dataSourceTop } = dataSourceNode.getBoundingClientRect();
-
-                    if (toolbarHeight > dataSourceTop) {
-                        const positionDiff = toolbarHeight - dataSourceTop;
-
-                        dataSourceNode.style.height = `calc(100% - ${positionDiff}px)`;
-                        dataSourceNode.style.marginTop = `${positionDiff}px`;
-                    }
-                };
-                const clearDataSourceHeight = () => {
-                    const fieldEditNode = editableElement.closest('.ibexa-field-edit');
-                    const dataSourceNode = fieldEditNode.querySelector('.ibexa-data-source');
-
-                    dataSourceNode.style.removeProperty('height');
-                    dataSourceNode.style.removeProperty('margin-top');
-                };
-                const setToolbarMaxWidth = (toolbarNode, fieldEditNode) => {
-                    const distractionFreeModeControlNodeBtn = fieldEditNode.querySelector(
-                        '.ibexa-field-edit__distraction-free-mode-control-container .ibexa-field-edit__distraction-free-mode-btns',
-                    );
-
-                    const dataSourceNode = fieldEditNode.querySelector('.ibexa-data-source');
-                    const { offsetWidth: dataSourceNodeWidth } = dataSourceNode;
-                    let toolbarNodeMaxWidth = dataSourceNodeWidth;
-
-                    if (distractionFreeModeControlNodeBtn !== null) {
-                        const { offsetWidth: distractionFreeModeControlNodeBtnWidth } = distractionFreeModeControlNodeBtn;
-
-                        toolbarNodeMaxWidth = dataSourceNodeWidth - distractionFreeModeControlNodeBtnWidth;
-                    }
-
-                    toolbarNode.style.maxWidth = `${toolbarNodeMaxWidth}px`;
-                };
-
-                updateInput(initialData, false);
-
-                this.editor.model.document.on('change:data', () => {
-                    const data = this.getData();
-
-                    updateInput(data);
-                });
-
-                this.editor.on('set:distractionFreeModeActive', ({ source: eventEditorInstance }, name, value) => {
-                    const { ui: eventEditorUiInstance } = eventEditorInstance;
-                    const { panel: eventEditorToolbarPanelInstance } = eventEditorUiInstance.view;
-                    const toolbarPanelNode = eventEditorToolbarPanelInstance.element;
-                    const toolbarPanelsContainer = toolbarPanelNode.closest('.ck-body');
-
-                    eventEditorUiInstance.viewportOffset = {
-                        top: value ? VIEWPORT_TOP_OFFSET_DISTRACTION_FREE_MODE : this.viewportTopOffset,
-                    };
-
-                    toolbarPanelsContainer.classList.toggle('ck-body--distraction-free-mode-active');
-
-                    if (!value) {
-                        eventEditorToolbarPanelInstance.hide();
-                        clearDataSourceHeight();
-                    }
-                });
-
-                editableUIView.on('change:isFocused', (event) => {
-                    const containerDataSource =
-                        container.closest('.ibexa-field-edit--ibexa_richtext .ibexa-data-source') ??
-                        container.closest('.ibexa-data-source--richtext');
-
-                    containerDataSource.classList.toggle('ibexa-data-source--focused', event.source.isFocused);
-                });
-
-                editorToolbarPanelInstance.on('change:isVisible', ({ source: eventBalloonPanelViewInstance }) => {
-                    const fieldEditNode = editableElement.closest('.ibexa-field-edit');
-
-                    setToolbarMaxWidth(eventBalloonPanelViewInstance.element, fieldEditNode);
-
-                    if (editor?.distractionFreeModeActive) {
-                        setDataSourceHeight(eventBalloonPanelViewInstance.element, fieldEditNode);
-                    }
-                });
-            });
+            createCKEditor();
         }
     }
 
