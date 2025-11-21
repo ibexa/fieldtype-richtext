@@ -13,6 +13,8 @@ import { createLabeledInputNumber } from '../../common/input-number/utils';
 import { addMultivalueSupport } from '../../common/multivalue-dropdown/utils';
 import { getCustomAttributesConfig, getCustomClassesConfig } from '../../custom-attributes/helpers/config-helper';
 
+const { ibexa } = window;
+
 class IbexaLinkFormView extends View {
     constructor(props) {
         super(props);
@@ -27,7 +29,7 @@ class IbexaLinkFormView extends View {
         this.urlInputView = this.createTextInput({ label: 'Link to' });
         this.titleView = this.createTextInput({ label: 'Title' });
         this.targetSwitcherView = this.createBoolean({ label: 'Open in tab' });
-        this.siteAccessView = this.createDropdown({ label: 'Site access', choices: ['site', 'test'] }); //TODO
+        this.siteAccessView = this.createDropdown({ label: 'Site access', choices: [] });
         this.attributeRenderMethods = {
             string: this.createTextInput,
             number: this.createNumberInput,
@@ -267,19 +269,16 @@ class IbexaLinkFormView extends View {
 
         children.add(this.selectContentButtonView);
         children.add(this.urlInputView);
+        children.add(this.siteAccessView);
         children.add(this.titleView);
         children.add(this.targetSwitcherView);
-        children.add(this.siteAccessView);
 
         return children;
     }
 
-    createDropdown(config, isCustomAttribute = false) {
+    createDropdownItemsList(config) {
         const Translator = getTranslator();
-        const labeledDropdown = new LabeledFieldView(this.locale, createLabeledDropdown);
         const itemsList = new Collection();
-
-        labeledDropdown.label = config.label;
 
         if (!config.multiple && !config.required) {
             itemsList.add({
@@ -302,6 +301,15 @@ class IbexaLinkFormView extends View {
                 }),
             });
         });
+
+        return itemsList;
+    }
+
+    createDropdown(config, isCustomAttribute = false) {
+        const labeledDropdown = new LabeledFieldView(this.locale, createLabeledDropdown);
+        const itemsList = this.createDropdownItemsList(config);
+
+        labeledDropdown.label = config.label;
 
         addListToDropdown(labeledDropdown.fieldView, itemsList);
 
@@ -467,11 +475,41 @@ class IbexaLinkFormView extends View {
         this.urlInputView.fieldView.set('value', url);
         this.urlInputView.fieldView.set('isEmpty', !url);
 
+        this.fetchSiteaccesses(items[0].id);
+
         this.editor.focus();
     }
 
     cancelHandler() {
         this.editor.focus();
+    }
+
+    fetchSiteaccesses(locationId) {
+        const request = new Request(`/api/ibexa/v2/site-access/load-non-admin-for-location/${locationId}`, {
+            method: 'GET',
+            headers: {
+                Accept: 'application/json',
+            },
+            mode: 'same-origin',
+            credentials: 'same-origin',
+        });
+
+        fetch(request)
+            .then(ibexa.helpers.request.getJsonFromResponse)
+            .then((response) => {
+                const itemsList = this.createDropdownItemsList({
+                    choices: response.SiteAccessesList.values.map((siteaccess) => siteaccess.name),
+                });
+
+                this.siteAccessView.fieldView.once(
+                    'change:isOpen',
+                    () => {
+                        this.siteAccessView.fieldView.panelView.children.clear();
+                        addListToDropdown(this.siteAccessView.fieldView, itemsList);
+                    },
+                    { priority: 'highest' },
+                );
+            });
     }
 }
 
