@@ -77,7 +77,7 @@ class IbexaEmbedImageEditing extends Plugin {
     defineSchema() {
         const { schema } = this.editor.model;
         const customClassesConfig = getCustomClassesConfig();
-        const allowedAttributes = ['contentId', 'size', 'ibexaLinkHref', 'ibexaLinkTitle', 'ibexaLinkTarget', 'siteaccess'];
+        const allowedAttributes = ['contentId', 'size', 'ibexaLinkHref', 'ibexaLinkTitle', 'ibexaLinkTarget', 'ibexaLinkSiteaccess'];
 
         if (customClassesConfig.link) {
             allowedAttributes.push('ibexaLinkClasses');
