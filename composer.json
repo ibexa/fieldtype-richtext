@@ -38,6 +38,7 @@
         "ibexa/doctrine-schema": "~4.6.x-dev",
         "ibexa/search": "~4.6.x-dev",
         "ibexa/solr": "~4.6.x-dev",
+        "ibexa/user": "~4.6.x-dev",
         "ibexa/test-core": "~4.6.x-dev",
         "ibexa/twig-components": "~4.6.x-dev",
         "phpstan/phpstan": "^2.0",
