@@ -41,6 +41,16 @@ class IbexaCustomTagEditing extends Plugin {
             view: (target, { writer: downcastWriter }) => downcastWriter.createAttributeElement('a', { target }),
         });
 
+        conversion.for('editingDowncast').attributeToElement({
+            model: 'ibexaLinkSiteaccess',
+            view: (siteaccess, { writer: downcastWriter }) => downcastWriter.createAttributeElement('a', { siteaccess }),
+        });
+
+        conversion.for('dataDowncast').attributeToElement({
+            model: 'ibexaLinkSiteaccess',
+            view: (siteaccess, { writer: downcastWriter }) => downcastWriter.createAttributeElement('a', { siteaccess }),
+        });
+
         if (customClassesLinkConfig) {
             conversion.for('editingDowncast').attributeToElement({
                 model: 'ibexaLinkClasses',
@@ -77,6 +87,8 @@ class IbexaCustomTagEditing extends Plugin {
                     const ibexaLinkHref = data.viewItem.getAttribute('href');
                     const ibexaLinkTitle = data.viewItem.getAttribute('title');
                     const ibexaLinkTarget = data.viewItem.getAttribute('target');
+                    const ibexaLinkSiteaccess = data.viewItem.getAttribute('siteaccess');
+
                     const classes = data.viewItem.getAttribute('class');
 
                     conversionApi.writer.setAttributes(
@@ -84,6 +96,7 @@ class IbexaCustomTagEditing extends Plugin {
                             ibexaLinkHref,
                             ibexaLinkTitle,
                             ibexaLinkTarget,
+                            ibexaLinkSiteaccess,
                         },
                         data.modelRange,
                     );
@@ -115,6 +128,7 @@ class IbexaCustomTagEditing extends Plugin {
         this.editor.model.schema.extend('$text', { allowAttributes: 'ibexaLinkHref' });
         this.editor.model.schema.extend('$text', { allowAttributes: 'ibexaLinkTitle' });
         this.editor.model.schema.extend('$text', { allowAttributes: 'ibexaLinkTarget' });
+        this.editor.model.schema.extend('$text', { allowAttributes: 'ibexaLinkSiteaccess' });
 
         if (customAttributesLinkConfig) {
             const attributes = Object.keys(customAttributesLinkConfig);
