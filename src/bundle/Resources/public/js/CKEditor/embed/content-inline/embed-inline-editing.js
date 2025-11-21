@@ -165,6 +165,7 @@ class IbexaEmbedContentInlineEditing extends Plugin {
                         writer.setAttribute('contentId', contentId, modelElement);
                         writer.setAttribute('locationId', locationId, modelElement);
                         writer.setAttribute('languageCodes', languageCodes, modelElement);
+                        writer.setAttribute('shouldFireInputEvent', false, modelElement);
                     });
                 });
 

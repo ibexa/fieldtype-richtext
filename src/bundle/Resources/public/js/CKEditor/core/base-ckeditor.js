@@ -305,8 +305,17 @@ const VIEWPORT_TOP_OFFSET_DISTRACTION_FREE_MODE = 0;
 
                     updateInput(initialData, false);
 
-                    this.editor.model.document.on('change:data', () => {
+                    this.editor.model.document.on('change:data', (eventInfo) => {
                         const data = this.getData();
+                        const changes = Array.from(eventInfo.source.differ.getChanges());
+                        const shouldFireInputEventAttribute = changes.find(
+                            (change) => change.type === 'attribute' && change.attributeKey === 'shouldFireInputEvent',
+                        );
+                        if (shouldFireInputEventAttribute && typeof shouldFireInputEventAttribute.attributeNewValue === 'boolean') {
+                            updateInput(data, shouldFireInputEventAttribute.attributeNewValue);
+
+                            return;
+                        }
 
                         updateInput(data);
                     });

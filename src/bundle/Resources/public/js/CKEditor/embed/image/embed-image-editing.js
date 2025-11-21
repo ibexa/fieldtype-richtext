@@ -58,6 +58,7 @@ class IbexaEmbedImageEditing extends Plugin {
             .then((imageData) => {
                 this.editor.model.change((writer) => {
                     writer.setAttribute('previewUrl', imageData.ContentImageVariation.uri, modelElement);
+                    writer.setAttribute('shouldFireInputEvent', false, modelElement);
                 });
             })
             .catch(window.ibexa.helpers.notification.showErrorNotification);
