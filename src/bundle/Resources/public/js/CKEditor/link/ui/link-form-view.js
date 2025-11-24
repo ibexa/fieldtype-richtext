@@ -13,6 +13,8 @@ import { createLabeledInputNumber } from '../../common/input-number/utils';
 import { addMultivalueSupport } from '../../common/multivalue-dropdown/utils';
 import { getCustomAttributesConfig, getCustomClassesConfig } from '../../custom-attributes/helpers/config-helper';
 
+const { ibexa } = window;
+
 class IbexaLinkFormView extends View {
     constructor(props) {
         super(props);
@@ -27,6 +29,7 @@ class IbexaLinkFormView extends View {
         this.urlInputView = this.createTextInput({ label: 'Link to' });
         this.titleView = this.createTextInput({ label: 'Title' });
         this.targetSwitcherView = this.createBoolean({ label: 'Open in tab' });
+        this.siteAccessView = this.createDropdown({ label: 'Site access', choices: [] });
         this.attributeRenderMethods = {
             string: this.createTextInput,
             number: this.createNumberInput,
@@ -128,9 +131,10 @@ class IbexaLinkFormView extends View {
         this.listenTo(this.selectContentButtonView, 'execute', this.chooseContent);
     }
 
-    setValues({ url, title, target, ibexaLinkClasses, ibexaLinkAttributes = {} }) {
+    setValues({ url, title, target, siteaccess, ibexaLinkClasses, ibexaLinkAttributes = {} }) {
         this.setStringValue(this.urlInputView, url);
         this.setStringValue(this.titleView, title);
+        this.setChoiceValue(this.siteAccessView, siteaccess);
 
         this.targetSwitcherView.fieldView.element.value = !!target;
         this.targetSwitcherView.fieldView.set('value', !!target);
@@ -139,6 +143,12 @@ class IbexaLinkFormView extends View {
 
         if (ibexaLinkClasses !== undefined) {
             this.setChoiceValue(this.classesView, ibexaLinkClasses);
+        }
+
+        if (url.includes('ezlocation://')) {
+            const locationId = url.replace('ezlocation://', '');
+
+            this.fetchSiteaccesses(locationId);
         }
 
         Object.entries(ibexaLinkAttributes).forEach(([name, value]) => {
@@ -187,6 +197,7 @@ class IbexaLinkFormView extends View {
             url,
             title: this.titleView.fieldView.element.value,
             target: this.targetSwitcherView.fieldView.isOn ? '_blank' : '',
+            siteaccess: this.siteAccessView.fieldView.element.value,
         };
         const customClassesValue = this.classesView?.fieldView.element.value;
         const customAttributesValue = Object.entries(this.attributeViews).reduce((output, [name, view]) => {
@@ -264,18 +275,16 @@ class IbexaLinkFormView extends View {
 
         children.add(this.selectContentButtonView);
         children.add(this.urlInputView);
+        children.add(this.siteAccessView);
         children.add(this.titleView);
         children.add(this.targetSwitcherView);
 
         return children;
     }
 
-    createDropdown(config, isCustomAttribute = false) {
+    createDropdownItemsList(config) {
         const Translator = getTranslator();
-        const labeledDropdown = new LabeledFieldView(this.locale, createLabeledDropdown);
         const itemsList = new Collection();
-
-        labeledDropdown.label = config.label;
 
         if (!config.multiple && !config.required) {
             itemsList.add({
@@ -298,6 +307,15 @@ class IbexaLinkFormView extends View {
                 }),
             });
         });
+
+        return itemsList;
+    }
+
+    createDropdown(config, isCustomAttribute = false) {
+        const labeledDropdown = new LabeledFieldView(this.locale, createLabeledDropdown);
+        const itemsList = this.createDropdownItemsList(config);
+
+        labeledDropdown.label = config.label;
 
         addListToDropdown(labeledDropdown.fieldView, itemsList);
 
@@ -463,11 +481,41 @@ class IbexaLinkFormView extends View {
         this.urlInputView.fieldView.set('value', url);
         this.urlInputView.fieldView.set('isEmpty', !url);
 
+        this.fetchSiteaccesses(items[0].id);
+
         this.editor.focus();
     }
 
     cancelHandler() {
         this.editor.focus();
+    }
+
+    fetchSiteaccesses(locationId) {
+        const request = new Request(`/api/ibexa/v2/site-access/by-location/${locationId}?resolver_type=non_admin`, {
+            method: 'GET',
+            headers: {
+                Accept: 'application/json',
+            },
+            mode: 'same-origin',
+            credentials: 'same-origin',
+        });
+
+        fetch(request)
+            .then(ibexa.helpers.request.getJsonFromResponse)
+            .then((response) => {
+                const itemsList = this.createDropdownItemsList({
+                    choices: response.SiteAccessesList.values.map((siteaccess) => siteaccess.name),
+                });
+
+                this.siteAccessView.fieldView.once(
+                    'change:isOpen',
+                    () => {
+                        this.siteAccessView.fieldView.panelView.children.clear();
+                        addListToDropdown(this.siteAccessView.fieldView, itemsList);
+                    },
+                    { priority: 'highest' },
+                );
+            });
     }
 }
 

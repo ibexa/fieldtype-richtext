@@ -36,7 +36,7 @@ class IbexaLinkUI extends Plugin {
         const formView = new IbexaLinkFormView({ locale: this.editor.locale, editor: this.editor });
 
         this.listenTo(formView, 'save-link', () => {
-            const { url, title, target, ibexaLinkClasses, ibexaLinkAttributes } = this.formView.getValues();
+            const { url, title, target, ibexaLinkClasses, ibexaLinkAttributes, siteaccess } = this.formView.getValues();
             const { path: firstPosition } = this.editor.model.document.selection.getFirstPosition();
             const { path: lastPosition } = this.editor.model.document.selection.getLastPosition();
             const noRangeSelection = firstPosition[0] === lastPosition[0] && firstPosition[1] === lastPosition[1];
@@ -59,7 +59,7 @@ class IbexaLinkUI extends Plugin {
 
             this.isNew = false;
 
-            this.editor.execute('insertIbexaLink', { href: url, title, target, ibexaLinkClasses, ibexaLinkAttributes });
+            this.editor.execute('insertIbexaLink', { href: url, title, target, siteaccess, ibexaLinkClasses, ibexaLinkAttributes });
             this.hideForm();
         });
 
@@ -78,6 +78,7 @@ class IbexaLinkUI extends Plugin {
         writer.removeAttribute('ibexaLinkHref', element);
         writer.removeAttribute('ibexaLinkTitle', element);
         writer.removeAttribute('ibexaLinkTarget', element);
+        writer.removeAttribute('ibexaLinkSiteaccess', element);
 
         if (customClassesLinkConfig) {
             writer.removeAttribute('ibexaLinkClasses', element);
@@ -121,6 +122,7 @@ class IbexaLinkUI extends Plugin {
             url: link?.getAttribute('href') ?? '',
             title: link?.getAttribute('title') ?? '',
             target: link?.getAttribute('target') ?? '',
+            siteaccess: link?.getAttribute('siteaccess') ?? '',
         };
 
         if (customClassesLinkConfig) {
@@ -172,7 +174,7 @@ class IbexaLinkUI extends Plugin {
 
         if (!link) {
             this.editor.focus();
-            this.editor.execute('insertIbexaLink', { href: '', title: '', target: '' });
+            this.editor.execute('insertIbexaLink', { href: '', title: '', target: '', siteaccess: '' });
 
             this.isNew = true;
         }
