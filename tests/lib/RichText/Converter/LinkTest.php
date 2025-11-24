@@ -28,7 +28,7 @@ use Symfony\Component\Routing\RouterInterface;
 class LinkTest extends TestCase
 {
     /**
-     * @return \PHPUnit\Framework\MockObject\MockObject&\Ibexa\Core\Repository\ContentService
+     * @return \PHPUnit\Framework\MockObject\MockObject&\Ibexa\Contracts\Core\Repository\ContentService
      */
     protected function getMockContentService()
     {
@@ -36,7 +36,7 @@ class LinkTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit\Framework\MockObject\MockObject&\Ibexa\Core\Repository\LocationService
+     * @return \PHPUnit\Framework\MockObject\MockObject&\Ibexa\Contracts\Core\Repository\LocationService
      */
     protected function getMockLocationService()
     {
@@ -286,12 +286,12 @@ class LinkTest extends TestCase
 
         $location = $this->createMock(APILocation::class);
 
-        $locationService->expects($this->once())
+        $locationService->expects(self::once())
             ->method('loadLocation')
-            ->with($this->equalTo(106))
+            ->with(self::equalTo(106))
             ->willReturn($location);
 
-        $router->expects($this->once())
+        $router->expects(self::once())
             ->method('generate')
             ->with(UrlAliasRouter::URL_ALIAS_ROUTE_NAME, [
                 'location' => $location,
