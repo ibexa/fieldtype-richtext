@@ -485,7 +485,7 @@ class IbexaLinkFormView extends View {
     }
 
     fetchSiteaccesses(locationId) {
-        const request = new Request(`/api/ibexa/v2/site-access/load-non-admin-for-location/${locationId}`, {
+        const request = new Request(`/api/ibexa/v2/site-access/by-location/${locationId}?resolver_type=non_admin`, {
             method: 'GET',
             headers: {
                 Accept: 'application/json',
