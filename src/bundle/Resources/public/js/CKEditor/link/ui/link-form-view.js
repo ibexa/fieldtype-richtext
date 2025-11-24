@@ -145,6 +145,12 @@ class IbexaLinkFormView extends View {
             this.setChoiceValue(this.classesView, ibexaLinkClasses);
         }
 
+        if (url.includes('ezlocation://')) {
+            const locationId = url.replace('ezlocation://', '');
+
+            this.fetchSiteaccesses(locationId);
+        }
+
         Object.entries(ibexaLinkAttributes).forEach(([name, value]) => {
             const attributeView = this.attributeViews[`ibexaLink${name}`];
             const setValueMethod = this.setValueMethods[this.customAttributes[name].type];
