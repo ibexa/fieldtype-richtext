@@ -21,6 +21,9 @@
     <link xlink:href="ezcontent://333" xlink:show="none" xml:id="id5" xlink:title="Content title" ezxhtml:class="linkClass5">Content name</link>
   </para>
   <para>
+    <link xlink:href="ezlocation://999" xlink:show="new" xml:id="id9" xlink:title="Location title with SA" xlink:siteaccess="site" ezxhtml:class="linkClass9">Location content name</link>
+  </para>
+  <para>
     <link xlink:href="ezcontent://333" xlink:show="none" xml:id="id6" xlink:title="Content title" ezxhtml:class="linkClass6">
       <ezattribute>
         <ezvalue key="name-1">value 1</ezvalue>

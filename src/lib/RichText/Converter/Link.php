@@ -18,6 +18,7 @@ use Ibexa\Contracts\Core\Repository\Values\Content\Location;
 use Ibexa\Contracts\FieldTypeRichText\RichText\Converter;
 use Ibexa\Core\MVC\Symfony\Routing\UrlAliasRouter;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 class Link implements Converter
@@ -77,6 +78,7 @@ class Link implements Converter
             // Set resolved href to number character as a default if it can't be resolved
             $hrefResolved = '#';
             $href = $link->getAttribute('xlink:href');
+            $siteaccess = $link->getAttribute('xlink:siteaccess') ?? null;
             $location = null;
             preg_match('~^(.+://)?([^#]*)?(#.*|\\s*)?$~', $href, $matches);
             list(, $scheme, $id, $fragment) = $matches;
@@ -85,7 +87,7 @@ class Link implements Converter
                 try {
                     $contentInfo = $this->contentService->loadContentInfo((int) $id);
                     $location = $this->locationService->loadLocation($contentInfo->mainLocationId);
-                    $hrefResolved = $this->generateUrlAliasForLocation($location, $fragment);
+                    $hrefResolved = $this->generateUrlAliasForLocation($location, $fragment, $siteaccess);
                 } catch (APINotFoundException $e) {
                     if ($this->logger) {
                         $this->logger->warning(
@@ -104,7 +106,7 @@ class Link implements Converter
             } elseif ($scheme === 'ezlocation://') {
                 try {
                     $location = $this->locationService->loadLocation((int) $id);
-                    $hrefResolved = $this->generateUrlAliasForLocation($location, $fragment);
+                    $hrefResolved = $this->generateUrlAliasForLocation($location, $fragment, $siteaccess);
                 } catch (APINotFoundException $e) {
                     if ($this->logger) {
                         $this->logger->warning(
@@ -140,11 +142,20 @@ class Link implements Converter
         return $document;
     }
 
-    private function generateUrlAliasForLocation(Location $location, string $fragment): string
-    {
+    private function generateUrlAliasForLocation(
+        Location $location,
+        string $fragment,
+        ?string $siteaccess
+    ): string {
+        $params = ['location' => $location];
+        if (!empty($siteaccess)) {
+            $params['siteaccess'] = $siteaccess;
+        }
+
         $urlAlias = $this->router->generate(
             UrlAliasRouter::URL_ALIAS_ROUTE_NAME,
-            ['location' => $location]
+            $params,
+            UrlGeneratorInterface::ABSOLUTE_URL
         );
 
         return $urlAlias . $fragment;
