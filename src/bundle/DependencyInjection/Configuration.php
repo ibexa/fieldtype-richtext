@@ -9,11 +9,16 @@ declare(strict_types=1);
 namespace Ibexa\Bundle\FieldTypeRichText\DependencyInjection;
 
 use Ibexa\Bundle\Core\DependencyInjection\Configuration\SiteAccessAware\Configuration as SiteAccessConfiguration;
+use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\NodeBuilder;
-use Symfony\Component\Config\Definition\Builder\NodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 
+/**
+ * @phpstan-import-type TRootNode from SiteAccessConfiguration
+ *
+ * @phpstan-type TNodeBuilder NodeBuilder<TRootNode>
+ */
 class Configuration extends SiteAccessConfiguration
 {
     public const array CUSTOM_TAG_ATTRIBUTE_TYPES = ['number', 'string', 'boolean', 'choice', 'link'];
@@ -46,6 +51,11 @@ class Configuration extends SiteAccessConfiguration
         return $treeBuilder;
     }
 
+    /**
+     * @phpstan-param TNodeBuilder $richTextNode
+     *
+     * @phpstan-return TNodeBuilder
+     */
     private function addEnabledAttributeTypesSection(NodeBuilder $richTextNode): NodeBuilder
     {
         return $richTextNode
@@ -57,7 +67,12 @@ class Configuration extends SiteAccessConfiguration
         ;
     }
 
-    private function validateAttributeTypes(NodeDefinition $rootNode): NodeDefinition
+    /**
+     * @phpstan-param TRootNode $rootNode
+     *
+     * @phpstan-return TRootNode
+     */
+    private function validateAttributeTypes(ArrayNodeDefinition $rootNode): ArrayNodeDefinition
     {
         return $rootNode
             ->validate()
@@ -95,6 +110,10 @@ class Configuration extends SiteAccessConfiguration
      * ibexa_richtext:
      *     custom_tags:
      * </code>
+     *
+     * @phpstan-param TNodeBuilder $ezRichTextNode
+     *
+     * @phpstan-return TNodeBuilder
      */
     private function addCustomTagsSection(NodeBuilder $ezRichTextNode): NodeBuilder
     {
@@ -180,6 +199,10 @@ class Configuration extends SiteAccessConfiguration
      *     ibexa_richtext:
      *         custom_styles:
      * </code>
+     *
+     * @phpstan-param TNodeBuilder $ezRichTextNode
+     *
+     * @phpstan-return TNodeBuilder
      */
     private function addCustomStylesSection(NodeBuilder $ezRichTextNode): NodeBuilder
     {
@@ -220,6 +243,10 @@ class Configuration extends SiteAccessConfiguration
      * Please note extra_buttons setting will be deprecated in eZ Platform 3.x.
      * The alternative and more flexible solution will be introduced.
      * So you will need to update Online Editor Extra Buttons as part of eZ Platform 3.x upgrade.
+     *
+     * @phpstan-param TNodeBuilder $ezRichTextNode
+     *
+     * @phpstan-return TNodeBuilder
      */
     private function addAlloyEditorSection(NodeBuilder $ezRichTextNode): NodeBuilder
     {

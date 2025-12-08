@@ -194,6 +194,24 @@ class LinkTest extends TestCase
                 106,
                 'test',
             ],
+            [
+                '<?xml version="1.0" encoding="UTF-8"?>
+<section xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ezxhtml="http://ibexa.co/xmlns/dxp/docbook/xhtml" version="5.0-variant ezpublish-1.0">
+  <title>Link example with empty site access</title>
+  <ezembed>
+    <ezlink xlink:href="ezlocation://106#anchor" xlink:siteaccess=""/>
+  </ezembed>
+</section>',
+                '<?xml version="1.0" encoding="UTF-8"?>
+<section xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ezxhtml="http://ibexa.co/xmlns/dxp/docbook/xhtml" version="5.0-variant ezpublish-1.0">
+  <title>Link example with empty site access</title>
+  <ezembed>
+    <ezlink xlink:href="ezlocation://106#anchor" xlink:siteaccess="" href_resolved="test#anchor"/>
+  </ezembed>
+</section>',
+                106,
+                'test',
+            ],
         ];
     }
 
@@ -222,6 +240,57 @@ class LinkTest extends TestCase
             ->method('generate')
             ->with(UrlAliasRouter::URL_ALIAS_ROUTE_NAME, ['location' => $location])
             ->willReturn($urlResolved);
+
+        $converter = new Link($locationService, $contentService, $router);
+
+        $outputDocument = $converter->convert($inputDocument);
+
+        $expectedOutputDocument = new DOMDocument();
+        $expectedOutputDocument->loadXML($output);
+
+        self::assertEquals($expectedOutputDocument, $outputDocument);
+    }
+
+    /**
+     * Test conversion of ezlocation://<id> links with the 'siteaccess' attribute.
+     */
+    public function testConvertLocationLinkWithSiteAccess(): void
+    {
+        $inputDocument = new DOMDocument();
+        $input = '<?xml version="1.0" encoding="UTF-8"?>
+<section xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ezxhtml="http://ibexa.co/xmlns/dxp/docbook/xhtml" version="5.0-variant ezpublish-1.0">
+  <title>Link example with site access</title>
+  <ezembed>
+    <ezlink xlink:href="ezlocation://106#anchor" xlink:siteaccess="site"/>
+  </ezembed>
+</section>';
+        $output = '<?xml version="1.0" encoding="UTF-8"?>
+<section xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ezxhtml="http://ibexa.co/xmlns/dxp/docbook/xhtml" version="5.0-variant ezpublish-1.0">
+  <title>Link example with site access</title>
+  <ezembed>
+    <ezlink xlink:href="ezlocation://106#anchor" xlink:siteaccess="site" href_resolved="test#anchor"/>
+  </ezembed>
+</section>';
+        $inputDocument->loadXML($input);
+
+        $contentService = $this->getMockContentService();
+        $locationService = $this->getMockLocationService();
+        $router = $this->getMockRouter();
+
+        $location = $this->createMock(APILocation::class);
+
+        $locationService->expects(self::once())
+            ->method('loadLocation')
+            ->with(self::equalTo(106))
+            ->willReturn($location);
+
+        $router->expects(self::once())
+            ->method('generate')
+            ->with(UrlAliasRouter::URL_ALIAS_ROUTE_NAME, [
+                'location' => $location,
+                'siteaccess' => 'site',
+            ])
+            ->willReturn('test');
 
         $converter = new Link($locationService, $contentService, $router);
 

@@ -49,11 +49,6 @@ class RichText extends AbstractFieldTypeParser
         return 'ibexa_richtext';
     }
 
-    /**
-     * Adds semantic configuration definition.
-     *
-     * @param \Symfony\Component\Config\Definition\Builder\NodeBuilder $nodeBuilder Node just under ezpublish.system.<siteaccess>
-     */
     public function addFieldTypeSemanticConfig(NodeBuilder $nodeBuilder): void
     {
         $nodeBuilder
@@ -226,6 +221,9 @@ class RichText extends AbstractFieldTypeParser
         $this->buildOnlineEditorConfiguration($nodeBuilder);
     }
 
+    /**
+     * @phpstan-return ScalarNodeDefinition<null>
+     */
     protected function getTemplateNodeDefinition(string $info, string $example): ScalarNodeDefinition
     {
         $templateNodeDefinition = new ScalarNodeDefinition('template');
@@ -298,6 +296,8 @@ class RichText extends AbstractFieldTypeParser
 
     /**
      * Build configuration nodes strictly related to Online Editor.
+     *
+     * @param NodeBuilder<null> $nodeBuilder
      */
     private function buildOnlineEditorConfiguration(NodeBuilder $nodeBuilder): void
     {
@@ -383,7 +383,7 @@ class RichText extends AbstractFieldTypeParser
      * - a `default_value` of custom data attribute must be the one from `choices` list,
      * - a custom data attribute of `boolean` type must not define `required` setting.
      */
-    private function getAttributesValidatorCallback(callable $invalidChoiceCallback): callable
+    private function getAttributesValidatorCallback(callable $invalidChoiceCallback): \Closure
     {
         return static function (array $v) use ($invalidChoiceCallback): array {
             if ($v[self::ATTRIBUTE_TYPE_NODE_KEY] === self::ATTRIBUTE_TYPE_CHOICE

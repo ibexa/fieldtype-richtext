@@ -17,6 +17,9 @@
     <a href="ezcontent://333" id="id5" title="Content title" class="linkClass5">Content name</a>
   </p>
   <p>
+    <a href="ezlocation://999" siteaccess="site" target="_blank" id="id9" title="Location title with SA" class="linkClass9">Location content name</a>
+  </p>
+  <p>
     <a href="ezcontent://333" data-ezattribute-name-1="value 1" data-ezattribute-name-2="value 2" id="id6" title="Content title" class="linkClass6">Content name</a>
   </p>
   <p>
