@@ -35,6 +35,7 @@ class IbexaLinkCommand extends Command {
         writer.setAttribute('ibexaLinkHref', linkData.href, element);
         writer.setAttribute('ibexaLinkTitle', linkData.title, element);
         writer.setAttribute('ibexaLinkTarget', linkData.target, element);
+        writer.setAttribute('ibexaLinkSiteaccess', linkData.siteaccess, element);
         writer.setAttribute('ibexaLinkClasses', linkData.ibexaLinkClasses, element);
 
         if (linkData.ibexaLinkAttributes) {

@@ -252,6 +252,13 @@
       <ref name="db.xlink.show.enumeration"/>
     </attribute>
   </define>
+  <define name="db.xlink.siteaccess.attribute">
+     <optional>
+        <attribute name="xlink:siteaccess">
+            <a:documentation>Specifies the siteaccess for the location</a:documentation>
+        </attribute>
+     </optional>
+  </define>
   <define name="db.xlink.actuate.enumeration">
     <choice>
       <value>onLoad</value>
@@ -290,6 +297,9 @@
       </optional>
       <optional>
         <ref name="db.xlink.actuate.attribute"/>
+      </optional>
+      <optional>
+        <ref name="db.xlink.siteaccess.attribute"/>
       </optional>
     </interleave>
   </define>
@@ -6877,6 +6887,9 @@ O, the molecular formula for water)</a:documentation>
         </optional>
         <optional>
           <ref name="db.xlink.to.attribute"/>
+        </optional>
+        <optional>
+          <ref name="db.xlink.siteaccess.attribute"/>
         </optional>
       </interleave>
     </define>
