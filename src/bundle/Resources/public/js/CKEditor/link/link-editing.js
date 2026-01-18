@@ -43,12 +43,20 @@ class IbexaCustomTagEditing extends Plugin {
 
         conversion.for('editingDowncast').attributeToElement({
             model: 'ibexaLinkSiteaccess',
-            view: (siteaccess, { writer: downcastWriter }) => downcastWriter.createAttributeElement('a', { siteaccess }),
+            view: (siteaccess, { writer: downcastWriter }) => {
+                if (siteaccess) {
+                    return downcastWriter.createAttributeElement('a', { siteaccess });
+                }
+            },
         });
 
         conversion.for('dataDowncast').attributeToElement({
             model: 'ibexaLinkSiteaccess',
-            view: (siteaccess, { writer: downcastWriter }) => downcastWriter.createAttributeElement('a', { siteaccess }),
+            view: (siteaccess, { writer: downcastWriter }) => {
+                if (siteaccess) {
+                    return downcastWriter.createAttributeElement('a', { siteaccess });
+                }
+            },
         });
 
         if (customClassesLinkConfig) {
