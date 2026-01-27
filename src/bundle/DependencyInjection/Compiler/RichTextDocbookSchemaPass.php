@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ */
 declare(strict_types=1);
 
 namespace Ibexa\Bundle\FieldTypeRichText\DependencyInjection\Compiler;
@@ -15,6 +19,7 @@ final class RichTextDocbookSchemaPass implements CompilerPassInterface
 
     public function process(ContainerBuilder $container): void
     {
+        /** @var array<string> $fragments */
         $fragments = $container->hasParameter(self::SCHEMA_FRAGMENTS_PARAM)
             ? (array)$container->getParameter(self::SCHEMA_FRAGMENTS_PARAM)
             : [];
@@ -23,6 +28,7 @@ final class RichTextDocbookSchemaPass implements CompilerPassInterface
             return;
         }
 
+        /** @var string $cacheDir */
         $cacheDir = $container->getParameter('kernel.cache_dir');
         $combinedSchemaPath = $cacheDir . '/richtext/docbook_combined.rng';
 
@@ -30,20 +36,24 @@ final class RichTextDocbookSchemaPass implements CompilerPassInterface
         $this->generateCombinedSchema($container, $fragments, $combinedSchemaPath);
 
         // Replace base schema with combined in validator resources
+        /** @var array<string> $resources */
         $resources = $container->getParameter(self::VALIDATOR_RESOURCES_PARAM);
         $resources = array_map(
-            static fn(string $path): string =>
-                str_contains($path, self::BASE_SCHEMA) ? $combinedSchemaPath : $path,
+            static fn (string $path): string => str_contains($path, self::BASE_SCHEMA) ? $combinedSchemaPath : $path,
             $resources
         );
         $container->setParameter(self::VALIDATOR_RESOURCES_PARAM, $resources);
     }
 
+    /**
+     * @param array<string> $fragments
+     */
     private function generateCombinedSchema(
         ContainerBuilder $container,
         array $fragments,
         string $outputPath
     ): void {
+        /** @var string $projectDir */
         $projectDir = $container->getParameter('kernel.project_dir');
         $baseSchemaPath = $projectDir . '/vendor/ibexa/fieldtype-richtext/src/bundle/Resources/richtext/schemas/docbook/ezpublish.rng';
 
@@ -88,6 +98,9 @@ XML;
         file_put_contents($outputPath, $schema);
     }
 
+    /**
+     * @param array<string> $includes
+     */
     private function formatIncludes(array $includes): string
     {
         return implode("\n  ", $includes);

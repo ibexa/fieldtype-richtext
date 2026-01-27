@@ -170,7 +170,7 @@ class RichText extends AbstractFieldTypeParser
                     ->end()
                 ->end()
                 ->validate()
-                    ->always(function (array $embeds): array {
+                    ->always(static function (array $embeds): array {
                         $coreTypes = [
                             'content', 'content_denied', 'content_inline', 'content_inline_denied',
                             'location', 'location_denied', 'location_inline', 'location_inline_denied',
