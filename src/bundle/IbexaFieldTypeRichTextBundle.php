@@ -9,9 +9,11 @@ declare(strict_types=1);
 namespace Ibexa\Bundle\FieldTypeRichText;
 
 use Ibexa\Bundle\Core\DependencyInjection\IbexaCoreExtension;
+use Ibexa\Bundle\FieldTypeRichText\DependencyInjection\Compiler\RichTextDocbookSchemaPass;
 use Ibexa\Bundle\FieldTypeRichText\DependencyInjection\Compiler\RichTextHtml5ConverterPass;
 use Ibexa\Bundle\FieldTypeRichText\DependencyInjection\Configuration\Parser\FieldType\RichText;
 use Ibexa\Bundle\FieldTypeRichText\DependencyInjection\IbexaFieldTypeRichTextExtension;
+use Symfony\Component\DependencyInjection\Compiler\PassConfig;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
@@ -30,6 +32,7 @@ class IbexaFieldTypeRichTextBundle extends Bundle
         $core->addDefaultSettings(__DIR__ . '/Resources/config', ['default_settings.yaml']);
 
         $container->addCompilerPass(new RichTextHtml5ConverterPass());
+        $container->addCompilerPass(new RichTextDocbookSchemaPass(), PassConfig::TYPE_BEFORE_OPTIMIZATION, -100);
         $this->registerConfigParser($container);
     }
 
