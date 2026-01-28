@@ -169,6 +169,7 @@ class IbexaEmbedImageEditing extends Plugin {
 
                 if (linkHref) {
                     const linkClasses = modelElement.getAttribute('ibexaLinkClasses');
+                    const linkSiteaccess = modelElement.getAttribute('ibexaLinkSiteaccess');
                     const linkAttributes = {
                         'data-ezelement': 'ezlink',
                         href: linkHref,
@@ -180,11 +181,16 @@ class IbexaEmbedImageEditing extends Plugin {
                         linkAttributes.class = linkClasses;
                     }
 
+                    if (linkSiteaccess) {
+                        linkAttributes.siteaccess = linkSiteaccess;
+                    }
+
                     const link = downcastWriter.createUIElement('a', linkAttributes);
 
                     consumable.consume(modelElement, 'attribute:ibexaLinkHref');
                     consumable.consume(modelElement, 'attribute:ibexaLinkTitle');
                     consumable.consume(modelElement, 'attribute:ibexaLinkTarget');
+                    consumable.consume(modelElement, 'attribute:ibexaLinkSiteaccess');
 
                     if (linkClasses) {
                         consumable.consume(modelElement, 'attribute:ibexaLinkClasses');
@@ -216,6 +222,7 @@ class IbexaEmbedImageEditing extends Plugin {
                     upcastWriter.setAttribute('ibexaLinkHref', link.getAttribute('href'), modelElement);
                     upcastWriter.setAttribute('ibexaLinkTitle', link.getAttribute('title') ?? '', modelElement);
                     upcastWriter.setAttribute('ibexaLinkTarget', link.getAttribute('target') ?? '', modelElement);
+                    upcastWriter.setAttribute('ibexaLinkSiteaccess', link.getAttribute('siteaccess') ?? '', modelElement);
 
                     if (link.getAttribute('class')) {
                         upcastWriter.setAttribute('ibexaLinkClasses', link.getAttribute('class'), modelElement);
