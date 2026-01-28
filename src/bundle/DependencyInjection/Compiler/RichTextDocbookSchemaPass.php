@@ -13,7 +13,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 final class RichTextDocbookSchemaPass implements CompilerPassInterface
 {
-    private const string SCHEMA_FRAGMENTS_PARAM = 'ibexa.field_type.richtext.docbook.schema_fragments';
+    public const string SCHEMA_FRAGMENTS_PARAM = 'ibexa.field_type.richtext.docbook.schema_fragments';
     private const string VALIDATOR_RESOURCES_PARAM = 'ibexa.field_type.richtext.validator.docbook.resources';
     private const string BASE_SCHEMA = 'ezpublish.rng';
 
