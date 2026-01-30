@@ -11,7 +11,7 @@ namespace Ibexa\Bundle\FieldTypeRichText\DependencyInjection\Compiler;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-final class RichTextDocbookSchemaPass implements CompilerPassInterface
+final readonly class RichTextDocbookSchemaPass implements CompilerPassInterface
 {
     public const string SCHEMA_FRAGMENTS_PARAM = 'ibexa.field_type.richtext.docbook.schema_fragments';
     private const string VALIDATOR_RESOURCES_PARAM = 'ibexa.field_type.richtext.validator.docbook.resources';
@@ -93,7 +93,7 @@ XML;
 
         $dir = dirname($outputPath);
         if (!is_dir($dir)) {
-            mkdir($dir, 0777, true);
+            mkdir($dir, 0700, true);
         }
         file_put_contents($outputPath, $schema);
     }
