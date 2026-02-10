@@ -194,7 +194,7 @@ class IbexaLinkUI extends Plugin {
         const viewDocument = this.editor.editing.view.document;
 
         this.listenTo(viewDocument, 'click', () => {
-            if (this.isLinkSelected()) {
+            if (this.isLinkSelected() && !this.checkIsImageSelected()) {
                 this.showForm();
             }
         });
@@ -227,6 +227,12 @@ class IbexaLinkUI extends Plugin {
 
     isLinkSelected() {
         return !!this.findLinkElement();
+    }
+
+    checkIsImageSelected() {
+        const modelElement = this.editor.model.document.selection.getSelectedElement();
+
+        return modelElement && modelElement.is('element', 'embedImage');
     }
 
     isValueValid(url) {
