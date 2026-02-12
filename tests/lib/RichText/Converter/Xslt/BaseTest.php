@@ -26,6 +26,16 @@ abstract class BaseTest extends TestCase
     protected ?ValidatorInterface $validator = null;
 
     /**
+     * Return the base directory for test fixtures.
+     *
+     * Override this method in subclasses to use fixtures from a different location.
+     */
+    protected function getFixtureDirectory(): string
+    {
+        return __DIR__ . '/_fixtures';
+    }
+
+    /**
      * Provider for conversion test.
      *
      * @return array<array{string, string}>
@@ -33,13 +43,14 @@ abstract class BaseTest extends TestCase
     public function providerForTestConvert(): array
     {
         $fixtureSubdirectories = $this->getFixtureSubdirectories();
+        $fixtureDir = $this->getFixtureDirectory();
 
         $map = [];
 
-        foreach (glob(__DIR__ . "/_fixtures/{$fixtureSubdirectories['input']}/*.xml") as $inputFile) {
+        foreach (glob($fixtureDir . "/{$fixtureSubdirectories['input']}/*.xml") as $inputFile) {
             $basename = basename($inputFile, '.xml');
-            $outputFile = __DIR__ . "/_fixtures/{$fixtureSubdirectories['output']}/{$basename}.xml";
-            $outputFileLossy = __DIR__ . "/_fixtures/{$fixtureSubdirectories['output']}/{$basename}.lossy.xml";
+            $outputFile = $fixtureDir . "/{$fixtureSubdirectories['output']}/{$basename}.xml";
+            $outputFileLossy = $fixtureDir . "/{$fixtureSubdirectories['output']}/{$basename}.lossy.xml";
 
             if (!file_exists($outputFile) && file_exists($outputFileLossy)) {
                 $outputFile = $outputFileLossy;
@@ -48,12 +59,12 @@ abstract class BaseTest extends TestCase
             $map[] = [$inputFile, $outputFile];
         }
 
-        $lossySubdirectory = "_fixtures/{$fixtureSubdirectories['input']}/lossy";
         $inputDirNormalized = str_replace('/', '.', $fixtureSubdirectories['input']);
         $outputDirNormalized = str_replace('/', '.', $fixtureSubdirectories['output']);
-        foreach (glob(__DIR__ . "/{$lossySubdirectory}/*.{$inputDirNormalized}.xml") as $inputFile) {
+        $lossyDir = $fixtureDir . "/{$fixtureSubdirectories['input']}/lossy";
+        foreach (glob($lossyDir . "/*.{$inputDirNormalized}.xml") as $inputFile) {
             $basename = basename(basename($inputFile, '.xml'), ".{$inputDirNormalized}");
-            $outputFile = __DIR__ . "/{$lossySubdirectory}/{$basename}.{$outputDirNormalized}.xml";
+            $outputFile = $lossyDir . "/{$basename}.{$outputDirNormalized}.xml";
 
             if (!file_exists($outputFile)) {
                 continue;
