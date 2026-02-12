@@ -70,7 +70,7 @@ final class RichTextDocbookSchemaPassTest extends TestCase
         $combinedSchemaPath = $this->cacheDir . '/richtext/docbook_combined.rng';
         self::assertFileExists($combinedSchemaPath);
 
-        $content = file_get_contents($combinedSchemaPath);
+        $content = (string)file_get_contents($combinedSchemaPath);
         $expectedBaseHref = $projectDir . '/vendor/ibexa/fieldtype-richtext/src/bundle/Resources/richtext/schemas/docbook/ezpublish.rng';
         self::assertStringContainsString('<include href="' . $expectedBaseHref . '">', $content);
         self::assertStringContainsString('<include href="' . $fragmentPath . '"/>', $content);
@@ -114,7 +114,7 @@ final class RichTextDocbookSchemaPassTest extends TestCase
         $pass = new RichTextDocbookSchemaPass();
         $pass->process($container);
 
-        $content = file_get_contents($this->cacheDir . '/richtext/docbook_combined.rng');
+        $content = (string)file_get_contents($this->cacheDir . '/richtext/docbook_combined.rng');
         self::assertStringContainsString(
             '<include href="' . $projectDir . '/custom/fragment.rng"/>',
             $content,
