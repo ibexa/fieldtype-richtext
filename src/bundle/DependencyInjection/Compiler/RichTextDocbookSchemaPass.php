@@ -57,7 +57,7 @@ final readonly class RichTextDocbookSchemaPass implements CompilerPassInterface
         $projectDir = $container->getParameter('kernel.project_dir');
         $baseSchemaPath = $projectDir . '/vendor/ibexa/fieldtype-richtext/src/bundle/Resources/richtext/schemas/docbook/ezpublish.rng';
 
-        $includes = [
+        $includeLines = [
             '<include href="' . $baseSchemaPath . '">',
             '  <!-- Override extension points to make them combinable if they are not already -->',
             '  <define name="ez.extension.blocks" combine="choice">',
@@ -68,41 +68,36 @@ final readonly class RichTextDocbookSchemaPass implements CompilerPassInterface
             '  </define>',
             '</include>',
         ];
+
         foreach ($fragments as $fragment) {
             $resolvedPath = str_replace('%kernel.project_dir%', $projectDir, $fragment);
-            $includes[] = '<include href="' . $resolvedPath . '"/>';
+            $includeLines[] = '<include href="' . $resolvedPath . '"/>';
         }
 
+        $includesXml = implode("\n  ", $includeLines);
+
         $schema = <<<XML
-<?xml version="1.0" encoding="UTF-8"?>
-<grammar xmlns="http://relaxng.org/ns/structure/1.0"
-         xmlns:db="http://docbook.org/ns/docbook"
-         xmlns:ez="http://ibexa.co/xmlns/ezpublish/docbook"
-         xmlns:ezxhtml="http://ibexa.co/xmlns/dxp/docbook/xhtml"
-         xmlns:ezcustom="http://ibexa.co/xmlns/dxp/docbook/custom"
-         xmlns:xlink="http://www.w3.org/1999/xlink"
-         xmlns:a="http://ibexa.co/xmlns/annotation"
-         xmlns:m="http://ibexa.co/xmlns/module"
-         ns="http://docbook.org/ns/docbook"
-         datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+            <?xml version="1.0" encoding="UTF-8"?>
+            <grammar xmlns="http://relaxng.org/ns/structure/1.0"
+                     xmlns:db="http://docbook.org/ns/docbook"
+                     xmlns:ez="http://ibexa.co/xmlns/ezpublish/docbook"
+                     xmlns:ezxhtml="http://ibexa.co/xmlns/dxp/docbook/xhtml"
+                     xmlns:ezcustom="http://ibexa.co/xmlns/dxp/docbook/custom"
+                     xmlns:xlink="http://www.w3.org/1999/xlink"
+                     xmlns:a="http://ibexa.co/xmlns/annotation"
+                     xmlns:m="http://ibexa.co/xmlns/module"
+                     ns="http://docbook.org/ns/docbook"
+                     datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
 
-  {$this->formatIncludes($includes)}
+              $includesXml
 
-</grammar>
-XML;
+            </grammar>
+            XML;
 
         $dir = dirname($outputPath);
         if (!is_dir($dir)) {
             mkdir($dir, 0700, true);
         }
         file_put_contents($outputPath, $schema);
-    }
-
-    /**
-     * @param array<string> $includes
-     */
-    private function formatIncludes(array $includes): string
-    {
-        return implode("\n  ", $includes);
     }
 }
