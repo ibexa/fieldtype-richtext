@@ -372,6 +372,12 @@ const VIEWPORT_TOP_OFFSET_DISTRACTION_FREE_MODE = 0;
                             setDataSourceHeight(eventBalloonPanelViewInstance.element, fieldEditNode);
                         }
                     });
+
+                    const instanceReadyEvent = new CustomEvent('ibexa-ckeditor:instance-ready', {
+                        detail: { editor },
+                    });
+
+                    container.dispatchEvent(instanceReadyEvent);
                 });
             };
 
