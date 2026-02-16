@@ -16,7 +16,7 @@ use Ibexa\FieldTypeRichText\Configuration\Provider\CKEditor;
 final class CKEditorTest extends BaseProviderTestCase
 {
     public function createProvider(
-        ConfigResolverInterface $configResolver = null,
+        ?ConfigResolverInterface $configResolver = null,
         array $customStylesConfiguration = []
     ): Provider {
         return new CKEditor(
