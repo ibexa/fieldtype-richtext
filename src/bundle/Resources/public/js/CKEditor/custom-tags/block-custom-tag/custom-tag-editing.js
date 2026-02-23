@@ -116,6 +116,10 @@ class IbexaCustomTagEditing extends Plugin {
                 const values = {};
 
                 for (const configValue of configValuesIterator) {
+                    if (configValue instanceof Element === false) {
+                        continue;
+                    }
+
                     const configName = configValue.getAttribute('data-ezvalue-key');
                     const configAttributes = tagConfig.attributes ?? {};
 
