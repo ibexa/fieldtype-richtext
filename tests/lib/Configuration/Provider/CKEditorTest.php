@@ -19,7 +19,7 @@ final class CKEditorTest extends BaseProviderTestCase
      * @param array<mixed> $customStylesConfiguration
      */
     public function createProvider(
-        ConfigResolverInterface $configResolver = null,
+        ?ConfigResolverInterface $configResolver = null,
         array $customStylesConfiguration = []
     ): Provider {
         return new CKEditor(

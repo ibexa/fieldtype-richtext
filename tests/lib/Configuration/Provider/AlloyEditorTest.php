@@ -26,7 +26,7 @@ class AlloyEditorTest extends BaseProviderTestCase
         $this->mapper = $this->createMock(OnlineEditorConfigMapper::class);
     }
 
-    public function createProvider(ConfigResolverInterface $configResolver = null): Provider
+    public function createProvider(?ConfigResolverInterface $configResolver = null): Provider
     {
         return new AlloyEditor(
             [
