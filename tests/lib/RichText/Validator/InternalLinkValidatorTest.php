@@ -289,7 +289,7 @@ class InternalLinkValidatorTest extends TestCase
     /**
      * @return \Ibexa\FieldTypeRichText\FieldType\RichText\InternalLinkValidator|\PHPUnit\Framework\MockObject\MockObject
      */
-    private function getInternalLinkValidator(array $methods = null)
+    private function getInternalLinkValidator(?array $methods = null)
     {
         return $this->getMockBuilder(InternalLinkValidator::class)
             ->setMethods($methods)
