@@ -152,7 +152,15 @@
     </para>
   </xsl:template>
 
-  <xsl:template match="ezxhtml5:span">
+  <!--
+    Generic span handler for plain text spans (line breaks, etc.).
+    The not(@data-ezelement) predicate is intentional: without it, this template would
+    catch ALL spans due to XSL import precedence rules, preventing external packages
+    from handling custom inline elements (e.g. ibexaembedproductinline) via xsl:import.
+    Spans with @data-ezelement handled by this stylesheet (ezembedinline, eztemplateinline, etc.)
+    are matched by their own more-specific templates below.
+  -->
+  <xsl:template match="ezxhtml5:span[not(@data-ezelement)]">
     <xsl:call-template name="breakline">
       <xsl:with-param name="node" select="node()"/>
     </xsl:call-template>

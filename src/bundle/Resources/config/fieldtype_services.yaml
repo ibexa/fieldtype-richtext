@@ -12,6 +12,10 @@ parameters:
     ibexa.field_type.richtext.validator.docbook.resources:
         - '%ibexa.field_type.richtext.resources%/schemas/docbook/ezpublish.rng'
         - '%ibexa.field_type.richtext.resources%/schemas/docbook/docbook.iso.sch.xsl'
+
+    # Schema fragments to include (paths to RNG files)
+    ibexa.field_type.richtext.docbook.schema_fragments: []
+
     ibexa.field_type.richtext.validator.output.xhtml5.resources:
         - '%ibexa.field_type.richtext.resources%/schemas/ezxhtml5/output/ezxhtml5.xsd'
 

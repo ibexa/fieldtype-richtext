@@ -53,7 +53,8 @@ class RichText extends AbstractFieldTypeParser
     {
         $nodeBuilder
             ->arrayNode('embed')
-                ->info('RichText embed tags configuration.')
+                ->info('RichText embed tags configuration. Custom embed types can be added by other bundles.')
+                ->ignoreExtraKeys(false)
                 ->children()
                     ->arrayNode('content')
                         ->info('Configuration for RichText block-level Content embed tags.')
@@ -167,6 +168,34 @@ class RichText extends AbstractFieldTypeParser
                             ->end()
                         ->end()
                     ->end()
+                ->end()
+                ->validate()
+                    ->always(static function (array $embeds): array {
+                        $coreTypes = [
+                            'content', 'content_denied', 'content_inline', 'content_inline_denied',
+                            'location', 'location_denied', 'location_inline', 'location_inline_denied',
+                        ];
+
+                        foreach ($embeds as $type => $config) {
+                            if (in_array($type, $coreTypes, true)) {
+                                continue;
+                            }
+
+                            if (!is_array($config)) {
+                                throw new InvalidArgumentException(
+                                    sprintf("Custom embed type '%s' configuration must be an array.", $type)
+                                );
+                            }
+
+                            if (!isset($config['template']) || empty($config['template'])) {
+                                throw new InvalidArgumentException(
+                                    sprintf("Custom embed type '%s' must have a non-empty 'template' key.", $type)
+                                );
+                            }
+                        }
+
+                        return $embeds;
+                    })
                 ->end()
             ->end();
 
