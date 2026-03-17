@@ -175,6 +175,42 @@ parameters:
 			path: src/lib/FieldType/RichText/RichTextStorage.php
 
 		-
+			message: '#^Offset 1 might not exist on array\{\}\|list\{0\: non\-falsy\-string, 1\?\: string, 2\?\: string\}\.$#'
+			identifier: offsetAccess.notFound
+			count: 1
+			path: src/lib/FieldType/RichText/RichTextStorage.php
+
+		-
+			message: '#^Offset 1 might not exist on array\{\}\|list\{0\: string, 1\?\: ''''\|''ezremote\://'', 2\?\: string, 3\?\: string\}\.$#'
+			identifier: offsetAccess.notFound
+			count: 1
+			path: src/lib/FieldType/RichText/RichTextStorage.php
+
+		-
+			message: '#^Offset 2 might not exist on array\{\}\|list\{0\: non\-falsy\-string, 1\?\: string, 2\?\: string\}\.$#'
+			identifier: offsetAccess.notFound
+			count: 1
+			path: src/lib/FieldType/RichText/RichTextStorage.php
+
+		-
+			message: '#^Offset 2 might not exist on array\{\}\|list\{0\: string, 1\?\: ''''\|''ezremote\://'', 2\?\: string, 3\?\: string\}\.$#'
+			identifier: offsetAccess.notFound
+			count: 2
+			path: src/lib/FieldType/RichText/RichTextStorage.php
+
+		-
+			message: '#^Offset 2 might not exist on list\{0\: string, 1\: ''ezremote\://'', 2\?\: string, 3\?\: string\}\.$#'
+			identifier: offsetAccess.notFound
+			count: 1
+			path: src/lib/FieldType/RichText/RichTextStorage.php
+
+		-
+			message: '#^Offset 3 might not exist on array\{\}\|list\{0\: string, 1\?\: ''''\|''ezremote\://'', 2\?\: string, 3\?\: string\}\.$#'
+			identifier: offsetAccess.notFound
+			count: 1
+			path: src/lib/FieldType/RichText/RichTextStorage.php
+
+		-
 			message: '#^Parameter \#1 \$source of method DOMDocument\:\:loadXML\(\) expects string, array\|bool\|float\|int\|string\|null given\.$#'
 			identifier: argument.type
 			count: 2
@@ -277,6 +313,24 @@ parameters:
 			path: src/lib/RichText/Converter/Link.php
 
 		-
+			message: '#^Offset 1 might not exist on array\{\}\|list\{0\: string, 1\?\: string, 2\?\: string, 3\?\: string\}\.$#'
+			identifier: offsetAccess.notFound
+			count: 1
+			path: src/lib/RichText/Converter/Link.php
+
+		-
+			message: '#^Offset 2 might not exist on array\{\}\|list\{0\: string, 1\?\: string, 2\?\: string, 3\?\: string\}\.$#'
+			identifier: offsetAccess.notFound
+			count: 1
+			path: src/lib/RichText/Converter/Link.php
+
+		-
+			message: '#^Offset 3 might not exist on array\{\}\|list\{0\: string, 1\?\: string, 2\?\: string, 3\?\: string\}\.$#'
+			identifier: offsetAccess.notFound
+			count: 1
+			path: src/lib/RichText/Converter/Link.php
+
+		-
 			message: '#^Parameter \#1 \$locationId of method Ibexa\\Contracts\\Core\\Repository\\LocationService\:\:loadLocation\(\) expects int, int\|null given\.$#'
 			identifier: argument.type
 			count: 1
@@ -363,6 +417,12 @@ parameters:
 		-
 			message: '#^Cannot call method error\(\) on Psr\\Log\\LoggerInterface\|null\.$#'
 			identifier: method.nonObject
+			count: 1
+			path: src/lib/RichText/Converter/Render/Embed.php
+
+		-
+			message: '#^Offset 1 might not exist on array\{\}\|array\{non\-falsy\-string, ''ezcontent''\|''ezlocation'', numeric\-string\}\.$#'
+			identifier: offsetAccess.notFound
 			count: 1
 			path: src/lib/RichText/Converter/Render/Embed.php
 
@@ -463,6 +523,18 @@ parameters:
 			path: src/lib/RichText/RelationProcessor.php
 
 		-
+			message: '#^Offset 1 might not exist on array\{\}\|list\{0\: non\-falsy\-string, 1\: non\-empty\-string, 2\?\: string, 3\?\: string\}\.$#'
+			identifier: offsetAccess.notFound
+			count: 1
+			path: src/lib/RichText/RelationProcessor.php
+
+		-
+			message: '#^Offset 2 might not exist on array\{\}\|list\{0\: non\-falsy\-string, 1\: non\-empty\-string, 2\?\: string, 3\?\: string\}\.$#'
+			identifier: offsetAccess.notFound
+			count: 1
+			path: src/lib/RichText/RelationProcessor.php
+
+		-
 			message: '#^Cannot access property \$textContent on DOMNode\|null\.$#'
 			identifier: property.nonObject
 			count: 1
@@ -471,6 +543,18 @@ parameters:
 		-
 			message: '#^Argument of an invalid type DOMNodeList\<DOMNameSpaceNode\|DOMNode\>\|false supplied for foreach, only iterables are supported\.$#'
 			identifier: foreach.nonIterable
+			count: 1
+			path: src/lib/RichText/Validator/InternalLinkValidator.php
+
+		-
+			message: '#^Offset 1 might not exist on array\{\}\|list\{0\: non\-falsy\-string, 1\: non\-empty\-string, 2\?\: string, 3\?\: string\}\.$#'
+			identifier: offsetAccess.notFound
+			count: 1
+			path: src/lib/RichText/Validator/InternalLinkValidator.php
+
+		-
+			message: '#^Offset 2 might not exist on array\{\}\|list\{0\: non\-falsy\-string, 1\: non\-empty\-string, 2\?\: string, 3\?\: string\}\.$#'
+			identifier: offsetAccess.notFound
 			count: 1
 			path: src/lib/RichText/Validator/InternalLinkValidator.php
 
@@ -523,7 +607,7 @@ parameters:
 			path: src/lib/RichText/XMLSanitizer.php
 
 		-
-			message: '#^Parameter \#2 \$child of method DOMNode\:\:replaceChild\(\) expects TNode of DOMNode, DOMNameSpaceNode\|DOMNode given\.$#'
+			message: '#^Parameter \#2 \$child of method DOMNode\:\:replaceChild\(\) expects DOMNode, DOMNameSpaceNode\|DOMNode given\.$#'
 			identifier: argument.type
 			count: 1
 			path: src/lib/RichText/XMLSanitizer.php
