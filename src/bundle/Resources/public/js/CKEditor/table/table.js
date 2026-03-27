@@ -14,7 +14,7 @@ class IbexaTable extends Plugin {
     afterInit() {
         const FIXED_BOTTOM_MARGIN = 40;
         const FIXED_TOP_MARGIN = 12;
-        const editor = this.editor;
+        const { editor } = this;
         const contextualBalloon = editor.plugins.get(ContextualBalloon);
         const toolbarPanel = editor.ui.view.panel;
 
@@ -40,11 +40,11 @@ class IbexaTable extends Plugin {
                     positions: [BalloonPanelView.defaultPositions.southArrowNorth],
                 });
             } else {
-                const stickyTop = (targetRect) => {
+                const stickyTop = (rect) => {
                     const toolbarBottom = toolbarPanel.element.getBoundingClientRect().bottom;
 
                     return {
-                        top: Math.max(toolbarBottom, targetRect.top) + FIXED_TOP_MARGIN,
+                        top: Math.max(toolbarBottom, rect.top) + FIXED_TOP_MARGIN,
                         left: balloonElRect.left,
                         name: 'arrow_n',
                     };
@@ -57,9 +57,8 @@ class IbexaTable extends Plugin {
             }
         };
 
-        editor.ui.on('update', fixBalloonOverlap, { priority: 'low' });
-
-        document.defaultView.addEventListener('scroll', fixBalloonOverlap, true);
+        this.listenTo(editor.ui, 'update', fixBalloonOverlap, { priority: 'low' });
+        document.defaultView.addEventListener('scroll', fixBalloonOverlap, { capture: true, passive: true });
     }
 }
 
