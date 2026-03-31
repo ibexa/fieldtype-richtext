@@ -133,8 +133,11 @@ class IbexaEmbedImageEditing extends Plugin {
                             return domElement;
                         },
                     );
+                    const viewChildren = Array.from(viewElement.getChildren());
 
-                    downcastWriter.remove(downcastWriter.createRangeIn(viewElement));
+                    viewChildren
+                        .filter((viewChild) => viewChild.is('uiElement', 'img'))
+                        .forEach((viewChild) => downcastWriter.remove(viewChild));
                     downcastWriter.insert(downcastWriter.createPositionAt(viewElement, 0), preview);
                 }),
             )
