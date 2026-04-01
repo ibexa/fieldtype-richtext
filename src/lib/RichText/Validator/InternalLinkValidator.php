@@ -64,9 +64,10 @@ class InternalLinkValidator implements ValidatorInterface
             foreach ($xpath->query($xpathExpression) as $element) {
                 $url = $element->getAttribute('xlink:href');
                 preg_match('~^(.+)://([^#]*)?(#.*|\\s*)?$~', $url, $matches);
-                list(, $scheme, $id) = $matches;
+                $scheme = $matches[1] ?? '';
+                $id = $matches[2] ?? '';
 
-                if (empty($id)) {
+                if ($id === '') {
                     continue;
                 }
 

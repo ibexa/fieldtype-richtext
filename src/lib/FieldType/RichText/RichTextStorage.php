@@ -72,12 +72,16 @@ class RichTextStorage extends GatewayBasedStorage
                 $link->getAttribute('xlink:href'),
                 $matches
             );
-            $linksInfo[$index] = $matches;
+            $linksInfo[$index] = [
+                'scheme' => $matches[1] ?? '',
+                'url' => $matches[2] ?? '',
+                'fragment' => $matches[3] ?? '',
+            ];
 
-            if (empty($matches[1])) {
-                $urlSet[$matches[2]] = true;
+            if ($linksInfo[$index]['scheme'] === '') {
+                $urlSet[$linksInfo[$index]['url']] = true;
             } else {
-                $remoteIdSet[$matches[2]] = true;
+                $remoteIdSet[$linksInfo[$index]['url']] = true;
             }
         }
 
@@ -86,9 +90,11 @@ class RichTextStorage extends GatewayBasedStorage
         $urlLinkSet = [];
 
         foreach ($links as $index => $link) {
-            list(, $scheme, $url, $fragment) = $linksInfo[$index];
+            $scheme = $linksInfo[$index]['scheme'];
+            $url = $linksInfo[$index]['url'];
+            $fragment = $linksInfo[$index]['fragment'];
 
-            if (empty($scheme)) {
+            if ($scheme === '') {
                 // Insert the same URL only once
                 if (!isset($urlIdMap[$url])) {
                     $urlIdMap[$url] = $this->gateway->insertUrl($url);
@@ -158,17 +164,21 @@ class RichTextStorage extends GatewayBasedStorage
                 $link->getAttribute('xlink:href'),
                 $matches
             );
-            $urlInfo[$index] = $matches;
+            $urlInfo[$index] = [
+                'urlId' => $matches[1] ?? '',
+                'fragment' => $matches[2] ?? '',
+            ];
 
-            if (!empty($matches[1])) {
-                $urlIdSet[$matches[1]] = true;
+            if ($urlInfo[$index]['urlId'] !== '') {
+                $urlIdSet[$urlInfo[$index]['urlId']] = true;
             }
         }
 
         $idUrlMap = $this->gateway->getIdUrlMap(array_keys($urlIdSet));
 
         foreach ($links as $index => $link) {
-            list(, $urlId, $fragment) = $urlInfo[$index];
+            $urlId = $urlInfo[$index]['urlId'];
+            $fragment = $urlInfo[$index]['fragment'];
 
             if (isset($idUrlMap[$urlId])) {
                 $href = $idUrlMap[$urlId] . $fragment;

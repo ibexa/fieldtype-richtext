@@ -77,7 +77,7 @@ class Embed extends Render implements Converter
                 if (isset($this->logger)) {
                     $this->logger->error("Could not embed resource: empty 'xlink:href' attribute");
                 }
-            } elseif (0 === preg_match('~^(ezcontent|ezlocation)://(\d+)$~', $resourceReference, $matches)) {
+            } elseif (preg_match('~^(ezcontent|ezlocation)://(\d+)$~', $resourceReference, $matches) !== 1) {
                 if (isset($this->logger)) {
                     $this->logger->error(
                         "Could not embed resource: unhandled resource reference '{$resourceReference}'"
@@ -215,7 +215,12 @@ class Embed extends Render implements Converter
             $resourceId = null;
         }
 
-        $fragmentPosition = isset($resourceId) ? strpos($resourceId, '#') : false;
+        /** @var string|null $resourceId */
+        if ($resourceId !== null) {
+            $fragmentPosition = strpos($resourceId, '#');
+        } else {
+            $fragmentPosition = false;
+        }
 
         if ($fragmentPosition !== false) {
             $resourceFragmentIdentifier = substr($resourceId, $fragmentPosition + 1);

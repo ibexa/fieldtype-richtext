@@ -1387,12 +1387,6 @@ parameters:
 			path: src/lib/RichText/Validator/ValidatorDispatcher.php
 
 		-
-			message: '#^Access to an undefined property DOMNameSpaceNode\|DOMNode\:\:\$textContent\.$#'
-			identifier: property.notFound
-			count: 1
-			path: src/lib/RichText/XMLSanitizer.php
-
-		-
 			message: '#^Method Ibexa\\FieldTypeRichText\\RichText\\XmlBase\:\:startRecordingErrors\(\) has no return type specified\.$#'
 			identifier: missingType.return
 			count: 1

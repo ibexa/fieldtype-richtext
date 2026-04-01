@@ -161,7 +161,10 @@ class Template extends Render implements Converter
             $rootNode->appendChild($newNode);
         }
 
-        return trim($this->richTextConverter->convert($innerDoc)->saveHTML());
+        $content = $this->richTextConverter->convert($innerDoc)->saveHTML();
+
+        /** @var string $content */
+        return trim($content);
     }
 
     /**
