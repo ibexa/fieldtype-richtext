@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace Ibexa\FieldTypeRichText\RichText;
 
 use DOMDocument;
+use DOMNode;
 use DOMText;
 use DOMXPath;
 use RuntimeException;
@@ -36,7 +37,11 @@ final class XMLSanitizer
         }
 
         foreach ($cdataNodes as $cdataNode) {
-            if ($cdataNode->nodeType === XML_CDATA_SECTION_NODE && $cdataNode->parentNode !== null) {
+            if (
+                $cdataNode instanceof DOMNode &&
+                $cdataNode->nodeType === XML_CDATA_SECTION_NODE &&
+                $cdataNode->parentNode !== null
+            ) {
                 $cdataNode->parentNode->replaceChild(new DOMText($cdataNode->textContent), $cdataNode);
             }
         }

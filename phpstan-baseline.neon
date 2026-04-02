@@ -601,18 +601,6 @@ parameters:
 			path: src/lib/RichText/Validator/ValidatorDispatcher.php
 
 		-
-			message: '#^Access to an undefined property DOMNameSpaceNode\|DOMNode\:\:\$textContent\.$#'
-			identifier: property.notFound
-			count: 1
-			path: src/lib/RichText/XMLSanitizer.php
-
-		-
-			message: '#^Parameter \#2 \$child of method DOMNode\:\:replaceChild\(\) expects DOMNode, DOMNameSpaceNode\|DOMNode given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/lib/RichText/XMLSanitizer.php
-
-		-
 			message: '#^Parameter \#2 \$desc of method Ibexa\\FieldTypeRichText\\Translation\\Extractor\\OnlineEditorCustomAttributesExtractor\:\:createMessage\(\) expects string, int\|string given\.$#'
 			identifier: argument.type
 			count: 1
