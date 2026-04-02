@@ -81,9 +81,7 @@ class Link implements Converter
             $siteaccess = $link->getAttribute('xlink:siteaccess') ?? null;
             $location = null;
             preg_match('~^(.+://)?([^#]*)?(#.*|\\s*)?$~', $href, $matches);
-            $scheme = $matches[1] ?? '';
-            $id = $matches[2] ?? '';
-            $fragment = $matches[3] ?? '';
+            list(, $scheme, $id, $fragment) = $matches;
 
             if ($scheme === 'ezcontent://') {
                 try {

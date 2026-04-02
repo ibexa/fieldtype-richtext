@@ -73,10 +73,9 @@ final class RelationProcessor
             /** @var \DOMElement $element */
             foreach ($xpath->query($xpathExpression) as $element) {
                 preg_match('~^(.+)://([^#]*)?(#.*|\\s*)?$~', $element->getAttribute('xlink:href'), $matches);
-                $scheme = $matches[1] ?? '';
-                $id = $matches[2] ?? '';
+                list(, $scheme, $id) = $matches;
 
-                if ($id === '') {
+                if (empty($id)) {
                     continue;
                 }
 
