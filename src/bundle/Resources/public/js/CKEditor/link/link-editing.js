@@ -10,8 +10,8 @@ class IbexaCustomTagEditing extends Plugin {
     }
 
     enableSelectionAttributesFixer() {
-        const model = this.editor.model;
-        const selection = model.document.selection;
+        const { model } = this.editor;
+        const { selection } = model.document;
 
         this.listenTo(selection, 'change:attribute', (_event, { attributeKeys }) => {
             if (!attributeKeys.includes('ibexaLinkHref') || selection.hasAttribute('ibexaLinkHref')) {
