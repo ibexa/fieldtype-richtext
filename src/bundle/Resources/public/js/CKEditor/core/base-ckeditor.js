@@ -289,6 +289,7 @@ const VIEWPORT_TOP_OFFSET_DISTRACTION_FREE_MODE = 0;
                 language: {
                     ui: ckEditorUiLanguage,
                     content: locale.language,
+                    ui: locale.language,
                 },
                 ...extraConfig,
             };
