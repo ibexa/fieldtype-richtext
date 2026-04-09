@@ -13,7 +13,7 @@ class IbexaCustomTagEditing extends Plugin {
         const { model } = this.editor;
         const { selection } = model.document;
 
-        this.listenTo(selection, 'change:attribute', (_event, { attributeKeys }) => {
+        this.listenTo(selection, 'change:attribute', (event, { attributeKeys }) => {
             if (!attributeKeys.includes('ibexaLinkHref') || selection.hasAttribute('ibexaLinkHref')) {
                 return;
             }
