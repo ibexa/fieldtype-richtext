@@ -32,6 +32,8 @@ import BlockQuote from '@ckeditor/ckeditor5-block-quote/src/blockquote';
 import SpecialCharactersEssentials from '@ckeditor/ckeditor5-special-characters/src/specialcharactersessentials';
 import ContextualBalloon from '@ckeditor/ckeditor5-ui/src/panel/balloon/contextualballoon';
 import IbexaTable from '../table/table';
+import { add } from '@ckeditor/ckeditor5-utils/src/translation-service';
+import { getRichTextToolbarTranslations } from '../helpers/richtext-toolbar-translations-helper';
 
 const VIEWPORT_TOP_OFFSET = 102;
 const VIEWPORT_TOP_OFFSET_DISTRACTION_FREE_MODE = 0;
@@ -137,6 +139,9 @@ const VIEWPORT_TOP_OFFSET_DISTRACTION_FREE_MODE = 0;
                 );
                 locale = new Intl.Locale('eng-GB');
             }
+
+            add(locale.language, getRichTextToolbarTranslations());
+
             const blockCustomStyles = Object.entries(ibexa.richText.customStyles)
                 .filter(([, customStyleConfig]) => !customStyleConfig.inline)
                 .map(([customStyleName, customStyleConfig]) => {
