@@ -36,6 +36,36 @@
         <target state="new">Right</target>
         <note>key: block_alignment.right</note>
       </trans-unit>
+      <trans-unit id="70ca87fcf27a898c58f2e73258650c67ff3e1f56" resname="block_quote_btn.label">
+        <source>Block quote</source>
+        <target state="new">Block quote</target>
+        <note>key: block_quote_btn.label</note>
+      </trans-unit>
+      <trans-unit id="8a7b727028f9b9ffe3673a8925e7876e0378d7cf" resname="bold_btn.label">
+        <source>Bold</source>
+        <target state="new">Bold</target>
+        <note>key: bold_btn.label</note>
+      </trans-unit>
+      <trans-unit id="29479094bf3a1369d96b25f22f5a04f31e1fbd59" resname="bulleted_list_btn.label">
+        <source>Bulleted List</source>
+        <target state="new">Bulleted List</target>
+        <note>key: bulleted_list_btn.label</note>
+      </trans-unit>
+      <trans-unit id="66d4db738ddd23ae5eb9dd4b174ce66999f0a98c" resname="bulleted_list_circle_btn.label">
+        <source>Circle</source>
+        <target state="new">Circle</target>
+        <note>key: bulleted_list_circle_btn.label</note>
+      </trans-unit>
+      <trans-unit id="729dcbfb5087014ee166508147ea21d639bc8be1" resname="bulleted_list_disc_btn.label">
+        <source>Disc</source>
+        <target state="new">Disc</target>
+        <note>key: bulleted_list_disc_btn.label</note>
+      </trans-unit>
+      <trans-unit id="be6c6a090eec768bb0834f5ac136750ff54336b8" resname="bulleted_list_square_btn.label">
+        <source>Square</source>
+        <target state="new">Square</target>
+        <note>key: bulleted_list_square_btn.label</note>
+      </trans-unit>
       <trans-unit id="250e037cfe2d6e349e2da22428ac75e7559f1d66" resname="custom_attributes_btn.label">
         <source>Custom attributes</source>
         <target state="new">Custom attributes</target>
@@ -81,6 +111,11 @@
         <target state="new">Formatted</target>
         <note>key: formatted_btn.label</note>
       </trans-unit>
+      <trans-unit id="841a18570b88796e700e0d0cd2f8d4e99f9e13bd" resname="heading_btn.label">
+        <source>Heading</source>
+        <target state="new">Heading</target>
+        <note>key: heading_btn.label</note>
+      </trans-unit>
       <trans-unit id="590b85bd86144a6c872dcff6475c451319782fc7" resname="image_btn.edit.label">
         <source>Edit</source>
         <target state="new">Edit</target>
@@ -95,6 +130,16 @@
         <source>Image</source>
         <target state="new">Image</target>
         <note>key: image_btn.label</note>
+      </trans-unit>
+      <trans-unit id="a83d599d0f6baf964e4fad7384f781f00fd6f9fc" resname="insert_table_btn.label">
+        <source>Insert table</source>
+        <target state="new">Insert table</target>
+        <note>key: insert_table_btn.label</note>
+      </trans-unit>
+      <trans-unit id="b8d37b77d1c5025aafb01e31c800e6d44add76ca" resname="italic_btn.label">
+        <source>Italic</source>
+        <target state="new">Italic</target>
+        <note>key: italic_btn.label</note>
       </trans-unit>
       <trans-unit id="13da450bcabe1534eb9a6f0e595d37bfce9af4a5" resname="link_btn.error.valid">
         <source>A valid link is needed.</source>
@@ -116,10 +161,95 @@
         <target state="new">Move up</target>
         <note>key: move_up_btn.title</note>
       </trans-unit>
+      <trans-unit id="336cf6c262d3ceee7d0d0636a03325e2f666b69c" resname="numbered_list_btn.label">
+        <source>Numbered List</source>
+        <target state="new">Numbered List</target>
+        <note>key: numbered_list_btn.label</note>
+      </trans-unit>
+      <trans-unit id="e5ff83a559e038d982d19b736845c6ea019f5b26" resname="numbered_list_decimal_btn.label">
+        <source>Decimal</source>
+        <target state="new">Decimal</target>
+        <note>key: numbered_list_decimal_btn.label</note>
+      </trans-unit>
+      <trans-unit id="e24538dfd2ecdad33c911356de12964d90794fad" resname="numbered_list_decimal_leading_zero_btn.label">
+        <source>Decimal with leading zero</source>
+        <target state="new">Decimal with leading zero</target>
+        <note>key: numbered_list_decimal_leading_zero_btn.label</note>
+      </trans-unit>
+      <trans-unit id="6827cbc6196cb624ace6cfca7448c19dcd658cf6" resname="numbered_list_lower_latin_btn.label">
+        <source>Lower-latin</source>
+        <target state="new">Lower-latin</target>
+        <note>key: numbered_list_lower_latin_btn.label</note>
+      </trans-unit>
+      <trans-unit id="5b3d3af5361fa0e2c0deeb0b3375f6b8984743d9" resname="numbered_list_lower_roman_btn.label">
+        <source>Lower-roman</source>
+        <target state="new">Lower-roman</target>
+        <note>key: numbered_list_lower_roman_btn.label</note>
+      </trans-unit>
+      <trans-unit id="9b11a66d415cf50c0c8f4230664202aaadac8c78" resname="numbered_list_upper_latin_btn.label">
+        <source>Upper-latin</source>
+        <target state="new">Upper-latin</target>
+        <note>key: numbered_list_upper_latin_btn.label</note>
+      </trans-unit>
+      <trans-unit id="19afeb77e96f65cfd03554011ecb7a43483322a4" resname="numbered_list_upper_roman_btn.label">
+        <source>Upper-roman</source>
+        <target state="new">Upper-roman</target>
+        <note>key: numbered_list_upper_roman_btn.label</note>
+      </trans-unit>
       <trans-unit id="8088c7f764bb2c276aa5a773d894de2860e9e0b4" resname="remove_block.title">
         <source>Remove</source>
         <target state="new">Remove</target>
         <note>key: remove_block.title</note>
+      </trans-unit>
+      <trans-unit id="994c86efdcdc4e5db5aab3b391051eab3b82ccc9" resname="special_characters_btn.label">
+        <source>Special characters</source>
+        <target state="new">Special characters</target>
+        <note>key: special_characters_btn.label</note>
+      </trans-unit>
+      <trans-unit id="928a20984283fd0c72b7928f96f203f4d3681e07" resname="strikethrough_btn.label">
+        <source>Strikethrough</source>
+        <target state="new">Strikethrough</target>
+        <note>key: strikethrough_btn.label</note>
+      </trans-unit>
+      <trans-unit id="1239bd7ca8264ebe43c8ea4b8a0f65f6a8f2a871" resname="subscript_btn.label">
+        <source>Subscript</source>
+        <target state="new">Subscript</target>
+        <note>key: subscript_btn.label</note>
+      </trans-unit>
+      <trans-unit id="c411f5e01621d10502208ca786037ccb015662f6" resname="superscript_btn.label">
+        <source>Superscript</source>
+        <target state="new">Superscript</target>
+        <note>key: superscript_btn.label</note>
+      </trans-unit>
+      <trans-unit id="63524491e6970e55a799ac316cde8af0a28106ed" resname="text_align_center_btn.label">
+        <source>Align center</source>
+        <target state="new">Align center</target>
+        <note>key: text_align_center_btn.label</note>
+      </trans-unit>
+      <trans-unit id="03d040bc1240e465fd590f329324006005600a6e" resname="text_align_justify_btn.label">
+        <source>Justify</source>
+        <target state="new">Justify</target>
+        <note>key: text_align_justify_btn.label</note>
+      </trans-unit>
+      <trans-unit id="666d0e93c1d10379c28667c6b8a5205de69e6ed0" resname="text_align_left_btn.label">
+        <source>Align left</source>
+        <target state="new">Align left</target>
+        <note>key: text_align_left_btn.label</note>
+      </trans-unit>
+      <trans-unit id="d90b6ee677c7203a977cb0e649cb74d797e7ea9a" resname="text_align_right_btn.label">
+        <source>Align right</source>
+        <target state="new">Align right</target>
+        <note>key: text_align_right_btn.label</note>
+      </trans-unit>
+      <trans-unit id="1653f5eca5bc3d16922be6090d0e87e086110c4a" resname="text_alignment_btn.label">
+        <source>Text alignment</source>
+        <target state="new">Text alignment</target>
+        <note>key: text_alignment_btn.label</note>
+      </trans-unit>
+      <trans-unit id="68e9c9bf0ce91623f9ccc573e31c47d241f9e440" resname="underline_btn.label">
+        <source>Underline</source>
+        <target state="new">Underline</target>
+        <note>key: underline_btn.label</note>
       </trans-unit>
       <trans-unit id="e66c892cf81b07c5edd1419a197054defd635b77" resname="upload_image.message.error">
         <source>Error while creating Image: %error%</source>
