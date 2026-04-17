@@ -58,7 +58,7 @@ class IbexaTable extends Plugin {
         };
 
         this.listenTo(editor.ui, 'update', fixBalloonOverlap, { priority: 'low' });
-        document.defaultView.addEventListener('scroll', fixBalloonOverlap, { capture: true, passive: true });
+        document.addEventListener('scroll', fixBalloonOverlap, { capture: true, passive: true });
     }
 }
 
