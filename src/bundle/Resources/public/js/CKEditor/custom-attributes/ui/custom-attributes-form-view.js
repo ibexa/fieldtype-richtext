@@ -7,17 +7,15 @@ import Collection from '@ckeditor/ckeditor5-utils/src/collection';
 import { createLabeledInputText, createLabeledDropdown } from '@ckeditor/ckeditor5-ui/src/labeledfield/utils';
 import { addListToDropdown } from '@ckeditor/ckeditor5-ui/src/dropdown/utils';
 
-import { getTranslator } from '@ibexa-admin-ui/src/bundle/Resources/public/js/scripts/helpers/context.helper';
-
 import { createLabeledInputNumber } from '../../common/input-number/utils';
 import { createLabeledSwitchButton } from '../../common/switch-button/utils';
 import { addMultivalueSupport } from '../../common/multivalue-dropdown/utils';
 
+const { Translator } = window;
+
 class IbexaCustomAttributesFormView extends View {
     constructor(props) {
         super(props);
-
-        const Translator = getTranslator();
 
         this.locale = props.locale;
         this.saveButtonView = this.createButton(
