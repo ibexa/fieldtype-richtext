@@ -16,10 +16,25 @@
         <target state="new">A valid anchor link is needed.</target>
         <note>key: anchor_btn.error.valid</note>
       </trans-unit>
+      <trans-unit id="4ab23dd2b761a9f1db3704416bed038dc06f1625" resname="anchor_btn.input.name">
+        <source>Name</source>
+        <target state="new">Name</target>
+        <note>key: anchor_btn.input.name</note>
+      </trans-unit>
       <trans-unit id="2fec67b71cd77563c4e494477e691ba9661d95fe" resname="anchor_btn.label">
         <source>Anchor</source>
         <target state="new">Anchor</target>
         <note>key: anchor_btn.label</note>
+      </trans-unit>
+      <trans-unit id="db29c4c0eedb9f53fc1e570a20cddb4c391dd290" resname="anchor_btn.remove.label">
+        <source>Remove</source>
+        <target state="new">Remove</target>
+        <note>key: anchor_btn.remove.label</note>
+      </trans-unit>
+      <trans-unit id="e04cfecaf1fb746f1077e13be1ef8c163d0d5ec5" resname="anchor_btn.save.label">
+        <source>Save</source>
+        <target state="new">Save</target>
+        <note>key: anchor_btn.save.label</note>
       </trans-unit>
       <trans-unit id="18521c98ecdb47eba2ceee2926516d53f89b0e34" resname="block_alignment.center">
         <source>Center</source>
@@ -66,6 +81,21 @@
         <target state="new">Square</target>
         <note>key: bulleted_list_square_btn.label</note>
       </trans-unit>
+      <trans-unit id="1f8a183a4d1d4d74a5ce13f45a008bac73c2b878" resname="custom_attributes.remove.label">
+        <source>Remove</source>
+        <target state="new">Remove</target>
+        <note>key: custom_attributes.remove.label</note>
+      </trans-unit>
+      <trans-unit id="39cd8d778cc5462b7ab99f304fcf7f906e988b2f" resname="custom_attributes.revert.label">
+        <source>Revert to saved</source>
+        <target state="new">Revert to saved</target>
+        <note>key: custom_attributes.revert.label</note>
+      </trans-unit>
+      <trans-unit id="dc8843e639e3ecba7dca9905a701d12eafc44c54" resname="custom_attributes.save.label">
+        <source>Save</source>
+        <target state="new">Save</target>
+        <note>key: custom_attributes.save.label</note>
+      </trans-unit>
       <trans-unit id="250e037cfe2d6e349e2da22428ac75e7559f1d66" resname="custom_attributes_btn.label">
         <source>Custom attributes</source>
         <target state="new">Custom attributes</target>
@@ -75,6 +105,16 @@
         <source>Custom styles</source>
         <target state="new">Custom styles</target>
         <note>key: custom_styles_btn.label</note>
+      </trans-unit>
+      <trans-unit id="b3206e346182e25a8b3d0ff8ab6d34fbcc713eca" resname="custom_tag.cancel.label">
+        <source>Cancel</source>
+        <target state="new">Cancel</target>
+        <note>key: custom_tag.cancel.label</note>
+      </trans-unit>
+      <trans-unit id="4642c8bf0fe5579726d5ce6a28a6ecfeef5f2737" resname="custom_tag.save.label">
+        <source>Save</source>
+        <target state="new">Save</target>
+        <note>key: custom_tag.save.label</note>
       </trans-unit>
       <trans-unit id="1027bcb4083e4adb65f39bfa202e9a6968327ef2" resname="custom_tag.settings.label">
         <source>Settings</source>
@@ -146,10 +186,50 @@
         <target state="new">A valid link is needed.</target>
         <note>key: link_btn.error.valid</note>
       </trans-unit>
+      <trans-unit id="79f4ef7374ddae6ec8a697de5aaf84ab29786aac" resname="link_btn.input.title">
+        <source>Title</source>
+        <target state="new">Title</target>
+        <note>key: link_btn.input.title</note>
+      </trans-unit>
+      <trans-unit id="9675a032fdb0a24b98a2f10392454eed40c2f5cc" resname="link_btn.input.url">
+        <source>Link to</source>
+        <target state="new">Link to</target>
+        <note>key: link_btn.input.url</note>
+      </trans-unit>
       <trans-unit id="111f9659ed2bb03c3009baafc54a24b0a8cab5c4" resname="link_btn.label">
         <source>Link</source>
         <target state="new">Link</target>
         <note>key: link_btn.label</note>
+      </trans-unit>
+      <trans-unit id="08499e240f53a85b0903a671566701d6c14bd5e0" resname="link_btn.open_in_tab.label">
+        <source>Open in tab</source>
+        <target state="new">Open in tab</target>
+        <note>key: link_btn.open_in_tab.label</note>
+      </trans-unit>
+      <trans-unit id="e2ee962de7749dd4262f9bf397d7821c5bee4316" resname="link_btn.remove.label">
+        <source>Remove link</source>
+        <target state="new">Remove link</target>
+        <note>key: link_btn.remove.label</note>
+      </trans-unit>
+      <trans-unit id="1a0be56348c06f3f4f515404114790b94d69cafd" resname="link_btn.remove_attributes.label">
+        <source>Remove attributes</source>
+        <target state="new">Remove attributes</target>
+        <note>key: link_btn.remove_attributes.label</note>
+      </trans-unit>
+      <trans-unit id="fef99c8cc2308146608471cfe13ac4f51a69f9da" resname="link_btn.save.label">
+        <source>Save</source>
+        <target state="new">Save</target>
+        <note>key: link_btn.save.label</note>
+      </trans-unit>
+      <trans-unit id="117e540a4598f927fba295fd7db1c3c1677628bb" resname="link_btn.select_content.label">
+        <source>Select content</source>
+        <target state="new">Select content</target>
+        <note>key: link_btn.select_content.label</note>
+      </trans-unit>
+      <trans-unit id="28c9515009db451ab8e1affb40edaeb51a24042b" resname="link_btn.site_access.label">
+        <source>Site access</source>
+        <target state="new">Site access</target>
+        <note>key: link_btn.site_access.label</note>
       </trans-unit>
       <trans-unit id="082d2d34dd20fe267d5693d3f6a2c8be105c490c" resname="move_down_btn.title">
         <source>Move down</source>

@@ -17,11 +17,27 @@ class IbexaCustomAttributesFormView extends View {
     constructor(props) {
         super(props);
 
-        this.locale = props.locale;
+        const Translator = getTranslator();
 
-        this.saveButtonView = this.createButton('Save', null, 'ck-button-save', 'save-custom-attributes');
-        this.cancelButtonView = this.createButton('Remove', null, 'ck-button-cancel', 'remove-custom-attributes');
-        this.revertButtonView = this.createButton('Revert to saved', null, 'ck-button-revert', 'revert-custom-attributes');
+        this.locale = props.locale;
+        this.saveButtonView = this.createButton(
+            Translator.trans(/*@Desc("Save")*/ 'custom_attributes.save.label', {}, 'ck_editor'),
+            null,
+            'ck-button-save',
+            'save-custom-attributes',
+        );
+        this.cancelButtonView = this.createButton(
+            Translator.trans(/*@Desc("Remove")*/ 'custom_attributes.remove.label', {}, 'ck_editor'),
+            null,
+            'ck-button-cancel',
+            'remove-custom-attributes',
+        );
+        this.revertButtonView = this.createButton(
+            Translator.trans(/*@Desc("Revert to saved")*/ 'custom_attributes.revert.label', {}, 'ck_editor'),
+            null,
+            'ck-button-revert',
+            'revert-custom-attributes',
+        );
 
         this.attributeViews = {};
         this.classesView = null;
@@ -194,7 +210,6 @@ class IbexaCustomAttributesFormView extends View {
     }
 
     createDropdown(config) {
-        const Translator = getTranslator();
         const labeledDropdown = new LabeledFieldView(this.locale, createLabeledDropdown);
         const itemsList = new Collection();
 
