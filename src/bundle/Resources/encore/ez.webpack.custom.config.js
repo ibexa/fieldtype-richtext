@@ -1,5 +1,8 @@
 const Encore = require('@symfony/webpack-encore');
 const path = require('path');
+const { CKEditorTranslationsPlugin } = require(
+    path.resolve('./public/bundles/ibexaadminuiassets/vendors/@ckeditor/ckeditor5-dev-translations'),
+);
 const { styles } = require(path.resolve('./public/bundles/ibexaadminuiassets/vendors/@ckeditor/ckeditor5-dev-utils'));
 const ibexaConfigManager = require(path.resolve('./ibexa.webpack.config.manager.js'));
 const configManagers = require(path.resolve('./var/encore/ibexa.richtext.config.manager.js'));
@@ -67,5 +70,13 @@ configManagers.forEach((configManagerPath) => {
 
     configManager(customConfig, ibexaConfigManager);
 });
+
+customConfig.plugins.push(
+    new CKEditorTranslationsPlugin({
+        language: 'en',
+        additionalLanguages: ['de', 'el', 'es', 'fr', 'hr', 'hu', 'it', 'ja', 'nb', 'pl', 'pt', 'ru', 'zh'],
+        translationsOutputFile: /ibexa-richtext-onlineeditor-js.*\.js$/,
+    }),
+);
 
 module.exports = customConfig;
