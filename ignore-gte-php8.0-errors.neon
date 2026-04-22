@@ -4,9 +4,3 @@ parameters:
 			message: "#^Parameter \\#1 \\$string of function trim expects string, string\\|false given\\.$#"
 			count: 1
 			path: src/lib/RichText/Converter/Render/Template.php
-
-		-
-			message: '#^Parameter \#2 \$child of method DOMNode\:\:replaceChild\(\) expects DOMNode, DOMNameSpaceNode\|DOMNode given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/lib/RichText/XMLSanitizer.php
