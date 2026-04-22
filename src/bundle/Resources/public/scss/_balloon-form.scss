@@ -203,7 +203,7 @@
 
             &.ck-button-cancel,
             &.ck-button-revert,
-            &.ibexa-btn--select-content {
+            &.ids-btn--select-content {
                 color: $ibexa-color-primary;
                 fill: $ibexa-color-primary;
                 background-color: $ibexa-color-white;
@@ -228,7 +228,7 @@
                 }
             }
 
-            &.ibexa-btn--select-content {
+            &.ids-btn--select-content {
                 margin-bottom: calculateRem(12px);
             }
         }
