@@ -28,7 +28,7 @@ class IbexaLinkFormView extends View {
         this.saveButtonView = this.createButton('Save', null, 'ck-button-save', 'save-link');
         this.cancelButtonView = this.createButton('Remove link', null, 'ck-button-cancel', 'remove-link');
         this.removeCustomAttributesButtonView = this.createButton('Remove attributes', null, 'ck-button-cancel');
-        this.selectContentButtonView = this.createButton('Select content', null, 'ibexa-btn--select-content');
+        this.selectContentButtonView = this.createButton('Select content', null, 'ids-btn--select-content');
         this.urlInputView = this.createTextInput({ label: 'Link to' });
         this.titleView = this.createTextInput({ label: 'Title' });
         this.targetSwitcherView = this.createBoolean({ label: 'Open in tab' });
