@@ -163,14 +163,140 @@ parameters:
 			path: src/lib/Configuration/UI/Mapper/CustomTag.php
 
 		-
+			message: '#^Method Ibexa\\FieldTypeRichText\\Configuration\\UI\\Mapper\\CustomTemplateConfigMapper\:\:mapConfig\(\) has parameter \$enabledCustomTemplates with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/lib/Configuration/UI/Mapper/CustomTemplateConfigMapper.php
+
+		-
+			message: '#^Method Ibexa\\FieldTypeRichText\\Configuration\\UI\\Mapper\\CustomTemplateConfigMapper\:\:mapConfig\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/lib/Configuration/UI/Mapper/CustomTemplateConfigMapper.php
+
+		-
+			message: '#^Call to method trans\(\) on an unknown class Symfony\\Component\\Translation\\TranslatorInterface\.$#'
+			identifier: class.notFound
+			count: 2
+			path: src/lib/Configuration/UI/Mapper/OnlineEditor.php
+
+		-
+			message: '#^Method Ibexa\\FieldTypeRichText\\Configuration\\UI\\Mapper\\OnlineEditor\:\:mapCssClassesConfiguration\(\) has parameter \$semanticConfiguration with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/lib/Configuration/UI/Mapper/OnlineEditor.php
+
+		-
+			message: '#^Method Ibexa\\FieldTypeRichText\\Configuration\\UI\\Mapper\\OnlineEditor\:\:mapCssClassesConfiguration\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/lib/Configuration/UI/Mapper/OnlineEditor.php
+
+		-
+			message: '#^Method Ibexa\\FieldTypeRichText\\Configuration\\UI\\Mapper\\OnlineEditor\:\:mapDataAttributesConfiguration\(\) has parameter \$semanticConfiguration with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/lib/Configuration/UI/Mapper/OnlineEditor.php
+
+		-
+			message: '#^Method Ibexa\\FieldTypeRichText\\Configuration\\UI\\Mapper\\OnlineEditor\:\:mapDataAttributesConfiguration\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/lib/Configuration/UI/Mapper/OnlineEditor.php
+
+		-
+			message: '#^Property Ibexa\\FieldTypeRichText\\Configuration\\UI\\Mapper\\OnlineEditor\:\:\$translator \(Symfony\\Component\\Translation\\TranslatorInterface\) does not accept Symfony\\Contracts\\Translation\\TranslatorInterface\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: src/lib/Configuration/UI/Mapper/OnlineEditor.php
+
+		-
+			message: '#^Property Ibexa\\FieldTypeRichText\\Configuration\\UI\\Mapper\\OnlineEditor\:\:\$translator has unknown class Symfony\\Component\\Translation\\TranslatorInterface as its type\.$#'
+			identifier: class.notFound
+			count: 1
+			path: src/lib/Configuration/UI/Mapper/OnlineEditor.php
+
+		-
+			message: '#^Method Ibexa\\FieldTypeRichText\\Configuration\\UI\\Mapper\\OnlineEditorConfigMapper\:\:mapCssClassesConfiguration\(\) has parameter \$semanticSemanticConfiguration with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/lib/Configuration/UI/Mapper/OnlineEditorConfigMapper.php
+
+		-
+			message: '#^Method Ibexa\\FieldTypeRichText\\Configuration\\UI\\Mapper\\OnlineEditorConfigMapper\:\:mapCssClassesConfiguration\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/lib/Configuration/UI/Mapper/OnlineEditorConfigMapper.php
+
+		-
+			message: '#^Method Ibexa\\FieldTypeRichText\\Configuration\\UI\\Mapper\\OnlineEditorConfigMapper\:\:mapDataAttributesConfiguration\(\) has parameter \$semanticConfiguration with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/lib/Configuration/UI/Mapper/OnlineEditorConfigMapper.php
+
+		-
+			message: '#^Method Ibexa\\FieldTypeRichText\\Configuration\\UI\\Mapper\\OnlineEditorConfigMapper\:\:mapDataAttributesConfiguration\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/lib/Configuration/UI/Mapper/OnlineEditorConfigMapper.php
+
+		-
 			message: '#^Call to an undefined method DOMNameSpaceNode\|DOMNode\:\:setAttribute\(\)\.$#'
 			identifier: method.notFound
 			count: 2
 			path: src/lib/FieldType/RichText/RichTextStorage.php
 
 		-
-			message: '#^Class Ibexa\\FieldTypeRichText\\FieldType\\RichText\\RichTextStorage extends generic class Ibexa\\Contracts\\Core\\FieldType\\GatewayBasedStorage but does not specify its types\: T$#'
-			identifier: missingType.generics
+			message: '#^Offset 2 might not exist on list\{0\: string, 1\: ''ezremote\://'', 2\?\: string, 3\?\: string\}\.$#'
+			identifier: offsetAccess.notFound
+			count: 1
+			path: src/lib/FieldType/RichText/RichTextStorage.php
+
+		-
+			message: '#^Method Ibexa\\FieldTypeRichText\\FieldType\\RichText\\RichTextStorage\:\:deleteFieldData\(\) has parameter \$context with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/lib/FieldType/RichText/RichTextStorage.php
+
+		-
+			message: '#^Method Ibexa\\FieldTypeRichText\\FieldType\\RichText\\RichTextStorage\:\:deleteFieldData\(\) has parameter \$fieldIds with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/lib/FieldType/RichText/RichTextStorage.php
+
+		-
+			message: '#^Method Ibexa\\FieldTypeRichText\\FieldType\\RichText\\RichTextStorage\:\:deleteFieldData\(\) should return bool but return statement is missing\.$#'
+			identifier: return.missing
+			count: 1
+			path: src/lib/FieldType/RichText/RichTextStorage.php
+
+		-
+			message: '#^Method Ibexa\\FieldTypeRichText\\FieldType\\RichText\\RichTextStorage\:\:getFieldData\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/lib/FieldType/RichText/RichTextStorage.php
+
+		-
+			message: '#^Method Ibexa\\FieldTypeRichText\\FieldType\\RichText\\RichTextStorage\:\:getFieldData\(\) has parameter \$context with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/lib/FieldType/RichText/RichTextStorage.php
+
+		-
+			message: '#^Method Ibexa\\FieldTypeRichText\\FieldType\\RichText\\RichTextStorage\:\:getIndexData\(\) has parameter \$context with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/lib/FieldType/RichText/RichTextStorage.php
+
+		-
+			message: '#^Method Ibexa\\FieldTypeRichText\\FieldType\\RichText\\RichTextStorage\:\:getIndexData\(\) should return array\<Ibexa\\Contracts\\Core\\Search\\Field\> but return statement is missing\.$#'
+			identifier: return.missing
+			count: 1
+			path: src/lib/FieldType/RichText/RichTextStorage.php
+
+		-
+			message: '#^Method Ibexa\\FieldTypeRichText\\FieldType\\RichText\\RichTextStorage\:\:storeFieldData\(\) has parameter \$context with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/lib/FieldType/RichText/RichTextStorage.php
 
@@ -325,14 +451,44 @@ parameters:
 			path: src/lib/RichText/Converter/Link.php
 
 		-
+			message: '#^Property Ibexa\\Core\\Persistence\\Legacy\\Content\\StorageFieldValue\:\:\$sortKeyString \(string\) does not accept bool\|float\|int\|string\|null\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: src/lib/Persistence/Legacy/RichTextFieldValueConverter.php
+
+		-
+			message: '#^Argument of an invalid type DOMNodeList\<DOMNameSpaceNode\|DOMNode\>\|false supplied for foreach, only iterables are supported\.$#'
+			identifier: foreach.nonIterable
+			count: 1
+			path: src/lib/RichText/Converter/Link.php
+
+		-
+			message: '#^Offset 1 might not exist on array\{\}\|list\{0\: string, 1\?\: string, 2\?\: string, 3\?\: string\}\.$#'
+			identifier: offsetAccess.notFound
+			count: 1
+			path: src/lib/RichText/Converter/Link.php
+
+		-
+			message: '#^Offset 2 might not exist on array\{\}\|list\{0\: string, 1\?\: string, 2\?\: string, 3\?\: string\}\.$#'
+			identifier: offsetAccess.notFound
+			count: 1
+			path: src/lib/RichText/Converter/Link.php
+
+		-
 			message: '#^Offset 3 might not exist on array\{\}\|list\{0\: string, 1\?\: string, 2\?\: string, 3\?\: string\}\.$#'
 			identifier: offsetAccess.notFound
 			count: 1
 			path: src/lib/RichText/Converter/Link.php
 
 		-
-			message: '#^Parameter \#1 \$locationId of method Ibexa\\Contracts\\Core\\Repository\\LocationService\:\:loadLocation\(\) expects int, int\|null given\.$#'
-			identifier: argument.type
+			message: '#^Offset 2 might not exist on array\{\}\|list\{0\: string, 1\?\: string, 2\?\: string, 3\?\: string\}\.$#'
+			identifier: offsetAccess.notFound
+			count: 1
+			path: src/lib/RichText/Converter/Link.php
+
+		-
+			message: '#^Property Ibexa\\FieldTypeRichText\\RichText\\Converter\\Link\:\:\$logger \(Psr\\Log\\LoggerInterface\) does not accept Psr\\Log\\LoggerInterface\|null\.$#'
+			identifier: assign.propertyType
 			count: 1
 			path: src/lib/RichText/Converter/Link.php
 
@@ -417,6 +573,54 @@ parameters:
 		-
 			message: '#^Cannot call method error\(\) on Psr\\Log\\LoggerInterface\|null\.$#'
 			identifier: method.nonObject
+			count: 1
+			path: src/lib/RichText/Converter/Render/Embed.php
+
+		-
+			message: '#^Method Ibexa\\FieldTypeRichText\\RichText\\Converter\\Render\\Embed\:\:extractCustomDataAttributes\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/lib/RichText/Converter/Render/Embed.php
+
+		-
+			message: '#^Method Ibexa\\FieldTypeRichText\\RichText\\Converter\\Render\\Embed\:\:extractLinkParameters\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/lib/RichText/Converter/Render/Embed.php
+
+		-
+			message: '#^Method Ibexa\\FieldTypeRichText\\RichText\\Converter\\Render\\Embed\:\:extractLinkParameters\(\) should return array but returns null\.$#'
+			identifier: return.type
+			count: 2
+			path: src/lib/RichText/Converter/Render/Embed.php
+
+		-
+			message: '#^Method Ibexa\\FieldTypeRichText\\RichText\\Converter\\Render\\Embed\:\:extractParameters\(\) has parameter \$tagName with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/lib/RichText/Converter/Render/Embed.php
+
+		-
+			message: '#^Method Ibexa\\FieldTypeRichText\\RichText\\Converter\\Render\\Embed\:\:extractParameters\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/lib/RichText/Converter/Render/Embed.php
+
+		-
+			message: '#^Method Ibexa\\FieldTypeRichText\\RichText\\Converter\\Render\\Embed\:\:mapLinkTarget\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/lib/RichText/Converter/Render/Embed.php
+
+		-
+			message: '#^Method Ibexa\\FieldTypeRichText\\RichText\\Converter\\Render\\Embed\:\:processTag\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/lib/RichText/Converter/Render/Embed.php
+
+		-
+			message: '#^Method Ibexa\\FieldTypeRichText\\RichText\\Converter\\Render\\Embed\:\:processTag\(\) has parameter \$tagName with no type specified\.$#'
+			identifier: missingType.parameter
 			count: 1
 			path: src/lib/RichText/Converter/Render/Embed.php
 
@@ -535,6 +739,138 @@ parameters:
 			path: src/lib/RichText/RelationProcessor.php
 
 		-
+			message: '#^Method Ibexa\\FieldTypeRichText\\RichText\\RelationProcessor\:\:getRelations\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/lib/RichText/RelationProcessor.php
+
+		-
+			message: '#^Offset 1 might not exist on array\{\}\|list\{0\: non\-falsy\-string, 1\: non\-empty\-string, 2\?\: string, 3\?\: string\}\.$#'
+			identifier: offsetAccess.notFound
+			count: 1
+			path: src/lib/RichText/RelationProcessor.php
+
+		-
+			message: '#^Offset 2 might not exist on array\{\}\|list\{0\: non\-falsy\-string, 1\: non\-empty\-string, 2\?\: string, 3\?\: string\}\.$#'
+			identifier: offsetAccess.notFound
+			count: 1
+			path: src/lib/RichText/RelationProcessor.php
+
+		-
+			message: '#^Cannot call method error\(\) on Psr\\Log\\LoggerInterface\|null\.$#'
+			identifier: method.nonObject
+			count: 13
+			path: src/lib/RichText/Renderer.php
+
+		-
+			message: '#^Cannot call method warning\(\) on Psr\\Log\\LoggerInterface\|null\.$#'
+			identifier: method.nonObject
+			count: 6
+			path: src/lib/RichText/Renderer.php
+
+		-
+			message: '#^Method Ibexa\\FieldTypeRichText\\RichText\\Renderer\:\:__construct\(\) has parameter \$customStylesConfiguration with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/lib/RichText/Renderer.php
+
+		-
+			message: '#^Method Ibexa\\FieldTypeRichText\\RichText\\Renderer\:\:__construct\(\) has parameter \$customTagsConfiguration with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/lib/RichText/Renderer.php
+
+		-
+			message: '#^Method Ibexa\\FieldTypeRichText\\RichText\\Renderer\:\:checkContentPermissions\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/lib/RichText/Renderer.php
+
+		-
+			message: '#^Method Ibexa\\FieldTypeRichText\\RichText\\Renderer\:\:getEmbedTemplateName\(\) has parameter \$isDenied with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/lib/RichText/Renderer.php
+
+		-
+			message: '#^Method Ibexa\\FieldTypeRichText\\RichText\\Renderer\:\:getEmbedTemplateName\(\) has parameter \$isInline with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/lib/RichText/Renderer.php
+
+		-
+			message: '#^Method Ibexa\\FieldTypeRichText\\RichText\\Renderer\:\:getEmbedTemplateName\(\) has parameter \$resourceType with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/lib/RichText/Renderer.php
+
+		-
+			message: '#^Method Ibexa\\FieldTypeRichText\\RichText\\Renderer\:\:render\(\) has parameter \$parameters with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/lib/RichText/Renderer.php
+
+		-
+			message: '#^Method Ibexa\\FieldTypeRichText\\RichText\\Renderer\:\:renderContentEmbed\(\) has parameter \$parameters with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/lib/RichText/Renderer.php
+
+		-
+			message: '#^Method Ibexa\\FieldTypeRichText\\RichText\\Renderer\:\:renderContentEmbed\(\) should return string but returns null\.$#'
+			identifier: return.type
+			count: 5
+			path: src/lib/RichText/Renderer.php
+
+		-
+			message: '#^Method Ibexa\\FieldTypeRichText\\RichText\\Renderer\:\:renderLocationEmbed\(\) has parameter \$parameters with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/lib/RichText/Renderer.php
+
+		-
+			message: '#^Method Ibexa\\FieldTypeRichText\\RichText\\Renderer\:\:renderLocationEmbed\(\) should return string but returns null\.$#'
+			identifier: return.type
+			count: 4
+			path: src/lib/RichText/Renderer.php
+
+		-
+			message: '#^Method Ibexa\\FieldTypeRichText\\RichText\\Renderer\:\:renderTemplate\(\) has parameter \$parameters with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/lib/RichText/Renderer.php
+
+		-
+			message: '#^Method Ibexa\\FieldTypeRichText\\RichText\\Renderer\:\:renderTemplate\(\) should return string but returns null\.$#'
+			identifier: return.type
+			count: 2
+			path: src/lib/RichText/Renderer.php
+
+		-
+			message: '#^Parameter \#1 \$locationId of method Ibexa\\Contracts\\Core\\Repository\\LocationService\:\:loadLocation\(\) expects int, int\|string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/lib/RichText/Renderer.php
+
+		-
+			message: '#^Property Ibexa\\FieldTypeRichText\\RichText\\Renderer\:\:\$customStylesConfiguration type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/lib/RichText/Renderer.php
+
+		-
+			message: '#^Property Ibexa\\FieldTypeRichText\\RichText\\Renderer\:\:\$customTagsConfiguration type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/lib/RichText/Renderer.php
+
+		-
+			message: '#^Property Ibexa\\FieldTypeRichText\\RichText\\Renderer\:\:\$repository \(Ibexa\\Core\\Repository\\Repository\) does not accept Ibexa\\Contracts\\Core\\Repository\\Repository\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: src/lib/RichText/Renderer.php
+
+		-
 			message: '#^Cannot access property \$textContent on DOMNode\|null\.$#'
 			identifier: property.nonObject
 			count: 1
@@ -553,8 +889,26 @@ parameters:
 			path: src/lib/RichText/Validator/InternalLinkValidator.php
 
 		-
+			message: '#^Offset 1 might not exist on array\{\}\|list\{0\: non\-falsy\-string, 1\: non\-empty\-string, 2\?\: string, 3\?\: string\}\.$#'
+			identifier: offsetAccess.notFound
+			count: 1
+			path: src/lib/RichText/Validator/InternalLinkValidator.php
+
+		-
 			message: '#^Offset 2 might not exist on array\{\}\|list\{0\: non\-falsy\-string, 1\: non\-empty\-string, 2\?\: string, 3\?\: string\}\.$#'
 			identifier: offsetAccess.notFound
+			count: 1
+			path: src/lib/RichText/Validator/InternalLinkValidator.php
+
+		-
+			message: '#^PHPDoc tag @var has invalid value \(\\Ibexa\\Contracts\\Core\\Persistence\\Content\\Location\\Handler;\)\: Unexpected token ";", expected TOKEN_HORIZONTAL_WS at offset 74 on line 2$#'
+			identifier: phpDoc.parseError
+			count: 1
+			path: src/lib/RichText/Validator/InternalLinkValidator.php
+
+		-
+			message: '#^Property Ibexa\\FieldTypeRichText\\RichText\\Validator\\InternalLinkValidator\:\:\$locationHandler has no type specified\.$#'
+			identifier: missingType.property
 			count: 1
 			path: src/lib/RichText/Validator/InternalLinkValidator.php
 
@@ -887,3 +1241,165 @@ parameters:
 			identifier: missingType.iterableValue
 			count: 1
 			path: tests/lib/RichText/Validator/InternalLinkValidatorTest.php
+
+		-
+			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Validator\\InternalLinkValidatorTest\:\:createInputDocument\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: tests/lib/RichText/Validator/InternalLinkValidatorTest.php
+
+		-
+			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Validator\\InternalLinkValidatorTest\:\:createInputDocument\(\) has parameter \$id with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: tests/lib/RichText/Validator/InternalLinkValidatorTest.php
+
+		-
+			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Validator\\InternalLinkValidatorTest\:\:createInputDocument\(\) has parameter \$scheme with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: tests/lib/RichText/Validator/InternalLinkValidatorTest.php
+
+		-
+			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Validator\\InternalLinkValidatorTest\:\:getInternalLinkValidator\(\) has invalid return type Ibexa\\FieldTypeRichText\\FieldType\\RichText\\InternalLinkValidator\.$#'
+			identifier: class.notFound
+			count: 1
+			path: tests/lib/RichText/Validator/InternalLinkValidatorTest.php
+
+		-
+			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Validator\\InternalLinkValidatorTest\:\:getInternalLinkValidator\(\) has parameter \$methods with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: tests/lib/RichText/Validator/InternalLinkValidatorTest.php
+
+		-
+			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Validator\\InternalLinkValidatorTest\:\:getInternalLinkValidator\(\) should return Ibexa\\FieldTypeRichText\\FieldType\\RichText\\InternalLinkValidator&PHPUnit\\Framework\\MockObject\\MockObject but returns Ibexa\\FieldTypeRichText\\RichText\\Validator\\InternalLinkValidator&PHPUnit\\Framework\\MockObject\\MockObject\.$#'
+			identifier: return.type
+			count: 1
+			path: tests/lib/RichText/Validator/InternalLinkValidatorTest.php
+
+		-
+			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Validator\\InternalLinkValidatorTest\:\:setupInternalLinkValidator\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: tests/lib/RichText/Validator/InternalLinkValidatorTest.php
+
+		-
+			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Validator\\InternalLinkValidatorTest\:\:testValidateDocumentEzContentExistingContentId\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: tests/lib/RichText/Validator/InternalLinkValidatorTest.php
+
+		-
+			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Validator\\InternalLinkValidatorTest\:\:testValidateDocumentEzContentExistingLocationId\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: tests/lib/RichText/Validator/InternalLinkValidatorTest.php
+
+		-
+			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Validator\\InternalLinkValidatorTest\:\:testValidateDocumentEzContentNonExistingContentId\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: tests/lib/RichText/Validator/InternalLinkValidatorTest.php
+
+		-
+			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Validator\\InternalLinkValidatorTest\:\:testValidateDocumentEzContentNonExistingLocationId\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: tests/lib/RichText/Validator/InternalLinkValidatorTest.php
+
+		-
+			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Validator\\InternalLinkValidatorTest\:\:testValidateDocumentEzRemoteExistingId\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: tests/lib/RichText/Validator/InternalLinkValidatorTest.php
+
+		-
+			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Validator\\InternalLinkValidatorTest\:\:testValidateDocumentEzRemoteNonExistingId\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: tests/lib/RichText/Validator/InternalLinkValidatorTest.php
+
+		-
+			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Validator\\InternalLinkValidatorTest\:\:testValidateDocumentSkipMissingTargetId\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: tests/lib/RichText/Validator/InternalLinkValidatorTest.php
+
+		-
+			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Validator\\InternalLinkValidatorTest\:\:testValidateEzContentNonExistingContentId\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: tests/lib/RichText/Validator/InternalLinkValidatorTest.php
+
+		-
+			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Validator\\InternalLinkValidatorTest\:\:testValidateEzContentWithExistingContentId\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: tests/lib/RichText/Validator/InternalLinkValidatorTest.php
+
+		-
+			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Validator\\InternalLinkValidatorTest\:\:testValidateEzLocationWithExistingLocationId\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: tests/lib/RichText/Validator/InternalLinkValidatorTest.php
+
+		-
+			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Validator\\InternalLinkValidatorTest\:\:testValidateEzLocationWithNonExistingLocationId\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: tests/lib/RichText/Validator/InternalLinkValidatorTest.php
+
+		-
+			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Validator\\InternalLinkValidatorTest\:\:testValidateEzRemoteWithExistingRemoteId\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: tests/lib/RichText/Validator/InternalLinkValidatorTest.php
+
+		-
+			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Validator\\InternalLinkValidatorTest\:\:testValidateEzRemoteWithNonExistingRemoteId\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: tests/lib/RichText/Validator/InternalLinkValidatorTest.php
+
+		-
+			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Validator\\InternalLinkValidatorTest\:\:testValidateFailOnNotSupportedSchema\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: tests/lib/RichText/Validator/InternalLinkValidatorTest.php
+
+		-
+			message: '#^Call to method expects\(\) on an unknown class Ibexa\\FieldTypeRichText\\RichText\\InputHandlerInterface\.$#'
+			identifier: class.notFound
+			count: 6
+			path: tests/lib/Validator/Constraints/RichTextValidatorTest.php
+
+		-
+			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\Validator\\Constraints\\RichTextValidatorTest\:\:createInvalidXmlExceptionMock\(\) has parameter \$errors with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: tests/lib/Validator/Constraints/RichTextValidatorTest.php
+
+		-
+			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\Validator\\Constraints\\RichTextValidatorTest\:\:fetchErrorMessages\(\) has parameter \$errors with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: tests/lib/Validator/Constraints/RichTextValidatorTest.php
+
+		-
+			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\Validator\\Constraints\\RichTextValidatorTest\:\:fetchErrorMessages\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: tests/lib/Validator/Constraints/RichTextValidatorTest.php
+
+		-
+			message: '#^Property Ibexa\\Tests\\FieldTypeRichText\\Validator\\Constraints\\RichTextValidatorTest\:\:\$inputHandler \(Ibexa\\FieldTypeRichText\\RichText\\InputHandlerInterface&PHPUnit\\Framework\\MockObject\\MockObject\) does not accept Ibexa\\Contracts\\FieldTypeRichText\\RichText\\InputHandlerInterface&PHPUnit\\Framework\\MockObject\\MockObject\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: tests/lib/Validator/Constraints/RichTextValidatorTest.php
+
+		-
+			message: '#^Property Ibexa\\Tests\\FieldTypeRichText\\Validator\\Constraints\\RichTextValidatorTest\:\:\$inputHandler has unknown class Ibexa\\FieldTypeRichText\\RichText\\InputHandlerInterface as its type\.$#'
+			identifier: class.notFound
+			count: 1
+			path: tests/lib/Validator/Constraints/RichTextValidatorTest.php
