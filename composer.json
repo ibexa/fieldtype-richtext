@@ -11,10 +11,10 @@
         "ext-libxml": "*",
         "ext-pdo": "*",
         "ext-xsl": "*",
-        "ibexa/content-forms": "~5.0.x-dev",
-        "ibexa/core": "~5.0.x-dev",
-        "ibexa/http-cache": "~5.0.x-dev",
-        "ibexa/rest": "~5.0.x-dev",
+        "ibexa/content-forms": "~6.0.x-dev",
+        "ibexa/core": "~6.0.x-dev",
+        "ibexa/http-cache": "~6.0.x-dev",
+        "ibexa/rest": "~6.0.x-dev",
         "symfony/asset": "^7.4",
         "symfony/cache": "^7.4",
         "symfony/config": "^7.4",
@@ -31,17 +31,17 @@
     },
     "require-dev": {
         "dama/doctrine-test-bundle": "^8.2",
-        "ibexa/admin-ui": "~5.0.x-dev",
+        "ibexa/admin-ui": "~6.0.x-dev",
         "ibexa/code-style": "~2.0.0",
-        "ibexa/design-engine": "~5.0.x-dev",
-        "ibexa/doctrine-schema": "~5.0.x-dev",
-        "ibexa/notifications": "~5.0.x-dev",
-        "ibexa/rector": "~5.0.x-dev",
-        "ibexa/search": "~5.0.x-dev",
-        "ibexa/solr": "~5.0.x-dev",
-        "ibexa/test-core": "~5.0.x-dev",
-        "ibexa/twig-components": "~5.0.x-dev",
-        "ibexa/user": "~5.0.x-dev",
+        "ibexa/design-engine": "~6.0.x-dev",
+        "ibexa/doctrine-schema": "~6.0.x-dev",
+        "ibexa/notifications": "~6.0.x-dev",
+        "ibexa/rector": "~6.0.x-dev",
+        "ibexa/search": "~6.0.x-dev",
+        "ibexa/solr": "~6.0.x-dev",
+        "ibexa/test-core": "~6.0.x-dev",
+        "ibexa/twig-components": "~6.0.x-dev",
+        "ibexa/user": "~6.0.x-dev",
         "matthiasnoback/symfony-config-test": "^5.0",
         "matthiasnoback/symfony-dependency-injection-test": "^5.0",
         "phpstan/phpstan": "^2.0",
@@ -80,7 +80,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-main": "5.0.x-dev"
+            "dev-main": "6.0.x-dev"
         }
     },
     "config": {
