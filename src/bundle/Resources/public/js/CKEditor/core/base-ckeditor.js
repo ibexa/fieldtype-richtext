@@ -52,6 +52,10 @@ const VIEWPORT_TOP_OFFSET_DISTRACTION_FREE_MODE = 0;
         }
 
         getData() {
+            if (!this.editor) {
+                return '';
+            }
+            
             const notTrimmedData = this.editor.getData({ trim: 'none' });
             const isDataEmpty = notTrimmedData === '<p>&nbsp;</p>';
 
