@@ -218,6 +218,7 @@ class IbexaCustomTagUI extends Plugin {
             return outputValues;
         }, {});
 
+        this.editor.focus();
         this.editor.execute('insertIbexaCustomTag', { customTagName: this.componentName, values });
 
         if (this.hasAttributes()) {
