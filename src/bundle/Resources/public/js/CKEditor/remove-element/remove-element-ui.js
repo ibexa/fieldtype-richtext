@@ -12,6 +12,7 @@ class IbexaRemoveElementUI extends Plugin {
     }
 
     removeBlock() {
+        this.editor.editing.view.focus();
         this.editor.execute('ibexaRemoveElement');
     }
 
