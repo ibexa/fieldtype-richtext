@@ -1,6 +1,12 @@
 parameters:
 	ignoreErrors:
 		-
+			message: '#^Parameter \#1 \$string of function trim expects string, string\|false given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/lib/RichText/Converter/Render/Template.php
+
+		-
 			message: '#^Strict comparison using \!\=\= between DOMNodeList and null will always evaluate to true\.$#'
 			identifier: notIdentical.alwaysTrue
 			count: 1
