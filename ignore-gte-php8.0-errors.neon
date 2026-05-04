@@ -1,6 +1,0 @@
-parameters:
-	ignoreErrors:
-		-
-			message: "#^Parameter \\#1 \\$string of function trim expects string, string\\|false given\\.$#"
-			count: 1
-			path: src/lib/RichText/Converter/Render/Template.php
