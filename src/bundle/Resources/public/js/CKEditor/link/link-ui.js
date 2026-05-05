@@ -16,6 +16,7 @@ class IbexaLinkUI extends Plugin {
         this.showForm = this.showForm.bind(this);
         this.addLink = this.addLink.bind(this);
         this.getLinkRange = this.getLinkRange.bind(this);
+        this.watchKeyboardLinkExit = this.watchKeyboardLinkExit.bind(this);
 
         this.isNew = false;
     }
@@ -36,6 +37,7 @@ class IbexaLinkUI extends Plugin {
             const { url, title, target, ibexaLinkClasses, ibexaLinkAttributes, siteaccess } = this.formView.getValues();
             const { path: firstPosition } = this.editor.model.document.selection.getFirstPosition();
             const { path: lastPosition } = this.editor.model.document.selection.getLastPosition();
+            const originalSelectionLastPosition = this.editor.model.document.selection.getLastPosition();
             const noRangeSelection = firstPosition[0] === lastPosition[0] && firstPosition[1] === lastPosition[1];
 
             const isValueValid = this.isValueValid(url);
@@ -54,13 +56,21 @@ class IbexaLinkUI extends Plugin {
                 });
             }
 
+            this.stopListening(this.editor.ui, 'update');
             this.isNew = false;
 
             this.editor.execute('insertIbexaLink', { href: url, title, target, siteaccess, ibexaLinkClasses, ibexaLinkAttributes });
+
+            this.editor.model.change((writer) => {
+                writer.setSelection(writer.createPositionFromPath(originalSelectionLastPosition.root, originalSelectionLastPosition.path));
+                writer.removeSelectionAttribute('ibexaLinkHref');
+            });
+
             this.hideForm();
         });
 
         this.listenTo(formView, 'remove-link', () => {
+            this.stopListening(this.editor.ui, 'update');
             this.removeLink();
             this.hideForm();
         });
@@ -149,9 +159,12 @@ class IbexaLinkUI extends Plugin {
         });
 
         this.balloon.updatePosition(this.getBalloonPositionData());
+        this.watchKeyboardLinkExit();
     }
 
     hideForm() {
+        this.stopListening(this.editor.ui, 'update');
+
         if (this.isNew) {
             this.editor.model.change((writer) => {
                 const ranges = this.editor.model.schema.getValidRanges(this.editor.model.document.selection.getRanges(), 'ibexaLinkHref');
@@ -201,6 +214,23 @@ class IbexaLinkUI extends Plugin {
             activator: () => this.balloon.hasView(this.formView),
             contextElements: [this.balloon.view.element, document.querySelector('#react-udw')],
             callback: () => this.hideForm(),
+        });
+    }
+
+    watchKeyboardLinkExit() {
+        let prevSelectedLink = this.findLinkElement();
+
+        this.listenTo(this.editor.ui, 'update', () => {
+            const selectedLink = this.findLinkElement();
+            const hasLeftLinkByKeyboard = prevSelectedLink && !selectedLink;
+
+            if (hasLeftLinkByKeyboard) {
+                this.hideForm();
+
+                return;
+            }
+
+            prevSelectedLink = selectedLink;
         });
     }
 
