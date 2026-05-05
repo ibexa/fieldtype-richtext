@@ -95,7 +95,7 @@ class Template extends Render implements Converter
         foreach ($contentNodes as $contentNode) {
             $innerContent .= $this->getCustomTemplateContent($contentNode);
         }
-        $parameters['content'] = !empty($innerContent) ? $innerContent : null;
+        $parameters['content'] = $innerContent !== '' ? $innerContent : null;
 
         foreach ($this->getAttributesMap() as $attribute => $param) {
             if ($template->hasAttribute($attribute)) {
