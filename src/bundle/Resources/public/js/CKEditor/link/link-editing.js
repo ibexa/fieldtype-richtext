@@ -1,11 +1,27 @@
 import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
+import TwoStepCaretMovement from '@ckeditor/ckeditor5-typing/src/twostepcaretmovement';
 
 import IbexaLinkCommand from './link-command';
 import { getCustomAttributesConfig, getCustomClassesConfig } from '../custom-attributes/helpers/config-helper';
 
 class IbexaCustomTagEditing extends Plugin {
     static get requires() {
-        return [];
+        return [TwoStepCaretMovement];
+    }
+
+    enableSelectionAttributesFixer() {
+        const { model } = this.editor;
+        const { selection } = model.document;
+
+        this.listenTo(selection, 'change:attribute', (event, { attributeKeys }) => {
+            if (!attributeKeys.includes('ibexaLinkHref') || selection.hasAttribute('ibexaLinkHref')) {
+                return;
+            }
+
+            model.change((writer) => {
+                writer.removeSelectionAttribute('ibexaLinkHref');
+            });
+        });
     }
 
     defineConverters(customAttributesLinkConfig, customClassesLinkConfig) {
@@ -149,6 +165,9 @@ class IbexaCustomTagEditing extends Plugin {
         if (customClassesLinkConfig) {
             this.editor.model.schema.extend('$text', { allowAttributes: 'ibexaLinkClasses' });
         }
+
+        this.editor.plugins.get(TwoStepCaretMovement).registerAttribute('ibexaLinkHref');
+        this.enableSelectionAttributesFixer();
 
         this.defineConverters(customAttributesLinkConfig, customClassesLinkConfig);
 
