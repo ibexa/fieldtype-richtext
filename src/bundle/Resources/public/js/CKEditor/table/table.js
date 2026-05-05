@@ -1,6 +1,4 @@
-import { Plugin } from 'ckeditor5';
-import ContextualBalloon from '@ckeditor/ckeditor5-ui/src/panel/balloon/contextualballoon';
-import BalloonPanelView from '@ckeditor/ckeditor5-ui/src/panel/balloon/balloonpanelview';
+import { Plugin, ContextualBalloon, BalloonPanelView } from 'ckeditor5';
 
 import { addPredefinedClassToConfig } from '../custom-attributes/helpers/config-helper';
 

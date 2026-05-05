@@ -1,5 +1,4 @@
-import { Plugin } from 'ckeditor5';
-import TwoStepCaretMovement from '@ckeditor/ckeditor5-typing/src/twostepcaretmovement';
+import { Plugin, TwoStepCaretMovement } from 'ckeditor5';
 
 import IbexaLinkCommand from './link-command';
 import { getCustomAttributesConfig, getCustomClassesConfig } from '../custom-attributes/helpers/config-helper';
