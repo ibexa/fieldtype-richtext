@@ -7,6 +7,10 @@ module.exports = (Encore) => {
     Encore.setOutputPath('public/assets/richtext/build')
         .setPublicPath('/assets/richtext/build')
         .enableSassLoader()
+        .enableTypeScriptLoader((tsConfig) => {
+            tsConfig.configFile = path.resolve('tsconfig.json');
+            tsConfig.onlyCompileBundledFiles = true;
+        })
         .disableSingleRuntimeChunk()
         .configureBabelPresetEnv((config) => {
             config.useBuiltIns = false;
