@@ -7,21 +7,35 @@ import Collection from '@ckeditor/ckeditor5-utils/src/collection';
 import { createLabeledInputText, createLabeledDropdown } from '@ckeditor/ckeditor5-ui/src/labeledfield/utils';
 import { addListToDropdown } from '@ckeditor/ckeditor5-ui/src/dropdown/utils';
 
-import { getTranslator } from '@ibexa-admin-ui/src/bundle/Resources/public/js/scripts/helpers/context.helper';
-
 import { createLabeledInputNumber } from '../../common/input-number/utils';
 import { createLabeledSwitchButton } from '../../common/switch-button/utils';
 import { addMultivalueSupport } from '../../common/multivalue-dropdown/utils';
+
+const { Translator } = window;
 
 class IbexaCustomAttributesFormView extends View {
     constructor(props) {
         super(props);
 
         this.locale = props.locale;
-
-        this.saveButtonView = this.createButton('Save', null, 'ck-button-save', 'save-custom-attributes');
-        this.cancelButtonView = this.createButton('Remove', null, 'ck-button-cancel', 'remove-custom-attributes');
-        this.revertButtonView = this.createButton('Revert to saved', null, 'ck-button-revert', 'revert-custom-attributes');
+        this.saveButtonView = this.createButton(
+            Translator.trans(/*@Desc("Save")*/ 'custom_attributes.save.label', {}, 'ck_editor'),
+            null,
+            'ck-button-save',
+            'save-custom-attributes',
+        );
+        this.cancelButtonView = this.createButton(
+            Translator.trans(/*@Desc("Remove")*/ 'custom_attributes.remove.label', {}, 'ck_editor'),
+            null,
+            'ck-button-cancel',
+            'remove-custom-attributes',
+        );
+        this.revertButtonView = this.createButton(
+            Translator.trans(/*@Desc("Revert to saved")*/ 'custom_attributes.revert.label', {}, 'ck_editor'),
+            null,
+            'ck-button-revert',
+            'revert-custom-attributes',
+        );
 
         this.attributeViews = {};
         this.classesView = null;
@@ -194,7 +208,6 @@ class IbexaCustomAttributesFormView extends View {
     }
 
     createDropdown(config) {
-        const Translator = getTranslator();
         const labeledDropdown = new LabeledFieldView(this.locale, createLabeledDropdown);
         const itemsList = new Collection();
 

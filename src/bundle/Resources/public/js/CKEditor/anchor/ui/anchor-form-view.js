@@ -3,15 +3,27 @@ import ButtonView from '@ckeditor/ckeditor5-ui/src/button/buttonview';
 import LabeledFieldView from '@ckeditor/ckeditor5-ui/src/labeledfield/labeledfieldview';
 import { createLabeledInputText } from '@ckeditor/ckeditor5-ui/src/labeledfield/utils';
 
+const { Translator } = window;
+
 class IbexaLinkFormView extends View {
     constructor(props) {
         super(props);
 
         this.locale = props.locale;
 
-        this.anchorInputView = this.createTextInput('Name');
-        this.saveButtonView = this.createButton('Save', null, 'ck-button-save', 'save-anchor');
-        this.cancelButtonView = this.createButton('Remove', null, 'ck-button-cancel', 'remove-anchor');
+        this.anchorInputView = this.createTextInput(Translator.trans(/*@Desc("Name")*/ 'anchor_btn.input.name', {}, 'ck_editor'));
+        this.saveButtonView = this.createButton(
+            Translator.trans(/*@Desc("Save")*/ 'anchor_btn.save.label', {}, 'ck_editor'),
+            null,
+            'ck-button-save',
+            'save-anchor',
+        );
+        this.cancelButtonView = this.createButton(
+            Translator.trans(/*@Desc("Remove")*/ 'anchor_btn.remove.label', {}, 'ck_editor'),
+            null,
+            'ck-button-cancel',
+            'remove-anchor',
+        );
 
         this.children = this.createFormChildren();
 
