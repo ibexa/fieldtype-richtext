@@ -12,14 +12,26 @@ import {
 import { createLabeledInputNumber } from '../../common/input-number/utils';
 import { createLabeledSwitchButton } from '../../common/switch-button/utils';
 
+const { Translator } = window;
+
 class IbexaCustomTagFormView extends View {
     constructor(props) {
         super(props);
 
         this.locale = props.locale;
 
-        this.saveButtonView = this.createButton('Save', null, 'ck-button-save', 'save-custom-tag');
-        this.cancelButtonView = this.createButton('Cancel', null, 'ck-button-cancel', 'cancel-custom-tag');
+        this.saveButtonView = this.createButton(
+            Translator.trans(/*@Desc("Save")*/ 'custom_tag.save.label', {}, 'ck_editor'),
+            null,
+            'ck-button-save',
+            'save-custom-tag',
+        );
+        this.cancelButtonView = this.createButton(
+            Translator.trans(/*@Desc("Cancel")*/ 'custom_tag.cancel.label', {}, 'ck_editor'),
+            null,
+            'ck-button-cancel',
+            'cancel-custom-tag',
+        );
 
         const attributeRenderMethods = window.ibexa.richText.CKEditor.customTags?.attributeRenderMethods || {};
         const setValueMethods = window.ibexa.richText.CKEditor.customTags?.setValueMethods || {};

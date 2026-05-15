@@ -9,14 +9,12 @@ import {
     addListToDropdown,
 } from 'ckeditor5';
 
-import { getTranslator } from '@ibexa-admin-ui/src/bundle/Resources/public/js/scripts/helpers/context.helper';
-
 import { createLabeledSwitchButton } from '../../common/switch-button/utils';
 import { createLabeledInputNumber } from '../../common/input-number/utils';
 import { addMultivalueSupport } from '../../common/multivalue-dropdown/utils';
 import { getCustomAttributesConfig, getCustomClassesConfig } from '../../custom-attributes/helpers/config-helper';
 
-const { ibexa } = window;
+const { ibexa, Translator } = window;
 
 class IbexaLinkFormView extends View {
     constructor(props) {
@@ -25,14 +23,37 @@ class IbexaLinkFormView extends View {
         this.locale = props.locale;
         this.editor = props.editor;
 
-        this.saveButtonView = this.createButton('Save', null, 'ck-button-save', 'save-link');
-        this.cancelButtonView = this.createButton('Remove link', null, 'ck-button-cancel', 'remove-link');
-        this.removeCustomAttributesButtonView = this.createButton('Remove attributes', null, 'ck-button-cancel');
-        this.selectContentButtonView = this.createButton('Select content', null, 'ibexa-btn--select-content');
-        this.urlInputView = this.createTextInput({ label: 'Link to' });
-        this.titleView = this.createTextInput({ label: 'Title' });
-        this.targetSwitcherView = this.createBoolean({ label: 'Open in tab' });
-        this.siteAccessView = this.createDropdown({ label: 'Site access', choices: [] });
+        this.saveButtonView = this.createButton(
+            Translator.trans(/*@Desc("Save")*/ 'link_btn.save.label', {}, 'ck_editor'),
+            null,
+            'ck-button-save',
+            'save-link',
+        );
+        this.cancelButtonView = this.createButton(
+            Translator.trans(/*@Desc("Remove link")*/ 'link_btn.remove.label', {}, 'ck_editor'),
+            null,
+            'ck-button-cancel',
+            'remove-link',
+        );
+        this.removeCustomAttributesButtonView = this.createButton(
+            Translator.trans(/*@Desc("Remove attributes")*/ 'link_btn.remove_attributes.label', {}, 'ck_editor'),
+            null,
+            'ck-button-cancel',
+        );
+        this.selectContentButtonView = this.createButton(
+            Translator.trans(/*@Desc("Select content")*/ 'link_btn.select_content.label', {}, 'ck_editor'),
+            null,
+            'ibexa-btn--select-content',
+        );
+        this.urlInputView = this.createTextInput({ label: Translator.trans(/*@Desc("Link to")*/ 'link_btn.input.url', {}, 'ck_editor') });
+        this.titleView = this.createTextInput({ label: Translator.trans(/*@Desc("Title")*/ 'link_btn.input.title', {}, 'ck_editor') });
+        this.targetSwitcherView = this.createBoolean({
+            label: Translator.trans(/*@Desc("Open in tab")*/ 'link_btn.open_in_tab.label', {}, 'ck_editor'),
+        });
+        this.siteAccessView = this.createDropdown({
+            label: Translator.trans(/*@Desc("Site access")*/ 'link_btn.site_access.label', {}, 'ck_editor'),
+            choices: [],
+        });
         this.attributeRenderMethods = {
             string: this.createTextInput,
             number: this.createNumberInput,
@@ -286,7 +307,6 @@ class IbexaLinkFormView extends View {
     }
 
     createDropdownItemsList(config) {
-        const Translator = getTranslator();
         const itemsList = new Collection();
 
         if (!config.multiple && !config.required) {

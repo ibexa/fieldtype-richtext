@@ -35,6 +35,38 @@ import {
     ContextualBalloon,
 } from 'ckeditor5';
 
+import enTranslations from 'ckeditor5/dist/translations/en.js';
+import deTranslations from 'ckeditor5/dist/translations/de.js';
+import elTranslations from 'ckeditor5/dist/translations/el.js';
+import esTranslations from 'ckeditor5/dist/translations/es.js';
+import frTranslations from 'ckeditor5/dist/translations/fr.js';
+import hrTranslations from 'ckeditor5/dist/translations/hr.js';
+import huTranslations from 'ckeditor5/dist/translations/hu.js';
+import itTranslations from 'ckeditor5/dist/translations/it.js';
+import jaTranslations from 'ckeditor5/dist/translations/ja.js';
+import nbTranslations from 'ckeditor5/dist/translations/nb.js';
+import plTranslations from 'ckeditor5/dist/translations/pl.js';
+import ptTranslations from 'ckeditor5/dist/translations/pt.js';
+import ruTranslations from 'ckeditor5/dist/translations/ru.js';
+import zhTranslations from 'ckeditor5/dist/translations/zh.js';
+
+const CKEDITOR_TRANSLATIONS = [
+    enTranslations,
+    deTranslations,
+    elTranslations,
+    esTranslations,
+    frTranslations,
+    hrTranslations,
+    huTranslations,
+    itTranslations,
+    jaTranslations,
+    nbTranslations,
+    plTranslations,
+    ptTranslations,
+    ruTranslations,
+    zhTranslations,
+];
+
 const VIEWPORT_TOP_OFFSET = 102;
 const VIEWPORT_TOP_OFFSET_DISTRACTION_FREE_MODE = 0;
 
@@ -130,7 +162,16 @@ const VIEWPORT_TOP_OFFSET_DISTRACTION_FREE_MODE = 0;
             const wrapper = this.getHTMLDocumentFragment(container.closest('.ibexa-data-source').querySelector('textarea').value);
             const section = wrapper.childNodes[0];
             const { toolbar, extraPlugins = [], extraConfig = {} } = window.ibexa.richText.CKEditor;
+            let ckEditorUiLanguage;
             let locale;
+
+            try {
+                ckEditorUiLanguage = new Intl.Locale(doc.documentElement.lang.replace('_', '-')).language;
+            } catch (e) {
+                console.warn(`Unsupported UI language '${doc.documentElement.lang}' - using fallback 'en'.`);
+                ckEditorUiLanguage = 'en';
+            }
+
             try {
                 locale = new Intl.Locale(doc.querySelector('meta[name="LanguageCode"]').content);
             } catch (e) {
@@ -139,6 +180,7 @@ const VIEWPORT_TOP_OFFSET_DISTRACTION_FREE_MODE = 0;
                 );
                 locale = new Intl.Locale('eng-GB');
             }
+
             const blockCustomStyles = Object.entries(ibexa.richText.customStyles)
                 .filter(([, customStyleConfig]) => !customStyleConfig.inline)
                 .map(([customStyleName, customStyleConfig]) => {
@@ -243,7 +285,9 @@ const VIEWPORT_TOP_OFFSET_DISTRACTION_FREE_MODE = 0;
                 table: {
                     contentToolbar: ['tableColumn', 'tableRow', 'mergeTableCells'],
                 },
+                translations: CKEDITOR_TRANSLATIONS,
                 language: {
+                    ui: ckEditorUiLanguage,
                     content: locale.language,
                 },
                 ...extraConfig,
