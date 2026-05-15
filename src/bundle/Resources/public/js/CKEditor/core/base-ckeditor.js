@@ -130,7 +130,16 @@ const VIEWPORT_TOP_OFFSET_DISTRACTION_FREE_MODE = 0;
             const wrapper = this.getHTMLDocumentFragment(container.closest('.ibexa-data-source').querySelector('textarea').value);
             const section = wrapper.childNodes[0];
             const { toolbar, extraPlugins = [], extraConfig = {} } = window.ibexa.richText.CKEditor;
+            let ckEditorUiLanguage;
             let locale;
+
+            try {
+                ckEditorUiLanguage = new Intl.Locale(doc.documentElement.lang.replace('_', '-')).language;
+            } catch (e) {
+                console.warn(`Unsupported UI language '${doc.documentElement.lang}' - using fallback 'en'.`);
+                ckEditorUiLanguage = 'en';
+            }
+
             try {
                 locale = new Intl.Locale(doc.querySelector('meta[name="LanguageCode"]').content);
             } catch (e) {
@@ -139,6 +148,7 @@ const VIEWPORT_TOP_OFFSET_DISTRACTION_FREE_MODE = 0;
                 );
                 locale = new Intl.Locale('eng-GB');
             }
+
             const blockCustomStyles = Object.entries(ibexa.richText.customStyles)
                 .filter(([, customStyleConfig]) => !customStyleConfig.inline)
                 .map(([customStyleName, customStyleConfig]) => {
@@ -244,6 +254,7 @@ const VIEWPORT_TOP_OFFSET_DISTRACTION_FREE_MODE = 0;
                     contentToolbar: ['tableColumn', 'tableRow', 'mergeTableCells'],
                 },
                 language: {
+                    ui: ckEditorUiLanguage,
                     content: locale.language,
                 },
                 ...extraConfig,

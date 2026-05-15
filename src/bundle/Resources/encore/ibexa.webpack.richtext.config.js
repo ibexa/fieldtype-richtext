@@ -1,4 +1,7 @@
 const path = require('path');
+const { CKEditorTranslationsPlugin } = require(
+    path.resolve('./public/bundles/ibexaadminuiassets/vendors/@ckeditor/ckeditor5-dev-translations'),
+);
 const ibexaConfigManager = require('@ibexa/frontend-config/webpack-config/manager');
 const configManagers = require(path.resolve('./var/encore/ibexa.richtext.config.manager.js'));
 
@@ -43,6 +46,14 @@ module.exports = (Encore) => {
 
         configManager(customConfig, ibexaConfigManager);
     });
+
+    customConfig.plugins.push(
+        new CKEditorTranslationsPlugin({
+            language: 'en',
+            additionalLanguages: ['de', 'el', 'es', 'fr', 'hr', 'hu', 'it', 'ja', 'nb', 'pl', 'pt', 'ru', 'zh'],
+            translationsOutputFile: /ibexa-richtext-onlineeditor-js.*\.js$/,
+        }),
+    );
 
     Encore.reset();
 
