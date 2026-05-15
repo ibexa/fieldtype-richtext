@@ -15,6 +15,8 @@ use Symfony\Component\Form\DataTransformerInterface;
 
 /**
  * DataTransformer for RichText\Value.
+ *
+ * @implements DataTransformerInterface<Value, string>
  */
 class RichTextValueTransformer implements DataTransformerInterface
 {

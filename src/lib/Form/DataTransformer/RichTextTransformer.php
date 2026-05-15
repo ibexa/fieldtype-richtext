@@ -17,6 +17,9 @@ use Ibexa\FieldTypeRichText\RichText\DOMDocumentFactory;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 
+/**
+ * @implements DataTransformerInterface<string, string>
+ */
 class RichTextTransformer implements DataTransformerInterface
 {
     private DOMDocumentFactory $domDocumentFactory;

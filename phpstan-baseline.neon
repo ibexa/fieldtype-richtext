@@ -247,12 +247,6 @@ parameters:
 			path: src/lib/FieldType/RichText/Type.php
 
 		-
-			message: '#^Class Ibexa\\FieldTypeRichText\\Form\\DataTransformer\\RichTextTransformer implements generic interface Symfony\\Component\\Form\\DataTransformerInterface but does not specify its types\: TValue, TTransformedValue$#'
-			identifier: missingType.generics
-			count: 1
-			path: src/lib/Form/DataTransformer/RichTextTransformer.php
-
-		-
 			message: '#^Method Ibexa\\FieldTypeRichText\\Form\\DataTransformer\\RichTextTransformer\:\:reverseTransform\(\) should return string but returns string\|false\.$#'
 			identifier: return.type
 			count: 1
@@ -263,12 +257,6 @@ parameters:
 			identifier: return.type
 			count: 1
 			path: src/lib/Form/DataTransformer/RichTextTransformer.php
-
-		-
-			message: '#^Class Ibexa\\FieldTypeRichText\\Form\\DataTransformer\\RichTextValueTransformer implements generic interface Symfony\\Component\\Form\\DataTransformerInterface but does not specify its types\: TValue, TTransformedValue$#'
-			identifier: missingType.generics
-			count: 1
-			path: src/lib/Form/DataTransformer/RichTextValueTransformer.php
 
 		-
 			message: '#^Method Ibexa\\FieldTypeRichText\\Form\\DataTransformer\\RichTextValueTransformer\:\:transform\(\) should return string but returns string\|false\.$#'
