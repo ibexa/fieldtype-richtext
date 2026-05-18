@@ -1,4 +1,5 @@
 @use '../functions/calculate.rem' as *;
+@use 'sass:color';
 
 // Ibexa colors
 $ibexa-color-black: #000000 !default;
@@ -33,7 +34,7 @@ $ibexa-color-accent-strong: #f18a6b !default;
 $ibexa-color-complementary: #47bedb !default;
 $ibexa-color-complementary-primary: #306cbe !default;
 
-$ibexa-btn-focus-box-shadow: 0 0 0 calculateRem(3px) rgba($ibexa-color-primary, 0.2) !default;
-$ibexa-btn-hover-box-shadow: 0 calculateRem(22px) calculateRem(24px) 0 rgba($ibexa-color-danger, 0.2) !default;
+$ibexa-btn-focus-box-shadow: 0 0 0 calculateRem(3px) color.change($ibexa-color-primary, $alpha: 0.2) !default;
+$ibexa-btn-hover-box-shadow: 0 calculateRem(22px) calculateRem(24px) 0 color.change($ibexa-color-danger, $alpha: 0.2) !default;
 
 $ibexa-gradient-danger-primary: linear-gradient(to right, $ibexa-color-danger 0%, $ibexa-color-primary 100%);

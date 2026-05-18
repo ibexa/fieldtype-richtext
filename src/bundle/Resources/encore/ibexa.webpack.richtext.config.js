@@ -22,6 +22,7 @@ module.exports = (Encore) => {
         ckeditor5: path.resolve('./public/bundles/ibexaadminuiassets/vendors/ckeditor5'),
         '@fieldtype-richtext': path.resolve('./vendor/ibexa/fieldtype-richtext'),
         '@ibexa-admin-ui': path.resolve('./vendor/ibexa/admin-ui'),
+        '@ibexa-admin-ui-assets': path.resolve('./vendor/ibexa/admin-ui-assets'),
     });
 
     Encore.addEntry('ibexa-richtext-onlineeditor-js', [
