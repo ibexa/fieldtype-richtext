@@ -1,6 +1,7 @@
 import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
 import Widget from '@ckeditor/ckeditor5-widget/src/widget';
 import { toWidget, toWidgetEditable } from '@ckeditor/ckeditor5-widget/src/utils';
+import Element from '@ckeditor/ckeditor5-engine/src/view/element';
 
 import IbexaCustomTagCommand from './custom-tag-command';
 
