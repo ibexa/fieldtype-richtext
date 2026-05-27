@@ -158,7 +158,7 @@ class IbexaCustomTagUI extends Plugin {
             if (this.config.attributes[key]?.type === 'boolean') {
                 return {
                     ...output,
-                    [key]: value === 'true',
+                    [key]: value === true || value === 'true',
                 };
             }
 
