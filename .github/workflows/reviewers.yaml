@@ -7,7 +7,7 @@ on:
 jobs:
   call-expand-team-reviewers:
     if: ${{ github.event.requested_team }}
-    uses: ibexa/gh-workflows/.github/workflows/expand-team-reviewers.yml@main
+    uses: ibexa/gh-workflows/.github/workflows/expand-team-reviewers.yml@new-twig-advisories
     with:
       requested_team: ${{ github.event.requested_team.slug }}
       pull_request_number: ${{ github.event.pull_request.number }}

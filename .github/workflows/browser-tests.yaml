@@ -11,7 +11,7 @@ on:
 jobs:
     richtext:
         name: "Richtext browser tests"
-        uses: ibexa/gh-workflows/.github/workflows/browser-tests.yml@main
+        uses: ibexa/gh-workflows/.github/workflows/browser-tests.yml@new-twig-advisories
         with:
             project-edition: 'oss'
             test-suite:  '--profile=browser --suite=admin-ui --tags=@richtext'

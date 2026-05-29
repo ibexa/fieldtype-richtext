@@ -18,9 +18,9 @@ jobs:
         steps:
             -   uses: actions/checkout@v6
 
-            -   uses: ibexa/gh-workflows/actions/setup-composer-root-version@main
+            -   uses: ibexa/gh-workflows/actions/setup-composer-root-version@new-twig-advisories
 
-            -   uses: ibexa/gh-workflows/actions/composer-install@main
+            -   uses: ibexa/gh-workflows/actions/composer-install@new-twig-advisories
                 with:
                     gh-client-id: ${{ secrets.AUTOMATION_CLIENT_ID }}
                     gh-client-secret: ${{ secrets.AUTOMATION_CLIENT_SECRET }}
@@ -46,9 +46,9 @@ jobs:
         steps:
             -   uses: actions/checkout@v6
 
-            -   uses: ibexa/gh-workflows/actions/setup-composer-root-version@main
+            -   uses: ibexa/gh-workflows/actions/setup-composer-root-version@new-twig-advisories
 
-            -   uses: ibexa/gh-workflows/actions/composer-install@main
+            -   uses: ibexa/gh-workflows/actions/composer-install@new-twig-advisories
                 with:
                     gh-client-id: ${{ secrets.AUTOMATION_CLIENT_ID }}
                     gh-client-secret: ${{ secrets.AUTOMATION_CLIENT_SECRET }}
@@ -95,9 +95,9 @@ jobs:
         steps:
             -   uses: actions/checkout@v6
 
-            -   uses: ibexa/gh-workflows/actions/setup-composer-root-version@main
+            -   uses: ibexa/gh-workflows/actions/setup-composer-root-version@new-twig-advisories
 
-            -   uses: ibexa/gh-workflows/actions/composer-install@main
+            -   uses: ibexa/gh-workflows/actions/composer-install@new-twig-advisories
                 with:
                     gh-client-id: ${{ secrets.AUTOMATION_CLIENT_ID }}
                     gh-client-secret: ${{ secrets.AUTOMATION_CLIENT_SECRET }}
@@ -145,9 +145,9 @@ jobs:
         steps:
             -   uses: actions/checkout@v6
 
-            -   uses: ibexa/gh-workflows/actions/setup-composer-root-version@main
+            -   uses: ibexa/gh-workflows/actions/setup-composer-root-version@new-twig-advisories
 
-            -   uses: ibexa/gh-workflows/actions/composer-install@main
+            -   uses: ibexa/gh-workflows/actions/composer-install@new-twig-advisories
                 with:
                     gh-client-id: ${{ secrets.AUTOMATION_CLIENT_ID }}
                     gh-client-secret: ${{ secrets.AUTOMATION_CLIENT_SECRET }}
@@ -182,9 +182,9 @@ jobs:
         steps:
             -   uses: actions/checkout@v6
 
-            -   uses: ibexa/gh-workflows/actions/setup-composer-root-version@main
+            -   uses: ibexa/gh-workflows/actions/setup-composer-root-version@new-twig-advisories
 
-            -   uses: ibexa/gh-workflows/actions/composer-install@main
+            -   uses: ibexa/gh-workflows/actions/composer-install@new-twig-advisories
                 with:
                     gh-client-id: ${{ secrets.AUTOMATION_CLIENT_ID }}
                     gh-client-secret: ${{ secrets.AUTOMATION_CLIENT_SECRET }}

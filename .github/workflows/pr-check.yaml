@@ -9,4 +9,4 @@ on:
 
 jobs:
   test-base-branch:
-    uses: ibexa/gh-workflows/.github/workflows/pr-check.yml@main
+    uses: ibexa/gh-workflows/.github/workflows/pr-check.yml@new-twig-advisories
