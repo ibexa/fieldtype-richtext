@@ -1,5 +1,5 @@
 <div class="embed-container" {% if align is defined %} style="text-align: {{ align }};"{% endif %}>
-    {% set autoplayQueryString = params.autoplay == 'true' 
+    {% set autoplayQueryString = params.autoplay is same as('true') 
             ? '?autoplay=1&mute=1'
             : '?autoplay=0'
     %}
