@@ -114,7 +114,7 @@ class IbexaCustomTagEditing extends Plugin {
                 const values = {};
 
                 for (const configValue of configValuesIterator) {
-                    if (configValue instanceof Element === false && typeof configValue !== 'object') {
+                    if (!configValue.is?.('element')) {
                         continue;
                     }
 
