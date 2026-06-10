@@ -43,7 +43,7 @@ class IbexaLinkFormView extends View {
         this.selectContentButtonView = this.createButton(
             Translator.trans(/*@Desc("Select content")*/ 'link_btn.select_content.label', {}, 'ck_editor'),
             null,
-            'ibexa-btn--select-content',
+            'ids-btn--select-content',
         );
         this.urlInputView = this.createTextInput({ label: Translator.trans(/*@Desc("Link to")*/ 'link_btn.input.url', {}, 'ck_editor') });
         this.titleView = this.createTextInput({ label: Translator.trans(/*@Desc("Title")*/ 'link_btn.input.title', {}, 'ck_editor') });
