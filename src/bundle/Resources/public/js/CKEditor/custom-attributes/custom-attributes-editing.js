@@ -85,11 +85,9 @@ class IbexaCustomAttributesEditing extends Plugin {
 
     extendSchemaAttribute(schema, element, isList, attributeName) {
         if (isList) {
-            if (schema.getDefinition('$listItem')) {
-                schema.extend('$listItem', { allowAttributes: `list-${attributeName}` });
-            } else {
-                schema.extend('$block', { allowAttributes: `list-${attributeName}` });
-            }
+            const elementName = schema.getDefinition('$listItem') ? '$listItem' : '$block';
+
+            schema.extend(elementName, { allowAttributes: `list-${attributeName}` });
         } else {
             this.extendSchema(schema, element, { allowAttributes: attributeName });
         }

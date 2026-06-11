@@ -14,12 +14,12 @@ class IbexaElementsPath extends Plugin {
     findElementSiblings(element, siblingsName) {
         let iterator = element;
         const elementSiblings = [element];
-        const matchesSibling =
+        const hasMatchesSibling =
             siblingsName === 'listItem'
                 ? (item) => item?.hasAttribute?.('listItemId') || item?.name === 'listItem'
                 : (item) => item?.name === siblingsName;
 
-        while (matchesSibling(iterator?.previousSibling)) {
+        while (hasMatchesSibling(iterator?.previousSibling)) {
             elementSiblings.unshift(iterator.previousSibling);
 
             iterator = iterator.previousSibling;
@@ -27,7 +27,7 @@ class IbexaElementsPath extends Plugin {
 
         iterator = element;
 
-        while (matchesSibling(iterator?.nextSibling)) {
+        while (hasMatchesSibling(iterator?.nextSibling)) {
             elementSiblings.push(iterator.nextSibling);
 
             iterator = iterator.nextSibling;
