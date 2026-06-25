@@ -83,26 +83,28 @@ class Embed extends Render implements Converter
                         "Could not embed resource: unhandled resource reference '{$resourceReference}'"
                     );
                 }
-            } elseif ($matches[1] === 'ezcontent') {
-                $parameters['id'] = (int) $matches[2];
-                $embedContent = $this->renderer->renderContentEmbed(
-                    $parameters['id'],
-                    $parameters['viewType'],
-                    [
-                        'embedParams' => $parameters,
-                    ],
-                    $isInline
-                );
-            } elseif ($matches[1] === 'ezlocation') {
-                $parameters['id'] = (int) $matches[2];
-                $embedContent = $this->renderer->renderLocationEmbed(
-                    $parameters['id'],
-                    $parameters['viewType'],
-                    [
-                        'embedParams' => $parameters,
-                    ],
-                    $isInline
-                );
+            } elseif ($matches !== []) {
+                if ($matches[1] === 'ezcontent') {
+                    $parameters['id'] = (int) $matches[2];
+                    $embedContent = $this->renderer->renderContentEmbed(
+                        $parameters['id'],
+                        $parameters['viewType'],
+                        [
+                            'embedParams' => $parameters,
+                        ],
+                        $isInline
+                    );
+                } elseif ($matches[1] === 'ezlocation') {
+                    $parameters['id'] = (int) $matches[2];
+                    $embedContent = $this->renderer->renderLocationEmbed(
+                        $parameters['id'],
+                        $parameters['viewType'],
+                        [
+                            'embedParams' => $parameters,
+                        ],
+                        $isInline
+                    );
+                }
             }
 
             if (isset($embedContent)) {
