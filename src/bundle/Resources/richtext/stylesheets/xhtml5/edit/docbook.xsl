@@ -423,7 +423,7 @@
       </xsl:if>
       <xsl:call-template name="ezattribute"/>
       <xsl:choose>
-        <xsl:when test="descendant::ezxhtml5:p">
+        <xsl:when test="descendant::ezxhtml5:p or descendant::ezxhtml5:h1 or descendant::ezxhtml5:h2 or descendant::ezxhtml5:h3 or descendant::ezxhtml5:h4 or descendant::ezxhtml5:h5 or descendant::ezxhtml5:h6">
           <xsl:apply-templates/>
         </xsl:when>
         <xsl:otherwise>

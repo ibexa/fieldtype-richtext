@@ -19,7 +19,7 @@ import CKEditor from '@ckeditor/ckeditor5-editor-inline/src/inlineeditor';
 import Essentials from '@ckeditor/ckeditor5-essentials/src/essentials';
 import Alignment from '@ckeditor/ckeditor5-alignment/src/alignment';
 import Heading from '@ckeditor/ckeditor5-heading/src/heading';
-import ListProperties from '@ckeditor/ckeditor5-list/src/listproperties';
+import DocumentListProperties from '@ckeditor/ckeditor5-list/src/documentlistproperties';
 import Table from '@ckeditor/ckeditor5-table/src/table';
 import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar';
 import Bold from '@ckeditor/ckeditor5-basic-styles/src/bold';
@@ -174,7 +174,7 @@ const VIEWPORT_TOP_OFFSET_DISTRACTION_FREE_MODE = 0;
                     Essentials,
                     Heading,
                     Alignment,
-                    ListProperties,
+                    DocumentListProperties,
                     Table,
                     TableToolbar,
                     Bold,
