@@ -63,6 +63,38 @@
     </xsl:element>
   </xsl:template>
 
+  <xsl:template match="docbook:listitem/docbook:para[@ezxhtml:level]">
+    <xsl:variable name="headingLevel">
+      <xsl:choose>
+        <xsl:when test="@ezxhtml:level &gt; 6">6</xsl:when>
+        <xsl:otherwise>
+          <xsl:value-of select="@ezxhtml:level"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+    <xsl:variable name="headingTag" select="concat( 'h', $headingLevel )"/>
+
+    <xsl:element name="{$headingTag}" namespace="{$outputNamespace}">
+      <xsl:if test="@xml:id">
+        <xsl:attribute name="id">
+          <xsl:value-of select="@xml:id"/>
+        </xsl:attribute>
+      </xsl:if>
+      <xsl:if test="@ezxhtml:class">
+        <xsl:attribute name="class">
+          <xsl:value-of select="@ezxhtml:class"/>
+        </xsl:attribute>
+      </xsl:if>
+      <xsl:if test="@ezxhtml:textalign">
+        <xsl:attribute name="style">
+          <xsl:value-of select="concat( 'text-align:', @ezxhtml:textalign, ';' )"/>
+        </xsl:attribute>
+      </xsl:if>
+      <xsl:call-template name="ezattribute"/>
+      <xsl:apply-templates/>
+    </xsl:element>
+  </xsl:template>
+
   <xsl:template match="docbook:programlisting">
     <xsl:element name="pre" namespace="{$outputNamespace}">
       <xsl:if test="@xml:id">
@@ -363,7 +395,7 @@
         </xsl:attribute>
       </xsl:if>
       <xsl:call-template name="ezattribute"/>
-      <xsl:apply-templates select="./docbook:para/node()" />
+      <xsl:apply-templates/>
     </xsl:element>
   </xsl:template>
 
