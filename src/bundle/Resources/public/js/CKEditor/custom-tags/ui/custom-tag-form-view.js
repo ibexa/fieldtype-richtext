@@ -98,9 +98,12 @@ class IbexaCustomTagFormView extends View {
     }
 
     setBooleanValue(attributeView, value) {
-        attributeView.fieldView.isOn = value === 'true';
-        attributeView.fieldView.element.value = value;
-        attributeView.fieldView.set('value', value);
+        const normalizedValue = value === true || value === 'true';
+        const normalizedValueAsString = normalizedValue ? 'true' : 'false';
+
+        attributeView.fieldView.isOn = normalizedValue;
+        attributeView.fieldView.element.value = normalizedValueAsString;
+        attributeView.fieldView.set('value', normalizedValueAsString);
         attributeView.fieldView.set('isEmpty', false);
     }
 
@@ -117,7 +120,7 @@ class IbexaCustomTagFormView extends View {
     }
 
     getBooleanValue(attributeView) {
-        return attributeView.fieldView.element.value;
+        return attributeView.fieldView.isOn ? 'true' : 'false';
     }
 
     setChildren(childrenData, label) {
@@ -266,9 +269,10 @@ class IbexaCustomTagFormView extends View {
 
         this.listenTo(labeledSwitch.fieldView, 'execute', () => {
             const value = !labeledSwitch.fieldView.isOn;
+            const valueAsString = value ? 'true' : 'false';
 
-            labeledSwitch.fieldView.element.value = value;
-            labeledSwitch.fieldView.set('value', value);
+            labeledSwitch.fieldView.element.value = valueAsString;
+            labeledSwitch.fieldView.set('value', valueAsString);
             labeledSwitch.fieldView.isOn = value;
         });
 
