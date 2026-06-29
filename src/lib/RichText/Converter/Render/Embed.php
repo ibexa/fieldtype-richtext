@@ -77,32 +77,36 @@ class Embed extends Render implements Converter
                 if (isset($this->logger)) {
                     $this->logger->error("Could not embed resource: empty 'xlink:href' attribute");
                 }
-            } elseif (0 === preg_match('~^(ezcontent|ezlocation)://(\d+)$~', $resourceReference, $matches)) {
+            } elseif (preg_match('~^(ezcontent|ezlocation)://(\d+)$~', $resourceReference, $matches) !== 1) {
                 if (isset($this->logger)) {
                     $this->logger->error(
                         "Could not embed resource: unhandled resource reference '{$resourceReference}'"
                     );
                 }
-            } elseif ($matches[1] === 'ezcontent') {
-                $parameters['id'] = (int) $matches[2];
-                $embedContent = $this->renderer->renderContentEmbed(
-                    $parameters['id'],
-                    $parameters['viewType'],
-                    [
-                        'embedParams' => $parameters,
-                    ],
-                    $isInline
-                );
-            } elseif ($matches[1] === 'ezlocation') {
-                $parameters['id'] = (int) $matches[2];
-                $embedContent = $this->renderer->renderLocationEmbed(
-                    $parameters['id'],
-                    $parameters['viewType'],
-                    [
-                        'embedParams' => $parameters,
-                    ],
-                    $isInline
-                );
+            } else {
+                $resourceType = $matches[1];
+                $resourceId = $matches[2];
+                if ($resourceType === 'ezcontent') {
+                    $parameters['id'] = (int) $resourceId;
+                    $embedContent = $this->renderer->renderContentEmbed(
+                        $parameters['id'],
+                        $parameters['viewType'],
+                        [
+                            'embedParams' => $parameters,
+                        ],
+                        $isInline
+                    );
+                } elseif ($resourceType === 'ezlocation') {
+                    $parameters['id'] = (int) $resourceId;
+                    $embedContent = $this->renderer->renderLocationEmbed(
+                        $parameters['id'],
+                        $parameters['viewType'],
+                        [
+                            'embedParams' => $parameters,
+                        ],
+                        $isInline
+                    );
+                }
             }
 
             if (isset($embedContent)) {
