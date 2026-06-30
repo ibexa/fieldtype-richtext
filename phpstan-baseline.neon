@@ -421,12 +421,6 @@ parameters:
 			path: src/lib/RichText/Converter/Render/Embed.php
 
 		-
-			message: '#^Offset 1 might not exist on array\{\}\|array\{non\-falsy\-string, ''ezcontent''\|''ezlocation'', decimal\-int\-string\}\.$#'
-			identifier: offsetAccess.notFound
-			count: 1
-			path: src/lib/RichText/Converter/Render/Embed.php
-
-		-
 			message: '#^PHPDoc tag @var has invalid value \(\$embed \\DOMElement\)\: Unexpected token "\$embed", expected type at offset 9 on line 1$#'
 			identifier: phpDoc.parseError
 			count: 1
