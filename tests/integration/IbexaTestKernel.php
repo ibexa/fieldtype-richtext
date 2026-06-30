@@ -30,6 +30,7 @@ use Symfony\Component\Config\Resource\FileResource;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\Notifier\NotifierInterface;
+use Symfony\UX\TwigComponent\TwigComponentBundle;
 use Symfony\WebpackEncoreBundle\WebpackEncoreBundle;
 
 final class IbexaTestKernel extends BaseIbexaTestKernel
@@ -50,6 +51,7 @@ final class IbexaTestKernel extends BaseIbexaTestKernel
         yield new IbexaDesignEngineBundle();
         yield new IbexaAdminUiBundle();
         yield new IbexaNotificationsBundle();
+        yield new TwigComponentBundle();
         yield new IbexaTwigComponentsBundle();
 
         yield new IbexaFieldTypeRichTextBundle();
