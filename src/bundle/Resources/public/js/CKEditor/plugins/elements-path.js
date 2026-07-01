@@ -107,19 +107,27 @@ class IbexaElementsPath extends Plugin {
         this.elementsPathWrapper.append(listItemNode);
     }
 
+    refreshPath() {
+        this.elementsPathWrapper.innerHTML = '';
+
+        this.editor.model.document.selection.getFirstPosition().getAncestors().forEach(this.updatePath);
+
+        if (this.isTableCellSelected) {
+            this.updatePath(this.editor.model.document.selection.getSelectedElement());
+
+            this.isTableCellSelected = false;
+        }
+    }
+
     init() {
         this.elementsPathWrapper = this.editor.sourceElement.parentElement.querySelector('.ibexa-elements-path');
 
         this.editor.model.document.selection.on('change:range', () => {
-            this.elementsPathWrapper.innerHTML = '';
+            this.refreshPath();
+        });
 
-            this.editor.model.document.selection.getFirstPosition().getAncestors().forEach(this.updatePath);
-
-            if (this.isTableCellSelected) {
-                this.updatePath(this.editor.model.document.selection.getSelectedElement());
-
-                this.isTableCellSelected = false;
-            }
+        this.editor.model.document.on('change:data', () => {
+            this.refreshPath();
         });
     }
 }
