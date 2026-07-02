@@ -1,12 +1,20 @@
-export const findContent = ({ token, siteaccess, contentId, limit = 1, offset = 0 }, callback) => {
+export const findContents = ({ token, siteaccess, contentIds, limit = contentIds.length, offset = 0 }, callback) => {
+    const ids = [...new Set(contentIds.map((contentId) => `${contentId}`))];
+
+    if (!ids.length) {
+        callback([]);
+
+        return;
+    }
+
     const body = JSON.stringify({
         ViewInput: {
-            identifier: `find-content-${contentId}`,
+            identifier: `find-content-${ids.join('-')}`,
             public: false,
             ContentQuery: {
                 FacetBuilders: {},
                 SortClauses: {},
-                Filter: { ContentIdCriterion: `${contentId}` },
+                Filter: { ContentIdCriterion: ids.join() },
                 limit,
                 offset,
             },
@@ -33,4 +41,8 @@ export const findContent = ({ token, siteaccess, contentId, limit = 1, offset = 
             callback(items);
         })
         .catch(window.ibexa.helpers.notification.showErrorNotification);
+};
+
+export const findContent = ({ token, siteaccess, contentId, limit = 1, offset = 0 }, callback) => {
+    findContents({ token, siteaccess, contentIds: [contentId], limit, offset }, callback);
 };
