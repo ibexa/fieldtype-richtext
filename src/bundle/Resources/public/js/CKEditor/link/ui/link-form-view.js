@@ -239,6 +239,8 @@ class IbexaLinkFormView extends View {
     }
 
     setProtocol(href) {
+        href = href?.trim();
+
         if (!href) {
             return;
         }
@@ -246,12 +248,18 @@ class IbexaLinkFormView extends View {
         const anchorPrefix = '#';
         const relativeLinkPrefix = '/';
         const schemaPattern = /^[a-z0-9]+:\/?\/?/i;
+        const emailPattern = /^[^\s@]+@[^\s.@]+(?:\.[^\s.@]+)+$/;
         const isAnchor = href.indexOf(anchorPrefix) === 0;
         const isRelativeLink = href.startsWith(relativeLinkPrefix);
         const isLocation = schemaPattern.test(href);
+        const isEmail = emailPattern.test(href);
 
         if (isAnchor || isLocation || isRelativeLink) {
             return href;
+        }
+
+        if (isEmail) {
+            return `mailto:${href}`;
         }
 
         return `http://${href}`;
