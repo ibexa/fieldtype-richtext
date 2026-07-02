@@ -5,57 +5,77 @@ custom_tags:
     ezfacebook:
         template: '@ibexadesign/ezrichtext/custom_tags/ezfacebook.html.twig'
         icon: '/bundles/ibexafieldtyperichtext/assets/images/custom_tags/admin/icons/facebook.svg#facebook'
+        label: 'Facebook'
+        description: 'Embed Facebook post'
         attributes:
             post_url:
                 type: 'string'
                 required: true
+                label: 'Post URL'
             width:
                 type: 'number'
+                label: 'Width'
     eztwitter:
         template: '@ibexadesign/ezrichtext/custom_tags/eztwitter.html.twig'
         icon: '/bundles/ibexafieldtyperichtext/assets/images/custom_tags/admin/icons/twitter.svg#twitter'
+        label: 'X'
+        description: 'Embed X post'
         attributes:
             tweet_url:
                 type: 'string'
                 required: true
+                label: 'Tweet URL'
             # see https://dev.twitter.com/web/embedded-tweets/parameters
             cards:
                 type: 'choice'
                 required: false
                 default_value: ''
                 choices: ['', 'hidden']
+                label: 'Cards'
             conversation:
                 type: 'choice'
                 default_value: ''
                 choices: ['', 'none']
+                label: 'Conversation'
             theme:
                 type: 'choice'
                 default_value: 'light'
                 required: true
                 choices: ['light', 'dark']
+                label: 'Theme'
             link_color:
                 type: 'string'
                 default_value: ''
+                label: 'Link color'
             width:
                 type: 'number'
                 default_value: 500
+                label: 'Width'
             lang:
                 type: 'string'
                 default_value: 'en'
+                label: 'Language code'
             dnt:
                 type: 'boolean'
                 default_value: true
+                label: "Don't target"
     ezyoutube:
         template: '@ibexadesign/ezrichtext/custom_tags/ezyoutube.html.twig'
         icon: '/bundles/ibexafieldtyperichtext/assets/images/custom_tags/admin/icons/video.svg#video'
+        label: 'YouTube'
+        description: 'Embed YouTube video'
         attributes:
             video_url:
                 type: 'string'
                 required: true
+                label: 'Video URL'
             width:
                 type: 'number'
+                label: 'Width'
             height:
                 type: 'number'
+                label: 'Height'
             autoplay:
                 type: 'boolean'
                 default_value: false
+                label: 'Autoplay'

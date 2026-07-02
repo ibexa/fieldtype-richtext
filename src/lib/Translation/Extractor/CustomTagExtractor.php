@@ -48,37 +48,47 @@ final class CustomTagExtractor implements ExtractorInterface
                 continue;
             }
 
-            $this->addCustomTagLabelMessage($catalogue, $tagName);
-            $this->addCustomTagDescriptionMessage($catalogue, $tagName);
+            $this->addCustomTagLabelMessage($catalogue, $tagName, $config);
+            $this->addCustomTagDescriptionMessage($catalogue, $tagName, $config);
 
-            /** @var string[] $attributes */
-            $attributes = array_keys($config['attributes'] ?? []);
-            foreach ($attributes as $attributeName) {
-                $this->addAttributeLabelMessage($catalogue, $tagName, $attributeName);
+            /** @var array<string, mixed> $attributes */
+            $attributes = $config['attributes'] ?? [];
+            foreach ($attributes as $attributeName => $attributeConfig) {
+                $this->addAttributeLabelMessage($catalogue, $tagName, $attributeName, $attributeConfig);
             }
         }
 
         return $catalogue->getCatalogue();
     }
 
-    private function addCustomTagLabelMessage(MessageCatalogueBuilder $catalogue, string $tagName): void
+    /**
+     * @param array<string, mixed> $config
+     */
+    private function addCustomTagLabelMessage(MessageCatalogueBuilder $catalogue, string $tagName, array $config): void
     {
-        $catalogue->addMessage(sprintf(self::CUSTOM_TAG_LABEL, $tagName), $tagName);
+        $catalogue->addMessage(sprintf(self::CUSTOM_TAG_LABEL, $tagName), $config['label'] ?? $tagName);
     }
 
-    private function addCustomTagDescriptionMessage(MessageCatalogueBuilder $catalogue, string $tagName): void
+    /**
+     * @param array<string, mixed> $config
+     */
+    private function addCustomTagDescriptionMessage(MessageCatalogueBuilder $catalogue, string $tagName, array $config): void
     {
-        $catalogue->addMessage(sprintf(self::CUSTOM_TAG_DESCRIPTION, $tagName), $tagName);
+        $catalogue->addMessage(sprintf(self::CUSTOM_TAG_DESCRIPTION, $tagName), $config['description'] ?? $tagName);
     }
 
+    /**
+     * @param array<string, mixed> $attributeConfig
+     */
     private function addAttributeLabelMessage(
         MessageCatalogueBuilder $catalogue,
         string $tagName,
-        string $attributeName
+        string $attributeName,
+        array $attributeConfig
     ): void {
         $catalogue->addMessage(
             sprintf(self::ATTRIBUTE_LABEL, $tagName, $attributeName),
-            $attributeName
+            $attributeConfig['label'] ?? $attributeName
         );
     }
 }
