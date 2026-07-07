@@ -32,30 +32,6 @@ class IbexaCustomAttributesEditing extends Plugin {
 
             Object.keys(customAttributes).forEach((customAttributeName) => {
                 if (isList) {
-                    this.editor.conversion.for('dataDowncast').add((dispatcher) => {
-                        dispatcher.on(`attribute:list-${customAttributeName}:listItem`, (event, data, conversionApi) => {
-                            const viewItem = conversionApi.mapper.toViewElement(data.item);
-
-                            conversionApi.writer.setAttribute(
-                                `data-ezattribute-${customAttributeName}`,
-                                data.attributeNewValue,
-                                viewItem.parent,
-                            );
-                        });
-                    });
-
-                    this.editor.conversion.for('editingDowncast').add((dispatcher) => {
-                        dispatcher.on(`attribute:list-${customAttributeName}:listItem`, (event, data, conversionApi) => {
-                            const viewItem = conversionApi.mapper.toViewElement(data.item);
-
-                            conversionApi.writer.setAttribute(
-                                `data-ezattribute-${customAttributeName}`,
-                                data.attributeNewValue,
-                                viewItem.parent,
-                            );
-                        });
-                    });
-
                     this.editor.conversion.for('upcast').add((dispatcher) => {
                         const customAttributeUpcastConverter = (event, data, conversionApi) => {
                             if (!data.modelRange) {
@@ -88,45 +64,6 @@ class IbexaCustomAttributesEditing extends Plugin {
             });
         });
 
-        this.editor.conversion.for('dataDowncast').add((dispatcher) => {
-            dispatcher.on('attribute:list-custom-classes:listItem', (event, data, conversionApi) => {
-                if (data.attributeKey !== 'list-custom-classes' || data.attributeNewValue === '') {
-                    return;
-                }
-
-                const viewItem = conversionApi.mapper.toViewElement(data.item);
-                const previousElement = viewItem.parent.previousSibling;
-
-                conversionApi.writer.setAttribute('class', data.attributeNewValue, viewItem.parent);
-
-                if (previousElement?.name === viewItem.parent.name) {
-                    conversionApi.writer.mergeContainers(conversionApi.writer.createPositionAfter(previousElement));
-                }
-            });
-        });
-
-        this.editor.conversion.for('editingDowncast').add((dispatcher) => {
-            dispatcher.on('attribute:list-custom-classes:listItem', (event, data, conversionApi) => {
-                if (data.attributeKey !== 'list-custom-classes' || data.attributeNewValue === '') {
-                    return;
-                }
-
-                const viewItem = conversionApi.mapper.toViewElement(data.item);
-                const previousElement = viewItem.parent.previousSibling;
-                const nextElement = viewItem.parent.nextSibling;
-
-                conversionApi.writer.setAttribute('class', data.attributeNewValue, viewItem.parent);
-
-                if (previousElement?.name === viewItem.parent.name) {
-                    conversionApi.writer.mergeContainers(conversionApi.writer.createPositionAfter(previousElement));
-                }
-
-                if (nextElement?.name === viewItem.parent.name) {
-                    conversionApi.writer.mergeContainers(conversionApi.writer.createPositionBefore(nextElement));
-                }
-            });
-        });
-
         this.editor.conversion.for('upcast').add((dispatcher) => {
             const customClassesUpcastConverter = (event, data, conversionApi) => {
                 if (!data.modelRange) {
@@ -144,6 +81,16 @@ class IbexaCustomAttributesEditing extends Plugin {
             dispatcher.on('element:ul', customClassesUpcastConverter);
             dispatcher.on('element:ol', customClassesUpcastConverter);
         });
+    }
+
+    extendSchemaAttribute(schema, element, isList, attributeName) {
+        if (isList) {
+            const elementName = schema.getDefinition('$listItem') ? '$listItem' : '$block';
+
+            schema.extend(elementName, { allowAttributes: `list-${attributeName}` });
+        } else {
+            this.extendSchema(schema, element, { allowAttributes: attributeName });
+        }
     }
 
     extendSchema(schema, element, definition) {
@@ -185,12 +132,10 @@ class IbexaCustomAttributesEditing extends Plugin {
             }
 
             const isList = element === 'ul' || element === 'ol';
-            const prefix = isList ? 'list-' : '';
-            const elementName = isList ? 'listItem' : element;
             const customAttributes = Object.keys(customAttributesConfig[element]);
 
             customAttributes.forEach((customAttribute) => {
-                this.extendSchema(model.schema, elementName, { allowAttributes: `${prefix}${customAttribute}` });
+                this.extendSchemaAttribute(model.schema, element, isList, customAttribute);
             });
         });
 
@@ -201,11 +146,63 @@ class IbexaCustomAttributesEditing extends Plugin {
 
             this.extendSchema(model.schema, element, { allowAttributes: 'custom-classes' });
             const isList = element === 'ul' || element === 'ol';
-            const prefix = isList ? 'list-' : '';
-            const elementName = isList ? 'listItem' : element;
 
-            this.extendSchema(model.schema, elementName, { allowAttributes: `${prefix}custom-classes` });
+            this.extendSchemaAttribute(model.schema, element, isList, 'custom-classes');
         });
+
+        const listEditing = this.editor.plugins.has('ListEditing') ? this.editor.plugins.get('ListEditing') : null;
+
+        if (listEditing) {
+            const registeredListAttributes = new Set();
+
+            elementsWithCustomClasses.forEach((element) => {
+                if (element !== 'ul' && element !== 'ol') {
+                    return;
+                }
+
+                if (!registeredListAttributes.has('list-custom-classes')) {
+                    registeredListAttributes.add('list-custom-classes');
+                    listEditing.registerDowncastStrategy({
+                        scope: 'list',
+                        attributeName: 'list-custom-classes',
+                        setAttributeOnDowncast(writer, value, viewElement) {
+                            if (value) {
+                                writer.setAttribute('class', value, viewElement);
+                            } else {
+                                writer.removeAttribute('class', viewElement);
+                            }
+                        },
+                    });
+                }
+            });
+
+            elementsWithCustomAttributes.forEach((element) => {
+                if (element !== 'ul' && element !== 'ol') {
+                    return;
+                }
+
+                Object.keys(customAttributesConfig[element]).forEach((customAttribute) => {
+                    const attrName = `list-${customAttribute}`;
+
+                    if (registeredListAttributes.has(attrName)) {
+                        return;
+                    }
+
+                    registeredListAttributes.add(attrName);
+                    listEditing.registerDowncastStrategy({
+                        scope: 'list',
+                        attributeName: attrName,
+                        setAttributeOnDowncast(writer, value, viewElement) {
+                            if (value) {
+                                writer.setAttribute(`data-ezattribute-${customAttribute}`, value, viewElement);
+                            } else {
+                                writer.removeAttribute(`data-ezattribute-${customAttribute}`, viewElement);
+                            }
+                        },
+                    });
+                });
+            });
+        }
 
         this.defineConverters();
 
