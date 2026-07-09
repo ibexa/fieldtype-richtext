@@ -1,5 +1,5 @@
 export const findContents = ({ token, siteaccess, contentIds, limit = contentIds.length, offset = 0 }, callback) => {
-    const ids = [...new Set(contentIds.map((contentId) => `${contentId}`))];
+    const ids = [...new Set(contentIds)];
 
     if (!ids.length) {
         callback([]);

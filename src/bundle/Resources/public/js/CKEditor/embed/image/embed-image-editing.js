@@ -6,6 +6,7 @@ import IbexaEmbedImageCommand from './embed-image-command';
 
 import { findContents } from '../../services/content-service';
 import { getCustomClassesConfig, addPredefinedClassToConfig } from '../../custom-attributes/helpers/config-helper';
+import { getUniqueAttrValues } from '../../helpers/models';
 
 const CONTAINER_CLASS = 'ibexa-embed-type-image';
 
@@ -22,28 +23,30 @@ class IbexaEmbedImageEditing extends Plugin {
         this.loadImageVariation = this.loadImageVariation.bind(this);
         this.getSetting = this.getSetting.bind(this);
 
-        this.pendingImagePreviewLoads = new Set();
-        this.pendingImagePreviewLoad = null;
+        this.pendingImagePreviewModelElements = new Set();
+        this.loadingImageAlreadyBatched = false;
 
         addPredefinedClassToConfig('embedImage', CONTAINER_CLASS);
     }
 
     loadImagePreview(modelElement) {
-        this.pendingImagePreviewLoads.add(modelElement);
+        this.pendingImagePreviewModelElements.add(modelElement);
 
-        if (this.pendingImagePreviewLoad === null) {
-            this.pendingImagePreviewLoad = Promise.resolve().then(this.loadPendingImagePreviews);
+        if (!this.loadingImageAlreadyBatched) {
+            this.loadingImageAlreadyBatched = true;
+
+            queueMicrotask(this.loadPendingImagePreviews);
         }
     }
 
     loadPendingImagePreviews() {
-        const modelElements = [...this.pendingImagePreviewLoads];
-        const contentIds = [...new Set(modelElements.map((modelElement) => modelElement.getAttribute('contentId')).filter(Boolean))];
+        const modelElements = [...this.pendingImagePreviewModelElements];
+        const contentIds = getUniqueAttrValues(modelElements, 'contentId');
         const token = document.querySelector('meta[name="CSRF-Token"]').content;
         const siteaccess = document.querySelector('meta[name="SiteAccess"]').content;
 
-        this.pendingImagePreviewLoads.clear();
-        this.pendingImagePreviewLoad = null;
+        this.pendingImagePreviewModelElements.clear();
+        this.loadingImageAlreadyBatched = false;
 
         if (!contentIds.length) {
             return;
@@ -54,7 +57,7 @@ class IbexaEmbedImageEditing extends Plugin {
                 const contentId = content._id ?? content.id;
 
                 if (contentId) {
-                    map[`${contentId}`] = content;
+                    map[contentId] = content;
                 }
 
                 return map;
@@ -62,7 +65,7 @@ class IbexaEmbedImageEditing extends Plugin {
 
             modelElements.forEach((modelElement) => {
                 const contentId = modelElement.getAttribute('contentId');
-                const content = contentsById[`${contentId}`];
+                const content = contentsById[contentId];
 
                 if (!content) {
                     return;
