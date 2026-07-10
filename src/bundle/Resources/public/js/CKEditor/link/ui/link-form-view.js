@@ -238,8 +238,8 @@ class IbexaLinkFormView extends View {
         return values;
     }
 
-    setProtocol(href) {
-        href = href?.trim();
+    setProtocol(hrefValue) {
+        const href = hrefValue?.trim();
 
         if (!href) {
             return;
