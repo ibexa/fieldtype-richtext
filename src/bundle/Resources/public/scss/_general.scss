@@ -198,7 +198,7 @@
         margin: calculateRem(16px) auto;
     }
 
-    [data-ezalign] + * {
+    [data-ezalign] + div.ck-widget {
         clear: both;
     }
 
