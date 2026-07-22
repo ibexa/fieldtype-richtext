@@ -4,8 +4,9 @@ import Widget from '@ckeditor/ckeditor5-widget/src/widget';
 
 import IbexaEmbedImageCommand from './embed-image-command';
 
-import { findContent } from '../../services/content-service';
+import { findContents } from '../../services/content-service';
 import { getCustomClassesConfig, addPredefinedClassToConfig } from '../../custom-attributes/helpers/config-helper';
+import { getUniqueAttrValues } from '../../helpers/models';
 
 const CONTAINER_CLASS = 'ibexa-embed-type-image';
 
@@ -18,24 +19,65 @@ class IbexaEmbedImageEditing extends Plugin {
         super(props);
 
         this.loadImagePreview = this.loadImagePreview.bind(this);
+        this.loadPendingImagePreviews = this.loadPendingImagePreviews.bind(this);
         this.loadImageVariation = this.loadImageVariation.bind(this);
         this.getSetting = this.getSetting.bind(this);
+
+        this.pendingImagePreviewModelElements = new Set();
+        this.loadingImageAlreadyBatched = false;
 
         addPredefinedClassToConfig('embedImage', CONTAINER_CLASS);
     }
 
     loadImagePreview(modelElement) {
-        const contentId = modelElement.getAttribute('contentId');
+        this.pendingImagePreviewModelElements.add(modelElement);
+
+        if (!this.loadingImageAlreadyBatched) {
+            this.loadingImageAlreadyBatched = true;
+
+            queueMicrotask(this.loadPendingImagePreviews);
+        }
+    }
+
+    loadPendingImagePreviews() {
+        const modelElements = [...this.pendingImagePreviewModelElements];
+        const contentIds = getUniqueAttrValues(modelElements, 'contentId');
         const token = document.querySelector('meta[name="CSRF-Token"]').content;
         const siteaccess = document.querySelector('meta[name="SiteAccess"]').content;
 
-        findContent({ token, siteaccess, contentId }, (contents) => {
-            const fields = contents[0].CurrentVersion.Version.Fields.field;
-            const fieldImage = fields.find((field) => field.fieldTypeIdentifier === 'ezimage');
-            const size = modelElement.getAttribute('size');
-            const variationHref = fieldImage.fieldValue.variations[size].href;
+        this.pendingImagePreviewModelElements.clear();
+        this.loadingImageAlreadyBatched = false;
 
-            this.loadImageVariation(modelElement, variationHref);
+        if (!contentIds.length) {
+            return;
+        }
+
+        findContents({ token, siteaccess, contentIds }, (contents) => {
+            const contentsById = contents.reduce((map, content) => {
+                const contentId = content._id ?? content.id;
+
+                if (contentId) {
+                    map[contentId] = content;
+                }
+
+                return map;
+            }, {});
+
+            modelElements.forEach((modelElement) => {
+                const contentId = modelElement.getAttribute('contentId');
+                const content = contentsById[contentId];
+
+                if (!content) {
+                    return;
+                }
+
+                const fields = content.CurrentVersion.Version.Fields.field;
+                const fieldImage = fields.find((field) => field.fieldTypeIdentifier === 'ezimage');
+                const size = modelElement.getAttribute('size');
+                const variationHref = fieldImage.fieldValue.variations[size].href;
+
+                this.loadImageVariation(modelElement, variationHref);
+            });
         });
     }
 
