@@ -246,6 +246,10 @@
             z-index: calc(var(--ck-z-panel) + 55);
         }
 
+        &:has(.ck-dropdown__panel-visible) {
+            z-index: calc(var(--ck-z-modal) + 60);
+        }
+
         &.ck-balloon-panel {
             box-shadow: calculateRem(0px) calculateRem(2px) calculateRem(8px) 0 color.change($ibexa-color-light, $alpha: 0.15);
 
@@ -278,6 +282,10 @@
 
         .ck-balloon-panel_with-arrow {
             z-index: 1081;
+        }
+
+        .ck-balloon-panel_visible:has(.ck-dropdown__panel-visible) {
+            z-index: 1082;
         }
     }
 }
