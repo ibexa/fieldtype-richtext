@@ -214,6 +214,12 @@ class IbexaEmbedImageEditing extends Plugin {
                 downcastWriter.remove(downcastWriter.createRangeIn(container));
                 downcastWriter.insert(downcastWriter.createPositionAt(container, 0), config);
 
+                for (const attributeKey of modelElement.getAttributeKeys()) {
+                    if (attributeKey.startsWith('ibexaLink')) {
+                        consumable.consume(modelElement, `attribute:${attributeKey}`);
+                    }
+                }
+
                 if (linkHref) {
                     const linkClasses = modelElement.getAttribute('ibexaLinkClasses');
                     const linkSiteaccess = modelElement.getAttribute('ibexaLinkSiteaccess');
@@ -233,15 +239,6 @@ class IbexaEmbedImageEditing extends Plugin {
                     }
 
                     const link = downcastWriter.createUIElement('a', linkAttributes);
-
-                    consumable.consume(modelElement, 'attribute:ibexaLinkHref');
-                    consumable.consume(modelElement, 'attribute:ibexaLinkTitle');
-                    consumable.consume(modelElement, 'attribute:ibexaLinkTarget');
-                    consumable.consume(modelElement, 'attribute:ibexaLinkSiteaccess');
-
-                    if (linkClasses) {
-                        consumable.consume(modelElement, 'attribute:ibexaLinkClasses');
-                    }
 
                     downcastWriter.insert(downcastWriter.createPositionAt(container, 'end'), link);
                 }
