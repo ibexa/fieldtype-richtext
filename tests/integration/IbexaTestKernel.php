@@ -10,19 +10,18 @@ namespace Ibexa\Tests\Integration\FieldTypeRichText;
 
 use DAMA\DoctrineTestBundle\DAMADoctrineTestBundle;
 use Hautelook\TemplatedUriBundle\HautelookTemplatedUriBundle;
-use Ibexa\Bundle\AdminUi\IbexaAdminUiBundle;
 use Ibexa\Bundle\ContentForms\IbexaContentFormsBundle;
 use Ibexa\Bundle\DesignEngine\IbexaDesignEngineBundle;
 use Ibexa\Bundle\FieldTypeRichText\IbexaFieldTypeRichTextBundle;
 use Ibexa\Bundle\Notifications\IbexaNotificationsBundle;
 use Ibexa\Bundle\Rest\IbexaRestBundle;
 use Ibexa\Bundle\Search\IbexaSearchBundle;
+use Ibexa\Bundle\Translations\IbexaTranslationsBundle;
 use Ibexa\Bundle\TwigComponents\IbexaTwigComponentsBundle;
 use Ibexa\Bundle\User\IbexaUserBundle;
 use Ibexa\Contracts\FieldTypeRichText\Persistence\Legacy\MigrateRichTextNamespaces\GatewayInterface;
 use Ibexa\Contracts\Test\Core\IbexaTestKernel as BaseIbexaTestKernel;
 use Ibexa\Core\Persistence\Cache\Identifier\CacheIdentifierGeneratorInterface;
-use Knp\Bundle\MenuBundle\KnpMenuBundle;
 use Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle;
 use Symfony\Component\Cache\Adapter\TagAwareAdapterInterface;
 use Symfony\Component\Config\Loader\LoaderInterface;
@@ -42,14 +41,13 @@ final class IbexaTestKernel extends BaseIbexaTestKernel
         yield new LexikJWTAuthenticationBundle();
         yield new HautelookTemplatedUriBundle();
         yield new WebpackEncoreBundle();
-        yield new KnpMenuBundle();
 
         yield new IbexaRestBundle();
         yield new IbexaContentFormsBundle();
         yield new IbexaSearchBundle();
         yield new IbexaUserBundle();
         yield new IbexaDesignEngineBundle();
-        yield new IbexaAdminUiBundle();
+        yield new IbexaTranslationsBundle();
         yield new IbexaNotificationsBundle();
         yield new TwigComponentBundle();
         yield new IbexaTwigComponentsBundle();
