@@ -240,7 +240,7 @@
 
         &:before {
             content: '';
-            background-image: url(/bundles/ibexaadminui/img/icons/link-anchor.svg);
+            background-image: url('/bundles/ibexaadminuiassets/vendors/ids-assets/dist/img/icons/link-anchor.svg');
             position: absolute;
             left: calculateRem(-20px);
             width: calculateRem(16px);
