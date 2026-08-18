@@ -96,7 +96,7 @@ final readonly class RichTextDocbookSchemaPass implements CompilerPassInterface
 
         $dir = dirname($outputPath);
         if (!is_dir($dir)) {
-            mkdir($dir, 0700, true);
+            mkdir($dir, 0777, true);
         }
         file_put_contents($outputPath, $schema);
     }
