@@ -8,12 +8,12 @@ declare(strict_types=1);
 
 namespace Ibexa\FieldTypeRichText\FieldType\RichText;
 
-use DOMDocument;
 use Ibexa\Contracts\Core\FieldType\Indexable;
 use Ibexa\Contracts\Core\Persistence\Content\Field;
 use Ibexa\Contracts\Core\Persistence\Content\Type\FieldDefinition;
 use Ibexa\Contracts\Core\Search;
 use Ibexa\Contracts\FieldTypeRichText\RichText\TextExtractorInterface;
+use Ibexa\FieldTypeRichText\RichText\DOMDocumentLoader;
 
 /**
  * Indexable definition for RichText field type.
@@ -42,8 +42,9 @@ class SearchField implements Indexable
      */
     public function getIndexData(Field $field, FieldDefinition $fieldDefinition)
     {
-        $document = new DOMDocument();
-        $document->loadXML($field->value->data);
+        /** @var string $xmlData */
+        $xmlData = $field->value->data;
+        $document = DOMDocumentLoader::loadXMLSuppressingWarnings($xmlData);
 
         return [
             new Search\Field(

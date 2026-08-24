@@ -10,6 +10,7 @@ namespace Ibexa\FieldTypeRichText\FieldType\RichText;
 
 use DOMDocument;
 use Ibexa\Core\FieldType\Value as BaseValue;
+use Ibexa\FieldTypeRichText\RichText\DOMDocumentLoader;
 
 /**
  * Value for RichText field type.
@@ -38,8 +39,7 @@ EOT;
         if ($xml instanceof DOMDocument) {
             $this->xml = $xml;
         } else {
-            $this->xml = new DOMDocument();
-            $this->xml->loadXML($xml === null ? self::EMPTY_VALUE : $xml);
+            $this->xml = DOMDocumentLoader::loadXMLSuppressingWarnings($xml === null ? self::EMPTY_VALUE : $xml);
         }
     }
 

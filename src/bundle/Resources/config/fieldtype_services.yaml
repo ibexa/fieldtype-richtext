@@ -142,6 +142,11 @@ services:
         tags:
             - {name: ibexa.field_type.richtext.converter.input.xhtml5, priority: 10}
 
+    # Note: should run after xsl transformation, sanitizes xml:id values which are not valid NCNames
+    Ibexa\FieldTypeRichText\RichText\Converter\XmlId:
+        tags:
+            - {name: ibexa.field_type.richtext.converter.input.xhtml5, priority: 60}
+
     # Note: should run after xsl transformation
     Ibexa\FieldTypeRichText\RichText\Converter\LiteralLayoutNestedList:
         tags:
