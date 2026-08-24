@@ -8,9 +8,9 @@ declare(strict_types=1);
 
 namespace Ibexa\FieldTypeRichText\REST\FieldTypeProcessor;
 
-use DOMDocument;
 use Ibexa\Contracts\FieldTypeRichText\RichText\Converter;
 use Ibexa\Contracts\Rest\FieldTypeProcessor;
+use Ibexa\FieldTypeRichText\RichText\DOMDocumentLoader;
 
 class RichTextProcessor extends FieldTypeProcessor
 {
@@ -29,8 +29,7 @@ class RichTextProcessor extends FieldTypeProcessor
      */
     public function postProcessValueHash($outgoingValueHash)
     {
-        $document = new DOMDocument();
-        $document->loadXML($outgoingValueHash['xml']);
+        $document = DOMDocumentLoader::loadXMLSuppressingWarnings($outgoingValueHash['xml']);
 
         $outgoingValueHash['xhtml5edit'] = $this->docbookToXhtml5EditConverter
             ->convert($document)
