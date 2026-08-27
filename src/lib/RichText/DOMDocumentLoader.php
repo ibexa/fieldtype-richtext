@@ -9,30 +9,47 @@ declare(strict_types=1);
 namespace Ibexa\FieldTypeRichText\RichText;
 
 use DOMDocument;
+use Ibexa\Contracts\FieldTypeRichText\RichText\DOMDocumentLoaderInterface;
+use LibXMLError;
+use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 
 /**
  * @internal
- *
- * Loads already stored, trusted XML documents suppressing libxml warnings (e.g. invalid NCName
- * in xml:id of a document stored before input sanitization was introduced), which Symfony's
- * error handler would otherwise turn into exceptions during rendering.
- *
- * Unlike {@see \Ibexa\FieldTypeRichText\RichText\DOMDocumentFactory} it performs no sanitization
- * and never throws — when the XML cannot be parsed at all, an empty \DOMDocument is returned.
  */
-final class DOMDocumentLoader
+final class DOMDocumentLoader implements DOMDocumentLoaderInterface
 {
-    public static function loadXMLSuppressingWarnings(string $xml): DOMDocument
+    private LoggerInterface $logger;
+
+    public function __construct(?LoggerInterface $logger = null)
+    {
+        $this->logger = $logger ?? new NullLogger();
+    }
+
+    public function loadXML(string $xml, array $logContext = []): DOMDocument
     {
         $document = new DOMDocument();
         $useInternalErrors = libxml_use_internal_errors(true);
         try {
             $document->loadXML($xml);
+            $errors = libxml_get_errors();
         } finally {
             libxml_clear_errors();
             libxml_use_internal_errors($useInternalErrors);
         }
 
+        if (!empty($errors)) {
+            $this->logger->warning(
+                'RichText XML document loaded with libxml errors',
+                $logContext + ['errors' => array_map([$this, 'formatError'], $errors)]
+            );
+        }
+
         return $document;
+    }
+
+    private function formatError(LibXMLError $error): string
+    {
+        return sprintf('[line %d] %s', $error->line, trim($error->message));
     }
 }

@@ -655,12 +655,6 @@ parameters:
 			path: src/lib/FieldType/RichText/Type.php
 
 		-
-			message: '#^Parameter \#1 \$xml of class Ibexa\\FieldTypeRichText\\FieldType\\RichText\\Value constructor expects DOMDocument\|string\|null, array\|bool\|float\|int\|string\|null given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/lib/FieldType/RichText/Type.php
-
-		-
 			message: '#^Property Ibexa\\FieldTypeRichText\\FieldType\\RichText\\Value\:\:\$xml \(DOMDocument\) in isset\(\) is not nullable\.$#'
 			identifier: isset.property
 			count: 1

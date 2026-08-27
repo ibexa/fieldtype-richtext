@@ -15,31 +15,19 @@ use Ibexa\Contracts\FieldTypeRichText\RichText\Converter;
 /**
  * @internal
  *
- * Sanitizes xml:id attribute values which are not valid NCNames (e.g. numeric ids
- * pasted into the online editor from external HTML), so that the stored DocBook
- * document can be loaded later without libxml warnings.
- *
- * Internal link fragments (xlink:href="#...") pointing at a sanitized id are
- * rewritten accordingly, so anchors keep working.
+ * Sanitizes xml:id values which are not valid NCNames and rewrites internal links pointing at them.
  */
 final class XmlId implements Converter
 {
     private const XLINK_NAMESPACE = 'http://www.w3.org/1999/xlink';
 
-    /**
-     * NCNameStartChar, per XML 1.0 (5th ed.) NameStartChar production, minus the colon.
-     *
-     * @see https://www.w3.org/TR/xml/#NT-NameStartChar
-     */
+    /** @see https://www.w3.org/TR/xml/#NT-NameStartChar */
     private const NCNAME_START_CHAR = 'A-Z_a-z'
         . '\\x{C0}-\\x{D6}\\x{D8}-\\x{F6}\\x{F8}-\\x{2FF}'
         . '\\x{370}-\\x{37D}\\x{37F}-\\x{1FFF}\\x{200C}-\\x{200D}'
         . '\\x{2070}-\\x{218F}\\x{2C00}-\\x{2FEF}\\x{3001}-\\x{D7FF}'
         . '\\x{F900}-\\x{FDCF}\\x{FDF0}-\\x{FFFD}\\x{10000}-\\x{EFFFF}';
 
-    /**
-     * NCNameChar = NCNameStartChar | "-" | "." | [0-9] | #xB7 | [#x300-#x36F] | [#x203F-#x2040].
-     */
     private const NCNAME_CHAR = self::NCNAME_START_CHAR
         . '\\-.0-9\\x{B7}\\x{300}-\\x{36F}\\x{203F}-\\x{2040}';
 
@@ -63,8 +51,6 @@ final class XmlId implements Converter
     {
         $elements = $xpath->query('//*[@xml:id]') ?: [];
 
-        // Register all valid ids upfront, so that a sanitized id cannot collide with a valid id
-        // appearing later in the document
         $usedIds = [];
         /** @var \DOMElement $element */
         foreach ($elements as $element) {
