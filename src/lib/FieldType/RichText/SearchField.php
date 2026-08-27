@@ -12,6 +12,7 @@ use Ibexa\Contracts\Core\FieldType\Indexable;
 use Ibexa\Contracts\Core\Persistence\Content\Field;
 use Ibexa\Contracts\Core\Persistence\Content\Type\FieldDefinition;
 use Ibexa\Contracts\Core\Search;
+use Ibexa\Contracts\FieldTypeRichText\RichText\DOMDocumentLoaderInterface;
 use Ibexa\Contracts\FieldTypeRichText\RichText\TextExtractorInterface;
 use Ibexa\FieldTypeRichText\RichText\DOMDocumentLoader;
 
@@ -24,12 +25,16 @@ class SearchField implements Indexable
 
     private TextExtractorInterface $fullTextExtractor;
 
+    private DOMDocumentLoaderInterface $domDocumentLoader;
+
     public function __construct(
         TextExtractorInterface $shortTextExtractor,
-        TextExtractorInterface $fullTextExtractor
+        TextExtractorInterface $fullTextExtractor,
+        ?DOMDocumentLoaderInterface $domDocumentLoader = null
     ) {
         $this->shortTextExtractor = $shortTextExtractor;
         $this->fullTextExtractor = $fullTextExtractor;
+        $this->domDocumentLoader = $domDocumentLoader ?? new DOMDocumentLoader();
     }
 
     /**
@@ -44,7 +49,11 @@ class SearchField implements Indexable
     {
         /** @var string $xmlData */
         $xmlData = $field->value->data;
-        $document = DOMDocumentLoader::loadXMLSuppressingWarnings($xmlData);
+        $document = $this->domDocumentLoader->loadXML($xmlData, [
+            'fieldId' => $field->id,
+            'versionNo' => $field->versionNo,
+            'fieldDefinitionIdentifier' => $fieldDefinition->identifier,
+        ]);
 
         return [
             new Search\Field(

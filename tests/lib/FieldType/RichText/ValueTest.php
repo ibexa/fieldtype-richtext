@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\Tests\FieldTypeRichText\FieldType\RichText;
 
+use DOMDocument;
 use Ibexa\FieldTypeRichText\FieldType\RichText\Value;
 use PHPUnit\Framework\TestCase;
 
@@ -16,15 +17,17 @@ use PHPUnit\Framework\TestCase;
  */
 final class ValueTest extends TestCase
 {
-    public function testCreateFromString(): void
-    {
-        $xml = '<?xml version="1.0" encoding="UTF-8"?>
+    private const XML = '<?xml version="1.0" encoding="UTF-8"?>
 <section xmlns="http://docbook.org/ns/docbook" version="5.0-variant ezpublish-1.0"><para>Lorem ipsum</para></section>';
 
-        $value = new Value($xml);
+    public function testCreateFromDOMDocument(): void
+    {
+        $document = new DOMDocument();
+        $document->loadXML(self::XML);
 
-        self::assertNotNull($value->xml->documentElement);
-        self::assertSame('section', $value->xml->documentElement->localName);
+        $value = new Value($document);
+
+        self::assertSame($document, $value->xml);
     }
 
     public function testCreateEmptyValue(): void
@@ -34,19 +37,27 @@ final class ValueTest extends TestCase
         self::assertSame(Value::EMPTY_VALUE, trim((string)$value));
     }
 
-    /**
-     * Loading an already stored document with an invalid xml:id must not emit a libxml
-     * warning, which Symfony's error handler would turn into an exception during rendering.
-     */
-    public function testCreateFromStringWithInvalidXmlIdDoesNotEmitWarning(): void
+    public function testCreateFromStringIsDeprecated(): void
     {
-        $xml = '<?xml version="1.0" encoding="UTF-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0-variant ezpublish-1.0"><para xml:id="227">Lorem ipsum</para></section>';
+        $deprecations = [];
+        set_error_handler(
+            static function (int $errno, string $errstr) use (&$deprecations): bool {
+                $deprecations[] = $errstr;
 
-        $value = new Value($xml);
+                return true;
+            },
+            E_USER_DEPRECATED
+        );
+
+        try {
+            $value = new Value(self::XML);
+        } finally {
+            restore_error_handler();
+        }
 
         self::assertNotNull($value->xml->documentElement);
         self::assertSame('section', $value->xml->documentElement->localName);
-        self::assertStringContainsString('xml:id="227"', (string)$value);
+        self::assertCount(1, $deprecations);
+        self::assertStringContainsString('Passing string as $xml argument', $deprecations[0]);
     }
 }

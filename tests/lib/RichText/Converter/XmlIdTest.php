@@ -111,7 +111,6 @@ final class XmlIdTest extends TestCase
         self::assertEquals($expectedOutputDocument, $outputDocument);
         self::assertLoadsWithoutLibXmlErrors((string)$outputDocument->saveXML());
 
-        // Converting an already sanitized document must be a no-op
         self::assertEquals(
             $expectedOutputDocument,
             $converter->convert($this->createDocument(self::SECTION_OPEN_TAG . $output . '</section>'))
@@ -120,7 +119,7 @@ final class XmlIdTest extends TestCase
 
     private function createDocument(string $xml): DOMDocument
     {
-        return DOMDocumentLoader::loadXMLSuppressingWarnings($xml);
+        return (new DOMDocumentLoader())->loadXML($xml);
     }
 
     private static function assertLoadsWithoutLibXmlErrors(string $xml): void

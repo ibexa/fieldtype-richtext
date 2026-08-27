@@ -12,12 +12,14 @@ use DOMDocument;
 use Ibexa\Contracts\Core\FieldType\Value as SPIValue;
 use Ibexa\Contracts\Core\Persistence\Content\FieldValue;
 use Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition;
+use Ibexa\Contracts\FieldTypeRichText\RichText\DOMDocumentLoaderInterface;
 use Ibexa\Contracts\FieldTypeRichText\RichText\InputHandlerInterface;
 use Ibexa\Contracts\FieldTypeRichText\RichText\TextExtractorInterface;
 use Ibexa\Core\Base\Exceptions\InvalidArgumentType;
 use Ibexa\Core\FieldType\FieldType;
 use Ibexa\Core\FieldType\ValidationError;
 use Ibexa\Core\FieldType\Value as BaseValue;
+use Ibexa\FieldTypeRichText\RichText\DOMDocumentLoader;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use RuntimeException;
@@ -34,12 +36,16 @@ class Type extends FieldType implements TranslationContainerInterface
 
     private TextExtractorInterface $textExtractor;
 
+    private DOMDocumentLoaderInterface $domDocumentLoader;
+
     public function __construct(
         InputHandlerInterface $inputHandler,
-        TextExtractorInterface $textExtractor
+        TextExtractorInterface $textExtractor,
+        ?DOMDocumentLoaderInterface $domDocumentLoader = null
     ) {
         $this->inputHandler = $inputHandler;
         $this->textExtractor = $textExtractor;
+        $this->domDocumentLoader = $domDocumentLoader ?? new DOMDocumentLoader();
     }
 
     /**
@@ -224,7 +230,11 @@ class Type extends FieldType implements TranslationContainerInterface
      */
     public function fromPersistenceValue(FieldValue $fieldValue)
     {
-        return new Value($fieldValue->data);
+        if (!is_string($fieldValue->data) || $fieldValue->data === '') {
+            return new Value();
+        }
+
+        return new Value($this->domDocumentLoader->loadXML($fieldValue->data));
     }
 
     /**
