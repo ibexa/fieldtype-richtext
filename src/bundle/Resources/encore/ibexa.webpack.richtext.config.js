@@ -23,6 +23,7 @@ module.exports = (Encore) => {
         '@fieldtype-richtext': path.resolve('./vendor/ibexa/fieldtype-richtext'),
         '@ibexa-admin-ui': path.resolve('./vendor/ibexa/admin-ui'),
         '@ibexa-admin-ui-assets': path.resolve('./vendor/ibexa/admin-ui-assets'),
+        '@ids-assets': path.resolve('./vendor/ibexa/admin-ui-assets/src/bundle/Resources/public/vendors/ids-assets/dist'),
     });
 
     Encore.addEntry('ibexa-richtext-onlineeditor-js', [
