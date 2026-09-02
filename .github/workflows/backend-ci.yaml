@@ -60,6 +60,8 @@ jobs:
 
             -   name: Run PHPStan analysis
                 run: composer run-script phpstan
+                env:
+                    PHPSTAN_TURBO: ${{ matrix.php == '7.4' && '0' || '' }}
 
             -   name: Run test suite
                 run: composer run-script --timeout=600 test
