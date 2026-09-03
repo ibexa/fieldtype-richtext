@@ -5,5 +5,6 @@ services:
         arguments:
             $textExtractor: '@Ibexa\FieldTypeRichText\RichText\TextExtractor\ShortTextExtractor'
             $inputHandler: '@Ibexa\FieldTypeRichText\RichText\InputHandler'
+            $domDocumentLoader: '@Ibexa\Contracts\FieldTypeRichText\RichText\DOMDocumentLoaderInterface'
         tags:
             - {name: ibexa.field_type, alias: ezrichtext}

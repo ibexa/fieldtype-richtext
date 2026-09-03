@@ -8,7 +8,9 @@ declare(strict_types=1);
 
 namespace Ibexa\Tests\FieldTypeRichText\FieldType;
 
+use DOMDocument;
 use Exception;
+use Ibexa\Contracts\Core\Persistence\Content\FieldValue;
 use Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException as ApiInvalidArgumentException;
 use Ibexa\Contracts\Core\Repository\Values\Content\Relation;
 use Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition as APIFieldDefinition;
@@ -294,7 +296,7 @@ class RichTextTest extends TestCase
     public function testValidate($xmlString, array $expectedValidationErrors)
     {
         $fieldType = $this->getFieldType();
-        $value = new Value($xmlString);
+        $value = new Value($this->createDocument($xmlString));
 
         /** @var \Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition|\PHPUnit\Framework\MockObject\MockObject $fieldDefinitionMock */
         $fieldDefinitionMock = $this->createMock(APIFieldDefinition::class);
@@ -323,6 +325,32 @@ class RichTextTest extends TestCase
         self::assertSame($xmlString, $fieldValue->data);
     }
 
+    public function testFromPersistenceValueWithInvalidXmlIdDoesNotEmitWarning(): void
+    {
+        $xmlString = '<?xml version="1.0" encoding="UTF-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0-variant ezpublish-1.0"><para xml:id="227">Lorem ipsum</para></section>';
+
+        $value = $this->getFieldType()->fromPersistenceValue(new FieldValue(['data' => $xmlString]));
+
+        self::assertNotNull($value->xml->documentElement);
+        self::assertStringContainsString('xml:id="227"', (string)$value);
+    }
+
+    public function testFromPersistenceValueWithNullData(): void
+    {
+        $value = $this->getFieldType()->fromPersistenceValue(new FieldValue(['data' => null]));
+
+        self::assertSame(Value::EMPTY_VALUE, trim((string)$value));
+    }
+
+    private function createDocument(string $xmlString): DOMDocument
+    {
+        $document = new DOMDocument();
+        $document->loadXML($xmlString);
+
+        return $document;
+    }
+
     /**
      * @covers \Ibexa\FieldTypeRichText\FieldType\RichText\Type::getName
      *
@@ -330,7 +358,7 @@ class RichTextTest extends TestCase
      */
     public function testGetName($xmlString, $expectedName)
     {
-        $value = new Value($xmlString);
+        $value = new Value($this->createDocument($xmlString));
 
         $fieldType = $this->getFieldType();
         $this->assertEquals(

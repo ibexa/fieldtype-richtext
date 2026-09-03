@@ -8,13 +8,14 @@ declare(strict_types=1);
 
 namespace Ibexa\FieldTypeRichText\FieldType\RichText;
 
-use DOMDocument;
 use DOMXPath;
 use Ibexa\Contracts\Core\FieldType\GatewayBasedStorage;
 use Ibexa\Contracts\Core\FieldType\StorageGateway;
 use Ibexa\Contracts\Core\Persistence\Content\Field;
 use Ibexa\Contracts\Core\Persistence\Content\VersionInfo;
+use Ibexa\Contracts\FieldTypeRichText\RichText\DOMDocumentLoaderInterface;
 use Ibexa\Core\Base\Exceptions\NotFoundException;
+use Ibexa\FieldTypeRichText\RichText\DOMDocumentLoader;
 use Psr\Log\LoggerInterface;
 
 class RichTextStorage extends GatewayBasedStorage
@@ -29,14 +30,28 @@ class RichTextStorage extends GatewayBasedStorage
      */
     protected $gateway;
 
-    /**
-     * @param \Ibexa\Contracts\Core\FieldType\StorageGateway $gateway
-     * @param \Psr\Log\LoggerInterface|null $logger
-     */
-    public function __construct(StorageGateway $gateway, ?LoggerInterface $logger = null)
-    {
+    private DOMDocumentLoaderInterface $domDocumentLoader;
+
+    public function __construct(
+        StorageGateway $gateway,
+        ?LoggerInterface $logger = null,
+        ?DOMDocumentLoaderInterface $domDocumentLoader = null
+    ) {
         parent::__construct($gateway);
         $this->logger = $logger;
+        $this->domDocumentLoader = $domDocumentLoader ?? new DOMDocumentLoader($logger);
+    }
+
+    /**
+     * @return array<string, int>
+     */
+    private function getLogContext(VersionInfo $versionInfo, Field $field): array
+    {
+        return [
+            'contentId' => $versionInfo->contentInfo->id,
+            'versionNo' => $versionInfo->versionNo,
+            'fieldId' => $field->id,
+        ];
     }
 
     /**
@@ -44,8 +59,9 @@ class RichTextStorage extends GatewayBasedStorage
      */
     public function storeFieldData(VersionInfo $versionInfo, Field $field, array $context)
     {
-        $document = new DOMDocument();
-        $document->loadXML($field->value->data);
+        /** @var string $xmlData */
+        $xmlData = $field->value->data;
+        $document = $this->domDocumentLoader->loadXML($xmlData, $this->getLogContext($versionInfo, $field));
 
         $xpath = new DOMXPath($document);
         $xpath->registerNamespace('docbook', 'http://docbook.org/ns/docbook');
@@ -135,8 +151,9 @@ class RichTextStorage extends GatewayBasedStorage
      */
     public function getFieldData(VersionInfo $versionInfo, Field $field, array $context)
     {
-        $document = new DOMDocument();
-        $document->loadXML($field->value->data);
+        /** @var string $xmlData */
+        $xmlData = $field->value->data;
+        $document = $this->domDocumentLoader->loadXML($xmlData, $this->getLogContext($versionInfo, $field));
 
         $xpath = new DOMXPath($document);
         $xpath->registerNamespace('docbook', 'http://docbook.org/ns/docbook');

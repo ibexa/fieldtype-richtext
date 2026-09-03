@@ -1,6 +1,10 @@
 services:
     Ibexa\FieldTypeRichText\FieldType\RichText\RichTextStorage:
-        arguments: ['@Ibexa\FieldTypeRichText\FieldType\RichText\RichTextStorage\Gateway\DoctrineStorage']
+        arguments:
+            $gateway: '@Ibexa\FieldTypeRichText\FieldType\RichText\RichTextStorage\Gateway\DoctrineStorage'
+            $logger: '@?logger'
+            $domDocumentLoader: '@Ibexa\Contracts\FieldTypeRichText\RichText\DOMDocumentLoaderInterface'
         tags:
             - {name: ibexa.field_type.storage.external.handler, alias: ezrichtext}
+            - {name: monolog.logger, channel: ibexa.richtext}
         public: true
