@@ -177,20 +177,18 @@
             &.ck-button-save {
                 color: $ibexa-color-white;
                 fill: $ibexa-color-white;
-                background-image: $ibexa-gradient-danger-primary;
+                background-image: $ibexa-gradient-primary;
                 border-width: 0;
                 padding: calculateRem(0px) calculateRem(16px);
                 border-radius: $ibexa-border-radius;
 
                 &:hover {
                     color: $ibexa-color-white;
-                    box-shadow:
-                        0 0 0 transparent,
-                        $ibexa-btn-hover-box-shadow;
+                    background-image: $ibexa-gradient-primary-hover;
                 }
 
-                &:hover:focus {
-                    box-shadow: $ibexa-btn-focus-box-shadow, $ibexa-btn-hover-box-shadow;
+                &:focus-visible {
+                    box-shadow: $ibexa-btn-focus-box-shadow;
                 }
 
                 &:disabled {
