@@ -50,6 +50,7 @@ final class ValueTest extends TestCase
         );
 
         try {
+            /** @phpstan-ignore argument.type (deliberately passing the deprecated string) */
             $value = new Value(self::XML);
         } finally {
             restore_error_handler();

@@ -23,7 +23,7 @@ final class XmlIdTest extends TestCase
     /**
      * @return array<string, array<int, string>>
      */
-    public function providerConvert(): array
+    public static function providerConvert(): array
     {
         // Paragraph-only cases, expressed as input xml:id list => expected xml:id list (null = no attribute)
         $idCases = [
@@ -52,7 +52,7 @@ final class XmlIdTest extends TestCase
 
         $cases = [];
         foreach ($idCases as $name => [$inputIds, $expectedIds]) {
-            $cases[$name] = [self::paragraphs($inputIds), self::paragraphs($expectedIds)];
+            $cases[$name] = [self::buildParagraphs($inputIds), self::buildParagraphs($expectedIds)];
         }
 
         $externalLinks = '<para><link xlink:href="http://example.com/#227">Lorem</link></para>'
@@ -61,12 +61,12 @@ final class XmlIdTest extends TestCase
 
         return $cases + [
             'internal link fragment follows the sanitized anchor id' => [
-                self::anchorWithInternalLink('227'),
-                self::anchorWithInternalLink('_227'),
+                self::buildAnchorWithInternalLink('227'),
+                self::buildAnchorWithInternalLink('_227'),
             ],
             'external link fragments are untouched' => [
-                self::paragraphs(['227']) . $externalLinks,
-                self::paragraphs(['_227']) . $externalLinks,
+                self::buildParagraphs(['227']) . $externalLinks,
+                self::buildParagraphs(['_227']) . $externalLinks,
             ],
             'dangling internal fragment is untouched' => [$danglingFragment, $danglingFragment],
         ];
@@ -75,7 +75,7 @@ final class XmlIdTest extends TestCase
     /**
      * @param array<int, string|null> $ids
      */
-    private static function paragraphs(array $ids): string
+    private static function buildParagraphs(array $ids): string
     {
         $xml = '';
         foreach ($ids as $index => $id) {
@@ -86,7 +86,7 @@ final class XmlIdTest extends TestCase
         return $xml;
     }
 
-    private static function anchorWithInternalLink(string $id): string
+    private static function buildAnchorWithInternalLink(string $id): string
     {
         return sprintf(
             '<para><anchor xml:id="%s"/>Lorem</para><para><link xlink:href="#%s">ipsum</link></para>',

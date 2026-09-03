@@ -325,9 +325,6 @@ class RichTextTest extends TestCase
         self::assertSame($xmlString, $fieldValue->data);
     }
 
-    /**
-     * @covers \Ibexa\FieldTypeRichText\FieldType\RichText\Type::fromPersistenceValue
-     */
     public function testFromPersistenceValueWithInvalidXmlIdDoesNotEmitWarning(): void
     {
         $xmlString = '<?xml version="1.0" encoding="UTF-8"?>
@@ -339,9 +336,6 @@ class RichTextTest extends TestCase
         self::assertStringContainsString('xml:id="227"', (string)$value);
     }
 
-    /**
-     * @covers \Ibexa\FieldTypeRichText\FieldType\RichText\Type::fromPersistenceValue
-     */
     public function testFromPersistenceValueWithNullData(): void
     {
         $value = $this->getFieldType()->fromPersistenceValue(new FieldValue(['data' => null]));

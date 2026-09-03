@@ -1,9 +1,9 @@
 services:
     Ibexa\FieldTypeRichText\FieldType\RichText\RichTextStorage:
         arguments:
-            - '@Ibexa\FieldTypeRichText\FieldType\RichText\RichTextStorage\Gateway\DoctrineStorage'
-            - ~
-            - '@Ibexa\Contracts\FieldTypeRichText\RichText\DOMDocumentLoaderInterface'
+            $gateway: '@Ibexa\FieldTypeRichText\FieldType\RichText\RichTextStorage\Gateway\DoctrineStorage'
+            $logger: ~
+            $domDocumentLoader: '@Ibexa\Contracts\FieldTypeRichText\RichText\DOMDocumentLoaderInterface'
         tags:
             - {name: ibexa.field_type.storage.external.handler, alias: ezrichtext}
         public: true
