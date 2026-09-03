@@ -17,6 +17,7 @@ use Ibexa\Bundle\FieldTypeRichText\IbexaFieldTypeRichTextBundle;
 use Ibexa\Bundle\Notifications\IbexaNotificationsBundle;
 use Ibexa\Bundle\Rest\IbexaRestBundle;
 use Ibexa\Bundle\Search\IbexaSearchBundle;
+use Ibexa\Bundle\Test\Core\IbexaTestCoreBundle;
 use Ibexa\Bundle\TwigComponents\IbexaTwigComponentsBundle;
 use Ibexa\Bundle\User\IbexaUserBundle;
 use Ibexa\Contracts\FieldTypeRichText\Persistence\Legacy\MigrateRichTextNamespaces\GatewayInterface;
@@ -38,6 +39,8 @@ final class IbexaTestKernel extends BaseIbexaTestKernel
     public function registerBundles(): iterable
     {
         yield from parent::registerBundles();
+
+        yield new IbexaTestCoreBundle();
 
         yield new LexikJWTAuthenticationBundle();
         yield new HautelookTemplatedUriBundle();
