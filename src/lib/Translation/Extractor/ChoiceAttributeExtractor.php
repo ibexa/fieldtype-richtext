@@ -75,7 +75,7 @@ final class ChoiceAttributeExtractor implements ExtractorInterface
     ): void {
         $catalogue->addMessage(
             sprintf(self::CHOICE_LABEL_KEY, $tagName, $attributeName, $choice),
-            $choice
+            ucfirst($choice)
         );
     }
 }

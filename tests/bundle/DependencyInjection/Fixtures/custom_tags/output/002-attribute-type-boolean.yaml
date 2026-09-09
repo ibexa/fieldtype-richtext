@@ -5,9 +5,12 @@ custom_tags:
         attributes:
             bar:
                 type: 'boolean'
+                label: ~
                 required: false
                 default_value: ~
         is_inline: false
+        label: ~
+        description: ~
 custom_styles: []
 enabled_attribute_types:
     - 'number'

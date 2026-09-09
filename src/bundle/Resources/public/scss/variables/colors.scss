@@ -1,12 +1,14 @@
 @use '../functions/calculate.rem' as *;
 @use 'sass:color';
+@use '@ids-assets/scss/variables/colors' as ids-colors;
+@use '@ids-assets/scss/variables/shadows' as ids-shadows;
 
 // Ibexa colors
 $ibexa-color-black: #000000 !default;
 $ibexa-color-white: #ffffff !default;
 
-$ibexa-color-primary: #ae1164 !default;
-$ibexa-color-primary-200: #eecfe0 !default;
+$ibexa-color-primary: ids-colors.$color-primary-80 !default;
+$ibexa-color-primary-200: color.change(ids-colors.$color-primary-30, $alpha: 0.25) !default;
 
 $ibexa-color-light: #e0e0e8 !default;
 $ibexa-color-light-400: #ececf1 !default;
@@ -34,7 +36,7 @@ $ibexa-color-accent-strong: #f18a6b !default;
 $ibexa-color-complementary: #47bedb !default;
 $ibexa-color-complementary-primary: #306cbe !default;
 
-$ibexa-btn-focus-box-shadow: 0 0 0 calculateRem(3px) color.change($ibexa-color-primary, $alpha: 0.2) !default;
-$ibexa-btn-hover-box-shadow: 0 calculateRem(22px) calculateRem(24px) 0 color.change($ibexa-color-danger, $alpha: 0.2) !default;
+$ibexa-btn-focus-box-shadow: ids-shadows.$box-shadow-focus-primary !default;
 
-$ibexa-gradient-danger-primary: linear-gradient(to right, $ibexa-color-danger 0%, $ibexa-color-primary 100%);
+$ibexa-gradient-primary: ids-colors.$gradient-primary-1 !default;
+$ibexa-gradient-primary-hover: ids-colors.$gradient-primary-2 !default;

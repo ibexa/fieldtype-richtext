@@ -14,8 +14,12 @@ class IbexaElementsPath extends Plugin {
     findElementSiblings(element, siblingsName) {
         let iterator = element;
         const elementSiblings = [element];
+        const hasMatchedSibling =
+            siblingsName === 'listItem'
+                ? (item) => item?.hasAttribute?.('listItemId') || item?.name === 'listItem'
+                : (item) => item?.name === siblingsName;
 
-        while (iterator?.previousSibling?.name === siblingsName) {
+        while (hasMatchedSibling(iterator?.previousSibling)) {
             elementSiblings.unshift(iterator.previousSibling);
 
             iterator = iterator.previousSibling;
@@ -23,7 +27,7 @@ class IbexaElementsPath extends Plugin {
 
         iterator = element;
 
-        while (iterator?.nextSibling?.name === siblingsName) {
+        while (hasMatchedSibling(iterator?.nextSibling)) {
             elementSiblings.push(iterator.nextSibling);
 
             iterator = iterator.nextSibling;
@@ -76,7 +80,7 @@ class IbexaElementsPath extends Plugin {
             return;
         }
 
-        if (element.name === 'listItem') {
+        if (element.name === 'listItem' || element.hasAttribute?.('listItemId')) {
             const listIndent = element.getAttribute('listIndent');
 
             for (let i = 0; i <= listIndent; i++) {
@@ -107,19 +111,27 @@ class IbexaElementsPath extends Plugin {
         this.elementsPathWrapper.append(listItemNode);
     }
 
+    refreshPath() {
+        this.elementsPathWrapper.innerHTML = '';
+
+        this.editor.model.document.selection.getFirstPosition().getAncestors().forEach(this.updatePath);
+
+        if (this.isTableCellSelected) {
+            this.updatePath(this.editor.model.document.selection.getSelectedElement());
+
+            this.isTableCellSelected = false;
+        }
+    }
+
     init() {
         this.elementsPathWrapper = this.editor.sourceElement.parentElement.querySelector('.ibexa-elements-path');
 
         this.editor.model.document.selection.on('change:range', () => {
-            this.elementsPathWrapper.innerHTML = '';
+            this.refreshPath();
+        });
 
-            this.editor.model.document.selection.getFirstPosition().getAncestors().forEach(this.updatePath);
-
-            if (this.isTableCellSelected) {
-                this.updatePath(this.editor.model.document.selection.getSelectedElement());
-
-                this.isTableCellSelected = false;
-            }
+        this.editor.model.document.on('change:data', () => {
+            this.refreshPath();
         });
     }
 }

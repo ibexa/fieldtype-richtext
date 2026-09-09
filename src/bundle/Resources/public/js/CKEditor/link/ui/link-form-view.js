@@ -43,7 +43,7 @@ class IbexaLinkFormView extends View {
         this.selectContentButtonView = this.createButton(
             Translator.trans(/*@Desc("Select content")*/ 'link_btn.select_content.label', {}, 'ck_editor'),
             null,
-            'ibexa-btn--select-content',
+            'ids-btn--select-content',
         );
         this.urlInputView = this.createTextInput({ label: Translator.trans(/*@Desc("Link to")*/ 'link_btn.input.url', {}, 'ck_editor') });
         this.titleView = this.createTextInput({ label: Translator.trans(/*@Desc("Title")*/ 'link_btn.input.title', {}, 'ck_editor') });
@@ -241,7 +241,9 @@ class IbexaLinkFormView extends View {
         return values;
     }
 
-    setProtocol(href) {
+    setProtocol(hrefValue) {
+        const href = hrefValue?.trim();
+
         if (!href) {
             return;
         }
@@ -249,12 +251,18 @@ class IbexaLinkFormView extends View {
         const anchorPrefix = '#';
         const relativeLinkPrefix = '/';
         const schemaPattern = /^[a-z0-9]+:\/?\/?/i;
+        const emailPattern = /^[^\s@]+@[^\s.@]+(?:\.[^\s.@]+)+$/;
         const isAnchor = href.indexOf(anchorPrefix) === 0;
         const isRelativeLink = href.startsWith(relativeLinkPrefix);
         const isLocation = schemaPattern.test(href);
+        const isEmail = emailPattern.test(href);
 
         if (isAnchor || isLocation || isRelativeLink) {
             return href;
+        }
+
+        if (isEmail) {
+            return `mailto:${href}`;
         }
 
         return `http://${href}`;

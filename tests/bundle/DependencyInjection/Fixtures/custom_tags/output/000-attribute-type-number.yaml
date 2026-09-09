@@ -7,7 +7,10 @@ custom_tags:
                 type: 'number'
                 required: true
                 default_value: 360
+                label: ~
         is_inline: false
+        label: ~
+        description: ~
 custom_styles: []
 enabled_attribute_types:
     - 'number'

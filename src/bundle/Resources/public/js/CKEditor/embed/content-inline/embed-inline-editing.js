@@ -24,7 +24,7 @@ const renderPreview = (title, contentId, itemActionsContainer) => {
             <span>
                 <button
                     type="button"
-                    class="btn ibexa-btn ibexa-btn--small ibexa-btn--ghost ibexa-btn--no-text ibexa-embedded-item__actions-menu-trigger-btn"
+                    class="ids-btn ids-btn--tertiary ids-btn--small ibexa-embedded-item__actions-menu-trigger-btn"
                 >
                     <svg class="ibexa-icon ibexa-icon--small-medium ibexa-icon--secondary">
                         <use xlink:href="${window.ibexa.helpers.icon.getIconPath('options')}"></use>
