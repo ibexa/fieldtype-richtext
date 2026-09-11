@@ -589,12 +589,6 @@ parameters:
 			path: src/lib/FieldType/RichText/RichTextStorage.php
 
 		-
-			message: '#^Parameter \#1 \$source of method DOMDocument\:\:loadXML\(\) expects string, array\|bool\|float\|int\|string\|null given\.$#'
-			identifier: argument.type
-			count: 2
-			path: src/lib/FieldType/RichText/RichTextStorage.php
-
-		-
 			message: '#^Method Ibexa\\FieldTypeRichText\\FieldType\\RichText\\RichTextStorage\\Gateway\:\:getContentIds\(\) has parameter \$remoteIds with no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
@@ -631,12 +625,6 @@ parameters:
 			path: src/lib/FieldType/RichText/RichTextStorage/Gateway.php
 
 		-
-			message: '#^Parameter \#1 \$source of method DOMDocument\:\:loadXML\(\) expects string, array\|bool\|float\|int\|string\|null given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/lib/FieldType/RichText/SearchField.php
-
-		-
 			message: '#^Access to an undefined property Ibexa\\Contracts\\Core\\FieldType\\Value\:\:\$xml\.$#'
 			identifier: property.notFound
 			count: 2
@@ -663,12 +651,6 @@ parameters:
 		-
 			message: '#^Method Ibexa\\FieldTypeRichText\\FieldType\\RichText\\Type\:\:getRelations\(\) return type has no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
-			count: 1
-			path: src/lib/FieldType/RichText/Type.php
-
-		-
-			message: '#^Parameter \#1 \$xml of class Ibexa\\FieldTypeRichText\\FieldType\\RichText\\Value constructor expects DOMDocument\|string\|null, array\|bool\|float\|int\|string\|null given\.$#'
-			identifier: argument.type
 			count: 1
 			path: src/lib/FieldType/RichText/Type.php
 

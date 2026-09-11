@@ -143,6 +143,11 @@ services:
             - {name: ibexa.field_type.richtext.converter.input.xhtml5, priority: 10}
 
     # Note: should run after xsl transformation
+    Ibexa\FieldTypeRichText\RichText\Converter\XmlId:
+        tags:
+            - {name: ibexa.field_type.richtext.converter.input.xhtml5, priority: 60}
+
+    # Note: should run after xsl transformation
     Ibexa\FieldTypeRichText\RichText\Converter\LiteralLayoutNestedList:
         tags:
             - {name: ibexa.field_type.richtext.converter.input.xhtml5, priority: 100}

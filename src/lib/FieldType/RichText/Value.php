@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace Ibexa\FieldTypeRichText\FieldType\RichText;
 
 use DOMDocument;
+use Ibexa\Contracts\FieldTypeRichText\RichText\DOMDocumentLoaderInterface;
 use Ibexa\Core\FieldType\Value as BaseValue;
 
 /**
@@ -31,16 +32,30 @@ EOT;
     /**
      * Initializes a new RichText Value object with $xmlDoc in.
      *
-     * @param \DOMDocument|string $xml
+     * @param \DOMDocument|null $xml passing a string is deprecated since 4.6.33 and will not be supported in 6.0
      */
     public function __construct($xml = null)
     {
         if ($xml instanceof DOMDocument) {
             $this->xml = $xml;
-        } else {
-            $this->xml = new DOMDocument();
-            $this->xml->loadXML($xml === null ? self::EMPTY_VALUE : $xml);
+
+            return;
         }
+
+        if ($xml !== null) {
+            trigger_deprecation(
+                'ibexa/fieldtype-richtext',
+                '4.6.33',
+                'Passing string as $xml argument of %s() is deprecated and will not be supported in 6.0. '
+                . 'Pass \DOMDocument instead, e.g. loaded with %s service.',
+                __METHOD__,
+                DOMDocumentLoaderInterface::class
+            );
+        }
+
+        $this->xml = new DOMDocument();
+        /** @phpstan-ignore nullCoalesce.variable (deprecated string $xml is not part of the declared signature) */
+        $this->xml->loadXML($xml ?? self::EMPTY_VALUE);
     }
 
     /**

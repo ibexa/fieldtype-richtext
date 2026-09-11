@@ -476,8 +476,16 @@ EOT;
 
         return [
             [new RichTextValue()],
-            [new RichTextValue($xml)],
+            [new RichTextValue($this->createDocumentFromString($xml))],
         ];
+    }
+
+    private function createDocumentFromString(string $xml): DOMDocument
+    {
+        $document = new DOMDocument();
+        $document->loadXML($xml);
+
+        return $document;
     }
 
     public function providerForTestIsNotEmptyValue()
@@ -497,8 +505,8 @@ EOT;
             [
                 $this->getValidCreationFieldData(),
             ],
-            [new RichTextValue($xml)],
-            [new RichTextValue($xml2)],
+            [new RichTextValue($this->createDocumentFromString($xml))],
+            [new RichTextValue($this->createDocumentFromString($xml2))],
         ];
     }
 

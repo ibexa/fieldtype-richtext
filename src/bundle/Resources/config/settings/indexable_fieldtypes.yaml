@@ -3,5 +3,6 @@ services:
         arguments:
             $shortTextExtractor: '@Ibexa\FieldTypeRichText\RichText\TextExtractor\ShortTextExtractor'
             $fullTextExtractor: '@Ibexa\FieldTypeRichText\RichText\TextExtractor\FullTextExtractor'
+            $domDocumentLoader: '@Ibexa\Contracts\FieldTypeRichText\RichText\DOMDocumentLoaderInterface'
         tags:
             - {name: ibexa.field_type.indexable, alias: ezrichtext}
