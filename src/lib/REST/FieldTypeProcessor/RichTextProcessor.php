@@ -11,7 +11,6 @@ namespace Ibexa\FieldTypeRichText\REST\FieldTypeProcessor;
 use Ibexa\Contracts\FieldTypeRichText\RichText\Converter;
 use Ibexa\Contracts\FieldTypeRichText\RichText\DOMDocumentLoaderInterface;
 use Ibexa\Contracts\Rest\FieldTypeProcessor;
-use Ibexa\FieldTypeRichText\RichText\DOMDocumentLoader;
 
 class RichTextProcessor extends FieldTypeProcessor
 {
@@ -21,10 +20,10 @@ class RichTextProcessor extends FieldTypeProcessor
 
     public function __construct(
         Converter $docbookToXhtml5EditConverter,
-        ?DOMDocumentLoaderInterface $domDocumentLoader = null
+        DOMDocumentLoaderInterface $domDocumentLoader
     ) {
         $this->docbookToXhtml5EditConverter = $docbookToXhtml5EditConverter;
-        $this->domDocumentLoader = $domDocumentLoader ?? new DOMDocumentLoader();
+        $this->domDocumentLoader = $domDocumentLoader;
     }
 
     /**

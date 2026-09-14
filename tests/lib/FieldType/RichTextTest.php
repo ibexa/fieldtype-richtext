@@ -25,6 +25,7 @@ use Ibexa\FieldTypeRichText\FieldType\RichText\Type as RichTextType;
 use Ibexa\FieldTypeRichText\FieldType\RichText\Value;
 use Ibexa\FieldTypeRichText\RichText\ConverterDispatcher;
 use Ibexa\FieldTypeRichText\RichText\DOMDocumentFactory;
+use Ibexa\FieldTypeRichText\RichText\DOMDocumentLoader;
 use Ibexa\FieldTypeRichText\RichText\InputHandler;
 use Ibexa\FieldTypeRichText\RichText\Normalizer\Aggregate;
 use Ibexa\FieldTypeRichText\RichText\RelationProcessor;
@@ -61,7 +62,7 @@ class RichTextTest extends TestCase
 
         $textExtractor = $this->createMock(TextExtractorInterface::class);
 
-        $fieldType = new RichTextType($inputHandler, $textExtractor);
+        $fieldType = new RichTextType($inputHandler, $textExtractor, new DOMDocumentLoader());
         $fieldType->setTransformationProcessor($this->getTransformationProcessorMock());
 
         return $fieldType;

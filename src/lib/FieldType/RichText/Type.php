@@ -19,7 +19,6 @@ use Ibexa\Core\Base\Exceptions\InvalidArgumentType;
 use Ibexa\Core\FieldType\FieldType;
 use Ibexa\Core\FieldType\ValidationError;
 use Ibexa\Core\FieldType\Value as BaseValue;
-use Ibexa\FieldTypeRichText\RichText\DOMDocumentLoader;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use RuntimeException;
@@ -38,11 +37,11 @@ class Type extends FieldType implements TranslationContainerInterface
     public function __construct(
         InputHandlerInterface $inputHandler,
         TextExtractorInterface $textExtractor,
-        ?DOMDocumentLoaderInterface $domDocumentLoader = null
+        DOMDocumentLoaderInterface $domDocumentLoader
     ) {
         $this->inputHandler = $inputHandler;
         $this->textExtractor = $textExtractor;
-        $this->domDocumentLoader = $domDocumentLoader ?? new DOMDocumentLoader();
+        $this->domDocumentLoader = $domDocumentLoader;
     }
 
     /**

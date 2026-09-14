@@ -14,7 +14,6 @@ use Ibexa\Contracts\Core\Persistence\Content\Type\FieldDefinition;
 use Ibexa\Contracts\Core\Search;
 use Ibexa\Contracts\FieldTypeRichText\RichText\DOMDocumentLoaderInterface;
 use Ibexa\Contracts\FieldTypeRichText\RichText\TextExtractorInterface;
-use Ibexa\FieldTypeRichText\RichText\DOMDocumentLoader;
 
 /**
  * Indexable definition for RichText field type.
@@ -30,11 +29,11 @@ class SearchField implements Indexable
     public function __construct(
         TextExtractorInterface $shortTextExtractor,
         TextExtractorInterface $fullTextExtractor,
-        ?DOMDocumentLoaderInterface $domDocumentLoader = null
+        DOMDocumentLoaderInterface $domDocumentLoader
     ) {
         $this->shortTextExtractor = $shortTextExtractor;
         $this->fullTextExtractor = $fullTextExtractor;
-        $this->domDocumentLoader = $domDocumentLoader ?? new DOMDocumentLoader();
+        $this->domDocumentLoader = $domDocumentLoader;
     }
 
     /**

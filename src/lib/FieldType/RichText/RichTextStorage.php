@@ -16,7 +16,6 @@ use Ibexa\Contracts\Core\Persistence\Content\Field;
 use Ibexa\Contracts\Core\Persistence\Content\VersionInfo;
 use Ibexa\Contracts\FieldTypeRichText\RichText\DOMDocumentLoaderInterface;
 use Ibexa\Core\Base\Exceptions\NotFoundException;
-use Ibexa\FieldTypeRichText\RichText\DOMDocumentLoader;
 use Psr\Log\LoggerInterface;
 
 class RichTextStorage extends GatewayBasedStorage
@@ -30,12 +29,12 @@ class RichTextStorage extends GatewayBasedStorage
 
     public function __construct(
         StorageGateway $gateway,
-        ?LoggerInterface $logger = null,
-        ?DOMDocumentLoaderInterface $domDocumentLoader = null
+        DOMDocumentLoaderInterface $domDocumentLoader,
+        ?LoggerInterface $logger = null
     ) {
         parent::__construct($gateway);
+        $this->domDocumentLoader = $domDocumentLoader;
         $this->logger = $logger;
-        $this->domDocumentLoader = $domDocumentLoader ?? new DOMDocumentLoader($logger);
     }
 
     /**

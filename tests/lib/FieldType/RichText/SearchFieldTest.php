@@ -14,6 +14,7 @@ use Ibexa\Contracts\Core\Persistence\Content\Type\FieldDefinition;
 use Ibexa\Contracts\Core\Search;
 use Ibexa\Contracts\FieldTypeRichText\RichText\TextExtractorInterface;
 use Ibexa\FieldTypeRichText\FieldType\RichText\SearchField;
+use Ibexa\FieldTypeRichText\RichText\DOMDocumentLoader;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
@@ -82,6 +83,7 @@ final class SearchFieldTest extends TestCase
         $this->searchField = new SearchField(
             $this->shortTextExtractor,
             $this->fullTextExtractor,
+            new DOMDocumentLoader(),
         );
     }
 

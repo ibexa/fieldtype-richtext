@@ -16,6 +16,7 @@ use Ibexa\Contracts\Core\Persistence\Content\VersionInfo;
 use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
 use Ibexa\FieldTypeRichText\FieldType\RichText\RichTextStorage;
 use Ibexa\FieldTypeRichText\FieldType\RichText\RichTextStorage\Gateway;
+use Ibexa\FieldTypeRichText\RichText\DOMDocumentLoader;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
@@ -400,6 +401,7 @@ class RichTextStorageTest extends TestCase
             ->setConstructorArgs(
                 [
                     $gateway,
+                    new DOMDocumentLoader(),
                     $this->getLoggerMock(),
                 ]
             )

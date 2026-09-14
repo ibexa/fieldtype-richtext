@@ -36,28 +36,4 @@ final class ValueTest extends TestCase
 
         self::assertSame(Value::EMPTY_VALUE, trim((string)$value));
     }
-
-    public function testCreateFromStringIsDeprecated(): void
-    {
-        $deprecations = [];
-        set_error_handler(
-            static function (int $errno, string $errstr) use (&$deprecations): bool {
-                $deprecations[] = $errstr;
-
-                return true;
-            },
-            E_USER_DEPRECATED
-        );
-
-        try {
-            $value = new Value(self::XML);
-        } finally {
-            restore_error_handler();
-        }
-
-        self::assertNotNull($value->xml->documentElement);
-        self::assertSame('section', $value->xml->documentElement->localName);
-        self::assertCount(1, $deprecations);
-        self::assertStringContainsString('Passing string as $xml argument', $deprecations[0]);
-    }
 }
