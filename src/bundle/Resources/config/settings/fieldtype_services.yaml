@@ -55,6 +55,12 @@ services:
     Ibexa\FieldTypeRichText\RichText\DOMDocumentFactory:
         public: false
 
+    Ibexa\FieldTypeRichText\RichText\DOMDocumentLoader:
+        tags:
+            - {name: monolog.logger, channel: ibexa.richtext}
+
+    Ibexa\Contracts\FieldTypeRichText\RichText\DOMDocumentLoaderInterface: '@Ibexa\FieldTypeRichText\RichText\DOMDocumentLoader'
+
     Ibexa\FieldTypeRichText\RichText\XMLSanitizer:
         public: false
 

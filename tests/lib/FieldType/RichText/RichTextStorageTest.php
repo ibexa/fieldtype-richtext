@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace Ibexa\Tests\FieldTypeRichText\FieldType\RichText;
 
 use Ibexa\Contracts\Core\FieldType\StorageGateway;
+use Ibexa\Contracts\Core\Persistence\Content\ContentInfo;
 use Ibexa\Contracts\Core\Persistence\Content\Field;
 use Ibexa\Contracts\Core\Persistence\Content\FieldValue;
 use Ibexa\Contracts\Core\Persistence\Content\VersionInfo;
@@ -96,7 +97,7 @@ class RichTextStorageTest extends TestCase
             ->method('error')
             ->withConsecutive($errorMessages);
 
-        $versionInfo = new VersionInfo();
+        $versionInfo = new VersionInfo(['contentInfo' => new ContentInfo(['id' => 1])]);
         $value = new FieldValue(['data' => $xmlString]);
         $field = new Field(['value' => $value]);
 
@@ -202,7 +203,7 @@ class RichTextStorageTest extends TestCase
         array $contentIds,
         bool $isUpdated
     ): void {
-        $versionInfo = new VersionInfo(['versionNo' => 24]);
+        $versionInfo = new VersionInfo(['versionNo' => 24, 'contentInfo' => new ContentInfo(['id' => 1])]);
         $value = new FieldValue(['data' => $xmlString]);
         $field = new Field(['id' => 42, 'value' => $value]);
         $gateway = $this->getGatewayMock();
@@ -362,7 +363,7 @@ class RichTextStorageTest extends TestCase
                 ->willReturn($linkMap['id']);
         }
 
-        $versionInfo = new VersionInfo();
+        $versionInfo = new VersionInfo(['contentInfo' => new ContentInfo(['id' => 1])]);
         $value = new FieldValue(['data' => $xmlString]);
         $field = new Field(['value' => $value]);
 
@@ -375,7 +376,7 @@ class RichTextStorageTest extends TestCase
 
     public function testDeleteFieldData(): void
     {
-        $versionInfo = new VersionInfo(['versionNo' => 42]);
+        $versionInfo = new VersionInfo(['versionNo' => 42, 'contentInfo' => new ContentInfo(['id' => 1])]);
         $fieldIds = [12, 23];
         $gateway = $this->getGatewayMock();
         $storage = $this->getPartlyMockedStorage($gateway);
