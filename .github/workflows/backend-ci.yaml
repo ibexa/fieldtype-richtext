@@ -109,6 +109,7 @@ jobs:
                 run: composer run-script integration
                 env:
                     DATABASE: "pgsql://postgres:postgres@localhost:${{ job.services.postgres.ports[5432] }}/testdb"
+                    DATABASE_URL: "pgsql://postgres:postgres@localhost:${{ job.services.postgres.ports[5432] }}/testdb"
 
     integration-tests-mysql:
         name: MySQL integration tests
@@ -158,6 +159,7 @@ jobs:
                 run: composer run-script integration
                 env:
                     DATABASE: "mysql://mysql:mysql@127.0.0.1:${{ job.services.mysql.ports[3306] }}/testdb"
+                    DATABASE_URL: "mysql://mysql:mysql@127.0.0.1:${{ job.services.mysql.ports[3306] }}/testdb"
 
     solr-integration:
         name: "Solr integration tests"
