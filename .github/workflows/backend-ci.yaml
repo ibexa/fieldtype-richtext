@@ -79,7 +79,7 @@ jobs:
                     --health-interval 10s
                     --health-timeout 5s
                     --health-retries 5
-                    --tmpfs /var/lib/postgresql/data
+                    --tmpfs /var/lib/postgresql
         runs-on: ubuntu-24.04
         timeout-minutes: 10
 
