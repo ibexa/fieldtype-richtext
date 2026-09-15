@@ -23,13 +23,14 @@ use Ibexa\Core\Repository\Values\Content\Relation;
 use Ibexa\FieldTypeRichText\FieldType\RichText\Value as RichTextValue;
 use Ibexa\Tests\Integration\Core\Repository\FieldType\RelationSearchBaseIntegrationTestTrait;
 use Ibexa\Tests\Integration\Core\Repository\FieldType\SearchBaseIntegrationTestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Integration test for use field type.
- *
- * @group integration
- * @group field-type
  */
+#[Group('integration')]
+#[Group('field-type')]
 class RichTextFieldTypeIntegrationTest extends SearchBaseIntegrationTestCase
 {
     use RelationSearchBaseIntegrationTestTrait;
@@ -38,11 +39,10 @@ class RichTextFieldTypeIntegrationTest extends SearchBaseIntegrationTestCase
 
     private DOMDocument $updatedDOMValue;
 
-    /**
-     * @param array<mixed> $data
-     */
-    public function __construct(?string $name = null, array $data = [], $dataName = '')
+    protected function setUp(): void
     {
+        parent::setUp();
+
         $this->createdDOMValue = new DOMDocument();
         $this->createdDOMValue->loadXML(
             <<<EOT
@@ -71,8 +71,6 @@ EOT
 </section>
 EOT
         );
-
-        parent::__construct($name, $data, $dataName);
     }
 
     /**
@@ -420,11 +418,10 @@ EOT
     }
 
     /**
-     * @dataProvider provideFromHashData
-     *
      * @todo: Requires correct registered FieldTypeService, needs to be
      *        maintained!
      */
+    #[DataProvider('provideFromHashData')]
     public function testFromHash(mixed $hash, mixed $expectedValue = null): void
     {
         $richTextValue = $this
@@ -498,7 +495,7 @@ EOT;
      *
      * @phpstan-return list<array{string, string}>
      */
-    public function providerForTestConvertRemoteObjectIdToObjectId(): array
+    public static function providerForTestConvertRemoteObjectIdToObjectId(): array
     {
         $remoteId = '[RemoteId]';
         $objectId = '[ObjectId]';
@@ -557,9 +554,8 @@ EOT;
 
     /**
      * This tests the conversion from remote_object_id to object_id.
-     *
-     * @dataProvider providerForTestConvertRemoteObjectIdToObjectId
      */
+    #[DataProvider('providerForTestConvertRemoteObjectIdToObjectId')]
     public function testConvertRemoteObjectIdToObjectId(string $test, string $expected): void
     {
         $repository = $this->getRepository();
@@ -778,9 +774,8 @@ EOT;
 
     /**
      * @param string $xmlDocumentPath
-     *
-     * @dataProvider providerForTestCreateContentWithValidCustomTag
      */
+    #[DataProvider('providerForTestCreateContentWithValidCustomTag')]
     public function testCreateContentWithValidCustomTag($xmlDocumentPath): void
     {
         $validXmlDocument = $this->createDocument($xmlDocumentPath);
@@ -792,7 +787,7 @@ EOT;
      *
      * @return list<array{(string|false)}>
      */
-    public function providerForTestCreateContentWithValidCustomTag(): array
+    public static function providerForTestCreateContentWithValidCustomTag(): array
     {
         $data = [];
         $iterator = new DirectoryIterator(__DIR__ . '/_fixtures/ibexa_richtext/custom_tags/valid');
@@ -807,9 +802,8 @@ EOT;
 
     /**
      * @param string $xmlDocumentPath
-     *
-     * @dataProvider providerForTestCreateContentWithInvalidCustomTag
      */
+    #[DataProvider('providerForTestCreateContentWithInvalidCustomTag')]
     public function testCreateContentWithInvalidCustomTag(
         $xmlDocumentPath,
         string $expectedValidationMessage
@@ -831,7 +825,7 @@ EOT;
      *
      * @return array<list<string>>
      */
-    public function providerForTestCreateContentWithInvalidCustomTag(): array
+    public static function providerForTestCreateContentWithInvalidCustomTag(): array
     {
         return [
             [

@@ -54,7 +54,7 @@ class RichTextValidatorTest extends TestCase
 
         $this->executionContext
             ->method('addViolation')
-            ->willReturnOnConsecutiveCalls($this->fetchErrorMessages($expectedErrors));
+            ->willReturnOnConsecutiveCalls(...$this->fetchErrorMessages($expectedErrors));
 
         $this->inputHandler
             ->expects(self::never())
@@ -84,7 +84,7 @@ class RichTextValidatorTest extends TestCase
 
     public function testValidateDOMDocument(): void
     {
-        $doc = $this->createMock(DOMDocument::class);
+        $doc = self::createStub(DOMDocument::class);
 
         $expectedErrors = [
             'This is not XML string: A',
@@ -104,7 +104,7 @@ class RichTextValidatorTest extends TestCase
         $this->executionContext
             ->expects(self::exactly(count($expectedErrors)))
             ->method('addViolation')
-            ->willReturnOnConsecutiveCalls($expectedErrors);
+            ->willReturnOnConsecutiveCalls(...$expectedErrors);
 
         $this->validator->validate($doc, new RichText());
     }
@@ -131,9 +131,9 @@ class RichTextValidatorTest extends TestCase
     }
 
     /**
-     * @param array<LibXMLError> $errors
+     * @param list<LibXMLError> $errors
      *
-     * @return array<string>
+     * @return list<string>
      */
     private function fetchErrorMessages(array $errors): array
     {

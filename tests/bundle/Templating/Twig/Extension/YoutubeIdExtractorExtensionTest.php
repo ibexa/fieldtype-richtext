@@ -9,15 +9,19 @@ declare(strict_types=1);
 namespace Ibexa\Tests\Bundle\FieldTypeRichText\Templating\Twig\Extension;
 
 use Ibexa\Bundle\FieldTypeRichText\Templating\Twig\Extension\YoutubeIdExtractorExtension;
+use PHPUnit\Framework\Attributes\CoversMethod;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Twig\TwigFunction;
 
+#[CoversMethod(YoutubeIdExtractorExtension::class, 'extractId')]
+#[CoversMethod(YoutubeIdExtractorExtension::class, 'getFunctions')]
 class YoutubeIdExtractorExtensionTest extends TestCase
 {
     /**
      * @return array<mixed>
      */
-    public function getYouTubeUrls(): array
+    public static function getYouTubeUrls(): array
     {
         return [
             ['http://www.youtube.com/watch?v=Z1xNWm6dHp4', 'Z1xNWm6dHp4'],
@@ -42,11 +46,7 @@ class YoutubeIdExtractorExtensionTest extends TestCase
         ];
     }
 
-    /**
-     * @covers \Ibexa\Bundle\FieldTypeRichText\Templating\Twig\Extension\YoutubeIdExtractorExtension::extractId
-     *
-     * @dataProvider getYouTubeUrls
-     */
+    #[DataProvider('getYouTubeUrls')]
     public function testExtractId(string $input, ?string $expected): void
     {
         $subject = new YoutubeIdExtractorExtension();
@@ -54,9 +54,6 @@ class YoutubeIdExtractorExtensionTest extends TestCase
         self::assertEquals($expected, $result);
     }
 
-    /**
-     * @covers \Ibexa\Bundle\FieldTypeRichText\Templating\Twig\Extension\YoutubeIdExtractorExtension::getFunctions
-     */
     public function testGetFunctions(): void
     {
         $subject = new YoutubeIdExtractorExtension();

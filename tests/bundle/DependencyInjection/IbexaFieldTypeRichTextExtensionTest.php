@@ -10,6 +10,7 @@ namespace Ibexa\Tests\Bundle\FieldTypeRichText\DependencyInjection;
 
 use Ibexa\Bundle\FieldTypeRichText\DependencyInjection\IbexaFieldTypeRichTextExtension;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Symfony\Component\Yaml\Yaml;
 
@@ -133,9 +134,7 @@ class IbexaFieldTypeRichTextExtensionTest extends AbstractExtensionTestCase
         );
     }
 
-    /**
-     * @dataProvider inlineTagDataProvider
-     */
+    #[DataProvider('inlineTagDataProvider')]
     public function testCheckingInlineCustomTagsInToolbars(string $toolbarName, ?string $expectedException): void
     {
         $config = Yaml::parse(
@@ -164,7 +163,7 @@ class IbexaFieldTypeRichTextExtensionTest extends AbstractExtensionTestCase
     /**
      * @return iterable<string, array<string|null>>
      */
-    public function inlineTagDataProvider(): iterable
+    public static function inlineTagDataProvider(): iterable
     {
         yield 'Inline tag in normal toolbar' => [
             'foo',

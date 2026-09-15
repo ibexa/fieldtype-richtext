@@ -11,24 +11,23 @@ namespace Ibexa\Tests\FieldTypeRichText\RichText;
 use DOMDocument;
 use Ibexa\Contracts\Core\Repository\Values\Content\RelationType;
 use Ibexa\FieldTypeRichText\RichText\RelationProcessor;
+use PHPUnit\Framework\Attributes\CoversMethod;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @group fieldType
- * @group ibexa_richtext
- */
+#[CoversMethod(RelationProcessor::class, 'getRelations')]
+#[Group('fieldType')]
+#[Group('ibexa_richtext')]
 class RelationProcessorTest extends TestCase
 {
     /**
-     * @covers \Ibexa\FieldTypeRichText\RichText\RelationProcessor::getRelations
-     *
-     * @dataProvider dateProviderForGetRelations
-     *
      * @param array{
      *     link: array{locationIds: array<int>, contentIds: array<int>},
      *     embed: array{locationIds: array<int>, contentIds: array<int>}
      * } $expectedRelations
      */
+    #[DataProvider('dateProviderForGetRelations')]
     public function testGetRelations(DOMDocument $document, array $expectedRelations): void
     {
         $actualProcessor = (new RelationProcessor())->getRelations($document);
@@ -39,7 +38,7 @@ class RelationProcessorTest extends TestCase
     /**
      * @return array<array<mixed>>
      */
-    public function dateProviderForGetRelations(): array
+    public static function dateProviderForGetRelations(): array
     {
         $xml = <<<EOT
 <?xml version="1.0" encoding="UTF-8"?>
@@ -56,7 +55,7 @@ EOT;
 
         return [
             [
-                $this->createDOMDocument($xml),
+                self::createDOMDocument($xml),
                 [
                     RelationType::LINK->value => [
                         'locationIds' => [72, 61],
@@ -71,7 +70,7 @@ EOT;
         ];
     }
 
-    private function createDOMDocument(string $xml): DOMDocument
+    private static function createDOMDocument(string $xml): DOMDocument
     {
         $document = new DOMDocument();
         $document->loadXML($xml);

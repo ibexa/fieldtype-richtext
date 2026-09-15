@@ -18,7 +18,7 @@ use Ibexa\FieldTypeRichText\RichText\Converter\Xslt;
 /**
  * Tests conversion from xhtml5 edit format to docbook.
  */
-class Xhtml5ToDocbookTest extends BaseTest
+class Xhtml5ToDocbookTest extends BaseTestCase
 {
     /**
      * Returns subdirectories for input and output fixtures.
@@ -37,7 +37,7 @@ class Xhtml5ToDocbookTest extends BaseTest
      *
      * @return array{input: string, output: string}
      */
-    public function getFixtureSubdirectories(): array
+    public static function getFixtureSubdirectories(): array
     {
         return [
             'input' => 'xhtml5/edit',

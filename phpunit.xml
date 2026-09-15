@@ -1,13 +1,5 @@
-<phpunit
-    backupGlobals="false"
-    backupStaticAttributes="false"
-    convertErrorsToExceptions="true"
-    convertNoticesToExceptions="true"
-    convertWarningsToExceptions="true"
-    beStrictAboutTestsThatDoNotTestAnything="false"
-    colors="true"
-    failOnWarning="true"
->
+<?xml version="1.0"?>
+<phpunit backupGlobals="false" beStrictAboutTestsThatDoNotTestAnything="false" colors="true" failOnWarning="true" cacheDirectory=".phpunit.cache" backupStaticProperties="false">
   <testsuites>
     <testsuite name="ibexa_richtext_field_type">
       <directory>tests/lib</directory>

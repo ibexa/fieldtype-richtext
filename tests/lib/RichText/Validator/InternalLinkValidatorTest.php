@@ -13,6 +13,7 @@ use Ibexa\Contracts\Core\Persistence\Content\Location\Handler as LocationHandler
 use Ibexa\Core\Base\Exceptions\InvalidArgumentException;
 use Ibexa\Core\Base\Exceptions\NotFoundException;
 use Ibexa\FieldTypeRichText\RichText\Validator\InternalLinkValidator;
+use PHPUnit\Framework\Attributes\Before;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
@@ -22,9 +23,7 @@ class InternalLinkValidatorTest extends TestCase
 
     private LocationHandler&MockObject $locationHandler;
 
-    /**
-     * @before
-     */
+    #[Before]
     public function setupInternalLinkValidator(): void
     {
         $this->contentHandler = $this->createMock(ContentHandler::class);
@@ -58,7 +57,7 @@ class InternalLinkValidatorTest extends TestCase
         $validator = $this->getInternalLinkValidator();
 
         $contentId = 1;
-        $exception = $this->createMock(NotFoundException::class);
+        $exception = self::createStub(NotFoundException::class);
 
         $this->contentHandler
             ->expects(self::once())
@@ -88,7 +87,7 @@ class InternalLinkValidatorTest extends TestCase
         $validator = $this->getInternalLinkValidator();
 
         $locationId = 1;
-        $exception = $this->createMock(NotFoundException::class);
+        $exception = self::createStub(NotFoundException::class);
 
         $this->locationHandler
             ->expects(self::once())
@@ -118,7 +117,7 @@ class InternalLinkValidatorTest extends TestCase
         $validator = $this->getInternalLinkValidator();
 
         $contentRemoteId = '0ba685755118cf95abb0fe25f3f6a1c8';
-        $exception = $this->createMock(NotFoundException::class);
+        $exception = self::createStub(NotFoundException::class);
 
         $this->contentHandler
             ->expects(self::once())
@@ -286,16 +285,16 @@ class InternalLinkValidatorTest extends TestCase
     }
 
     /**
-     * @param list<string>|null $methods
+     * @param list<non-empty-string>|null $methods
      */
     private function getInternalLinkValidator(?array $methods = null): InternalLinkValidator&MockObject
     {
         return $this->getMockBuilder(InternalLinkValidator::class)
-            ->setMethods($methods)
             ->setConstructorArgs([
                 $this->contentHandler,
                 $this->locationHandler,
             ])
+            ->onlyMethods($methods ?? [])
             ->getMock();
     }
 

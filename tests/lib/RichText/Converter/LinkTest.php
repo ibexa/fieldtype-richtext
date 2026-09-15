@@ -18,6 +18,7 @@ use Ibexa\Core\MVC\Symfony\Routing\UrlAliasRouter;
 use Ibexa\Core\Repository\ContentService;
 use Ibexa\Core\Repository\LocationService;
 use Ibexa\FieldTypeRichText\RichText\Converter\Link;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
@@ -47,7 +48,7 @@ class LinkTest extends TestCase
     /**
      * @return list<array{string, string}>
      */
-    public function providerLinkXmlSample(): array
+    public static function providerLinkXmlSample(): array
     {
         return [
             [
@@ -103,9 +104,8 @@ class LinkTest extends TestCase
 
     /**
      * Test conversion of ezurl://<id> links.
-     *
-     * @dataProvider providerLinkXmlSample
      */
+    #[DataProvider('providerLinkXmlSample')]
     public function testLink(string $input, string $output): void
     {
         $inputDocument = new DOMDocument();
@@ -137,7 +137,7 @@ class LinkTest extends TestCase
     /**
      * @return array<array{string, string, int, string}>
      */
-    public function providerLocationLink(): array
+    public static function providerLocationLink(): array
     {
         return [
             [
@@ -217,9 +217,8 @@ class LinkTest extends TestCase
 
     /**
      * Test conversion of ezlocation://<id> links.
-     *
-     * @dataProvider providerLocationLink
      */
+    #[DataProvider('providerLocationLink')]
     public function testConvertLocationLink(string $input, string $output, int $locationId, string $urlResolved): void
     {
         $inputDocument = new DOMDocument();
@@ -229,7 +228,7 @@ class LinkTest extends TestCase
         $locationService = $this->getMockLocationService();
         $router = $this->getMockRouter();
 
-        $location = $this->createMock(APILocation::class);
+        $location = self::createStub(APILocation::class);
 
         $locationService->expects(self::once())
             ->method('loadLocation')
@@ -277,7 +276,7 @@ class LinkTest extends TestCase
         $locationService = $this->getMockLocationService();
         $router = $this->getMockRouter();
 
-        $location = $this->createMock(APILocation::class);
+        $location = self::createStub(APILocation::class);
 
         $locationService->expects(self::once())
             ->method('loadLocation')
@@ -305,7 +304,7 @@ class LinkTest extends TestCase
     /**
      * @return array<array{string, string, int, \Exception, string}>
      */
-    public function providerBadLocationLink(): array
+    public static function providerBadLocationLink(): array
     {
         return [
             [
@@ -373,9 +372,8 @@ class LinkTest extends TestCase
 
     /**
      * Test logging of bad location links.
-     *
-     * @dataProvider providerBadLocationLink
      */
+    #[DataProvider('providerBadLocationLink')]
     public function testConvertBadLocationLink(string $input, string $output, int $locationId, Exception $exception, string $logType, string $logMessage): void
     {
         $inputDocument = new DOMDocument();
@@ -409,7 +407,7 @@ class LinkTest extends TestCase
     /**
      * @return array<array{string, string, int, string}>
      */
-    public function providerContentLink(): array
+    public static function providerContentLink(): array
     {
         return [
             [
@@ -471,9 +469,8 @@ class LinkTest extends TestCase
 
     /**
      * Test conversion of ezcontent://<id> links.
-     *
-     * @dataProvider providerContentLink
      */
+    #[DataProvider('providerContentLink')]
     public function testConvertContentLink(string $input, string $output, int $contentId, string $urlResolved): void
     {
         $locationId = 106;
@@ -485,7 +482,7 @@ class LinkTest extends TestCase
         $router = $this->getMockRouter();
 
         $contentInfo = $this->createMock(APIContentInfo::class);
-        $location = $this->createMock(APILocation::class);
+        $location = self::createStub(APILocation::class);
 
         $contentInfo->expects(self::once())
             ->method('__get')
@@ -520,7 +517,7 @@ class LinkTest extends TestCase
     /**
      * @return array<array<mixed>>
      */
-    public function providerBadContentLink(): array
+    public static function providerBadContentLink(): array
     {
         return [
             [
@@ -588,9 +585,8 @@ class LinkTest extends TestCase
 
     /**
      * Test logging of bad content links.
-     *
-     * @dataProvider providerBadContentLink
      */
+    #[DataProvider('providerBadContentLink')]
     public function testConvertBadContentLink(string $input, string $output, int $contentId, Exception $exception, string $logType, string $logMessage): void
     {
         $inputDocument = new DOMDocument();

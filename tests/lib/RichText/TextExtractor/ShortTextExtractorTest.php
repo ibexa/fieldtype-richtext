@@ -10,7 +10,7 @@ namespace Ibexa\Tests\FieldTypeRichText\RichText\TextExtractor;
 
 use Ibexa\FieldTypeRichText\RichText\TextExtractor\ShortTextExtractor;
 
-final class ShortTextExtractorTest extends BaseTest
+final class ShortTextExtractorTest extends BaseTestCase
 {
     protected function setUp(): void
     {
@@ -20,21 +20,21 @@ final class ShortTextExtractorTest extends BaseTest
     /**
      * @return array<string, array{0: string, 1: string}>
      */
-    public function providerForTestExtractText(): array
+    public static function providerForTestExtractText(): array
     {
         return [
             'simple document' => [
-                $this->getSimpleDocBookXml(),
+                self::getSimpleDocBookXml(),
                 'Welcome to Ibexa',
             ],
             'empty xml' => [
-                $this->getEmptyXml(),
+                self::getEmptyXml(),
                 '',
             ],
         ];
     }
 
-    private function getSimpleDocBookXml(): string
+    private static function getSimpleDocBookXml(): string
     {
         return <<<XML
 <?xml version="1.0" encoding="UTF-8"?>
@@ -47,7 +47,7 @@ final class ShortTextExtractorTest extends BaseTest
 XML;
     }
 
-    private function getEmptyXml(): string
+    private static function getEmptyXml(): string
     {
         return '<?xml version="1.0" encoding="UTF-8"?><section></section>';
     }

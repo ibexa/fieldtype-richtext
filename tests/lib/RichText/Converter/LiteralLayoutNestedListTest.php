@@ -10,17 +10,17 @@ namespace Ibexa\Tests\FieldTypeRichText\RichText\Converter;
 
 use DOMDocument;
 use Ibexa\FieldTypeRichText\RichText\Converter\LiteralLayoutNestedList;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \Ibexa\FieldTypeRichText\RichText\Converter\LiteralLayoutNestedList
- */
+#[CoversClass(LiteralLayoutNestedList::class)]
 final class LiteralLayoutNestedListTest extends TestCase
 {
     /**
      * @return array<int, array<int, string>>
      */
-    public function providerConvert(): array
+    public static function providerConvert(): array
     {
         return [
             [
@@ -74,9 +74,8 @@ this is line 3</literallayout>
 
     /**
      * Test conversion of <li> tags which containing <br/> and <ol>/<ul> tags.
-     *
-     * @dataProvider providerConvert
      */
+    #[DataProvider('providerConvert')]
     public function testConvert(string $input, string $output): void
     {
         $inputDocument = new DOMDocument();

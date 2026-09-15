@@ -13,6 +13,7 @@ use Ibexa\Contracts\FieldTypeRichText\RichText\Converter;
 use Ibexa\Contracts\FieldTypeRichText\RichText\RendererInterface;
 use Ibexa\FieldTypeRichText\RichText\Converter\Aggregate;
 use Ibexa\FieldTypeRichText\RichText\Converter\Render\Template;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
@@ -32,7 +33,7 @@ class TemplateTest extends TestCase
     /**
      * @return array{DOMDocument, DOMDocument, mixed}[]
      */
-    public function providerForTestConvert(): array
+    public static function providerForTestConvert(): array
     {
         $data = [];
 
@@ -72,9 +73,7 @@ class TemplateTest extends TestCase
         return $data;
     }
 
-    /**
-     * @dataProvider providerForTestConvert
-     */
+    #[DataProvider('providerForTestConvert')]
     public function testConvert(
         DOMDocument $inputDocument,
         DOMDocument $expectedOutputDocument,
@@ -89,18 +88,28 @@ class TemplateTest extends TestCase
             $renderParameters,
             $renderReturnValues
         ] = $this->provideConvertRenderValues($expectedRenderParams);
+        $matcher = self::exactly(count($convertReturnValues));
 
         $this->converterMock
-            ->expects(self::exactly(count($convertReturnValues)))
+            ->expects($matcher)
             ->method('convert')
-            ->withConsecutive(...$convertParameters)
-            ->willReturnOnConsecutiveCalls(...$convertReturnValues);
+            ->willReturnCallback(function (...$parameters) use ($matcher, $convertParameters, $convertReturnValues) {
+                $invocation = $matcher->numberOfInvocations();
+                $this->assertEquals($convertParameters[$invocation - 1], $parameters);
+
+                return $convertReturnValues[$invocation - 1];
+            });
+        $matcher = self::exactly(count($renderReturnValues));
 
         $this->rendererMock
-            ->expects(self::exactly(count($renderReturnValues)))
+            ->expects($matcher)
             ->method('renderTemplate')
-            ->withConsecutive(...$renderParameters)
-            ->willReturnOnConsecutiveCalls(...$renderReturnValues);
+            ->willReturnCallback(function (...$parameters) use ($matcher, $renderParameters, $renderReturnValues) {
+                $invocation = $matcher->numberOfInvocations();
+                $this->assertEquals($renderParameters[$invocation - 1], $parameters);
+
+                return $renderReturnValues[$invocation - 1];
+            });
 
         $outputDocument = $this->getConverter()->convert($inputDocument);
 

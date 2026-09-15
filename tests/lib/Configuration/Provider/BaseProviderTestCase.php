@@ -10,9 +10,11 @@ namespace Ibexa\Tests\FieldTypeRichText\Configuration\Provider;
 
 use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 use Ibexa\Contracts\FieldTypeRichText\Configuration\Provider;
+use PHPUnit\Framework\Attributes\CoversMethod;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
+#[CoversMethod(Provider::class, 'getName')]
 abstract class BaseProviderTestCase extends TestCase
 {
     protected ConfigResolverInterface&MockObject $configResolver;
@@ -26,9 +28,6 @@ abstract class BaseProviderTestCase extends TestCase
 
     abstract public function getExpectedProviderName(): string;
 
-    /**
-     * @covers \Ibexa\Contracts\FieldTypeRichText\Configuration\Provider::getName
-     */
     final public function testGetName(): void
     {
         self::assertSame(

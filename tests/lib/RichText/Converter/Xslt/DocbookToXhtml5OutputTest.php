@@ -16,7 +16,7 @@ use Ibexa\FieldTypeRichText\RichText\Converter\Xslt;
 /**
  * Tests conversion from docbook to xhtml5 output format.
  */
-class DocbookToXhtml5OutputTest extends BaseTest
+class DocbookToXhtml5OutputTest extends BaseTestCase
 {
     /**
      * Returns subdirectories for input and output fixtures.
@@ -35,7 +35,7 @@ class DocbookToXhtml5OutputTest extends BaseTest
      *
      * @return array{input: string, output: string}
      */
-    public function getFixtureSubdirectories(): array
+    public static function getFixtureSubdirectories(): array
     {
         return [
             'input' => 'docbook',

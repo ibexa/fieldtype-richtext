@@ -11,11 +11,12 @@ namespace Ibexa\Tests\Integration\FieldTypeRichText\Persistence\Legacy\MigrateRi
 use Ibexa\Contracts\Core\Repository\Values\Content\Content;
 use Ibexa\Contracts\FieldTypeRichText\Persistence\Legacy\MigrateRichTextNamespaces\GatewayInterface;
 use Ibexa\Core\Persistence\Cache\Identifier\CacheIdentifierGeneratorInterface;
+use Ibexa\FieldTypeRichText\Persistence\Legacy\MigrateRichTextNamespaces\Gateway\DoctrineDatabase;
 use Ibexa\Tests\Integration\FieldTypeRichText\BaseRichTextIntegrationTestCase;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 
-/**
- * @covers \Ibexa\Contracts\FieldTypeRichText\Persistence\Legacy\MigrateRichTextNamespaces\DoctrineDatabase
- */
+#[CoversClass(DoctrineDatabase::class)]
 final class DoctrineDatabaseTest extends BaseRichTextIntegrationTestCase
 {
     private GatewayInterface $gateway;
@@ -33,12 +34,11 @@ final class DoctrineDatabaseTest extends BaseRichTextIntegrationTestCase
     }
 
     /**
-     * @dataProvider provideDataForTestMigrate
-     *
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\Exception
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
      */
+    #[DataProvider('provideDataForTestMigrate')]
     public function testMigrate(string $expected, string $contents): void
     {
         $folder = $this->createRichTextContent($contents);
@@ -63,7 +63,7 @@ final class DoctrineDatabaseTest extends BaseRichTextIntegrationTestCase
     /**
      * @return iterable<array{string, string}>
      */
-    public function provideDataForTestMigrate(): iterable
+    public static function provideDataForTestMigrate(): iterable
     {
         yield [
             <<<XML

@@ -18,9 +18,14 @@ use Ibexa\FieldTypeRichText\RichText\InputHandler;
 use Ibexa\FieldTypeRichText\RichText\Normalizer;
 use Ibexa\FieldTypeRichText\RichText\RelationProcessor;
 use Ibexa\FieldTypeRichText\RichText\XMLSanitizer;
+use PHPUnit\Framework\Attributes\CoversMethod;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
+#[CoversMethod(InputHandler::class, 'fromString')]
+#[CoversMethod(InputHandler::class, 'fromDocument')]
+#[CoversMethod(InputHandler::class, 'getRelations')]
+#[CoversMethod(InputHandler::class, 'validate')]
 class InputHandlerTest extends TestCase
 {
     private DOMDocumentFactory $domDocumentFactory;
@@ -56,9 +61,6 @@ class InputHandlerTest extends TestCase
         );
     }
 
-    /**
-     * @covers \Ibexa\FieldTypeRichText\RichText\InputHandler::fromString
-     */
     public function testFromString(): void
     {
         $inputXml = '<?xml version="1.0" encoding="UTF-8"?>
@@ -76,7 +78,7 @@ class InputHandlerTest extends TestCase
                 $this->docbookValidator,
                 $this->relationProcessor,
             ])
-            ->setMethods(['fromDocument'])
+            ->onlyMethods(['fromDocument'])
             ->disableOriginalClone()
             ->disableArgumentCloning()
             ->disallowMockingUnknownTypes()
@@ -88,7 +90,7 @@ class InputHandlerTest extends TestCase
             ->with($inputXml)
             ->willReturn(false);
 
-        $outputDocument = $this->createMock(DOMDocument::class);
+        $outputDocument = self::createStub(DOMDocument::class);
 
         $inputHandler
             ->expects(self::once())
@@ -102,13 +104,10 @@ class InputHandlerTest extends TestCase
         self::assertEquals($outputDocument, $inputHandler->fromString($inputXml));
     }
 
-    /**
-     * @covers \Ibexa\FieldTypeRichText\RichText\InputHandler::fromDocument
-     */
     public function testFromDocument(): void
     {
-        $inputDocument = $this->createMock(DOMDocument::class);
-        $outputDocument = $this->createMock(DOMDocument::class);
+        $inputDocument = self::createStub(DOMDocument::class);
+        $outputDocument = self::createStub(DOMDocument::class);
 
         $this->schemaValidator
             ->expects(self::once())
@@ -125,12 +124,9 @@ class InputHandlerTest extends TestCase
         self::assertEquals($outputDocument, $this->inputHandler->fromDocument($inputDocument));
     }
 
-    /**
-     * @covers \Ibexa\FieldTypeRichText\RichText\InputHandler::fromDocument
-     */
     public function testFromDocumentThrowsInvalidArgumentException(): void
     {
-        $inputDocument = $this->createMock(DOMDocument::class);
+        $inputDocument = self::createStub(DOMDocument::class);
 
         $this->schemaValidator
             ->expects(self::once())
@@ -150,9 +146,6 @@ class InputHandlerTest extends TestCase
         $this->inputHandler->fromDocument($inputDocument);
     }
 
-    /**
-     * @covers \Ibexa\FieldTypeRichText\RichText\InputHandler::getRelations
-     */
     public function testGetRelations(): void
     {
         $xml = <<<EOT
@@ -183,12 +176,9 @@ EOT;
         ], $this->inputHandler->getRelations($document));
     }
 
-    /**
-     * @covers \Ibexa\FieldTypeRichText\RichText\InputHandler::validate
-     */
     public function testValidate(): void
     {
-        $document = $this->createMock(DOMDocument::class);
+        $document = self::createStub(DOMDocument::class);
         $expectedErrors = [
             'Example error A',
             'Example error B',

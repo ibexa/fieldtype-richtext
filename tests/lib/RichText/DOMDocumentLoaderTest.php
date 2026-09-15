@@ -9,12 +9,11 @@ declare(strict_types=1);
 namespace Ibexa\Tests\FieldTypeRichText\RichText;
 
 use Ibexa\FieldTypeRichText\RichText\DOMDocumentLoader;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 
-/**
- * @covers \Ibexa\FieldTypeRichText\RichText\DOMDocumentLoader
- */
+#[CoversClass(DOMDocumentLoader::class)]
 final class DOMDocumentLoaderTest extends TestCase
 {
     /** @var \Psr\Log\LoggerInterface&\PHPUnit\Framework\MockObject\MockObject */

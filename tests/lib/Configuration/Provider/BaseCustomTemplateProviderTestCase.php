@@ -8,9 +8,12 @@ declare(strict_types=1);
 
 namespace Ibexa\Tests\FieldTypeRichText\Configuration\Provider;
 
+use Ibexa\Contracts\FieldTypeRichText\Configuration\Provider;
 use Ibexa\FieldTypeRichText\Configuration\UI\Mapper\CustomTemplateConfigMapper;
+use PHPUnit\Framework\Attributes\CoversMethod;
 use PHPUnit\Framework\MockObject\MockObject;
 
+#[CoversMethod(Provider::class, 'getConfiguration')]
 abstract class BaseCustomTemplateProviderTestCase extends BaseProviderTestCase
 {
     protected CustomTemplateConfigMapper&MockObject $mapper;
@@ -29,9 +32,6 @@ abstract class BaseCustomTemplateProviderTestCase extends BaseProviderTestCase
         $this->mapper = $this->createMock(CustomTemplateConfigMapper::class);
     }
 
-    /**
-     * @covers \Ibexa\Contracts\FieldTypeRichText\Configuration\Provider::getConfiguration
-     */
     final public function testGetConfiguration(): void
     {
         $provider = $this->createProvider();
