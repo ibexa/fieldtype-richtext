@@ -71,7 +71,7 @@ jobs:
         needs: tests
         services:
             postgres:
-                image: postgres:10
+                image: postgres:${{ matrix.postgres_version }}
                 ports:
                     - 5432
                 env:
@@ -82,7 +82,7 @@ jobs:
                     --health-interval 10s
                     --health-timeout 5s
                     --health-retries 5
-                    --tmpfs /var/lib/postgresql/data
+                    --tmpfs ${{ matrix.pg_tmpfs }}
         runs-on: ubuntu-24.04
         timeout-minutes: 10
 
@@ -93,6 +93,14 @@ jobs:
                     - '7.4'
                     - '8.3'
                     - '8.4'
+                postgres_version:
+                    - '14'
+                    - '18'
+                include:
+                    -   postgres_version: '14'
+                        pg_tmpfs: /var/lib/postgresql/data
+                    -   postgres_version: '18'
+                        pg_tmpfs: /var/lib/postgresql
 
         steps:
             -   uses: actions/checkout@v6
