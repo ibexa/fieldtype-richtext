@@ -71,12 +71,13 @@ jobs:
         needs: tests
         services:
             postgres:
-                image: postgres:10
+                image: postgres:${{ matrix.postgres_version }}
                 ports:
                     - 5432
                 env:
                     POSTGRES_PASSWORD: postgres
                     POSTGRES_DB: testdb
+                    PGDATA: "/var/lib/postgresql/data"
                 options: >-
                     --health-cmd pg_isready
                     --health-interval 10s
@@ -93,6 +94,9 @@ jobs:
                     - '7.4'
                     - '8.3'
                     - '8.4'
+                postgres_version:
+                    - '14'
+                    - '18'
 
         steps:
             -   uses: actions/checkout@v6
@@ -112,7 +116,9 @@ jobs:
             -   name: Run integration test suite vs Postgresql
                 run: composer run-script integration
                 env:
-                    DATABASE: "pgsql://postgres:postgres@localhost:${{ job.services.postgres.ports[5432] }}/testdb"
+                    DATABASE_URL: "pgsql://postgres:postgres@localhost:${{ job.services.postgres.ports[5432] }}/testdb?serverVersion=${{ matrix.postgres_version }}"
+                    # Required by old repository tests
+                    DATABASE: "pgsql://postgres:postgres@localhost:${{ job.services.postgres.ports[5432] }}/testdb?serverVersion=${{ matrix.postgres_version }}"
 
     integration-tests-mysql:
         name: MySQL integration tests
@@ -162,6 +168,7 @@ jobs:
             -   name: Run integration test suite vs MySQL
                 run: composer run-script integration
                 env:
+                    DATABASE_URL: "mysql://mysql:mysql@127.0.0.1:${{ job.services.mysql.ports[3306] }}/testdb"
                     DATABASE: "mysql://mysql:mysql@127.0.0.1:${{ job.services.mysql.ports[3306] }}/testdb"
 
     solr-integration:
