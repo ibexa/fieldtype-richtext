@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<phpunit backupGlobals="false" bootstrap="tests/integration/bootstrap.php" beStrictAboutTestsThatDoNotTestAnything="true" colors="true" failOnWarning="true" failOnNotice="true" cacheDirectory=".phpunit.cache" backupStaticProperties="false">
+<phpunit backupGlobals="false" bootstrap="tests/integration/bootstrap.php" beStrictAboutTestsThatDoNotTestAnything="true" colors="true" failOnWarning="true" failOnNotice="true" failOnDeprecation="true" displayDetailsOnTestsThatTriggerDeprecations="true" cacheDirectory=".phpunit.cache" backupStaticProperties="false">
   <testsuites>
     <testsuite name="integration_persistence">
       <directory>tests/integration/Persistence</directory>
@@ -15,4 +15,11 @@
   <extensions>
     <bootstrap class="DAMA\DoctrineTestBundle\PHPUnit\PHPUnitExtension"/>
   </extensions>
+  <source baseline="phpunit-integration.baseline.xml" ignoreIndirectDeprecations="false" ignoreSuppressionOfDeprecations="true">
+    <include>
+      <directory>src/lib</directory>
+      <directory>src/contracts</directory>
+      <directory>src/bundle</directory>
+    </include>
+  </source>
 </phpunit>
