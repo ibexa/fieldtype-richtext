@@ -26,9 +26,6 @@ abstract class BaseProviderTestCase extends TestCase
 
     abstract public function getExpectedProviderName(): string;
 
-    /**
-     * @covers \Ibexa\Contracts\FieldTypeRichText\Configuration\Provider::getName
-     */
     final public function testGetName(): void
     {
         self::assertSame(

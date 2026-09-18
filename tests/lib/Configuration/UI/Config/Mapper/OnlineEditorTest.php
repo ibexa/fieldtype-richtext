@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace Ibexa\Tests\FieldTypeRichText\Configuration\UI\Config\Mapper;
 
 use Ibexa\FieldTypeRichText\Configuration\UI\Mapper\OnlineEditor;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -33,7 +34,7 @@ class OnlineEditorTest extends TestCase
      *
      * @see testMapCssClassesConfiguration
      */
-    public function getSemanticConfigurationForMapCssClassesConfiguration(): array
+    public static function getSemanticConfigurationForMapCssClassesConfiguration(): array
     {
         return [
             [
@@ -92,7 +93,7 @@ class OnlineEditorTest extends TestCase
      *
      * @see testMapDataAttributesConfiguration
      */
-    public function getSemanticConfigurationForMapDataAttributesConfiguration(): array
+    public static function getSemanticConfigurationForMapDataAttributesConfiguration(): array
     {
         return [
             [
@@ -182,11 +183,10 @@ class OnlineEditorTest extends TestCase
     }
 
     /**
-     * @dataProvider getSemanticConfigurationForMapCssClassesConfiguration
-     *
      * @param array<string, mixed> $semanticConfiguration
      * @param array<string, mixed> $expectedMappedConfiguration
      */
+    #[DataProvider('getSemanticConfigurationForMapCssClassesConfiguration')]
     public function testMapCssClassesConfiguration(
         array $semanticConfiguration,
         array $expectedMappedConfiguration
@@ -198,11 +198,10 @@ class OnlineEditorTest extends TestCase
     }
 
     /**
-     * @dataProvider getSemanticConfigurationForMapDataAttributesConfiguration
-     *
      * @param array<string, mixed> $semanticConfiguration
      * @param array<string, mixed> $expectedMappedConfiguration
      */
+    #[DataProvider('getSemanticConfigurationForMapDataAttributesConfiguration')]
     public function testMapDataAttributesConfiguration(
         array $semanticConfiguration,
         array $expectedMappedConfiguration

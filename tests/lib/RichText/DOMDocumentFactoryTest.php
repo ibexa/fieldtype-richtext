@@ -12,8 +12,11 @@ use DOMDocument;
 use Ibexa\FieldTypeRichText\RichText\DOMDocumentFactory;
 use Ibexa\FieldTypeRichText\RichText\Exception\InvalidXmlException;
 use Ibexa\FieldTypeRichText\RichText\XMLSanitizer;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
+#[CoversClass(DOMDocumentFactory::class)]
 class DOMDocumentFactoryTest extends TestCase
 {
     private DOMDocumentFactory $domDocumentFactory;
@@ -23,9 +26,6 @@ class DOMDocumentFactoryTest extends TestCase
         $this->domDocumentFactory = new DOMDocumentFactory(new XMLSanitizer());
     }
 
-    /**
-     * @covers \Ibexa\FieldTypeRichText\RichText\DOMDocumentFactory::loadXMLString
-     */
     public function testLoadXMLString(): void
     {
         $xml = <<<EOT
@@ -40,9 +40,6 @@ EOT;
         self::assertInstanceOf(DOMDocument::class, $doc);
     }
 
-    /**
-     * @covers \Ibexa\FieldTypeRichText\RichText\DOMDocumentFactory::loadXMLString
-     */
     public function testLoadXMLStringThrowsInvalidXmlException(): void
     {
         $this->expectException(InvalidXmlException::class);
@@ -117,9 +114,7 @@ EOT;
         self::assertStringContainsString('<tag>data beetween style</tag>', $docXMLString);
     }
 
-    /**
-     * @dataProvider dataProviderForHandleDoctype
-     */
+    #[DataProvider('dataProviderForHandleDoctype')]
     public function testHandleDoctype(string $xml, string $stringNotContainsString): void
     {
         $doc = $this->domDocumentFactory->loadXMLString($xml);
@@ -131,7 +126,7 @@ EOT;
     /**
      * @return iterable<array{string, string}>
      */
-    public function dataProviderForHandleDoctype(): iterable
+    public static function dataProviderForHandleDoctype(): iterable
     {
         yield 'Case insensitive doctype' => [
             <<<EOT

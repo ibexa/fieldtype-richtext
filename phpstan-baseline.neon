@@ -661,18 +661,6 @@ parameters:
 			path: tests/lib/FieldType/RichText/RichTextStorageTest.php
 
 		-
-			message: '#^Method PHPUnit\\Framework\\MockObject\\Builder\\InvocationMocker\:\:willReturnOnConsecutiveCalls\(\) invoked with unpacked array with possibly string key, but it''s not allowed because of @no\-named\-arguments\.$#'
-			identifier: argument.named
-			count: 1
-			path: tests/lib/FieldType/RichText/RichTextStorageTest.php
-
-		-
-			message: '#^Method PHPUnit\\Framework\\MockObject\\Builder\\InvocationMocker\:\:withConsecutive\(\) invoked with unpacked array with possibly string key, but it''s not allowed because of @no\-named\-arguments\.$#'
-			identifier: argument.named
-			count: 1
-			path: tests/lib/FieldType/RichText/RichTextStorageTest.php
-
-		-
 			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\FieldType\\RichTextTest\:\:testValidate\(\) has parameter \$expectedValidationErrors with no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
@@ -685,22 +673,10 @@ parameters:
 			path: tests/lib/FieldType/RichTextTest.php
 
 		-
-			message: '#^Parameter \#2 \$actualXml of method PHPUnit\\Framework\\Assert\:\:assertXmlStringEqualsXmlString\(\) expects DOMDocument\|string, string\|false given\.$#'
+			message: '#^Parameter \#2 \$actualXml of method PHPUnit\\Framework\\Assert\:\:assertXmlStringEqualsXmlString\(\) expects string, string\|false given\.$#'
 			identifier: argument.type
 			count: 1
 			path: tests/lib/Form/DataTransformer/RichTextTransformerTest.php
-
-		-
-			message: '#^Method PHPUnit\\Framework\\MockObject\\Builder\\InvocationMocker\:\:willReturnOnConsecutiveCalls\(\) invoked with unpacked array with possibly string key, but it''s not allowed because of @no\-named\-arguments\.$#'
-			identifier: argument.named
-			count: 2
-			path: tests/lib/RichText/Converter/Render/EmbedTest.php
-
-		-
-			message: '#^Method PHPUnit\\Framework\\MockObject\\Builder\\InvocationMocker\:\:withConsecutive\(\) invoked with unpacked array with possibly string key, but it''s not allowed because of @no\-named\-arguments\.$#'
-			identifier: argument.named
-			count: 2
-			path: tests/lib/RichText/Converter/Render/EmbedTest.php
 
 		-
 			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Converter\\Render\\TemplateTest\:\:provideConvertRenderValues\(\) has parameter \$expectedValues with no value type specified in iterable type array\.$#'
@@ -718,18 +694,6 @@ parameters:
 			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\Converter\\Render\\TemplateTest\:\:testConvert\(\) has parameter \$expectedRenderParams with no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
-			path: tests/lib/RichText/Converter/Render/TemplateTest.php
-
-		-
-			message: '#^Method PHPUnit\\Framework\\MockObject\\Builder\\InvocationMocker\:\:willReturnOnConsecutiveCalls\(\) invoked with unpacked array with possibly string key, but it''s not allowed because of @no\-named\-arguments\.$#'
-			identifier: argument.named
-			count: 2
-			path: tests/lib/RichText/Converter/Render/TemplateTest.php
-
-		-
-			message: '#^Method PHPUnit\\Framework\\MockObject\\Builder\\InvocationMocker\:\:withConsecutive\(\) invoked with unpacked array with possibly string key, but it''s not allowed because of @no\-named\-arguments\.$#'
-			identifier: argument.named
-			count: 2
 			path: tests/lib/RichText/Converter/Render/TemplateTest.php
 
 		-
@@ -832,18 +796,6 @@ parameters:
 			message: '#^Method Ibexa\\Tests\\FieldTypeRichText\\RichText\\RendererTest\:\:testRenderTagWithTemplate\(\) has parameter \$loggerParams with no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
-			path: tests/lib/RichText/RendererTest.php
-
-		-
-			message: '#^Method PHPUnit\\Framework\\MockObject\\Builder\\InvocationMocker\:\:willReturnOnConsecutiveCalls\(\) invoked with unpacked array with possibly string key, but it''s not allowed because of @no\-named\-arguments\.$#'
-			identifier: argument.named
-			count: 6
-			path: tests/lib/RichText/RendererTest.php
-
-		-
-			message: '#^Method PHPUnit\\Framework\\MockObject\\Builder\\InvocationMocker\:\:withConsecutive\(\) invoked with unpacked array with possibly string key, but it''s not allowed because of @no\-named\-arguments\.$#'
-			identifier: argument.named
-			count: 6
 			path: tests/lib/RichText/RendererTest.php
 
 		-

@@ -29,9 +29,6 @@ abstract class BaseCustomTemplateProviderTestCase extends BaseProviderTestCase
         $this->mapper = $this->createMock(CustomTemplateConfigMapper::class);
     }
 
-    /**
-     * @covers \Ibexa\Contracts\FieldTypeRichText\Configuration\Provider::getConfiguration
-     */
     final public function testGetConfiguration(): void
     {
         $provider = $this->createProvider();

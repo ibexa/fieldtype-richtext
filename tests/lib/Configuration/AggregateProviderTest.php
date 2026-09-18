@@ -10,20 +10,17 @@ namespace Ibexa\Tests\FieldTypeRichText\Configuration;
 
 use Ibexa\Contracts\FieldTypeRichText\Configuration\Provider;
 use Ibexa\FieldTypeRichText\Configuration\AggregateProvider;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \Ibexa\FieldTypeRichText\Configuration\AggregateProvider
- */
+#[CoversClass(AggregateProvider::class)]
 class AggregateProviderTest extends TestCase
 {
     /**
-     * @covers \Ibexa\FieldTypeRichText\Configuration\AggregateProvider::getConfiguration
-     *
-     * @dataProvider getConfiguration
-     *
      * @param array<string, array<string, mixed>> $configuration
      */
+    #[DataProvider('getConfiguration')]
     public function testGetConfiguration(array $configuration): void
     {
         $providers = [];
@@ -66,7 +63,7 @@ class AggregateProviderTest extends TestCase
     /**
      * @return array<mixed>
      */
-    public function getConfiguration(): array
+    public static function getConfiguration(): array
     {
         return [
             [

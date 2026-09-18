@@ -37,7 +37,7 @@ class Xhtml5ToDocbookTest extends BaseTest
      *
      * @return array{input: string, output: string}
      */
-    public function getFixtureSubdirectories(): array
+    public static function getFixtureSubdirectories(): array
     {
         return [
             'input' => 'xhtml5/edit',

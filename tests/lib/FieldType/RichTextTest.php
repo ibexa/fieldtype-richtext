@@ -17,6 +17,8 @@ use Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition as APIFie
 use Ibexa\Contracts\FieldTypeRichText\RichText\TextExtractorInterface;
 use Ibexa\Core\Base\Exceptions\InvalidArgumentException;
 use Ibexa\Core\Base\Exceptions\NotFoundException;
+use Ibexa\Core\FieldType\Author\Type as AuthorType;
+use Ibexa\Core\FieldType\FieldType;
 use Ibexa\Core\FieldType\ValidationError;
 use Ibexa\Core\FieldType\Value as CoreValue;
 use Ibexa\Core\Persistence\TransformationProcessor;
@@ -32,14 +34,18 @@ use Ibexa\FieldTypeRichText\RichText\RelationProcessor;
 use Ibexa\FieldTypeRichText\RichText\Validator\Validator;
 use Ibexa\FieldTypeRichText\RichText\Validator\ValidatorDispatcher;
 use Ibexa\FieldTypeRichText\RichText\XMLSanitizer;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 
-/**
- * @group fieldType
- * @group ibexa_richtext
- */
+#[CoversClass(FieldType::class)]
+#[CoversClass(Type::class)]
+#[CoversClass(AuthorType::class)]
+#[Group('fieldType')]
+#[Group('ibexa_richtext')]
 class RichTextTest extends TestCase
 {
     protected function getFieldType(): Type
@@ -60,9 +66,7 @@ class RichTextTest extends TestCase
             new RelationProcessor()
         );
 
-        $textExtractor = $this->createMock(TextExtractorInterface::class);
-
-        $fieldType = new RichTextType($inputHandler, $textExtractor, new DOMDocumentLoader());
+        $fieldType = new RichTextType($inputHandler, self::createStub(TextExtractorInterface::class), new DOMDocumentLoader());
         $fieldType->setTransformationProcessor($this->getTransformationProcessorMock());
 
         return $fieldType;
@@ -80,9 +84,6 @@ class RichTextTest extends TestCase
         );
     }
 
-    /**
-     * @covers \Ibexa\Core\FieldType\FieldType::getValidatorConfigurationSchema
-     */
     public function testValidatorConfigurationSchema(): void
     {
         $fieldType = $this->getFieldType();
@@ -92,9 +93,6 @@ class RichTextTest extends TestCase
         );
     }
 
-    /**
-     * @covers \Ibexa\Core\FieldType\FieldType::getSettingsSchema
-     */
     public function testSettingsSchema(): void
     {
         $fieldType = $this->getFieldType();
@@ -105,14 +103,11 @@ class RichTextTest extends TestCase
         );
     }
 
-    /**
-     * @covers \Ibexa\FieldTypeRichText\FieldType\RichText\Type::acceptValue
-     */
     public function testAcceptValueInvalidType(): void
     {
         $this->expectException(ApiInvalidArgumentException::class);
 
-        $this->getFieldType()->acceptValue($this->createMock(CoreValue::class));
+        $this->getFieldType()->acceptValue(self::createStub(CoreValue::class));
     }
 
     /**
@@ -138,11 +133,7 @@ class RichTextTest extends TestCase
         ];
     }
 
-    /**
-     * @covers \Ibexa\Core\FieldType\Author\Type::acceptValue
-     *
-     * @dataProvider providerForTestAcceptValueValidFormat
-     */
+    #[DataProvider('providerForTestAcceptValueValidFormat')]
     public function testAcceptValueValidFormat(string $input): void
     {
         $fieldType = $this->getFieldType();
@@ -172,11 +163,7 @@ class RichTextTest extends TestCase
         ];
     }
 
-    /**
-     * @covers \Ibexa\Core\FieldType\Author\Type::acceptValue
-     *
-     * @dataProvider providerForTestAcceptValueInvalidFormat
-     */
+    #[DataProvider('providerForTestAcceptValueInvalidFormat')]
     public function testAcceptValueInvalidFormat(string $input, Exception $expectedException): void
     {
         try {
@@ -197,7 +184,7 @@ class RichTextTest extends TestCase
     /**
      * @phpstan-return list<array{string, \Ibexa\Contracts\Core\FieldType\ValidationError[]}>
      */
-    public function providerForTestValidate(): array
+    public static function providerForTestValidate(): array
     {
         return [
             [
@@ -293,25 +280,20 @@ class RichTextTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider providerForTestValidate
-     */
+    #[DataProvider('providerForTestValidate')]
     public function testValidate(string $xmlString, array $expectedValidationErrors): void
     {
         $fieldType = $this->getFieldType();
         $value = new Value($this->createDocument($xmlString));
 
         /** @var \Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition|\PHPUnit\Framework\MockObject\MockObject $fieldDefinitionMock */
-        $fieldDefinitionMock = $this->createMock(APIFieldDefinition::class);
+        $fieldDefinitionMock = self::createStub(APIFieldDefinition::class);
 
         $validationErrors = $fieldType->validate($fieldDefinitionMock, $value);
 
         self::assertEquals($expectedValidationErrors, $validationErrors);
     }
 
-    /**
-     * @covers \Ibexa\FieldTypeRichText\FieldType\RichText\Type::toPersistenceValue
-     */
     public function testToPersistenceValue(): void
     {
         $xmlString = '<?xml version="1.0" encoding="UTF-8"?>
@@ -354,11 +336,7 @@ class RichTextTest extends TestCase
         return $document;
     }
 
-    /**
-     * @covers \Ibexa\FieldTypeRichText\FieldType\RichText\Type::getName
-     *
-     * @dataProvider providerForTestGetName
-     */
+    #[DataProvider('providerForTestGetName')]
     public function testGetName(string $xmlString, string $expectedName): void
     {
         $value = new Value($this->createDocument($xmlString));
@@ -366,7 +344,7 @@ class RichTextTest extends TestCase
         $fieldType = $this->getFieldType();
         self::assertEquals(
             $expectedName,
-            $fieldType->getName($value, $this->createMock(APIFieldDefinition::class), 'eng-US')
+            $fieldType->getName($value, self::createStub(APIFieldDefinition::class), 'eng-US')
         );
     }
 
@@ -463,8 +441,6 @@ class RichTextTest extends TestCase
 
     /**
      * @todo handle embeds when implemented
-     *
-     * @covers \Ibexa\FieldTypeRichText\FieldType\RichText\Type::getRelations
      */
     public function testGetRelations(): void
     {

@@ -16,24 +16,24 @@ use Ibexa\Core\MVC\Symfony\Routing\UrlAliasRouter;
 use Ibexa\FieldTypeRichText\RichText\Converter\Aggregate;
 use Ibexa\FieldTypeRichText\RichText\Converter\Link;
 use Ibexa\FieldTypeRichText\RichText\Converter\Render\Template;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class AggregateTest extends TestCase
 {
     /**
-     * @dataProvider providerConvertWithLinkInCustomTag
-     *
      * @see https://issues.ibexa.co/browse/EZP-30166
      */
+    #[DataProvider('providerConvertWithLinkInCustomTag')]
     public function testConvertWithLinkInCustomTag(string $input, string $expectedOutput): void
     {
         $xmlDocument = new DOMDocument();
         $xmlDocument->loadXML($input);
 
-        $locationService = $this->createMock(LocationService::class);
-        $contentService = $this->createMock(ContentService::class);
-        $urlAliasRouter = $this->createMock(UrlAliasRouter::class);
-        $renderer = $this->createMock(RendererInterface::class);
+        $locationService = self::createStub(LocationService::class);
+        $contentService = self::createStub(ContentService::class);
+        $urlAliasRouter = self::createStub(UrlAliasRouter::class);
+        $renderer = self::createStub(RendererInterface::class);
 
         $linkConverter = new Link(
             $locationService,
@@ -59,7 +59,7 @@ class AggregateTest extends TestCase
     /**
      * @return array<int, array{0: string, 1: string}>
      */
-    public function providerConvertWithLinkInCustomTag(): array
+    public static function providerConvertWithLinkInCustomTag(): array
     {
         return [
             [

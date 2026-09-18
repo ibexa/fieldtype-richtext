@@ -13,8 +13,10 @@ use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 use Ibexa\Contracts\FieldTypeRichText\Configuration\Provider;
 use Ibexa\FieldTypeRichText\Configuration\Provider\AlloyEditor;
 use Ibexa\FieldTypeRichText\Configuration\UI\Mapper\OnlineEditorConfigMapper;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\MockObject\MockObject;
 
+#[CoversClass(AlloyEditorTest::class)]
 class AlloyEditorTest extends BaseProviderTestCase
 {
     private OnlineEditorConfigMapper&MockObject $mapper;
@@ -42,9 +44,6 @@ class AlloyEditorTest extends BaseProviderTestCase
         return 'alloyEditor';
     }
 
-    /**
-     * @covers \Ibexa\Tests\FieldTypeRichText\Configuration\Provider\AlloyEditorTest::createProvider
-     */
     public function testGetConfiguration(): void
     {
         $provider = $this->createProvider();

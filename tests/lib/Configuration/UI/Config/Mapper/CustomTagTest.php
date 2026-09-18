@@ -10,6 +10,8 @@ namespace Ibexa\Tests\FieldTypeRichText\Configuration\UI\Config\Mapper;
 
 use ArrayObject;
 use Ibexa\FieldTypeRichText\Configuration\UI\Mapper\CustomTag;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Asset\Packages;
@@ -22,17 +24,15 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  *
  * @see \Ibexa\FieldTypeRichText\Configuration\UI\Mapper\CustomTag::__construct
  */
+#[CoversClass(CustomTag::class)]
 class CustomTagTest extends TestCase
 {
     /**
-     * @covers \Ibexa\FieldTypeRichText\Configuration\UI\Mapper\CustomTag::mapConfig
-     *
-     * @dataProvider providerForTestMapConfig
-     *
      * @param array<mixed> $customTagsConfiguration
      * @param array<int, string> $enabledCustomTags
      * @param array<mixed> $expectedConfig
      */
+    #[DataProvider('providerForTestMapConfig')]
     public function testMapConfig(
         array $customTagsConfiguration,
         array $enabledCustomTags,
@@ -66,7 +66,7 @@ class CustomTagTest extends TestCase
      *     array<string, mixed>
      * }>
      */
-    public function providerForTestMapConfig(): array
+    public static function providerForTestMapConfig(): array
     {
         return [
             [

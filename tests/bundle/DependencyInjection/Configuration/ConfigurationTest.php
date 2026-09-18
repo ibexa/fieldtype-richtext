@@ -10,6 +10,7 @@ namespace Ibexa\Tests\Bundle\FieldTypeRichText\DependencyInjection\Configuration
 
 use Ibexa\Bundle\FieldTypeRichText\DependencyInjection\Configuration;
 use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Yaml\Yaml;
@@ -35,7 +36,7 @@ final class ConfigurationTest extends TestCase
      *
      * @see testProcessingConfiguration
      */
-    public function providerForTestProcessingCustomTagsConfiguration(): iterable
+    public static function providerForTestProcessingCustomTagsConfiguration(): iterable
     {
         $finder = new Finder();
         $finder
@@ -65,7 +66,7 @@ final class ConfigurationTest extends TestCase
      *
      * @see testProcessingConfiguration
      */
-    public function providerForTestProcessingConfiguration(): array
+    public static function providerForTestProcessingConfiguration(): array
     {
         return [
             'Empty configuration' => [
@@ -119,12 +120,11 @@ final class ConfigurationTest extends TestCase
     }
 
     /**
-     * @dataProvider providerForTestProcessingConfiguration
-     * @dataProvider providerForTestProcessingCustomTagsConfiguration
-     *
      * @param array<string, mixed> $configurationValues
      * @param array<string, mixed> $expectedProcessedConfiguration
      */
+    #[DataProvider('providerForTestProcessingConfiguration')]
+    #[DataProvider('providerForTestProcessingCustomTagsConfiguration')]
     public function testProcessingConfiguration(
         array $configurationValues,
         array $expectedProcessedConfiguration

@@ -11,6 +11,7 @@ namespace Ibexa\Tests\FieldTypeRichText\RichText\Validator;
 use DOMDocument;
 use Ibexa\Contracts\FieldTypeRichText\RichText\ValidatorInterface;
 use Ibexa\FieldTypeRichText\RichText\Validator\Validator;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class DocbookTest extends TestCase
@@ -18,9 +19,9 @@ class DocbookTest extends TestCase
     protected ?ValidatorInterface $validator = null;
 
     /**
-     * @phpstan-return list<array{string, string[]}>
+     * @phpstan-return list<array{string, non-empty-string[]}>
      */
-    public function providerForTestValidate(): array
+    public static function providerForTestValidate(): array
     {
         return [
             [
@@ -159,10 +160,9 @@ class DocbookTest extends TestCase
     }
 
     /**
-     * @dataProvider providerForTestValidate
-     *
-     * @param string[] $expectedErrors
+     * @param non-empty-string[] $expectedErrors
      */
+    #[DataProvider('providerForTestValidate')]
     public function testValidate(string $input, array $expectedErrors): void
     {
         $document = new DOMDocument();

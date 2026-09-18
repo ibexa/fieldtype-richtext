@@ -17,6 +17,7 @@ use Ibexa\Contracts\Core\Repository\Values\Content\Location;
 use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 use Ibexa\Core\Base\Exceptions\NotFoundException;
 use Ibexa\FieldTypeRichText\RichText\Renderer;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
@@ -148,7 +149,7 @@ class RendererTest extends TestCase
         );
     }
 
-    public function providerForTestRenderTagWithTemplate(): array
+    public static function providerForTestRenderTagWithTemplate(): array
     {
         return [
             [
@@ -288,9 +289,7 @@ class RendererTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider providerForTestRenderTagWithTemplate
-     */
+    #[DataProvider('providerForTestRenderTagWithTemplate')]
     public function testRenderTagWithTemplate(
         string $tagName,
         array $configResolverParams,
@@ -341,19 +340,23 @@ class RendererTest extends TestCase
             [$getParameterArguments, $getParameterReturnValues] = $getParameterValues;
 
             if (!empty($hasParameterArguments)) {
+                $matcher = self::exactly(count($hasParameterArguments));
                 $this->configResolverMock
-                    ->expects(self::exactly(count($hasParameterArguments)))
+                    ->expects($matcher)
                     ->method('hasParameter')
-                    ->withConsecutive($hasParameterArguments[0])
-                    ->willReturnOnConsecutiveCalls(...$hasParameterReturnValues);
+                    ->willReturnCallback(static function (...$parameters) use ($matcher, $hasParameterReturnValues) {
+                        return $hasParameterReturnValues[$matcher->numberOfInvocations() - 1] ?? null;
+                    });
             }
 
             if (!empty($getParameterArguments)) {
+                $matcher = self::exactly(count($getParameterArguments));
                 $this->configResolverMock
-                    ->expects(self::exactly(count($getParameterArguments)))
+                    ->expects($matcher)
                     ->method('getParameter')
-                    ->withConsecutive($getParameterArguments[0])
-                    ->willReturnOnConsecutiveCalls(...$getParameterReturnValues);
+                    ->willReturnCallback(static function (...$parameters) use ($matcher, $getParameterReturnValues) {
+                        return $getParameterReturnValues[$matcher->numberOfInvocations() - 1] ?? null;
+                    });
             }
         }
 
@@ -365,17 +368,25 @@ class RendererTest extends TestCase
             [$warningArguments, $errorArguments] = $loggerParams;
 
             if (!empty($warningArguments)) {
+                $matcher = self::exactly(count($warningArguments));
                 $this->loggerMock
-                    ->expects(self::exactly(count($warningArguments)))
+                    ->expects($matcher)
                     ->method('warning')
-                    ->withConsecutive(...$warningArguments);
+                    ->willReturnCallback(function (...$parameters) use ($matcher, $warningArguments) {
+                        $expected = $warningArguments[$matcher->numberOfInvocations() - 1];
+                        $this->assertSame($expected, array_slice($parameters, 0, count($expected)));
+                    });
             }
 
             if (!empty($errorArguments)) {
+                $matcher = self::exactly(count($errorArguments));
                 $this->loggerMock
-                    ->expects(self::exactly(count($errorArguments)))
+                    ->expects($matcher)
                     ->method('error')
-                    ->withConsecutive(...$errorArguments);
+                    ->willReturnCallback(function (...$parameters) use ($matcher, $errorArguments) {
+                        $expected = $errorArguments[$matcher->numberOfInvocations() - 1];
+                        $this->assertSame($expected, array_slice($parameters, 0, count($expected)));
+                    });
             }
         }
 
@@ -645,16 +656,21 @@ class RendererTest extends TestCase
         $isInline = true;
 
         $contentInfoMock = $this->createMock(ContentInfo::class);
+        $matcher = self::exactly(2);
         $contentInfoMock
-            ->expects(self::exactly(2))
-            ->method('__get')
-            ->withConsecutive(
-                ['mainLocationId'],
-                ['isHidden'],
-            )->willReturnOnConsecutiveCalls(
-                2,
-                true
-            );
+            ->expects($matcher)
+            ->method('__get')->willReturnCallback(function (...$parameters) use ($matcher) {
+            if ($matcher->numberOfInvocations() === 1) {
+                $this->assertSame('mainLocationId', $parameters[0]);
+
+                return 2;
+            }
+            if ($matcher->numberOfInvocations() === 2) {
+                $this->assertSame('isHidden', $parameters[0]);
+
+                return true;
+            }
+        });
 
         $contentMock = $this->createMock(Content::class);
         $contentMock
@@ -680,7 +696,7 @@ class RendererTest extends TestCase
     /**
      * @phpstan-return list<array{\Exception}>
      */
-    public function providerForTestRenderContentEmbedNotFound(): array
+    public static function providerForTestRenderContentEmbedNotFound(): array
     {
         return [
             [new NotFoundException('Content', 42)],
@@ -688,9 +704,7 @@ class RendererTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider providerForTestRenderContentEmbedNotFound
-     */
+    #[DataProvider('providerForTestRenderContentEmbedNotFound')]
     public function testRenderContentEmbedNotFound(Exception $exception): void
     {
         $renderer = $this->getMockedRenderer(['render', 'checkContentPermissions', 'getEmbedTemplateName']);
@@ -765,7 +779,7 @@ class RendererTest extends TestCase
     /**
      * @phpstan-return list<array{bool, \Exception|null, mixed[], mixed[], string|null, string|null, string|null}>
      */
-    public function providerForTestRenderContentWithTemplate(): array
+    public static function providerForTestRenderContentWithTemplate(): array
     {
         $contentId = 42;
 
@@ -957,9 +971,7 @@ class RendererTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider providerForTestRenderContentWithTemplate
-     */
+    #[DataProvider('providerForTestRenderContentWithTemplate')]
     public function testRenderContentWithTemplate(
         bool $isInline,
         ?AccessDeniedException $deniedException,
@@ -1033,19 +1045,23 @@ class RendererTest extends TestCase
             [$getParameterArguments, $getParameterReturnValues] = $getParameterValues;
 
             if (!empty($hasParameterArguments)) {
+                $matcher = self::exactly(count($hasParameterArguments));
                 $this->configResolverMock
-                    ->expects(self::exactly(count($hasParameterArguments)))
+                    ->expects($matcher)
                     ->method('hasParameter')
-                    ->withConsecutive($hasParameterArguments[0])
-                    ->willReturnOnConsecutiveCalls(...$hasParameterReturnValues);
+                    ->willReturnCallback(static function (...$parameters) use ($matcher, $hasParameterReturnValues) {
+                        return $hasParameterReturnValues[$matcher->numberOfInvocations() - 1] ?? null;
+                    });
             }
 
             if (!empty($getParameterArguments)) {
+                $matcher = self::exactly(count($getParameterArguments));
                 $this->configResolverMock
-                    ->expects(self::exactly(count($getParameterArguments)))
+                    ->expects($matcher)
                     ->method('getParameter')
-                    ->withConsecutive($getParameterArguments[0])
-                    ->willReturnOnConsecutiveCalls(...$getParameterReturnValues);
+                    ->willReturnCallback(static function (...$parameters) use ($matcher, $getParameterReturnValues) {
+                        return $getParameterReturnValues[$matcher->numberOfInvocations() - 1] ?? null;
+                    });
             }
         }
 
@@ -1057,17 +1073,25 @@ class RendererTest extends TestCase
             [$warningArguments, $errorArguments] = $loggerParams;
 
             if (!empty($warningArguments)) {
+                $matcher = self::exactly(count($warningArguments));
                 $this->loggerMock
-                    ->expects(self::exactly(count($warningArguments)))
+                    ->expects($matcher)
                     ->method('warning')
-                    ->withConsecutive(...$warningArguments);
+                    ->willReturnCallback(function (...$parameters) use ($matcher, $warningArguments) {
+                        $expected = $warningArguments[$matcher->numberOfInvocations() - 1];
+                        $this->assertSame($expected, array_slice($parameters, 0, count($expected)));
+                    });
             }
 
             if (!empty($errorArguments)) {
+                $matcher = self::exactly(count($errorArguments));
                 $this->loggerMock
-                    ->expects(self::exactly(count($errorArguments)))
+                    ->expects($matcher)
                     ->method('error')
-                    ->withConsecutive(...$errorArguments);
+                    ->willReturnCallback(function (...$parameters) use ($matcher, $errorArguments) {
+                        $expected = $errorArguments[$matcher->numberOfInvocations() - 1];
+                        $this->assertSame($expected, array_slice($parameters, 0, count($expected)));
+                    });
             }
         }
 
@@ -1329,7 +1353,7 @@ class RendererTest extends TestCase
     /**
      * @phpstan-return list<array{\Exception}>
      */
-    public function providerForTestRenderLocationEmbedNotFound(): array
+    public static function providerForTestRenderLocationEmbedNotFound(): array
     {
         return [
             [new NotFoundException('Location', 42)],
@@ -1337,9 +1361,7 @@ class RendererTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider providerForTestRenderLocationEmbedNotFound
-     */
+    #[DataProvider('providerForTestRenderLocationEmbedNotFound')]
     public function testRenderLocationEmbedNotFound(Exception $exception): void
     {
         $renderer = $this->getMockedRenderer(['render', 'checkLocation', 'getEmbedTemplateName']);
@@ -1398,7 +1420,7 @@ class RendererTest extends TestCase
     /**
      * @phpstan-return list<array{bool, \Exception|null, mixed[], mixed[], string|null, string|null, string|null}>
      */
-    public function providerForTestRenderLocationWithTemplate(): array
+    public static function providerForTestRenderLocationWithTemplate(): array
     {
         $locationId = 42;
 
@@ -1586,9 +1608,7 @@ class RendererTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider providerForTestRenderLocationWithTemplate
-     */
+    #[DataProvider('providerForTestRenderLocationWithTemplate')]
     public function testRenderLocationWithTemplate(
         bool $isInline,
         ?AccessDeniedException $deniedException,
@@ -1662,19 +1682,23 @@ class RendererTest extends TestCase
             [$getParameterArguments, $getParameterReturnValues] = $getParameterValues;
 
             if (!empty($hasParameterArguments)) {
+                $matcher = self::exactly(count($hasParameterArguments));
                 $this->configResolverMock
-                    ->expects(self::exactly(count($hasParameterArguments)))
+                    ->expects($matcher)
                     ->method('hasParameter')
-                    ->withConsecutive($hasParameterArguments[0])
-                    ->willReturnOnConsecutiveCalls(...$hasParameterReturnValues);
+                    ->willReturnCallback(static function (...$parameters) use ($matcher, $hasParameterReturnValues) {
+                        return $hasParameterReturnValues[$matcher->numberOfInvocations() - 1] ?? null;
+                    });
             }
 
             if (!empty($getParameterArguments)) {
+                $matcher = self::exactly(count($getParameterArguments));
                 $this->configResolverMock
-                    ->expects(self::exactly(count($getParameterArguments)))
+                    ->expects($matcher)
                     ->method('getParameter')
-                    ->withConsecutive($getParameterArguments[0])
-                    ->willReturnOnConsecutiveCalls(...$getParameterReturnValues);
+                    ->willReturnCallback(static function (...$parameters) use ($matcher, $getParameterReturnValues) {
+                        return $getParameterReturnValues[$matcher->numberOfInvocations() - 1] ?? null;
+                    });
             }
         }
 
@@ -1686,17 +1710,25 @@ class RendererTest extends TestCase
             [$warningArguments, $errorArguments] = $loggerParams;
 
             if (!empty($warningArguments)) {
+                $matcher = self::exactly(count($warningArguments));
                 $this->loggerMock
-                    ->expects(self::exactly(count($warningArguments)))
+                    ->expects($matcher)
                     ->method('warning')
-                    ->withConsecutive(...$warningArguments);
+                    ->willReturnCallback(function (...$parameters) use ($matcher, $warningArguments) {
+                        $expected = $warningArguments[$matcher->numberOfInvocations() - 1];
+                        $this->assertSame($expected, array_slice($parameters, 0, count($expected)));
+                    });
             }
 
             if (!empty($errorArguments)) {
+                $matcher = self::exactly(count($errorArguments));
                 $this->loggerMock
-                    ->expects(self::exactly(count($errorArguments)))
+                    ->expects($matcher)
                     ->method('error')
-                    ->withConsecutive(...$errorArguments);
+                    ->willReturnCallback(function (...$parameters) use ($matcher, $errorArguments) {
+                        $expected = $errorArguments[$matcher->numberOfInvocations() - 1];
+                        $this->assertSame($expected, array_slice($parameters, 0, count($expected)));
+                    });
             }
         }
 
@@ -1707,7 +1739,7 @@ class RendererTest extends TestCase
     }
 
     /**
-     * @param array<int, string> $methods
+     * @param list<non-empty-string> $methods
      */
     protected function getMockedRenderer(array $methods = []): Renderer&MockObject
     {
@@ -1724,7 +1756,7 @@ class RendererTest extends TestCase
                     $this->loggerMock,
                 ]
             )
-            ->setMethods($methods)
+            ->onlyMethods($methods)
             ->getMock();
     }
 
@@ -1799,16 +1831,21 @@ class RendererTest extends TestCase
     protected function getContentMock($mainLocationId): MockObject
     {
         $contentInfoMock = $this->createMock(ContentInfo::class);
+        $matcher = self::exactly(2);
         $contentInfoMock
-            ->expects(self::exactly(2))
-            ->method('__get')
-            ->withConsecutive(
-                ['mainLocationId'],
-                ['isHidden'],
-            )->willReturnOnConsecutiveCalls(
-                $mainLocationId,
-                false
-            );
+            ->expects($matcher)
+            ->method('__get')->willReturnCallback(function (...$parameters) use ($matcher, $mainLocationId) {
+            if ($matcher->numberOfInvocations() === 1) {
+                $this->assertSame('mainLocationId', $parameters[0]);
+
+                return $mainLocationId;
+            }
+            if ($matcher->numberOfInvocations() === 2) {
+                $this->assertSame('isHidden', $parameters[0]);
+
+                return false;
+            }
+        });
 
         $contentMock = $this->createMock(Content::class);
         $contentMock

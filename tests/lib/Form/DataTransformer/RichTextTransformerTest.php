@@ -17,10 +17,13 @@ use Ibexa\Contracts\FieldTypeRichText\RichText\InputHandlerInterface;
 use Ibexa\FieldTypeRichText\Form\DataTransformer\RichTextTransformer;
 use Ibexa\FieldTypeRichText\RichText\DOMDocumentFactory;
 use Ibexa\FieldTypeRichText\RichText\XMLSanitizer;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 
+#[CoversClass(RichTextTransformer::class)]
 class RichTextTransformerTest extends TestCase
 {
     private InputHandlerInterface&MockObject $inputHandler;
@@ -42,9 +45,6 @@ class RichTextTransformerTest extends TestCase
         );
     }
 
-    /**
-     * @covers \Ibexa\FieldTypeRichText\Form\DataTransformer\RichTextTransformer::transform
-     */
     public function testTransform(): void
     {
         $outputXML = '<?xml version="1.0" encoding="UTF-8"?>' . PHP_EOL
@@ -69,9 +69,6 @@ class RichTextTransformerTest extends TestCase
         self::assertXmlStringEqualsXmlString($outputXML, $this->richTextTransformer->transform($inputXML));
     }
 
-    /**
-     * @covers \Ibexa\FieldTypeRichText\Form\DataTransformer\RichTextTransformer::transform
-     */
     public function testTransformThrowsTransformationFailedException(): void
     {
         $this->expectException(TransformationFailedException::class);
@@ -80,9 +77,6 @@ class RichTextTransformerTest extends TestCase
         $this->richTextTransformer->transform('Invalid XML');
     }
 
-    /**
-     * @covers \Ibexa\FieldTypeRichText\Form\DataTransformer\RichTextTransformer::reverseTransform
-     */
     public function testReverseTransform(): void
     {
         $inputXML = '<?xml version="1.0" encoding="UTF-8"?>' . PHP_EOL . '
@@ -110,11 +104,7 @@ class RichTextTransformerTest extends TestCase
         self::assertXmlStringEqualsXmlString($outputXML, $this->richTextTransformer->reverseTransform($inputXML));
     }
 
-    /**
-     * @covers \Ibexa\FieldTypeRichText\Form\DataTransformer\RichTextTransformer::reverseTransform
-     *
-     * @dataProvider dataProviderForReverseTransformTransformationFailedException
-     */
+    #[DataProvider('dataProviderForReverseTransformTransformationFailedException')]
     public function testReverseTransformTransformationFailedException(Exception $exception): void
     {
         $value = 'Invalid XML';
@@ -133,11 +123,11 @@ class RichTextTransformerTest extends TestCase
     /**
      * @phpstan-return list<array{\Exception}>
      */
-    public function dataProviderForReverseTransformTransformationFailedException(): array
+    public static function dataProviderForReverseTransformTransformationFailedException(): array
     {
         return [
-            [$this->createMock(NotFoundException::class)],
-            [$this->createMock(InvalidArgumentException::class)],
+            [self::createStub(NotFoundException::class)],
+            [self::createStub(InvalidArgumentException::class)],
         ];
     }
 }

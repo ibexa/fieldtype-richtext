@@ -10,11 +10,10 @@ namespace Ibexa\Tests\FieldTypeRichText\FieldType\RichText;
 
 use DOMDocument;
 use Ibexa\FieldTypeRichText\FieldType\RichText\Value;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \Ibexa\FieldTypeRichText\FieldType\RichText\Value
- */
+#[CoversClass(Value::class)]
 final class ValueTest extends TestCase
 {
     private const XML = '<?xml version="1.0" encoding="UTF-8"?>

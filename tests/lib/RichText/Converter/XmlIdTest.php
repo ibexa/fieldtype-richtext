@@ -11,11 +11,11 @@ namespace Ibexa\Tests\FieldTypeRichText\RichText\Converter;
 use DOMDocument;
 use Ibexa\FieldTypeRichText\RichText\Converter\XmlId;
 use Ibexa\FieldTypeRichText\RichText\DOMDocumentLoader;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \Ibexa\FieldTypeRichText\RichText\Converter\XmlId
- */
+#[CoversClass(XmlId::class)]
 final class XmlIdTest extends TestCase
 {
     private const SECTION_OPEN_TAG = '<section xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0-variant ezpublish-1.0">';
@@ -95,9 +95,7 @@ final class XmlIdTest extends TestCase
         );
     }
 
-    /**
-     * @dataProvider providerConvert
-     */
+    #[DataProvider('providerConvert')]
     public function testConvert(string $input, string $output): void
     {
         $inputDocument = $this->createDocument(self::SECTION_OPEN_TAG . $input . '</section>');
