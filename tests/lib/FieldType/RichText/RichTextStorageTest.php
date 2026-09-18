@@ -239,8 +239,11 @@ class RichTextStorageTest extends TestCase
         $gateway
             ->expects($matcher)
             ->method('insertUrl')
-            ->willReturnCallback(static function (...$parameters) use ($matcher, $insertedIds) {
-                return $insertedIds[$matcher->numberOfInvocations() - 1] ?? null;
+            ->willReturnCallback(static function (...$parameters) use ($matcher, $urlAssertions, $insertedIds) {
+                $i = $matcher->numberOfInvocations() - 1;
+                self::assertThat($parameters[0], $urlAssertions[$i]);
+
+                return $insertedIds[$i] ?? null;
             });
 
         $linkUrlsArguments = array_map(static function (int $id): array {
