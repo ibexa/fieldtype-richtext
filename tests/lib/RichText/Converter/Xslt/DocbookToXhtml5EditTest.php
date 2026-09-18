@@ -11,7 +11,7 @@ namespace Ibexa\Tests\FieldTypeRichText\RichText\Converter\Xslt;
 /**
  * Tests conversion from docbook to xhtml5 edit format.
  */
-class DocbookToXhtml5EditTest extends BaseTestCase
+class DocbookToXhtml5EditTest extends BaseTest
 {
     /**
      * Returns subdirectories for input and output fixtures.

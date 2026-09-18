@@ -20,7 +20,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * Base class for XSLT converter tests.
  */
-abstract class BaseTestCase extends TestCase
+abstract class BaseTest extends TestCase
 {
     protected ?Converter $converter = null;
 

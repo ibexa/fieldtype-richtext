@@ -13,7 +13,7 @@ use Ibexa\Contracts\FieldTypeRichText\RichText\TextExtractorInterface;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
-abstract class BaseTestCase extends TestCase
+abstract class BaseTest extends TestCase
 {
     protected TextExtractorInterface $textExtractor;
 

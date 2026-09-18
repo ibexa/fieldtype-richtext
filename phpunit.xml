@@ -4,6 +4,8 @@
     <testsuite name="ibexa_richtext_field_type">
       <directory>tests/lib</directory>
       <directory>tests/bundle</directory>
+      <exclude>tests/lib/RichText/Converter/Xslt/BaseTest.php</exclude>
+      <exclude>tests/lib/RichText/TextExtractor/BaseTest.php</exclude>
     </testsuite>
   </testsuites>
 </phpunit>

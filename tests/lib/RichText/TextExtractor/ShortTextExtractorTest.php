@@ -10,7 +10,7 @@ namespace Ibexa\Tests\FieldTypeRichText\RichText\TextExtractor;
 
 use Ibexa\FieldTypeRichText\RichText\TextExtractor\ShortTextExtractor;
 
-final class ShortTextExtractorTest extends BaseTestCase
+final class ShortTextExtractorTest extends BaseTest
 {
     protected function setUp(): void
     {

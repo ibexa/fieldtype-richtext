@@ -700,31 +700,31 @@ parameters:
 			message: '#^Argument of an invalid type list\<string\>\|false supplied for foreach, only iterables are supported\.$#'
 			identifier: foreach.nonIterable
 			count: 2
-			path: tests/lib/RichText/Converter/Xslt/BaseTestCase.php
+			path: tests/lib/RichText/Converter/Xslt/BaseTest.php
 
 		-
 			message: '#^Cannot access property \$length on DOMNodeList\<DOMNameSpaceNode\|DOMNode\>\|false\.$#'
 			identifier: property.nonObject
 			count: 1
-			path: tests/lib/RichText/Converter/Xslt/BaseTestCase.php
+			path: tests/lib/RichText/Converter/Xslt/BaseTest.php
 
 		-
 			message: '#^Cannot access property \$parentNode on DOMNameSpaceNode\|DOMNode\|null\.$#'
 			identifier: property.nonObject
 			count: 1
-			path: tests/lib/RichText/Converter/Xslt/BaseTestCase.php
+			path: tests/lib/RichText/Converter/Xslt/BaseTest.php
 
 		-
 			message: '#^Cannot call method item\(\) on DOMNodeList\<DOMNameSpaceNode\|DOMNode\>\|false\.$#'
 			identifier: method.nonObject
 			count: 2
-			path: tests/lib/RichText/Converter/Xslt/BaseTestCase.php
+			path: tests/lib/RichText/Converter/Xslt/BaseTest.php
 
 		-
 			message: '#^Cannot call method removeChild\(\) on DOMNode\|null\.$#'
 			identifier: method.nonObject
 			count: 1
-			path: tests/lib/RichText/Converter/Xslt/BaseTestCase.php
+			path: tests/lib/RichText/Converter/Xslt/BaseTest.php
 
 		-
 			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''DOMDocument'' and DOMDocument will always evaluate to true\.$#'

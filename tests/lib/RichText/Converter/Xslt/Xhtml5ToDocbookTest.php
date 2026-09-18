@@ -18,7 +18,7 @@ use Ibexa\FieldTypeRichText\RichText\Converter\Xslt;
 /**
  * Tests conversion from xhtml5 edit format to docbook.
  */
-class Xhtml5ToDocbookTest extends BaseTestCase
+class Xhtml5ToDocbookTest extends BaseTest
 {
     /**
      * Returns subdirectories for input and output fixtures.
