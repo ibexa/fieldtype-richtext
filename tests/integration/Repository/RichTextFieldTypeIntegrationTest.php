@@ -35,6 +35,14 @@ class RichTextFieldTypeIntegrationTest extends SearchBaseIntegrationTestCase
 {
     use RelationSearchBaseIntegrationTestTrait;
 
+    private const string CREATED_XML = <<<EOT
+<?xml version="1.0" encoding="UTF-8"?>
+<section xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ezxhtml="http://ibexa.co/xmlns/dxp/docbook/xhtml" xmlns:ezcustom="http://ibexa.co/xmlns/dxp/docbook/custom" version="5.0-variant ezpublish-1.0">
+    <para><link xlink:href="ezlocation://58" xlink:show="none">link1</link></para>
+    <para><link xlink:href="ezcontent://54" xlink:show="none">link2</link> <ezembedinline xlink:href="ezlocation://60" view="embed" xml:id="embed-id-1" ezxhtml:class="embed-class" ezxhtml:align="left"></ezembedinline></para>
+</section>
+EOT;
+
     private DOMDocument $createdDOMValue;
 
     private DOMDocument $updatedDOMValue;
@@ -44,15 +52,7 @@ class RichTextFieldTypeIntegrationTest extends SearchBaseIntegrationTestCase
         parent::setUp();
 
         $this->createdDOMValue = new DOMDocument();
-        $this->createdDOMValue->loadXML(
-            <<<EOT
-<?xml version="1.0" encoding="UTF-8"?>
-<section xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ezxhtml="http://ibexa.co/xmlns/dxp/docbook/xhtml" xmlns:ezcustom="http://ibexa.co/xmlns/dxp/docbook/custom" version="5.0-variant ezpublish-1.0">
-    <para><link xlink:href="ezlocation://58" xlink:show="none">link1</link></para>
-    <para><link xlink:href="ezcontent://54" xlink:show="none">link2</link> <ezembedinline xlink:href="ezlocation://60" view="embed" xml:id="embed-id-1" ezxhtml:class="embed-class" ezxhtml:align="left"></ezembedinline></para>
-</section>
-EOT
-        );
+        $this->createdDOMValue->loadXML(self::CREATED_XML);
 
         $this->updatedDOMValue = new DOMDocument();
         $this->updatedDOMValue->loadXML(
@@ -269,7 +269,7 @@ EOT
      *
      * @return array<array<mixed>>
      */
-    public function provideInvalidCreationFieldData(): array
+    public static function provideInvalidCreationFieldData(): array
     {
         return [
             [
@@ -326,9 +326,9 @@ EOT
      *
      * @return array<array<mixed>>
      */
-    public function provideInvalidUpdateFieldData(): array
+    public static function provideInvalidUpdateFieldData(): array
     {
-        return $this->provideInvalidCreationFieldData();
+        return self::provideInvalidCreationFieldData();
     }
 
     /**
@@ -372,7 +372,7 @@ EOT
      *
      * @return list<array{RichTextValue, array{xml: string|false}}>
      */
-    public function provideToHashData(): array
+    public static function provideToHashData(): array
     {
         $xml = new DOMDocument();
         $xml->loadXML(
@@ -398,7 +398,7 @@ EOT
      *
      * @return array<array<array<string, mixed>>>
      */
-    public function provideFromHashData(): array
+    public static function provideFromHashData(): array
     {
         return [
             [
@@ -440,7 +440,7 @@ EOT
     /**
      * @return array<array<mixed>>
      */
-    public function providerForTestIsEmptyValue(): array
+    public static function providerForTestIsEmptyValue(): array
     {
         $xml = <<<EOT
 <?xml version="1.0" encoding="UTF-8"?>
@@ -449,11 +449,11 @@ EOT;
 
         return [
             [new RichTextValue()],
-            [new RichTextValue($this->createDocumentFromString($xml))],
+            [new RichTextValue(self::createDocumentFromString($xml))],
         ];
     }
 
-    private function createDocumentFromString(string $xml): DOMDocument
+    private static function createDocumentFromString(string $xml): DOMDocument
     {
         $document = new DOMDocument();
         $document->loadXML($xml);
@@ -464,7 +464,7 @@ EOT;
     /**
      * @return array<array<mixed>>
      */
-    public function providerForTestIsNotEmptyValue(): array
+    public static function providerForTestIsNotEmptyValue(): array
     {
         $xml = <<<EOT
 <?xml version="1.0" encoding="UTF-8"?>
@@ -479,10 +479,10 @@ EOT;
 
         return [
             [
-                $this->getValidCreationFieldData(),
+                new RichTextValue(self::createDocumentFromString(self::CREATED_XML)),
             ],
-            [new RichTextValue($this->createDocumentFromString($xml))],
-            [new RichTextValue($this->createDocumentFromString($xml2))],
+            [new RichTextValue(self::createDocumentFromString($xml))],
+            [new RichTextValue(self::createDocumentFromString($xml2))],
         ];
     }
 
@@ -1047,7 +1047,7 @@ XML
         }
     }
 
-    protected function getValidSearchValueOne(): string
+    protected static function getValidSearchValueOne(): string
     {
         return <<<EOT
 <?xml version="1.0" encoding="UTF-8"?>
@@ -1057,13 +1057,13 @@ XML
 EOT;
     }
 
-    protected function getSearchTargetValueOne(): string
+    protected static function getSearchTargetValueOne(): string
     {
         // ensure case-insensitivity
         return strtoupper('caution is the path to mediocrity');
     }
 
-    protected function getValidSearchValueTwo(): string
+    protected static function getValidSearchValueTwo(): string
     {
         return <<<EOT
 <?xml version="1.0" encoding="UTF-8"?>
@@ -1073,7 +1073,7 @@ EOT;
 EOT;
     }
 
-    protected function getSearchTargetValueTwo(): string
+    protected static function getSearchTargetValueTwo(): string
     {
         // ensure case-insensitivity
         return strtoupper('truth suffers from too much analysis');
@@ -1082,7 +1082,7 @@ EOT;
     /**
      * @return array<list<string>>
      */
-    protected function getFullTextIndexedFieldData(): array
+    protected static function getFullTextIndexedFieldData(): array
     {
         return [
             ['mediocrity', 'analysis'],
