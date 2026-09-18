@@ -99,6 +99,12 @@ class IbexaInlineCustomTagUI extends Plugin {
 
             this.isNew = false;
             this.editor.model.change((writer) => {
+                const contentElement = modelElement.getChild(0);
+
+                if (contentElement) {
+                    writer.move(writer.createRangeIn(contentElement), writer.createPositionBefore(modelElement));
+                }
+
                 writer.remove(modelElement);
             });
         }
