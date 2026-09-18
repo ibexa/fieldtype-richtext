@@ -12,9 +12,9 @@ use Ibexa\Bundle\FieldTypeRichText\DependencyInjection\Configuration\Parser\Fiel
 use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 use Ibexa\Contracts\FieldTypeRichText\Configuration\Provider;
 use Ibexa\FieldTypeRichText\Configuration\Provider\CKEditor;
-use PHPUnit\Framework\Attributes\CoversMethod;
+use PHPUnit\Framework\Attributes\CoversClass;
 
-#[CoversMethod(CKEditorTest::class, 'createProvider')]
+#[CoversClass(CKEditorTest::class)]
 final class CKEditorTest extends BaseProviderTestCase
 {
     /**

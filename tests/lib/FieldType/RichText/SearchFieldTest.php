@@ -15,12 +15,12 @@ use Ibexa\Contracts\Core\Search;
 use Ibexa\Contracts\FieldTypeRichText\RichText\TextExtractorInterface;
 use Ibexa\FieldTypeRichText\FieldType\RichText\SearchField;
 use Ibexa\FieldTypeRichText\RichText\DOMDocumentLoader;
-use PHPUnit\Framework\Attributes\CoversMethod;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
-#[CoversMethod(SearchField::class, 'getIndexData')]
+#[CoversClass(SearchField::class)]
 final class SearchFieldTest extends TestCase
 {
     private SearchField $searchField;

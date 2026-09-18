@@ -34,20 +34,16 @@ use Ibexa\FieldTypeRichText\RichText\RelationProcessor;
 use Ibexa\FieldTypeRichText\RichText\Validator\Validator;
 use Ibexa\FieldTypeRichText\RichText\Validator\ValidatorDispatcher;
 use Ibexa\FieldTypeRichText\RichText\XMLSanitizer;
-use PHPUnit\Framework\Attributes\CoversMethod;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 
-#[CoversMethod(FieldType::class, 'getValidatorConfigurationSchema')]
-#[CoversMethod(FieldType::class, 'getSettingsSchema')]
-#[CoversMethod(Type::class, 'acceptValue')]
-#[CoversMethod(AuthorType::class, 'acceptValue')]
-#[CoversMethod(Type::class, 'toPersistenceValue')]
-#[CoversMethod(Type::class, 'getName')]
-#[CoversMethod(Type::class, 'getRelations')]
+#[CoversClass(FieldType::class)]
+#[CoversClass(Type::class)]
+#[CoversClass(AuthorType::class)]
 #[Group('fieldType')]
 #[Group('ibexa_richtext')]
 class RichTextTest extends TestCase

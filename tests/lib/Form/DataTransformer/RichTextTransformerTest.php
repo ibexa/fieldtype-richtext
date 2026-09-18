@@ -17,14 +17,13 @@ use Ibexa\Contracts\FieldTypeRichText\RichText\InputHandlerInterface;
 use Ibexa\FieldTypeRichText\Form\DataTransformer\RichTextTransformer;
 use Ibexa\FieldTypeRichText\RichText\DOMDocumentFactory;
 use Ibexa\FieldTypeRichText\RichText\XMLSanitizer;
-use PHPUnit\Framework\Attributes\CoversMethod;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 
-#[CoversMethod(RichTextTransformer::class, 'transform')]
-#[CoversMethod(RichTextTransformer::class, 'reverseTransform')]
+#[CoversClass(RichTextTransformer::class)]
 class RichTextTransformerTest extends TestCase
 {
     private InputHandlerInterface&MockObject $inputHandler;

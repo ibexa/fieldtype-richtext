@@ -18,14 +18,11 @@ use Ibexa\FieldTypeRichText\RichText\InputHandler;
 use Ibexa\FieldTypeRichText\RichText\Normalizer;
 use Ibexa\FieldTypeRichText\RichText\RelationProcessor;
 use Ibexa\FieldTypeRichText\RichText\XMLSanitizer;
-use PHPUnit\Framework\Attributes\CoversMethod;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
-#[CoversMethod(InputHandler::class, 'fromString')]
-#[CoversMethod(InputHandler::class, 'fromDocument')]
-#[CoversMethod(InputHandler::class, 'getRelations')]
-#[CoversMethod(InputHandler::class, 'validate')]
+#[CoversClass(InputHandler::class)]
 class InputHandlerTest extends TestCase
 {
     private DOMDocumentFactory $domDocumentFactory;

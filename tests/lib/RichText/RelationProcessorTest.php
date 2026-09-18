@@ -11,12 +11,12 @@ namespace Ibexa\Tests\FieldTypeRichText\RichText;
 use DOMDocument;
 use Ibexa\Contracts\Core\Repository\Values\Content\RelationType;
 use Ibexa\FieldTypeRichText\RichText\RelationProcessor;
-use PHPUnit\Framework\Attributes\CoversMethod;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 
-#[CoversMethod(RelationProcessor::class, 'getRelations')]
+#[CoversClass(RelationProcessor::class)]
 #[Group('fieldType')]
 #[Group('ibexa_richtext')]
 class RelationProcessorTest extends TestCase

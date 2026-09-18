@@ -12,11 +12,11 @@ use DOMDocument;
 use Ibexa\FieldTypeRichText\RichText\DOMDocumentFactory;
 use Ibexa\FieldTypeRichText\RichText\Exception\InvalidXmlException;
 use Ibexa\FieldTypeRichText\RichText\XMLSanitizer;
-use PHPUnit\Framework\Attributes\CoversMethod;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
-#[CoversMethod(DOMDocumentFactory::class, 'loadXMLString')]
+#[CoversClass(DOMDocumentFactory::class)]
 class DOMDocumentFactoryTest extends TestCase
 {
     private DOMDocumentFactory $domDocumentFactory;

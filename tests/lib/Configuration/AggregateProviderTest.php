@@ -11,12 +11,10 @@ namespace Ibexa\Tests\FieldTypeRichText\Configuration;
 use Ibexa\Contracts\FieldTypeRichText\Configuration\Provider;
 use Ibexa\FieldTypeRichText\Configuration\AggregateProvider;
 use PHPUnit\Framework\Attributes\CoversClass;
-use PHPUnit\Framework\Attributes\CoversMethod;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 #[CoversClass(AggregateProvider::class)]
-#[CoversMethod(AggregateProvider::class, 'getConfiguration')]
 class AggregateProviderTest extends TestCase
 {
     /**

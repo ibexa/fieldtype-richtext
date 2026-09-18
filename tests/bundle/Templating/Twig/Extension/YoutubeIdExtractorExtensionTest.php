@@ -9,13 +9,12 @@ declare(strict_types=1);
 namespace Ibexa\Tests\Bundle\FieldTypeRichText\Templating\Twig\Extension;
 
 use Ibexa\Bundle\FieldTypeRichText\Templating\Twig\Extension\YoutubeIdExtractorExtension;
-use PHPUnit\Framework\Attributes\CoversMethod;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Twig\TwigFunction;
 
-#[CoversMethod(YoutubeIdExtractorExtension::class, 'extractId')]
-#[CoversMethod(YoutubeIdExtractorExtension::class, 'getFunctions')]
+#[CoversClass(YoutubeIdExtractorExtension::class)]
 class YoutubeIdExtractorExtensionTest extends TestCase
 {
     /**

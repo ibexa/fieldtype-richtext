@@ -11,10 +11,10 @@ namespace Ibexa\Tests\FieldTypeRichText\RichText\Validator;
 use DOMDocument;
 use Ibexa\Contracts\FieldTypeRichText\RichText\ValidatorInterface;
 use Ibexa\FieldTypeRichText\RichText\Validator\ValidatorAggregate;
-use PHPUnit\Framework\Attributes\CoversMethod;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
-#[CoversMethod(ValidatorAggregate::class, 'validateDocument')]
+#[CoversClass(ValidatorAggregate::class)]
 class ValidatorAggregateTest extends TestCase
 {
     public function testValidateDocument(): void

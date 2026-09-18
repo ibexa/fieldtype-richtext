@@ -10,7 +10,7 @@ namespace Ibexa\Tests\FieldTypeRichText\Configuration\UI\Config\Mapper;
 
 use ArrayObject;
 use Ibexa\FieldTypeRichText\Configuration\UI\Mapper\CustomTag;
-use PHPUnit\Framework\Attributes\CoversMethod;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -24,7 +24,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  *
  * @see \Ibexa\FieldTypeRichText\Configuration\UI\Mapper\CustomTag::__construct
  */
-#[CoversMethod(CustomTag::class, 'mapConfig')]
+#[CoversClass(CustomTag::class)]
 class CustomTagTest extends TestCase
 {
     /**
