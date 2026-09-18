@@ -51,7 +51,6 @@
         "phpunit/phpunit": "^11.5",
         "symfony/finder": "^7.4",
         "symfony/notifier": "^7.4",
-        "symfony/phpunit-bridge": "^7.4",
         "symfony/webpack-encore-bundle": "^2.2"
     },
     "autoload": {
