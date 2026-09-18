@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<phpunit backupGlobals="false" processIsolation="false" beStrictAboutTestsThatDoNotTestAnything="false" colors="true" failOnWarning="true" cacheDirectory=".phpunit.cache" backupStaticProperties="false">
+<phpunit backupGlobals="false" processIsolation="false" beStrictAboutTestsThatDoNotTestAnything="false" colors="true" failOnWarning="true" failOnNotice="true" cacheDirectory=".phpunit.cache" backupStaticProperties="false">
   <php>
     <env name="setupFactory" value="Ibexa\Tests\Integration\FieldTypeRichText\Repository\SetupFactory\LegacySetupFactory"/>
     <env name="backendVersion" value="5"/>
