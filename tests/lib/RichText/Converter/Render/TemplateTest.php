@@ -93,7 +93,7 @@ class TemplateTest extends TestCase
         $this->converterMock
             ->expects($matcher)
             ->method('convert')
-            ->willReturnCallback(static function (...$parameters) use ($matcher, $convertParameters, $convertReturnValues) {
+            ->willReturnCallback(static function (...$parameters) use ($matcher, $convertParameters, $convertReturnValues): DOMDocument {
                 $invocation = $matcher->numberOfInvocations();
                 self::assertEquals($convertParameters[$invocation - 1], $parameters);
 
@@ -104,7 +104,7 @@ class TemplateTest extends TestCase
         $this->rendererMock
             ->expects($matcher)
             ->method('renderTemplate')
-            ->willReturnCallback(static function (...$parameters) use ($matcher, $renderParameters, $renderReturnValues) {
+            ->willReturnCallback(static function (...$parameters) use ($matcher, $renderParameters, $renderReturnValues): ?string {
                 $invocation = $matcher->numberOfInvocations();
                 self::assertEquals($renderParameters[$invocation - 1], $parameters);
 

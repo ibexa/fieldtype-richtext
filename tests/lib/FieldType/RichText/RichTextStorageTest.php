@@ -97,7 +97,7 @@ class RichTextStorageTest extends TestCase
         $logger
             ->expects($matcher)
             ->method('error')
-            ->willReturnCallback(static function (...$parameters) use ($matcher, $errorMessages) {
+            ->willReturnCallback(static function (...$parameters) use ($matcher, $errorMessages): void {
                 self::assertSame($errorMessages[$matcher->numberOfInvocations() - 1], $parameters[0]);
             });
 
@@ -239,7 +239,7 @@ class RichTextStorageTest extends TestCase
         $gateway
             ->expects($matcher)
             ->method('insertUrl')
-            ->willReturnCallback(static function (...$parameters) use ($matcher, $urlAssertions, $insertedIds) {
+            ->willReturnCallback(static function (...$parameters) use ($matcher, $urlAssertions, $insertedIds): mixed {
                 $i = $matcher->numberOfInvocations() - 1;
                 self::assertThat($parameters[0], $urlAssertions[$i]);
 
@@ -254,7 +254,7 @@ class RichTextStorageTest extends TestCase
         $gateway
             ->expects($matcher)
             ->method('linkUrl')
-            ->willReturnCallback(static function (...$parameters) use ($matcher, $linkUrlsArguments) {
+            ->willReturnCallback(static function (...$parameters) use ($matcher, $linkUrlsArguments): void {
                 self::assertSame($linkUrlsArguments[$matcher->numberOfInvocations() - 1], $parameters);
             });
 
@@ -370,7 +370,7 @@ class RichTextStorageTest extends TestCase
             $gateway
                 ->expects($matcher)
                 ->method('insertUrl')
-                ->willReturnCallback(static function (string $url) use ($matcher, $insertLinks) {
+                ->willReturnCallback(static function (string $url) use ($matcher, $insertLinks): int {
                     $linkMap = $insertLinks[$matcher->numberOfInvocations() - 1];
                     self::assertSame($linkMap['url'], $url);
 
@@ -398,7 +398,7 @@ class RichTextStorageTest extends TestCase
         $matcher = self::exactly(2);
         $gateway
             ->expects($matcher)
-            ->method('unlinkUrl')->willReturnCallback(static function (...$parameters) use ($matcher) {
+            ->method('unlinkUrl')->willReturnCallback(static function (...$parameters) use ($matcher): void {
             if ($matcher->numberOfInvocations() === 1) {
                 self::assertSame(12, $parameters[0]);
                 self::assertSame(42, $parameters[1]);

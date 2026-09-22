@@ -823,7 +823,7 @@ class EmbedTest extends TestCase
         $this->loggerMock
             ->expects($matcher)
             ->method('error')
-            ->willReturnCallback(static function (...$parameters) use ($matcher, $errors) {
+            ->willReturnCallback(static function (...$parameters) use ($matcher, $errors): void {
                 self::assertSame($errors[$matcher->numberOfInvocations() - 1], $parameters[0]);
             });
 
@@ -837,7 +837,7 @@ class EmbedTest extends TestCase
             $this->rendererMock
                 ->expects($matcher)
                 ->method('renderContentEmbed')
-                ->willReturnCallback(static function (...$parameters) use ($matcher, $embedContentParams, $embedContentReturnValues) {
+                ->willReturnCallback(static function (...$parameters) use ($matcher, $embedContentParams, $embedContentReturnValues): ?string {
                     $invocation = $matcher->numberOfInvocations();
                     self::assertEquals(array_values($embedContentParams[$invocation - 1]), $parameters);
 
@@ -850,7 +850,7 @@ class EmbedTest extends TestCase
             $this->rendererMock
                 ->expects($matcher)
                 ->method('renderLocationEmbed')
-                ->willReturnCallback(static function (...$parameters) use ($matcher, $embedLocationParams, $embedLocationReturnValues) {
+                ->willReturnCallback(static function (...$parameters) use ($matcher, $embedLocationParams, $embedLocationReturnValues): ?string {
                     $invocation = $matcher->numberOfInvocations();
                     self::assertEquals(array_values($embedLocationParams[$invocation - 1]), $parameters);
 
