@@ -823,8 +823,8 @@ class EmbedTest extends TestCase
         $this->loggerMock
             ->expects($matcher)
             ->method('error')
-            ->willReturnCallback(function (...$parameters) use ($matcher, $errors) {
-                $this->assertSame($errors[$matcher->numberOfInvocations() - 1], $parameters[0]);
+            ->willReturnCallback(static function (...$parameters) use ($matcher, $errors) {
+                self::assertSame($errors[$matcher->numberOfInvocations() - 1], $parameters[0]);
             });
 
         $this->rendererMock->expects(self::never())->method('renderTemplate');
@@ -837,9 +837,9 @@ class EmbedTest extends TestCase
             $this->rendererMock
                 ->expects($matcher)
                 ->method('renderContentEmbed')
-                ->willReturnCallback(function (...$parameters) use ($matcher, $embedContentParams, $embedContentReturnValues) {
+                ->willReturnCallback(static function (...$parameters) use ($matcher, $embedContentParams, $embedContentReturnValues) {
                     $invocation = $matcher->numberOfInvocations();
-                    $this->assertEquals(array_values($embedContentParams[$invocation - 1]), $parameters);
+                    self::assertEquals(array_values($embedContentParams[$invocation - 1]), $parameters);
 
                     return $embedContentReturnValues[$invocation - 1] ?? null;
                 });
@@ -850,9 +850,9 @@ class EmbedTest extends TestCase
             $this->rendererMock
                 ->expects($matcher)
                 ->method('renderLocationEmbed')
-                ->willReturnCallback(function (...$parameters) use ($matcher, $embedLocationParams, $embedLocationReturnValues) {
+                ->willReturnCallback(static function (...$parameters) use ($matcher, $embedLocationParams, $embedLocationReturnValues) {
                     $invocation = $matcher->numberOfInvocations();
-                    $this->assertEquals(array_values($embedLocationParams[$invocation - 1]), $parameters);
+                    self::assertEquals(array_values($embedLocationParams[$invocation - 1]), $parameters);
 
                     return $embedLocationReturnValues[$invocation - 1] ?? null;
                 });

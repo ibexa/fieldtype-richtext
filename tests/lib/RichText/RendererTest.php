@@ -372,9 +372,9 @@ class RendererTest extends TestCase
                 $this->loggerMock
                     ->expects($matcher)
                     ->method('warning')
-                    ->willReturnCallback(function (...$parameters) use ($matcher, $warningArguments) {
+                    ->willReturnCallback(static function (...$parameters) use ($matcher, $warningArguments) {
                         $expected = $warningArguments[$matcher->numberOfInvocations() - 1];
-                        $this->assertSame($expected, array_slice($parameters, 0, count($expected)));
+                        self::assertSame($expected, array_slice($parameters, 0, count($expected)));
                     });
             }
 
@@ -383,9 +383,9 @@ class RendererTest extends TestCase
                 $this->loggerMock
                     ->expects($matcher)
                     ->method('error')
-                    ->willReturnCallback(function (...$parameters) use ($matcher, $errorArguments) {
+                    ->willReturnCallback(static function (...$parameters) use ($matcher, $errorArguments) {
                         $expected = $errorArguments[$matcher->numberOfInvocations() - 1];
-                        $this->assertSame($expected, array_slice($parameters, 0, count($expected)));
+                        self::assertSame($expected, array_slice($parameters, 0, count($expected)));
                     });
             }
         }
@@ -659,14 +659,14 @@ class RendererTest extends TestCase
         $matcher = self::exactly(2);
         $contentInfoMock
             ->expects($matcher)
-            ->method('__get')->willReturnCallback(function (...$parameters) use ($matcher) {
+            ->method('__get')->willReturnCallback(static function (...$parameters) use ($matcher) {
             if ($matcher->numberOfInvocations() === 1) {
-                $this->assertSame('mainLocationId', $parameters[0]);
+                self::assertSame('mainLocationId', $parameters[0]);
 
                 return 2;
             }
             if ($matcher->numberOfInvocations() === 2) {
-                $this->assertSame('isHidden', $parameters[0]);
+                self::assertSame('isHidden', $parameters[0]);
 
                 return true;
             }
@@ -1077,9 +1077,9 @@ class RendererTest extends TestCase
                 $this->loggerMock
                     ->expects($matcher)
                     ->method('warning')
-                    ->willReturnCallback(function (...$parameters) use ($matcher, $warningArguments) {
+                    ->willReturnCallback(static function (...$parameters) use ($matcher, $warningArguments) {
                         $expected = $warningArguments[$matcher->numberOfInvocations() - 1];
-                        $this->assertSame($expected, array_slice($parameters, 0, count($expected)));
+                        self::assertSame($expected, array_slice($parameters, 0, count($expected)));
                     });
             }
 
@@ -1088,9 +1088,9 @@ class RendererTest extends TestCase
                 $this->loggerMock
                     ->expects($matcher)
                     ->method('error')
-                    ->willReturnCallback(function (...$parameters) use ($matcher, $errorArguments) {
+                    ->willReturnCallback(static function (...$parameters) use ($matcher, $errorArguments) {
                         $expected = $errorArguments[$matcher->numberOfInvocations() - 1];
-                        $this->assertSame($expected, array_slice($parameters, 0, count($expected)));
+                        self::assertSame($expected, array_slice($parameters, 0, count($expected)));
                     });
             }
         }
@@ -1714,9 +1714,9 @@ class RendererTest extends TestCase
                 $this->loggerMock
                     ->expects($matcher)
                     ->method('warning')
-                    ->willReturnCallback(function (...$parameters) use ($matcher, $warningArguments) {
+                    ->willReturnCallback(static function (...$parameters) use ($matcher, $warningArguments) {
                         $expected = $warningArguments[$matcher->numberOfInvocations() - 1];
-                        $this->assertSame($expected, array_slice($parameters, 0, count($expected)));
+                        self::assertSame($expected, array_slice($parameters, 0, count($expected)));
                     });
             }
 
@@ -1725,9 +1725,9 @@ class RendererTest extends TestCase
                 $this->loggerMock
                     ->expects($matcher)
                     ->method('error')
-                    ->willReturnCallback(function (...$parameters) use ($matcher, $errorArguments) {
+                    ->willReturnCallback(static function (...$parameters) use ($matcher, $errorArguments) {
                         $expected = $errorArguments[$matcher->numberOfInvocations() - 1];
-                        $this->assertSame($expected, array_slice($parameters, 0, count($expected)));
+                        self::assertSame($expected, array_slice($parameters, 0, count($expected)));
                     });
             }
         }
@@ -1834,14 +1834,14 @@ class RendererTest extends TestCase
         $matcher = self::exactly(2);
         $contentInfoMock
             ->expects($matcher)
-            ->method('__get')->willReturnCallback(function (...$parameters) use ($matcher, $mainLocationId) {
+            ->method('__get')->willReturnCallback(static function (...$parameters) use ($matcher, $mainLocationId) {
             if ($matcher->numberOfInvocations() === 1) {
-                $this->assertSame('mainLocationId', $parameters[0]);
+                self::assertSame('mainLocationId', $parameters[0]);
 
                 return $mainLocationId;
             }
             if ($matcher->numberOfInvocations() === 2) {
-                $this->assertSame('isHidden', $parameters[0]);
+                self::assertSame('isHidden', $parameters[0]);
 
                 return false;
             }

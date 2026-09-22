@@ -92,8 +92,8 @@ class InputHandlerTest extends TestCase
         $inputHandler
             ->expects(self::once())
             ->method('fromDocument')
-            ->willReturnCallback(function (DOMDocument $document) use ($inputXml, $outputDocument): DOMDocument {
-                $this->assertEquals($inputXml, $document->saveXML());
+            ->willReturnCallback(static function (DOMDocument $document) use ($inputXml, $outputDocument): DOMDocument {
+                self::assertEquals($inputXml, $document->saveXML());
 
                 return $outputDocument;
             });

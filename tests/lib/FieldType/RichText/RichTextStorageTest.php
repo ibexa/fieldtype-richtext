@@ -97,8 +97,8 @@ class RichTextStorageTest extends TestCase
         $logger
             ->expects($matcher)
             ->method('error')
-            ->willReturnCallback(function (...$parameters) use ($matcher, $errorMessages) {
-                $this->assertSame($errorMessages[$matcher->numberOfInvocations() - 1], $parameters[0]);
+            ->willReturnCallback(static function (...$parameters) use ($matcher, $errorMessages) {
+                self::assertSame($errorMessages[$matcher->numberOfInvocations() - 1], $parameters[0]);
             });
 
         $versionInfo = new VersionInfo(['contentInfo' => new ContentInfo(['id' => 1])]);
@@ -254,8 +254,8 @@ class RichTextStorageTest extends TestCase
         $gateway
             ->expects($matcher)
             ->method('linkUrl')
-            ->willReturnCallback(function (...$parameters) use ($matcher, $linkUrlsArguments) {
-                $this->assertSame($linkUrlsArguments[$matcher->numberOfInvocations() - 1], $parameters);
+            ->willReturnCallback(static function (...$parameters) use ($matcher, $linkUrlsArguments) {
+                self::assertSame($linkUrlsArguments[$matcher->numberOfInvocations() - 1], $parameters);
             });
 
         $gateway
@@ -398,14 +398,14 @@ class RichTextStorageTest extends TestCase
         $matcher = self::exactly(2);
         $gateway
             ->expects($matcher)
-            ->method('unlinkUrl')->willReturnCallback(function (...$parameters) use ($matcher) {
+            ->method('unlinkUrl')->willReturnCallback(static function (...$parameters) use ($matcher) {
             if ($matcher->numberOfInvocations() === 1) {
-                $this->assertSame(12, $parameters[0]);
-                $this->assertSame(42, $parameters[1]);
+                self::assertSame(12, $parameters[0]);
+                self::assertSame(42, $parameters[1]);
             }
             if ($matcher->numberOfInvocations() === 2) {
-                $this->assertSame(23, $parameters[0]);
-                $this->assertSame(42, $parameters[1]);
+                self::assertSame(23, $parameters[0]);
+                self::assertSame(42, $parameters[1]);
             }
         });
 
