@@ -41,8 +41,8 @@ class DoctrineStorage extends Gateway
             $query = $this->connection->createQueryBuilder();
             $query
                 ->select(
-                    $this->connection->quoteIdentifier('id'),
-                    $this->connection->quoteIdentifier('remote_id')
+                    $this->connection->quoteSingleIdentifier('id'),
+                    $this->connection->quoteSingleIdentifier('remote_id')
                 )
                 ->from(ContentGateway::CONTENT_ITEM_TABLE)
                 ->where($query->expr()->in('remote_id', ':remoteIds'))
