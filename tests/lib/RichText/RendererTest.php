@@ -344,7 +344,7 @@ class RendererTest extends TestCase
                 $this->configResolverMock
                     ->expects($matcher)
                     ->method('hasParameter')
-                    ->willReturnCallback(static function (...$parameters) use ($matcher, $hasParameterReturnValues) {
+                    ->willReturnCallback(static function (...$parameters) use ($matcher, $hasParameterReturnValues): mixed {
                         return $hasParameterReturnValues[$matcher->numberOfInvocations() - 1] ?? null;
                     });
             }
@@ -354,7 +354,7 @@ class RendererTest extends TestCase
                 $this->configResolverMock
                     ->expects($matcher)
                     ->method('getParameter')
-                    ->willReturnCallback(static function (...$parameters) use ($matcher, $getParameterReturnValues) {
+                    ->willReturnCallback(static function (...$parameters) use ($matcher, $getParameterReturnValues): mixed {
                         return $getParameterReturnValues[$matcher->numberOfInvocations() - 1] ?? null;
                     });
             }
@@ -372,9 +372,9 @@ class RendererTest extends TestCase
                 $this->loggerMock
                     ->expects($matcher)
                     ->method('warning')
-                    ->willReturnCallback(function (...$parameters) use ($matcher, $warningArguments) {
+                    ->willReturnCallback(static function (...$parameters) use ($matcher, $warningArguments): void {
                         $expected = $warningArguments[$matcher->numberOfInvocations() - 1];
-                        $this->assertSame($expected, array_slice($parameters, 0, count($expected)));
+                        self::assertSame($expected, array_slice($parameters, 0, count($expected)));
                     });
             }
 
@@ -383,9 +383,9 @@ class RendererTest extends TestCase
                 $this->loggerMock
                     ->expects($matcher)
                     ->method('error')
-                    ->willReturnCallback(function (...$parameters) use ($matcher, $errorArguments) {
+                    ->willReturnCallback(static function (...$parameters) use ($matcher, $errorArguments): void {
                         $expected = $errorArguments[$matcher->numberOfInvocations() - 1];
-                        $this->assertSame($expected, array_slice($parameters, 0, count($expected)));
+                        self::assertSame($expected, array_slice($parameters, 0, count($expected)));
                     });
             }
         }
@@ -659,17 +659,19 @@ class RendererTest extends TestCase
         $matcher = self::exactly(2);
         $contentInfoMock
             ->expects($matcher)
-            ->method('__get')->willReturnCallback(function (...$parameters) use ($matcher) {
+            ->method('__get')->willReturnCallback(static function (...$parameters) use ($matcher): mixed {
             if ($matcher->numberOfInvocations() === 1) {
-                $this->assertSame('mainLocationId', $parameters[0]);
+                self::assertSame('mainLocationId', $parameters[0]);
 
                 return 2;
             }
             if ($matcher->numberOfInvocations() === 2) {
-                $this->assertSame('isHidden', $parameters[0]);
+                self::assertSame('isHidden', $parameters[0]);
 
                 return true;
             }
+
+            return null;
         });
 
         $contentMock = $this->createMock(Content::class);
@@ -1049,7 +1051,7 @@ class RendererTest extends TestCase
                 $this->configResolverMock
                     ->expects($matcher)
                     ->method('hasParameter')
-                    ->willReturnCallback(static function (...$parameters) use ($matcher, $hasParameterReturnValues) {
+                    ->willReturnCallback(static function (...$parameters) use ($matcher, $hasParameterReturnValues): mixed {
                         return $hasParameterReturnValues[$matcher->numberOfInvocations() - 1] ?? null;
                     });
             }
@@ -1059,7 +1061,7 @@ class RendererTest extends TestCase
                 $this->configResolverMock
                     ->expects($matcher)
                     ->method('getParameter')
-                    ->willReturnCallback(static function (...$parameters) use ($matcher, $getParameterReturnValues) {
+                    ->willReturnCallback(static function (...$parameters) use ($matcher, $getParameterReturnValues): mixed {
                         return $getParameterReturnValues[$matcher->numberOfInvocations() - 1] ?? null;
                     });
             }
@@ -1077,9 +1079,9 @@ class RendererTest extends TestCase
                 $this->loggerMock
                     ->expects($matcher)
                     ->method('warning')
-                    ->willReturnCallback(function (...$parameters) use ($matcher, $warningArguments) {
+                    ->willReturnCallback(static function (...$parameters) use ($matcher, $warningArguments): void {
                         $expected = $warningArguments[$matcher->numberOfInvocations() - 1];
-                        $this->assertSame($expected, array_slice($parameters, 0, count($expected)));
+                        self::assertSame($expected, array_slice($parameters, 0, count($expected)));
                     });
             }
 
@@ -1088,9 +1090,9 @@ class RendererTest extends TestCase
                 $this->loggerMock
                     ->expects($matcher)
                     ->method('error')
-                    ->willReturnCallback(function (...$parameters) use ($matcher, $errorArguments) {
+                    ->willReturnCallback(static function (...$parameters) use ($matcher, $errorArguments): void {
                         $expected = $errorArguments[$matcher->numberOfInvocations() - 1];
-                        $this->assertSame($expected, array_slice($parameters, 0, count($expected)));
+                        self::assertSame($expected, array_slice($parameters, 0, count($expected)));
                     });
             }
         }
@@ -1686,7 +1688,7 @@ class RendererTest extends TestCase
                 $this->configResolverMock
                     ->expects($matcher)
                     ->method('hasParameter')
-                    ->willReturnCallback(static function (...$parameters) use ($matcher, $hasParameterReturnValues) {
+                    ->willReturnCallback(static function (...$parameters) use ($matcher, $hasParameterReturnValues): mixed {
                         return $hasParameterReturnValues[$matcher->numberOfInvocations() - 1] ?? null;
                     });
             }
@@ -1696,7 +1698,7 @@ class RendererTest extends TestCase
                 $this->configResolverMock
                     ->expects($matcher)
                     ->method('getParameter')
-                    ->willReturnCallback(static function (...$parameters) use ($matcher, $getParameterReturnValues) {
+                    ->willReturnCallback(static function (...$parameters) use ($matcher, $getParameterReturnValues): mixed {
                         return $getParameterReturnValues[$matcher->numberOfInvocations() - 1] ?? null;
                     });
             }
@@ -1714,9 +1716,9 @@ class RendererTest extends TestCase
                 $this->loggerMock
                     ->expects($matcher)
                     ->method('warning')
-                    ->willReturnCallback(function (...$parameters) use ($matcher, $warningArguments) {
+                    ->willReturnCallback(static function (...$parameters) use ($matcher, $warningArguments): void {
                         $expected = $warningArguments[$matcher->numberOfInvocations() - 1];
-                        $this->assertSame($expected, array_slice($parameters, 0, count($expected)));
+                        self::assertSame($expected, array_slice($parameters, 0, count($expected)));
                     });
             }
 
@@ -1725,9 +1727,9 @@ class RendererTest extends TestCase
                 $this->loggerMock
                     ->expects($matcher)
                     ->method('error')
-                    ->willReturnCallback(function (...$parameters) use ($matcher, $errorArguments) {
+                    ->willReturnCallback(static function (...$parameters) use ($matcher, $errorArguments): void {
                         $expected = $errorArguments[$matcher->numberOfInvocations() - 1];
-                        $this->assertSame($expected, array_slice($parameters, 0, count($expected)));
+                        self::assertSame($expected, array_slice($parameters, 0, count($expected)));
                     });
             }
         }
@@ -1834,17 +1836,19 @@ class RendererTest extends TestCase
         $matcher = self::exactly(2);
         $contentInfoMock
             ->expects($matcher)
-            ->method('__get')->willReturnCallback(function (...$parameters) use ($matcher, $mainLocationId) {
+            ->method('__get')->willReturnCallback(static function (...$parameters) use ($matcher, $mainLocationId): mixed {
             if ($matcher->numberOfInvocations() === 1) {
-                $this->assertSame('mainLocationId', $parameters[0]);
+                self::assertSame('mainLocationId', $parameters[0]);
 
                 return $mainLocationId;
             }
             if ($matcher->numberOfInvocations() === 2) {
-                $this->assertSame('isHidden', $parameters[0]);
+                self::assertSame('isHidden', $parameters[0]);
 
                 return false;
             }
+
+            return null;
         });
 
         $contentMock = $this->createMock(Content::class);

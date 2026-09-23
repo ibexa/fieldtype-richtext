@@ -41,8 +41,16 @@ class Xslt extends XmlBase implements Converter
     public function __construct(string $stylesheet, array $customStylesheets = [])
     {
         $this->stylesheet = $stylesheet;
+        $this->addCustomStylesheets($customStylesheets);
+    }
 
-        // Grouping stylesheets by priority.
+    /**
+     * Groups the given stylesheets by priority and merges them into the already registered ones.
+     *
+     * @param array<array{priority: int, path: string}> $customStylesheets Array of XSL stylesheets. Each entry consists in a hash having "path" and "priority" keys.
+     */
+    protected function addCustomStylesheets(array $customStylesheets): void
+    {
         foreach ($customStylesheets as $customStylesheet) {
             $this->customStylesheets[(int)$customStylesheet['priority']][] = $customStylesheet['path'];
         }

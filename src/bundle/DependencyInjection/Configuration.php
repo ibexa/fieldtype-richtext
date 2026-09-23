@@ -144,7 +144,7 @@ class Configuration extends SiteAccessConfiguration
                             ->arrayPrototype()
                                 ->beforeNormalization()
                                     ->always(
-                                        static function ($v) {
+                                        static function (array $v): array {
                                             // Workaround: set empty value to be able to unset it later on (see validation for "choices")
                                             if (!isset($v['choices'])) {
                                                 $v['choices'] = [];

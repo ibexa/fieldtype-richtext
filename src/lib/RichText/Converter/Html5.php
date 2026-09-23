@@ -9,17 +9,14 @@ declare(strict_types=1);
 namespace Ibexa\FieldTypeRichText\RichText\Converter;
 
 use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
-use Ibexa\FieldTypeRichText\RichText\Converter\Xslt as XsltConverter;
 
 /**
  * Adds ConfigResolver awareness to the Xslt converter.
  */
-class Html5 extends XsltConverter
+class Html5 extends ConfigResolverAwareXsltConverter
 {
     public function __construct(string $stylesheet, ConfigResolverInterface $configResolver)
     {
-        $customStylesheets = $configResolver->getParameter('fieldtypes.ibexa_richtext.output_custom_xsl');
-        $customStylesheets = $customStylesheets ?: [];
-        parent::__construct($stylesheet, $customStylesheets);
+        parent::__construct($stylesheet, $configResolver, 'fieldtypes.ibexa_richtext.output_custom_xsl');
     }
 }

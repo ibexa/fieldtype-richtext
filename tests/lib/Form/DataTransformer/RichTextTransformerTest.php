@@ -60,8 +60,10 @@ class RichTextTransformerTest extends TestCase
         $this->docbook2xhtml5editConverter
             ->expects(self::once())
             ->method('convert')
-            ->willReturnCallback(function (DOMDocument $doc) use ($inputXML, $outputDocument): \DOMDocument {
-                $this->assertXmlStringEqualsXmlString($inputXML, $doc->saveXML());
+            ->willReturnCallback(static function (DOMDocument $doc) use ($inputXML, $outputDocument): \DOMDocument {
+                $actualXML = $doc->saveXML();
+                self::assertIsString($actualXML);
+                self::assertXmlStringEqualsXmlString($inputXML, $actualXML);
 
                 return $outputDocument;
             });
