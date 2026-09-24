@@ -689,7 +689,7 @@ EOT;
         $query = $connection->createQueryBuilder();
         $query
             ->select(
-                $connection->quoteIdentifier('id')
+                $connection->quoteSingleIdentifier('id')
             )
             ->from(DoctrineDatabase::URL_TABLE)
             ->where('url = :url')
@@ -752,7 +752,7 @@ EOT;
         $query = $connection->createQueryBuilder();
         $query
             ->select(
-                $connection->quoteIdentifier('url_id')
+                $connection->quoteSingleIdentifier('url_id')
             )
             ->from(DoctrineDatabase::URL_LINK_TABLE)
             ->where('contentobject_attribute_id = :contentobject_attribute_id')
