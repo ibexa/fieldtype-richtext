@@ -8,7 +8,11 @@ import { findContents } from '../../services/content-service';
 import { getCustomClassesConfig, addPredefinedClassToConfig } from '../../custom-attributes/helpers/config-helper';
 import { getUniqueAttrValues } from '../../helpers/models';
 
+const { Translator } = window;
+const { dangerouslySetInnerHTML } = window.ibexa.helpers.dom;
+
 const CONTAINER_CLASS = 'ibexa-embed-type-image';
+const PREVIEW_MISSING_CLASS = 'ibexa-embed-type-image__preview-missing';
 
 class IbexaEmbedImageEditing extends Plugin {
     static get requires() {
@@ -67,17 +71,27 @@ class IbexaEmbedImageEditing extends Plugin {
                 const contentId = modelElement.getAttribute('contentId');
                 const content = contentsById[contentId];
 
-                if (!content) {
+                const fields = content?.CurrentVersion.Version.Fields.field ?? [];
+                const fieldImage = fields.find((field) => field.fieldTypeIdentifier === 'ezimage');
+                const size = modelElement.getAttribute('size');
+                const variationHref = fieldImage?.fieldValue?.variations[size]?.href;
+
+                if (!variationHref) {
+                    this.setPreviewMissing(modelElement);
+
                     return;
                 }
 
-                const fields = content.CurrentVersion.Version.Fields.field;
-                const fieldImage = fields.find((field) => field.fieldTypeIdentifier === 'ezimage');
-                const size = modelElement.getAttribute('size');
-                const variationHref = fieldImage.fieldValue.variations[size].href;
-
                 this.loadImageVariation(modelElement, variationHref);
             });
+        });
+    }
+
+    setPreviewMissing(modelElement) {
+        this.editor.model.change((writer) => {
+            writer.removeAttribute('previewUrl', modelElement);
+            writer.setAttribute('isPreviewMissing', true, modelElement);
+            writer.setAttribute('shouldFireInputEvent', false, modelElement);
         });
     }
 
@@ -96,10 +110,23 @@ class IbexaEmbedImageEditing extends Plugin {
         });
 
         fetch(request)
-            .then((response) => response.json())
+            .then((response) => {
+                if (response.status === 404) {
+                    this.setPreviewMissing(modelElement);
+
+                    return null;
+                }
+
+                return window.ibexa.helpers.request.getJsonFromResponse(response);
+            })
             .then((imageData) => {
+                if (!imageData) {
+                    return;
+                }
+
                 this.editor.model.change((writer) => {
                     writer.setAttribute('previewUrl', imageData.ContentImageVariation.uri, modelElement);
+                    writer.removeAttribute('isPreviewMissing', modelElement);
                     writer.setAttribute('shouldFireInputEvent', false, modelElement);
                 });
             })
@@ -181,6 +208,47 @@ class IbexaEmbedImageEditing extends Plugin {
                         .filter((viewChild) => viewChild.is('uiElement', 'img'))
                         .forEach((viewChild) => downcastWriter.remove(viewChild));
                     downcastWriter.insert(downcastWriter.createPositionAt(viewElement, 0), preview);
+                }),
+            )
+            .add((dispatcher) =>
+                dispatcher.on('attribute:isPreviewMissing', (event, data, conversionApi) => {
+                    const downcastWriter = conversionApi.writer;
+                    const modelElement = data.item;
+                    const viewElement = conversionApi.mapper.toViewElement(modelElement);
+                    const viewChildren = Array.from(viewElement.getChildren());
+
+                    viewChildren
+                        .filter((viewChild) => viewChild.is('uiElement', 'div') && viewChild.hasClass(PREVIEW_MISSING_CLASS))
+                        .forEach((viewChild) => downcastWriter.remove(viewChild));
+
+                    if (!modelElement.getAttribute('isPreviewMissing')) {
+                        return;
+                    }
+
+                    viewChildren
+                        .filter((viewChild) => viewChild.is('uiElement', 'img'))
+                        .forEach((viewChild) => downcastWriter.remove(viewChild));
+
+                    const placeholder = downcastWriter.createUIElement('div', { class: PREVIEW_MISSING_CLASS }, function (domDocument) {
+                        const domElement = this.toDomElement(domDocument);
+                        const message = Translator.trans(
+                            /*@Desc("The embedded image is no longer available.")*/ 'image_embed.preview_missing.message',
+                            {},
+                            'ck_editor',
+                        );
+
+                        dangerouslySetInnerHTML(
+                            domElement,
+                            `<svg class="ibexa-icon ibexa-icon--medium ibexa-icon--secondary">
+                                <use xlink:href="${window.ibexa.helpers.icon.getIconPath('image')}"></use>
+                            </svg>
+                            <span>${message}</span>`,
+                        );
+
+                        return domElement;
+                    });
+
+                    downcastWriter.insert(downcastWriter.createPositionAt(viewElement, 0), placeholder);
                 }),
             )
             .add((dispatcher) =>

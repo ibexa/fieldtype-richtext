@@ -179,6 +179,18 @@
 
     .ibexa-embed-type-image {
         padding: calculateRem(8px);
+
+        &__preview-missing {
+            display: flex;
+            align-items: center;
+            gap: calculateRem(8px);
+            padding: calculateRem(16px);
+            border: calculateRem(1px) dashed $ibexa-color-dark-300;
+            border-radius: $ibexa-border-radius-small;
+            background-color: $ibexa-color-light-300;
+            color: $ibexa-color-dark-400;
+            font-size: $ibexa-text-font-size-small;
+        }
     }
 
     [data-ezalign='right'] {
