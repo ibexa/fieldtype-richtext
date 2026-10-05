@@ -13,11 +13,11 @@
         "@types/react-dom": "^19.1.2"
     },
     "scripts": {
-        "test": "yarn prettier-test && yarn eslint-test",
+        "test": "yarn prettier-test && yarn eslint-test && yarn ts-test",
         "fix": "yarn prettier-test --write && yarn eslint-test --fix",
         "ts-test": "tsc --noEmit",
         "eslint-test": "eslint \"./src/bundle/Resources/**/*.{js,ts}\"",
         "prettier-test": "yarn prettier \"./src/bundle/Resources/**/*.{js,ts,scss}\" --check",
-        "postinstall": "yarn ibexa-generate-tsconfig --use-root-project-tsconfig"
+        "postinstall": "yarn ibexa-generate-tsconfig"
     }
 }
