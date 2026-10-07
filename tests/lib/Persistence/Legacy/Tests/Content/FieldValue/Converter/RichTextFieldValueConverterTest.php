@@ -22,7 +22,7 @@ use PHPUnit\Framework\TestCase;
 class RichTextFieldValueConverterTest extends TestCase
 {
     /**
-     * @var \Ibexa\FieldTypeRichText\Persistence\Legacy\RichTextFieldValueConverter
+     * @var RichTextFieldValueConverter
      */
     protected $converter;
 

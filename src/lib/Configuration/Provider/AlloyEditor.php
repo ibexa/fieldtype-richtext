@@ -23,10 +23,10 @@ final class AlloyEditor implements Provider
     /** @var array */
     private $alloyEditorConfiguration;
 
-    /** @var \Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface */
+    /** @var ConfigResolverInterface */
     private $configResolver;
 
-    /** @var \Ibexa\FieldTypeRichText\Configuration\UI\Mapper\OnlineEditorConfigMapper */
+    /** @var OnlineEditorConfigMapper */
     private $onlineEditorConfigMapper;
 
     public function __construct(
@@ -84,7 +84,10 @@ final class AlloyEditor implements Provider
             return $value['visible'];
         });
 
-        uasort($buttons, static function (array $a, array $b): int {
+        uasort($buttons, static function (
+            array $a,
+            array $b
+        ): int {
             return $b['priority'] <=> $a['priority'];
         });
 

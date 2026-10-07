@@ -86,8 +86,12 @@ xmlns="http://ibexa.co/namespaces/ezpublish5/xhtml5/edit">
      * @param string $dtdPath
      * @param string $input
      */
-    public function testAccept($documentElement, $namespace, $dtdPath, $input)
-    {
+    public function testAccept(
+        $documentElement,
+        $namespace,
+        $dtdPath,
+        $input
+    ) {
         $normalizer = $this->getNormalizer($documentElement, $namespace, $dtdPath);
 
         $this->assertTrue($normalizer->accept($input));
@@ -101,8 +105,12 @@ xmlns="http://ibexa.co/namespaces/ezpublish5/xhtml5/edit">
      * @param string $dtdPath
      * @param string $input Ignored
      */
-    public function testAcceptNoXmlDeclaration($documentElement, $namespace, $dtdPath, $input)
-    {
+    public function testAcceptNoXmlDeclaration(
+        $documentElement,
+        $namespace,
+        $dtdPath,
+        $input
+    ) {
         $normalizer = $this->getNormalizer($documentElement, $namespace, $dtdPath);
 
         $this->assertTrue($normalizer->accept(
@@ -127,8 +135,14 @@ XML
      * @param string $expectedOutput
      * @param string $expectedSaved
      */
-    public function testNormalize($documentElement, $namespace, $dtdPath, $input, $expectedOutput, $expectedSaved)
-    {
+    public function testNormalize(
+        $documentElement,
+        $namespace,
+        $dtdPath,
+        $input,
+        $expectedOutput,
+        $expectedSaved
+    ) {
         $normalizer = $this->getNormalizer($documentElement, $namespace, $dtdPath);
 
         $output = $normalizer->normalize($input);
@@ -205,15 +219,22 @@ XML
      * @param string $dtdPath
      * @param string $input
      */
-    public function testRefuse($documentElement, $namespace, $dtdPath, $input)
-    {
+    public function testRefuse(
+        $documentElement,
+        $namespace,
+        $dtdPath,
+        $input
+    ) {
         $normalizer = $this->getNormalizer($documentElement, $namespace, $dtdPath);
 
         $this->assertFalse($normalizer->accept($input));
     }
 
-    protected function getNormalizer($documentElement, $namespace, $dtdPath)
-    {
+    protected function getNormalizer(
+        $documentElement,
+        $namespace,
+        $dtdPath
+    ) {
         return new DocumentTypeDefinition($documentElement, $namespace, $dtdPath);
     }
 }

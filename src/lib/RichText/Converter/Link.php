@@ -24,22 +24,22 @@ use Symfony\Component\Routing\RouterInterface;
 class Link implements Converter
 {
     /**
-     * @var \Ibexa\Contracts\Core\Repository\LocationService
+     * @var LocationService
      */
     protected $locationService;
 
     /**
-     * @var \Ibexa\Contracts\Core\Repository\ContentService
+     * @var ContentService
      */
     protected $contentService;
 
     /**
-     * @var \Symfony\Component\Routing\RouterInterface
+     * @var RouterInterface
      */
     protected $router;
 
     /**
-     * @var \Psr\Log\LoggerInterface
+     * @var LoggerInterface
      */
     protected $logger;
 
@@ -58,9 +58,9 @@ class Link implements Converter
     /**
      * Converts internal links (ezcontent:// and ezlocation://) to URLs.
      *
-     * @param \DOMDocument $document
+     * @param DOMDocument $document
      *
-     * @return \DOMDocument
+     * @return DOMDocument
      */
     public function convert(DOMDocument $document)
     {

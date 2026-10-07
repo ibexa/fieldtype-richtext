@@ -13,7 +13,7 @@ use Ibexa\FieldTypeRichText\RichText\Exception\InvalidXmlException;
 
 final class DOMDocumentFactory
 {
-    /** @var \Ibexa\FieldTypeRichText\RichText\XMLSanitizer */
+    /** @var XMLSanitizer */
     private $xmlSanitizer;
 
     public function __construct(XMLSanitizer $xmlSanitizer)
@@ -24,11 +24,11 @@ final class DOMDocumentFactory
     /**
      * Creates \DOMDocument from given $xmlString.
      *
-     * @throws \Ibexa\FieldTypeRichText\RichText\Exception\InvalidXmlException
+     * @throws InvalidXmlException
      *
      * @param string $xmlString
      *
-     * @return \DOMDocument
+     * @return DOMDocument
      */
     public function loadXMLString(string $xmlString): DOMDocument
     {

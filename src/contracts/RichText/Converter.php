@@ -18,9 +18,9 @@ interface Converter
     /**
      * Converts given $xmlDoc into another \DOMDocument object.
      *
-     * @param \DOMDocument $xmlDoc
+     * @param DOMDocument $xmlDoc
      *
-     * @return \DOMDocument
+     * @return DOMDocument
      */
     public function convert(DOMDocument $xmlDoc);
 }

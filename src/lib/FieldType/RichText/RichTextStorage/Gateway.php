@@ -18,7 +18,7 @@ use Ibexa\Core\FieldType\Url\UrlStorage\Gateway as UrlGateway;
 abstract class Gateway extends StorageGateway
 {
     /**
-     * @var \Ibexa\Core\FieldType\Url\UrlStorage\Gateway
+     * @var UrlGateway
      */
     protected $urlGateway;
 
@@ -85,8 +85,11 @@ abstract class Gateway extends StorageGateway
      * @param int|string $fieldId
      * @param int $versionNo
      */
-    public function linkUrl($urlId, $fieldId, $versionNo)
-    {
+    public function linkUrl(
+        $urlId,
+        $fieldId,
+        $versionNo
+    ) {
         $this->urlGateway->linkUrl($urlId, $fieldId, $versionNo);
     }
 
@@ -97,8 +100,11 @@ abstract class Gateway extends StorageGateway
      * @param int $versionNo
      * @param int[] $excludeUrlIds
      */
-    public function unlinkUrl($fieldId, $versionNo, array $excludeUrlIds = [])
-    {
+    public function unlinkUrl(
+        $fieldId,
+        $versionNo,
+        array $excludeUrlIds = []
+    ) {
         $this->urlGateway->unlinkUrl($fieldId, $versionNo, $excludeUrlIds);
     }
 }

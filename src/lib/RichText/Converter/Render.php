@@ -19,7 +19,7 @@ use Ibexa\Contracts\FieldTypeRichText\RichText\RendererInterface;
 abstract class Render
 {
     /**
-     * @var \Ibexa\Contracts\FieldTypeRichText\RichText\RendererInterface
+     * @var RendererInterface
      */
     protected $renderer;
 
@@ -31,7 +31,7 @@ abstract class Render
     /**
      * Extracts configuration hash from embed element.
      *
-     * @param \DOMElement $embed
+     * @param DOMElement $embed
      *
      * @return array
      */
@@ -53,7 +53,7 @@ abstract class Render
     /**
      * Recursively extracts data from XML hash structure.
      *
-     * @param \DOMNode $configHash
+     * @param DOMNode $configHash
      *
      * @return array|null
      */
@@ -66,7 +66,7 @@ abstract class Render
         }
 
         foreach ($configHash->childNodes as $node) {
-            /** @var \DOMText|\DOMElement $node */
+            /** @var \DOMText|DOMElement $node */
             if ($node->nodeType === XML_ELEMENT_NODE) {
                 $hash[$node->getAttribute('key')] = $this->extractHash($node);
             } elseif ($node->nodeType === XML_TEXT_NODE && !$node->isWhitespaceInElementContent()) {

@@ -41,9 +41,9 @@ class Validator extends XmlBase implements ValidatorInterface
      *
      * Handles ISO Schematron (as XSLT stylesheet), XSD and RELAX NG schemas.
      *
-     * @throws \RuntimeException If schema file does not exist or can not be handled
+     * @throws RuntimeException If schema file does not exist or can not be handled
      *
-     * @param \DOMDocument $document
+     * @param DOMDocument $document
      *
      * @return string[] An array of validation errors
      */
@@ -70,15 +70,17 @@ class Validator extends XmlBase implements ValidatorInterface
     /**
      * Performs validation on given $document using given $schema file and returns validation errors.
      *
-     * @throws \RuntimeException If given $schema file does not exist or can not be handled
+     * @throws RuntimeException If given $schema file does not exist or can not be handled
      *
-     * @param \DOMDocument $document
+     * @param DOMDocument $document
      * @param string $schema
      *
      * @return string[]
      */
-    protected function validateBySchema(DOMDocument $document, $schema)
-    {
+    protected function validateBySchema(
+        DOMDocument $document,
+        $schema
+    ) {
         if (!file_exists($schema) || !is_file($schema)) {
             throw new RuntimeException(
                 "Validation of XML document cannot be performed, file '{$schema}' does not exist."
@@ -112,13 +114,15 @@ class Validator extends XmlBase implements ValidatorInterface
      * Validates given $document using XSLT stylesheet converted from ISO Schematron schema
      * and returns an array or error messages.
      *
-     * @param \DOMDocument $document
+     * @param DOMDocument $document
      * @param string $filename
      *
      * @return string[]
      */
-    protected function schematronValidate(DOMDocument $document, $filename)
-    {
+    protected function schematronValidate(
+        DOMDocument $document,
+        $filename
+    ) {
         $stylesheet = $this->loadFile($filename);
         $xsltProcessor = new XSLTProcessor();
         $xsltProcessor->importStyleSheet($stylesheet);
@@ -142,7 +146,7 @@ class Validator extends XmlBase implements ValidatorInterface
     /**
      * Returns SVRL assertion failure as a string.
      *
-     * @param \DOMElement $failedAssert
+     * @param DOMElement $failedAssert
      *
      * @return string
      */

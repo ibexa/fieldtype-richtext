@@ -21,24 +21,24 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class RichTextType extends AbstractType
 {
     /**
-     * @var \Ibexa\FieldTypeRichText\RichText\DOMDocumentFactory
+     * @var DOMDocumentFactory
      */
     private $domDocumentFactory;
 
     /**
-     * @var \Ibexa\Contracts\FieldTypeRichText\RichText\InputHandlerInterface
+     * @var InputHandlerInterface
      */
     private $inputHandler;
 
     /**
-     * @var \Ibexa\Contracts\FieldTypeRichText\RichText\Converter
+     * @var Converter
      */
     private $docbookToXhtml5EditConverter;
 
     /**
-     * @param \Ibexa\FieldTypeRichText\RichText\DOMDocumentFactory $domDocumentFactory
-     * @param \Ibexa\Contracts\FieldTypeRichText\RichText\InputHandlerInterface $inputHandler
-     * @param \Ibexa\Contracts\FieldTypeRichText\RichText\Converter $docbookToXhtml5EditConverter
+     * @param DOMDocumentFactory $domDocumentFactory
+     * @param InputHandlerInterface $inputHandler
+     * @param Converter $docbookToXhtml5EditConverter
      */
     public function __construct(
         DOMDocumentFactory $domDocumentFactory,
@@ -53,8 +53,10 @@ class RichTextType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options): void
-    {
+    public function buildForm(
+        FormBuilderInterface $builder,
+        array $options
+    ): void {
         $builder->addModelTransformer(new RichTextTransformer(
             $this->domDocumentFactory,
             $this->inputHandler,

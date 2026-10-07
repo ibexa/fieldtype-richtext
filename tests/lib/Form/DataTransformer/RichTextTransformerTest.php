@@ -17,18 +17,19 @@ use Ibexa\Contracts\FieldTypeRichText\RichText\InputHandlerInterface;
 use Ibexa\FieldTypeRichText\Form\DataTransformer\RichTextTransformer;
 use Ibexa\FieldTypeRichText\RichText\DOMDocumentFactory;
 use Ibexa\FieldTypeRichText\RichText\XMLSanitizer;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 
 class RichTextTransformerTest extends TestCase
 {
-    /** @var \Ibexa\FieldTypeRichText\RichText\InputHandlerInterface|\PHPUnit\Framework\MockObject\MockObject */
+    /** @var \Ibexa\FieldTypeRichText\RichText\InputHandlerInterface|MockObject */
     private $inputHandler;
 
-    /** @var \Ibexa\FieldTypeRichText\RichText\Converter|\PHPUnit\Framework\MockObject\MockObject */
+    /** @var \Ibexa\FieldTypeRichText\RichText\Converter|MockObject */
     private $docbook2xhtml5editConverter;
 
-    /** @var \Ibexa\FieldTypeRichText\Form\DataTransformer\RichTextTransformer */
+    /** @var RichTextTransformer */
     private $richTextTransformer;
 
     protected function setUp(): void

@@ -11,6 +11,7 @@ namespace Ibexa\Tests\FieldTypeRichText\REST\FieldTypeProcessor;
 use DOMDocument;
 use Ibexa\Contracts\FieldTypeRichText\RichText\Converter;
 use Ibexa\FieldTypeRichText\REST\FieldTypeProcessor\RichTextProcessor;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 class RichTextProcessorTest extends TestCase
@@ -54,12 +55,12 @@ EOT;
     }
 
     /**
-     * @var \Ibexa\FieldTypeRichText\RichText\Converter|\PHPUnit\Framework\MockObject\MockObject
+     * @var \Ibexa\FieldTypeRichText\RichText\Converter|MockObject
      */
     protected $converter;
 
     /**
-     * @return \Ibexa\FieldTypeRichText\REST\FieldTypeProcessor\RichTextProcessor
+     * @return RichTextProcessor
      */
     protected function getProcessor()
     {

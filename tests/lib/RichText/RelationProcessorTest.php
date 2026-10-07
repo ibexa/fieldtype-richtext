@@ -24,11 +24,13 @@ class RelationProcessorTest extends TestCase
      *
      * @dataProvider dateProviderForGetRelations
      *
-     * @param \DOMDocument $document
+     * @param DOMDocument $document
      * @param array $expectedRelations
      */
-    public function testGetRelations(DOMDocument $document, array $expectedRelations): void
-    {
+    public function testGetRelations(
+        DOMDocument $document,
+        array $expectedRelations
+    ): void {
         $actualProcessor = (new RelationProcessor())->getRelations($document);
 
         $this->assertSame($expectedRelations, $actualProcessor);

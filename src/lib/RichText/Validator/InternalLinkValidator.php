@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace Ibexa\FieldTypeRichText\RichText\Validator;
 
 use DOMDocument;
+use Ibexa\Contracts\Core\Persistence\Content\Handler;
 use Ibexa\Contracts\Core\Persistence\Content\Handler as ContentHandler;
 use Ibexa\Contracts\Core\Persistence\Content\Location\Handler as LocationHandler;
 use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
@@ -21,7 +22,7 @@ use Ibexa\Core\Base\Exceptions\InvalidArgumentException;
 class InternalLinkValidator implements ValidatorInterface
 {
     /**
-     * @var \Ibexa\Contracts\Core\Persistence\Content\Handler
+     * @var Handler
      */
     private $contentHandler;
 
@@ -33,11 +34,13 @@ class InternalLinkValidator implements ValidatorInterface
     /**
      * InternalLinkValidator constructor.
      *
-     * @param \Ibexa\Contracts\Core\Persistence\Content\Handler $contentHandler
-     * @param \Ibexa\Contracts\Core\Persistence\Content\Location\Handler $locationHandler
+     * @param Handler $contentHandler
+     * @param LocationHandler $locationHandler
      */
-    public function __construct(ContentHandler $contentHandler, LocationHandler $locationHandler)
-    {
+    public function __construct(
+        ContentHandler $contentHandler,
+        LocationHandler $locationHandler
+    ) {
         $this->contentHandler = $contentHandler;
         $this->locationHandler = $locationHandler;
     }
@@ -45,7 +48,7 @@ class InternalLinkValidator implements ValidatorInterface
     /**
      * Extracts and validate internal links.
      *
-     * @param \DOMDocument $xml
+     * @param DOMDocument $xml
      *
      * @return array
      *
@@ -89,8 +92,10 @@ class InternalLinkValidator implements ValidatorInterface
      *
      * @return bool
      */
-    public function validate($scheme, $id)
-    {
+    public function validate(
+        $scheme,
+        $id
+    ) {
         try {
             switch ($scheme) {
                 case 'ezcontent':
@@ -122,8 +127,10 @@ class InternalLinkValidator implements ValidatorInterface
      *
      * @return string
      */
-    private function getInvalidLinkError($scheme, $url)
-    {
+    private function getInvalidLinkError(
+        $scheme,
+        $url
+    ) {
         switch ($scheme) {
             case 'ezcontent':
             case 'ezremote':

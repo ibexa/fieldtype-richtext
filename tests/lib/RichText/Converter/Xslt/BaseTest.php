@@ -10,8 +10,10 @@ namespace Ibexa\Tests\FieldTypeRichText\RichText\Converter\Xslt;
 
 use DOMDocument;
 use DOMXpath;
+use Ibexa\FieldTypeRichText\RichText\Converter;
 use Ibexa\FieldTypeRichText\RichText\Converter\Xslt;
 use Ibexa\FieldTypeRichText\RichText\Validator\Validator;
+use Ibexa\FieldTypeRichText\RichText\ValidatorInterface;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -20,7 +22,7 @@ use PHPUnit\Framework\TestCase;
 abstract class BaseTest extends TestCase
 {
     /**
-     * @var \Ibexa\FieldTypeRichText\RichText\Converter
+     * @var Converter
      */
     protected $converter;
 
@@ -85,8 +87,10 @@ abstract class BaseTest extends TestCase
      *
      * @dataProvider providerForTestConvert
      */
-    public function testConvert($inputFile, $outputFile)
-    {
+    public function testConvert(
+        $inputFile,
+        $outputFile
+    ) {
         $endsWith = '.lossy.xml';
         if (substr_compare($inputFile, $endsWith, -strlen($endsWith), strlen($endsWith)) === 0) {
             $this->markTestSkipped('Skipped lossy conversion.');
@@ -134,7 +138,7 @@ abstract class BaseTest extends TestCase
     /**
      * @param string $xmlFile
      *
-     * @return \DOMDocument
+     * @return DOMDocument
      */
     protected function createDocument($xmlFile)
     {
@@ -148,8 +152,10 @@ abstract class BaseTest extends TestCase
         return $document;
     }
 
-    protected function formatValidationErrors($outputFile, array $errors)
-    {
+    protected function formatValidationErrors(
+        $outputFile,
+        array $errors
+    ) {
         $output = "\n";
         foreach ($errors as $error) {
             $output .= ' - ' . $error . "\n";
@@ -164,7 +170,7 @@ abstract class BaseTest extends TestCase
     }
 
     /**
-     * @return \Ibexa\FieldTypeRichText\RichText\Converter
+     * @return Converter
      */
     protected function getConverter()
     {
@@ -179,7 +185,7 @@ abstract class BaseTest extends TestCase
     }
 
     /**
-     * @return \Ibexa\FieldTypeRichText\RichText\ValidatorInterface
+     * @return ValidatorInterface
      */
     protected function getConversionValidator()
     {

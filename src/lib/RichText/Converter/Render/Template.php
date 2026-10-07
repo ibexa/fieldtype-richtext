@@ -26,21 +26,21 @@ class Template extends Render implements Converter
     public const LITERAL_LAYOUT_LINE_BREAK = "\n";
 
     /**
-     * @var \Ibexa\Contracts\FieldTypeRichText\RichText\Converter
+     * @var Converter
      */
     private $richTextConverter;
 
     /**
-     * @var \Psr\Log\LoggerInterface
+     * @var LoggerInterface
      */
     private $logger;
 
     /**
      * RichText Template converter constructor.
      *
-     * @param \Ibexa\Contracts\FieldTypeRichText\RichText\RendererInterface $renderer
-     * @param \Ibexa\Contracts\FieldTypeRichText\RichText\Converter $richTextConverter
-     * @param \Psr\Log\LoggerInterface|null $logger
+     * @param RendererInterface $renderer
+     * @param Converter $richTextConverter
+     * @param LoggerInterface|null $logger
      */
     public function __construct(
         RendererInterface $renderer,
@@ -56,9 +56,9 @@ class Template extends Render implements Converter
     /**
      * Injects rendered payloads into template elements.
      *
-     * @param \DOMDocument $document
+     * @param DOMDocument $document
      *
-     * @return \DOMDocument
+     * @return DOMDocument
      */
     public function convert(DOMDocument $document)
     {
@@ -77,12 +77,15 @@ class Template extends Render implements Converter
     /**
      * Processes given template $template in a given $document.
      *
-     * @param \DOMDocument $document
-     * @param \DOMXPath $xpath
-     * @param \DOMElement $template
+     * @param DOMDocument $document
+     * @param DOMXPath $xpath
+     * @param DOMElement $template
      */
-    protected function processTemplate(DOMDocument $document, DOMXPath $xpath, DOMElement $template)
-    {
+    protected function processTemplate(
+        DOMDocument $document,
+        DOMXPath $xpath,
+        DOMElement $template
+    ) {
         $templateName = $template->getAttribute('name');
         $templateType = $template->hasAttribute('type') ? $template->getAttribute('type') : 'tag';
         $parameters = [
@@ -137,7 +140,7 @@ class Template extends Render implements Converter
     /**
      * Returns XML fragment string for given converted $node.
      *
-     * @param \DOMNode $node
+     * @param DOMNode $node
      *
      * @return string
      */
@@ -150,7 +153,7 @@ class Template extends Render implements Converter
 
         $rootNode = $this->wrapContentWithLiteralLayout($rootNode, $node);
 
-        /** @var \DOMNode $child */
+        /** @var DOMNode $child */
         foreach ($node->childNodes as $child) {
             $newNode = $innerDoc->importNode($child, true);
             if ($newNode === false) {
@@ -168,13 +171,15 @@ class Template extends Render implements Converter
      * BC: wrap nested content containing line breaks with "literallayout" DocBook tag,
      * unless literallayout already exists.
      *
-     * @param \DOMNode $rootNode
-     * @param \DOMNode $node
+     * @param DOMNode $rootNode
+     * @param DOMNode $node
      *
-     * @return \DOMNode
+     * @return DOMNode
      */
-    private function wrapContentWithLiteralLayout(DOMNode $rootNode, DOMNode $node): DOMNode
-    {
+    private function wrapContentWithLiteralLayout(
+        DOMNode $rootNode,
+        DOMNode $node
+    ): DOMNode {
         if (false === strpos($node->nodeValue, self::LITERAL_LAYOUT_LINE_BREAK)) {
             return $rootNode;
         }

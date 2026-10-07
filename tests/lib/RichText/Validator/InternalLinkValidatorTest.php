@@ -8,19 +8,21 @@ declare(strict_types=1);
 
 namespace Ibexa\Tests\FieldTypeRichText\RichText\Validator;
 
+use Ibexa\Contracts\Core\Persistence\Content\Handler;
 use Ibexa\Contracts\Core\Persistence\Content\Handler as ContentHandler;
 use Ibexa\Contracts\Core\Persistence\Content\Location\Handler as LocationHandler;
 use Ibexa\Core\Base\Exceptions\InvalidArgumentException;
 use Ibexa\Core\Base\Exceptions\NotFoundException;
 use Ibexa\FieldTypeRichText\RichText\Validator\InternalLinkValidator;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 class InternalLinkValidatorTest extends TestCase
 {
-    /** @var \Ibexa\Contracts\Core\Persistence\Content\Handler|\PHPUnit\Framework\MockObject\MockObject */
+    /** @var Handler|MockObject */
     private $contentHandler;
 
-    /** @var \Ibexa\Contracts\Core\Persistence\Content\Location\Handler|\PHPUnit\Framework\MockObject\MockObject */
+    /** @var LocationHandler|MockObject */
     private $locationHandler;
 
     /**
@@ -265,29 +267,35 @@ class InternalLinkValidatorTest extends TestCase
         $this->assertContainsEzRemoteInvalidLinkError($contentRemoteId, $errors);
     }
 
-    private function assertContainsEzLocationInvalidLinkError($locationId, array $errors)
-    {
+    private function assertContainsEzLocationInvalidLinkError(
+        $locationId,
+        array $errors
+    ) {
         $format = 'Invalid link "ezlocation://%d": cannot find target Location';
 
         $this->assertContains(sprintf($format, $locationId), $errors);
     }
 
-    private function assertContainsEzContentInvalidLinkError($contentId, array $errors)
-    {
+    private function assertContainsEzContentInvalidLinkError(
+        $contentId,
+        array $errors
+    ) {
         $format = 'Invalid link "ezcontent://%d": cannot find target content';
 
         $this->assertContains(sprintf($format, $contentId), $errors);
     }
 
-    private function assertContainsEzRemoteInvalidLinkError($contentId, array $errors)
-    {
+    private function assertContainsEzRemoteInvalidLinkError(
+        $contentId,
+        array $errors
+    ) {
         $format = 'Invalid link "ezremote://%s": cannot find target content';
 
         $this->assertContains(sprintf($format, $contentId), $errors);
     }
 
     /**
-     * @return \Ibexa\FieldTypeRichText\FieldType\RichText\InternalLinkValidator|\PHPUnit\Framework\MockObject\MockObject
+     * @return \Ibexa\FieldTypeRichText\FieldType\RichText\InternalLinkValidator|MockObject
      */
     private function getInternalLinkValidator(?array $methods = null)
     {
@@ -300,8 +308,10 @@ class InternalLinkValidatorTest extends TestCase
             ->getMock();
     }
 
-    private function createInputDocument($scheme, $id)
-    {
+    private function createInputDocument(
+        $scheme,
+        $id
+    ) {
         $url = $scheme . '://' . $id;
         $xml = '<?xml version="1.0" encoding="UTF-8"?>
 <section xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ezxhtml="http://ibexa.co/xmlns/dxp/docbook/xhtml" xmlns:ezcustom="http://ibexa.co/xmlns/dxp/docbook/custom" version="5.0-variant ezpublish-1.0">

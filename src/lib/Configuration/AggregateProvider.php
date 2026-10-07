@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\FieldTypeRichText\Configuration;
 
+use Ibexa\Contracts\FieldTypeRichText\Configuration\Provider;
 use Ibexa\Contracts\FieldTypeRichText\Configuration\ProviderService;
 
 /**
@@ -17,11 +18,11 @@ use Ibexa\Contracts\FieldTypeRichText\Configuration\ProviderService;
  */
 final class AggregateProvider implements ProviderService
 {
-    /** @var \Ibexa\Contracts\FieldTypeRichText\Configuration\Provider[]|iterable */
+    /** @var Provider[]|iterable */
     private $providers;
 
     /**
-     * @param \Ibexa\Contracts\FieldTypeRichText\Configuration\Provider[] $providers
+     * @param Provider[] $providers
      */
     public function __construct(iterable $providers)
     {

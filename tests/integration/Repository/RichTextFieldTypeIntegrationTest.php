@@ -9,10 +9,16 @@ declare(strict_types=1);
 namespace Ibexa\Tests\Integration\FieldTypeRichText\Repository;
 
 use DirectoryIterator;
+use Doctrine\DBAL\Exception;
 use Doctrine\DBAL\FetchMode;
 use Doctrine\DBAL\ParameterType;
 use DOMDocument;
+use Ibexa\Contracts\Core\Repository\Exceptions\BadStateException;
 use Ibexa\Contracts\Core\Repository\Exceptions\ContentFieldValidationException;
+use Ibexa\Contracts\Core\Repository\Exceptions\ContentValidationException;
+use Ibexa\Contracts\Core\Repository\Exceptions\ForbiddenException;
+use Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException;
+use Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException;
 use Ibexa\Contracts\Core\Repository\Repository;
 use Ibexa\Contracts\Core\Repository\Values\Content\Content;
 use Ibexa\Contracts\Core\Repository\Values\Content\Field;
@@ -36,17 +42,20 @@ class RichTextFieldTypeIntegrationTest extends SearchBaseIntegrationTest
     use RelationSearchBaseIntegrationTestTrait;
 
     /**
-     * @var \DOMDocument
+     * @var DOMDocument
      */
     private $createdDOMValue;
 
     /**
-     * @var \DOMDocument
+     * @var DOMDocument
      */
     private $updatedDOMValue;
 
-    public function __construct($name = null, array $data = [], $dataName = '')
-    {
+    public function __construct(
+        $name = null,
+        array $data = [],
+        $dataName = ''
+    ) {
         $this->createdDOMValue = new DOMDocument();
         $this->createdDOMValue->loadXML(
             <<<EOT
@@ -80,9 +89,9 @@ EOT
     }
 
     /**
-     * @param \Ibexa\Contracts\Core\Repository\Values\Content\Content $content
+     * @param Content $content
      *
-     * @return \Ibexa\Core\Repository\Values\Content\Relation[]
+     * @return Relation[]
      */
     public function getCreateExpectedRelations(Content $content)
     {
@@ -114,9 +123,9 @@ EOT
     }
 
     /**
-     * @param \Ibexa\Contracts\Core\Repository\Values\Content\Content $content
+     * @param Content $content
      *
-     * @return \Ibexa\Core\Repository\Values\Content\Relation[]
+     * @return Relation[]
      */
     public function getUpdateExpectedRelations(Content $content)
     {
@@ -249,7 +258,7 @@ EOT
      * Asserts that the data provided by {@link getValidCreationFieldData()}
      * was stored and loaded correctly.
      *
-     * @param \Ibexa\Contracts\Core\Repository\Values\Content\Field $field
+     * @param Field $field
      */
     public function assertFieldDataLoadedCorrect(Field $field)
     {
@@ -361,7 +370,7 @@ EOT
      * Asserts that the data provided by {@link getValidCreationFieldData()}
      * was copied and loaded correctly.
      *
-     * @param \Ibexa\Contracts\Core\Repository\Values\Content\Field $field
+     * @param Field $field
      */
     public function assertCopiedFieldDataLoadedCorrectly(Field $field)
     {
@@ -451,8 +460,10 @@ EOT
      * @todo: Requires correct registered FieldTypeService, needs to be
      *        maintained!
      */
-    public function testFromHash($hash, $expectedValue = null)
-    {
+    public function testFromHash(
+        $hash,
+        $expectedValue = null
+    ) {
         $richTextValue = $this
             ->getRepository()
             ->getFieldTypeService()
@@ -579,8 +590,10 @@ EOT;
      *
      * @dataProvider providerForTestConvertRemoteObjectIdToObjectId
      */
-    public function testConvertRemoteObjectIdToObjectId($test, $expected): void
-    {
+    public function testConvertRemoteObjectIdToObjectId(
+        $test,
+        $expected
+    ): void {
         $repository = $this->getRepository();
 
         $contentService = $repository->getContentService();
@@ -648,10 +661,10 @@ EOT;
 
     /**
      * @throws \Doctrine\DBAL\Driver\Exception
-     * @throws \Doctrine\DBAL\Exception
+     * @throws Exception
      * @throws \ErrorException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ForbiddenException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
+     * @throws ForbiddenException
+     * @throws UnauthorizedException
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      */
     public function testExternalLinkStoringAfterUpdate(): void
@@ -698,7 +711,7 @@ EOT;
 
     /**
      * @throws \Doctrine\DBAL\Driver\Exception
-     * @throws \Doctrine\DBAL\Exception
+     * @throws Exception
      * @throws \ErrorException
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      */
@@ -725,10 +738,10 @@ EOT;
     }
 
     /**
-     * @return \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType
+     * @return ContentType
      *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ForbiddenException
+     * @throws UnauthorizedException
+     * @throws ForbiddenException
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      */
     private function createContentTypeForTestExternalLinkStoringAfterUpdate(): ContentType
@@ -874,7 +887,7 @@ EOT;
     /**
      * @param string $filename
      *
-     * @return \DOMDocument
+     * @return DOMDocument
      */
     protected function createDocument($filename)
     {
@@ -891,12 +904,12 @@ EOT;
     /**
      * Prepare Content structure with link to deleted Location.
      *
-     * @param \Ibexa\Contracts\Core\Repository\Repository $repository
+     * @param Repository $repository
      *
      * @return array [$deletedLocation, $brokenContent]
      *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ForbiddenException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
+     * @throws ForbiddenException
+     * @throws UnauthorizedException
      */
     private function prepareInternalLinkValidatorBrokenLinksTestCase(Repository $repository)
     {
@@ -941,11 +954,11 @@ EOT;
     /**
      * Test updating Content which contains links to deleted Location doesn't fail when updating not broken field only.
      *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\BadStateException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ContentFieldValidationException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ContentValidationException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
+     * @throws BadStateException
+     * @throws ContentFieldValidationException
+     * @throws ContentValidationException
+     * @throws InvalidArgumentException
+     * @throws UnauthorizedException
      */
     public function testInternalLinkValidatorIgnoresMissingRelationOnNotUpdatedField()
     {
@@ -969,11 +982,11 @@ EOT;
     /**
      * Test updating Content which contains links to deleted Location fails when updating broken field.
      *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\BadStateException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ContentValidationException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ContentFieldValidationException
+     * @throws BadStateException
+     * @throws ContentValidationException
+     * @throws InvalidArgumentException
+     * @throws UnauthorizedException
+     * @throws ContentFieldValidationException
      */
     public function testInternalLinkValidatorReturnsErrorOnMissingRelationInUpdatedField()
     {
@@ -985,7 +998,7 @@ EOT;
         );
 
         // update field containing erroneous link to trigger validation
-        /** @var \DOMDocument $document */
+        /** @var DOMDocument $document */
         $document = $brokenContent->getField('data', 'eng-GB')->value->xml;
         $newParagraph = $document->createElement('para', 'Updated content');
         $document
@@ -1018,7 +1031,7 @@ EOT;
     /**
      * @param array $urls
      *
-     * @return \DOMDocument
+     * @return DOMDocument
      */
     private function createXmlDocumentWithExternalLink(array $urls): DOMDocument
     {
@@ -1058,9 +1071,9 @@ XML
     /**
      * Get XML Document in DocBook format, containing link to the given Location.
      *
-     * @param \Ibexa\Contracts\Core\Repository\Values\Content\Location $location
+     * @param Location $location
      *
-     * @return \DOMDocument
+     * @return DOMDocument
      */
     private function getDocumentWithLocationLink(Location $location)
     {

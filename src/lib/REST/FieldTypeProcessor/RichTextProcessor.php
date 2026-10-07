@@ -16,7 +16,7 @@ use Ibexa\FieldTypeRichText\RichText\DOMDocumentLoader;
 class RichTextProcessor extends FieldTypeProcessor
 {
     /**
-     * @var \Ibexa\Contracts\FieldTypeRichText\RichText\Converter
+     * @var Converter
      */
     protected $docbookToXhtml5EditConverter;
 

@@ -14,17 +14,18 @@ use Ibexa\Contracts\Core\Persistence\Content\Type\FieldDefinition;
 use Ibexa\Contracts\Core\Search;
 use Ibexa\Contracts\FieldTypeRichText\RichText\TextExtractorInterface;
 use Ibexa\FieldTypeRichText\FieldType\RichText\SearchField;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 final class SearchFieldTest extends TestCase
 {
-    /** @var \Ibexa\FieldTypeRichText\FieldType\RichText\SearchField */
+    /** @var SearchField */
     private $searchField;
 
-    /** @var \Ibexa\Contracts\FieldTypeRichText\RichText\TextExtractorInterface&\PHPUnit\Framework\MockObject\MockObject */
+    /** @var TextExtractorInterface&MockObject */
     private TextExtractorInterface $shortTextExtractor;
 
-    /** @var \Ibexa\Contracts\FieldTypeRichText\RichText\TextExtractorInterface&\PHPUnit\Framework\MockObject\MockObject */
+    /** @var TextExtractorInterface&MockObject */
     private TextExtractorInterface $fullTextExtractor;
 
     public function getDataForTestGetIndexData(): array
@@ -89,11 +90,14 @@ final class SearchFieldTest extends TestCase
      *
      * @dataProvider getDataForTestGetIndexData
      *
-     * @param array<\Ibexa\Contracts\Core\Search\Field> $expectedSearchFields
+     * @param array<Search\Field> $expectedSearchFields
      * @param array<string> $expectedTextValues
      */
-    public function testGetIndexData(string $docBookXml, array $expectedSearchFields, array $expectedTextValues): void
-    {
+    public function testGetIndexData(
+        string $docBookXml,
+        array $expectedSearchFields,
+        array $expectedTextValues
+    ): void {
         $field = new Field(
             [
                 'id' => 1,
