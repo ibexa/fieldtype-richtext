@@ -8,7 +8,6 @@ declare(strict_types=1);
 
 namespace Ibexa\Tests\FieldTypeRichText\RichText\Validator;
 
-use Ibexa\Contracts\Core\Persistence\Content\Handler;
 use Ibexa\Contracts\Core\Persistence\Content\Handler as ContentHandler;
 use Ibexa\Contracts\Core\Persistence\Content\Location\Handler as LocationHandler;
 use Ibexa\Core\Base\Exceptions\InvalidArgumentException;
@@ -19,7 +18,7 @@ use PHPUnit\Framework\TestCase;
 
 class InternalLinkValidatorTest extends TestCase
 {
-    /** @var Handler|MockObject */
+    /** @var ContentHandler|MockObject */
     private $contentHandler;
 
     /** @var LocationHandler|MockObject */

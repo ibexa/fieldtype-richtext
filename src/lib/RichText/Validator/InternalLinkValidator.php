@@ -9,7 +9,6 @@ declare(strict_types=1);
 namespace Ibexa\FieldTypeRichText\RichText\Validator;
 
 use DOMDocument;
-use Ibexa\Contracts\Core\Persistence\Content\Handler;
 use Ibexa\Contracts\Core\Persistence\Content\Handler as ContentHandler;
 use Ibexa\Contracts\Core\Persistence\Content\Location\Handler as LocationHandler;
 use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
@@ -22,19 +21,19 @@ use Ibexa\Core\Base\Exceptions\InvalidArgumentException;
 class InternalLinkValidator implements ValidatorInterface
 {
     /**
-     * @var Handler
+     * @var ContentHandler
      */
     private $contentHandler;
 
     /**
-     * @var \Ibexa\Contracts\Core\Persistence\Content\Location\Handler;
+     * @var LocationHandler;
      */
     private $locationHandler;
 
     /**
      * InternalLinkValidator constructor.
      *
-     * @param Handler $contentHandler
+     * @param ContentHandler $contentHandler
      * @param LocationHandler $locationHandler
      */
     public function __construct(
