@@ -571,9 +571,15 @@ parameters:
 			path: src/lib/FieldType/RichText/RichTextStorage.php
 
 		-
+			message: '#^Offset 2 might not exist on array\{\}\|list\{0\: string, 1\?\: '''', 2\?\: string, 3\?\: string\}\.$#'
+			identifier: offsetAccess.notFound
+			count: 1
+			path: src/lib/FieldType/RichText/RichTextStorage.php
+
+		-
 			message: '#^Offset 2 might not exist on array\{\}\|list\{0\: string, 1\?\: ''''\|''ezremote\://'', 2\?\: string, 3\?\: string\}\.$#'
 			identifier: offsetAccess.notFound
-			count: 2
+			count: 1
 			path: src/lib/FieldType/RichText/RichTextStorage.php
 
 		-

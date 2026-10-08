@@ -54,7 +54,6 @@ EOT;
         }
 
         $this->xml = new DOMDocument();
-        /** @phpstan-ignore nullCoalesce.variable (deprecated string $xml is not part of the declared signature) */
         $this->xml->loadXML($xml ?? self::EMPTY_VALUE);
     }
 
