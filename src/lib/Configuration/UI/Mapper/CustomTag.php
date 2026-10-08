@@ -48,10 +48,10 @@ final class CustomTag implements CustomTemplateConfigMapper
 
     private Packages $packages;
 
-    /** @var iterable<\Ibexa\FieldTypeRichText\Configuration\UI\Mapper\CustomTag\AttributeMapper> */
+    /** @var iterable<AttributeMapper> */
     private iterable $customTagAttributeMappers;
 
-    /** @var array<\Ibexa\FieldTypeRichText\Configuration\UI\Mapper\CustomTag\AttributeMapper> */
+    /** @var array<AttributeMapper> */
     private array $supportedTagAttributeMappersCache;
 
     private string $translationDomain;
@@ -64,7 +64,7 @@ final class CustomTag implements CustomTemplateConfigMapper
      *
      * @phpstan-param array<TConfig> $customTagsConfiguration
      *
-     * @param iterable<\Ibexa\FieldTypeRichText\Configuration\UI\Mapper\CustomTag\AttributeMapper> $customTagAttributeMappers
+     * @param iterable<AttributeMapper> $customTagAttributeMappers
      */
     public function __construct(
         array $customTagsConfiguration,

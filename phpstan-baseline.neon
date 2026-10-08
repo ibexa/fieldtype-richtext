@@ -571,9 +571,15 @@ parameters:
 			path: src/lib/FieldType/RichText/RichTextStorage.php
 
 		-
+			message: '#^Offset 2 might not exist on array\{\}\|list\{0\: string, 1\?\: '''', 2\?\: string, 3\?\: string\}\.$#'
+			identifier: offsetAccess.notFound
+			count: 1
+			path: src/lib/FieldType/RichText/RichTextStorage.php
+
+		-
 			message: '#^Offset 2 might not exist on array\{\}\|list\{0\: string, 1\?\: ''''\|''ezremote\://'', 2\?\: string, 3\?\: string\}\.$#'
 			identifier: offsetAccess.notFound
-			count: 2
+			count: 1
 			path: src/lib/FieldType/RichText/RichTextStorage.php
 
 		-
@@ -1339,7 +1345,7 @@ parameters:
 			path: src/lib/RichText/Validator/InternalLinkValidator.php
 
 		-
-			message: '#^PHPDoc tag @var has invalid value \(\\Ibexa\\Contracts\\Core\\Persistence\\Content\\Location\\Handler;\)\: Unexpected token ";", expected TOKEN_HORIZONTAL_WS at offset 74 on line 2$#'
+			message: '#^PHPDoc tag @var has invalid value \(LocationHandler;\)\: Unexpected token ";", expected TOKEN_HORIZONTAL_WS at offset 31 on line 2$#'
 			identifier: phpDoc.parseError
 			count: 1
 			path: src/lib/RichText/Validator/InternalLinkValidator.php
@@ -1471,7 +1477,7 @@ parameters:
 			path: src/lib/Validator/Constraints/RichText.php
 
 		-
-			message: '#^PHPDoc tag @param has invalid value \(\\Ibexa\\Contracts\\FieldTypeRichText\\RichText\\InputHandlerInterface\)\: Unexpected token "\\n     ", expected variable at offset 83 on line 2$#'
+			message: '#^PHPDoc tag @param has invalid value \(InputHandlerInterface\)\: Unexpected token "\\n     ", expected variable at offset 39 on line 2$#'
 			identifier: phpDoc.parseError
 			count: 1
 			path: src/lib/Validator/Constraints/RichTextValidator.php

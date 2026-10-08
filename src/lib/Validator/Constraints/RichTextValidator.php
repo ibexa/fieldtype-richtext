@@ -17,12 +17,12 @@ use Symfony\Component\Validator\ConstraintValidator;
 class RichTextValidator extends ConstraintValidator
 {
     /**
-     * @var \Ibexa\Contracts\FieldTypeRichText\RichText\InputHandlerInterface
+     * @var InputHandlerInterface
      */
     private $inputHandler;
 
     /**
-     * @param \Ibexa\Contracts\FieldTypeRichText\RichText\InputHandlerInterface
+     * @param InputHandlerInterface
      */
     public function __construct(InputHandlerInterface $inputHandler)
     {
@@ -32,8 +32,10 @@ class RichTextValidator extends ConstraintValidator
     /**
      * {@inheritdoc}
      */
-    public function validate($value, Constraint $constraint): void
-    {
+    public function validate(
+        $value,
+        Constraint $constraint
+    ): void {
         if (is_string($value)) {
             try {
                 $value = $this->inputHandler->fromString($value);

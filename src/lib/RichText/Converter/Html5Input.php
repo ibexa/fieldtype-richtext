@@ -16,8 +16,10 @@ use Ibexa\FieldTypeRichText\RichText\Converter\Xslt as XsltConverter;
  */
 class Html5Input extends XsltConverter
 {
-    public function __construct($stylesheet, ConfigResolverInterface $configResolver)
-    {
+    public function __construct(
+        $stylesheet,
+        ConfigResolverInterface $configResolver
+    ) {
         $customStylesheets = $configResolver->getParameter('fieldtypes.ezrichtext.input_custom_xsl');
         $customStylesheets = $customStylesheets ?: [];
         parent::__construct($stylesheet, $customStylesheets);

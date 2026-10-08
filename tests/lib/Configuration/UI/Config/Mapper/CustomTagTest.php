@@ -20,7 +20,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 /**
  * UI Config Mapper test for RichText Custom Tags configuration.
  *
- * @see \Ibexa\FieldTypeRichText\Configuration\UI\Mapper\CustomTag::__construct
+ * @see CustomTag::__construct
  */
 class CustomTagTest extends TestCase
 {
@@ -173,7 +173,7 @@ class CustomTagTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit\Framework\MockObject\MockObject|\Symfony\Contracts\Translation\TranslatorInterface
+     * @return MockObject|TranslatorInterface
      */
     private function getTranslatorInterfaceMock(): MockObject
     {
@@ -188,7 +188,7 @@ class CustomTagTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit\Framework\MockObject\MockObject|\Symfony\Component\Translation\TranslatorBagInterface
+     * @return MockObject|TranslatorBagInterface
      */
     private function getTranslatorBagInterfaceMock(): MockObject
     {
@@ -211,7 +211,7 @@ class CustomTagTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit\Framework\MockObject\MockObject|\Symfony\Component\Asset\Packages
+     * @return MockObject|Packages
      */
     private function getPackagesMock(): MockObject
     {

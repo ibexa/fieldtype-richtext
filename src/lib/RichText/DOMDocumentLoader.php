@@ -26,8 +26,10 @@ final class DOMDocumentLoader implements DOMDocumentLoaderInterface
         $this->logger = $logger ?? new NullLogger();
     }
 
-    public function loadXML(string $xml, array $logContext = []): DOMDocument
-    {
+    public function loadXML(
+        string $xml,
+        array $logContext = []
+    ): DOMDocument {
         $document = new DOMDocument();
         $useInternalErrors = libxml_use_internal_errors(true);
         try {

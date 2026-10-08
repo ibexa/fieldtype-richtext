@@ -18,42 +18,43 @@ use Ibexa\FieldTypeRichText\RichText\InputHandler;
 use Ibexa\FieldTypeRichText\RichText\Normalizer;
 use Ibexa\FieldTypeRichText\RichText\RelationProcessor;
 use Ibexa\FieldTypeRichText\RichText\XMLSanitizer;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 class InputHandlerTest extends TestCase
 {
     /**
-     * @var \Ibexa\FieldTypeRichText\RichText\DOMDocumentFactory|\PHPUnit\Framework\MockObject\MockObject
+     * @var DOMDocumentFactory|MockObject
      */
     private $domDocumentFactory;
 
     /**
-     * @var \Ibexa\FieldTypeRichText\RichText\ConverterDispatcher|\PHPUnit\Framework\MockObject\MockObject
+     * @var ConverterDispatcher|MockObject
      */
     private $converter;
 
     /**
-     * @var \Ibexa\FieldTypeRichText\RichText\Normalizer|\PHPUnit\Framework\MockObject\MockObject
+     * @var Normalizer|MockObject
      */
     private $normalizer;
 
     /**
-     * @var \Ibexa\FieldTypeRichText\RichText\ValidatorInterface|\PHPUnit\Framework\MockObject\MockObject
+     * @var \Ibexa\FieldTypeRichText\RichText\ValidatorInterface|MockObject
      */
     private $schemaValidator;
 
     /**
-     * @var \Ibexa\FieldTypeRichText\RichText\ValidatorInterface|\PHPUnit\Framework\MockObject\MockObject
+     * @var \Ibexa\FieldTypeRichText\RichText\ValidatorInterface|MockObject
      */
     private $docbookValidator;
 
     /**
-     * @var \Ibexa\FieldTypeRichText\RichText\RelationProcessor
+     * @var RelationProcessor
      */
     private $relationProcessor;
 
     /**
-     * @var \Ibexa\FieldTypeRichText\RichText\InputHandler|\PHPUnit\Framework\MockObject\MockObject
+     * @var InputHandler|MockObject
      */
     private $inputHandler;
 

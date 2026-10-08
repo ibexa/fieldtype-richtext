@@ -87,8 +87,10 @@ final class XmlId implements Converter
     /**
      * @param array<string, string> $sanitizedFragmentMap
      */
-    private function rewriteInternalLinks(DOMXPath $xpath, array $sanitizedFragmentMap): void
-    {
+    private function rewriteInternalLinks(
+        DOMXPath $xpath,
+        array $sanitizedFragmentMap
+    ): void {
         $links = $xpath->query('//*[starts-with(@xlink:href, "#")]') ?: [];
         /** @var \DOMElement $link */
         foreach ($links as $link) {
@@ -117,8 +119,10 @@ final class XmlId implements Converter
     /**
      * @param array<string, true> $usedIds
      */
-    private function buildUniqueId(string $id, array $usedIds): string
-    {
+    private function buildUniqueId(
+        string $id,
+        array $usedIds
+    ): string {
         $uniqueId = $id;
         $suffix = 1;
         while (isset($usedIds[$uniqueId])) {

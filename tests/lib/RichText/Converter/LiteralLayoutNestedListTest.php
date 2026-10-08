@@ -77,8 +77,10 @@ this is line 3</literallayout>
      *
      * @dataProvider providerConvert
      */
-    public function testConvert(string $input, string $output): void
-    {
+    public function testConvert(
+        string $input,
+        string $output
+    ): void {
         $inputDocument = new DOMDocument();
         $inputDocument->loadXML($input);
 

@@ -9,16 +9,17 @@ declare(strict_types=1);
 namespace Ibexa\FieldTypeRichText\Configuration\Provider;
 
 use Ibexa\Contracts\FieldTypeRichText\Configuration\Provider;
+use Ibexa\Contracts\FieldTypeRichText\Configuration\ProviderConfiguratorInterface;
 
 final class ConfigurableProvider implements Provider
 {
     private Provider $inner;
 
-    /** @var iterable<\Ibexa\Contracts\FieldTypeRichText\Configuration\ProviderConfiguratorInterface> */
+    /** @var iterable<ProviderConfiguratorInterface> */
     private iterable $configurators;
 
     /**
-     * @param iterable<\Ibexa\Contracts\FieldTypeRichText\Configuration\ProviderConfiguratorInterface> $configurators
+     * @param iterable<ProviderConfiguratorInterface> $configurators
      */
     public function __construct(
         Provider $inner,

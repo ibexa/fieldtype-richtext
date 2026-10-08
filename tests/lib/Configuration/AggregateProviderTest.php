@@ -33,8 +33,10 @@ class AggregateProviderTest extends TestCase
 
                 private $configuration;
 
-                public function __construct(string $name, array $configuration)
-                {
+                public function __construct(
+                    string $name,
+                    array $configuration
+                ) {
                     $this->name = $name;
                     $this->configuration = $configuration;
                 }

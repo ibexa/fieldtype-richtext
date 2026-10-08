@@ -21,7 +21,7 @@ final class OnlineEditorCustomAttributesExtractor implements ExtractorInterface
     private const CLASS_LABEL_MESSAGE_ID = 'ezrichtext.classes.class.label';
 
     /**
-     * @var \Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface
+     * @var ConfigResolverInterface
      */
     private $configResolver;
 
@@ -31,11 +31,13 @@ final class OnlineEditorCustomAttributesExtractor implements ExtractorInterface
     private $siteAccessList;
 
     /**
-     * @param \Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface $configResolver
+     * @param ConfigResolverInterface $configResolver
      * @param string[] $siteAccessList
      */
-    public function __construct(ConfigResolverInterface $configResolver, array $siteAccessList)
-    {
+    public function __construct(
+        ConfigResolverInterface $configResolver,
+        array $siteAccessList
+    ) {
         $this->configResolver = $configResolver;
         $this->siteAccessList = $siteAccessList;
     }
@@ -43,7 +45,7 @@ final class OnlineEditorCustomAttributesExtractor implements ExtractorInterface
     /**
      * Iterate over each scope and extract custom attributes label names.
      *
-     * @return \JMS\TranslationBundle\Model\MessageCatalogue
+     * @return MessageCatalogue
      */
     public function extract(): MessageCatalogue
     {
@@ -65,10 +67,12 @@ final class OnlineEditorCustomAttributesExtractor implements ExtractorInterface
      * @param string $id
      * @param string $desc
      *
-     * @return \JMS\TranslationBundle\Model\Message\XliffMessage
+     * @return XliffMessage
      */
-    private function createMessage(string $id, string $desc): XliffMessage
-    {
+    private function createMessage(
+        string $id,
+        string $desc
+    ): XliffMessage {
         $message = new XliffMessage($id, self::MESSAGE_DOMAIN);
         $message->setNew(false);
         $message->setMeaning($desc);
@@ -82,11 +86,13 @@ final class OnlineEditorCustomAttributesExtractor implements ExtractorInterface
     /**
      * Extract messages from the given scope into the catalogue.
      *
-     * @param \JMS\TranslationBundle\Model\MessageCatalogue $catalogue
+     * @param MessageCatalogue $catalogue
      * @param string $scope
      */
-    private function extractMessagesForScope(MessageCatalogue $catalogue, string $scope): void
-    {
+    private function extractMessagesForScope(
+        MessageCatalogue $catalogue,
+        string $scope
+    ): void {
         $attributes = $this->configResolver->getParameter(
             RichText::ATTRIBUTES_SA_SETTINGS_ID,
             null,

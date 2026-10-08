@@ -28,7 +28,7 @@ final class RelationProcessor
      * Not intended for \Ibexa\Contracts\Core\Repository\Values\Content\Relation::COMMON type relations,
      * there is a service API for handling those.
      *
-     * @param \DOMDocument $doc
+     * @param DOMDocument $doc
      *
      * @return array Hash with relation type as key and array of destination content ids as value.
      *
@@ -56,13 +56,15 @@ final class RelationProcessor
     }
 
     /**
-     * @param \DOMDocument $xml
+     * @param DOMDocument $xml
      * @param array $tagNames
      *
      * @return array
      */
-    private function getRelatedObjectIds(DOMDocument $xml, array $tagNames): array
-    {
+    private function getRelatedObjectIds(
+        DOMDocument $xml,
+        array $tagNames
+    ): array {
         $contentIds = [];
         $locationIds = [];
 

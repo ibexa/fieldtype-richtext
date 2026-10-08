@@ -13,17 +13,18 @@ use Ibexa\Contracts\FieldTypeRichText\RichText\Converter;
 use Ibexa\Contracts\FieldTypeRichText\RichText\RendererInterface;
 use Ibexa\FieldTypeRichText\RichText\Converter\Aggregate;
 use Ibexa\FieldTypeRichText\RichText\Converter\Render\Template;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 class TemplateTest extends TestCase
 {
     /**
-     * @var \Ibexa\FieldTypeRichText\RichText\RendererInterface|\PHPUnit\Framework\MockObject\MockObject
+     * @var \Ibexa\FieldTypeRichText\RichText\RendererInterface|MockObject
      */
     protected $rendererMock;
 
     /**
-     * @var \Ibexa\FieldTypeRichText\RichText\Converter|\PHPUnit\Framework\MockObject\MockObject
+     * @var \Ibexa\FieldTypeRichText\RichText\Converter|MockObject
      */
     protected $converterMock;
 
@@ -167,7 +168,7 @@ class TemplateTest extends TestCase
     }
 
     /**
-     * @return \Ibexa\FieldTypeRichText\RichText\RendererInterface|\PHPUnit\Framework\MockObject\MockObject
+     * @return \Ibexa\FieldTypeRichText\RichText\RendererInterface|MockObject
      */
     protected function getRendererMock()
     {
@@ -175,7 +176,7 @@ class TemplateTest extends TestCase
     }
 
     /**
-     * @return \Ibexa\FieldTypeRichText\RichText\Converter|\PHPUnit\Framework\MockObject\MockObject
+     * @return \Ibexa\FieldTypeRichText\RichText\Converter|MockObject
      */
     protected function getConverterMock()
     {

@@ -23,7 +23,7 @@ use Psr\Log\LoggerInterface;
 class Embed extends Render implements Converter
 {
     /**
-     * @var \Psr\Log\LoggerInterface|null
+     * @var LoggerInterface|null
      */
     protected $logger;
 
@@ -47,8 +47,10 @@ class Embed extends Render implements Converter
         'replace' => '_self',
     ];
 
-    public function __construct(RendererInterface $renderer, ?LoggerInterface $logger = null)
-    {
+    public function __construct(
+        RendererInterface $renderer,
+        ?LoggerInterface $logger = null
+    ) {
         parent::__construct($renderer);
         $this->logger = $logger;
     }
@@ -56,12 +58,15 @@ class Embed extends Render implements Converter
     /**
      * Processes single embed element type (ezembed or ezembedinline).
      *
-     * @param \DOMDocument $document
+     * @param DOMDocument $document
      * @param $tagName string name of the tag to extract
      * @param bool $isInline
      */
-    protected function processTag(DOMDocument $document, $tagName, $isInline)
-    {
+    protected function processTag(
+        DOMDocument $document,
+        $tagName,
+        $isInline
+    ) {
         /** @var $embed \DOMElement */
         foreach ($document->getElementsByTagName($tagName) as $embed) {
             $embedContent = null;
@@ -120,13 +125,15 @@ class Embed extends Render implements Converter
     /**
      * Extracts parameters from embed element.
      *
-     * @param \DOMElement $embed
+     * @param DOMElement $embed
      * @param $tagName string name of the tag to extract
      *
      * @return array
      */
-    protected function extractParameters(DOMElement $embed, $tagName)
-    {
+    protected function extractParameters(
+        DOMElement $embed,
+        $tagName
+    ) {
         if (!$viewType = $embed->getAttribute('view')) {
             $viewType = $this->tagDefaultViewMap[$tagName];
         }
@@ -168,7 +175,7 @@ class Embed extends Render implements Converter
     /**
      * Extracts link parameters from embed element.
      *
-     * @param \DOMElement $embed
+     * @param DOMElement $embed
      *
      * @return array
      */
@@ -180,7 +187,7 @@ class Embed extends Render implements Converter
             return null;
         }
 
-        /** @var \DOMElement $link */
+        /** @var DOMElement $link */
         $link = $links->item(0);
 
         $hrefResolved = $link->getAttribute('href_resolved');
@@ -275,7 +282,7 @@ class Embed extends Render implements Converter
      *
      * After EmbedLinking converter pass this should be possible only for inline level embeds.
      *
-     * @param \DOMElement $element
+     * @param DOMElement $element
      *
      * @return bool
      */
@@ -288,7 +295,7 @@ class Embed extends Render implements Converter
         } elseif ($parentNode->localName === 'link') {
             $childCount = 0;
 
-            /** @var \DOMText|\DOMElement $node */
+            /** @var \DOMText|DOMElement $node */
             foreach ($parentNode->childNodes as $node) {
                 if (!($node->nodeType === XML_TEXT_NODE && $node->isWhitespaceInElementContent())) {
                     ++$childCount;
@@ -308,9 +315,9 @@ class Embed extends Render implements Converter
     /**
      * Injects rendered payloads into embed elements.
      *
-     * @param \DOMDocument $document
+     * @param DOMDocument $document
      *
-     * @return \DOMDocument
+     * @return DOMDocument
      */
     public function convert(DOMDocument $document)
     {
@@ -323,13 +330,15 @@ class Embed extends Render implements Converter
     /**
      * Extract /ezattribute/ezvalue elements from XML for the current embed node.
      *
-     * @param \DOMDocument $document
-     * @param \DOMNode $embedNode
+     * @param DOMDocument $document
+     * @param DOMNode $embedNode
      *
      * @return array
      */
-    private function extractCustomDataAttributes(DOMDocument $document, DOMNode $embedNode): array
-    {
+    private function extractCustomDataAttributes(
+        DOMDocument $document,
+        DOMNode $embedNode
+    ): array {
         $dataAttributes = [];
 
         $xpath = new DOMXPath($document);
@@ -337,7 +346,7 @@ class Embed extends Render implements Converter
         $dataAttributeNodes = $xpath->query('./docbook:ezattribute/docbook:ezvalue', $embedNode);
 
         foreach ($dataAttributeNodes as $dataAttributeNode) {
-            /** @var \DOMElement $dataAttributeNode */
+            /** @var DOMElement $dataAttributeNode */
             $attributeName = $dataAttributeNode->getAttribute('key');
             $dataAttributes[$attributeName] = $dataAttributeNode->nodeValue;
         }

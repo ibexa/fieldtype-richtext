@@ -17,6 +17,7 @@ use Ibexa\Core\MVC\Symfony\Routing\UrlAliasRouter;
 use Ibexa\Core\Repository\ContentService;
 use Ibexa\Core\Repository\LocationService;
 use Ibexa\FieldTypeRichText\RichText\Converter\Link;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Routing\RouterInterface;
@@ -28,7 +29,7 @@ use Symfony\Component\Routing\RouterInterface;
 class LinkTest extends TestCase
 {
     /**
-     * @return \PHPUnit\Framework\MockObject\MockObject&\Ibexa\Contracts\Core\Repository\ContentService
+     * @return MockObject&\Ibexa\Contracts\Core\Repository\ContentService
      */
     protected function getMockContentService()
     {
@@ -36,7 +37,7 @@ class LinkTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit\Framework\MockObject\MockObject&\Ibexa\Contracts\Core\Repository\LocationService
+     * @return MockObject&\Ibexa\Contracts\Core\Repository\LocationService
      */
     protected function getMockLocationService()
     {
@@ -44,7 +45,7 @@ class LinkTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit\Framework\MockObject\MockObject&\Symfony\Component\Routing\RouterInterface
+     * @return MockObject&RouterInterface
      */
     protected function getMockRouter()
     {
@@ -113,8 +114,10 @@ class LinkTest extends TestCase
      *
      * @dataProvider providerLinkXmlSample
      */
-    public function testLink($input, $output)
-    {
+    public function testLink(
+        $input,
+        $output
+    ) {
         $inputDocument = new DOMDocument();
         $inputDocument->loadXML($input);
 
@@ -227,8 +230,12 @@ class LinkTest extends TestCase
      *
      * @dataProvider providerLocationLink
      */
-    public function testConvertLocationLink($input, $output, $locationId, $urlResolved)
-    {
+    public function testConvertLocationLink(
+        $input,
+        $output,
+        $locationId,
+        $urlResolved
+    ) {
         $inputDocument = new DOMDocument();
         $inputDocument->loadXML($input);
 
@@ -383,8 +390,14 @@ class LinkTest extends TestCase
      *
      * @dataProvider providerBadLocationLink
      */
-    public function testConvertBadLocationLink($input, $output, $locationId, $exception, $logType, $logMessage)
-    {
+    public function testConvertBadLocationLink(
+        $input,
+        $output,
+        $locationId,
+        $exception,
+        $logType,
+        $logMessage
+    ) {
         $inputDocument = new DOMDocument();
         $inputDocument->loadXML($input);
 
@@ -481,8 +494,12 @@ class LinkTest extends TestCase
      *
      * @dataProvider providerContentLink
      */
-    public function testConvertContentLink($input, $output, $contentId, $urlResolved)
-    {
+    public function testConvertContentLink(
+        $input,
+        $output,
+        $contentId,
+        $urlResolved
+    ) {
         $locationId = 106;
         $inputDocument = new DOMDocument();
         $inputDocument->loadXML($input);
@@ -598,8 +615,14 @@ class LinkTest extends TestCase
      *
      * @dataProvider providerBadContentLink
      */
-    public function testConvertBadContentLink($input, $output, $contentId, $exception, $logType, $logMessage)
-    {
+    public function testConvertBadContentLink(
+        $input,
+        $output,
+        $contentId,
+        $exception,
+        $logType,
+        $logMessage
+    ) {
         $inputDocument = new DOMDocument();
         $inputDocument->loadXML($input);
 

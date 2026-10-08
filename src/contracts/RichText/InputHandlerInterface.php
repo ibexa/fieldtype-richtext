@@ -9,6 +9,9 @@ declare(strict_types=1);
 namespace Ibexa\Contracts\FieldTypeRichText\RichText;
 
 use DOMDocument;
+use Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException;
+use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
+use Ibexa\FieldTypeRichText\RichText\Exception\InvalidXmlException;
 
 interface InputHandlerInterface
 {
@@ -17,30 +20,30 @@ interface InputHandlerInterface
      *
      * @param string|null $inputValue
      *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
-     * @throws \Ibexa\FieldTypeRichText\RichText\Exception\InvalidXmlException
+     * @throws NotFoundException
+     * @throws InvalidArgumentException
+     * @throws InvalidXmlException
      *
-     * @return \DOMDocument
+     * @return DOMDocument
      */
     public function fromString(?string $inputValue = null): DOMDocument;
 
     /**
      * Converts given DOMDocument to the internal Rich Text representation.
      *
-     * @param \DOMDocument $inputValue
+     * @param DOMDocument $inputValue
      *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
+     * @throws NotFoundException
+     * @throws InvalidArgumentException
      *
-     * @return \DOMDocument
+     * @return DOMDocument
      */
     public function fromDocument(DOMDocument $inputValue): DOMDocument;
 
     /**
      * Returns relation data extracted from given $document (internal representation).
      *
-     * @param \DOMDocument $document
+     * @param DOMDocument $document
      *
      * @return array
      */
@@ -49,7 +52,7 @@ interface InputHandlerInterface
     /**
      * Validate the given $document (internal representation) and returns list of errors.
      *
-     * @param \DOMDocument $document
+     * @param DOMDocument $document
      *
      * @return array
      */

@@ -30,6 +30,7 @@ use Ibexa\FieldTypeRichText\RichText\RelationProcessor;
 use Ibexa\FieldTypeRichText\RichText\Validator\Validator;
 use Ibexa\FieldTypeRichText\RichText\Validator\ValidatorDispatcher;
 use Ibexa\FieldTypeRichText\RichText\XMLSanitizer;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 
@@ -40,7 +41,7 @@ use RuntimeException;
 class RichTextTest extends TestCase
 {
     /**
-     * @return \Ibexa\FieldTypeRichText\FieldType\RichText\Type
+     * @return RichTextType
      */
     protected function getFieldType()
     {
@@ -69,7 +70,7 @@ class RichTextTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit\Framework\MockObject\MockObject
+     * @return MockObject
      */
     protected function getTransformationProcessorMock()
     {
@@ -109,7 +110,7 @@ class RichTextTest extends TestCase
     }
 
     /**
-     * @covers \Ibexa\FieldTypeRichText\FieldType\RichText\Type::acceptValue
+     * @covers \RichTextType::acceptValue
      */
     public function testAcceptValueInvalidType()
     {
@@ -174,8 +175,10 @@ class RichTextTest extends TestCase
      *
      * @dataProvider providerForTestAcceptValueInvalidFormat
      */
-    public function testAcceptValueInvalidFormat($input, Exception $expectedException)
-    {
+    public function testAcceptValueInvalidFormat(
+        $input,
+        Exception $expectedException
+    ) {
         try {
             $fieldType = $this->getFieldType();
             $fieldType->acceptValue($input);
@@ -293,12 +296,14 @@ class RichTextTest extends TestCase
      * @param string $xmlString
      * @param array $expectedValidationErrors
      */
-    public function testValidate($xmlString, array $expectedValidationErrors)
-    {
+    public function testValidate(
+        $xmlString,
+        array $expectedValidationErrors
+    ) {
         $fieldType = $this->getFieldType();
         $value = new Value($this->createDocument($xmlString));
 
-        /** @var \Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition|\PHPUnit\Framework\MockObject\MockObject $fieldDefinitionMock */
+        /** @var APIFieldDefinition|MockObject $fieldDefinitionMock */
         $fieldDefinitionMock = $this->createMock(APIFieldDefinition::class);
 
         $validationErrors = $fieldType->validate($fieldDefinitionMock, $value);
@@ -307,7 +312,7 @@ class RichTextTest extends TestCase
     }
 
     /**
-     * @covers \Ibexa\FieldTypeRichText\FieldType\RichText\Type::toPersistenceValue
+     * @covers \RichTextType::toPersistenceValue
      */
     public function testToPersistenceValue()
     {
@@ -352,12 +357,14 @@ class RichTextTest extends TestCase
     }
 
     /**
-     * @covers \Ibexa\FieldTypeRichText\FieldType\RichText\Type::getName
+     * @covers \RichTextType::getName
      *
      * @dataProvider providerForTestGetName
      */
-    public function testGetName($xmlString, $expectedName)
-    {
+    public function testGetName(
+        $xmlString,
+        $expectedName
+    ) {
         $value = new Value($this->createDocument($xmlString));
 
         $fieldType = $this->getFieldType();
@@ -459,7 +466,7 @@ class RichTextTest extends TestCase
     /**
      * @todo handle embeds when implemented
      *
-     * @covers \Ibexa\FieldTypeRichText\FieldType\RichText\Type::getRelations
+     * @covers \RichTextType::getRelations
      */
     public function testGetRelations()
     {

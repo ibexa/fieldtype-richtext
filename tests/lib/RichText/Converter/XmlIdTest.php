@@ -98,8 +98,10 @@ final class XmlIdTest extends TestCase
     /**
      * @dataProvider providerConvert
      */
-    public function testConvert(string $input, string $output): void
-    {
+    public function testConvert(
+        string $input,
+        string $output
+    ): void {
         $inputDocument = $this->createDocument(self::SECTION_OPEN_TAG . $input . '</section>');
 
         $converter = new XmlId();

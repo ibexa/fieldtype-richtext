@@ -8,10 +8,14 @@ declare(strict_types=1);
 
 namespace Ibexa\Tests\Integration\FieldTypeRichText\Persistence\Legacy\MigrateRichTextNamespaces\Gateway;
 
+use Ibexa\Contracts\Core\Repository\Exceptions\Exception;
+use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
+use Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException;
 use Ibexa\Contracts\Core\Repository\Values\Content\Content;
 use Ibexa\Contracts\FieldTypeRichText\Persistence\Legacy\MigrateRichTextNamespaces\GatewayInterface;
 use Ibexa\Core\Persistence\Cache\Identifier\CacheIdentifierGeneratorInterface;
 use Ibexa\Tests\Integration\FieldTypeRichText\BaseRichTextIntegrationTestCase;
+use Symfony\Component\Cache\Adapter\TagAwareAdapter;
 
 /**
  * @covers \Ibexa\Contracts\FieldTypeRichText\Persistence\Legacy\MigrateRichTextNamespaces\DoctrineDatabase
@@ -35,12 +39,14 @@ final class DoctrineDatabaseTest extends BaseRichTextIntegrationTestCase
     /**
      * @dataProvider provideDataForTestMigrate
      *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\Exception
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
+     * @throws Exception
+     * @throws NotFoundException
+     * @throws UnauthorizedException
      */
-    public function testMigrate(string $expected, string $contents): void
-    {
+    public function testMigrate(
+        string $expected,
+        string $contents
+    ): void {
         $folder = $this->createRichTextContent($contents);
 
         // sanity check
@@ -95,7 +101,7 @@ XML,
     }
 
     /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\Exception
+     * @throws Exception
      */
     private function createRichTextContent(string $description): Content
     {
@@ -110,9 +116,11 @@ XML,
         return $this->contentService->publishVersion($contentDraft->getVersionInfo());
     }
 
-    private function invalidateContentItemPersistenceCache(int $contentId, int $versionNo): void
-    {
-        /** @var \Symfony\Component\Cache\Adapter\TagAwareAdapter $cache */
+    private function invalidateContentItemPersistenceCache(
+        int $contentId,
+        int $versionNo
+    ): void {
+        /** @var TagAwareAdapter $cache */
         $cache = self::getContainer()->get('ibexa.cache_pool');
         $cacheIdentifierGenerator = self::getServiceByClassName(CacheIdentifierGeneratorInterface::class);
 

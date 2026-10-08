@@ -36,6 +36,7 @@
         "friendsofphp/php-cs-fixer": "^3.0",
         "ibexa/admin-ui": "~4.6.x-dev",
         "ibexa/ci-scripts": "^0.2@dev",
+        "ibexa/doctrine-migrations": "~4.6.x-dev",
         "ibexa/doctrine-schema": "~4.6.x-dev",
         "ibexa/search": "~4.6.x-dev",
         "ibexa/solr": "~4.6.x-dev",
@@ -51,7 +52,7 @@
         "symfony/proxy-manager-bridge": "^5.3",
         "matthiasnoback/symfony-config-test": "^4.1",
         "matthiasnoback/symfony-dependency-injection-test": "^4.1",
-        "ibexa/code-style": "^1.0"
+        "ibexa/code-style": "~2.3.1"
     },
     "autoload": {
         "psr-4": {
