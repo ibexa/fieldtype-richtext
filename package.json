@@ -8,16 +8,16 @@
     "devDependencies": {
         "@ibexa/eslint-config": "https://github.com/ibexa/eslint-config-ibexa.git#~v2.0.0",
         "@ibexa/frontend-config": "https://github.com/ibexa/frontend-config#^v5.0.0-beta1",
-        "@ibexa/ts-config": "https://github.com/ibexa/ts-config-ibexa#~v1.1.0",
+        "@ibexa/ts-config": "https://github.com/ibexa/ts-config-ibexa#IBX-12116-type-dependencies",
         "@types/react": "^19.1.2",
         "@types/react-dom": "^19.1.2"
     },
     "scripts": {
-        "test": "yarn prettier-test && yarn eslint-test",
+        "test": "yarn prettier-test && yarn eslint-test && yarn ts-test",
         "fix": "yarn prettier-test --write && yarn eslint-test --fix",
         "ts-test": "tsc --noEmit",
         "eslint-test": "eslint \"./src/bundle/Resources/**/*.{js,ts}\"",
         "prettier-test": "yarn prettier \"./src/bundle/Resources/**/*.{js,ts,scss}\" --check",
-        "postinstall": "yarn ibexa-generate-tsconfig --use-root-project-tsconfig"
+        "postinstall": "yarn ibexa-generate-tsconfig"
     }
 }
