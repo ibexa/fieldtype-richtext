@@ -36,6 +36,7 @@
         "ibexa/code-style": "~2.0.0",
         "ibexa/design-engine": "~5.0.x-dev",
         "ibexa/doctrine-schema": "~5.0.x-dev",
+        "ibexa/mcp": "~5.0.x-dev",
         "ibexa/notifications": "~5.0.x-dev",
         "ibexa/rector": "~5.0.x-dev",
         "ibexa/search": "~5.0.x-dev",
@@ -87,5 +88,8 @@
     "config": {
         "allow-plugins": false,
         "sort-packages": true
+    },
+    "suggest": {
+        "ibexa/mcp": "Enables the RichText MCP tool (convert_to_richtext_xml)"
     }
 }

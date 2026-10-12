@@ -13,9 +13,11 @@ use Ibexa\Bundle\FieldTypeRichText\DependencyInjection\Compiler\RichTextDocbookS
 use Ibexa\Bundle\FieldTypeRichText\DependencyInjection\Compiler\RichTextHtml5ConverterPass;
 use Ibexa\Bundle\FieldTypeRichText\DependencyInjection\Configuration\Parser\FieldType\RichText;
 use Ibexa\Bundle\FieldTypeRichText\DependencyInjection\IbexaFieldTypeRichTextExtension;
+use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\Compiler\PassConfig;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
+use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
@@ -34,6 +36,11 @@ class IbexaFieldTypeRichTextBundle extends Bundle
         $container->addCompilerPass(new RichTextHtml5ConverterPass());
         $container->addCompilerPass(new RichTextDocbookSchemaPass(), PassConfig::TYPE_BEFORE_OPTIMIZATION, -100);
         $this->registerConfigParser($container);
+
+        if ($container->hasExtension('ibexa_mcp')) {
+            $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/Resources/config'));
+            $loader->load('mcp.yaml');
+        }
     }
 
     public function registerConfigParser(ContainerBuilder $container): void

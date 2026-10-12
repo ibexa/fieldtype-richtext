@@ -1,0 +1,19 @@
+ibexa:
+    repositories:
+        default:
+            mcp:
+                richtext:
+                    enabled: true
+                    path: /mcp/richtext
+                    discovery_cache: ~
+                    tools:
+                        - Ibexa\FieldTypeRichText\Mcp\Tool\RichTextTools
+                    session:
+                        type: file
+                        directory: '%kernel.cache_dir%/mcp_sessions'
+
+    system:
+        default:
+            mcp:
+                servers:
+                    - richtext

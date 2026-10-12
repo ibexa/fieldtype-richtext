@@ -9,11 +9,13 @@ declare(strict_types=1);
 namespace Ibexa\Tests\Integration\FieldTypeRichText;
 
 use DAMA\DoctrineTestBundle\DAMADoctrineTestBundle;
+use GuzzleHttp\Psr7\HttpFactory;
 use Hautelook\TemplatedUriBundle\HautelookTemplatedUriBundle;
 use Ibexa\Bundle\AdminUi\IbexaAdminUiBundle;
 use Ibexa\Bundle\ContentForms\IbexaContentFormsBundle;
 use Ibexa\Bundle\DesignEngine\IbexaDesignEngineBundle;
 use Ibexa\Bundle\FieldTypeRichText\IbexaFieldTypeRichTextBundle;
+use Ibexa\Bundle\Mcp\IbexaMcpBundle;
 use Ibexa\Bundle\Notifications\IbexaNotificationsBundle;
 use Ibexa\Bundle\Rest\IbexaRestBundle;
 use Ibexa\Bundle\Search\IbexaSearchBundle;
@@ -21,10 +23,14 @@ use Ibexa\Bundle\Test\Core\IbexaTestCoreBundle;
 use Ibexa\Bundle\TwigComponents\IbexaTwigComponentsBundle;
 use Ibexa\Bundle\User\IbexaUserBundle;
 use Ibexa\Contracts\FieldTypeRichText\Persistence\Legacy\MigrateRichTextNamespaces\GatewayInterface;
+use Ibexa\Contracts\Seo\Resolver\FieldReferenceResolverInterface;
 use Ibexa\Contracts\Test\Core\IbexaTestKernel as BaseIbexaTestKernel;
 use Ibexa\Core\Persistence\Cache\Identifier\CacheIdentifierGeneratorInterface;
+use Ibexa\Mcp\Server\McpServerRegistryInterface;
 use Knp\Bundle\MenuBundle\KnpMenuBundle;
 use Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle;
+use Psr\Http\Message\ResponseFactoryInterface;
+use Psr\Http\Message\StreamFactoryInterface;
 use Symfony\Component\Cache\Adapter\TagAwareAdapterInterface;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\Config\Resource\FileResource;
@@ -58,6 +64,7 @@ final class IbexaTestKernel extends BaseIbexaTestKernel
         yield new IbexaTwigComponentsBundle();
 
         yield new IbexaFieldTypeRichTextBundle();
+        yield new IbexaMcpBundle();
         yield new DAMADoctrineTestBundle();
     }
 
@@ -68,6 +75,8 @@ final class IbexaTestKernel extends BaseIbexaTestKernel
         yield GatewayInterface::class;
 
         yield CacheIdentifierGeneratorInterface::class;
+
+        yield McpServerRegistryInterface::class;
     }
 
     protected static function getExposedServicesById(): iterable
@@ -83,6 +92,7 @@ final class IbexaTestKernel extends BaseIbexaTestKernel
 
         $loader->load(__DIR__ . '/Resources/override.yaml');
         $loader->load(__DIR__ . '/Resources/config.yaml');
+        $loader->load(__DIR__ . '/Resources/ibexa_mcp.yaml');
         $loader->load(static function (ContainerBuilder $container): void {
             $container->setDefinition(
                 'Symfony\Component\Notifier\NotifierInterface',
@@ -96,6 +106,21 @@ final class IbexaTestKernel extends BaseIbexaTestKernel
                     'resource' => $resource->getResource(),
                 ],
             ]);
+
+            self::prepareMcpServer($container);
         });
+    }
+
+    /**
+     * Services ibexa/mcp depends on without the RichText tools needing them: the PSR-17 factories of its HTTP
+     * controller (tests run the MCP server directly, without HTTP) and the ibexa/seo resolver of its SEO tools.
+     */
+    private static function prepareMcpServer(ContainerBuilder $container): void
+    {
+        self::addSyntheticService($container, FieldReferenceResolverInterface::class);
+
+        $httpFactory = new Definition(HttpFactory::class);
+        $container->setDefinition(ResponseFactoryInterface::class, $httpFactory);
+        $container->setDefinition(StreamFactoryInterface::class, $httpFactory);
     }
 }

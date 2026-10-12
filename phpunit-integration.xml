@@ -16,6 +16,9 @@
     <testsuite name="integration_translation_extraction">
       <file>tests/integration/TranslationTest.php</file>
     </testsuite>
+    <testsuite name="integration_mcp">
+      <directory>tests/integration/Mcp</directory>
+    </testsuite>
   </testsuites>
   <php>
     <env name="DATABASE_URL" value="sqlite://i@i/test.db" />

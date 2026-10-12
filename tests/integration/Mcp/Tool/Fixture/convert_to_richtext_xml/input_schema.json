@@ -1,0 +1,13 @@
+{
+    "type": "object",
+    "properties": {
+        "html": {
+            "type": [
+                "null",
+                "string"
+            ],
+            "description": "Plain text or HTML markup to convert. Plain text is wrapped in a single paragraph, HTML fragments such as \"<p>Hello</p>\" are wrapped in a RichText section, and a complete DocBook or XHTML5 edit document is converted as-is. When null or empty, an empty RichText document is returned.",
+            "default": null
+        }
+    }
+}

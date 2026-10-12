@@ -1,0 +1,13 @@
+{
+    "type": "object",
+    "properties": {
+        "xml": {
+            "type": "string",
+            "description": "RichText DocBook XML document, usable as the \"xml\" key of a RichText field value."
+        }
+    },
+    "required": [
+        "xml"
+    ],
+    "additionalProperties": false
+}
