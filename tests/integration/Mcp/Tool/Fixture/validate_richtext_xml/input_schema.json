@@ -1,0 +1,12 @@
+{
+    "type": "object",
+    "properties": {
+        "xml": {
+            "type": "string",
+            "description": "RichText document to validate: DocBook XML, or XHTML5 edit XML which is converted to DocBook first."
+        }
+    },
+    "required": [
+        "xml"
+    ]
+}

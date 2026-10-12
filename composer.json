@@ -90,6 +90,6 @@
         "sort-packages": true
     },
     "suggest": {
-        "ibexa/mcp": "Enables the RichText MCP tool (convert_to_richtext_xml)"
+        "ibexa/mcp": "Enables the RichText MCP tools (convert_to_richtext_xml, validate_richtext_xml)"
     }
 }

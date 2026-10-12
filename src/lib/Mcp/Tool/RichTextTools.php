@@ -15,6 +15,7 @@ use Ibexa\Contracts\FieldTypeRichText\RichText\InputHandlerInterface;
 use Ibexa\Contracts\Mcp\Attribute\McpTool;
 use Ibexa\Contracts\Mcp\McpCapabilityInterface;
 use Ibexa\FieldTypeRichText\FieldType\RichText\Value;
+use Ibexa\FieldTypeRichText\Mcp\Tool\Output\RichTextValidationResult;
 use Ibexa\FieldTypeRichText\Mcp\Tool\Output\RichTextXml;
 use Ibexa\FieldTypeRichText\RichText\Exception\InvalidXmlException;
 use Mcp\Exception\ToolCallException;
@@ -51,7 +52,8 @@ final readonly class RichTextTools implements McpCapabilityInterface
         description: 'Converts plain text or HTML markup into the DocBook XML stored in RichText fields. '
             . 'HTML must be well-formed XML: close every tag and write void elements as "<br/>"; '
             . 'HTML named entities such as "&nbsp;" are allowed. A complete DocBook or XHTML5 edit document '
-            . 'is converted as-is. Returns an empty RichText document when no input is given.',
+            . 'is converted as-is. Returns an empty RichText document when no input is given. '
+            . 'Check the result with validate_richtext_xml.',
         annotations: new ToolAnnotations(
             readOnlyHint: true,
             destructiveHint: false,
@@ -91,6 +93,44 @@ final readonly class RichTextTools implements McpCapabilityInterface
         $xml = $document->saveXML();
 
         return new RichTextXml($xml === false ? Value::EMPTY_VALUE : $xml);
+    }
+
+    /**
+     * @param string $xml RichText document to validate: DocBook XML, or XHTML5 edit XML which is converted to DocBook first.
+     */
+    #[McpTool(
+        name: 'validate_richtext_xml',
+        title: 'Validate RichText XML',
+        description: 'Validates a RichText document the way saving a RichText field does: DocBook XML, or XHTML5 '
+            . 'edit XML which is converted first. Checks the RichText schema and that internal links '
+            . '(ezcontent://, ezlocation://, ezremote://) point to existing content. Returns the list of '
+            . 'validation errors, empty when the document is valid.',
+        annotations: new ToolAnnotations(
+            readOnlyHint: true,
+            destructiveHint: false,
+            idempotentHint: true,
+            openWorldHint: false,
+        ),
+    )]
+    public function validateRichTextXml(string $xml): RichTextValidationResult
+    {
+        if (trim($xml) === '') {
+            return new RichTextValidationResult(false, ['The XML document is empty.']);
+        }
+
+        try {
+            $document = $this->inputHandler->fromString($xml);
+        } catch (InvalidXmlException $e) {
+            return new RichTextValidationResult(false, $this->getXmlErrorMessages($e));
+        } catch (NotFoundException) {
+            return new RichTextValidationResult(false, [$this->getUnsupportedNamespaceMessage($xml)]);
+        } catch (InvalidArgumentException $e) {
+            return new RichTextValidationResult(false, [$e->getMessage()]);
+        }
+
+        $errors = array_values($this->inputHandler->validate($document));
+
+        return new RichTextValidationResult($errors === [], $errors);
     }
 
     /**

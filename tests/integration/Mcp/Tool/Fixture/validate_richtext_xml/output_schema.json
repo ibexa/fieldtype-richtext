@@ -1,0 +1,21 @@
+{
+    "type": "object",
+    "properties": {
+        "valid": {
+            "type": "boolean",
+            "description": "Whether the document would be accepted as a RichText field value."
+        },
+        "errors": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
+            "description": "Validation error messages. Empty when the document is valid."
+        }
+    },
+    "required": [
+        "valid",
+        "errors"
+    ],
+    "additionalProperties": false
+}
