@@ -53,8 +53,10 @@ final class ValidatorDispatcherTest extends TestCase
     /**
      * @dataProvider provideUnsupportedDocuments
      */
-    public function testThrowsUnsupportedNamespaceException(string $xml, string $expectedMessage): void
-    {
+    public function testThrowsUnsupportedNamespaceException(
+        string $xml,
+        string $expectedMessage
+    ): void {
         $dispatcher = new ValidatorDispatcher([
             self::DOCBOOK_NAMESPACE => null,
             self::XHTML5_EDIT_NAMESPACE => null,

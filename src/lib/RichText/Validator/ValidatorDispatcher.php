@@ -47,7 +47,7 @@ class ValidatorDispatcher implements ValidatorInterface
     /**
      * Dispatches DOMDocument to the namespace mapped validator.
      *
-     * @throws \Ibexa\FieldTypeRichText\RichText\Exception\UnsupportedNamespaceException if no validator is mapped to the document namespace
+     * @throws UnsupportedNamespaceException if no validator is mapped to the document namespace
      *
      * @return string[]
      */
