@@ -23,8 +23,10 @@ class RichTextValidator extends ConstraintValidator
         $this->inputHandler = $inputHandler;
     }
 
-    public function validate(mixed $value, Constraint $constraint): void
-    {
+    public function validate(
+        mixed $value,
+        Constraint $constraint
+    ): void {
         if (is_string($value)) {
             try {
                 $value = $this->inputHandler->fromString($value);

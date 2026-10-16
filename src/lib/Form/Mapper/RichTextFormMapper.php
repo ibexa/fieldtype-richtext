@@ -16,8 +16,10 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class RichTextFormMapper implements FieldValueFormMapperInterface
 {
-    public function mapFieldValueForm(FormInterface $fieldForm, FieldData $data): void
-    {
+    public function mapFieldValueForm(
+        FormInterface $fieldForm,
+        FieldData $data
+    ): void {
         $fieldDefinition = $data->getFieldDefinition();
         $formConfig = $fieldForm->getConfig();
 

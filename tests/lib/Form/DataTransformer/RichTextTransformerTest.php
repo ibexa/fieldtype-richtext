@@ -23,9 +23,9 @@ use Symfony\Component\Form\Exception\TransformationFailedException;
 
 class RichTextTransformerTest extends TestCase
 {
-    private InputHandlerInterface&MockObject $inputHandler;
+    private InputHandlerInterface & MockObject $inputHandler;
 
-    private Converter&MockObject $docbook2xhtml5editConverter;
+    private Converter & MockObject $docbook2xhtml5editConverter;
 
     private RichTextTransformer $richTextTransformer;
 
@@ -60,7 +60,7 @@ class RichTextTransformerTest extends TestCase
         $this->docbook2xhtml5editConverter
             ->expects(self::once())
             ->method('convert')
-            ->willReturnCallback(function (DOMDocument $doc) use ($inputXML, $outputDocument): \DOMDocument {
+            ->willReturnCallback(function (DOMDocument $doc) use ($inputXML, $outputDocument): DOMDocument {
                 $this->assertXmlStringEqualsXmlString($inputXML, $doc->saveXML());
 
                 return $outputDocument;
@@ -131,7 +131,7 @@ class RichTextTransformerTest extends TestCase
     }
 
     /**
-     * @phpstan-return list<array{\Exception}>
+     * @phpstan-return list<array{Exception}>
      */
     public function dataProviderForReverseTransformTransformationFailedException(): array
     {

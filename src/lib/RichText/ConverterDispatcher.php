@@ -20,12 +20,12 @@ class ConverterDispatcher
     /**
      * Mapping of namespaces to converters.
      *
-     * @var array<string, \Ibexa\Contracts\FieldTypeRichText\RichText\Converter|null>
+     * @var array<string, Converter|null>
      */
     protected array $mapping = [];
 
     /**
-     * @param array<string, \Ibexa\Contracts\FieldTypeRichText\RichText\Converter|null> $converterMap
+     * @param array<string, Converter|null> $converterMap
      */
     public function __construct(array $converterMap)
     {
@@ -37,8 +37,10 @@ class ConverterDispatcher
     /**
      * Adds converter mapping.
      */
-    public function addConverter(string $namespace, ?Converter $converter = null): void
-    {
+    public function addConverter(
+        string $namespace,
+        ?Converter $converter = null
+    ): void {
         $this->mapping[$namespace] = $converter;
     }
 

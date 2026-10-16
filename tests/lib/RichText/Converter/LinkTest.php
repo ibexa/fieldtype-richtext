@@ -29,17 +29,17 @@ use Symfony\Component\Routing\RouterInterface;
  */
 class LinkTest extends TestCase
 {
-    protected function getMockContentService(): ContentService&MockObject
+    protected function getMockContentService(): ContentService & MockObject
     {
         return $this->createMock(ContentService::class);
     }
 
-    protected function getMockLocationService(): LocationService&MockObject
+    protected function getMockLocationService(): LocationService & MockObject
     {
         return $this->createMock(LocationService::class);
     }
 
-    protected function getMockRouter(): RouterInterface&MockObject
+    protected function getMockRouter(): RouterInterface & MockObject
     {
         return $this->createMock(RouterInterface::class);
     }
@@ -106,8 +106,10 @@ class LinkTest extends TestCase
      *
      * @dataProvider providerLinkXmlSample
      */
-    public function testLink(string $input, string $output): void
-    {
+    public function testLink(
+        string $input,
+        string $output
+    ): void {
         $inputDocument = new DOMDocument();
         $inputDocument->loadXML($input);
 
@@ -220,8 +222,12 @@ class LinkTest extends TestCase
      *
      * @dataProvider providerLocationLink
      */
-    public function testConvertLocationLink(string $input, string $output, int $locationId, string $urlResolved): void
-    {
+    public function testConvertLocationLink(
+        string $input,
+        string $output,
+        int $locationId,
+        string $urlResolved
+    ): void {
         $inputDocument = new DOMDocument();
         $inputDocument->loadXML($input);
 
@@ -303,7 +309,7 @@ class LinkTest extends TestCase
     }
 
     /**
-     * @return array<array{string, string, int, \Exception, string}>
+     * @return array<array{string, string, int, Exception, string}>
      */
     public function providerBadLocationLink(): array
     {
@@ -376,8 +382,14 @@ class LinkTest extends TestCase
      *
      * @dataProvider providerBadLocationLink
      */
-    public function testConvertBadLocationLink(string $input, string $output, int $locationId, Exception $exception, string $logType, string $logMessage): void
-    {
+    public function testConvertBadLocationLink(
+        string $input,
+        string $output,
+        int $locationId,
+        Exception $exception,
+        string $logType,
+        string $logMessage
+    ): void {
         $inputDocument = new DOMDocument();
         $inputDocument->loadXML($input);
 
@@ -474,8 +486,12 @@ class LinkTest extends TestCase
      *
      * @dataProvider providerContentLink
      */
-    public function testConvertContentLink(string $input, string $output, int $contentId, string $urlResolved): void
-    {
+    public function testConvertContentLink(
+        string $input,
+        string $output,
+        int $contentId,
+        string $urlResolved
+    ): void {
         $locationId = 106;
         $inputDocument = new DOMDocument();
         $inputDocument->loadXML($input);
@@ -591,8 +607,14 @@ class LinkTest extends TestCase
      *
      * @dataProvider providerBadContentLink
      */
-    public function testConvertBadContentLink(string $input, string $output, int $contentId, Exception $exception, string $logType, string $logMessage): void
-    {
+    public function testConvertBadContentLink(
+        string $input,
+        string $output,
+        int $contentId,
+        Exception $exception,
+        string $logType,
+        string $logMessage
+    ): void {
         $inputDocument = new DOMDocument();
         $inputDocument->loadXML($input);
 

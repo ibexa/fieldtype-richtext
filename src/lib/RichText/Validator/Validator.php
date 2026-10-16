@@ -41,7 +41,7 @@ class Validator extends XmlBase implements ValidatorInterface
      *
      * Handles ISO Schematron (as XSLT stylesheet), XSD and RELAX NG schemas.
      *
-     * @throws \RuntimeException If schema file does not exist or can not be handled
+     * @throws RuntimeException If schema file does not exist or can not be handled
      *
      * @return string[] An array of validation errors
      */
@@ -70,10 +70,12 @@ class Validator extends XmlBase implements ValidatorInterface
      *
      * @return string[]
      *
-     * @throws \RuntimeException If given $schema file does not exist or can not be handled
+     * @throws RuntimeException If given $schema file does not exist or can not be handled
      */
-    protected function validateBySchema(DOMDocument $document, string $schema): array
-    {
+    protected function validateBySchema(
+        DOMDocument $document,
+        string $schema
+    ): array {
         if (!file_exists($schema) || !is_file($schema)) {
             throw new RuntimeException(
                 "Validation of XML document cannot be performed, file '{$schema}' does not exist."
@@ -109,8 +111,10 @@ class Validator extends XmlBase implements ValidatorInterface
      *
      * @return string[]
      */
-    protected function schematronValidate(DOMDocument $document, string $filename): array
-    {
+    protected function schematronValidate(
+        DOMDocument $document,
+        string $filename
+    ): array {
         $stylesheet = $this->loadFile($filename);
         $xsltProcessor = new XSLTProcessor();
         $xsltProcessor->importStyleSheet($stylesheet);

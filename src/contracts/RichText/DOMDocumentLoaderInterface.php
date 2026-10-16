@@ -18,5 +18,8 @@ interface DOMDocumentLoaderInterface
     /**
      * @param array<string, mixed> $logContext
      */
-    public function loadXML(string $xml, array $logContext = []): DOMDocument;
+    public function loadXML(
+        string $xml,
+        array $logContext = []
+    ): DOMDocument;
 }

@@ -18,9 +18,9 @@ use PHPUnit\Framework\TestCase;
 
 class InternalLinkValidatorTest extends TestCase
 {
-    private ContentHandler&MockObject $contentHandler;
+    private ContentHandler & MockObject $contentHandler;
 
-    private LocationHandler&MockObject $locationHandler;
+    private LocationHandler & MockObject $locationHandler;
 
     /**
      * @before
@@ -264,22 +264,28 @@ class InternalLinkValidatorTest extends TestCase
         $this->assertContainsEzRemoteInvalidLinkError($contentRemoteId, $errors);
     }
 
-    private function assertContainsEzLocationInvalidLinkError(int $locationId, array $errors): void
-    {
+    private function assertContainsEzLocationInvalidLinkError(
+        int $locationId,
+        array $errors
+    ): void {
         $format = 'Invalid link "ezlocation://%d": cannot find target Location';
 
         self::assertContains(sprintf($format, $locationId), $errors);
     }
 
-    private function assertContainsEzContentInvalidLinkError(int $contentId, array $errors): void
-    {
+    private function assertContainsEzContentInvalidLinkError(
+        int $contentId,
+        array $errors
+    ): void {
         $format = 'Invalid link "ezcontent://%d": cannot find target content';
 
         self::assertContains(sprintf($format, $contentId), $errors);
     }
 
-    private function assertContainsEzRemoteInvalidLinkError(string $contentId, array $errors): void
-    {
+    private function assertContainsEzRemoteInvalidLinkError(
+        string $contentId,
+        array $errors
+    ): void {
         $format = 'Invalid link "ezremote://%s": cannot find target content';
 
         self::assertContains(sprintf($format, $contentId), $errors);
@@ -288,7 +294,7 @@ class InternalLinkValidatorTest extends TestCase
     /**
      * @param list<string>|null $methods
      */
-    private function getInternalLinkValidator(?array $methods = null): InternalLinkValidator&MockObject
+    private function getInternalLinkValidator(?array $methods = null): InternalLinkValidator & MockObject
     {
         return $this->getMockBuilder(InternalLinkValidator::class)
             ->setMethods($methods)
@@ -299,8 +305,10 @@ class InternalLinkValidatorTest extends TestCase
             ->getMock();
     }
 
-    private function createInputDocument(string $scheme, null|int|string $id): \DOMDocument
-    {
+    private function createInputDocument(
+        string $scheme,
+        null | int | string $id
+    ): \DOMDocument {
         $url = $scheme . '://' . $id;
         $xml = '<?xml version="1.0" encoding="UTF-8"?>
 <section xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ezxhtml="http://ibexa.co/xmlns/dxp/docbook/xhtml" xmlns:ezcustom="http://ibexa.co/xmlns/dxp/docbook/custom" version="5.0-variant ezpublish-1.0">

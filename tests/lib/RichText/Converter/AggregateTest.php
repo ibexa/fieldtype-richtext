@@ -25,8 +25,10 @@ class AggregateTest extends TestCase
      *
      * @see https://issues.ibexa.co/browse/EZP-30166
      */
-    public function testConvertWithLinkInCustomTag(string $input, string $expectedOutput): void
-    {
+    public function testConvertWithLinkInCustomTag(
+        string $input,
+        string $expectedOutput
+    ): void {
         $xmlDocument = new DOMDocument();
         $xmlDocument->loadXML($input);
 

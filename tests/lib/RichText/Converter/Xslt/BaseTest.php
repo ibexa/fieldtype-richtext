@@ -89,8 +89,10 @@ abstract class BaseTest extends TestCase
     /**
      * @dataProvider providerForTestConvert
      */
-    public function testConvert(string $inputFile, string $outputFile): void
-    {
+    public function testConvert(
+        string $inputFile,
+        string $outputFile
+    ): void {
         $endsWith = '.lossy.xml';
         if (substr_compare($inputFile, $endsWith, -strlen($endsWith), strlen($endsWith)) === 0) {
             self::markTestSkipped('Skipped lossy conversion.');
@@ -150,8 +152,10 @@ abstract class BaseTest extends TestCase
     /**
      * @param array<int, string> $errors
      */
-    protected function formatValidationErrors(string $outputFile, array $errors): string
-    {
+    protected function formatValidationErrors(
+        string $outputFile,
+        array $errors
+    ): string {
         $output = "\n";
         foreach ($errors as $error) {
             $output .= ' - ' . $error . "\n";

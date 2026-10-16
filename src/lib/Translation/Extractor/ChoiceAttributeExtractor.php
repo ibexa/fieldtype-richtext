@@ -32,8 +32,11 @@ final class ChoiceAttributeExtractor implements ExtractorInterface
      * @param string $domain Target translation domain
      * @param string[] $allowlist Whitelist of custom tags to extract
      */
-    public function __construct(array $customTags, string $domain, array $allowlist = [])
-    {
+    public function __construct(
+        array $customTags,
+        string $domain,
+        array $allowlist = []
+    ) {
         $this->customTags = $customTags;
         $this->domain = $domain;
         $this->allowlist = $allowlist;

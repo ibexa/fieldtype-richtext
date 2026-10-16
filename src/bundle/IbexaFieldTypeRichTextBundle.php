@@ -27,7 +27,7 @@ class IbexaFieldTypeRichTextBundle extends Bundle
     {
         parent::build($container);
 
-        /** @var \Ibexa\Bundle\Core\DependencyInjection\IbexaCoreExtension $core */
+        /** @var IbexaCoreExtension $core */
         $core = $container->getExtension('ibexa');
         $core->addDefaultSettings(__DIR__ . '/Resources/config', ['default_settings.yaml']);
 
@@ -43,7 +43,7 @@ class IbexaFieldTypeRichTextBundle extends Bundle
 
     protected function getCoreExtension(ContainerBuilder $container): IbexaCoreExtension
     {
-        /** @var \Ibexa\Bundle\Core\DependencyInjection\IbexaCoreExtension */
+        /** @var IbexaCoreExtension */
         return $container->getExtension('ibexa');
     }
 

@@ -11,6 +11,7 @@ namespace Ibexa\FieldTypeRichText\FieldType\RichText;
 use DOMDocument;
 use Ibexa\Contracts\Core\FieldType\Value as SPIValue;
 use Ibexa\Contracts\Core\Persistence\Content\FieldValue;
+use Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException;
 use Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition;
 use Ibexa\Contracts\FieldTypeRichText\RichText\DOMDocumentLoaderInterface;
 use Ibexa\Contracts\FieldTypeRichText\RichText\InputHandlerInterface;
@@ -59,8 +60,11 @@ class Type extends FieldType implements TranslationContainerInterface
      * It will be used to generate content name and url alias if current field is designated
      * to be used in the content name/urlAlias pattern.
      */
-    public function getName(SPIValue $value, FieldDefinition $fieldDefinition, string $languageCode): string
-    {
+    public function getName(
+        SPIValue $value,
+        FieldDefinition $fieldDefinition,
+        string $languageCode
+    ): string {
         $result = null;
         if ($section = $value->xml->documentElement->firstChild) {
             $textDom = $section->firstChild;
@@ -107,7 +111,7 @@ class Type extends FieldType implements TranslationContainerInterface
     /**
      * Inspects a given $inputValue and potentially converts it into a dedicated value object.
      *
-     * @param Value|\DOMDocument|string $inputValue
+     * @param Value|DOMDocument|string $inputValue
      *
      * @return Value the potentially converted and structurally plausible value
      */
@@ -129,7 +133,7 @@ class Type extends FieldType implements TranslationContainerInterface
      *
      * @param Value $value
      *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException if the value does not match the expected structure
+     * @throws InvalidArgumentException if the value does not match the expected structure
      */
     protected function checkValueStructure(BaseValue $value): void
     {
@@ -149,13 +153,15 @@ class Type extends FieldType implements TranslationContainerInterface
      * that no validation errors occurred. Overwrite in derived types, if
      * validation is supported.
      *
-     * @param \Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition $fieldDefinition The field definition of the field
+     * @param FieldDefinition $fieldDefinition The field definition of the field
      * @param Value $value The field value for which an action is performed
      *
      * @return \Ibexa\Contracts\Core\FieldType\ValidationError[]
      */
-    public function validate(FieldDefinition $fieldDefinition, SPIValue $value): array
-    {
+    public function validate(
+        FieldDefinition $fieldDefinition,
+        SPIValue $value
+    ): array {
         return array_map(static function (string $error): ValidationError {
             return new ValidationError("Validation of XML content failed:\n" . $error, null, [], 'xml');
         }, $this->inputHandler->validate($value->xml));
@@ -180,7 +186,7 @@ class Type extends FieldType implements TranslationContainerInterface
      *
      * @return Value
      *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function fromHash(mixed $hash): SPIValue
     {

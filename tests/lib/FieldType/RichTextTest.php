@@ -13,6 +13,7 @@ use Exception;
 use Ibexa\Contracts\Core\Persistence\Content\FieldValue;
 use Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException as ApiInvalidArgumentException;
 use Ibexa\Contracts\Core\Repository\Values\Content\RelationType;
+use Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition;
 use Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition as APIFieldDefinition;
 use Ibexa\Contracts\FieldTypeRichText\RichText\TextExtractorInterface;
 use Ibexa\Core\Base\Exceptions\InvalidArgumentException;
@@ -20,7 +21,6 @@ use Ibexa\Core\Base\Exceptions\NotFoundException;
 use Ibexa\Core\FieldType\ValidationError;
 use Ibexa\Core\FieldType\Value as CoreValue;
 use Ibexa\Core\Persistence\TransformationProcessor;
-use Ibexa\FieldTypeRichText\FieldType\RichText\Type;
 use Ibexa\FieldTypeRichText\FieldType\RichText\Type as RichTextType;
 use Ibexa\FieldTypeRichText\FieldType\RichText\Value;
 use Ibexa\FieldTypeRichText\RichText\ConverterDispatcher;
@@ -67,7 +67,7 @@ class RichTextTest extends TestCase
         return $fieldType;
     }
 
-    protected function getTransformationProcessorMock(): TransformationProcessor&MockObject
+    protected function getTransformationProcessorMock(): TransformationProcessor & MockObject
     {
         return $this->getMockForAbstractClass(
             TransformationProcessor::class,
@@ -105,7 +105,7 @@ class RichTextTest extends TestCase
     }
 
     /**
-     * @covers \Ibexa\FieldTypeRichText\FieldType\RichText\Type::acceptValue
+     * @covers \RichTextType::acceptValue
      */
     public function testAcceptValueInvalidType(): void
     {
@@ -149,7 +149,7 @@ class RichTextTest extends TestCase
     }
 
     /**
-     * @phpstan-return list<array{string, \Exception}>
+     * @phpstan-return list<array{string, Exception}>
      */
     public static function providerForTestAcceptValueInvalidFormat(): array
     {
@@ -176,8 +176,10 @@ class RichTextTest extends TestCase
      *
      * @dataProvider providerForTestAcceptValueInvalidFormat
      */
-    public function testAcceptValueInvalidFormat(string $input, Exception $expectedException): void
-    {
+    public function testAcceptValueInvalidFormat(
+        string $input,
+        Exception $expectedException
+    ): void {
         try {
             $fieldType = $this->getFieldType();
             $fieldType->acceptValue($input);
@@ -295,12 +297,14 @@ class RichTextTest extends TestCase
     /**
      * @dataProvider providerForTestValidate
      */
-    public function testValidate(string $xmlString, array $expectedValidationErrors): void
-    {
+    public function testValidate(
+        string $xmlString,
+        array $expectedValidationErrors
+    ): void {
         $fieldType = $this->getFieldType();
         $value = new Value($this->createDocument($xmlString));
 
-        /** @var \Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition|\PHPUnit\Framework\MockObject\MockObject $fieldDefinitionMock */
+        /** @var APIFieldDefinition|MockObject $fieldDefinitionMock */
         $fieldDefinitionMock = $this->createMock(APIFieldDefinition::class);
 
         $validationErrors = $fieldType->validate($fieldDefinitionMock, $value);
@@ -309,7 +313,7 @@ class RichTextTest extends TestCase
     }
 
     /**
-     * @covers \Ibexa\FieldTypeRichText\FieldType\RichText\Type::toPersistenceValue
+     * @covers \RichTextType::toPersistenceValue
      */
     public function testToPersistenceValue(): void
     {
@@ -354,12 +358,14 @@ class RichTextTest extends TestCase
     }
 
     /**
-     * @covers \Ibexa\FieldTypeRichText\FieldType\RichText\Type::getName
+     * @covers \RichTextType::getName
      *
      * @dataProvider providerForTestGetName
      */
-    public function testGetName(string $xmlString, string $expectedName): void
-    {
+    public function testGetName(
+        string $xmlString,
+        string $expectedName
+    ): void {
         $value = new Value($this->createDocument($xmlString));
 
         $fieldType = $this->getFieldType();
@@ -463,7 +469,7 @@ class RichTextTest extends TestCase
     /**
      * @todo handle embeds when implemented
      *
-     * @covers \Ibexa\FieldTypeRichText\FieldType\RichText\Type::getRelations
+     * @covers \RichTextType::getRelations
      */
     public function testGetRelations(): void
     {

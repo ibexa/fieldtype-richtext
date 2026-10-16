@@ -76,8 +76,11 @@ abstract class Gateway extends StorageGateway
     /**
      * Creates a link to URL with $urlId for field with $fieldId in $versionNo.
      */
-    public function linkUrl(int $urlId, int $fieldId, int $versionNo): void
-    {
+    public function linkUrl(
+        int $urlId,
+        int $fieldId,
+        int $versionNo
+    ): void {
         $this->urlGateway->linkUrl($urlId, $fieldId, $versionNo);
     }
 
@@ -86,8 +89,11 @@ abstract class Gateway extends StorageGateway
      *
      * @param int[] $excludeUrlIds
      */
-    public function unlinkUrl(int $fieldId, int $versionNo, array $excludeUrlIds = []): void
-    {
+    public function unlinkUrl(
+        int $fieldId,
+        int $versionNo,
+        array $excludeUrlIds = []
+    ): void {
         $this->urlGateway->unlinkUrl($fieldId, $versionNo, $excludeUrlIds);
     }
 }

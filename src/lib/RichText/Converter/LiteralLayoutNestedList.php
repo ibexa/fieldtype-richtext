@@ -42,9 +42,9 @@ final class LiteralLayoutNestedList implements Converter
         $elements = $xpath->query($xpathExpression) ?: [];
 
         // elements are list of <literallayout> elements
-        /** @var \DOMElement $element */
+        /** @var DOMElement $element */
         foreach ($elements as $element) {
-            /** @var \DOMNode $childNode */
+            /** @var DOMNode $childNode */
             foreach ($element->childNodes as $childNode) {
                 if ($this->isNestedListNode($childNode)) {
                     $targetNode = $childNode->parentNode->parentNode;

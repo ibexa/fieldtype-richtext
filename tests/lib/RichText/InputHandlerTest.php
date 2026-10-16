@@ -25,13 +25,13 @@ class InputHandlerTest extends TestCase
 {
     private DOMDocumentFactory $domDocumentFactory;
 
-    private ConverterDispatcher&MockObject $converter;
+    private ConverterDispatcher & MockObject $converter;
 
-    private Normalizer&MockObject $normalizer;
+    private Normalizer & MockObject $normalizer;
 
-    private ValidatorInterface&MockObject $schemaValidator;
+    private ValidatorInterface & MockObject $schemaValidator;
 
-    private ValidatorInterface&MockObject $docbookValidator;
+    private ValidatorInterface & MockObject $docbookValidator;
 
     private RelationProcessor $relationProcessor;
 

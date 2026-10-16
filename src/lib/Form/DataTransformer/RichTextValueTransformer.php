@@ -21,12 +21,14 @@ class RichTextValueTransformer implements DataTransformerInterface
     private FieldType $fieldType;
 
     /**
-     * @var \Ibexa\Contracts\FieldTypeRichText\RichText\Converter Converter
+     * @var Converter Converter
      */
     protected Converter $docbookToXhtml5EditConverter;
 
-    public function __construct(FieldType $fieldType, Converter $docbookToXhtml5EditConverter)
-    {
+    public function __construct(
+        FieldType $fieldType,
+        Converter $docbookToXhtml5EditConverter
+    ) {
         $this->fieldType = $fieldType;
         $this->docbookToXhtml5EditConverter = $docbookToXhtml5EditConverter;
     }
