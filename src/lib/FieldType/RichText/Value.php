@@ -27,9 +27,9 @@ EOT;
     /**
      * Initializes a new RichText Value object with $xmlDoc in.
      *
-     * @param \DOMDocument|string|null $xml passing a string is deprecated since 4.6.33 and will not be supported in 6.0
+     * @param DOMDocument|string|null $xml passing a string is deprecated since 4.6.33 and will not be supported in 6.0
      */
-    public function __construct(DOMDocument|string|null $xml = null)
+    public function __construct(DOMDocument | string | null $xml = null)
     {
         if ($xml instanceof DOMDocument) {
             $this->xml = $xml;
@@ -53,7 +53,7 @@ EOT;
     }
 
     /**
-     * @see \Ibexa\Core\FieldType\Value
+     * @see BaseValue
      */
     public function __toString(): string
     {

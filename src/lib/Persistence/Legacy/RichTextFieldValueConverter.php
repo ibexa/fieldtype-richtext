@@ -20,8 +20,10 @@ class RichTextFieldValueConverter implements Converter
     /**
      * Converts data from $value to $storageFieldValue.
      */
-    public function toStorageValue(FieldValue $value, StorageFieldValue $storageFieldValue): void
-    {
+    public function toStorageValue(
+        FieldValue $value,
+        StorageFieldValue $storageFieldValue
+    ): void {
         $storageFieldValue->dataText = $value->data;
         $storageFieldValue->sortKeyString = $value->sortKey;
     }
@@ -29,8 +31,10 @@ class RichTextFieldValueConverter implements Converter
     /**
      * Converts data from $value to $fieldValue.
      */
-    public function toFieldValue(StorageFieldValue $value, FieldValue $fieldValue): void
-    {
+    public function toFieldValue(
+        StorageFieldValue $value,
+        FieldValue $fieldValue
+    ): void {
         $fieldValue->data = $value->dataText ?: Value::EMPTY_VALUE;
         $fieldValue->sortKey = $value->sortKeyString;
     }

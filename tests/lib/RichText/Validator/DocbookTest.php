@@ -163,8 +163,10 @@ class DocbookTest extends TestCase
      *
      * @param string[] $expectedErrors
      */
-    public function testValidate(string $input, array $expectedErrors): void
-    {
+    public function testValidate(
+        string $input,
+        array $expectedErrors
+    ): void {
         $document = new DOMDocument();
         $document->loadXML($input);
 

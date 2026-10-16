@@ -73,8 +73,12 @@ class RichTextStorageTest extends TestCase
      * @param int[] $linkIds
      * @param array<int, string> $linkUrls
      */
-    public function testGetFieldData(string $xmlString, string $updatedXmlString, array $linkIds, array $linkUrls): void
-    {
+    public function testGetFieldData(
+        string $xmlString,
+        string $updatedXmlString,
+        array $linkIds,
+        array $linkUrls
+    ): void {
         $gateway = $this->getGatewayMock();
         $gateway
             ->expects(self::once())
@@ -273,8 +277,11 @@ class RichTextStorageTest extends TestCase
      * @param array<string|int> $insertLinks
      * @param array<string|int> $linkIds
      */
-    private function groupLinksData(array $linkUrls, array $insertLinks, array $linkIds): array
-    {
+    private function groupLinksData(
+        array $linkUrls,
+        array $insertLinks,
+        array $linkIds
+    ): array {
         $urlAssertions = [];
         $insertedIds = [];
         $idsToLink = [];
@@ -407,9 +414,9 @@ class RichTextStorageTest extends TestCase
             ->getMock();
     }
 
-    protected (LoggerInterface&MockObject)|null $loggerMock = null;
+    protected (LoggerInterface & MockObject) | null $loggerMock = null;
 
-    protected function getLoggerMock(): LoggerInterface&MockObject
+    protected function getLoggerMock(): LoggerInterface & MockObject
     {
         if (!isset($this->loggerMock)) {
             $this->loggerMock = $this->getMockForAbstractClass(
@@ -420,9 +427,9 @@ class RichTextStorageTest extends TestCase
         return $this->loggerMock;
     }
 
-    protected (Gateway&MockObject)|null $gatewayMock = null;
+    protected (Gateway & MockObject) | null $gatewayMock = null;
 
-    protected function getGatewayMock(): Gateway&MockObject
+    protected function getGatewayMock(): Gateway & MockObject
     {
         if (!isset($this->gatewayMock)) {
             $this->gatewayMock = $this->createMock(Gateway::class);

@@ -253,8 +253,10 @@ class RichText extends AbstractFieldTypeParser
     /**
      * @phpstan-return ScalarNodeDefinition<null>
      */
-    protected function getTemplateNodeDefinition(string $info, string $example): ScalarNodeDefinition
-    {
+    protected function getTemplateNodeDefinition(
+        string $info,
+        string $example
+    ): ScalarNodeDefinition {
         $templateNodeDefinition = new ScalarNodeDefinition('template');
         $templateNodeDefinition
             ->info($info)
@@ -268,8 +270,11 @@ class RichText extends AbstractFieldTypeParser
     /**
      * @param string $currentScope
      */
-    public function mapConfig(array &$scopeSettings, $currentScope, ContextualizerInterface $contextualizer): void
-    {
+    public function mapConfig(
+        array &$scopeSettings,
+        $currentScope,
+        ContextualizerInterface $contextualizer
+    ): void {
         if (!empty($scopeSettings['fieldtypes'])) {
             // Workaround to be able to use Contextualizer::mapConfigArray() which only supports first level entries.
             if (isset($scopeSettings['fieldtypes']['ibexa_richtext']['custom_tags'])) {
@@ -306,8 +311,10 @@ class RichText extends AbstractFieldTypeParser
         }
     }
 
-    public function postMap(array $config, ContextualizerInterface $contextualizer): void
-    {
+    public function postMap(
+        array $config,
+        ContextualizerInterface $contextualizer
+    ): void {
         $contextualizer->mapConfigArray('fieldtypes.ibexa_richtext.custom_tags', $config);
         $contextualizer->mapConfigArray('fieldtypes.ibexa_richtext.custom_styles', $config);
         $contextualizer->mapConfigArray(self::TOOLBARS_SA_SETTINGS_ID, $config);

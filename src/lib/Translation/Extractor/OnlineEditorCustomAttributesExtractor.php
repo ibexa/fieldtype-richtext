@@ -30,8 +30,10 @@ final class OnlineEditorCustomAttributesExtractor implements ExtractorInterface
     /**
      * @param string[] $siteAccessList
      */
-    public function __construct(ConfigResolverInterface $configResolver, array $siteAccessList)
-    {
+    public function __construct(
+        ConfigResolverInterface $configResolver,
+        array $siteAccessList
+    ) {
         $this->configResolver = $configResolver;
         $this->siteAccessList = $siteAccessList;
     }
@@ -55,8 +57,10 @@ final class OnlineEditorCustomAttributesExtractor implements ExtractorInterface
         return $catalogue;
     }
 
-    private function createMessage(string $id, string $desc): XliffMessage
-    {
+    private function createMessage(
+        string $id,
+        string $desc
+    ): XliffMessage {
         $message = new XliffMessage($id, self::MESSAGE_DOMAIN);
         $message->setNew(false);
         $message->setMeaning($desc);
@@ -70,8 +74,10 @@ final class OnlineEditorCustomAttributesExtractor implements ExtractorInterface
     /**
      * Extract messages from the given scope into the catalogue.
      */
-    private function extractMessagesForScope(MessageCatalogue $catalogue, string $scope): void
-    {
+    private function extractMessagesForScope(
+        MessageCatalogue $catalogue,
+        string $scope
+    ): void {
         $attributes = $this->configResolver->getParameter(
             RichText::ATTRIBUTES_SA_SETTINGS_ID,
             null,

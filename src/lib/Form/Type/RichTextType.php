@@ -36,8 +36,10 @@ class RichTextType extends AbstractType
         $this->docbookToXhtml5EditConverter = $docbookToXhtml5EditConverter;
     }
 
-    public function buildForm(FormBuilderInterface $builder, array $options): void
-    {
+    public function buildForm(
+        FormBuilderInterface $builder,
+        array $options
+    ): void {
         $builder->addModelTransformer(new RichTextTransformer(
             $this->domDocumentFactory,
             $this->inputHandler,

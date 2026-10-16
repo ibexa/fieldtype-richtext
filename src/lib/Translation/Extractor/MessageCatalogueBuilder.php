@@ -41,13 +41,17 @@ final class MessageCatalogueBuilder
         return $this->catalogue;
     }
 
-    public function addMessage(string $id, string $desc): void
-    {
+    public function addMessage(
+        string $id,
+        string $desc
+    ): void {
         $this->catalogue->add($this->createMessage($id, $desc));
     }
 
-    private function createMessage(string $id, string $desc): XliffMessage
-    {
+    private function createMessage(
+        string $id,
+        string $desc
+    ): XliffMessage {
         $message = new XliffMessage($id, $this->domain);
         $message->setNew(false);
         $message->setMeaning($desc);

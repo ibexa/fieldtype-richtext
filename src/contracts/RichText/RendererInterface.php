@@ -21,7 +21,7 @@ interface RendererInterface
         string $type,
         array $parameters,
         bool $isInline,
-    ): string|null;
+    ): string | null;
 
     /**
      * @param array<mixed> $parameters
@@ -31,7 +31,7 @@ interface RendererInterface
         string $viewType,
         array $parameters,
         bool $isInline,
-    ): string|null;
+    ): string | null;
 
     /**
      * @param array<mixed> $parameters
@@ -41,5 +41,5 @@ interface RendererInterface
         string $viewType,
         array $parameters,
         bool $isInline,
-    ): string|null;
+    ): string | null;
 }

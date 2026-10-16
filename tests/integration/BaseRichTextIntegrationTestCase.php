@@ -10,6 +10,9 @@ namespace Ibexa\Tests\Integration\FieldTypeRichText;
 
 use Ibexa\Contracts\Core\Repository\ContentService;
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
+use Ibexa\Contracts\Core\Repository\Exceptions\ForbiddenException;
+use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
+use Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException;
 use Ibexa\Contracts\Core\Repository\Values\Content\Content;
 use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType;
 use Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinitionCreateStruct;
@@ -35,9 +38,9 @@ abstract class BaseRichTextIntegrationTestCase extends IbexaKernelTestCase
     }
 
     /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ForbiddenException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
+     * @throws ForbiddenException
+     * @throws NotFoundException
+     * @throws UnauthorizedException
      */
     protected function createRichTextContentType(): ContentType
     {
@@ -72,8 +75,10 @@ abstract class BaseRichTextIntegrationTestCase extends IbexaKernelTestCase
         return $fieldCreate;
     }
 
-    protected static function assertRichTextFieldValue(string $contents, Content $folder): void
-    {
+    protected static function assertRichTextFieldValue(
+        string $contents,
+        Content $folder
+    ): void {
         $field = $folder->getField(self::FIELD_DEFINITION_IDENTIFIER);
         self::assertNotNull($field, 'Missing field with identifier: ' . self::FIELD_DEFINITION_IDENTIFIER);
 

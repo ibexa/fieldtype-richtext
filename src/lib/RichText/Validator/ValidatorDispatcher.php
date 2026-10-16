@@ -37,8 +37,10 @@ class ValidatorDispatcher implements ValidatorInterface
     /**
      * Adds validator mapping.
      */
-    public function addValidator(string $namespace, ?ValidatorInterface $validator = null): void
-    {
+    public function addValidator(
+        string $namespace,
+        ?ValidatorInterface $validator = null
+    ): void {
         $this->mapping[$namespace] = $validator;
     }
 

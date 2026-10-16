@@ -29,8 +29,10 @@ class RelationProcessorTest extends TestCase
      *     embed: array{locationIds: array<int>, contentIds: array<int>}
      * } $expectedRelations
      */
-    public function testGetRelations(DOMDocument $document, array $expectedRelations): void
-    {
+    public function testGetRelations(
+        DOMDocument $document,
+        array $expectedRelations
+    ): void {
         $actualProcessor = (new RelationProcessor())->getRelations($document);
 
         self::assertSame($expectedRelations, $actualProcessor);

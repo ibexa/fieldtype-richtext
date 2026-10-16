@@ -102,7 +102,7 @@ class IbexaFieldTypeRichTextExtensionTest extends AbstractExtensionTestCase
     /**
      * Test IbexaFieldTypeRichTextExtension prepends expected and needed core settings.
      *
-     * @see \Ibexa\Bundle\FieldTypeRichText\DependencyInjection\IbexaFieldTypeRichTextExtension::prepend
+     * @see IbexaFieldTypeRichTextExtension::prepend
      */
     public function testPrepend(): void
     {
@@ -114,11 +114,11 @@ class IbexaFieldTypeRichTextExtensionTest extends AbstractExtensionTestCase
 
         $expectedPrependedConfig = [
             'field_templates' => [
-                    [
-                        'template' => '@IbexaFieldTypeRichText/RichText/content_fields.html.twig',
-                        'priority' => 0,
-                    ],
+                [
+                    'template' => '@IbexaFieldTypeRichText/RichText/content_fields.html.twig',
+                    'priority' => 0,
                 ],
+            ],
             'fielddefinition_settings_templates' => [
                 [
                     'template' => '@IbexaFieldTypeRichText/RichText/fielddefinition_settings.html.twig',
@@ -136,8 +136,10 @@ class IbexaFieldTypeRichTextExtensionTest extends AbstractExtensionTestCase
     /**
      * @dataProvider inlineTagDataProvider
      */
-    public function testCheckingInlineCustomTagsInToolbars(string $toolbarName, ?string $expectedException): void
-    {
+    public function testCheckingInlineCustomTagsInToolbars(
+        string $toolbarName,
+        ?string $expectedException
+    ): void {
         $config = Yaml::parse(
             file_get_contents(__DIR__ . '/Fixtures/ibexa_fieldtype_richtext.yaml')
         );

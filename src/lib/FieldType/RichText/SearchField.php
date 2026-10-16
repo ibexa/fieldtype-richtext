@@ -12,6 +12,7 @@ use Ibexa\Contracts\Core\FieldType\Indexable;
 use Ibexa\Contracts\Core\Persistence\Content\Field;
 use Ibexa\Contracts\Core\Persistence\Content\Type\FieldDefinition;
 use Ibexa\Contracts\Core\Search;
+use Ibexa\Contracts\Core\Search\FieldType;
 use Ibexa\Contracts\FieldTypeRichText\RichText\DOMDocumentLoaderInterface;
 use Ibexa\Contracts\FieldTypeRichText\RichText\TextExtractorInterface;
 use Ibexa\FieldTypeRichText\RichText\DOMDocumentLoader;
@@ -40,10 +41,12 @@ class SearchField implements Indexable
     /**
      * Get index data for field for search backend.
      *
-     * @return \Ibexa\Contracts\Core\Search\Field[]
+     * @return Search\Field[]
      */
-    public function getIndexData(Field $field, FieldDefinition $fieldDefinition): array
-    {
+    public function getIndexData(
+        Field $field,
+        FieldDefinition $fieldDefinition
+    ): array {
         /** @var string $xmlData */
         $xmlData = $field->value->data;
         $document = $this->domDocumentLoader->loadXML($xmlData, [
@@ -56,12 +59,12 @@ class SearchField implements Indexable
             new Search\Field(
                 'value',
                 $this->shortTextExtractor->extractText($document),
-                new Search\FieldType\StringField()
+                new FieldType\StringField()
             ),
             new Search\Field(
                 'fulltext',
                 $this->fullTextExtractor->extractText($document),
-                new Search\FieldType\FullTextField()
+                new FieldType\FullTextField()
             ),
         ];
     }
@@ -69,12 +72,12 @@ class SearchField implements Indexable
     /**
      * Get index field types for search backend.
      *
-     * @return \Ibexa\Contracts\Core\Search\FieldType[]
+     * @return FieldType[]
      */
     public function getIndexDefinition(): array
     {
         return [
-            'value' => new Search\FieldType\StringField(),
+            'value' => new FieldType\StringField(),
         ];
     }
 
