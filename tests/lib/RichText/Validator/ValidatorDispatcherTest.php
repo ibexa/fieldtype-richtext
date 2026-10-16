@@ -22,11 +22,14 @@ use PHPUnit\Framework\TestCase;
 final class ValidatorDispatcherTest extends TestCase
 {
     private const string DOCBOOK_NAMESPACE = 'http://docbook.org/ns/docbook';
-    private const string XHTML5_EDIT_NAMESPACE = 'http://ibexa.co/namespaces/ezpublish5/xhtml5/edit';
+    /**
+     * Any namespace URI works for the dispatcher, a URN avoids an insecure-looking "http" URL.
+     */
+    private const string OTHER_NAMESPACE = 'urn:ibexa:test:richtext';
 
     public function testDispatchesToMappedValidator(): void
     {
-        $document = self::loadDocument('<section xmlns="' . self::XHTML5_EDIT_NAMESPACE . '"/>');
+        $document = self::loadDocument('<section xmlns="' . self::OTHER_NAMESPACE . '"/>');
 
         $validator = $this->createMock(ValidatorInterface::class);
         $validator
@@ -37,7 +40,7 @@ final class ValidatorDispatcherTest extends TestCase
 
         $dispatcher = new ValidatorDispatcher([
             self::DOCBOOK_NAMESPACE => null,
-            self::XHTML5_EDIT_NAMESPACE => $validator,
+            self::OTHER_NAMESPACE => $validator,
         ]);
 
         self::assertSame(['error'], $dispatcher->dispatch($document));
@@ -59,7 +62,7 @@ final class ValidatorDispatcherTest extends TestCase
     ): void {
         $dispatcher = new ValidatorDispatcher([
             self::DOCBOOK_NAMESPACE => null,
-            self::XHTML5_EDIT_NAMESPACE => null,
+            self::OTHER_NAMESPACE => null,
         ]);
 
         try {
@@ -77,7 +80,7 @@ final class ValidatorDispatcherTest extends TestCase
      */
     public static function provideUnsupportedDocuments(): iterable
     {
-        $supported = '"' . self::DOCBOOK_NAMESPACE . '", "' . self::XHTML5_EDIT_NAMESPACE . '"';
+        $supported = '"' . self::DOCBOOK_NAMESPACE . '", "' . self::OTHER_NAMESPACE . '"';
 
         yield 'no namespace' => [
             '<section><para>x</para></section>',
