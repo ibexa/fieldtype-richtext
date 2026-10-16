@@ -10,7 +10,7 @@ namespace Ibexa\FieldTypeRichText\RichText\Validator;
 
 use DOMDocument;
 use Ibexa\Contracts\FieldTypeRichText\RichText\ValidatorInterface;
-use Ibexa\Core\Base\Exceptions\NotFoundException;
+use Ibexa\FieldTypeRichText\RichText\Exception\UnsupportedNamespaceException;
 
 /**
  * Dispatcher for various validators depending on the XML document namespace.
@@ -45,7 +45,7 @@ class ValidatorDispatcher implements ValidatorInterface
     /**
      * Dispatches DOMDocument to the namespace mapped validator.
      *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\FieldTypeRichText\RichText\Exception\UnsupportedNamespaceException if no validator is mapped to the document namespace
      *
      * @return string[]
      */
@@ -67,7 +67,11 @@ class ValidatorDispatcher implements ValidatorInterface
             }
         }
 
-        throw new NotFoundException('Validator', $documentNamespace);
+        throw new UnsupportedNamespaceException(
+            $document->documentElement->nodeName ?? '',
+            $documentNamespace,
+            array_keys($this->mapping)
+        );
     }
 
     public function validateDocument(DOMDocument $xmlDocument): array
