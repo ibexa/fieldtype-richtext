@@ -41,7 +41,7 @@ use PHPUnit\Framework\TestCase;
 use RuntimeException;
 
 #[CoversClass(FieldType::class)]
-#[CoversClass(Type::class)]
+#[CoversClass(RichTextType::class)]
 #[CoversClass(AuthorType::class)]
 #[Group('fieldType')]
 #[Group('ibexa_richtext')]
@@ -289,7 +289,7 @@ class RichTextTest extends TestCase
         $fieldType = $this->getFieldType();
         $value = new Value($this->createDocument($xmlString));
 
-        /** @var FieldDefinition|MockObject $fieldDefinitionMock */
+        /** @var APIFieldDefinition|MockObject $fieldDefinitionMock */
         $fieldDefinitionMock = self::createStub(APIFieldDefinition::class);
 
         $validationErrors = $fieldType->validate($fieldDefinitionMock, $value);
