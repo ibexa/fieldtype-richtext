@@ -83,7 +83,7 @@ abstract class XmlBase
      *
      * @uses ::formatLibXmlError()
      *
-     * @throws \RuntimeException If error recording is not started
+     * @throws RuntimeException If error recording is not started
      *
      * @return string[]
      */

@@ -81,7 +81,10 @@ final class AlloyEditor implements Provider
             return $value['visible'];
         });
 
-        uasort($buttons, static function (array $a, array $b): int {
+        uasort($buttons, static function (
+            array $a,
+            array $b
+        ): int {
             return $b['priority'] <=> $a['priority'];
         });
 

@@ -88,7 +88,10 @@ final class CKEditor implements Provider
             }
         );
 
-        uasort($groupsConfiguration, static function (array $a, array $b): int {
+        uasort($groupsConfiguration, static function (
+            array $a,
+            array $b
+        ): int {
             return $b['priority'] <=> $a['priority'];
         });
 
@@ -119,7 +122,10 @@ final class CKEditor implements Provider
             return $button['visible'];
         });
 
-        uasort($buttons, static function (array $a, array $b): int {
+        uasort($buttons, static function (
+            array $a,
+            array $b
+        ): int {
             return $b['priority'] <=> $a['priority'];
         });
 
@@ -132,7 +138,10 @@ final class CKEditor implements Provider
 
         return 0 !== count(array_filter(
             $this->customStylesConfiguration,
-            static function (array $customStyle, string $name) use ($enabledCustomStyles): bool {
+            static function (
+                array $customStyle,
+                string $name
+            ) use ($enabledCustomStyles): bool {
                 return in_array($name, $enabledCustomStyles, true) && $customStyle['inline'];
             },
             ARRAY_FILTER_USE_BOTH

@@ -19,7 +19,7 @@ use PHPUnit\Framework\MockObject\MockObject;
 #[CoversClass(AlloyEditorTest::class)]
 class AlloyEditorTest extends BaseProviderTestCase
 {
-    private OnlineEditorConfigMapper&MockObject $mapper;
+    private OnlineEditorConfigMapper & MockObject $mapper;
 
     public function setUp(): void
     {

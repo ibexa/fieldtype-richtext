@@ -13,7 +13,7 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 abstract class BaseCustomTemplateProviderTestCase extends BaseProviderTestCase
 {
-    protected CustomTemplateConfigMapper&MockObject $mapper;
+    protected CustomTemplateConfigMapper & MockObject $mapper;
 
     /**
      * @return array<mixed>

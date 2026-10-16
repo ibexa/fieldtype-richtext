@@ -16,6 +16,7 @@ use Ibexa\Tests\Bundle\Core\DependencyInjection\Configuration\Parser\AbstractPar
 use Ibexa\Tests\Bundle\FieldTypeRichText\DependencyInjection\ContainerParameterLoader;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
+use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\Yaml\Yaml;
 
@@ -80,7 +81,7 @@ class RichTextTest extends AbstractParserTestCase
      * Return an array of container extensions you need to be registered for each test (usually just the container
      * extension you are testing.
      *
-     * @return \Symfony\Component\DependencyInjection\Extension\ExtensionInterface[]
+     * @return ExtensionInterface[]
      */
     protected function getContainerExtensions(): array
     {
@@ -250,8 +251,10 @@ class RichTextTest extends AbstractParserTestCase
      * @throws \Exception
      */
     #[DataProvider('richTextSettingsProvider')]
-    public function testRichTextSettings(array $config, array $expected): void
-    {
+    public function testRichTextSettings(
+        array $config,
+        array $expected
+    ): void {
         $this->configureAndLoad(
             [
                 'ibexa' => [

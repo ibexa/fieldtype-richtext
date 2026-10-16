@@ -37,7 +37,7 @@ EOT;
     }
 
     /**
-     * @see \Ibexa\Core\FieldType\Value
+     * @see BaseValue
      */
     public function __toString(): string
     {

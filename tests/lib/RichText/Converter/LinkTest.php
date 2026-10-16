@@ -30,17 +30,17 @@ use Symfony\Component\Routing\RouterInterface;
  */
 class LinkTest extends TestCase
 {
-    protected function getMockContentService(): ContentService&MockObject
+    protected function getMockContentService(): ContentService & MockObject
     {
         return $this->createMock(ContentService::class);
     }
 
-    protected function getMockLocationService(): LocationService&MockObject
+    protected function getMockLocationService(): LocationService & MockObject
     {
         return $this->createMock(LocationService::class);
     }
 
-    protected function getMockRouter(): RouterInterface&MockObject
+    protected function getMockRouter(): RouterInterface & MockObject
     {
         return $this->createMock(RouterInterface::class);
     }
@@ -106,8 +106,10 @@ class LinkTest extends TestCase
      * Test conversion of ezurl://<id> links.
      */
     #[DataProvider('providerLinkXmlSample')]
-    public function testLink(string $input, string $output): void
-    {
+    public function testLink(
+        string $input,
+        string $output
+    ): void {
         $inputDocument = new DOMDocument();
         $inputDocument->loadXML($input);
 
@@ -115,13 +117,13 @@ class LinkTest extends TestCase
         $locationService = $this->getMockLocationService();
         $router = $this->getMockRouter();
 
-        $contentService->expects(self::never())
+        $contentService->expects($this->never())
             ->method(self::anything());
 
-        $locationService->expects(self::never())
+        $locationService->expects($this->never())
             ->method(self::anything());
 
-        $router->expects(self::never())
+        $router->expects($this->never())
             ->method(self::anything());
 
         $converter = new Link($locationService, $contentService, $router);
@@ -219,8 +221,12 @@ class LinkTest extends TestCase
      * Test conversion of ezlocation://<id> links.
      */
     #[DataProvider('providerLocationLink')]
-    public function testConvertLocationLink(string $input, string $output, int $locationId, string $urlResolved): void
-    {
+    public function testConvertLocationLink(
+        string $input,
+        string $output,
+        int $locationId,
+        string $urlResolved
+    ): void {
         $inputDocument = new DOMDocument();
         $inputDocument->loadXML($input);
 
@@ -230,12 +236,12 @@ class LinkTest extends TestCase
 
         $location = self::createStub(APILocation::class);
 
-        $locationService->expects(self::once())
+        $locationService->expects($this->once())
             ->method('loadLocation')
             ->with(self::equalTo($locationId))
             ->willReturn($location);
 
-        $router->expects(self::once())
+        $router->expects($this->once())
             ->method('generate')
             ->with(UrlAliasRouter::URL_ALIAS_ROUTE_NAME, ['location' => $location])
             ->willReturn($urlResolved);
@@ -278,12 +284,12 @@ class LinkTest extends TestCase
 
         $location = self::createStub(APILocation::class);
 
-        $locationService->expects(self::once())
+        $locationService->expects($this->once())
             ->method('loadLocation')
             ->with(self::equalTo(106))
             ->willReturn($location);
 
-        $router->expects(self::once())
+        $router->expects($this->once())
             ->method('generate')
             ->with(UrlAliasRouter::URL_ALIAS_ROUTE_NAME, [
                 'location' => $location,
@@ -302,7 +308,7 @@ class LinkTest extends TestCase
     }
 
     /**
-     * @return array<array{string, string, int, \Exception, string}>
+     * @return array<array{string, string, int, Exception, string}>
      */
     public static function providerBadLocationLink(): array
     {
@@ -374,8 +380,14 @@ class LinkTest extends TestCase
      * Test logging of bad location links.
      */
     #[DataProvider('providerBadLocationLink')]
-    public function testConvertBadLocationLink(string $input, string $output, int $locationId, Exception $exception, string $logType, string $logMessage): void
-    {
+    public function testConvertBadLocationLink(
+        string $input,
+        string $output,
+        int $locationId,
+        Exception $exception,
+        string $logType,
+        string $logMessage
+    ): void {
         $inputDocument = new DOMDocument();
         $inputDocument->loadXML($input);
 
@@ -385,14 +397,14 @@ class LinkTest extends TestCase
 
         $logger = $this->createMock(LoggerInterface::class);
 
-        $logger->expects(self::once())
+        $logger->expects($this->once())
             ->method($logType)
             ->with(self::equalTo($logMessage));
 
-        $locationService->expects(self::once())
+        $locationService->expects($this->once())
             ->method('loadLocation')
             ->with(self::equalTo($locationId))
-            ->will(self::throwException($exception));
+            ->will($this->throwException($exception));
 
         $converter = new Link($locationService, $contentService, $router, $logger);
 
@@ -471,8 +483,12 @@ class LinkTest extends TestCase
      * Test conversion of ezcontent://<id> links.
      */
     #[DataProvider('providerContentLink')]
-    public function testConvertContentLink(string $input, string $output, int $contentId, string $urlResolved): void
-    {
+    public function testConvertContentLink(
+        string $input,
+        string $output,
+        int $contentId,
+        string $urlResolved
+    ): void {
         $locationId = 106;
         $inputDocument = new DOMDocument();
         $inputDocument->loadXML($input);
@@ -484,22 +500,22 @@ class LinkTest extends TestCase
         $contentInfo = $this->createMock(APIContentInfo::class);
         $location = self::createStub(APILocation::class);
 
-        $contentInfo->expects(self::once())
+        $contentInfo->expects($this->once())
             ->method('__get')
             ->with(self::equalTo('mainLocationId'))
             ->willReturn($locationId);
 
-        $contentService->expects(self::any())
+        $contentService->expects($this->any())
             ->method('loadContentInfo')
             ->with(self::equalTo($contentId))
             ->willReturn($contentInfo);
 
-        $locationService->expects(self::once())
+        $locationService->expects($this->once())
             ->method('loadLocation')
             ->with(self::equalTo($locationId))
             ->willReturn($location);
 
-        $router->expects(self::once())
+        $router->expects($this->once())
             ->method('generate')
             ->with(UrlAliasRouter::URL_ALIAS_ROUTE_NAME, ['location' => $location])
             ->willReturn($urlResolved);
@@ -587,8 +603,14 @@ class LinkTest extends TestCase
      * Test logging of bad content links.
      */
     #[DataProvider('providerBadContentLink')]
-    public function testConvertBadContentLink(string $input, string $output, int $contentId, Exception $exception, string $logType, string $logMessage): void
-    {
+    public function testConvertBadContentLink(
+        string $input,
+        string $output,
+        int $contentId,
+        Exception $exception,
+        string $logType,
+        string $logMessage
+    ): void {
         $inputDocument = new DOMDocument();
         $inputDocument->loadXML($input);
 
@@ -598,14 +620,14 @@ class LinkTest extends TestCase
 
         $logger = $this->createMock(LoggerInterface::class);
 
-        $logger->expects(self::once())
+        $logger->expects($this->once())
             ->method($logType)
             ->with(self::equalTo($logMessage));
 
-        $contentService->expects(self::once())
+        $contentService->expects($this->once())
             ->method('loadContentInfo')
             ->with(self::equalTo($contentId))
-            ->will(self::throwException($exception));
+            ->will($this->throwException($exception));
 
         $converter = new Link($locationService, $contentService, $router, $logger);
 

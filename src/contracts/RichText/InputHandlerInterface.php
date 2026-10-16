@@ -9,23 +9,26 @@ declare(strict_types=1);
 namespace Ibexa\Contracts\FieldTypeRichText\RichText;
 
 use DOMDocument;
+use Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException;
+use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
+use Ibexa\FieldTypeRichText\RichText\Exception\InvalidXmlException;
 
 interface InputHandlerInterface
 {
     /**
      * Converts a given XML String to the internal Rich Text representation.
      *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
-     * @throws \Ibexa\FieldTypeRichText\RichText\Exception\InvalidXmlException
+     * @throws NotFoundException
+     * @throws InvalidArgumentException
+     * @throws InvalidXmlException
      */
     public function fromString(?string $inputValue = null): DOMDocument;
 
     /**
      * Converts a given DOMDocument to the internal Rich Text representation.
      *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
+     * @throws NotFoundException
+     * @throws InvalidArgumentException
      */
     public function fromDocument(DOMDocument $inputValue): DOMDocument;
 

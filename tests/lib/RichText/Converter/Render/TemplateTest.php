@@ -19,9 +19,9 @@ use PHPUnit\Framework\TestCase;
 
 class TemplateTest extends TestCase
 {
-    protected RendererInterface&MockObject $rendererMock;
+    protected RendererInterface & MockObject $rendererMock;
 
-    protected Converter&MockObject $converterMock;
+    protected Converter & MockObject $converterMock;
 
     public function setUp(): void
     {
@@ -173,12 +173,12 @@ class TemplateTest extends TestCase
         );
     }
 
-    protected function getRendererMock(): RendererInterface&MockObject
+    protected function getRendererMock(): RendererInterface & MockObject
     {
         return $this->createMock(RendererInterface::class);
     }
 
-    protected function getConverterMock(): Converter&MockObject
+    protected function getConverterMock(): Converter & MockObject
     {
         return $this->createMock(Converter::class);
     }

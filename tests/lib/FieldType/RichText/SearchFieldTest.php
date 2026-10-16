@@ -25,12 +25,12 @@ final class SearchFieldTest extends TestCase
 {
     private SearchField $searchField;
 
-    private TextExtractorInterface&MockObject $shortTextExtractor;
+    private TextExtractorInterface & MockObject $shortTextExtractor;
 
-    private TextExtractorInterface&MockObject $fullTextExtractor;
+    private TextExtractorInterface & MockObject $fullTextExtractor;
 
     /**
-     * @return array<string, array{string, \Ibexa\Contracts\Core\Search\Field[], string[]}>
+     * @return array<string, array{string, Search\Field[], string[]}>
      */
     public static function getDataForTestGetIndexData(): array
     {
@@ -91,12 +91,15 @@ final class SearchFieldTest extends TestCase
     }
 
     /**
-     * @param array<\Ibexa\Contracts\Core\Search\Field> $expectedSearchFields
+     * @param array<Search\Field> $expectedSearchFields
      * @param array<string> $expectedTextValues
      */
     #[DataProvider('getDataForTestGetIndexData')]
-    public function testGetIndexData(string $docBookXml, array $expectedSearchFields, array $expectedTextValues): void
-    {
+    public function testGetIndexData(
+        string $docBookXml,
+        array $expectedSearchFields,
+        array $expectedTextValues
+    ): void {
         $field = new Field(
             [
                 'id' => 1,

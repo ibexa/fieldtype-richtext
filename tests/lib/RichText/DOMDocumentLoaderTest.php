@@ -10,13 +10,14 @@ namespace Ibexa\Tests\FieldTypeRichText\RichText;
 
 use Ibexa\FieldTypeRichText\RichText\DOMDocumentLoader;
 use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 
 #[CoversClass(DOMDocumentLoader::class)]
 final class DOMDocumentLoaderTest extends TestCase
 {
-    /** @var \Psr\Log\LoggerInterface&\PHPUnit\Framework\MockObject\MockObject */
+    /** @var LoggerInterface&MockObject */
     private LoggerInterface $logger;
 
     private DOMDocumentLoader $loader;
@@ -29,7 +30,7 @@ final class DOMDocumentLoaderTest extends TestCase
 
     public function testLoadValidXML(): void
     {
-        $this->logger->expects(self::never())->method('warning');
+        $this->logger->expects($this->never())->method('warning');
 
         $document = $this->loader->loadXML(
             '<?xml version="1.0" encoding="UTF-8"?><section xmlns="http://docbook.org/ns/docbook"><para>Lorem</para></section>'
@@ -42,7 +43,7 @@ final class DOMDocumentLoaderTest extends TestCase
     public function testLoadXMLWithInvalidXmlIdLogsWarningWithContext(): void
     {
         $this->logger
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('warning')
             ->with(
                 'RichText XML document loaded with libxml errors',
@@ -65,7 +66,7 @@ final class DOMDocumentLoaderTest extends TestCase
 
     public function testLoadUnparseableXMLReturnsEmptyDocumentAndLogs(): void
     {
-        $this->logger->expects(self::once())->method('warning');
+        $this->logger->expects($this->once())->method('warning');
 
         $document = $this->loader->loadXML('<section><para>unclosed</section>');
 

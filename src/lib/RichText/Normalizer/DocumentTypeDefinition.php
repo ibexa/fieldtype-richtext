@@ -39,8 +39,11 @@ class DocumentTypeDefinition extends Normalizer
      */
     private ?string $expression = null;
 
-    public function __construct(string $documentElement, string $namespace, string $dtdPath)
-    {
+    public function __construct(
+        string $documentElement,
+        string $namespace,
+        string $dtdPath
+    ) {
         $this->documentElement = $documentElement;
         $this->namespace = $namespace;
         $this->dtdPath = $dtdPath;

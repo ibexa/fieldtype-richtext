@@ -9,9 +9,15 @@ declare(strict_types=1);
 namespace Ibexa\Tests\Integration\FieldTypeRichText\Repository;
 
 use DirectoryIterator;
+use Doctrine\DBAL\Exception;
 use Doctrine\DBAL\ParameterType;
 use DOMDocument;
+use Ibexa\Contracts\Core\Repository\Exceptions\BadStateException;
 use Ibexa\Contracts\Core\Repository\Exceptions\ContentFieldValidationException;
+use Ibexa\Contracts\Core\Repository\Exceptions\ContentValidationException;
+use Ibexa\Contracts\Core\Repository\Exceptions\ForbiddenException;
+use Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException;
+use Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException;
 use Ibexa\Contracts\Core\Repository\Repository;
 use Ibexa\Contracts\Core\Repository\Values\Content\Content;
 use Ibexa\Contracts\Core\Repository\Values\Content\Field;
@@ -74,7 +80,7 @@ EOT
     }
 
     /**
-     * @return \Ibexa\Core\Repository\Values\Content\Relation[]
+     * @return Relation[]
      */
     public function getCreateExpectedRelations(Content $content): array
     {
@@ -106,7 +112,7 @@ EOT
     }
 
     /**
-     * @return \Ibexa\Core\Repository\Values\Content\Relation[]
+     * @return Relation[]
      */
     public function getUpdateExpectedRelations(Content $content): array
     {
@@ -422,8 +428,10 @@ EOT
      *        maintained!
      */
     #[DataProvider('provideFromHashData')]
-    public function testFromHash(mixed $hash, mixed $expectedValue = null): void
-    {
+    public function testFromHash(
+        mixed $hash,
+        mixed $expectedValue = null
+    ): void {
         $richTextValue = $this
             ->getRepository()
             ->getFieldTypeService()
@@ -556,8 +564,10 @@ EOT;
      * This tests the conversion from remote_object_id to object_id.
      */
     #[DataProvider('providerForTestConvertRemoteObjectIdToObjectId')]
-    public function testConvertRemoteObjectIdToObjectId(string $test, string $expected): void
-    {
+    public function testConvertRemoteObjectIdToObjectId(
+        string $test,
+        string $expected
+    ): void {
         $repository = $this->getRepository();
 
         $contentService = $repository->getContentService();
@@ -625,10 +635,10 @@ EOT;
 
     /**
      * @throws \Doctrine\DBAL\Driver\Exception
-     * @throws \Doctrine\DBAL\Exception
+     * @throws Exception
      * @throws \ErrorException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ForbiddenException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
+     * @throws ForbiddenException
+     * @throws UnauthorizedException
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      */
     public function testExternalLinkStoringAfterUpdate(): void
@@ -679,7 +689,7 @@ EOT;
 
     /**
      * @throws \Doctrine\DBAL\Driver\Exception
-     * @throws \Doctrine\DBAL\Exception
+     * @throws Exception
      * @throws \ErrorException
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      */
@@ -706,8 +716,8 @@ EOT;
     }
 
     /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ForbiddenException
+     * @throws UnauthorizedException
+     * @throws ForbiddenException
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      */
     private function createContentTypeForTestExternalLinkStoringAfterUpdate(): ContentType
@@ -858,10 +868,10 @@ EOT;
     /**
      * Prepare Content structure with link to deleted Location.
      *
-     * @return array{\Ibexa\Contracts\Core\Repository\Values\Content\Location, \Ibexa\Contracts\Core\Repository\Values\Content\Content}
+     * @return array{Location, Content}
      *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ForbiddenException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
+     * @throws ForbiddenException
+     * @throws UnauthorizedException
      */
     private function prepareInternalLinkValidatorBrokenLinksTestCase(Repository $repository): array
     {
@@ -906,12 +916,12 @@ EOT;
     /**
      * Test updating Content which contains links to deleted Location doesn't fail when updating not broken field only.
      *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\BadStateException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ContentFieldValidationException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ContentValidationException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ForbiddenException
+     * @throws BadStateException
+     * @throws ContentFieldValidationException
+     * @throws ContentValidationException
+     * @throws InvalidArgumentException
+     * @throws UnauthorizedException
+     * @throws ForbiddenException
      */
     public function testInternalLinkValidatorIgnoresMissingRelationOnNotUpdatedField(): void
     {
@@ -936,11 +946,11 @@ EOT;
      * Test updating Content which contains links to deleted Location fails when updating broken field.
      *
      * @throws \DOMException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\BadStateException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ContentValidationException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ForbiddenException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
+     * @throws BadStateException
+     * @throws ContentValidationException
+     * @throws ForbiddenException
+     * @throws InvalidArgumentException
+     * @throws UnauthorizedException
      */
     public function testInternalLinkValidatorReturnsErrorOnMissingRelationInUpdatedField(): void
     {
@@ -952,7 +962,7 @@ EOT;
         );
 
         // update field containing erroneous link to trigger validation
-        /** @var \DOMDocument $document */
+        /** @var DOMDocument $document */
         $document = $brokenContent->getField('data', 'eng-GB')?->getValue()->xml;
         $newParagraph = $document->createElement('para', 'Updated content');
         $document

@@ -18,8 +18,10 @@ class DoctrineStorage extends Gateway
 {
     protected Connection $connection;
 
-    public function __construct(UrlGateway $urlGateway, Connection $connection)
-    {
+    public function __construct(
+        UrlGateway $urlGateway,
+        Connection $connection
+    ) {
         parent::__construct($urlGateway);
         $this->connection = $connection;
     }

@@ -76,8 +76,10 @@ this is line 3</literallayout>
      * Test conversion of <li> tags which containing <br/> and <ol>/<ul> tags.
      */
     #[DataProvider('providerConvert')]
-    public function testConvert(string $input, string $output): void
-    {
+    public function testConvert(
+        string $input,
+        string $output
+    ): void {
         $inputDocument = new DOMDocument();
         $inputDocument->loadXML($input);
 

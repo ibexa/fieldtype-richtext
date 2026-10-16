@@ -17,7 +17,7 @@ use PHPUnit\Framework\TestCase;
 
 class RichTextProcessorTest extends TestCase
 {
-    protected Converter&MockObject $converter;
+    protected Converter & MockObject $converter;
 
     protected function setUp(): void
     {

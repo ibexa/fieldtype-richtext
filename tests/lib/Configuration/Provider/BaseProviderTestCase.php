@@ -15,7 +15,7 @@ use PHPUnit\Framework\TestCase;
 
 abstract class BaseProviderTestCase extends TestCase
 {
-    protected ConfigResolverInterface&MockObject $configResolver;
+    protected ConfigResolverInterface & MockObject $configResolver;
 
     public function setUp(): void
     {

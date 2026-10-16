@@ -22,7 +22,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 /**
  * UI Config Mapper test for RichText Custom Tags configuration.
  *
- * @see \Ibexa\FieldTypeRichText\Configuration\UI\Mapper\CustomTag::__construct
+ * @see CustomTag::__construct
  */
 #[CoversClass(CustomTag::class)]
 class CustomTagTest extends TestCase
@@ -176,7 +176,7 @@ class CustomTagTest extends TestCase
         ];
     }
 
-    private function getTranslatorInterfaceMock(): TranslatorInterface&MockObject
+    private function getTranslatorInterfaceMock(): TranslatorInterface & MockObject
     {
         $translatorInterfaceMock = $this->createMock(TranslatorInterface::class);
         $translatorInterfaceMock
@@ -188,7 +188,7 @@ class CustomTagTest extends TestCase
         return $translatorInterfaceMock;
     }
 
-    private function getTranslatorBagInterfaceMock(): TranslatorBagInterface&MockObject
+    private function getTranslatorBagInterfaceMock(): TranslatorBagInterface & MockObject
     {
         $catalogueMock = $this->createMock(MessageCatalogueInterface::class);
         $catalogueMock
@@ -208,7 +208,7 @@ class CustomTagTest extends TestCase
         return $translatorBagInterfaceMock;
     }
 
-    private function getPackagesMock(): Packages&MockObject
+    private function getPackagesMock(): Packages & MockObject
     {
         $packagesMock = $this->createMock(Packages::class);
         $packagesMock

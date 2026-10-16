@@ -21,9 +21,9 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 class RichTextValidatorTest extends TestCase
 {
-    private InputHandlerInterface&MockObject $inputHandler;
+    private InputHandlerInterface & MockObject $inputHandler;
 
-    private ExecutionContextInterface&MockObject $executionContext;
+    private ExecutionContextInterface & MockObject $executionContext;
 
     private RichTextValidator $validator;
 

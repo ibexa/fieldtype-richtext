@@ -9,7 +9,6 @@ declare(strict_types=1);
 namespace Ibexa\FieldTypeRichText\RichText\Validator;
 
 use DOMDocument;
-use Ibexa\Contracts\Core\Persistence\Content\Handler;
 use Ibexa\Contracts\Core\Persistence\Content\Handler as ContentHandler;
 use Ibexa\Contracts\Core\Persistence\Content\Location\Handler as LocationHandler;
 use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
@@ -21,12 +20,14 @@ use Ibexa\Core\Base\Exceptions\InvalidArgumentException;
  */
 class InternalLinkValidator implements ValidatorInterface
 {
-    private Handler $contentHandler;
+    private ContentHandler $contentHandler;
 
     private LocationHandler $locationHandler;
 
-    public function __construct(ContentHandler $contentHandler, LocationHandler $locationHandler)
-    {
+    public function __construct(
+        ContentHandler $contentHandler,
+        LocationHandler $locationHandler
+    ) {
         $this->contentHandler = $contentHandler;
         $this->locationHandler = $locationHandler;
     }
@@ -71,8 +72,10 @@ class InternalLinkValidator implements ValidatorInterface
      *
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException if given $scheme is not supported
      */
-    public function validate(string $scheme, string $id): bool
-    {
+    public function validate(
+        string $scheme,
+        string $id
+    ): bool {
         try {
             switch ($scheme) {
                 case 'ezcontent':
@@ -99,8 +102,10 @@ class InternalLinkValidator implements ValidatorInterface
      *
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException if given $scheme is not supported
      */
-    private function getInvalidLinkError(string $scheme, string $url): string
-    {
+    private function getInvalidLinkError(
+        string $scheme,
+        string $url
+    ): string {
         switch ($scheme) {
             case 'ezcontent':
             case 'ezremote':

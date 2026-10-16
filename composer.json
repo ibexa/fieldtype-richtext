@@ -31,9 +31,10 @@
     },
     "require-dev": {
         "dama/doctrine-test-bundle": "^8.2",
-        "ibexa/code-style": "~2.0.0",
+        "ibexa/code-style": "~2.3.1",
         "ibexa/design-engine": "~6.0.x-dev",
         "ibexa/design-system-twig": "~6.0.x-dev",
+        "ibexa/doctrine-migrations": "~6.0.x-dev",
         "ibexa/doctrine-schema": "~6.0.x-dev",
         "ibexa/notifications": "~6.0.x-dev",
         "ibexa/phpstan": "~6.0.x-dev",

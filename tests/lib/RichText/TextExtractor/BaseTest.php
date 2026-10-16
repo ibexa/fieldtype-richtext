@@ -18,8 +18,10 @@ abstract class BaseTest extends TestCase
     protected TextExtractorInterface $textExtractor;
 
     #[DataProvider('providerForTestExtractText')]
-    public function testExtractText(string $docBookXml, string $expectedText): void
-    {
+    public function testExtractText(
+        string $docBookXml,
+        string $expectedText
+    ): void {
         $document = new DOMDocument();
         $document->loadXML($docBookXml);
 

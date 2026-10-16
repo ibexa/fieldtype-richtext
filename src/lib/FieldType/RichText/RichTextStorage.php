@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace Ibexa\FieldTypeRichText\FieldType\RichText;
 
 use DOMXPath;
+use Ibexa\Contracts\Core\FieldType\FieldStorage;
 use Ibexa\Contracts\Core\FieldType\GatewayBasedStorage;
 use Ibexa\Contracts\Core\FieldType\StorageGateway;
 use Ibexa\Contracts\Core\FieldType\StorageGatewayInterface;
@@ -16,13 +17,14 @@ use Ibexa\Contracts\Core\Persistence\Content\Field;
 use Ibexa\Contracts\Core\Persistence\Content\VersionInfo;
 use Ibexa\Contracts\FieldTypeRichText\RichText\DOMDocumentLoaderInterface;
 use Ibexa\Core\Base\Exceptions\NotFoundException;
+use Ibexa\FieldTypeRichText\FieldType\RichText\RichTextStorage\Gateway;
 use Psr\Log\LoggerInterface;
 
 class RichTextStorage extends GatewayBasedStorage
 {
     protected ?LoggerInterface $logger;
 
-    /** @var \Ibexa\FieldTypeRichText\FieldType\RichText\RichTextStorage\Gateway */
+    /** @var Gateway */
     protected StorageGatewayInterface $gateway;
 
     private DOMDocumentLoaderInterface $domDocumentLoader;
@@ -40,8 +42,10 @@ class RichTextStorage extends GatewayBasedStorage
     /**
      * @return array<string, int>
      */
-    private function getLogContext(VersionInfo $versionInfo, Field $field): array
-    {
+    private function getLogContext(
+        VersionInfo $versionInfo,
+        Field $field
+    ): array {
         return [
             'contentId' => $versionInfo->contentInfo->id,
             'versionNo' => $versionInfo->versionNo,
@@ -50,10 +54,12 @@ class RichTextStorage extends GatewayBasedStorage
     }
 
     /**
-     * @see \Ibexa\Contracts\Core\FieldType\FieldStorage
+     * @see FieldStorage
      */
-    public function storeFieldData(VersionInfo $versionInfo, Field $field): bool
-    {
+    public function storeFieldData(
+        VersionInfo $versionInfo,
+        Field $field
+    ): bool {
         /** @var string $xmlData */
         $xmlData = $field->value->data;
         $document = $this->domDocumentLoader->loadXML($xmlData, $this->getLogContext($versionInfo, $field));
@@ -138,8 +144,10 @@ class RichTextStorage extends GatewayBasedStorage
     /**
      * Modifies $field if needed, using external data (like for Urls).
      */
-    public function getFieldData(VersionInfo $versionInfo, Field $field): void
-    {
+    public function getFieldData(
+        VersionInfo $versionInfo,
+        Field $field
+    ): void {
         /** @var string $xmlData */
         $xmlData = $field->value->data;
         $document = $this->domDocumentLoader->loadXML($xmlData, $this->getLogContext($versionInfo, $field));
@@ -195,8 +203,10 @@ class RichTextStorage extends GatewayBasedStorage
     /**
      * @param list<int> $fieldIds
      */
-    public function deleteFieldData(VersionInfo $versionInfo, array $fieldIds): bool
-    {
+    public function deleteFieldData(
+        VersionInfo $versionInfo,
+        array $fieldIds
+    ): bool {
         foreach ($fieldIds as $fieldId) {
             $this->gateway->unlinkUrl($fieldId, $versionInfo->versionNo);
         }

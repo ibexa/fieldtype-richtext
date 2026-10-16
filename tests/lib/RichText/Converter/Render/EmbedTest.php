@@ -18,9 +18,9 @@ use Psr\Log\LoggerInterface;
 
 class EmbedTest extends TestCase
 {
-    protected RendererInterface&MockObject $rendererMock;
+    protected RendererInterface & MockObject $rendererMock;
 
-    protected LoggerInterface&MockObject $loggerMock;
+    protected LoggerInterface & MockObject $loggerMock;
 
     public function setUp(): void
     {
@@ -881,12 +881,12 @@ class EmbedTest extends TestCase
         );
     }
 
-    protected function getRendererMock(): RendererInterface&MockObject
+    protected function getRendererMock(): RendererInterface & MockObject
     {
         return $this->createMock(RendererInterface::class);
     }
 
-    protected function getLoggerMock(): LoggerInterface&MockObject
+    protected function getLoggerMock(): LoggerInterface & MockObject
     {
         return $this->createMock(LoggerInterface::class);
     }

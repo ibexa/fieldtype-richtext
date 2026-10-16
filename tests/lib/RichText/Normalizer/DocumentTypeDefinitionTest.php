@@ -83,8 +83,12 @@ xmlns="http://ibexa.co/namespaces/ezpublish5/xhtml5/edit">
     }
 
     #[DataProvider('providerForTestNormalize')]
-    public function testAccept(string $documentElement, string $namespace, string $dtdPath, string $input): void
-    {
+    public function testAccept(
+        string $documentElement,
+        string $namespace,
+        string $dtdPath,
+        string $input
+    ): void {
         $normalizer = $this->getNormalizer($documentElement, $namespace, $dtdPath);
 
         self::assertTrue($normalizer->accept($input));
@@ -94,8 +98,12 @@ xmlns="http://ibexa.co/namespaces/ezpublish5/xhtml5/edit">
      * @param string $input Ignored
      */
     #[DataProvider('providerForTestNormalize')]
-    public function testAcceptNoXmlDeclaration(string $documentElement, string $namespace, string $dtdPath, string $input): void
-    {
+    public function testAcceptNoXmlDeclaration(
+        string $documentElement,
+        string $namespace,
+        string $dtdPath,
+        string $input
+    ): void {
         $normalizer = $this->getNormalizer($documentElement, $namespace, $dtdPath);
 
         self::assertTrue($normalizer->accept(
@@ -111,8 +119,14 @@ XML
     }
 
     #[DataProvider('providerForTestNormalize')]
-    public function testNormalize(string $documentElement, string $namespace, string $dtdPath, string $input, string $expectedOutput, string $expectedSaved): void
-    {
+    public function testNormalize(
+        string $documentElement,
+        string $namespace,
+        string $dtdPath,
+        string $input,
+        string $expectedOutput,
+        string $expectedSaved
+    ): void {
         $normalizer = $this->getNormalizer($documentElement, $namespace, $dtdPath);
 
         $output = (string)$normalizer->normalize($input);
@@ -185,15 +199,22 @@ XML
     }
 
     #[DataProvider('providerForTestRefuse')]
-    public function testRefuse(string $documentElement, string $namespace, string $dtdPath, string $input): void
-    {
+    public function testRefuse(
+        string $documentElement,
+        string $namespace,
+        string $dtdPath,
+        string $input
+    ): void {
         $normalizer = $this->getNormalizer($documentElement, $namespace, $dtdPath);
 
         self::assertFalse($normalizer->accept($input));
     }
 
-    protected function getNormalizer($documentElement, $namespace, $dtdPath): DocumentTypeDefinition
-    {
+    protected function getNormalizer(
+        $documentElement,
+        $namespace,
+        $dtdPath
+    ): DocumentTypeDefinition {
         return new DocumentTypeDefinition($documentElement, $namespace, $dtdPath);
     }
 }

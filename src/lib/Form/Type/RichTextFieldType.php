@@ -24,8 +24,10 @@ class RichTextFieldType extends AbstractType
 
     protected Converter $docbookToXhtml5EditConverter;
 
-    public function __construct(FieldTypeService $fieldTypeService, Converter $docbookToXhtml5EditConverter)
-    {
+    public function __construct(
+        FieldTypeService $fieldTypeService,
+        Converter $docbookToXhtml5EditConverter
+    ) {
         $this->fieldTypeService = $fieldTypeService;
         $this->docbookToXhtml5EditConverter = $docbookToXhtml5EditConverter;
     }
@@ -45,8 +47,10 @@ class RichTextFieldType extends AbstractType
         return TextareaType::class;
     }
 
-    public function buildForm(FormBuilderInterface $builder, array $options): void
-    {
+    public function buildForm(
+        FormBuilderInterface $builder,
+        array $options
+    ): void {
         $builder->addModelTransformer(new RichTextValueTransformer(
             $this->fieldTypeService->getFieldType('ibexa_richtext'),
             $this->docbookToXhtml5EditConverter

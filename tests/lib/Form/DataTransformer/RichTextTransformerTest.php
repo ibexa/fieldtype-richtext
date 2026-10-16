@@ -26,9 +26,9 @@ use Symfony\Component\Form\Exception\TransformationFailedException;
 #[CoversClass(RichTextTransformer::class)]
 class RichTextTransformerTest extends TestCase
 {
-    private InputHandlerInterface&MockObject $inputHandler;
+    private InputHandlerInterface & MockObject $inputHandler;
 
-    private Converter&MockObject $docbook2xhtml5editConverter;
+    private Converter & MockObject $docbook2xhtml5editConverter;
 
     private RichTextTransformer $richTextTransformer;
 
@@ -58,9 +58,9 @@ class RichTextTransformerTest extends TestCase
             '<section xmlns="http://docbook.org/ns/docbook" version="5.0-variant ezpublish-1.0"><para>This is a paragraph.</para></section>';
 
         $this->docbook2xhtml5editConverter
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('convert')
-            ->willReturnCallback(static function (DOMDocument $doc) use ($inputXML, $outputDocument): \DOMDocument {
+            ->willReturnCallback(static function (DOMDocument $doc) use ($inputXML, $outputDocument): DOMDocument {
                 $actualXML = $doc->saveXML();
                 self::assertIsString($actualXML);
                 self::assertXmlStringEqualsXmlString($inputXML, $actualXML);
@@ -98,7 +98,7 @@ class RichTextTransformerTest extends TestCase
         $outputDocument->loadXML($outputXML);
 
         $this->inputHandler
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('fromString')
             ->with($inputXML)
             ->willReturn($outputDocument);
@@ -114,7 +114,7 @@ class RichTextTransformerTest extends TestCase
         $this->expectException(TransformationFailedException::class);
 
         $this->inputHandler
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('fromString')
             ->with($value)
             ->willThrowException($exception);
@@ -123,7 +123,7 @@ class RichTextTransformerTest extends TestCase
     }
 
     /**
-     * @phpstan-return list<array{\Exception}>
+     * @phpstan-return list<array{Exception}>
      */
     public static function dataProviderForReverseTransformTransformationFailedException(): array
     {

@@ -28,8 +28,10 @@ class RelationProcessorTest extends TestCase
      * } $expectedRelations
      */
     #[DataProvider('dateProviderForGetRelations')]
-    public function testGetRelations(DOMDocument $document, array $expectedRelations): void
-    {
+    public function testGetRelations(
+        DOMDocument $document,
+        array $expectedRelations
+    ): void {
         $actualProcessor = (new RelationProcessor())->getRelations($document);
 
         self::assertSame($expectedRelations, $actualProcessor);

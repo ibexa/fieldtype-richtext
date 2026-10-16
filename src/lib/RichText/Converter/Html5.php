@@ -15,8 +15,10 @@ use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
  */
 class Html5 extends ConfigResolverAwareXsltConverter
 {
-    public function __construct(string $stylesheet, ConfigResolverInterface $configResolver)
-    {
+    public function __construct(
+        string $stylesheet,
+        ConfigResolverInterface $configResolver
+    ) {
         parent::__construct($stylesheet, $configResolver, 'fieldtypes.ibexa_richtext.output_custom_xsl');
     }
 }

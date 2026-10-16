@@ -115,8 +115,10 @@ EOT;
     }
 
     #[DataProvider('dataProviderForHandleDoctype')]
-    public function testHandleDoctype(string $xml, string $stringNotContainsString): void
-    {
+    public function testHandleDoctype(
+        string $xml,
+        string $stringNotContainsString
+    ): void {
         $doc = $this->domDocumentFactory->loadXMLString($xml);
         $docXMLString = $doc->saveXML();
         self::assertIsString($docXMLString);

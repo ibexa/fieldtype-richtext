@@ -60,8 +60,10 @@ final class RelationProcessor
      *
      * @return array{locationIds: array<int, int>, contentIds: array<int, int>}
      */
-    private function getRelatedObjectIds(DOMDocument $xml, array $tagNames): array
-    {
+    private function getRelatedObjectIds(
+        DOMDocument $xml,
+        array $tagNames
+    ): array {
         $contentIds = [];
         $locationIds = [];
 
