@@ -9,24 +9,26 @@ declare(strict_types=1);
 namespace Ibexa\FieldTypeRichText\FieldType\RichText;
 
 use DOMXPath;
+use Ibexa\Contracts\Core\FieldType\FieldStorage;
 use Ibexa\Contracts\Core\FieldType\GatewayBasedStorage;
 use Ibexa\Contracts\Core\FieldType\StorageGateway;
 use Ibexa\Contracts\Core\Persistence\Content\Field;
 use Ibexa\Contracts\Core\Persistence\Content\VersionInfo;
 use Ibexa\Contracts\FieldTypeRichText\RichText\DOMDocumentLoaderInterface;
 use Ibexa\Core\Base\Exceptions\NotFoundException;
+use Ibexa\FieldTypeRichText\FieldType\RichText\RichTextStorage\Gateway;
 use Ibexa\FieldTypeRichText\RichText\DOMDocumentLoader;
 use Psr\Log\LoggerInterface;
 
 class RichTextStorage extends GatewayBasedStorage
 {
     /**
-     * @var \Psr\Log\LoggerInterface|null
+     * @var LoggerInterface|null
      */
     protected $logger;
 
     /**
-     * @var \Ibexa\FieldTypeRichText\FieldType\RichText\RichTextStorage\Gateway
+     * @var Gateway
      */
     protected $gateway;
 
@@ -45,8 +47,10 @@ class RichTextStorage extends GatewayBasedStorage
     /**
      * @return array<string, int>
      */
-    private function getLogContext(VersionInfo $versionInfo, Field $field): array
-    {
+    private function getLogContext(
+        VersionInfo $versionInfo,
+        Field $field
+    ): array {
         return [
             'contentId' => $versionInfo->contentInfo->id,
             'versionNo' => $versionInfo->versionNo,
@@ -55,10 +59,13 @@ class RichTextStorage extends GatewayBasedStorage
     }
 
     /**
-     * @see \Ibexa\Contracts\Core\FieldType\FieldStorage
+     * @see FieldStorage
      */
-    public function storeFieldData(VersionInfo $versionInfo, Field $field, array $context)
-    {
+    public function storeFieldData(
+        VersionInfo $versionInfo,
+        Field $field,
+        array $context
+    ) {
         /** @var string $xmlData */
         $xmlData = $field->value->data;
         $document = $this->domDocumentLoader->loadXML($xmlData, $this->getLogContext($versionInfo, $field));
@@ -145,12 +152,15 @@ class RichTextStorage extends GatewayBasedStorage
     /**
      * Modifies $field if needed, using external data (like for Urls).
      *
-     * @param \Ibexa\Contracts\Core\Persistence\Content\VersionInfo $versionInfo
-     * @param \Ibexa\Contracts\Core\Persistence\Content\Field $field
+     * @param VersionInfo $versionInfo
+     * @param Field $field
      * @param array $context
      */
-    public function getFieldData(VersionInfo $versionInfo, Field $field, array $context)
-    {
+    public function getFieldData(
+        VersionInfo $versionInfo,
+        Field $field,
+        array $context
+    ) {
         /** @var string $xmlData */
         $xmlData = $field->value->data;
         $document = $this->domDocumentLoader->loadXML($xmlData, $this->getLogContext($versionInfo, $field));
@@ -203,8 +213,11 @@ class RichTextStorage extends GatewayBasedStorage
         $field->value->data = $document->saveXML();
     }
 
-    public function deleteFieldData(VersionInfo $versionInfo, array $fieldIds, array $context)
-    {
+    public function deleteFieldData(
+        VersionInfo $versionInfo,
+        array $fieldIds,
+        array $context
+    ) {
         foreach ($fieldIds as $fieldId) {
             $this->gateway->unlinkUrl($fieldId, $versionInfo->versionNo);
         }
@@ -220,9 +233,11 @@ class RichTextStorage extends GatewayBasedStorage
         return true;
     }
 
-    public function getIndexData(VersionInfo $versionInfo, Field $field, array $context)
-    {
-    }
+    public function getIndexData(
+        VersionInfo $versionInfo,
+        Field $field,
+        array $context
+    ) {}
 }
 
 class_alias(RichTextStorage::class, 'EzSystems\EzPlatformRichText\eZ\FieldType\RichText\RichTextStorage');

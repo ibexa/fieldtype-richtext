@@ -20,14 +20,16 @@ use Symfony\Component\Form\FormBuilderInterface;
  */
 class RichTextFieldType extends AbstractType
 {
-    /** @var \Ibexa\Contracts\Core\Repository\FieldTypeService */
+    /** @var FieldTypeService */
     protected $fieldTypeService;
 
-    /** @var \Ibexa\Contracts\FieldTypeRichText\RichText\Converter */
+    /** @var Converter */
     protected $docbookToXhtml5EditConverter;
 
-    public function __construct(FieldTypeService $fieldTypeService, Converter $docbookToXhtml5EditConverter)
-    {
+    public function __construct(
+        FieldTypeService $fieldTypeService,
+        Converter $docbookToXhtml5EditConverter
+    ) {
         $this->fieldTypeService = $fieldTypeService;
         $this->docbookToXhtml5EditConverter = $docbookToXhtml5EditConverter;
     }
@@ -47,8 +49,10 @@ class RichTextFieldType extends AbstractType
         return TextareaType::class;
     }
 
-    public function buildForm(FormBuilderInterface $builder, array $options)
-    {
+    public function buildForm(
+        FormBuilderInterface $builder,
+        array $options
+    ) {
         $builder->addModelTransformer(new RichTextValueTransformer(
             $this->fieldTypeService->getFieldType('ezrichtext'),
             $this->docbookToXhtml5EditConverter

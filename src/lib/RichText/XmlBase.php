@@ -41,7 +41,7 @@ abstract class XmlBase
      *
      * @param string $path
      *
-     * @return \DOMDocument
+     * @return DOMDocument
      */
     protected function loadFile($path)
     {
@@ -56,7 +56,7 @@ abstract class XmlBase
      *
      * Example: Error in 6:0: Expecting an element title, got nothing
      *
-     * @param \LibXMLError $error
+     * @param LibXMLError $error
      *
      * @return string
      */
@@ -93,7 +93,7 @@ abstract class XmlBase
      *
      * @uses ::formatLibXmlError()
      *
-     * @throws \RuntimeException If error recording is not started
+     * @throws RuntimeException If error recording is not started
      *
      * @return string[]
      */

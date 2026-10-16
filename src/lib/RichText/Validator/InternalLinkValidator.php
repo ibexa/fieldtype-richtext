@@ -21,23 +21,25 @@ use Ibexa\Core\Base\Exceptions\InvalidArgumentException;
 class InternalLinkValidator implements ValidatorInterface
 {
     /**
-     * @var \Ibexa\Contracts\Core\Persistence\Content\Handler
+     * @var ContentHandler
      */
     private $contentHandler;
 
     /**
-     * @var \Ibexa\Contracts\Core\Persistence\Content\Location\Handler;
+     * @var LocationHandler;
      */
     private $locationHandler;
 
     /**
      * InternalLinkValidator constructor.
      *
-     * @param \Ibexa\Contracts\Core\Persistence\Content\Handler $contentHandler
-     * @param \Ibexa\Contracts\Core\Persistence\Content\Location\Handler $locationHandler
+     * @param ContentHandler $contentHandler
+     * @param LocationHandler $locationHandler
      */
-    public function __construct(ContentHandler $contentHandler, LocationHandler $locationHandler)
-    {
+    public function __construct(
+        ContentHandler $contentHandler,
+        LocationHandler $locationHandler
+    ) {
         $this->contentHandler = $contentHandler;
         $this->locationHandler = $locationHandler;
     }
@@ -45,7 +47,7 @@ class InternalLinkValidator implements ValidatorInterface
     /**
      * Extracts and validate internal links.
      *
-     * @param \DOMDocument $xml
+     * @param DOMDocument $xml
      *
      * @return array
      *
@@ -89,8 +91,10 @@ class InternalLinkValidator implements ValidatorInterface
      *
      * @return bool
      */
-    public function validate($scheme, $id)
-    {
+    public function validate(
+        $scheme,
+        $id
+    ) {
         try {
             switch ($scheme) {
                 case 'ezcontent':
@@ -122,8 +126,10 @@ class InternalLinkValidator implements ValidatorInterface
      *
      * @return string
      */
-    private function getInvalidLinkError($scheme, $url)
-    {
+    private function getInvalidLinkError(
+        $scheme,
+        $url
+    ) {
         switch ($scheme) {
             case 'ezcontent':
             case 'ezremote':

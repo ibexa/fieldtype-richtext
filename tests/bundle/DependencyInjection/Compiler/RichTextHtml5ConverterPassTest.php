@@ -22,7 +22,7 @@ class RichTextHtml5ConverterPassTest extends AbstractCompilerPassTestCase
      *
      *   $container->addCompilerPass(new MyCompilerPass());
      *
-     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
+     * @param ContainerBuilder $container
      */
     protected function registerCompilerPass(ContainerBuilder $container): void
     {

@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\FieldTypeRichText\Persistence\Legacy\MigrateRichTextNamespaces;
 
+use Ibexa\Contracts\FieldTypeRichText\Persistence\Legacy\MigrateRichTextNamespaces\GatewayInterface;
 use Ibexa\FieldTypeRichText\Persistence\MigrateRichTextNamespacesHandlerInterface;
 
 /**
@@ -15,11 +16,11 @@ use Ibexa\FieldTypeRichText\Persistence\MigrateRichTextNamespacesHandlerInterfac
  */
 final class Handler implements MigrateRichTextNamespacesHandlerInterface
 {
-    /** @var iterable<\Ibexa\Contracts\FieldTypeRichText\Persistence\Legacy\MigrateRichTextNamespaces\GatewayInterface> */
+    /** @var iterable<GatewayInterface> */
     private iterable $gateways;
 
     /**
-     * @param iterable<\Ibexa\Contracts\FieldTypeRichText\Persistence\Legacy\MigrateRichTextNamespaces\GatewayInterface> $gateways
+     * @param iterable<GatewayInterface> $gateways
      */
     public function __construct(iterable $gateways)
     {

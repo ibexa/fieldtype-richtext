@@ -161,8 +161,10 @@ final class XMLSanitizer
      *
      * @return array<int, string>
      */
-    private function resolveRecursiveEntities(array $entityDefinitions, array $entitiesToRemove): array
-    {
+    private function resolveRecursiveEntities(
+        array $entityDefinitions,
+        array $entitiesToRemove
+    ): array {
         foreach ($entityDefinitions as $name => $value) {
             foreach ($entitiesToRemove as $toRemove) {
                 if (strpos($value, "&$toRemove;") !== false && !in_array($name, $entitiesToRemove, true)) {
@@ -177,8 +179,10 @@ final class XMLSanitizer
     /**
      * @param array<int, string> $entitiesToRemove
      */
-    private function containsUnsafeEntity(string $line, array $entitiesToRemove): bool
-    {
+    private function containsUnsafeEntity(
+        string $line,
+        array $entitiesToRemove
+    ): bool {
         foreach ($entitiesToRemove as $toRemove) {
             if (strpos($line, $toRemove) !== false) {
                 return true;

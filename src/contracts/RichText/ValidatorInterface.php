@@ -15,7 +15,7 @@ interface ValidatorInterface
     /**
      * Validate the given $xmlDocument and returns list of errors.
      *
-     * @param \DOMDocument $xmlDocument
+     * @param DOMDocument $xmlDocument
      *
      * @return string[]
      */

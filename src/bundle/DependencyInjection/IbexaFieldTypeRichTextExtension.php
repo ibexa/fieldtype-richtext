@@ -48,12 +48,14 @@ class IbexaFieldTypeRichTextExtension extends Extension implements PrependExtens
      * Load Ibexa RichText Field Type Bundle configuration.
      *
      * @param array $configs
-     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
+     * @param ContainerBuilder $container
      *
      * @throws \Exception
      */
-    public function load(array $configs, ContainerBuilder $container)
-    {
+    public function load(
+        array $configs,
+        ContainerBuilder $container
+    ) {
         $settingsLoader = new Loader\YamlFileLoader(
             $container,
             new FileLocator(__DIR__ . '/../Resources/config/settings')
@@ -96,10 +98,12 @@ class IbexaFieldTypeRichTextExtension extends Extension implements PrependExtens
      * Register parameters of global RichText configuration.
      *
      * @param array $config
-     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
+     * @param ContainerBuilder $container
      */
-    private function registerRichTextConfiguration(array $config, ContainerBuilder $container): void
-    {
+    private function registerRichTextConfiguration(
+        array $config,
+        ContainerBuilder $container
+    ): void {
         $customTagsConfig = $config['custom_tags'] ?? [];
         $customStylesConfig = $config['custom_styles'] ?? [];
         $alloyEditorConfig = $config['alloy_editor'] ?? [];
@@ -136,7 +140,7 @@ class IbexaFieldTypeRichTextExtension extends Extension implements PrependExtens
     /**
      * Allow an extension to prepend the extension configurations.
      *
-     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
+     * @param ContainerBuilder $container
      *
      * @throws \Exception
      */
@@ -171,7 +175,7 @@ class IbexaFieldTypeRichTextExtension extends Extension implements PrependExtens
     }
 
     /**
-     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
+     * @param ContainerBuilder $container
      */
     private function prependJMSTranslation(ContainerBuilder $container): void
     {
@@ -193,8 +197,10 @@ class IbexaFieldTypeRichTextExtension extends Extension implements PrependExtens
         ]);
     }
 
-    public function getConfiguration(array $config, ContainerBuilder $container)
-    {
+    public function getConfiguration(
+        array $config,
+        ContainerBuilder $container
+    ) {
         return new Configuration();
     }
 
@@ -205,7 +211,7 @@ class IbexaFieldTypeRichTextExtension extends Extension implements PrependExtens
      * @param array $config Custom Template configuration
      * @param string $nodeName Custom Template node name
      * @param string $type Custom Template type name
-     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
+     * @param ContainerBuilder $container
      */
     private function validateCustomTemplatesConfig(
         array $availableSiteAccesses,
@@ -238,7 +244,7 @@ class IbexaFieldTypeRichTextExtension extends Extension implements PrependExtens
      *
      * @param array $availableSiteAccesses a list of available SiteAccesses
      * @param array $customTagsConfig Custom Tags configuration
-     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
+     * @param ContainerBuilder $container
      */
     private function validateInlineCustomTagToolbarsConfig(
         array $availableSiteAccesses,
@@ -256,8 +262,10 @@ class IbexaFieldTypeRichTextExtension extends Extension implements PrependExtens
     /**
      * @return iterable<array> Iterable containing arrays with toolbars and their buttons
      */
-    private function getToolbarsBySiteAccess(array $availableSiteAccesses, ContainerBuilder $container): iterable
-    {
+    private function getToolbarsBySiteAccess(
+        array $availableSiteAccesses,
+        ContainerBuilder $container
+    ): iterable {
         foreach ($availableSiteAccesses as $siteAccessName) {
             $paramName = "ibexa.site_access.config.{$siteAccessName}.fieldtypes.ezrichtext.toolbars";
             if (!$container->hasParameter($paramName)) {

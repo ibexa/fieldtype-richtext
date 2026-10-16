@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace Ibexa\Bundle\FieldTypeRichText\DependencyInjection;
 
 use Ibexa\Bundle\Core\DependencyInjection\Configuration\SiteAccessAware\Configuration as SiteAccessConfiguration;
+use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\NodeBuilder;
 use Symfony\Component\Config\Definition\Builder\NodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
@@ -21,7 +22,7 @@ class Configuration extends SiteAccessConfiguration
     /**
      * Generates the configuration tree builder.
      *
-     * @return \Symfony\Component\Config\Definition\Builder\TreeBuilder The tree builder
+     * @return TreeBuilder The tree builder
      */
     public function getConfigTreeBuilder()
     {
@@ -96,9 +97,9 @@ class Configuration extends SiteAccessConfiguration
      *     custom_tags:
      * </code>
      *
-     * @param \Symfony\Component\Config\Definition\Builder\NodeBuilder $ezRichTextNode
+     * @param NodeBuilder $ezRichTextNode
      *
-     * @return \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition
+     * @return ArrayNodeDefinition
      */
     private function addCustomTagsSection(NodeBuilder $ezRichTextNode)
     {
@@ -194,9 +195,9 @@ class Configuration extends SiteAccessConfiguration
      *         custom_styles:
      * </code>
      *
-     * @param \Symfony\Component\Config\Definition\Builder\NodeBuilder $ezRichTextNode
+     * @param NodeBuilder $ezRichTextNode
      *
-     * @return \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition
+     * @return ArrayNodeDefinition
      */
     private function addCustomStylesSection(NodeBuilder $ezRichTextNode)
     {
@@ -238,9 +239,9 @@ class Configuration extends SiteAccessConfiguration
      * The alternative and more flexible solution will be introduced.
      * So you will need to update Online Editor Extra Buttons as part of eZ Platform 3.x upgrade.
      *
-     * @param \Symfony\Component\Config\Definition\Builder\NodeBuilder $ezRichTextNode
+     * @param NodeBuilder $ezRichTextNode
      *
-     * @return \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition
+     * @return ArrayNodeDefinition
      */
     private function addAlloyEditorSection(NodeBuilder $ezRichTextNode)
     {

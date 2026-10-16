@@ -17,7 +17,7 @@ use PHPUnit\Framework\TestCase;
 class DOMDocumentFactoryTest extends TestCase
 {
     /**
-     * @var \Ibexa\FieldTypeRichText\RichText\DOMDocumentFactory
+     * @var DOMDocumentFactory
      */
     private $domDocumentFactory;
 
@@ -126,8 +126,10 @@ EOT;
     /**
      * @dataProvider dataProviderForHandleDoctype
      */
-    public function testHandleDoctype(string $xml, string $stringNotContainsString): void
-    {
+    public function testHandleDoctype(
+        string $xml,
+        string $stringNotContainsString
+    ): void {
         $doc = $this->domDocumentFactory->loadXMLString($xml);
         $docXMLString = $doc->saveXML();
         self::assertIsString($docXMLString);

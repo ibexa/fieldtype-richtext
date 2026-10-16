@@ -16,13 +16,20 @@ final class DebugRenderer implements RendererInterface
     private const EMBED_CONTENT_FORMAT = '<embed-content-output content-id="%d" view-type="%s" is-inline="%s">%s</embed-content-output>';
     private const EMBED_LOCATION_FORMAT = '<embed-location-output location-id="%d" view-type="%s" is-inline="%s">%s</embed-location-output>';
 
-    public function renderTag($name, array $parameters, $isInline): string
-    {
+    public function renderTag(
+        $name,
+        array $parameters,
+        $isInline
+    ): string {
         return $this->renderTemplate($name, 'tag', $parameters, $isInline);
     }
 
-    public function renderTemplate($name, $type, array $parameters, $isInline): string
-    {
+    public function renderTemplate(
+        $name,
+        $type,
+        array $parameters,
+        $isInline
+    ): string {
         return sprintf(
             self::TEMPLATE_FORMAT,
             $name,
@@ -32,8 +39,12 @@ final class DebugRenderer implements RendererInterface
         );
     }
 
-    public function renderContentEmbed($contentId, $viewType, array $parameters, $isInline): string
-    {
+    public function renderContentEmbed(
+        $contentId,
+        $viewType,
+        array $parameters,
+        $isInline
+    ): string {
         return sprintf(
             self::EMBED_CONTENT_FORMAT,
             $contentId,
@@ -43,8 +54,12 @@ final class DebugRenderer implements RendererInterface
         );
     }
 
-    public function renderLocationEmbed($locationId, $viewType, array $parameters, $isInline): string
-    {
+    public function renderLocationEmbed(
+        $locationId,
+        $viewType,
+        array $parameters,
+        $isInline
+    ): string {
         return sprintf(
             self::EMBED_LOCATION_FORMAT,
             $locationId,

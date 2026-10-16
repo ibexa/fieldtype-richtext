@@ -10,6 +10,7 @@ namespace Ibexa\Tests\FieldTypeRichText\RichText\Validator;
 
 use DOMDocument;
 use Ibexa\FieldTypeRichText\RichText\Validator\Validator;
+use Ibexa\FieldTypeRichText\RichText\ValidatorInterface;
 use PHPUnit\Framework\TestCase;
 
 class DocbookTest extends TestCase
@@ -155,8 +156,10 @@ class DocbookTest extends TestCase
     /**
      * @dataProvider providerForTestValidate
      */
-    public function testValidate($input, $expectedErrors)
-    {
+    public function testValidate(
+        $input,
+        $expectedErrors
+    ) {
         $document = new DOMDocument();
         $document->loadXML($input);
 
@@ -171,12 +174,12 @@ class DocbookTest extends TestCase
     }
 
     /**
-     * @var \Ibexa\FieldTypeRichText\RichText\ValidatorInterface
+     * @var ValidatorInterface
      */
     protected $validator;
 
     /**
-     * @return \Ibexa\FieldTypeRichText\RichText\ValidatorInterface
+     * @return ValidatorInterface
      */
     protected function getConversionValidator()
     {

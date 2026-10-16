@@ -33,8 +33,11 @@ final class CustomTagExtractor implements ExtractorInterface
      * @param string $domain Target translation domain
      * @param string[] $allowlist Whitelist of custom tags to extract
      */
-    public function __construct(array $customTags, string $domain, array $allowlist = [])
-    {
+    public function __construct(
+        array $customTags,
+        string $domain,
+        array $allowlist = []
+    ) {
         $this->customTags = $customTags;
         $this->domain = $domain;
         $this->allowlist = $allowlist;
@@ -64,16 +67,22 @@ final class CustomTagExtractor implements ExtractorInterface
     /**
      * @param array<string, mixed> $config
      */
-    private function addCustomTagLabelMessage(MessageCatalogueBuilder $catalogue, string $tagName, array $config): void
-    {
+    private function addCustomTagLabelMessage(
+        MessageCatalogueBuilder $catalogue,
+        string $tagName,
+        array $config
+    ): void {
         $catalogue->addMessage(sprintf(self::CUSTOM_TAG_LABEL, $tagName), $config['label'] ?? $tagName);
     }
 
     /**
      * @param array<string, mixed> $config
      */
-    private function addCustomTagDescriptionMessage(MessageCatalogueBuilder $catalogue, string $tagName, array $config): void
-    {
+    private function addCustomTagDescriptionMessage(
+        MessageCatalogueBuilder $catalogue,
+        string $tagName,
+        array $config
+    ): void {
         $catalogue->addMessage(sprintf(self::CUSTOM_TAG_DESCRIPTION, $tagName), $config['description'] ?? $tagName);
     }
 

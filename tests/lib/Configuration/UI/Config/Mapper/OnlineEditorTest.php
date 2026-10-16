@@ -9,17 +9,18 @@ declare(strict_types=1);
 namespace Ibexa\Tests\FieldTypeRichText\Configuration\UI\Config\Mapper;
 
 use Ibexa\FieldTypeRichText\Configuration\UI\Mapper\OnlineEditor;
+use Ibexa\FieldTypeRichText\Configuration\UI\Mapper\OnlineEditorConfigMapper;
 use PHPUnit\Framework\TestCase;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class OnlineEditorTest extends TestCase
 {
-    /** @var \Ibexa\FieldTypeRichText\Configuration\UI\Mapper\OnlineEditorConfigMapper */
+    /** @var OnlineEditorConfigMapper */
     private $mapper;
 
     public function setUp(): void
     {
-        /** @var \Symfony\Contracts\Translation\TranslatorInterface $translatorMock */
+        /** @var TranslatorInterface $translatorMock */
         $translatorMock = $this->createMock(TranslatorInterface::class);
         $translatorMock
             ->expects($this->any())

@@ -20,12 +20,12 @@ class ConverterDispatcher
     /**
      * Mapping of namespaces to converters.
      *
-     * @var \Ibexa\Contracts\FieldTypeRichText\RichText\Converter[]
+     * @var Converter[]
      */
     protected $mapping = [];
 
     /**
-     * @param \Ibexa\Contracts\FieldTypeRichText\RichText\Converter[] $converterMap
+     * @param Converter[] $converterMap
      */
     public function __construct($converterMap)
     {
@@ -38,10 +38,12 @@ class ConverterDispatcher
      * Adds converter mapping.
      *
      * @param string $namespace
-     * @param \Ibexa\Contracts\FieldTypeRichText\RichText\Converter|null $converter
+     * @param Converter|null $converter
      */
-    public function addConverter($namespace, ?Converter $converter = null)
-    {
+    public function addConverter(
+        $namespace,
+        ?Converter $converter = null
+    ) {
         $this->mapping[$namespace] = $converter;
     }
 
@@ -50,9 +52,9 @@ class ConverterDispatcher
      *
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      *
-     * @param \DOMDocument $document
+     * @param DOMDocument $document
      *
-     * @return \DOMDocument
+     * @return DOMDocument
      */
     public function dispatch(DOMDocument $document)
     {

@@ -17,42 +17,42 @@ use Ibexa\FieldTypeRichText\FieldType\RichText\Value;
 class InputHandler implements InputHandlerInterface
 {
     /**
-     * @var \Ibexa\FieldTypeRichText\RichText\DOMDocumentFactory
+     * @var DOMDocumentFactory
      */
     private $domDocumentFactory;
 
     /**
-     * @var \Ibexa\FieldTypeRichText\RichText\ConverterDispatcher
+     * @var ConverterDispatcher
      */
     private $converter;
 
     /**
-     * @var \Ibexa\FieldTypeRichText\RichText\Normalizer
+     * @var Normalizer
      */
     private $normalizer;
 
     /**
-     * @var \Ibexa\Contracts\FieldTypeRichText\RichText\ValidatorInterface
+     * @var ValidatorInterface
      */
     private $schemaValidator;
 
     /**
-     * @var \Ibexa\Contracts\FieldTypeRichText\RichText\ValidatorInterface
+     * @var ValidatorInterface
      */
     private $docbookValidator;
 
     /**
-     * @var \Ibexa\FieldTypeRichText\RichText\RelationProcessor
+     * @var RelationProcessor
      */
     private $relationProcessor;
 
     /**
-     * @param \Ibexa\FieldTypeRichText\RichText\DOMDocumentFactory $domDocumentFactory
-     * @param \Ibexa\FieldTypeRichText\RichText\ConverterDispatcher $inputConverter
-     * @param \Ibexa\FieldTypeRichText\RichText\Normalizer $inputNormalizer
-     * @param \Ibexa\Contracts\FieldTypeRichText\RichText\ValidatorInterface $schemaValidator
-     * @param \Ibexa\Contracts\FieldTypeRichText\RichText\ValidatorInterface $dockbookValidator
-     * @param \Ibexa\FieldTypeRichText\RichText\RelationProcessor $relationProcessor
+     * @param DOMDocumentFactory $domDocumentFactory
+     * @param ConverterDispatcher $inputConverter
+     * @param Normalizer $inputNormalizer
+     * @param ValidatorInterface $schemaValidator
+     * @param ValidatorInterface $dockbookValidator
+     * @param RelationProcessor $relationProcessor
      */
     public function __construct(
         DOMDocumentFactory $domDocumentFactory,

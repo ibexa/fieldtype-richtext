@@ -14,7 +14,7 @@ namespace Ibexa\Contracts\FieldTypeRichText\Configuration;
  * To provide custom configuration implement \Ibexa\Contracts\FieldTypeRichText\Configuration\Provider
  * instead.
  *
- * @see \Ibexa\Contracts\FieldTypeRichText\Configuration\Provider
+ * @see Provider
  */
 interface ProviderService
 {

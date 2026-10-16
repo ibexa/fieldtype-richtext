@@ -23,7 +23,12 @@ interface RendererInterface
      *
      * @return string
      */
-    public function renderTemplate($name, $type, array $parameters, $isInline);
+    public function renderTemplate(
+        $name,
+        $type,
+        array $parameters,
+        $isInline
+    );
 
     /**
      * Renders Content embed.
@@ -35,7 +40,12 @@ interface RendererInterface
      *
      * @return string
      */
-    public function renderContentEmbed($contentId, $viewType, array $parameters, $isInline);
+    public function renderContentEmbed(
+        $contentId,
+        $viewType,
+        array $parameters,
+        $isInline
+    );
 
     /**
      * Renders Location embed.
@@ -47,7 +57,12 @@ interface RendererInterface
      *
      * @return string
      */
-    public function renderLocationEmbed($locationId, $viewType, array $parameters, $isInline);
+    public function renderLocationEmbed(
+        $locationId,
+        $viewType,
+        array $parameters,
+        $isInline
+    );
 }
 
 class_alias(RendererInterface::class, 'EzSystems\EzPlatformRichText\eZ\RichText\RendererInterface');

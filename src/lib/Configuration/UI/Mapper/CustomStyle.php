@@ -22,10 +22,10 @@ final class CustomStyle implements CustomTemplateConfigMapper
     /** @var array */
     private $customStylesConfiguration;
 
-    /** @var \Symfony\Contracts\Translation\TranslatorInterface */
+    /** @var TranslatorInterface */
     private $translator;
 
-    /** @var \Symfony\Component\Asset\Packages */
+    /** @var Packages */
     private $packages;
 
     /** @var string */

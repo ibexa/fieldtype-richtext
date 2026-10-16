@@ -39,8 +39,10 @@ class CustomTemplateValidatorTest extends TestCase
      *
      * @param list<string> $expectedErrors
      */
-    public function testValidateDocument(DOMDocument $document, array $expectedErrors): void
-    {
+    public function testValidateDocument(
+        DOMDocument $document,
+        array $expectedErrors
+    ): void {
         self::assertEquals(
             $expectedErrors,
             $this->validator->validateDocument($document)

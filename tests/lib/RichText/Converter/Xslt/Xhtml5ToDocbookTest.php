@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\Tests\FieldTypeRichText\RichText\Converter\Xslt;
 
+use Ibexa\FieldTypeRichText\RichText\Converter;
 use Ibexa\FieldTypeRichText\RichText\Converter\Aggregate;
 use Ibexa\FieldTypeRichText\RichText\Converter\LiteralLayoutNestedList;
 use Ibexa\FieldTypeRichText\RichText\Converter\ProgramListing;
@@ -100,7 +101,7 @@ class Xhtml5ToDocbookTest extends BaseTest
     }
 
     /**
-     * @return \Ibexa\FieldTypeRichText\RichText\Converter
+     * @return Converter
      */
     protected function getConverter()
     {

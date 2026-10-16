@@ -17,6 +17,7 @@ use Ibexa\Contracts\Core\Repository\Values\Content\Location;
 use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 use Ibexa\Core\Base\Exceptions\NotFoundException;
 use Ibexa\FieldTypeRichText\RichText\Renderer;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -1699,7 +1700,7 @@ class RendererTest extends TestCase
     /**
      * @param array $methods
      *
-     * @return \Ibexa\FieldTypeRichText\RichText\Renderer|\PHPUnit\Framework\MockObject\MockObject
+     * @return Renderer|MockObject
      */
     protected function getMockedRenderer(array $methods = [])
     {
@@ -1720,55 +1721,55 @@ class RendererTest extends TestCase
             ->getMock();
     }
 
-    /** @var \Ibexa\Contracts\Core\Repository\Repository&\PHPUnit\Framework\MockObject\MockObject */
+    /** @var Repository&MockObject */
     protected Repository $repositoryMock;
 
     /**
-     * @return \Ibexa\Contracts\Core\Repository\Repository&\PHPUnit\Framework\MockObject\MockObject
+     * @return Repository&MockObject
      */
     protected function getRepositoryMock(): Repository
     {
         return $this->createMock(Repository::class);
     }
 
-    /** @var \Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface&\PHPUnit\Framework\MockObject\MockObject */
+    /** @var ConfigResolverInterface&MockObject */
     protected ConfigResolverInterface $configResolverMock;
 
     /**
-     * @return \Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface&\PHPUnit\Framework\MockObject\MockObject
+     * @return ConfigResolverInterface&MockObject
      */
     protected function getConfigResolverMock(): ConfigResolverInterface
     {
         return $this->createMock(ConfigResolverInterface::class);
     }
 
-    /** @var \Twig\Environment&\PHPUnit\Framework\MockObject\MockObject */
+    /** @var Environment&MockObject */
     protected Environment $templateEngineMock;
 
     /**
-     * @return \Twig\Environment&\PHPUnit\Framework\MockObject\MockObject
+     * @return Environment&MockObject
      */
     protected function getTemplateEngineMock(): Environment
     {
         return $this->createMock(Environment::class);
     }
 
-    /** @var \Ibexa\Contracts\Core\Repository\PermissionResolver&\PHPUnit\Framework\MockObject\MockObject */
+    /** @var PermissionResolver&MockObject */
     protected PermissionResolver $permissionResolverMock;
 
     /**
-     * @return \Ibexa\Contracts\Core\Repository\PermissionResolver&\PHPUnit\Framework\MockObject\MockObject
+     * @return PermissionResolver&MockObject
      */
     protected function getPermissionResolverMock(): PermissionResolver
     {
         return $this->createMock(PermissionResolver::class);
     }
 
-    /** @var \Psr\Log\LoggerInterface&\PHPUnit\Framework\MockObject\MockObject */
+    /** @var LoggerInterface&MockObject */
     protected LoggerInterface $loggerMock;
 
     /**
-     * @return \Psr\Log\LoggerInterface&\PHPUnit\Framework\MockObject\MockObject
+     * @return LoggerInterface&MockObject
      */
     protected function getLoggerMock(): LoggerInterface
     {
@@ -1776,12 +1777,12 @@ class RendererTest extends TestCase
     }
 
     /**
-     * @var \Twig\Loader\LoaderInterface|\PHPUnit\Framework\MockObject\MockObject
+     * @var LoaderInterface|MockObject
      */
     protected $loaderMock;
 
     /**
-     * @return \Twig\Loader\LoaderInterface&\PHPUnit\Framework\MockObject\MockObject
+     * @return LoaderInterface&MockObject
      */
     protected function getLoaderMock(): LoaderInterface
     {

@@ -18,12 +18,12 @@ class Aggregate extends Normalizer
     /**
      * An array of normalizers, sorted by priority.
      *
-     * @var \Ibexa\FieldTypeRichText\RichText\Normalizer[]
+     * @var Normalizer[]
      */
     protected $normalizers = [];
 
     /**
-     * @param \Ibexa\FieldTypeRichText\RichText\Normalizer[] $normalizers An array of Normalizers, sorted by priority
+     * @param Normalizer[] $normalizers An array of Normalizers, sorted by priority
      */
     public function __construct(array $normalizers = [])
     {

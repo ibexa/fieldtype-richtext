@@ -18,16 +18,18 @@ use Symfony\Component\Form\DataTransformerInterface;
  */
 class RichTextValueTransformer implements DataTransformerInterface
 {
-    /** @var \Ibexa\Contracts\Core\Repository\FieldType */
+    /** @var FieldType */
     private $fieldType;
 
     /**
-     * @var \Ibexa\Contracts\FieldTypeRichText\RichText\Converter Converter
+     * @var Converter Converter
      */
     protected $docbookToXhtml5EditConverter;
 
-    public function __construct(FieldType $fieldType, Converter $docbookToXhtml5EditConverter)
-    {
+    public function __construct(
+        FieldType $fieldType,
+        Converter $docbookToXhtml5EditConverter
+    ) {
         $this->fieldType = $fieldType;
         $this->docbookToXhtml5EditConverter = $docbookToXhtml5EditConverter;
     }
@@ -49,7 +51,7 @@ class RichTextValueTransformer implements DataTransformerInterface
     /**
      * @param mixed $value
      *
-     * @return \Ibexa\FieldTypeRichText\FieldType\RichText\Value|null
+     * @return Value|null
      */
     public function reverseTransform($value)
     {

@@ -23,8 +23,10 @@ final class OnlineEditor implements OnlineEditorConfigMapper
     /** @var string */
     private $translationDomain;
 
-    public function __construct(TranslatorInterface $translator, string $translationDomain)
-    {
+    public function __construct(
+        TranslatorInterface $translator,
+        string $translationDomain
+    ) {
         $this->translator = $translator;
         $this->translationDomain = $translationDomain;
     }

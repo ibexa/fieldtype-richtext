@@ -25,14 +25,14 @@ EOT;
     /**
      * XML content as DOMDocument.
      *
-     * @var \DOMDocument
+     * @var DOMDocument
      */
     public $xml;
 
     /**
      * Initializes a new RichText Value object with $xmlDoc in.
      *
-     * @param \DOMDocument|null $xml passing a string is deprecated since 4.6.33 and will not be supported in 6.0
+     * @param DOMDocument|null $xml passing a string is deprecated since 4.6.33 and will not be supported in 6.0
      */
     public function __construct($xml = null)
     {
@@ -54,12 +54,11 @@ EOT;
         }
 
         $this->xml = new DOMDocument();
-        /** @phpstan-ignore nullCoalesce.variable (deprecated string $xml is not part of the declared signature) */
         $this->xml->loadXML($xml ?? self::EMPTY_VALUE);
     }
 
     /**
-     * @see \Ibexa\Core\FieldType\Value
+     * @see BaseValue
      */
     public function __toString()
     {

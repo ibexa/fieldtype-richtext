@@ -15,10 +15,10 @@ use Twig\TwigFilter;
 
 class RichTextConverterExtension extends AbstractExtension
 {
-    /** @var \Ibexa\Contracts\FieldTypeRichText\RichText\Converter */
+    /** @var RichTextConverterInterface */
     private $richTextOutputConverter;
 
-    /** @var \Ibexa\Contracts\FieldTypeRichText\RichText\Converter */
+    /** @var RichTextConverterInterface */
     private $richTextEditConverter;
 
     public function __construct(

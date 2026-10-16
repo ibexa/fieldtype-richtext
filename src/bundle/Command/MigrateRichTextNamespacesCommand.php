@@ -41,8 +41,10 @@ final class MigrateRichTextNamespacesCommand extends Command
         $this->cache = $cache;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output): int
-    {
+    protected function execute(
+        InputInterface $input,
+        OutputInterface $output
+    ): int {
         $io = new SymfonyStyle($input, $output);
 
         $io->info('Starting namespaces migration process...');

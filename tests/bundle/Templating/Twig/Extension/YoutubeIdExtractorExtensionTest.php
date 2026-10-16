@@ -47,8 +47,10 @@ class YoutubeIdExtractorExtensionTest extends TestCase
      * @param string $input
      * @param string|null $expected
      */
-    public function testExtractId(string $input, ?string $expected): void
-    {
+    public function testExtractId(
+        string $input,
+        ?string $expected
+    ): void {
         $subject = new YoutubeIdExtractorExtension();
         $result = $subject->extractId($input);
         $this->assertEquals($expected, $result);
@@ -60,7 +62,7 @@ class YoutubeIdExtractorExtensionTest extends TestCase
     public function testGetFunctions(): void
     {
         $subject = new YoutubeIdExtractorExtension();
-        /** @var \Twig\TwigFunction[] $result */
+        /** @var TwigFunction[] $result */
         $result = $subject->getFunctions();
         $this->assertIsArray($result);
         $this->assertInstanceOf(TwigFunction::class, $result[0]);

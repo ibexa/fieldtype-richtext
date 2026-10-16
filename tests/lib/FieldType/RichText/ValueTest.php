@@ -41,7 +41,10 @@ final class ValueTest extends TestCase
     {
         $deprecations = [];
         set_error_handler(
-            static function (int $errno, string $errstr) use (&$deprecations): bool {
+            static function (
+                int $errno,
+                string $errstr
+            ) use (&$deprecations): bool {
                 $deprecations[] = $errstr;
 
                 return true;

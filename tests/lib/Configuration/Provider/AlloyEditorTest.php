@@ -13,10 +13,11 @@ use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 use Ibexa\Contracts\FieldTypeRichText\Configuration\Provider;
 use Ibexa\FieldTypeRichText\Configuration\Provider\AlloyEditor;
 use Ibexa\FieldTypeRichText\Configuration\UI\Mapper\OnlineEditorConfigMapper;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class AlloyEditorTest extends BaseProviderTestCase
 {
-    /** @var \PHPUnit\Framework\MockObject\MockObject|\Ibexa\FieldTypeRichText\Configuration\UI\Mapper\OnlineEditorConfigMapper */
+    /** @var MockObject|OnlineEditorConfigMapper */
     private $mapper;
 
     public function setUp(): void

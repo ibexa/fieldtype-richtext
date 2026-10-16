@@ -18,7 +18,7 @@ use Ibexa\Tests\Core\Persistence\Legacy\TestCase;
 class DoctrineStorageTest extends TestCase
 {
     /**
-     * @var \Ibexa\FieldTypeRichText\FieldType\RichText\RichTextStorage\Gateway\DoctrineStorage
+     * @var DoctrineStorage
      */
     protected $storageGateway;
 
@@ -46,7 +46,7 @@ class DoctrineStorageTest extends TestCase
     /**
      * Return a ready to test DoctrineStorage gateway.
      *
-     * @return \Ibexa\FieldTypeRichText\FieldType\RichText\RichTextStorage\Gateway\DoctrineStorage
+     * @return DoctrineStorage
      */
     protected function getStorageGateway()
     {

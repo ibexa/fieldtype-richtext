@@ -40,8 +40,10 @@ class Xslt extends XmlBase implements Converter
      * @param string $stylesheet Stylesheet to use for conversion
      * @param array $customStylesheets Array of XSL stylesheets. Each entry consists in a hash having "path" and "priority" keys.
      */
-    public function __construct($stylesheet, array $customStylesheets = [])
-    {
+    public function __construct(
+        $stylesheet,
+        array $customStylesheets = []
+    ) {
         $this->stylesheet = $stylesheet;
 
         // Grouping stylesheets by priority.
@@ -53,9 +55,9 @@ class Xslt extends XmlBase implements Converter
     /**
      * Returns the XSLTProcessor to use to transform internal XML to HTML5.
      *
-     * @throws \RuntimeException
+     * @throws RuntimeException
      *
-     * @return \XSLTProcessor
+     * @return XSLTProcessor
      */
     protected function getXSLTProcessor()
     {
@@ -116,9 +118,9 @@ class Xslt extends XmlBase implements Converter
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException if stylesheet is not found
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException if document does not transform
      *
-     * @param \DOMDocument $document
+     * @param DOMDocument $document
      *
-     * @return \DOMDocument
+     * @return DOMDocument
      */
     public function convert(DOMDocument $document)
     {

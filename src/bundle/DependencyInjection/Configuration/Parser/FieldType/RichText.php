@@ -54,7 +54,7 @@ class RichText extends AbstractFieldTypeParser
     /**
      * Adds semantic configuration definition.
      *
-     * @param \Symfony\Component\Config\Definition\Builder\NodeBuilder $nodeBuilder Node just under ezpublish.system.<siteaccess>
+     * @param NodeBuilder $nodeBuilder Node just under ezpublish.system.<siteaccess>
      */
     public function addFieldTypeSemanticConfig(NodeBuilder $nodeBuilder)
     {
@@ -232,10 +232,12 @@ class RichText extends AbstractFieldTypeParser
      * @param string $info
      * @param string $example
      *
-     * @return \Symfony\Component\Config\Definition\Builder\ScalarNodeDefinition
+     * @return ScalarNodeDefinition
      */
-    protected function getTemplateNodeDefinition($info, $example)
-    {
+    protected function getTemplateNodeDefinition(
+        $info,
+        $example
+    ) {
         $templateNodeDefinition = new ScalarNodeDefinition('template');
         $templateNodeDefinition
             ->info($info)
@@ -246,8 +248,11 @@ class RichText extends AbstractFieldTypeParser
         return $templateNodeDefinition;
     }
 
-    public function mapConfig(array &$scopeSettings, $currentScope, ContextualizerInterface $contextualizer)
-    {
+    public function mapConfig(
+        array &$scopeSettings,
+        $currentScope,
+        ContextualizerInterface $contextualizer
+    ) {
         if (!empty($scopeSettings['fieldtypes'])) {
             // Workaround to be able to use Contextualizer::mapConfigArray() which only supports first level entries.
             if (isset($scopeSettings['fieldtypes']['ezrichtext']['custom_tags'])) {
@@ -284,8 +289,10 @@ class RichText extends AbstractFieldTypeParser
         }
     }
 
-    public function postMap(array $config, ContextualizerInterface $contextualizer)
-    {
+    public function postMap(
+        array $config,
+        ContextualizerInterface $contextualizer
+    ) {
         $contextualizer->mapConfigArray('fieldtypes.ezrichtext.custom_tags', $config);
         $contextualizer->mapConfigArray('fieldtypes.ezrichtext.custom_styles', $config);
         $contextualizer->mapConfigArray(self::TOOLBARS_SA_SETTINGS_ID, $config);
@@ -304,7 +311,7 @@ class RichText extends AbstractFieldTypeParser
     /**
      * Build configuration nodes strictly related to Online Editor.
      *
-     * @param \Symfony\Component\Config\Definition\Builder\NodeBuilder $nodeBuilder
+     * @param NodeBuilder $nodeBuilder
      */
     private function buildOnlineEditorConfiguration(NodeBuilder $nodeBuilder): void
     {
