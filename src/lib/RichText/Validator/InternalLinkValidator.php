@@ -20,7 +20,7 @@ use Ibexa\Core\Base\Exceptions\InvalidArgumentException;
  */
 class InternalLinkValidator implements ValidatorInterface
 {
-    private Handler $contentHandler;
+    private ContentHandler $contentHandler;
 
     private LocationHandler $locationHandler;
 

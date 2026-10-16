@@ -40,7 +40,7 @@ use RuntimeException;
  */
 class RichTextTest extends TestCase
 {
-    protected function getFieldType(): Type
+    protected function getFieldType(): RichTextType
     {
         $inputHandler = new InputHandler(
             new DOMDocumentFactory(new XMLSanitizer()),

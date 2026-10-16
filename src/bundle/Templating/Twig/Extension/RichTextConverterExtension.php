@@ -15,9 +15,9 @@ use Twig\TwigFilter;
 
 class RichTextConverterExtension extends AbstractExtension
 {
-    private Converter $richTextOutputConverter;
+    private RichTextConverterInterface $richTextOutputConverter;
 
-    private Converter $richTextEditConverter;
+    private RichTextConverterInterface $richTextEditConverter;
 
     public function __construct(
         RichTextConverterInterface $richTextOutputConverter,
