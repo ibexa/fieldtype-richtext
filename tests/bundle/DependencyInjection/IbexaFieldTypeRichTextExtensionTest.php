@@ -114,11 +114,11 @@ class IbexaFieldTypeRichTextExtensionTest extends AbstractExtensionTestCase
 
         $expectedPrependedConfig = [
             'field_templates' => [
-                    [
-                        'template' => '@IbexaFieldTypeRichText/RichText/content_fields.html.twig',
-                        'priority' => 0,
-                    ],
+                [
+                    'template' => '@IbexaFieldTypeRichText/RichText/content_fields.html.twig',
+                    'priority' => 0,
                 ],
+            ],
             'fielddefinition_settings_templates' => [
                 [
                     'template' => '@IbexaFieldTypeRichText/RichText/fielddefinition_settings.html.twig',

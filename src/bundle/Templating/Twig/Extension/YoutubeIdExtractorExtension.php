@@ -20,7 +20,7 @@ final class YoutubeIdExtractorExtension extends AbstractExtension
         . '(?P<id>[\w-]{11})(?=[^\w-]|$)(?![?=&+%\w.-]*(?:[\'"][^<>]*>|<\/a>))[?=&+%\w.-]*/i';
 
     /**
-     * @return \Twig\TwigFunction[]
+     * @return TwigFunction[]
      */
     public function getFunctions(): array
     {

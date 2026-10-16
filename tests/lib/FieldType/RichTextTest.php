@@ -13,7 +13,6 @@ use Exception;
 use Ibexa\Contracts\Core\Persistence\Content\FieldValue;
 use Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException as ApiInvalidArgumentException;
 use Ibexa\Contracts\Core\Repository\Values\Content\RelationType;
-use Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition;
 use Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition as APIFieldDefinition;
 use Ibexa\Contracts\FieldTypeRichText\RichText\TextExtractorInterface;
 use Ibexa\Core\Base\Exceptions\InvalidArgumentException;
