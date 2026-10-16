@@ -2,6 +2,9 @@ const path = require('path');
 const ibexaConfigManager = require('@ibexa/frontend-config/webpack-config/manager');
 const configManagers = require(path.resolve('./var/encore/ibexa.richtext.config.manager.js'));
 
+// @symfony/webpack-encore 7+ returns the webpack config as a Promise, older versions return it directly
+const whenConfigReady = (config, callback) => (typeof config?.then === 'function' ? config.then(callback) : callback(config));
+
 module.exports = (Encore) => {
     Encore.reset();
     Encore.setOutputPath('public/assets/richtext/build')
@@ -11,11 +14,7 @@ module.exports = (Encore) => {
             tsConfig.configFile = path.resolve('tsconfig.json');
             tsConfig.onlyCompileBundledFiles = true;
         })
-        .disableSingleRuntimeChunk()
-        .configureBabelPresetEnv((config) => {
-            config.useBuiltIns = false;
-            config.corejs = false;
-        });
+        .disableSingleRuntimeChunk();
 
     Encore.addAliases({
         '@ckeditor': path.resolve('./public/bundles/ibexaadminuiassets/vendors/@ckeditor'),
@@ -31,17 +30,19 @@ module.exports = (Encore) => {
         path.resolve(__dirname, '../public/scss/ckeditor.scss'),
     ]);
 
-    const customConfig = Encore.getWebpackConfig();
+    const customConfig = whenConfigReady(Encore.getWebpackConfig(), (config) => {
+        config.name = 'richtext';
 
-    customConfig.name = 'richtext';
+        config.module.rules[4].oneOf[1].use[1].options.url = false;
+        config.module.rules[1].oneOf[1].use[1].options.url = false;
 
-    customConfig.module.rules[4].oneOf[1].use[1].options.url = false;
-    customConfig.module.rules[1].oneOf[1].use[1].options.url = false;
+        configManagers.forEach((configManagerPath) => {
+            const configManager = require(path.resolve(configManagerPath));
 
-    configManagers.forEach((configManagerPath) => {
-        const configManager = require(path.resolve(configManagerPath));
+            configManager(config, ibexaConfigManager);
+        });
 
-        configManager(customConfig, ibexaConfigManager);
+        return config;
     });
 
     Encore.reset();
