@@ -79,8 +79,8 @@ class TemplateTest extends TestCase
         DOMDocument $expectedOutputDocument,
         array $expectedRenderParams
     ): void {
-        $this->rendererMock->expects(self::never())->method('renderContentEmbed');
-        $this->rendererMock->expects(self::never())->method('renderLocationEmbed');
+        $this->rendererMock->expects($this->never())->method('renderContentEmbed');
+        $this->rendererMock->expects($this->never())->method('renderLocationEmbed');
 
         [
             $convertParameters,
@@ -88,7 +88,7 @@ class TemplateTest extends TestCase
             $renderParameters,
             $renderReturnValues
         ] = $this->provideConvertRenderValues($expectedRenderParams);
-        $matcher = self::exactly(count($convertReturnValues));
+        $matcher = $this->exactly(count($convertReturnValues));
 
         $this->converterMock
             ->expects($matcher)
@@ -99,7 +99,7 @@ class TemplateTest extends TestCase
 
                 return $convertReturnValues[$invocation - 1];
             });
-        $matcher = self::exactly(count($renderReturnValues));
+        $matcher = $this->exactly(count($renderReturnValues));
 
         $this->rendererMock
             ->expects($matcher)

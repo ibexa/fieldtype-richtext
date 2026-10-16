@@ -29,7 +29,7 @@ class ValidatorAggregateTest extends TestCase
 
             $validator = $this->createMock(ValidatorInterface::class);
             $validator
-                ->expects(self::once())
+                ->expects($this->once())
                 ->method('validateDocument')
                 ->with($doc)
                 ->willReturn([$errorMessage]);

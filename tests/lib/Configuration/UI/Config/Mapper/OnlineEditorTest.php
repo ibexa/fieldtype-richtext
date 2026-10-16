@@ -21,7 +21,7 @@ class OnlineEditorTest extends TestCase
     {
         $translatorMock = $this->createMock(TranslatorInterface::class);
         $translatorMock
-            ->expects(self::any())
+            ->expects($this->any())
             ->method('trans')
             ->willReturnArgument(0);
         $this->mapper = new OnlineEditor($translatorMock, 'online_editor');

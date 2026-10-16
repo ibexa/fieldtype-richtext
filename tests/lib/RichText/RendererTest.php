@@ -49,13 +49,13 @@ class RendererTest extends TestCase
         $result = 'result';
 
         $renderer
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('render')
             ->with($templateName, $parameters)
             ->willReturn($result);
 
         $renderer
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('getTagTemplateName')
             ->with($name, $isInline)
             ->willReturn($templateName);
@@ -66,12 +66,12 @@ class RendererTest extends TestCase
             ->willReturn(true);
 
         $this->templateEngineMock
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('getLoader')
             ->willReturn($this->loaderMock);
 
         $this->loggerMock
-            ->expects(self::never())
+            ->expects($this->never())
             ->method(self::anything());
 
         self::assertEquals(
@@ -88,21 +88,21 @@ class RendererTest extends TestCase
         $isInline = true;
 
         $renderer
-            ->expects(self::never())
+            ->expects($this->never())
             ->method('render');
 
         $renderer
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('getTagTemplateName')
             ->with($name, $isInline)
             ->willReturn(null);
 
         $this->templateEngineMock
-            ->expects(self::never())
+            ->expects($this->never())
             ->method('getLoader');
 
         $this->loggerMock
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('error')
             ->with("Could not render template tag '{$name}': no template configured");
 
@@ -120,11 +120,11 @@ class RendererTest extends TestCase
         $isInline = true;
 
         $renderer
-            ->expects(self::never())
+            ->expects($this->never())
             ->method('render');
 
         $renderer
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('getTagTemplateName')
             ->with($name, $isInline)
             ->willReturn('templateName');
@@ -135,12 +135,12 @@ class RendererTest extends TestCase
             ->willReturn(false);
 
         $this->templateEngineMock
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('getLoader')
             ->willReturn($this->loaderMock);
 
         $this->loggerMock
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('error')
             ->with("Could not render template tag '{$name}': template '{$templateName}' does not exist");
 
@@ -304,11 +304,11 @@ class RendererTest extends TestCase
 
         if (!isset($renderTemplate)) {
             $renderer
-                ->expects(self::never())
+                ->expects($this->never())
                 ->method('render');
         } else {
             $renderer
-                ->expects(self::once())
+                ->expects($this->once())
                 ->method('render')
                 ->with($renderTemplate, $parameters)
                 ->willReturn($renderResult);
@@ -316,7 +316,7 @@ class RendererTest extends TestCase
 
         if (!isset($templateEngineTemplate)) {
             $this->templateEngineMock
-                ->expects(self::never())
+                ->expects($this->never())
                 ->method(self::anything());
         } else {
             $this->loaderMock
@@ -325,14 +325,14 @@ class RendererTest extends TestCase
                 ->willReturn(true);
 
             $this->templateEngineMock
-                ->expects(self::once())
+                ->expects($this->once())
                 ->method('getLoader')
                 ->willReturn($this->loaderMock);
         }
 
         if (empty($configResolverParams)) {
             $this->configResolverMock
-                ->expects(self::never())
+                ->expects($this->never())
                 ->method(self::anything());
         } else {
             [$hasParameterValues, $getParameterValues] = $configResolverParams;
@@ -340,7 +340,7 @@ class RendererTest extends TestCase
             [$getParameterArguments, $getParameterReturnValues] = $getParameterValues;
 
             if (!empty($hasParameterArguments)) {
-                $matcher = self::exactly(count($hasParameterArguments));
+                $matcher = $this->exactly(count($hasParameterArguments));
                 $this->configResolverMock
                     ->expects($matcher)
                     ->method('hasParameter')
@@ -350,7 +350,7 @@ class RendererTest extends TestCase
             }
 
             if (!empty($getParameterArguments)) {
-                $matcher = self::exactly(count($getParameterArguments));
+                $matcher = $this->exactly(count($getParameterArguments));
                 $this->configResolverMock
                     ->expects($matcher)
                     ->method('getParameter')
@@ -362,13 +362,13 @@ class RendererTest extends TestCase
 
         if (empty($loggerParams)) {
             $this->loggerMock
-                ->expects(self::never())
+                ->expects($this->never())
                 ->method(self::anything());
         } else {
             [$warningArguments, $errorArguments] = $loggerParams;
 
             if (!empty($warningArguments)) {
-                $matcher = self::exactly(count($warningArguments));
+                $matcher = $this->exactly(count($warningArguments));
                 $this->loggerMock
                     ->expects($matcher)
                     ->method('warning')
@@ -379,7 +379,7 @@ class RendererTest extends TestCase
             }
 
             if (!empty($errorArguments)) {
-                $matcher = self::exactly(count($errorArguments));
+                $matcher = $this->exactly(count($errorArguments));
                 $this->loggerMock
                     ->expects($matcher)
                     ->method('error')
@@ -411,23 +411,23 @@ class RendererTest extends TestCase
         $contentMock = $this->getContentMock($mainLocationId);
 
         $this->repositoryMock
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('sudo')
             ->willReturn($contentMock);
 
         $renderer
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('checkContentPermissions')
             ->with($contentMock);
 
         $renderer
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('render')
             ->with($templateName, $parameters)
             ->willReturn($result);
 
         $renderer
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('getEmbedTemplateName')
             ->with(Renderer::RESOURCE_TYPE_CONTENT, $isInline, $isDenied)
             ->willReturn($templateName);
@@ -438,12 +438,12 @@ class RendererTest extends TestCase
             ->willReturn(true);
 
         $this->templateEngineMock
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('getLoader')
             ->willReturn($this->loaderMock);
 
         $this->loggerMock
-            ->expects(self::never())
+            ->expects($this->never())
             ->method(self::anything());
 
         self::assertEquals(
@@ -466,31 +466,31 @@ class RendererTest extends TestCase
         $contentMock = $this->getContentMock($mainLocationId);
 
         $this->repositoryMock
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('sudo')
             ->willReturn($contentMock);
 
         $renderer
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('checkContentPermissions')
             ->with($contentMock);
 
         $renderer
-            ->expects(self::never())
+            ->expects($this->never())
             ->method('render');
 
         $renderer
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('getEmbedTemplateName')
             ->with(Renderer::RESOURCE_TYPE_CONTENT, $isInline, $isDenied)
             ->willReturn($templateName);
 
         $this->templateEngineMock
-            ->expects(self::never())
+            ->expects($this->never())
             ->method('getLoader');
 
         $this->loggerMock
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('error')
             ->with('Could not render embedded resource: no template configured');
 
@@ -513,21 +513,21 @@ class RendererTest extends TestCase
         $contentMock = $this->getContentMock($mainLocationId);
 
         $this->repositoryMock
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('sudo')
             ->willReturn($contentMock);
 
         $renderer
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('checkContentPermissions')
             ->with($contentMock);
 
         $renderer
-            ->expects(self::never())
+            ->expects($this->never())
             ->method('render');
 
         $renderer
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('getEmbedTemplateName')
             ->with(Renderer::RESOURCE_TYPE_CONTENT, $isInline, $isDenied)
             ->willReturn($templateName);
@@ -538,12 +538,12 @@ class RendererTest extends TestCase
             ->willReturn(false);
 
         $this->templateEngineMock
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('getLoader')
             ->willReturn($this->loaderMock);
 
         $this->loggerMock
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('error')
             ->with("Could not render embedded resource: template '{$templateName}' does not exists");
 
@@ -567,24 +567,24 @@ class RendererTest extends TestCase
         $contentMock = $this->getContentMock($mainLocationId);
 
         $this->repositoryMock
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('sudo')
             ->willReturn($contentMock);
 
         $renderer
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('checkContentPermissions')
             ->with($contentMock)
-            ->will(self::throwException(new AccessDeniedException()));
+            ->will($this->throwException(new AccessDeniedException()));
 
         $renderer
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('render')
             ->with($templateName, $parameters)
             ->willReturn($result);
 
         $renderer
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('getEmbedTemplateName')
             ->with(Renderer::RESOURCE_TYPE_CONTENT, $isInline, $isDenied)
             ->willReturn($templateName);
@@ -595,12 +595,12 @@ class RendererTest extends TestCase
             ->willReturn(true);
 
         $this->templateEngineMock
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('getLoader')
             ->willReturn($this->loaderMock);
 
         $this->loggerMock
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('error')
             ->with("Could not render embedded resource: access denied to embed Content #{$contentId}");
 
@@ -620,25 +620,25 @@ class RendererTest extends TestCase
 
         $contentInfoMock = $this->createMock(ContentInfo::class);
         $contentInfoMock
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('__get')
             ->with('mainLocationId')
             ->willReturn(null);
 
         $contentMock = $this->createMock(Content::class);
         $contentMock
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('__get')
             ->with('contentInfo')
             ->willReturn($contentInfoMock);
 
         $this->repositoryMock
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('sudo')
             ->willReturn($contentMock);
 
         $this->loggerMock
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('error')
             ->with("Could not render embedded resource: Content #{$contentId} is trashed.");
 
@@ -656,23 +656,23 @@ class RendererTest extends TestCase
         $isInline = true;
 
         $contentInfoMock = $this->createMock(ContentInfo::class);
-        $matcher = self::exactly(2);
+        $matcher = $this->exactly(2);
         $contentInfoMock
             ->expects($matcher)
             ->method('__get')->willReturnCallback(static function (...$parameters) use ($matcher): mixed {
-            if ($matcher->numberOfInvocations() === 1) {
-                self::assertSame('mainLocationId', $parameters[0]);
+                if ($matcher->numberOfInvocations() === 1) {
+                    self::assertSame('mainLocationId', $parameters[0]);
 
-                return 2;
-            }
-            if ($matcher->numberOfInvocations() === 2) {
-                self::assertSame('isHidden', $parameters[0]);
+                    return 2;
+                }
+                if ($matcher->numberOfInvocations() === 2) {
+                    self::assertSame('isHidden', $parameters[0]);
 
-                return true;
-            }
+                    return true;
+                }
 
-            return null;
-        });
+                return null;
+            });
 
         $contentMock = $this->createMock(Content::class);
         $contentMock
@@ -681,12 +681,12 @@ class RendererTest extends TestCase
             ->willReturn($contentInfoMock);
 
         $this->repositoryMock
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('sudo')
             ->willReturn($contentMock);
 
         $this->loggerMock
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('error')
             ->with("Could not render embedded resource: Content #{$contentId} is hidden.");
 
@@ -720,30 +720,30 @@ class RendererTest extends TestCase
         $contentMock = $this->getContentMock($mainLocationId);
 
         $this->repositoryMock
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('sudo')
             ->willReturn($contentMock);
 
         $renderer
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('checkContentPermissions')
             ->with($contentMock)
-            ->will(self::throwException($exception));
+            ->will($this->throwException($exception));
 
         $renderer
-            ->expects(self::never())
+            ->expects($this->never())
             ->method('render');
 
         $renderer
-            ->expects(self::never())
+            ->expects($this->never())
             ->method('getEmbedTemplateName');
 
         $this->templateEngineMock
-            ->expects(self::never())
+            ->expects($this->never())
             ->method('getLoader');
 
         $this->loggerMock
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('error')
             ->with("Could not render embedded resource: Content #{$contentId} not found");
 
@@ -765,15 +765,15 @@ class RendererTest extends TestCase
         $contentMock = $this->getContentMock($mainLocationId);
 
         $this->repositoryMock
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('sudo')
             ->willReturn($contentMock);
 
         $renderer
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('checkContentPermissions')
             ->with($contentMock)
-            ->will(self::throwException(new Exception('Something threw up')));
+            ->will($this->throwException(new Exception('Something threw up')));
 
         $renderer->renderContentEmbed($contentId, 'embedTest', ['parameters'], true);
     }
@@ -992,30 +992,30 @@ class RendererTest extends TestCase
         $contentMock = $this->getContentMock($mainLocationId);
 
         $this->repositoryMock
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('sudo')
             ->willReturn($contentMock);
 
         if (isset($deniedException)) {
             $renderer
-                ->expects(self::once())
+                ->expects($this->once())
                 ->method('checkContentPermissions')
                 ->with($contentMock)
-                ->will(self::throwException($deniedException));
+                ->will($this->throwException($deniedException));
         } else {
             $renderer
-                ->expects(self::once())
+                ->expects($this->once())
                 ->method('checkContentPermissions')
                 ->with($contentMock);
         }
 
         if (!isset($renderTemplate)) {
             $renderer
-                ->expects(self::never())
+                ->expects($this->never())
                 ->method('render');
         } else {
             $renderer
-                ->expects(self::once())
+                ->expects($this->once())
                 ->method('render')
                 ->with($renderTemplate, $parameters)
                 ->willReturn($renderResult);
@@ -1023,7 +1023,7 @@ class RendererTest extends TestCase
 
         if (!isset($templateEngineTemplate)) {
             $this->templateEngineMock
-                ->expects(self::never())
+                ->expects($this->never())
                 ->method(self::anything());
         } else {
             $this->loaderMock
@@ -1032,14 +1032,14 @@ class RendererTest extends TestCase
                 ->willReturn(true);
 
             $this->templateEngineMock
-                ->expects(self::once())
+                ->expects($this->once())
                 ->method('getLoader')
                 ->willReturn($this->loaderMock);
         }
 
         if (empty($configResolverParams)) {
             $this->configResolverMock
-                ->expects(self::never())
+                ->expects($this->never())
                 ->method(self::anything());
         } else {
             [$hasParameterValues, $getParameterValues] = $configResolverParams;
@@ -1047,7 +1047,7 @@ class RendererTest extends TestCase
             [$getParameterArguments, $getParameterReturnValues] = $getParameterValues;
 
             if (!empty($hasParameterArguments)) {
-                $matcher = self::exactly(count($hasParameterArguments));
+                $matcher = $this->exactly(count($hasParameterArguments));
                 $this->configResolverMock
                     ->expects($matcher)
                     ->method('hasParameter')
@@ -1057,7 +1057,7 @@ class RendererTest extends TestCase
             }
 
             if (!empty($getParameterArguments)) {
-                $matcher = self::exactly(count($getParameterArguments));
+                $matcher = $this->exactly(count($getParameterArguments));
                 $this->configResolverMock
                     ->expects($matcher)
                     ->method('getParameter')
@@ -1069,13 +1069,13 @@ class RendererTest extends TestCase
 
         if (empty($loggerParams)) {
             $this->loggerMock
-                ->expects(self::never())
+                ->expects($this->never())
                 ->method(self::anything());
         } else {
             [$warningArguments, $errorArguments] = $loggerParams;
 
             if (!empty($warningArguments)) {
-                $matcher = self::exactly(count($warningArguments));
+                $matcher = $this->exactly(count($warningArguments));
                 $this->loggerMock
                     ->expects($matcher)
                     ->method('warning')
@@ -1086,7 +1086,7 @@ class RendererTest extends TestCase
             }
 
             if (!empty($errorArguments)) {
-                $matcher = self::exactly(count($errorArguments));
+                $matcher = $this->exactly(count($errorArguments));
                 $this->loggerMock
                     ->expects($matcher)
                     ->method('error')
@@ -1116,25 +1116,25 @@ class RendererTest extends TestCase
         $mockLocation = $this->createMock(Location::class);
 
         $mockLocation
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('__get')
             ->with('invisible')
             ->willReturn(false);
 
         $renderer
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('checkLocation')
             ->with($locationId)
             ->willReturn($mockLocation);
 
         $renderer
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('render')
             ->with($templateName, $parameters)
             ->willReturn($result);
 
         $renderer
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('getEmbedTemplateName')
             ->with(Renderer::RESOURCE_TYPE_LOCATION, $isInline, $isDenied)
             ->willReturn($templateName);
@@ -1145,12 +1145,12 @@ class RendererTest extends TestCase
             ->willReturn(true);
 
         $this->templateEngineMock
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('getLoader')
             ->willReturn($this->loaderMock);
 
         $this->loggerMock
-            ->expects(self::never())
+            ->expects($this->never())
             ->method(self::anything());
 
         self::assertEquals(
@@ -1171,33 +1171,33 @@ class RendererTest extends TestCase
         $mockLocation = $this->createMock(Location::class);
 
         $mockLocation
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('__get')
             ->with('invisible')
             ->willReturn(false);
 
         $renderer
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('checkLocation')
             ->with($locationId)
             ->willReturn($mockLocation);
 
         $renderer
-            ->expects(self::never())
+            ->expects($this->never())
             ->method('render');
 
         $renderer
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('getEmbedTemplateName')
             ->with(Renderer::RESOURCE_TYPE_LOCATION, $isInline, $isDenied)
             ->willReturn($templateName);
 
         $this->templateEngineMock
-            ->expects(self::never())
+            ->expects($this->never())
             ->method('getLoader');
 
         $this->loggerMock
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('error')
             ->with('Could not render embedded resource: no template configured');
 
@@ -1218,23 +1218,23 @@ class RendererTest extends TestCase
         $mockLocation = $this->createMock(Location::class);
 
         $mockLocation
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('__get')
             ->with('invisible')
             ->willReturn(false);
 
         $renderer
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('checkLocation')
             ->with($locationId)
             ->willReturn($mockLocation);
 
         $renderer
-            ->expects(self::never())
+            ->expects($this->never())
             ->method('render');
 
         $renderer
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('getEmbedTemplateName')
             ->with(Renderer::RESOURCE_TYPE_LOCATION, $isInline, $isDenied)
             ->willReturn($templateName);
@@ -1245,12 +1245,12 @@ class RendererTest extends TestCase
             ->willReturn(false);
 
         $this->templateEngineMock
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('getLoader')
             ->willReturn($this->loaderMock);
 
         $this->loggerMock
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('error')
             ->with("Could not render embedded resource: template '{$templateName}' does not exists");
 
@@ -1271,19 +1271,19 @@ class RendererTest extends TestCase
         $result = 'result';
 
         $renderer
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('checkLocation')
             ->with($locationId)
-            ->will(self::throwException(new AccessDeniedException()));
+            ->will($this->throwException(new AccessDeniedException()));
 
         $renderer
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('render')
             ->with($templateName, $parameters)
             ->willReturn($result);
 
         $renderer
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('getEmbedTemplateName')
             ->with(Renderer::RESOURCE_TYPE_LOCATION, $isInline, $isDenied)
             ->willReturn($templateName);
@@ -1294,12 +1294,12 @@ class RendererTest extends TestCase
             ->willReturn(true);
 
         $this->templateEngineMock
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('getLoader')
             ->willReturn($this->loaderMock);
 
         $this->loggerMock
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('error')
             ->with("Could not render embedded resource: access denied to embed Location #{$locationId}");
 
@@ -1319,31 +1319,31 @@ class RendererTest extends TestCase
         $mockLocation = $this->createMock(Location::class);
 
         $mockLocation
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('__get')
             ->with('invisible')
             ->willReturn(true);
 
         $renderer
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('checkLocation')
             ->with($locationId)
             ->willReturn($mockLocation);
 
         $renderer
-            ->expects(self::never())
+            ->expects($this->never())
             ->method('render');
 
         $renderer
-            ->expects(self::never())
+            ->expects($this->never())
             ->method('getEmbedTemplateName');
 
         $this->templateEngineMock
-            ->expects(self::never())
+            ->expects($this->never())
             ->method('getLoader');
 
         $this->loggerMock
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('error')
             ->with("Could not render embedded resource: Location #{$locationId} is not visible");
 
@@ -1374,25 +1374,25 @@ class RendererTest extends TestCase
         $result = null;
 
         $renderer
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('checkLocation')
             ->with($locationId)
-            ->will(self::throwException($exception));
+            ->will($this->throwException($exception));
 
         $renderer
-            ->expects(self::never())
+            ->expects($this->never())
             ->method('render');
 
         $renderer
-            ->expects(self::never())
+            ->expects($this->never())
             ->method('getEmbedTemplateName');
 
         $this->templateEngineMock
-            ->expects(self::never())
+            ->expects($this->never())
             ->method('getLoader');
 
         $this->loggerMock
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('error')
             ->with("Could not render embedded resource: Location #{$locationId} not found");
 
@@ -1411,10 +1411,10 @@ class RendererTest extends TestCase
         $locationId = 42;
 
         $renderer
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('checkLocation')
             ->with($locationId)
-            ->will(self::throwException(new Exception('Something threw up')));
+            ->will($this->throwException(new Exception('Something threw up')));
 
         $renderer->renderLocationEmbed($locationId, 'embedTest', ['parameters'], true);
     }
@@ -1628,19 +1628,19 @@ class RendererTest extends TestCase
 
         if (isset($deniedException)) {
             $renderer
-                ->expects(self::once())
+                ->expects($this->once())
                 ->method('checkLocation')
                 ->with($locationId)
-                ->will(self::throwException($deniedException));
+                ->will($this->throwException($deniedException));
         } else {
             $mockLocation
-                ->expects(self::once())
+                ->expects($this->once())
                 ->method('__get')
                 ->with('invisible')
                 ->willReturn(false);
 
             $renderer
-                ->expects(self::once())
+                ->expects($this->once())
                 ->method('checkLocation')
                 ->with($locationId)
                 ->willReturn($mockLocation);
@@ -1648,11 +1648,11 @@ class RendererTest extends TestCase
 
         if (!isset($renderTemplate)) {
             $renderer
-                ->expects(self::never())
+                ->expects($this->never())
                 ->method('render');
         } else {
             $renderer
-                ->expects(self::once())
+                ->expects($this->once())
                 ->method('render')
                 ->with($renderTemplate, $parameters)
                 ->willReturn($renderResult);
@@ -1660,7 +1660,7 @@ class RendererTest extends TestCase
 
         if (!isset($templateEngineTemplate)) {
             $this->templateEngineMock
-                ->expects(self::never())
+                ->expects($this->never())
                 ->method(self::anything());
         } else {
             $this->loaderMock
@@ -1669,14 +1669,14 @@ class RendererTest extends TestCase
                 ->willReturn(true);
 
             $this->templateEngineMock
-                ->expects(self::once())
+                ->expects($this->once())
                 ->method('getLoader')
                 ->willReturn($this->loaderMock);
         }
 
         if (empty($configResolverParams)) {
             $this->configResolverMock
-                ->expects(self::never())
+                ->expects($this->never())
                 ->method(self::anything());
         } else {
             [$hasParameterValues, $getParameterValues] = $configResolverParams;
@@ -1684,7 +1684,7 @@ class RendererTest extends TestCase
             [$getParameterArguments, $getParameterReturnValues] = $getParameterValues;
 
             if (!empty($hasParameterArguments)) {
-                $matcher = self::exactly(count($hasParameterArguments));
+                $matcher = $this->exactly(count($hasParameterArguments));
                 $this->configResolverMock
                     ->expects($matcher)
                     ->method('hasParameter')
@@ -1694,7 +1694,7 @@ class RendererTest extends TestCase
             }
 
             if (!empty($getParameterArguments)) {
-                $matcher = self::exactly(count($getParameterArguments));
+                $matcher = $this->exactly(count($getParameterArguments));
                 $this->configResolverMock
                     ->expects($matcher)
                     ->method('getParameter')
@@ -1706,13 +1706,13 @@ class RendererTest extends TestCase
 
         if (empty($loggerParams)) {
             $this->loggerMock
-                ->expects(self::never())
+                ->expects($this->never())
                 ->method(self::anything());
         } else {
             [$warningArguments, $errorArguments] = $loggerParams;
 
             if (!empty($warningArguments)) {
-                $matcher = self::exactly(count($warningArguments));
+                $matcher = $this->exactly(count($warningArguments));
                 $this->loggerMock
                     ->expects($matcher)
                     ->method('warning')
@@ -1723,7 +1723,7 @@ class RendererTest extends TestCase
             }
 
             if (!empty($errorArguments)) {
-                $matcher = self::exactly(count($errorArguments));
+                $matcher = $this->exactly(count($errorArguments));
                 $this->loggerMock
                     ->expects($matcher)
                     ->method('error')
@@ -1833,23 +1833,23 @@ class RendererTest extends TestCase
     protected function getContentMock($mainLocationId): MockObject
     {
         $contentInfoMock = $this->createMock(ContentInfo::class);
-        $matcher = self::exactly(2);
+        $matcher = $this->exactly(2);
         $contentInfoMock
             ->expects($matcher)
             ->method('__get')->willReturnCallback(static function (...$parameters) use ($matcher, $mainLocationId): mixed {
-            if ($matcher->numberOfInvocations() === 1) {
-                self::assertSame('mainLocationId', $parameters[0]);
+                if ($matcher->numberOfInvocations() === 1) {
+                    self::assertSame('mainLocationId', $parameters[0]);
 
-                return $mainLocationId;
-            }
-            if ($matcher->numberOfInvocations() === 2) {
-                self::assertSame('isHidden', $parameters[0]);
+                    return $mainLocationId;
+                }
+                if ($matcher->numberOfInvocations() === 2) {
+                    self::assertSame('isHidden', $parameters[0]);
 
-                return false;
-            }
+                    return false;
+                }
 
-            return null;
-        });
+                return null;
+            });
 
         $contentMock = $this->createMock(Content::class);
         $contentMock

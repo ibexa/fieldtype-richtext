@@ -19,7 +19,7 @@ final class ConfigurableProviderTest extends TestCase
     {
         $inner = $this->createMock(Provider::class);
         $inner
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('getName')
             ->willReturn('__inner_name__');
 
@@ -35,7 +35,7 @@ final class ConfigurableProviderTest extends TestCase
     {
         $inner = $this->createMock(Provider::class);
         $inner
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('getConfiguration')
             ->willReturn([
                 'foo' => 'bar',
@@ -53,7 +53,7 @@ final class ConfigurableProviderTest extends TestCase
     {
         $inner = $this->createMock(Provider::class);
         $inner
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('getConfiguration')
             ->willReturn([
                 'foo' => 'bar',
@@ -61,7 +61,7 @@ final class ConfigurableProviderTest extends TestCase
 
         $configurator = $this->createMock(ProviderConfiguratorInterface::class);
         $configurator
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('getConfiguration')
             ->with(self::identicalTo(['foo' => 'bar']))
             ->willReturn(['bar' => 'foo']);

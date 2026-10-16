@@ -819,7 +819,7 @@ class EmbedTest extends TestCase
         array $renderContentEmbedParams,
         array $renderLocationEmbedParams
     ): void {
-        $matcher = self::exactly(count($errors));
+        $matcher = $this->exactly(count($errors));
         $this->loggerMock
             ->expects($matcher)
             ->method('error')
@@ -827,13 +827,13 @@ class EmbedTest extends TestCase
                 self::assertSame($errors[$matcher->numberOfInvocations() - 1], $parameters[0]);
             });
 
-        $this->rendererMock->expects(self::never())->method('renderTemplate');
+        $this->rendererMock->expects($this->never())->method('renderTemplate');
 
         [$embedContentParams, $embedContentReturnValues] = $renderContentEmbedParams;
         [$embedLocationParams, $embedLocationReturnValues] = $renderLocationEmbedParams;
 
         if (!empty($embedContentParams)) {
-            $matcher = self::exactly(count($embedContentParams));
+            $matcher = $this->exactly(count($embedContentParams));
             $this->rendererMock
                 ->expects($matcher)
                 ->method('renderContentEmbed')
@@ -846,7 +846,7 @@ class EmbedTest extends TestCase
         }
 
         if (!empty($embedLocationParams)) {
-            $matcher = self::exactly(count($embedLocationParams));
+            $matcher = $this->exactly(count($embedLocationParams));
             $this->rendererMock
                 ->expects($matcher)
                 ->method('renderLocationEmbed')

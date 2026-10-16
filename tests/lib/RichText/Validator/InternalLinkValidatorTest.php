@@ -45,7 +45,7 @@ class InternalLinkValidatorTest extends TestCase
 
         $contentId = 1;
         $this->contentHandler
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('loadContentInfo')
             ->with($contentId);
 
@@ -60,7 +60,7 @@ class InternalLinkValidatorTest extends TestCase
         $exception = self::createStub(NotFoundException::class);
 
         $this->contentHandler
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('loadContentInfo')
             ->with($contentId)
             ->willThrowException($exception);
@@ -75,7 +75,7 @@ class InternalLinkValidatorTest extends TestCase
         $locationId = 1;
 
         $this->locationHandler
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('load')
             ->with($locationId);
 
@@ -90,7 +90,7 @@ class InternalLinkValidatorTest extends TestCase
         $exception = self::createStub(NotFoundException::class);
 
         $this->locationHandler
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('load')
             ->with($locationId)
             ->willThrowException($exception);
@@ -105,7 +105,7 @@ class InternalLinkValidatorTest extends TestCase
         $contentRemoteId = '0ba685755118cf95abb0fe25f3f6a1c8';
 
         $this->contentHandler
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('loadContentInfoByRemoteId')
             ->with($contentRemoteId);
 
@@ -120,7 +120,7 @@ class InternalLinkValidatorTest extends TestCase
         $exception = self::createStub(NotFoundException::class);
 
         $this->contentHandler
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('loadContentInfoByRemoteId')
             ->with($contentRemoteId)
             ->willThrowException($exception);
@@ -135,7 +135,7 @@ class InternalLinkValidatorTest extends TestCase
 
         $validator = $this->getInternalLinkValidator(['validate']);
         $validator
-            ->expects(self::never())
+            ->expects($this->never())
             ->method('validate')
             ->with($scheme, $contentId);
 
@@ -153,7 +153,7 @@ class InternalLinkValidatorTest extends TestCase
 
         $validator = $this->getInternalLinkValidator(['validate']);
         $validator
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('validate')
             ->with($scheme, $contentId)
             ->willReturn(true);
@@ -172,7 +172,7 @@ class InternalLinkValidatorTest extends TestCase
 
         $validator = $this->getInternalLinkValidator(['validate']);
         $validator
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('validate')
             ->with($scheme, $contentId)
             ->willReturn(false);
@@ -192,7 +192,7 @@ class InternalLinkValidatorTest extends TestCase
 
         $validator = $this->getInternalLinkValidator(['validate']);
         $validator
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('validate')
             ->with($scheme, $locationId)
             ->willReturn(true);
@@ -211,7 +211,7 @@ class InternalLinkValidatorTest extends TestCase
 
         $validator = $this->getInternalLinkValidator(['validate']);
         $validator
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('validate')
             ->with($scheme, $locationId)
             ->willReturn(false);
@@ -231,7 +231,7 @@ class InternalLinkValidatorTest extends TestCase
 
         $validator = $this->getInternalLinkValidator(['validate']);
         $validator
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('validate')
             ->with($scheme, $contentRemoteId)
             ->willReturn(true);
@@ -250,7 +250,7 @@ class InternalLinkValidatorTest extends TestCase
 
         $validator = $this->getInternalLinkValidator(['validate']);
         $validator
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('validate')
             ->with($scheme, $contentRemoteId)
             ->willReturn(false);

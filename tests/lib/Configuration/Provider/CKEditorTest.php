@@ -40,7 +40,7 @@ final class CKEditorTest extends BaseProviderTestCase
         $provider = $this->createProvider();
 
         $this->configResolver
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('hasParameter')
             ->willReturn(false);
 

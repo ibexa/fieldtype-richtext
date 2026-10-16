@@ -82,7 +82,7 @@ class InputHandlerTest extends TestCase
             ->getMock();
 
         $this->normalizer
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('accept')
             ->with($inputXml)
             ->willReturn(false);
@@ -90,7 +90,7 @@ class InputHandlerTest extends TestCase
         $outputDocument = self::createStub(DOMDocument::class);
 
         $inputHandler
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('fromDocument')
             ->willReturnCallback(static function (DOMDocument $document) use ($inputXml, $outputDocument): DOMDocument {
                 self::assertEquals($inputXml, $document->saveXML());
@@ -107,13 +107,13 @@ class InputHandlerTest extends TestCase
         $outputDocument = self::createStub(DOMDocument::class);
 
         $this->schemaValidator
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('validateDocument')
             ->with($inputDocument)
             ->willReturn([]);
 
         $this->converter
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('dispatch')
             ->with($inputDocument)
             ->willReturn($outputDocument);
@@ -126,7 +126,7 @@ class InputHandlerTest extends TestCase
         $inputDocument = self::createStub(DOMDocument::class);
 
         $this->schemaValidator
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('validateDocument')
             ->with($inputDocument)
             ->willReturn([
@@ -134,7 +134,7 @@ class InputHandlerTest extends TestCase
             ]);
 
         $this->converter
-            ->expects(self::never())
+            ->expects($this->never())
             ->method('dispatch');
 
         $this->expectException(InvalidArgumentException::class);
@@ -183,7 +183,7 @@ EOT;
         ];
 
         $this->docbookValidator
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('validateDocument')
             ->with($document)
             ->willReturn($expectedErrors);

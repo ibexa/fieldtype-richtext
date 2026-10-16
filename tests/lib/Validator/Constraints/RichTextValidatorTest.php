@@ -47,7 +47,7 @@ class RichTextValidatorTest extends TestCase
         ];
 
         $this->inputHandler
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('fromString')
             ->with($xml)
             ->willThrowException($this->createInvalidXmlExceptionMock($expectedErrors));
@@ -57,7 +57,7 @@ class RichTextValidatorTest extends TestCase
             ->willReturnOnConsecutiveCalls(...$this->fetchErrorMessages($expectedErrors));
 
         $this->inputHandler
-            ->expects(self::never())
+            ->expects($this->never())
             ->method('validate');
 
         $this->validator->validate($xml, new RichText());
@@ -68,15 +68,15 @@ class RichTextValidatorTest extends TestCase
         $object = new stdClass();
 
         $this->inputHandler
-            ->expects(self::never())
+            ->expects($this->never())
             ->method('fromString');
 
         $this->inputHandler
-            ->expects(self::never())
+            ->expects($this->never())
             ->method('validate');
 
         $this->executionContext
-            ->expects(self::never())
+            ->expects($this->never())
             ->method('addViolation');
 
         $this->validator->validate($object, new RichText());
@@ -92,17 +92,17 @@ class RichTextValidatorTest extends TestCase
         ];
 
         $this->inputHandler
-            ->expects(self::never())
+            ->expects($this->never())
             ->method('fromString');
 
         $this->inputHandler
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('validate')
             ->with($doc)
             ->willReturn($expectedErrors);
 
         $this->executionContext
-            ->expects(self::exactly(count($expectedErrors)))
+            ->expects($this->exactly(count($expectedErrors)))
             ->method('addViolation')
             ->willReturnOnConsecutiveCalls(...$expectedErrors);
 
@@ -115,7 +115,7 @@ class RichTextValidatorTest extends TestCase
     private function createInvalidXmlExceptionMock(array $errors): InvalidXmlException
     {
         $ex = $this->createMock(InvalidXmlException::class);
-        $ex->expects(self::once())
+        $ex->expects($this->once())
             ->method('getErrors')
             ->willReturn($errors);
 

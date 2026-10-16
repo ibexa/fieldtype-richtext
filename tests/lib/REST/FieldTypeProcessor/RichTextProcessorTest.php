@@ -51,7 +51,7 @@ EOT;
         $convertedDocument->loadXML($processedOutputValue['xhtml5edit']);
 
         $this->converter
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('convert')
             ->with(self::isInstanceOf('DOMDocument'))
             ->willReturn($convertedDocument);
