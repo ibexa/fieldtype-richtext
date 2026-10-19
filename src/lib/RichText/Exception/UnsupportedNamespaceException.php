@@ -30,11 +30,11 @@ final class UnsupportedNamespaceException extends NotFoundException
     ) {
         parent::__construct('Validator', $namespace, $previous);
 
-        $this->setMessageTemplate(
-            $namespace === null
-                ? 'The root element "%element%" has no namespace. Supported namespaces: %namespaces%.'
-                : 'The root element "%element%" has an unsupported namespace "%namespace%". Supported namespaces: %namespaces%.'
-        );
+        if ($namespace === null) {
+            $this->setMessageTemplate('The root element "%element%" has no namespace. Supported namespaces: %namespaces%.');
+        } else {
+            $this->setMessageTemplate('The root element "%element%" has an unsupported namespace "%namespace%". Supported namespaces: %namespaces%.');
+        }
         $this->setParameters([
             '%element%' => $rootElementName,
             '%namespace%' => $namespace ?? '',
