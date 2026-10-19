@@ -24,6 +24,7 @@ use Ibexa\FieldTypeRichText\FieldType\RichText\Type as RichTextType;
 use Ibexa\FieldTypeRichText\FieldType\RichText\Value;
 use Ibexa\FieldTypeRichText\RichText\ConverterDispatcher;
 use Ibexa\FieldTypeRichText\RichText\DOMDocumentFactory;
+use Ibexa\FieldTypeRichText\RichText\Exception\UnsupportedNamespaceException;
 use Ibexa\FieldTypeRichText\RichText\InputHandler;
 use Ibexa\FieldTypeRichText\RichText\Normalizer\Aggregate;
 use Ibexa\FieldTypeRichText\RichText\RelationProcessor;
@@ -162,9 +163,10 @@ class RichTextTest extends TestCase
             ],
             [
                 '<?xml version="1.0" encoding="UTF-8"?><unknown xmlns="http://www.w3.org/2013/foobar"><format /></unknown>',
-                new NotFoundException(
-                    'Validator',
-                    'http://www.w3.org/2013/foobar'
+                new UnsupportedNamespaceException(
+                    'unknown',
+                    'http://www.w3.org/2013/foobar',
+                    ['http://docbook.org/ns/docbook']
                 ),
             ],
         ];
