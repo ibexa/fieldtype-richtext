@@ -22,6 +22,7 @@ use Ibexa\Contracts\Core\Repository\Repository;
 use Ibexa\Contracts\Core\Repository\Values\Content\Content;
 use Ibexa\Contracts\Core\Repository\Values\Content\Field;
 use Ibexa\Contracts\Core\Repository\Values\Content\Location;
+use Ibexa\Contracts\Core\Repository\Values\Content\RelationType;
 use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType;
 use Ibexa\Core\Base\Exceptions\NotFoundException;
 use Ibexa\Core\Persistence\Legacy\URL\Gateway\DoctrineDatabase;
@@ -89,21 +90,21 @@ EOT
         return [
             new Relation(
                 [
-                    'type' => Relation::LINK,
+                    'type' => RelationType::LINK->value,
                     'sourceContentInfo' => $content->contentInfo,
                     'destinationContentInfo' => $contentService->loadContentInfo(56),
                 ]
             ),
             new Relation(
                 [
-                    'type' => Relation::LINK,
+                    'type' => RelationType::LINK->value,
                     'sourceContentInfo' => $content->contentInfo,
                     'destinationContentInfo' => $contentService->loadContentInfo(54),
                 ]
             ),
             new Relation(
                 [
-                    'type' => Relation::EMBED,
+                    'type' => RelationType::EMBED->value,
                     'sourceContentInfo' => $content->contentInfo,
                     'destinationContentInfo' => $contentService->loadContentInfo(58),
                 ]
@@ -121,14 +122,14 @@ EOT
         return [
             new Relation(
                 [
-                    'type' => Relation::LINK,
+                    'type' => RelationType::LINK->value,
                     'sourceContentInfo' => $content->contentInfo,
                     'destinationContentInfo' => $contentService->loadContentInfo(58),
                 ]
             ),
             new Relation(
                 [
-                    'type' => Relation::LINK,
+                    'type' => RelationType::LINK->value,
                     'sourceContentInfo' => $content->contentInfo,
                     'destinationContentInfo' => $contentService->loadContentInfo(56),
                 ]
@@ -137,7 +138,7 @@ EOT
                 [
                     // @todo Won't be possible to add before we break how we store relations with legacy kernel.
                     //'sourceFieldDefinitionIdentifier' => 'data',
-                    'type' => Relation::EMBED,
+                    'type' => RelationType::EMBED->value,
                     'sourceContentInfo' => $content->contentInfo,
                     'destinationContentInfo' => $contentService->loadContentInfo(54),
                 ]
