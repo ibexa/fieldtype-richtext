@@ -44,6 +44,10 @@
                 }
             }
 
+            &.ck-widget_with-selection-handle {
+                overflow: hidden;
+            }
+
             &.ck-widget_with-selection-handle .ck-widget__selection-handle,
             &.ck-widget_with-selection-handle:hover .ck-widget__selection-handle {
                 left: calculateRem(-1px);
