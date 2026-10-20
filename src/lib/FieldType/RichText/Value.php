@@ -26,18 +26,18 @@ EOT;
     /**
      * Initializes a new RichText Value object with $xmlDoc in.
      */
-    public function __construct(DOMDocument|string|null $xml = null)
+    public function __construct(?DOMDocument $xml = null)
     {
-        if ($xml instanceof DOMDocument) {
-            $this->xml = $xml;
-        } else {
-            $this->xml = new DOMDocument();
-            $this->xml->loadXML($xml === null ? self::EMPTY_VALUE : $xml);
+        if ($xml === null) {
+            $xml = new DOMDocument();
+            $xml->loadXML(self::EMPTY_VALUE);
         }
+
+        $this->xml = $xml;
     }
 
     /**
-     * @see \Ibexa\Core\FieldType\Value
+     * @see BaseValue
      */
     public function __toString(): string
     {

@@ -9,13 +9,20 @@ declare(strict_types=1);
 namespace Ibexa\Tests\Integration\FieldTypeRichText\Repository;
 
 use DirectoryIterator;
+use Doctrine\DBAL\Exception;
 use Doctrine\DBAL\ParameterType;
 use DOMDocument;
+use Ibexa\Contracts\Core\Repository\Exceptions\BadStateException;
 use Ibexa\Contracts\Core\Repository\Exceptions\ContentFieldValidationException;
+use Ibexa\Contracts\Core\Repository\Exceptions\ContentValidationException;
+use Ibexa\Contracts\Core\Repository\Exceptions\ForbiddenException;
+use Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException;
+use Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException;
 use Ibexa\Contracts\Core\Repository\Repository;
 use Ibexa\Contracts\Core\Repository\Values\Content\Content;
 use Ibexa\Contracts\Core\Repository\Values\Content\Field;
 use Ibexa\Contracts\Core\Repository\Values\Content\Location;
+use Ibexa\Contracts\Core\Repository\Values\Content\RelationType;
 use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType;
 use Ibexa\Core\Base\Exceptions\NotFoundException;
 use Ibexa\Core\Persistence\Legacy\URL\Gateway\DoctrineDatabase;
@@ -23,36 +30,36 @@ use Ibexa\Core\Repository\Values\Content\Relation;
 use Ibexa\FieldTypeRichText\FieldType\RichText\Value as RichTextValue;
 use Ibexa\Tests\Integration\Core\Repository\FieldType\RelationSearchBaseIntegrationTestTrait;
 use Ibexa\Tests\Integration\Core\Repository\FieldType\SearchBaseIntegrationTestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Integration test for use field type.
- *
- * @group integration
- * @group field-type
  */
+#[Group('integration')]
+#[Group('field-type')]
 class RichTextFieldTypeIntegrationTest extends SearchBaseIntegrationTestCase
 {
     use RelationSearchBaseIntegrationTestTrait;
 
-    private DOMDocument $createdDOMValue;
-
-    private DOMDocument $updatedDOMValue;
-
-    /**
-     * @param array<mixed> $data
-     */
-    public function __construct(?string $name = null, array $data = [], $dataName = '')
-    {
-        $this->createdDOMValue = new DOMDocument();
-        $this->createdDOMValue->loadXML(
-            <<<EOT
+    private const string CREATED_XML = <<<EOT
 <?xml version="1.0" encoding="UTF-8"?>
 <section xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ezxhtml="http://ibexa.co/xmlns/dxp/docbook/xhtml" xmlns:ezcustom="http://ibexa.co/xmlns/dxp/docbook/custom" version="5.0-variant ezpublish-1.0">
     <para><link xlink:href="ezlocation://58" xlink:show="none">link1</link></para>
     <para><link xlink:href="ezcontent://54" xlink:show="none">link2</link> <ezembedinline xlink:href="ezlocation://60" view="embed" xml:id="embed-id-1" ezxhtml:class="embed-class" ezxhtml:align="left"></ezembedinline></para>
 </section>
-EOT
-        );
+EOT;
+
+    private DOMDocument $createdDOMValue;
+
+    private DOMDocument $updatedDOMValue;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->createdDOMValue = new DOMDocument();
+        $this->createdDOMValue->loadXML(self::CREATED_XML);
 
         $this->updatedDOMValue = new DOMDocument();
         $this->updatedDOMValue->loadXML(
@@ -71,12 +78,10 @@ EOT
 </section>
 EOT
         );
-
-        parent::__construct($name, $data, $dataName);
     }
 
     /**
-     * @return \Ibexa\Core\Repository\Values\Content\Relation[]
+     * @return Relation[]
      */
     public function getCreateExpectedRelations(Content $content): array
     {
@@ -85,21 +90,21 @@ EOT
         return [
             new Relation(
                 [
-                    'type' => Relation::LINK,
+                    'type' => RelationType::LINK->value,
                     'sourceContentInfo' => $content->contentInfo,
                     'destinationContentInfo' => $contentService->loadContentInfo(56),
                 ]
             ),
             new Relation(
                 [
-                    'type' => Relation::LINK,
+                    'type' => RelationType::LINK->value,
                     'sourceContentInfo' => $content->contentInfo,
                     'destinationContentInfo' => $contentService->loadContentInfo(54),
                 ]
             ),
             new Relation(
                 [
-                    'type' => Relation::EMBED,
+                    'type' => RelationType::EMBED->value,
                     'sourceContentInfo' => $content->contentInfo,
                     'destinationContentInfo' => $contentService->loadContentInfo(58),
                 ]
@@ -108,7 +113,7 @@ EOT
     }
 
     /**
-     * @return \Ibexa\Core\Repository\Values\Content\Relation[]
+     * @return Relation[]
      */
     public function getUpdateExpectedRelations(Content $content): array
     {
@@ -117,14 +122,14 @@ EOT
         return [
             new Relation(
                 [
-                    'type' => Relation::LINK,
+                    'type' => RelationType::LINK->value,
                     'sourceContentInfo' => $content->contentInfo,
                     'destinationContentInfo' => $contentService->loadContentInfo(58),
                 ]
             ),
             new Relation(
                 [
-                    'type' => Relation::LINK,
+                    'type' => RelationType::LINK->value,
                     'sourceContentInfo' => $content->contentInfo,
                     'destinationContentInfo' => $contentService->loadContentInfo(56),
                 ]
@@ -133,7 +138,7 @@ EOT
                 [
                     // @todo Won't be possible to add before we break how we store relations with legacy kernel.
                     //'sourceFieldDefinitionIdentifier' => 'data',
-                    'type' => Relation::EMBED,
+                    'type' => RelationType::EMBED->value,
                     'sourceContentInfo' => $content->contentInfo,
                     'destinationContentInfo' => $contentService->loadContentInfo(54),
                 ]
@@ -271,7 +276,7 @@ EOT
      *
      * @return array<array<mixed>>
      */
-    public function provideInvalidCreationFieldData(): array
+    public static function provideInvalidCreationFieldData(): array
     {
         return [
             [
@@ -328,9 +333,9 @@ EOT
      *
      * @return array<array<mixed>>
      */
-    public function provideInvalidUpdateFieldData(): array
+    public static function provideInvalidUpdateFieldData(): array
     {
-        return $this->provideInvalidCreationFieldData();
+        return self::provideInvalidCreationFieldData();
     }
 
     /**
@@ -374,7 +379,7 @@ EOT
      *
      * @return list<array{RichTextValue, array{xml: string|false}}>
      */
-    public function provideToHashData(): array
+    public static function provideToHashData(): array
     {
         $xml = new DOMDocument();
         $xml->loadXML(
@@ -400,7 +405,7 @@ EOT
      *
      * @return array<array<array<string, mixed>>>
      */
-    public function provideFromHashData(): array
+    public static function provideFromHashData(): array
     {
         return [
             [
@@ -420,13 +425,14 @@ EOT
     }
 
     /**
-     * @dataProvider provideFromHashData
-     *
      * @todo: Requires correct registered FieldTypeService, needs to be
      *        maintained!
      */
-    public function testFromHash(mixed $hash, mixed $expectedValue = null): void
-    {
+    #[DataProvider('provideFromHashData')]
+    public function testFromHash(
+        mixed $hash,
+        mixed $expectedValue = null
+    ): void {
         $richTextValue = $this
             ->getRepository()
             ->getFieldTypeService()
@@ -443,7 +449,7 @@ EOT
     /**
      * @return array<array<mixed>>
      */
-    public function providerForTestIsEmptyValue(): array
+    public static function providerForTestIsEmptyValue(): array
     {
         $xml = <<<EOT
 <?xml version="1.0" encoding="UTF-8"?>
@@ -452,14 +458,22 @@ EOT;
 
         return [
             [new RichTextValue()],
-            [new RichTextValue($xml)],
+            [new RichTextValue(self::createDocumentFromString($xml))],
         ];
+    }
+
+    private static function createDocumentFromString(string $xml): DOMDocument
+    {
+        $document = new DOMDocument();
+        $document->loadXML($xml);
+
+        return $document;
     }
 
     /**
      * @return array<array<mixed>>
      */
-    public function providerForTestIsNotEmptyValue(): array
+    public static function providerForTestIsNotEmptyValue(): array
     {
         $xml = <<<EOT
 <?xml version="1.0" encoding="UTF-8"?>
@@ -474,10 +488,10 @@ EOT;
 
         return [
             [
-                $this->getValidCreationFieldData(),
+                new RichTextValue(self::createDocumentFromString(self::CREATED_XML)),
             ],
-            [new RichTextValue($xml)],
-            [new RichTextValue($xml2)],
+            [new RichTextValue(self::createDocumentFromString($xml))],
+            [new RichTextValue(self::createDocumentFromString($xml2))],
         ];
     }
 
@@ -490,7 +504,7 @@ EOT;
      *
      * @phpstan-return list<array{string, string}>
      */
-    public function providerForTestConvertRemoteObjectIdToObjectId(): array
+    public static function providerForTestConvertRemoteObjectIdToObjectId(): array
     {
         $remoteId = '[RemoteId]';
         $objectId = '[ObjectId]';
@@ -549,11 +563,12 @@ EOT;
 
     /**
      * This tests the conversion from remote_object_id to object_id.
-     *
-     * @dataProvider providerForTestConvertRemoteObjectIdToObjectId
      */
-    public function testConvertRemoteObjectIdToObjectId(string $test, string $expected): void
-    {
+    #[DataProvider('providerForTestConvertRemoteObjectIdToObjectId')]
+    public function testConvertRemoteObjectIdToObjectId(
+        string $test,
+        string $expected
+    ): void {
         $repository = $this->getRepository();
 
         $contentService = $repository->getContentService();
@@ -621,10 +636,10 @@ EOT;
 
     /**
      * @throws \Doctrine\DBAL\Driver\Exception
-     * @throws \Doctrine\DBAL\Exception
+     * @throws Exception
      * @throws \ErrorException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ForbiddenException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
+     * @throws ForbiddenException
+     * @throws UnauthorizedException
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      */
     public function testExternalLinkStoringAfterUpdate(): void
@@ -675,7 +690,7 @@ EOT;
 
     /**
      * @throws \Doctrine\DBAL\Driver\Exception
-     * @throws \Doctrine\DBAL\Exception
+     * @throws Exception
      * @throws \ErrorException
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      */
@@ -685,7 +700,7 @@ EOT;
         $query = $connection->createQueryBuilder();
         $query
             ->select(
-                $connection->quoteIdentifier('id')
+                $connection->quoteSingleIdentifier('id')
             )
             ->from(DoctrineDatabase::URL_TABLE)
             ->where('url = :url')
@@ -702,8 +717,8 @@ EOT;
     }
 
     /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ForbiddenException
+     * @throws UnauthorizedException
+     * @throws ForbiddenException
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      */
     private function createContentTypeForTestExternalLinkStoringAfterUpdate(): ContentType
@@ -748,7 +763,7 @@ EOT;
         $query = $connection->createQueryBuilder();
         $query
             ->select(
-                $connection->quoteIdentifier('url_id')
+                $connection->quoteSingleIdentifier('url_id')
             )
             ->from(DoctrineDatabase::URL_LINK_TABLE)
             ->where('contentobject_attribute_id = :contentobject_attribute_id')
@@ -770,9 +785,8 @@ EOT;
 
     /**
      * @param string $xmlDocumentPath
-     *
-     * @dataProvider providerForTestCreateContentWithValidCustomTag
      */
+    #[DataProvider('providerForTestCreateContentWithValidCustomTag')]
     public function testCreateContentWithValidCustomTag($xmlDocumentPath): void
     {
         $validXmlDocument = $this->createDocument($xmlDocumentPath);
@@ -784,7 +798,7 @@ EOT;
      *
      * @return list<array{(string|false)}>
      */
-    public function providerForTestCreateContentWithValidCustomTag(): array
+    public static function providerForTestCreateContentWithValidCustomTag(): array
     {
         $data = [];
         $iterator = new DirectoryIterator(__DIR__ . '/_fixtures/ibexa_richtext/custom_tags/valid');
@@ -799,9 +813,8 @@ EOT;
 
     /**
      * @param string $xmlDocumentPath
-     *
-     * @dataProvider providerForTestCreateContentWithInvalidCustomTag
      */
+    #[DataProvider('providerForTestCreateContentWithInvalidCustomTag')]
     public function testCreateContentWithInvalidCustomTag(
         $xmlDocumentPath,
         string $expectedValidationMessage
@@ -823,7 +836,7 @@ EOT;
      *
      * @return array<list<string>>
      */
-    public function providerForTestCreateContentWithInvalidCustomTag(): array
+    public static function providerForTestCreateContentWithInvalidCustomTag(): array
     {
         return [
             [
@@ -856,10 +869,10 @@ EOT;
     /**
      * Prepare Content structure with link to deleted Location.
      *
-     * @return array{\Ibexa\Contracts\Core\Repository\Values\Content\Location, \Ibexa\Contracts\Core\Repository\Values\Content\Content}
+     * @return array{Location, Content}
      *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ForbiddenException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
+     * @throws ForbiddenException
+     * @throws UnauthorizedException
      */
     private function prepareInternalLinkValidatorBrokenLinksTestCase(Repository $repository): array
     {
@@ -904,12 +917,12 @@ EOT;
     /**
      * Test updating Content which contains links to deleted Location doesn't fail when updating not broken field only.
      *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\BadStateException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ContentFieldValidationException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ContentValidationException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ForbiddenException
+     * @throws BadStateException
+     * @throws ContentFieldValidationException
+     * @throws ContentValidationException
+     * @throws InvalidArgumentException
+     * @throws UnauthorizedException
+     * @throws ForbiddenException
      */
     public function testInternalLinkValidatorIgnoresMissingRelationOnNotUpdatedField(): void
     {
@@ -934,11 +947,11 @@ EOT;
      * Test updating Content which contains links to deleted Location fails when updating broken field.
      *
      * @throws \DOMException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\BadStateException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ContentValidationException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ForbiddenException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
+     * @throws BadStateException
+     * @throws ContentValidationException
+     * @throws ForbiddenException
+     * @throws InvalidArgumentException
+     * @throws UnauthorizedException
      */
     public function testInternalLinkValidatorReturnsErrorOnMissingRelationInUpdatedField(): void
     {
@@ -950,7 +963,7 @@ EOT;
         );
 
         // update field containing erroneous link to trigger validation
-        /** @var \DOMDocument $document */
+        /** @var DOMDocument $document */
         $document = $brokenContent->getField('data', 'eng-GB')?->getValue()->xml;
         $newParagraph = $document->createElement('para', 'Updated content');
         $document
@@ -1045,7 +1058,7 @@ XML
         }
     }
 
-    protected function getValidSearchValueOne(): string
+    protected static function getValidSearchValueOne(): string
     {
         return <<<EOT
 <?xml version="1.0" encoding="UTF-8"?>
@@ -1055,13 +1068,13 @@ XML
 EOT;
     }
 
-    protected function getSearchTargetValueOne(): string
+    protected static function getSearchTargetValueOne(): string
     {
         // ensure case-insensitivity
         return strtoupper('caution is the path to mediocrity');
     }
 
-    protected function getValidSearchValueTwo(): string
+    protected static function getValidSearchValueTwo(): string
     {
         return <<<EOT
 <?xml version="1.0" encoding="UTF-8"?>
@@ -1071,7 +1084,7 @@ EOT;
 EOT;
     }
 
-    protected function getSearchTargetValueTwo(): string
+    protected static function getSearchTargetValueTwo(): string
     {
         // ensure case-insensitivity
         return strtoupper('truth suffers from too much analysis');
@@ -1080,7 +1093,7 @@ EOT;
     /**
      * @return array<list<string>>
      */
-    protected function getFullTextIndexedFieldData(): array
+    protected static function getFullTextIndexedFieldData(): array
     {
         return [
             ['mediocrity', 'analysis'],

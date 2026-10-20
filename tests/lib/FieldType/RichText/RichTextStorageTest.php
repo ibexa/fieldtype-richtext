@@ -9,12 +9,15 @@ declare(strict_types=1);
 namespace Ibexa\Tests\FieldTypeRichText\FieldType\RichText;
 
 use Ibexa\Contracts\Core\FieldType\StorageGateway;
+use Ibexa\Contracts\Core\Persistence\Content\ContentInfo;
 use Ibexa\Contracts\Core\Persistence\Content\Field;
 use Ibexa\Contracts\Core\Persistence\Content\FieldValue;
 use Ibexa\Contracts\Core\Persistence\Content\VersionInfo;
 use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
 use Ibexa\FieldTypeRichText\FieldType\RichText\RichTextStorage;
 use Ibexa\FieldTypeRichText\FieldType\RichText\RichTextStorage\Gateway;
+use Ibexa\FieldTypeRichText\RichText\DOMDocumentLoader;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
@@ -24,7 +27,7 @@ class RichTextStorageTest extends TestCase
     /**
      * @phpstan-return list<array{string, string, int[], array<int, string>}>
      */
-    public function providerForTestGetFieldData(): array
+    public static function providerForTestGetFieldData(): array
     {
         return [
             [
@@ -67,36 +70,42 @@ class RichTextStorageTest extends TestCase
     }
 
     /**
-     * @dataProvider providerForTestGetFieldData
-     *
      * @param int[] $linkIds
      * @param array<int, string> $linkUrls
      */
-    public function testGetFieldData(string $xmlString, string $updatedXmlString, array $linkIds, array $linkUrls): void
-    {
+    #[DataProvider('providerForTestGetFieldData')]
+    public function testGetFieldData(
+        string $xmlString,
+        string $updatedXmlString,
+        array $linkIds,
+        array $linkUrls
+    ): void {
         $gateway = $this->getGatewayMock();
         $gateway
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('getIdUrlMap')
             ->with(self::equalTo($linkIds))
             ->willReturn($linkUrls);
 
-        $gateway->expects(self::never())->method('getUrlIdMap');
-        $gateway->expects(self::never())->method('getContentIds');
-        $gateway->expects(self::never())->method('insertUrl');
+        $gateway->expects($this->never())->method('getUrlIdMap');
+        $gateway->expects($this->never())->method('getContentIds');
+        $gateway->expects($this->never())->method('insertUrl');
 
         $logger = $this->getLoggerMock();
-        $missingIds = array_diff($linkIds, array_keys($linkUrls));
+        $missingIds = array_values(array_diff($linkIds, array_keys($linkUrls)));
         $errorMessages = array_map(static function (int $missingId): string {
             return "URL with ID {$missingId} not found";
         }, $missingIds);
+        $matcher = $this->exactly(count($missingIds));
 
         $logger
-            ->expects(self::exactly(count($missingIds)))
+            ->expects($matcher)
             ->method('error')
-            ->withConsecutive($errorMessages);
+            ->willReturnCallback(static function (...$parameters) use ($matcher, $errorMessages): void {
+                self::assertSame($errorMessages[$matcher->numberOfInvocations() - 1], $parameters[0]);
+            });
 
-        $versionInfo = new VersionInfo();
+        $versionInfo = new VersionInfo(['contentInfo' => new ContentInfo(['id' => 1])]);
         $value = new FieldValue(['data' => $xmlString]);
         $field = new Field(['value' => $value]);
 
@@ -115,7 +124,7 @@ class RichTextStorageTest extends TestCase
     /**
      * @return list<array{string, string, string[], array<string, int>, array<string, int>, string[], array<string, int>, bool}>
      */
-    public function providerForTestStoreFieldData(): array
+    public static function providerForTestStoreFieldData(): array
     {
         return [
             [
@@ -184,14 +193,13 @@ class RichTextStorageTest extends TestCase
     }
 
     /**
-     * @dataProvider providerForTestStoreFieldData
-     *
      * @param string[] $linkUrls
      * @param array<string, int> $linkIds
      * @param array<string, int> $insertLinks
      * @param string[] $remoteIds
      * @param array<string, int> $contentIds
      */
+    #[DataProvider('providerForTestStoreFieldData')]
     public function testStoreFieldData(
         string $xmlString,
         string $updatedXmlString,
@@ -202,52 +210,60 @@ class RichTextStorageTest extends TestCase
         array $contentIds,
         bool $isUpdated
     ): void {
-        $versionInfo = new VersionInfo(['versionNo' => 24]);
+        $versionInfo = new VersionInfo(['versionNo' => 24, 'contentInfo' => new ContentInfo(['id' => 1])]);
         $value = new FieldValue(['data' => $xmlString]);
         $field = new Field(['id' => 42, 'value' => $value]);
         $gateway = $this->getGatewayMock();
 
         $gateway
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('getUrlIdMap')
             ->with(self::equalTo($linkUrls))
             ->willReturn($linkIds);
 
         $gateway
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('getContentIds')
             ->with(self::equalTo($remoteIds))
             ->willReturn($contentIds);
 
         $gateway
-            ->expects(self::never())
+            ->expects($this->never())
             ->method('getIdUrlMap');
 
         if (empty($insertLinks)) {
             $gateway
-                ->expects(self::never())
+                ->expects($this->never())
                 ->method('insertUrl');
         }
 
         [$urlAssertions, $insertedIds, $idsToLink] = $this->groupLinksData($linkUrls, $insertLinks, $linkIds);
+        $matcher = $this->exactly(count($urlAssertions));
 
         $gateway
-            ->expects(self::exactly(count($urlAssertions)))
+            ->expects($matcher)
             ->method('insertUrl')
-            ->withConsecutive($urlAssertions)
-            ->willReturnOnConsecutiveCalls(...$insertedIds);
+            ->willReturnCallback(static function (...$parameters) use ($matcher, $urlAssertions, $insertedIds): mixed {
+                $i = $matcher->numberOfInvocations() - 1;
+                self::assertThat($parameters[0], $urlAssertions[$i]);
+
+                return $insertedIds[$i] ?? null;
+            });
 
         $linkUrlsArguments = array_map(static function (int $id): array {
             return [$id, 42, 24];
         }, $idsToLink);
+        $matcher = $this->exactly(count($idsToLink));
 
         $gateway
-            ->expects(self::exactly(count($idsToLink)))
+            ->expects($matcher)
             ->method('linkUrl')
-            ->withConsecutive(...$linkUrlsArguments);
+            ->willReturnCallback(static function (...$parameters) use ($matcher, $linkUrlsArguments): void {
+                self::assertSame($linkUrlsArguments[$matcher->numberOfInvocations() - 1], $parameters);
+            });
 
         $gateway
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('unlinkUrl')
             ->with(42, 24, $idsToLink);
 
@@ -272,8 +288,11 @@ class RichTextStorageTest extends TestCase
      * @param array<string|int> $insertLinks
      * @param array<string|int> $linkIds
      */
-    private function groupLinksData(array $linkUrls, array $insertLinks, array $linkIds): array
-    {
+    private function groupLinksData(
+        array $linkUrls,
+        array $insertLinks,
+        array $linkIds
+    ): array {
         $urlAssertions = [];
         $insertedIds = [];
         $idsToLink = [];
@@ -299,7 +318,7 @@ class RichTextStorageTest extends TestCase
     /**
      * @return list<array{string, string[], array<string, int>, array<int, array{url: string, id: int}>, string[], array<string, int>}>
      */
-    public function providerForTestStoreFieldDataThrowsNotFoundException(): array
+    public static function providerForTestStoreFieldDataThrowsNotFoundException(): array
     {
         return [
             [
@@ -320,14 +339,13 @@ class RichTextStorageTest extends TestCase
     }
 
     /**
-     * @dataProvider providerForTestStoreFieldDataThrowsNotFoundException
-     *
      * @param string[] $linkUrls
      * @param array<string, int> $linkIds
      * @param array<int, array{url: string, id: int}> $insertLinks
      * @param string[] $remoteIds
      * @param array<string, int> $contentIds
      */
+    #[DataProvider('providerForTestStoreFieldDataThrowsNotFoundException')]
     public function testStoreFieldDataThrowsNotFoundException(
         string $xmlString,
         array $linkUrls,
@@ -340,29 +358,34 @@ class RichTextStorageTest extends TestCase
 
         $gateway = $this->getGatewayMock();
         $gateway
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('getUrlIdMap')
             ->with(self::equalTo($linkUrls))
             ->willReturn($linkIds);
         $gateway
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('getContentIds')
             ->with(self::equalTo($remoteIds))
             ->willReturn($contentIds);
-        $gateway->expects(self::never())->method('getIdUrlMap');
+        $gateway->expects($this->never())->method('getIdUrlMap');
         if (empty($insertLinks)) {
-            $gateway->expects(self::never())->method('insertUrl');
+            $gateway->expects($this->never())->method('insertUrl');
         }
 
-        foreach ($insertLinks as $index => $linkMap) {
+        if (!empty($insertLinks)) {
+            $matcher = $this->exactly(count($insertLinks));
             $gateway
-                ->expects(self::at($index + 2))
+                ->expects($matcher)
                 ->method('insertUrl')
-                ->with(self::equalTo($linkMap['url']))
-                ->willReturn($linkMap['id']);
+                ->willReturnCallback(static function (string $url) use ($matcher, $insertLinks): int {
+                    $linkMap = $insertLinks[$matcher->numberOfInvocations() - 1];
+                    self::assertSame($linkMap['url'], $url);
+
+                    return $linkMap['id'];
+                });
         }
 
-        $versionInfo = new VersionInfo();
+        $versionInfo = new VersionInfo(['contentInfo' => new ContentInfo(['id' => 1])]);
         $value = new FieldValue(['data' => $xmlString]);
         $field = new Field(['value' => $value]);
 
@@ -375,17 +398,23 @@ class RichTextStorageTest extends TestCase
 
     public function testDeleteFieldData(): void
     {
-        $versionInfo = new VersionInfo(['versionNo' => 42]);
+        $versionInfo = new VersionInfo(['versionNo' => 42, 'contentInfo' => new ContentInfo(['id' => 1])]);
         $fieldIds = [12, 23];
         $gateway = $this->getGatewayMock();
         $storage = $this->getPartlyMockedStorage($gateway);
+        $matcher = $this->exactly(2);
         $gateway
-            ->expects(self::exactly(2))
-            ->method('unlinkUrl')
-            ->withConsecutive(
-                [12, 42],
-                [23, 42],
-            );
+            ->expects($matcher)
+            ->method('unlinkUrl')->willReturnCallback(static function (...$parameters) use ($matcher): void {
+                if ($matcher->numberOfInvocations() === 1) {
+                    self::assertSame(12, $parameters[0]);
+                    self::assertSame(42, $parameters[1]);
+                }
+                if ($matcher->numberOfInvocations() === 2) {
+                    self::assertSame(23, $parameters[0]);
+                    self::assertSame(42, $parameters[1]);
+                }
+            });
 
         $storage->deleteFieldData(
             $versionInfo,
@@ -399,16 +428,17 @@ class RichTextStorageTest extends TestCase
             ->setConstructorArgs(
                 [
                     $gateway,
+                    new DOMDocumentLoader(),
                     $this->getLoggerMock(),
                 ]
             )
-            ->setMethods(null)
+            ->onlyMethods([])
             ->getMock();
     }
 
-    protected (LoggerInterface&MockObject)|null $loggerMock = null;
+    protected (LoggerInterface & MockObject) | null $loggerMock = null;
 
-    protected function getLoggerMock(): LoggerInterface&MockObject
+    protected function getLoggerMock(): LoggerInterface & MockObject
     {
         if (!isset($this->loggerMock)) {
             $this->loggerMock = $this->getMockForAbstractClass(
@@ -419,9 +449,9 @@ class RichTextStorageTest extends TestCase
         return $this->loggerMock;
     }
 
-    protected (Gateway&MockObject)|null $gatewayMock = null;
+    protected (Gateway & MockObject) | null $gatewayMock = null;
 
-    protected function getGatewayMock(): Gateway&MockObject
+    protected function getGatewayMock(): Gateway & MockObject
     {
         if (!isset($this->gatewayMock)) {
             $this->gatewayMock = $this->createMock(Gateway::class);

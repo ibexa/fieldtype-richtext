@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
+  <file source-language="en" target-language="en" datatype="plaintext" original="not.available">
+    <header>
+      <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
+      <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
+    </header>
+    <body>
+      <trans-unit id="25af91219d0d35a32aebda1d0945428db73af78f" resname='The root element "%element%" has an unsupported namespace "%namespace%". Supported namespaces: %namespaces%.'>
+        <source>The root element "%element%" has an unsupported namespace "%namespace%". Supported namespaces: %namespaces%.</source>
+        <target state="new">The root element "%element%" has an unsupported namespace "%namespace%". Supported namespaces: %namespaces%.</target>
+        <note>key: The root element "%element%" has an unsupported namespace "%namespace%". Supported namespaces: %namespaces%.</note>
+      </trans-unit>
+      <trans-unit id="c87220f1ccf4df7311ed4e5bcc9c6c7c70176734" resname='The root element "%element%" has no namespace. Supported namespaces: %namespaces%.'>
+        <source>The root element "%element%" has no namespace. Supported namespaces: %namespaces%.</source>
+        <target state="new">The root element "%element%" has no namespace. Supported namespaces: %namespaces%.</target>
+        <note>key: The root element "%element%" has no namespace. Supported namespaces: %namespaces%.</note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

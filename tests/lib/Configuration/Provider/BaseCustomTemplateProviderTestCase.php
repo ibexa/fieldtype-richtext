@@ -13,7 +13,7 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 abstract class BaseCustomTemplateProviderTestCase extends BaseProviderTestCase
 {
-    protected CustomTemplateConfigMapper&MockObject $mapper;
+    protected CustomTemplateConfigMapper & MockObject $mapper;
 
     /**
      * @return array<mixed>
@@ -29,9 +29,6 @@ abstract class BaseCustomTemplateProviderTestCase extends BaseProviderTestCase
         $this->mapper = $this->createMock(CustomTemplateConfigMapper::class);
     }
 
-    /**
-     * @covers \Ibexa\Contracts\FieldTypeRichText\Configuration\Provider::getConfiguration
-     */
     final public function testGetConfiguration(): void
     {
         $provider = $this->createProvider();
@@ -39,19 +36,19 @@ abstract class BaseCustomTemplateProviderTestCase extends BaseProviderTestCase
         $tags = $this->getExpectedCustomTemplatesConfiguration();
 
         $this->configResolver
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('hasParameter')
             ->with($this->getCustomTemplateSiteAccessConfigParamName())
             ->willReturn(true);
 
         $this->configResolver
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('getParameter')
             ->with($this->getCustomTemplateSiteAccessConfigParamName())
             ->willReturn($tags);
 
         $this->mapper
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('mapConfig')
             ->with($tags)
             ->willReturnArgument(0);

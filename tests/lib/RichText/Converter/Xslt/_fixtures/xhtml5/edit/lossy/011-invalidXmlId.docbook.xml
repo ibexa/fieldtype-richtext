@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xmlns="http://docbook.org/ns/docbook"
+         xmlns:xlink="http://www.w3.org/1999/xlink"
+         xmlns:ezxhtml="http://ibexa.co/xmlns/dxp/docbook/xhtml"
+         xmlns:ezcustom="http://ibexa.co/xmlns/dxp/docbook/custom"
+         version="5.0-variant ezpublish-1.0">
+    <para xml:id="_227">Paragraph with numeric id pasted from external HTML.</para>
+    <para xml:id="foo_bar">Paragraph with a space in the id.</para>
+    <para xml:id="valid-id.1">Paragraph with a valid id.</para>
+    <para>
+        <link xlink:href="#_42" xlink:show="none">Jump to the anchor below</link>
+    </para>
+    <para>
+        <link xlink:href="http://example.com/#227" xlink:show="none">External link, fragment must stay</link>
+    </para>
+    <para><anchor xml:id="_42"/>Anchored content.</para>
+</section>

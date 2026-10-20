@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\Bundle\FieldTypeRichText\DependencyInjection\Compiler;
 
+use Ibexa\FieldTypeRichText\RichText\Converter\Aggregate;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
@@ -16,7 +17,7 @@ use Symfony\Component\DependencyInjection\Reference;
 /**
  * Compiler pass for the RichText Aggregate converter tags.
  *
- * @see \Ibexa\FieldTypeRichText\RichText\Converter\Aggregate
+ * @see Aggregate
  */
 class RichTextHtml5ConverterPass implements CompilerPassInterface
 {
@@ -42,8 +43,10 @@ class RichTextHtml5ConverterPass implements CompilerPassInterface
     /**
      * @param array<string, array<string, mixed>> $taggedServiceIds
      */
-    protected function setConverterDefinitions(array $taggedServiceIds, Definition $converterDefinition): void
-    {
+    protected function setConverterDefinitions(
+        array $taggedServiceIds,
+        Definition $converterDefinition
+    ): void {
         $convertersByPriority = [];
         foreach ($taggedServiceIds as $id => $tags) {
             foreach ($tags as $tag) {
@@ -65,7 +68,7 @@ class RichTextHtml5ConverterPass implements CompilerPassInterface
      *
      * @param array<int, list<Reference>> $convertersByPriority
      *
-     * @return \Symfony\Component\DependencyInjection\Reference[]
+     * @return Reference[]
      */
     protected function sortConverters(array $convertersByPriority): array
     {

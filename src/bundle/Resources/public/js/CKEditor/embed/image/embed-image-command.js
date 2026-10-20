@@ -10,7 +10,7 @@ class IbexaEmbedImageCommand extends Command {
     }
 
     createEmbed(writer, { contentId, size }) {
-        return writer.createElement('embedImage', { contentId, size });
+        return writer.createElement('embedImage', { contentId: contentId?.toString(), size });
     }
 }
 

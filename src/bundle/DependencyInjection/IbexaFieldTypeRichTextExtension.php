@@ -51,8 +51,10 @@ class IbexaFieldTypeRichTextExtension extends Extension implements PrependExtens
      *
      * @throws \Exception
      */
-    public function load(array $configs, ContainerBuilder $container): void
-    {
+    public function load(
+        array $configs,
+        ContainerBuilder $container
+    ): void {
         $settingsLoader = new Loader\YamlFileLoader(
             $container,
             new FileLocator(__DIR__ . '/../Resources/config/settings')
@@ -94,8 +96,10 @@ class IbexaFieldTypeRichTextExtension extends Extension implements PrependExtens
     /**
      * Register parameters of global RichText configuration.
      */
-    private function registerRichTextConfiguration(array $config, ContainerBuilder $container): void
-    {
+    private function registerRichTextConfiguration(
+        array $config,
+        ContainerBuilder $container
+    ): void {
         $customTagsConfig = $config['custom_tags'] ?? [];
         $customStylesConfig = $config['custom_styles'] ?? [];
         $alloyEditorConfig = $config['alloy_editor'] ?? [];
@@ -185,8 +189,10 @@ class IbexaFieldTypeRichTextExtension extends Extension implements PrependExtens
         ]);
     }
 
-    public function getConfiguration(array $config, ContainerBuilder $container): ?ConfigurationInterface
-    {
+    public function getConfiguration(
+        array $config,
+        ContainerBuilder $container
+    ): ?ConfigurationInterface {
         return new Configuration();
     }
 
@@ -246,8 +252,10 @@ class IbexaFieldTypeRichTextExtension extends Extension implements PrependExtens
     /**
      * @return iterable<array> Iterable containing arrays with toolbars and their buttons
      */
-    private function getToolbarsBySiteAccess(array $availableSiteAccesses, ContainerBuilder $container): iterable
-    {
+    private function getToolbarsBySiteAccess(
+        array $availableSiteAccesses,
+        ContainerBuilder $container
+    ): iterable {
         foreach ($availableSiteAccesses as $siteAccessName) {
             $paramName = "ibexa.site_access.config.{$siteAccessName}.fieldtypes.ibexa_richtext.toolbars";
             if (!$container->hasParameter($paramName)) {

@@ -11,14 +11,16 @@ namespace Ibexa\Tests\FieldTypeRichText\Persistence\Legacy\Tests\Content\FieldVa
 use Ibexa\Contracts\Core\Persistence\Content\FieldValue;
 use Ibexa\Core\Persistence\Legacy\Content\StorageFieldValue;
 use Ibexa\FieldTypeRichText\Persistence\Legacy\RichTextFieldValueConverter;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 
 /**
  * Test case for RichText converter in Legacy storage.
- *
- * @group fieldType
- * @group ibexa_richtext
  */
+#[CoversClass(RichTextFieldValueConverter::class)]
+#[Group('fieldType')]
+#[Group('ibexa_richtext')]
 class RichTextFieldValueConverterTest extends TestCase
 {
     protected RichTextFieldValueConverter $converter;
@@ -45,9 +47,6 @@ EOT;
         parent::tearDown();
     }
 
-    /**
-     * @covers \Ibexa\FieldTypeRichText\Persistence\Legacy\RichTextFieldValueConverter::toStorageValue
-     */
     public function testToStorageValue(): void
     {
         $value = new FieldValue();
@@ -58,9 +57,6 @@ EOT;
         self::assertSame($this->docbookString, $storageFieldValue->dataText);
     }
 
-    /**
-     * @covers \Ibexa\FieldTypeRichText\Persistence\Legacy\RichTextFieldValueConverter::toFieldValue
-     */
     public function testToFieldValue(): void
     {
         $storageFieldValue = new StorageFieldValue();

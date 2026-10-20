@@ -11,7 +11,9 @@ namespace Ibexa\FieldTypeRichText\FieldType\RichText;
 use DOMDocument;
 use Ibexa\Contracts\Core\FieldType\Value as SPIValue;
 use Ibexa\Contracts\Core\Persistence\Content\FieldValue;
+use Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException;
 use Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition;
+use Ibexa\Contracts\FieldTypeRichText\RichText\DOMDocumentLoaderInterface;
 use Ibexa\Contracts\FieldTypeRichText\RichText\InputHandlerInterface;
 use Ibexa\Contracts\FieldTypeRichText\RichText\TextExtractorInterface;
 use Ibexa\Core\Base\Exceptions\InvalidArgumentType;
@@ -31,12 +33,16 @@ class Type extends FieldType implements TranslationContainerInterface
 
     private TextExtractorInterface $textExtractor;
 
+    private DOMDocumentLoaderInterface $domDocumentLoader;
+
     public function __construct(
         InputHandlerInterface $inputHandler,
-        TextExtractorInterface $textExtractor
+        TextExtractorInterface $textExtractor,
+        DOMDocumentLoaderInterface $domDocumentLoader
     ) {
         $this->inputHandler = $inputHandler;
         $this->textExtractor = $textExtractor;
+        $this->domDocumentLoader = $domDocumentLoader;
     }
 
     /**
@@ -53,8 +59,11 @@ class Type extends FieldType implements TranslationContainerInterface
      * It will be used to generate content name and url alias if current field is designated
      * to be used in the content name/urlAlias pattern.
      */
-    public function getName(SPIValue $value, FieldDefinition $fieldDefinition, string $languageCode): string
-    {
+    public function getName(
+        SPIValue $value,
+        FieldDefinition $fieldDefinition,
+        string $languageCode
+    ): string {
         $result = null;
         if ($section = $value->xml->documentElement->firstChild) {
             $textDom = $section->firstChild;
@@ -101,7 +110,7 @@ class Type extends FieldType implements TranslationContainerInterface
     /**
      * Inspects a given $inputValue and potentially converts it into a dedicated value object.
      *
-     * @param Value|\DOMDocument|string $inputValue
+     * @param Value|DOMDocument|string $inputValue
      *
      * @return Value the potentially converted and structurally plausible value
      */
@@ -123,7 +132,7 @@ class Type extends FieldType implements TranslationContainerInterface
      *
      * @param Value $value
      *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException if the value does not match the expected structure
+     * @throws InvalidArgumentException if the value does not match the expected structure
      */
     protected function checkValueStructure(BaseValue $value): void
     {
@@ -143,13 +152,15 @@ class Type extends FieldType implements TranslationContainerInterface
      * that no validation errors occurred. Overwrite in derived types, if
      * validation is supported.
      *
-     * @param \Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition $fieldDefinition The field definition of the field
+     * @param FieldDefinition $fieldDefinition The field definition of the field
      * @param Value $value The field value for which an action is performed
      *
      * @return \Ibexa\Contracts\Core\FieldType\ValidationError[]
      */
-    public function validate(FieldDefinition $fieldDefinition, SPIValue $value): array
-    {
+    public function validate(
+        FieldDefinition $fieldDefinition,
+        SPIValue $value
+    ): array {
         return array_map(static function (string $error): ValidationError {
             return new ValidationError("Validation of XML content failed:\n" . $error, null, [], 'xml');
         }, $this->inputHandler->validate($value->xml));
@@ -174,7 +185,7 @@ class Type extends FieldType implements TranslationContainerInterface
      *
      * @return Value
      *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function fromHash(mixed $hash): SPIValue
     {
@@ -203,7 +214,11 @@ class Type extends FieldType implements TranslationContainerInterface
      */
     public function fromPersistenceValue(FieldValue $fieldValue): Value
     {
-        return new Value($fieldValue->data);
+        if (!is_string($fieldValue->data) || $fieldValue->data === '') {
+            return new Value();
+        }
+
+        return new Value($this->domDocumentLoader->loadXML($fieldValue->data));
     }
 
     /**
@@ -231,7 +246,7 @@ class Type extends FieldType implements TranslationContainerInterface
     /**
      * Returns relation data extracted from value.
      *
-     * Not intended for \Ibexa\Contracts\Core\Repository\Values\Content\Relation::COMMON type relations,
+     * Not intended for \Ibexa\Contracts\Core\Repository\Values\Content\RelationType::COMMON type relations,
      * there is a service API for handling those.
      *
      * @return array<int, array{locationIds: array<int, int>, contentIds: array<int, int>}> hash with relation type as key and array of destination content ids as value.
@@ -239,15 +254,15 @@ class Type extends FieldType implements TranslationContainerInterface
      * Example:
      * <code>
      *  array(
-     *      \Ibexa\Contracts\Core\Repository\Values\Content\Relation::LINK => array(
+     *      \Ibexa\Contracts\Core\Repository\Values\Content\RelationType::LINK->value => array(
      *          "contentIds" => array( 12, 13, 14 ),
      *          "locationIds" => array( 24 )
      *      ),
-     *      \Ibexa\Contracts\Core\Repository\Values\Content\Relation::EMBED => array(
+     *      \Ibexa\Contracts\Core\Repository\Values\Content\RelationType::EMBED->value => array(
      *          "contentIds" => array( 12 ),
      *          "locationIds" => array( 24, 45 )
      *      ),
-     *      \Ibexa\Contracts\Core\Repository\Values\Content\Relation::FIELD => array( 12 )
+     *      \Ibexa\Contracts\Core\Repository\Values\Content\RelationType::FIELD->value => array( 12 )
      *  )
      * </code>
      */

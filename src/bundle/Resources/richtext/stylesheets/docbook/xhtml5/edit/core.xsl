@@ -82,7 +82,10 @@
         </xsl:attribute>
       </xsl:if>
       <xsl:call-template name="ezattribute"/>
-      <xsl:value-of select="./text()"/>
+      <!-- Iterate over all text nodes: since libxml2 2.14 adjacent CDATA sections are no longer merged -->
+      <xsl:for-each select="./text()">
+        <xsl:value-of select="."/>
+      </xsl:for-each>
     </xsl:element>
   </xsl:template>
 

@@ -14,6 +14,7 @@ use Ibexa\Contracts\FieldTypeRichText\RichText\Converter;
 use Ibexa\Contracts\FieldTypeRichText\RichText\ValidatorInterface;
 use Ibexa\FieldTypeRichText\RichText\Converter\Xslt;
 use Ibexa\FieldTypeRichText\RichText\Validator\Validator;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -30,7 +31,7 @@ abstract class BaseTest extends TestCase
      *
      * Override this method in subclasses to use fixtures from a different location.
      */
-    protected function getFixtureDirectory(): string
+    protected static function getFixtureDirectory(): string
     {
         return __DIR__ . '/_fixtures';
     }
@@ -40,10 +41,10 @@ abstract class BaseTest extends TestCase
      *
      * @return array<array{string, string}>
      */
-    public function providerForTestConvert(): array
+    public static function providerForTestConvert(): array
     {
-        $fixtureSubdirectories = $this->getFixtureSubdirectories();
-        $fixtureDir = $this->getFixtureDirectory();
+        $fixtureSubdirectories = static::getFixtureSubdirectories();
+        $fixtureDir = static::getFixtureDirectory();
 
         $map = [];
 
@@ -86,11 +87,11 @@ abstract class BaseTest extends TestCase
         }
     }
 
-    /**
-     * @dataProvider providerForTestConvert
-     */
-    public function testConvert(string $inputFile, string $outputFile): void
-    {
+    #[DataProvider('providerForTestConvert')]
+    public function testConvert(
+        string $inputFile,
+        string $outputFile
+    ): void {
         $endsWith = '.lossy.xml';
         if (substr_compare($inputFile, $endsWith, -strlen($endsWith), strlen($endsWith)) === 0) {
             self::markTestSkipped('Skipped lossy conversion.');
@@ -150,8 +151,10 @@ abstract class BaseTest extends TestCase
     /**
      * @param array<int, string> $errors
      */
-    protected function formatValidationErrors(string $outputFile, array $errors): string
-    {
+    protected function formatValidationErrors(
+        string $outputFile,
+        array $errors
+    ): string {
         $output = "\n";
         foreach ($errors as $error) {
             $output .= ' - ' . $error . "\n";
@@ -230,7 +233,7 @@ abstract class BaseTest extends TestCase
      *
      * @return array{input: string, output: string}
      */
-    abstract public function getFixtureSubdirectories(): array;
+    abstract public static function getFixtureSubdirectories(): array;
 
     /**
      * Return the absolute path to conversion transformation stylesheet.

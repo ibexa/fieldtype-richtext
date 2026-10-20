@@ -9,16 +9,15 @@ declare(strict_types=1);
 namespace Ibexa\Bundle\FieldTypeRichText\Templating\Twig\Extension;
 
 use DOMDocument;
-use Ibexa\Contracts\FieldTypeRichText\RichText\Converter;
 use Ibexa\Contracts\FieldTypeRichText\RichText\Converter as RichTextConverterInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 
 class RichTextConverterExtension extends AbstractExtension
 {
-    private Converter $richTextOutputConverter;
+    private RichTextConverterInterface $richTextOutputConverter;
 
-    private Converter $richTextEditConverter;
+    private RichTextConverterInterface $richTextEditConverter;
 
     public function __construct(
         RichTextConverterInterface $richTextOutputConverter,
@@ -29,7 +28,7 @@ class RichTextConverterExtension extends AbstractExtension
     }
 
     /**
-     * @return \Twig\TwigFilter[]
+     * @return TwigFilter[]
      */
     public function getFilters(): array
     {

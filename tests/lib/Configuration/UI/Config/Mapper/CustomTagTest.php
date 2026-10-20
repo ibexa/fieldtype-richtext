@@ -10,6 +10,8 @@ namespace Ibexa\Tests\FieldTypeRichText\Configuration\UI\Config\Mapper;
 
 use ArrayObject;
 use Ibexa\FieldTypeRichText\Configuration\UI\Mapper\CustomTag;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Asset\Packages;
@@ -20,19 +22,17 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 /**
  * UI Config Mapper test for RichText Custom Tags configuration.
  *
- * @see \Ibexa\FieldTypeRichText\Configuration\UI\Mapper\CustomTag::__construct
+ * @see CustomTag::__construct
  */
+#[CoversClass(CustomTag::class)]
 class CustomTagTest extends TestCase
 {
     /**
-     * @covers \Ibexa\FieldTypeRichText\Configuration\UI\Mapper\CustomTag::mapConfig
-     *
-     * @dataProvider providerForTestMapConfig
-     *
      * @param array<mixed> $customTagsConfiguration
      * @param array<int, string> $enabledCustomTags
      * @param array<mixed> $expectedConfig
      */
+    #[DataProvider('providerForTestMapConfig')]
     public function testMapConfig(
         array $customTagsConfiguration,
         array $enabledCustomTags,
@@ -66,7 +66,7 @@ class CustomTagTest extends TestCase
      *     array<string, mixed>
      * }>
      */
-    public function providerForTestMapConfig(): array
+    public static function providerForTestMapConfig(): array
     {
         return [
             [
@@ -176,11 +176,11 @@ class CustomTagTest extends TestCase
         ];
     }
 
-    private function getTranslatorInterfaceMock(): TranslatorInterface&MockObject
+    private function getTranslatorInterfaceMock(): TranslatorInterface & MockObject
     {
         $translatorInterfaceMock = $this->createMock(TranslatorInterface::class);
         $translatorInterfaceMock
-            ->expects(self::any())
+            ->expects($this->any())
             ->method('trans')
             ->withAnyParameters()
             ->willReturnArgument(0);
@@ -188,18 +188,18 @@ class CustomTagTest extends TestCase
         return $translatorInterfaceMock;
     }
 
-    private function getTranslatorBagInterfaceMock(): TranslatorBagInterface&MockObject
+    private function getTranslatorBagInterfaceMock(): TranslatorBagInterface & MockObject
     {
         $catalogueMock = $this->createMock(MessageCatalogueInterface::class);
         $catalogueMock
-            ->expects(self::any())
+            ->expects($this->any())
             ->method('has')
             ->withAnyParameters()
             ->willReturn(false);
 
         $translatorBagInterfaceMock = $this->createMock(TranslatorBagInterface::class);
         $translatorBagInterfaceMock
-            ->expects(self::any())
+            ->expects($this->any())
             ->method('getCatalogue')
             ->willReturn(
                 $catalogueMock
@@ -208,11 +208,11 @@ class CustomTagTest extends TestCase
         return $translatorBagInterfaceMock;
     }
 
-    private function getPackagesMock(): Packages&MockObject
+    private function getPackagesMock(): Packages & MockObject
     {
         $packagesMock = $this->createMock(Packages::class);
         $packagesMock
-            ->expects(self::any())
+            ->expects($this->any())
             ->method('getUrl')
             ->withAnyParameters()
             ->willReturnArgument(0);

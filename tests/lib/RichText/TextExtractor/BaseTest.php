@@ -10,17 +10,18 @@ namespace Ibexa\Tests\FieldTypeRichText\RichText\TextExtractor;
 
 use DOMDocument;
 use Ibexa\Contracts\FieldTypeRichText\RichText\TextExtractorInterface;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 abstract class BaseTest extends TestCase
 {
     protected TextExtractorInterface $textExtractor;
 
-    /**
-     * @dataProvider providerForTestExtractText
-     */
-    public function testExtractText(string $docBookXml, string $expectedText): void
-    {
+    #[DataProvider('providerForTestExtractText')]
+    public function testExtractText(
+        string $docBookXml,
+        string $expectedText
+    ): void {
         $document = new DOMDocument();
         $document->loadXML($docBookXml);
 
@@ -33,5 +34,5 @@ abstract class BaseTest extends TestCase
     /**
      * @return array<string, array<string>>
      */
-    abstract public function providerForTestExtractText(): array;
+    abstract public static function providerForTestExtractText(): array;
 }

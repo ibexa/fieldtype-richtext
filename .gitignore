@@ -5,3 +5,5 @@ node_modules/
 yarn.lock
 /var
 tsconfig.json
+/.phpunit.cache/
+/.phpunit.result.cache

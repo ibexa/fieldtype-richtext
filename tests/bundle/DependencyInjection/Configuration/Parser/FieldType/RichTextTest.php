@@ -14,7 +14,9 @@ use Ibexa\Bundle\FieldTypeRichText\DependencyInjection\IbexaFieldTypeRichTextExt
 use Ibexa\Bundle\FieldTypeRichText\IbexaFieldTypeRichTextBundle;
 use Ibexa\Tests\Bundle\Core\DependencyInjection\Configuration\Parser\AbstractParserTestCase;
 use Ibexa\Tests\Bundle\FieldTypeRichText\DependencyInjection\ContainerParameterLoader;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
+use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\Yaml\Yaml;
 
@@ -79,7 +81,7 @@ class RichTextTest extends AbstractParserTestCase
      * Return an array of container extensions you need to be registered for each test (usually just the container
      * extension you are testing.
      *
-     * @return \Symfony\Component\DependencyInjection\Extension\ExtensionInterface[]
+     * @return ExtensionInterface[]
      */
     protected function getContainerExtensions(): array
     {
@@ -150,12 +152,12 @@ class RichTextTest extends AbstractParserTestCase
     /**
      * Test expected semantic config validation for online editor settings.
      *
-     * @dataProvider getOnlineEditorInvalidSettings
      *
      * @param array<string, mixed> $config
      *
      * @throws \Exception
      */
+    #[DataProvider('getOnlineEditorInvalidSettings')]
     public function testOnlineEditorInvalidSettingsThrowException(
         array $config,
         string $expectedExceptionMessage
@@ -185,7 +187,7 @@ class RichTextTest extends AbstractParserTestCase
      *
      * @see testOnlineEditorInvalidSettingsThrowException
      */
-    public function getOnlineEditorInvalidSettings(): array
+    public static function getOnlineEditorInvalidSettings(): array
     {
         return [
             [
@@ -243,15 +245,16 @@ class RichTextTest extends AbstractParserTestCase
     }
 
     /**
-     * @dataProvider richTextSettingsProvider
-     *
      * @param array<string, mixed> $config
      * @param array<string, mixed> $expected
      *
      * @throws \Exception
      */
-    public function testRichTextSettings(array $config, array $expected): void
-    {
+    #[DataProvider('richTextSettingsProvider')]
+    public function testRichTextSettings(
+        array $config,
+        array $expected
+    ): void {
         $this->configureAndLoad(
             [
                 'ibexa' => [
@@ -270,7 +273,7 @@ class RichTextTest extends AbstractParserTestCase
     /**
      * @phpstan-return list<array{array<string, mixed>, array<string, mixed>}>
      */
-    public function richTextSettingsProvider(): array
+    public static function richTextSettingsProvider(): array
     {
         return [
             [

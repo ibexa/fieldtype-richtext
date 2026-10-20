@@ -8,36 +8,61 @@ declare(strict_types=1);
 
 namespace Ibexa\FieldTypeRichText\FieldType\RichText;
 
-use DOMDocument;
 use DOMXPath;
+use Ibexa\Contracts\Core\FieldType\FieldStorage;
 use Ibexa\Contracts\Core\FieldType\GatewayBasedStorage;
 use Ibexa\Contracts\Core\FieldType\StorageGateway;
 use Ibexa\Contracts\Core\FieldType\StorageGatewayInterface;
 use Ibexa\Contracts\Core\Persistence\Content\Field;
 use Ibexa\Contracts\Core\Persistence\Content\VersionInfo;
+use Ibexa\Contracts\FieldTypeRichText\RichText\DOMDocumentLoaderInterface;
 use Ibexa\Core\Base\Exceptions\NotFoundException;
+use Ibexa\FieldTypeRichText\FieldType\RichText\RichTextStorage\Gateway;
 use Psr\Log\LoggerInterface;
 
 class RichTextStorage extends GatewayBasedStorage
 {
     protected ?LoggerInterface $logger;
 
-    /** @var \Ibexa\FieldTypeRichText\FieldType\RichText\RichTextStorage\Gateway */
+    /** @var Gateway */
     protected StorageGatewayInterface $gateway;
 
-    public function __construct(StorageGateway $gateway, ?LoggerInterface $logger = null)
-    {
+    private DOMDocumentLoaderInterface $domDocumentLoader;
+
+    public function __construct(
+        StorageGateway $gateway,
+        DOMDocumentLoaderInterface $domDocumentLoader,
+        ?LoggerInterface $logger = null
+    ) {
         parent::__construct($gateway);
+        $this->domDocumentLoader = $domDocumentLoader;
         $this->logger = $logger;
     }
 
     /**
-     * @see \Ibexa\Contracts\Core\FieldType\FieldStorage
+     * @return array<string, int>
      */
-    public function storeFieldData(VersionInfo $versionInfo, Field $field): bool
-    {
-        $document = new DOMDocument();
-        $document->loadXML($field->value->data);
+    private function getLogContext(
+        VersionInfo $versionInfo,
+        Field $field
+    ): array {
+        return [
+            'contentId' => $versionInfo->contentInfo->id,
+            'versionNo' => $versionInfo->versionNo,
+            'fieldId' => $field->id,
+        ];
+    }
+
+    /**
+     * @see FieldStorage
+     */
+    public function storeFieldData(
+        VersionInfo $versionInfo,
+        Field $field
+    ): bool {
+        /** @var string $xmlData */
+        $xmlData = $field->value->data;
+        $document = $this->domDocumentLoader->loadXML($xmlData, $this->getLogContext($versionInfo, $field));
 
         $xpath = new DOMXPath($document);
         $xpath->registerNamespace('docbook', 'http://docbook.org/ns/docbook');
@@ -119,10 +144,13 @@ class RichTextStorage extends GatewayBasedStorage
     /**
      * Modifies $field if needed, using external data (like for Urls).
      */
-    public function getFieldData(VersionInfo $versionInfo, Field $field): void
-    {
-        $document = new DOMDocument();
-        $document->loadXML($field->value->data);
+    public function getFieldData(
+        VersionInfo $versionInfo,
+        Field $field
+    ): void {
+        /** @var string $xmlData */
+        $xmlData = $field->value->data;
+        $document = $this->domDocumentLoader->loadXML($xmlData, $this->getLogContext($versionInfo, $field));
 
         $xpath = new DOMXPath($document);
         $xpath->registerNamespace('docbook', 'http://docbook.org/ns/docbook');
@@ -175,8 +203,10 @@ class RichTextStorage extends GatewayBasedStorage
     /**
      * @param list<int> $fieldIds
      */
-    public function deleteFieldData(VersionInfo $versionInfo, array $fieldIds): bool
-    {
+    public function deleteFieldData(
+        VersionInfo $versionInfo,
+        array $fieldIds
+    ): bool {
         foreach ($fieldIds as $fieldId) {
             $this->gateway->unlinkUrl($fieldId, $versionInfo->versionNo);
         }

@@ -14,28 +14,32 @@ use Ibexa\Contracts\Core\Persistence\Content\Type\FieldDefinition;
 use Ibexa\Contracts\Core\Search;
 use Ibexa\Contracts\FieldTypeRichText\RichText\TextExtractorInterface;
 use Ibexa\FieldTypeRichText\FieldType\RichText\SearchField;
+use Ibexa\FieldTypeRichText\RichText\DOMDocumentLoader;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
+#[CoversClass(SearchField::class)]
 final class SearchFieldTest extends TestCase
 {
     private SearchField $searchField;
 
-    private TextExtractorInterface&MockObject $shortTextExtractor;
+    private TextExtractorInterface & MockObject $shortTextExtractor;
 
-    private TextExtractorInterface&MockObject $fullTextExtractor;
+    private TextExtractorInterface & MockObject $fullTextExtractor;
 
     /**
-     * @return array<string, array{string, \Ibexa\Contracts\Core\Search\Field[], string[]}>
+     * @return array<string, array{string, Search\Field[], string[]}>
      */
-    public function getDataForTestGetIndexData(): array
+    public static function getDataForTestGetIndexData(): array
     {
         $simpleStubShortTextValue = 'Welcome to Ibexa';
         $simpleStubFullTextValue = "\n   Welcome to Ibexa \n   Ibexa  is the new generation DXP from Ibexa. \n ";
 
         return [
             'simple stub' => [
-                $this->getSimpleDocBookXml(),
+                self::getSimpleDocBookXml(),
                 [
                     new Search\Field(
                         'value',
@@ -54,7 +58,7 @@ final class SearchFieldTest extends TestCase
                 ],
             ],
             'empty xml' => [
-                $this->getEmptyXml(),
+                self::getEmptyXml(),
                 [
                     new Search\Field(
                         'value',
@@ -82,19 +86,20 @@ final class SearchFieldTest extends TestCase
         $this->searchField = new SearchField(
             $this->shortTextExtractor,
             $this->fullTextExtractor,
+            new DOMDocumentLoader(),
         );
     }
 
     /**
-     * @covers \Ibexa\FieldTypeRichText\FieldType\RichText\SearchField::getIndexData
-     *
-     * @dataProvider getDataForTestGetIndexData
-     *
-     * @param array<\Ibexa\Contracts\Core\Search\Field> $expectedSearchFields
+     * @param array<Search\Field> $expectedSearchFields
      * @param array<string> $expectedTextValues
      */
-    public function testGetIndexData(string $docBookXml, array $expectedSearchFields, array $expectedTextValues): void
-    {
+    #[DataProvider('getDataForTestGetIndexData')]
+    public function testGetIndexData(
+        string $docBookXml,
+        array $expectedSearchFields,
+        array $expectedTextValues
+    ): void {
         $field = new Field(
             [
                 'id' => 1,
@@ -118,7 +123,7 @@ final class SearchFieldTest extends TestCase
         );
     }
 
-    private function getSimpleDocBookXml(): string
+    private static function getSimpleDocBookXml(): string
     {
         return <<<XML
 <?xml version="1.0" encoding="UTF-8"?>
@@ -131,7 +136,7 @@ final class SearchFieldTest extends TestCase
 XML;
     }
 
-    private function getEmptyXml(): string
+    private static function getEmptyXml(): string
     {
         return '<?xml version="1.0" encoding="UTF-8"?><section></section>';
     }

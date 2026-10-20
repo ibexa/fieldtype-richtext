@@ -31,8 +31,7 @@ final class CustomTemplateValidator implements ValidatorInterface
     public function __construct(
         private readonly array $customTagsConfiguration,
         private readonly array $customStylesConfiguration
-    ) {
-    }
+    ) {}
 
     /**
      * Validate Custom Tags found in the document.

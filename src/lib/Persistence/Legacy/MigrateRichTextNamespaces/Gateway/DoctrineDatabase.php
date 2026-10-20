@@ -45,6 +45,6 @@ final class DoctrineDatabase extends AbstractGateway
                 )
             );
 
-        return $queryBuilder->executeStatement();
+        return (int) $queryBuilder->executeStatement();
     }
 }

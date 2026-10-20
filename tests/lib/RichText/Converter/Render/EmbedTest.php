@@ -11,15 +11,16 @@ namespace Ibexa\Tests\FieldTypeRichText\RichText\Converter\Render;
 use DOMDocument;
 use Ibexa\Contracts\FieldTypeRichText\RichText\RendererInterface;
 use Ibexa\FieldTypeRichText\RichText\Converter\Render\Embed;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 
 class EmbedTest extends TestCase
 {
-    protected RendererInterface&MockObject $rendererMock;
+    protected RendererInterface & MockObject $rendererMock;
 
-    protected LoggerInterface&MockObject $loggerMock;
+    protected LoggerInterface & MockObject $loggerMock;
 
     public function setUp(): void
     {
@@ -44,7 +45,7 @@ class EmbedTest extends TestCase
      * Provided parameters:
      * <code>string $xmlString, string $expectedXmlString, array $errors, array $renderParams</code>
      */
-    public function providerForTestConvert(): array
+    public static function providerForTestConvert(): array
     {
         return [
             [
@@ -806,12 +807,11 @@ class EmbedTest extends TestCase
     }
 
     /**
-     * @dataProvider providerForTestConvert
-     *
      * @param array<string> $errors
      * @param array{array<array<mixed>>, array<string>} $renderContentEmbedParams
      * @param array{array<array<mixed>>, array<string>} $renderLocationEmbedParams
      */
+    #[DataProvider('providerForTestConvert')]
     public function testConvert(
         string $xmlString,
         string $expectedXmlString,
@@ -819,30 +819,43 @@ class EmbedTest extends TestCase
         array $renderContentEmbedParams,
         array $renderLocationEmbedParams
     ): void {
+        $matcher = $this->exactly(count($errors));
         $this->loggerMock
-            ->expects(self::exactly(count($errors)))
+            ->expects($matcher)
             ->method('error')
-            ->withConsecutive($errors);
+            ->willReturnCallback(static function (...$parameters) use ($matcher, $errors): void {
+                self::assertSame($errors[$matcher->numberOfInvocations() - 1], $parameters[0]);
+            });
 
-        $this->rendererMock->expects(self::never())->method('renderTemplate');
+        $this->rendererMock->expects($this->never())->method('renderTemplate');
 
         [$embedContentParams, $embedContentReturnValues] = $renderContentEmbedParams;
         [$embedLocationParams, $embedLocationReturnValues] = $renderLocationEmbedParams;
 
         if (!empty($embedContentParams)) {
+            $matcher = $this->exactly(count($embedContentParams));
             $this->rendererMock
-                ->expects(self::exactly(count($embedContentParams)))
+                ->expects($matcher)
                 ->method('renderContentEmbed')
-                ->withConsecutive(...$embedContentParams)
-                ->willReturnOnConsecutiveCalls(...$embedContentReturnValues);
+                ->willReturnCallback(static function (...$parameters) use ($matcher, $embedContentParams, $embedContentReturnValues): ?string {
+                    $invocation = $matcher->numberOfInvocations();
+                    self::assertEquals(array_values($embedContentParams[$invocation - 1]), $parameters);
+
+                    return $embedContentReturnValues[$invocation - 1] ?? null;
+                });
         }
 
         if (!empty($embedLocationParams)) {
+            $matcher = $this->exactly(count($embedLocationParams));
             $this->rendererMock
-                ->expects(self::exactly(count($embedLocationParams)))
+                ->expects($matcher)
                 ->method('renderLocationEmbed')
-                ->withConsecutive(...$embedLocationParams)
-                ->willReturnOnConsecutiveCalls(...$embedLocationReturnValues);
+                ->willReturnCallback(static function (...$parameters) use ($matcher, $embedLocationParams, $embedLocationReturnValues): ?string {
+                    $invocation = $matcher->numberOfInvocations();
+                    self::assertEquals(array_values($embedLocationParams[$invocation - 1]), $parameters);
+
+                    return $embedLocationReturnValues[$invocation - 1] ?? null;
+                });
         }
 
         $document = new DOMDocument();
@@ -868,12 +881,12 @@ class EmbedTest extends TestCase
         );
     }
 
-    protected function getRendererMock(): RendererInterface&MockObject
+    protected function getRendererMock(): RendererInterface & MockObject
     {
         return $this->createMock(RendererInterface::class);
     }
 
-    protected function getLoggerMock(): LoggerInterface&MockObject
+    protected function getLoggerMock(): LoggerInterface & MockObject
     {
         return $this->createMock(LoggerInterface::class);
     }

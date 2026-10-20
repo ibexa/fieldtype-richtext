@@ -1,17 +1,18 @@
-<phpunit
-    backupGlobals="false"
-    backupStaticAttributes="false"
-    convertErrorsToExceptions="true"
-    convertNoticesToExceptions="true"
-    convertWarningsToExceptions="true"
-    beStrictAboutTestsThatDoNotTestAnything="false"
-    colors="true"
-    failOnWarning="true"
->
+<?xml version="1.0"?>
+<phpunit backupGlobals="false" beStrictAboutTestsThatDoNotTestAnything="false" colors="true" failOnWarning="true" failOnNotice="true" failOnDeprecation="true" displayDetailsOnTestsThatTriggerDeprecations="true" cacheDirectory=".phpunit.cache" backupStaticProperties="false">
   <testsuites>
     <testsuite name="ibexa_richtext_field_type">
       <directory>tests/lib</directory>
       <directory>tests/bundle</directory>
+      <exclude>tests/lib/RichText/Converter/Xslt/BaseTest.php</exclude>
+      <exclude>tests/lib/RichText/TextExtractor/BaseTest.php</exclude>
     </testsuite>
   </testsuites>
+  <source baseline="phpunit.baseline.xml" ignoreIndirectDeprecations="false" ignoreSuppressionOfDeprecations="true">
+    <include>
+      <directory>src/lib</directory>
+      <directory>src/contracts</directory>
+      <directory>src/bundle</directory>
+    </include>
+  </source>
 </phpunit>

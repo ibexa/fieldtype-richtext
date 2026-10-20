@@ -8,38 +8,47 @@ declare(strict_types=1);
 
 namespace Ibexa\Tests\FieldTypeRichText\FieldType;
 
+use DOMDocument;
 use Exception;
+use Ibexa\Contracts\Core\Persistence\Content\FieldValue;
 use Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException as ApiInvalidArgumentException;
 use Ibexa\Contracts\Core\Repository\Values\Content\RelationType;
 use Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition as APIFieldDefinition;
 use Ibexa\Contracts\FieldTypeRichText\RichText\TextExtractorInterface;
 use Ibexa\Core\Base\Exceptions\InvalidArgumentException;
 use Ibexa\Core\Base\Exceptions\NotFoundException;
+use Ibexa\Core\FieldType\Author\Type as AuthorType;
+use Ibexa\Core\FieldType\FieldType;
 use Ibexa\Core\FieldType\ValidationError;
 use Ibexa\Core\FieldType\Value as CoreValue;
 use Ibexa\Core\Persistence\TransformationProcessor;
-use Ibexa\FieldTypeRichText\FieldType\RichText\Type;
 use Ibexa\FieldTypeRichText\FieldType\RichText\Type as RichTextType;
 use Ibexa\FieldTypeRichText\FieldType\RichText\Value;
 use Ibexa\FieldTypeRichText\RichText\ConverterDispatcher;
 use Ibexa\FieldTypeRichText\RichText\DOMDocumentFactory;
+use Ibexa\FieldTypeRichText\RichText\DOMDocumentLoader;
+use Ibexa\FieldTypeRichText\RichText\Exception\UnsupportedNamespaceException;
 use Ibexa\FieldTypeRichText\RichText\InputHandler;
 use Ibexa\FieldTypeRichText\RichText\Normalizer\Aggregate;
 use Ibexa\FieldTypeRichText\RichText\RelationProcessor;
 use Ibexa\FieldTypeRichText\RichText\Validator\Validator;
 use Ibexa\FieldTypeRichText\RichText\Validator\ValidatorDispatcher;
 use Ibexa\FieldTypeRichText\RichText\XMLSanitizer;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 
-/**
- * @group fieldType
- * @group ibexa_richtext
- */
+#[CoversClass(FieldType::class)]
+#[CoversClass(RichTextType::class)]
+#[CoversClass(AuthorType::class)]
+#[Group('fieldType')]
+#[Group('ibexa_richtext')]
 class RichTextTest extends TestCase
 {
-    protected function getFieldType(): Type
+    protected function getFieldType(): RichTextType
     {
         $inputHandler = new InputHandler(
             new DOMDocumentFactory(new XMLSanitizer()),
@@ -57,15 +66,13 @@ class RichTextTest extends TestCase
             new RelationProcessor()
         );
 
-        $textExtractor = $this->createMock(TextExtractorInterface::class);
-
-        $fieldType = new RichTextType($inputHandler, $textExtractor);
+        $fieldType = new RichTextType($inputHandler, self::createStub(TextExtractorInterface::class), new DOMDocumentLoader());
         $fieldType->setTransformationProcessor($this->getTransformationProcessorMock());
 
         return $fieldType;
     }
 
-    protected function getTransformationProcessorMock(): TransformationProcessor&MockObject
+    protected function getTransformationProcessorMock(): TransformationProcessor & MockObject
     {
         return $this->getMockForAbstractClass(
             TransformationProcessor::class,
@@ -77,9 +84,6 @@ class RichTextTest extends TestCase
         );
     }
 
-    /**
-     * @covers \Ibexa\Core\FieldType\FieldType::getValidatorConfigurationSchema
-     */
     public function testValidatorConfigurationSchema(): void
     {
         $fieldType = $this->getFieldType();
@@ -89,9 +93,6 @@ class RichTextTest extends TestCase
         );
     }
 
-    /**
-     * @covers \Ibexa\Core\FieldType\FieldType::getSettingsSchema
-     */
     public function testSettingsSchema(): void
     {
         $fieldType = $this->getFieldType();
@@ -102,14 +103,11 @@ class RichTextTest extends TestCase
         );
     }
 
-    /**
-     * @covers \Ibexa\FieldTypeRichText\FieldType\RichText\Type::acceptValue
-     */
     public function testAcceptValueInvalidType(): void
     {
         $this->expectException(ApiInvalidArgumentException::class);
 
-        $this->getFieldType()->acceptValue($this->createMock(CoreValue::class));
+        $this->getFieldType()->acceptValue(self::createStub(CoreValue::class));
     }
 
     /**
@@ -135,11 +133,7 @@ class RichTextTest extends TestCase
         ];
     }
 
-    /**
-     * @covers \Ibexa\Core\FieldType\Author\Type::acceptValue
-     *
-     * @dataProvider providerForTestAcceptValueValidFormat
-     */
+    #[DataProvider('providerForTestAcceptValueValidFormat')]
     public function testAcceptValueValidFormat(string $input): void
     {
         $fieldType = $this->getFieldType();
@@ -147,7 +141,7 @@ class RichTextTest extends TestCase
     }
 
     /**
-     * @phpstan-return list<array{string, \Exception}>
+     * @phpstan-return list<array{string, Exception}>
      */
     public static function providerForTestAcceptValueInvalidFormat(): array
     {
@@ -161,21 +155,20 @@ class RichTextTest extends TestCase
             ],
             [
                 '<?xml version="1.0" encoding="UTF-8"?><unknown xmlns="http://www.w3.org/2013/foobar"><format /></unknown>',
-                new NotFoundException(
-                    'Validator',
-                    'http://www.w3.org/2013/foobar'
+                new UnsupportedNamespaceException(
+                    'unknown',
+                    'http://www.w3.org/2013/foobar',
+                    ['http://docbook.org/ns/docbook']
                 ),
             ],
         ];
     }
 
-    /**
-     * @covers \Ibexa\Core\FieldType\Author\Type::acceptValue
-     *
-     * @dataProvider providerForTestAcceptValueInvalidFormat
-     */
-    public function testAcceptValueInvalidFormat(string $input, Exception $expectedException): void
-    {
+    #[DataProvider('providerForTestAcceptValueInvalidFormat')]
+    public function testAcceptValueInvalidFormat(
+        string $input,
+        Exception $expectedException
+    ): void {
         try {
             $fieldType = $this->getFieldType();
             $fieldType->acceptValue($input);
@@ -194,7 +187,7 @@ class RichTextTest extends TestCase
     /**
      * @phpstan-return list<array{string, \Ibexa\Contracts\Core\FieldType\ValidationError[]}>
      */
-    public function providerForTestValidate(): array
+    public static function providerForTestValidate(): array
     {
         return [
             [
@@ -290,25 +283,22 @@ class RichTextTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider providerForTestValidate
-     */
-    public function testValidate(string $xmlString, array $expectedValidationErrors): void
-    {
+    #[DataProvider('providerForTestValidate')]
+    public function testValidate(
+        string $xmlString,
+        array $expectedValidationErrors
+    ): void {
         $fieldType = $this->getFieldType();
-        $value = new Value($xmlString);
+        $value = new Value($this->createDocument($xmlString));
 
-        /** @var \Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition|\PHPUnit\Framework\MockObject\MockObject $fieldDefinitionMock */
-        $fieldDefinitionMock = $this->createMock(APIFieldDefinition::class);
+        /** @var APIFieldDefinition|MockObject $fieldDefinitionMock */
+        $fieldDefinitionMock = self::createStub(APIFieldDefinition::class);
 
         $validationErrors = $fieldType->validate($fieldDefinitionMock, $value);
 
         self::assertEquals($expectedValidationErrors, $validationErrors);
     }
 
-    /**
-     * @covers \Ibexa\FieldTypeRichText\FieldType\RichText\Type::toPersistenceValue
-     */
     public function testToPersistenceValue(): void
     {
         $xmlString = '<?xml version="1.0" encoding="UTF-8"?>
@@ -325,19 +315,43 @@ class RichTextTest extends TestCase
         self::assertSame($xmlString, $fieldValue->data);
     }
 
-    /**
-     * @covers \Ibexa\FieldTypeRichText\FieldType\RichText\Type::getName
-     *
-     * @dataProvider providerForTestGetName
-     */
-    public function testGetName(string $xmlString, string $expectedName): void
+    public function testFromPersistenceValueWithInvalidXmlIdDoesNotEmitWarning(): void
     {
-        $value = new Value($xmlString);
+        $xmlString = '<?xml version="1.0" encoding="UTF-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0-variant ezpublish-1.0"><para xml:id="227">Lorem ipsum</para></section>';
+
+        $value = $this->getFieldType()->fromPersistenceValue(new FieldValue(['data' => $xmlString]));
+
+        self::assertNotNull($value->xml->documentElement);
+        self::assertStringContainsString('xml:id="227"', (string)$value);
+    }
+
+    public function testFromPersistenceValueWithNullData(): void
+    {
+        $value = $this->getFieldType()->fromPersistenceValue(new FieldValue(['data' => null]));
+
+        self::assertSame(Value::EMPTY_VALUE, trim((string)$value));
+    }
+
+    private function createDocument(string $xmlString): DOMDocument
+    {
+        $document = new DOMDocument();
+        $document->loadXML($xmlString);
+
+        return $document;
+    }
+
+    #[DataProvider('providerForTestGetName')]
+    public function testGetName(
+        string $xmlString,
+        string $expectedName
+    ): void {
+        $value = new Value($this->createDocument($xmlString));
 
         $fieldType = $this->getFieldType();
         self::assertEquals(
             $expectedName,
-            $fieldType->getName($value, $this->createMock(APIFieldDefinition::class), 'eng-US')
+            $fieldType->getName($value, self::createStub(APIFieldDefinition::class), 'eng-US')
         );
     }
 
@@ -434,8 +448,6 @@ class RichTextTest extends TestCase
 
     /**
      * @todo handle embeds when implemented
-     *
-     * @covers \Ibexa\FieldTypeRichText\FieldType\RichText\Type::getRelations
      */
     public function testGetRelations(): void
     {

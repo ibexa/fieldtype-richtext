@@ -60,8 +60,11 @@ class Template extends Render implements Converter
     /**
      * Processes given template $template in a given $document.
      */
-    protected function processTemplate(DOMDocument $document, DOMXPath $xpath, DOMElement $template): void
-    {
+    protected function processTemplate(
+        DOMDocument $document,
+        DOMXPath $xpath,
+        DOMElement $template
+    ): void {
         $templateName = $template->getAttribute('name');
         $templateType = $template->hasAttribute('type') ? $template->getAttribute('type') : 'tag';
         $parameters = [
@@ -125,7 +128,7 @@ class Template extends Render implements Converter
 
         $rootNode = $this->wrapContentWithLiteralLayout($rootNode, $node);
 
-        /** @var \DOMNode $child */
+        /** @var DOMNode $child */
         foreach ($node->childNodes as $child) {
             $newNode = $innerDoc->importNode($child, true);
             if ($newNode === false) {
@@ -143,8 +146,10 @@ class Template extends Render implements Converter
      * BC: wrap nested content containing line breaks with "literallayout" DocBook tag,
      * unless literallayout already exists.
      */
-    private function wrapContentWithLiteralLayout(DOMNode $rootNode, DOMNode $node): DOMNode
-    {
+    private function wrapContentWithLiteralLayout(
+        DOMNode $rootNode,
+        DOMNode $node
+    ): DOMNode {
         if (false === strpos($node->nodeValue, self::LITERAL_LAYOUT_LINE_BREAK)) {
             return $rootNode;
         }

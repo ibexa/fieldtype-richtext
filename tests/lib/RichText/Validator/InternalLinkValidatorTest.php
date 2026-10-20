@@ -13,18 +13,17 @@ use Ibexa\Contracts\Core\Persistence\Content\Location\Handler as LocationHandler
 use Ibexa\Core\Base\Exceptions\InvalidArgumentException;
 use Ibexa\Core\Base\Exceptions\NotFoundException;
 use Ibexa\FieldTypeRichText\RichText\Validator\InternalLinkValidator;
+use PHPUnit\Framework\Attributes\Before;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 class InternalLinkValidatorTest extends TestCase
 {
-    private ContentHandler&MockObject $contentHandler;
+    private ContentHandler & MockObject $contentHandler;
 
-    private LocationHandler&MockObject $locationHandler;
+    private LocationHandler & MockObject $locationHandler;
 
-    /**
-     * @before
-     */
+    #[Before]
     public function setupInternalLinkValidator(): void
     {
         $this->contentHandler = $this->createMock(ContentHandler::class);
@@ -46,7 +45,7 @@ class InternalLinkValidatorTest extends TestCase
 
         $contentId = 1;
         $this->contentHandler
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('loadContentInfo')
             ->with($contentId);
 
@@ -58,10 +57,10 @@ class InternalLinkValidatorTest extends TestCase
         $validator = $this->getInternalLinkValidator();
 
         $contentId = 1;
-        $exception = $this->createMock(NotFoundException::class);
+        $exception = self::createStub(NotFoundException::class);
 
         $this->contentHandler
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('loadContentInfo')
             ->with($contentId)
             ->willThrowException($exception);
@@ -76,7 +75,7 @@ class InternalLinkValidatorTest extends TestCase
         $locationId = 1;
 
         $this->locationHandler
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('load')
             ->with($locationId);
 
@@ -88,10 +87,10 @@ class InternalLinkValidatorTest extends TestCase
         $validator = $this->getInternalLinkValidator();
 
         $locationId = 1;
-        $exception = $this->createMock(NotFoundException::class);
+        $exception = self::createStub(NotFoundException::class);
 
         $this->locationHandler
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('load')
             ->with($locationId)
             ->willThrowException($exception);
@@ -106,7 +105,7 @@ class InternalLinkValidatorTest extends TestCase
         $contentRemoteId = '0ba685755118cf95abb0fe25f3f6a1c8';
 
         $this->contentHandler
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('loadContentInfoByRemoteId')
             ->with($contentRemoteId);
 
@@ -118,10 +117,10 @@ class InternalLinkValidatorTest extends TestCase
         $validator = $this->getInternalLinkValidator();
 
         $contentRemoteId = '0ba685755118cf95abb0fe25f3f6a1c8';
-        $exception = $this->createMock(NotFoundException::class);
+        $exception = self::createStub(NotFoundException::class);
 
         $this->contentHandler
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('loadContentInfoByRemoteId')
             ->with($contentRemoteId)
             ->willThrowException($exception);
@@ -136,7 +135,7 @@ class InternalLinkValidatorTest extends TestCase
 
         $validator = $this->getInternalLinkValidator(['validate']);
         $validator
-            ->expects(self::never())
+            ->expects($this->never())
             ->method('validate')
             ->with($scheme, $contentId);
 
@@ -154,7 +153,7 @@ class InternalLinkValidatorTest extends TestCase
 
         $validator = $this->getInternalLinkValidator(['validate']);
         $validator
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('validate')
             ->with($scheme, $contentId)
             ->willReturn(true);
@@ -173,7 +172,7 @@ class InternalLinkValidatorTest extends TestCase
 
         $validator = $this->getInternalLinkValidator(['validate']);
         $validator
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('validate')
             ->with($scheme, $contentId)
             ->willReturn(false);
@@ -193,7 +192,7 @@ class InternalLinkValidatorTest extends TestCase
 
         $validator = $this->getInternalLinkValidator(['validate']);
         $validator
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('validate')
             ->with($scheme, $locationId)
             ->willReturn(true);
@@ -212,7 +211,7 @@ class InternalLinkValidatorTest extends TestCase
 
         $validator = $this->getInternalLinkValidator(['validate']);
         $validator
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('validate')
             ->with($scheme, $locationId)
             ->willReturn(false);
@@ -232,7 +231,7 @@ class InternalLinkValidatorTest extends TestCase
 
         $validator = $this->getInternalLinkValidator(['validate']);
         $validator
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('validate')
             ->with($scheme, $contentRemoteId)
             ->willReturn(true);
@@ -251,7 +250,7 @@ class InternalLinkValidatorTest extends TestCase
 
         $validator = $this->getInternalLinkValidator(['validate']);
         $validator
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('validate')
             ->with($scheme, $contentRemoteId)
             ->willReturn(false);
@@ -264,43 +263,51 @@ class InternalLinkValidatorTest extends TestCase
         $this->assertContainsEzRemoteInvalidLinkError($contentRemoteId, $errors);
     }
 
-    private function assertContainsEzLocationInvalidLinkError(int $locationId, array $errors): void
-    {
+    private function assertContainsEzLocationInvalidLinkError(
+        int $locationId,
+        array $errors
+    ): void {
         $format = 'Invalid link "ezlocation://%d": cannot find target Location';
 
         self::assertContains(sprintf($format, $locationId), $errors);
     }
 
-    private function assertContainsEzContentInvalidLinkError(int $contentId, array $errors): void
-    {
+    private function assertContainsEzContentInvalidLinkError(
+        int $contentId,
+        array $errors
+    ): void {
         $format = 'Invalid link "ezcontent://%d": cannot find target content';
 
         self::assertContains(sprintf($format, $contentId), $errors);
     }
 
-    private function assertContainsEzRemoteInvalidLinkError(string $contentId, array $errors): void
-    {
+    private function assertContainsEzRemoteInvalidLinkError(
+        string $contentId,
+        array $errors
+    ): void {
         $format = 'Invalid link "ezremote://%s": cannot find target content';
 
         self::assertContains(sprintf($format, $contentId), $errors);
     }
 
     /**
-     * @param list<string>|null $methods
+     * @param list<non-empty-string>|null $methods
      */
-    private function getInternalLinkValidator(?array $methods = null): InternalLinkValidator&MockObject
+    private function getInternalLinkValidator(?array $methods = null): InternalLinkValidator & MockObject
     {
         return $this->getMockBuilder(InternalLinkValidator::class)
-            ->setMethods($methods)
             ->setConstructorArgs([
                 $this->contentHandler,
                 $this->locationHandler,
             ])
+            ->onlyMethods($methods ?? [])
             ->getMock();
     }
 
-    private function createInputDocument(string $scheme, null|int|string $id): \DOMDocument
-    {
+    private function createInputDocument(
+        string $scheme,
+        null | int | string $id
+    ): \DOMDocument {
         $url = $scheme . '://' . $id;
         $xml = '<?xml version="1.0" encoding="UTF-8"?>
 <section xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ezxhtml="http://ibexa.co/xmlns/dxp/docbook/xhtml" xmlns:ezcustom="http://ibexa.co/xmlns/dxp/docbook/custom" version="5.0-variant ezpublish-1.0">

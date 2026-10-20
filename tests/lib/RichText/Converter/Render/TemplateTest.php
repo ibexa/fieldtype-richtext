@@ -13,14 +13,15 @@ use Ibexa\Contracts\FieldTypeRichText\RichText\Converter;
 use Ibexa\Contracts\FieldTypeRichText\RichText\RendererInterface;
 use Ibexa\FieldTypeRichText\RichText\Converter\Aggregate;
 use Ibexa\FieldTypeRichText\RichText\Converter\Render\Template;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 class TemplateTest extends TestCase
 {
-    protected RendererInterface&MockObject $rendererMock;
+    protected RendererInterface & MockObject $rendererMock;
 
-    protected Converter&MockObject $converterMock;
+    protected Converter & MockObject $converterMock;
 
     public function setUp(): void
     {
@@ -32,7 +33,7 @@ class TemplateTest extends TestCase
     /**
      * @return array{DOMDocument, DOMDocument, mixed}[]
      */
-    public function providerForTestConvert(): array
+    public static function providerForTestConvert(): array
     {
         $data = [];
 
@@ -72,16 +73,14 @@ class TemplateTest extends TestCase
         return $data;
     }
 
-    /**
-     * @dataProvider providerForTestConvert
-     */
+    #[DataProvider('providerForTestConvert')]
     public function testConvert(
         DOMDocument $inputDocument,
         DOMDocument $expectedOutputDocument,
         array $expectedRenderParams
     ): void {
-        $this->rendererMock->expects(self::never())->method('renderContentEmbed');
-        $this->rendererMock->expects(self::never())->method('renderLocationEmbed');
+        $this->rendererMock->expects($this->never())->method('renderContentEmbed');
+        $this->rendererMock->expects($this->never())->method('renderLocationEmbed');
 
         [
             $convertParameters,
@@ -89,18 +88,28 @@ class TemplateTest extends TestCase
             $renderParameters,
             $renderReturnValues
         ] = $this->provideConvertRenderValues($expectedRenderParams);
+        $matcher = $this->exactly(count($convertReturnValues));
 
         $this->converterMock
-            ->expects(self::exactly(count($convertReturnValues)))
+            ->expects($matcher)
             ->method('convert')
-            ->withConsecutive(...$convertParameters)
-            ->willReturnOnConsecutiveCalls(...$convertReturnValues);
+            ->willReturnCallback(static function (...$parameters) use ($matcher, $convertParameters, $convertReturnValues): DOMDocument {
+                $invocation = $matcher->numberOfInvocations();
+                self::assertEquals($convertParameters[$invocation - 1], $parameters);
+
+                return $convertReturnValues[$invocation - 1];
+            });
+        $matcher = $this->exactly(count($renderReturnValues));
 
         $this->rendererMock
-            ->expects(self::exactly(count($renderReturnValues)))
+            ->expects($matcher)
             ->method('renderTemplate')
-            ->withConsecutive(...$renderParameters)
-            ->willReturnOnConsecutiveCalls(...$renderReturnValues);
+            ->willReturnCallback(static function (...$parameters) use ($matcher, $renderParameters, $renderReturnValues): ?string {
+                $invocation = $matcher->numberOfInvocations();
+                self::assertEquals($renderParameters[$invocation - 1], $parameters);
+
+                return $renderReturnValues[$invocation - 1];
+            });
 
         $outputDocument = $this->getConverter()->convert($inputDocument);
 
@@ -164,12 +173,12 @@ class TemplateTest extends TestCase
         );
     }
 
-    protected function getRendererMock(): RendererInterface&MockObject
+    protected function getRendererMock(): RendererInterface & MockObject
     {
         return $this->createMock(RendererInterface::class);
     }
 
-    protected function getConverterMock(): Converter&MockObject
+    protected function getConverterMock(): Converter & MockObject
     {
         return $this->createMock(Converter::class);
     }

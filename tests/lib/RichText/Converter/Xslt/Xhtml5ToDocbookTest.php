@@ -12,6 +12,7 @@ use Ibexa\Contracts\FieldTypeRichText\RichText\Converter;
 use Ibexa\FieldTypeRichText\RichText\Converter\Aggregate;
 use Ibexa\FieldTypeRichText\RichText\Converter\LiteralLayoutNestedList;
 use Ibexa\FieldTypeRichText\RichText\Converter\ProgramListing;
+use Ibexa\FieldTypeRichText\RichText\Converter\XmlId;
 use Ibexa\FieldTypeRichText\RichText\Converter\Xslt;
 
 /**
@@ -36,7 +37,7 @@ class Xhtml5ToDocbookTest extends BaseTest
      *
      * @return array{input: string, output: string}
      */
-    public function getFixtureSubdirectories(): array
+    public static function getFixtureSubdirectories(): array
     {
         return [
             'input' => 'xhtml5/edit',
@@ -107,6 +108,7 @@ class Xhtml5ToDocbookTest extends BaseTest
                         $this->getConversionTransformationStylesheet(),
                         $this->getCustomConversionTransformationStylesheets()
                     ),
+                    new XmlId(),
                     new LiteralLayoutNestedList(),
                 ]
             );

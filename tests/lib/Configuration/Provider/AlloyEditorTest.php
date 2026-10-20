@@ -13,11 +13,13 @@ use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 use Ibexa\Contracts\FieldTypeRichText\Configuration\Provider;
 use Ibexa\FieldTypeRichText\Configuration\Provider\AlloyEditor;
 use Ibexa\FieldTypeRichText\Configuration\UI\Mapper\OnlineEditorConfigMapper;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\MockObject\MockObject;
 
+#[CoversClass(AlloyEditorTest::class)]
 class AlloyEditorTest extends BaseProviderTestCase
 {
-    private OnlineEditorConfigMapper&MockObject $mapper;
+    private OnlineEditorConfigMapper & MockObject $mapper;
 
     public function setUp(): void
     {
@@ -42,26 +44,23 @@ class AlloyEditorTest extends BaseProviderTestCase
         return 'alloyEditor';
     }
 
-    /**
-     * @covers \Ibexa\Tests\FieldTypeRichText\Configuration\Provider\AlloyEditorTest::createProvider
-     */
     public function testGetConfiguration(): void
     {
         $provider = $this->createProvider();
 
         $this->configResolver
-            ->expects(self::any())
+            ->expects($this->any())
             ->method('hasParameter')
             ->willReturn(false);
 
         $this->mapper
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('mapCssClassesConfiguration')
             ->with([])
             ->willReturn(['class1', 'class2']);
 
         $this->mapper
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('mapDataAttributesConfiguration')
             ->with([])
             ->willReturn(['attr1', 'attr2']);

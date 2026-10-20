@@ -8,17 +8,22 @@ declare(strict_types=1);
 
 namespace Ibexa\FieldTypeRichText\REST\FieldTypeProcessor;
 
-use DOMDocument;
 use Ibexa\Contracts\FieldTypeRichText\RichText\Converter;
+use Ibexa\Contracts\FieldTypeRichText\RichText\DOMDocumentLoaderInterface;
 use Ibexa\Contracts\Rest\FieldTypeProcessor;
 
 class RichTextProcessor extends FieldTypeProcessor
 {
     protected Converter $docbookToXhtml5EditConverter;
 
-    public function __construct(Converter $docbookToXhtml5EditConverter)
-    {
+    private DOMDocumentLoaderInterface $domDocumentLoader;
+
+    public function __construct(
+        Converter $docbookToXhtml5EditConverter,
+        DOMDocumentLoaderInterface $domDocumentLoader
+    ) {
         $this->docbookToXhtml5EditConverter = $docbookToXhtml5EditConverter;
+        $this->domDocumentLoader = $domDocumentLoader;
     }
 
     /**
@@ -26,8 +31,7 @@ class RichTextProcessor extends FieldTypeProcessor
      */
     public function postProcessValueHash(mixed $outgoingValueHash): array
     {
-        $document = new DOMDocument();
-        $document->loadXML($outgoingValueHash['xml']);
+        $document = $this->domDocumentLoader->loadXML($outgoingValueHash['xml']);
 
         $outgoingValueHash['xhtml5edit'] = $this->docbookToXhtml5EditConverter
             ->convert($document)

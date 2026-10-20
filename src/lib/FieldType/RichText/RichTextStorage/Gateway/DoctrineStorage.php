@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\FieldTypeRichText\FieldType\RichText\RichTextStorage\Gateway;
 
+use Doctrine\DBAL\ArrayParameterType;
 use Doctrine\DBAL\Connection;
 use Ibexa\Core\FieldType\Url\UrlStorage\Gateway as UrlGateway;
 use Ibexa\Core\Persistence\Legacy\Content\Gateway as ContentGateway;
@@ -17,8 +18,10 @@ class DoctrineStorage extends Gateway
 {
     protected Connection $connection;
 
-    public function __construct(UrlGateway $urlGateway, Connection $connection)
-    {
+    public function __construct(
+        UrlGateway $urlGateway,
+        Connection $connection
+    ) {
         parent::__construct($urlGateway);
         $this->connection = $connection;
     }
@@ -40,12 +43,12 @@ class DoctrineStorage extends Gateway
             $query = $this->connection->createQueryBuilder();
             $query
                 ->select(
-                    $this->connection->quoteIdentifier('id'),
-                    $this->connection->quoteIdentifier('remote_id')
+                    $this->connection->quoteSingleIdentifier('id'),
+                    $this->connection->quoteSingleIdentifier('remote_id')
                 )
                 ->from(ContentGateway::CONTENT_ITEM_TABLE)
                 ->where($query->expr()->in('remote_id', ':remoteIds'))
-                ->setParameter('remoteIds', $remoteIds, Connection::PARAM_STR_ARRAY)
+                ->setParameter('remoteIds', $remoteIds, ArrayParameterType::STRING)
             ;
 
             $statement = $query->executeQuery();

@@ -11,12 +11,13 @@ namespace Ibexa\Tests\FieldTypeRichText\REST\FieldTypeProcessor;
 use DOMDocument;
 use Ibexa\Contracts\FieldTypeRichText\RichText\Converter;
 use Ibexa\FieldTypeRichText\REST\FieldTypeProcessor\RichTextProcessor;
+use Ibexa\FieldTypeRichText\RichText\DOMDocumentLoader;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 class RichTextProcessorTest extends TestCase
 {
-    protected Converter&MockObject $converter;
+    protected Converter & MockObject $converter;
 
     protected function setUp(): void
     {
@@ -50,7 +51,7 @@ EOT;
         $convertedDocument->loadXML($processedOutputValue['xhtml5edit']);
 
         $this->converter
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('convert')
             ->with(self::isInstanceOf('DOMDocument'))
             ->willReturn($convertedDocument);
@@ -63,6 +64,6 @@ EOT;
 
     protected function getProcessor(): RichTextProcessor
     {
-        return new RichTextProcessor($this->converter);
+        return new RichTextProcessor($this->converter, new DOMDocumentLoader());
     }
 }

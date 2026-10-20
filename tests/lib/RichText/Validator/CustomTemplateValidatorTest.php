@@ -10,12 +10,12 @@ namespace Ibexa\Tests\FieldTypeRichText\RichText\Validator;
 
 use DOMDocument;
 use Ibexa\FieldTypeRichText\RichText\Validator\CustomTemplateValidator;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Yaml\Yaml;
 
-/**
- * @covers \Ibexa\FieldTypeRichText\FieldType\RichText\CustomTemplateValidator
- */
+#[CoversClass(CustomTemplateValidator::class)]
 final class CustomTemplateValidatorTest extends TestCase
 {
     private CustomTemplateValidator $validator;
@@ -33,12 +33,14 @@ final class CustomTemplateValidatorTest extends TestCase
     /**
      * Test validating DocBook document containing Custom Tags.
      *
-     * @dataProvider providerForTestValidateDocument
      *
      * @param list<string> $expectedErrors
      */
-    public function testValidateDocument(DOMDocument $document, array $expectedErrors): void
-    {
+    #[DataProvider('providerForTestValidateDocument')]
+    public function testValidateDocument(
+        DOMDocument $document,
+        array $expectedErrors
+    ): void {
         self::assertEquals(
             $expectedErrors,
             $this->validator->validateDocument($document)
@@ -52,11 +54,11 @@ final class CustomTemplateValidatorTest extends TestCase
      *
      * @see testValidateDocument
      */
-    public function providerForTestValidateDocument(): array
+    public static function providerForTestValidateDocument(): array
     {
         return [
             [
-                $this->createDocument(
+                self::createDocument(
                     <<<DOCBOOK
 <?xml version="1.0" encoding="UTF-8"?>
 <section xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -73,7 +75,7 @@ DOCBOOK
                 ],
             ],
             [
-                $this->createDocument(
+                self::createDocument(
                     <<<DOCBOOK
 <?xml version="1.0" encoding="UTF-8"?>
 <section xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -96,7 +98,7 @@ DOCBOOK
                 ],
             ],
             [
-                $this->createDocument(
+                self::createDocument(
                     <<<DOCBOOK
 <?xml version="1.0" encoding="UTF-8"?>
 <section xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -112,7 +114,7 @@ DOCBOOK
                 [],
             ],
             [
-                $this->createDocument(
+                self::createDocument(
                     <<<DOCBOOK
 <?xml version="1.0" encoding="UTF-8"?>
 <section xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -130,7 +132,7 @@ DOCBOOK
                 ],
             ],
             [
-                $this->createDocument(
+                self::createDocument(
                     <<<DOCBOOK
 <?xml version="1.0" encoding="UTF-8"?>
 <section xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -153,7 +155,7 @@ DOCBOOK
                 ],
             ],
             [
-                $this->createDocument(
+                self::createDocument(
                     <<<DOCBOOK
 <?xml version="1.0" encoding="UTF-8"?>
 <section xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -175,7 +177,7 @@ DOCBOOK
                 ],
             ],
             [
-                $this->createDocument(
+                self::createDocument(
                     <<<DOCBOOK
 <?xml version="1.0" encoding="UTF-8"?>
 <section xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -215,7 +217,7 @@ DOCBOOK
         ];
     }
 
-    protected function createDocument(string $source): DOMDocument
+    protected static function createDocument(string $source): DOMDocument
     {
         $document = new DOMDocument();
 

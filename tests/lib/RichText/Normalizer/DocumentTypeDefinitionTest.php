@@ -10,6 +10,7 @@ namespace Ibexa\Tests\FieldTypeRichText\RichText\Normalizer;
 
 use DOMDocument;
 use Ibexa\FieldTypeRichText\RichText\Normalizer\DocumentTypeDefinition;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class DocumentTypeDefinitionTest extends TestCase
@@ -17,7 +18,7 @@ class DocumentTypeDefinitionTest extends TestCase
     /**
      * @phpstan-return list<array{string, string, string, string, string, string}>
      */
-    public function providerForTestNormalize(): array
+    public static function providerForTestNormalize(): array
     {
         return [
             [
@@ -81,23 +82,28 @@ xmlns="http://ibexa.co/namespaces/ezpublish5/xhtml5/edit">
         ];
     }
 
-    /**
-     * @dataProvider providerForTestNormalize
-     */
-    public function testAccept(string $documentElement, string $namespace, string $dtdPath, string $input): void
-    {
+    #[DataProvider('providerForTestNormalize')]
+    public function testAccept(
+        string $documentElement,
+        string $namespace,
+        string $dtdPath,
+        string $input
+    ): void {
         $normalizer = $this->getNormalizer($documentElement, $namespace, $dtdPath);
 
         self::assertTrue($normalizer->accept($input));
     }
 
     /**
-     * @dataProvider providerForTestNormalize
-     *
      * @param string $input Ignored
      */
-    public function testAcceptNoXmlDeclaration(string $documentElement, string $namespace, string $dtdPath, string $input): void
-    {
+    #[DataProvider('providerForTestNormalize')]
+    public function testAcceptNoXmlDeclaration(
+        string $documentElement,
+        string $namespace,
+        string $dtdPath,
+        string $input
+    ): void {
         $normalizer = $this->getNormalizer($documentElement, $namespace, $dtdPath);
 
         self::assertTrue($normalizer->accept(
@@ -112,11 +118,15 @@ XML
         ));
     }
 
-    /**
-     * @dataProvider providerForTestNormalize
-     */
-    public function testNormalize(string $documentElement, string $namespace, string $dtdPath, string $input, string $expectedOutput, string $expectedSaved): void
-    {
+    #[DataProvider('providerForTestNormalize')]
+    public function testNormalize(
+        string $documentElement,
+        string $namespace,
+        string $dtdPath,
+        string $input,
+        string $expectedOutput,
+        string $expectedSaved
+    ): void {
         $normalizer = $this->getNormalizer($documentElement, $namespace, $dtdPath);
 
         $output = (string)$normalizer->normalize($input);
@@ -134,7 +144,7 @@ XML
     /**
      * @phpstan-return list<array{string, string, string, string}>
      */
-    public function providerForTestRefuse(): array
+    public static function providerForTestRefuse(): array
     {
         return [
             [
@@ -188,18 +198,23 @@ XML
         ];
     }
 
-    /**
-     * @dataProvider providerForTestRefuse
-     */
-    public function testRefuse(string $documentElement, string $namespace, string $dtdPath, string $input): void
-    {
+    #[DataProvider('providerForTestRefuse')]
+    public function testRefuse(
+        string $documentElement,
+        string $namespace,
+        string $dtdPath,
+        string $input
+    ): void {
         $normalizer = $this->getNormalizer($documentElement, $namespace, $dtdPath);
 
         self::assertFalse($normalizer->accept($input));
     }
 
-    protected function getNormalizer($documentElement, $namespace, $dtdPath): DocumentTypeDefinition
-    {
+    protected function getNormalizer(
+        $documentElement,
+        $namespace,
+        $dtdPath
+    ): DocumentTypeDefinition {
         return new DocumentTypeDefinition($documentElement, $namespace, $dtdPath);
     }
 }

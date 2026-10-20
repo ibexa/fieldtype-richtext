@@ -8,11 +8,12 @@ declare(strict_types=1);
 
 namespace Ibexa\FieldTypeRichText\FieldType\RichText;
 
-use DOMDocument;
 use Ibexa\Contracts\Core\FieldType\Indexable;
 use Ibexa\Contracts\Core\Persistence\Content\Field;
 use Ibexa\Contracts\Core\Persistence\Content\Type\FieldDefinition;
 use Ibexa\Contracts\Core\Search;
+use Ibexa\Contracts\Core\Search\FieldType;
+use Ibexa\Contracts\FieldTypeRichText\RichText\DOMDocumentLoaderInterface;
 use Ibexa\Contracts\FieldTypeRichText\RichText\TextExtractorInterface;
 
 /**
@@ -24,34 +25,45 @@ class SearchField implements Indexable
 
     private TextExtractorInterface $fullTextExtractor;
 
+    private DOMDocumentLoaderInterface $domDocumentLoader;
+
     public function __construct(
         TextExtractorInterface $shortTextExtractor,
-        TextExtractorInterface $fullTextExtractor
+        TextExtractorInterface $fullTextExtractor,
+        DOMDocumentLoaderInterface $domDocumentLoader
     ) {
         $this->shortTextExtractor = $shortTextExtractor;
         $this->fullTextExtractor = $fullTextExtractor;
+        $this->domDocumentLoader = $domDocumentLoader;
     }
 
     /**
      * Get index data for field for search backend.
      *
-     * @return \Ibexa\Contracts\Core\Search\Field[]
+     * @return Search\Field[]
      */
-    public function getIndexData(Field $field, FieldDefinition $fieldDefinition): array
-    {
-        $document = new DOMDocument();
-        $document->loadXML($field->value->data);
+    public function getIndexData(
+        Field $field,
+        FieldDefinition $fieldDefinition
+    ): array {
+        /** @var string $xmlData */
+        $xmlData = $field->value->data;
+        $document = $this->domDocumentLoader->loadXML($xmlData, [
+            'fieldId' => $field->id,
+            'versionNo' => $field->versionNo,
+            'fieldDefinitionIdentifier' => $fieldDefinition->identifier,
+        ]);
 
         return [
             new Search\Field(
                 'value',
                 $this->shortTextExtractor->extractText($document),
-                new Search\FieldType\StringField()
+                new FieldType\StringField()
             ),
             new Search\Field(
                 'fulltext',
                 $this->fullTextExtractor->extractText($document),
-                new Search\FieldType\FullTextField()
+                new FieldType\FullTextField()
             ),
         ];
     }
@@ -59,12 +71,12 @@ class SearchField implements Indexable
     /**
      * Get index field types for search backend.
      *
-     * @return \Ibexa\Contracts\Core\Search\FieldType[]
+     * @return FieldType[]
      */
     public function getIndexDefinition(): array
     {
         return [
-            'value' => new Search\FieldType\StringField(),
+            'value' => new FieldType\StringField(),
         ];
     }
 

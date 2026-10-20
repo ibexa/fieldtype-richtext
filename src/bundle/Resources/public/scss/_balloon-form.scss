@@ -177,20 +177,18 @@
             &.ck-button-save {
                 color: $ibexa-color-white;
                 fill: $ibexa-color-white;
-                background-image: $ibexa-gradient-danger-primary;
+                background-image: $ibexa-gradient-primary;
                 border-width: 0;
                 padding: calculateRem(0px) calculateRem(16px);
                 border-radius: $ibexa-border-radius;
 
                 &:hover {
                     color: $ibexa-color-white;
-                    box-shadow:
-                        0 0 0 transparent,
-                        $ibexa-btn-hover-box-shadow;
+                    background-image: $ibexa-gradient-primary-hover;
                 }
 
-                &:hover:focus {
-                    box-shadow: $ibexa-btn-focus-box-shadow, $ibexa-btn-hover-box-shadow;
+                &:focus-visible {
+                    box-shadow: $ibexa-btn-focus-box-shadow;
                 }
 
                 &:disabled {
@@ -204,7 +202,7 @@
 
             &.ck-button-cancel,
             &.ck-button-revert,
-            &.ibexa-btn--select-content {
+            &.ids-btn--select-content {
                 color: $ibexa-color-primary;
                 fill: $ibexa-color-primary;
                 background-color: $ibexa-color-white;
@@ -229,7 +227,7 @@
                 }
             }
 
-            &.ibexa-btn--select-content {
+            &.ids-btn--select-content {
                 margin-bottom: calculateRem(12px);
             }
         }
@@ -244,6 +242,10 @@
 
         &.ck-balloon-panel_with-arrow {
             z-index: calc(var(--ck-z-panel) + 55);
+        }
+
+        &:has(.ck-dropdown__panel-visible) {
+            z-index: calc(var(--ck-z-modal) + 60);
         }
 
         &.ck-balloon-panel {
@@ -278,6 +280,10 @@
 
         .ck-balloon-panel_with-arrow {
             z-index: 1081;
+        }
+
+        .ck-balloon-panel_visible:has(.ck-dropdown__panel-visible) {
+            z-index: 1082;
         }
     }
 }

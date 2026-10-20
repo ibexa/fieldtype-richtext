@@ -23,7 +23,7 @@ final class DOMDocumentFactory
     /**
      * Creates \DOMDocument from given $xmlString.
      *
-     * @throws \Ibexa\FieldTypeRichText\RichText\Exception\InvalidXmlException
+     * @throws InvalidXmlException
      */
     public function loadXMLString(string $xmlString): DOMDocument
     {

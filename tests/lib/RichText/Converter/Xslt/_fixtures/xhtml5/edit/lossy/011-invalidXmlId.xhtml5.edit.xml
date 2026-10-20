@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xmlns="http://ibexa.co/namespaces/ezpublish5/xhtml5/edit">
+    <p id="227">Paragraph with numeric id pasted from external HTML.</p>
+    <p id="foo bar">Paragraph with a space in the id.</p>
+    <p id="valid-id.1">Paragraph with a valid id.</p>
+    <p>
+        <a href="#42">Jump to the anchor below</a>
+    </p>
+    <p>
+        <a href="http://example.com/#227">External link, fragment must stay</a>
+    </p>
+    <p><a id="42"/>Anchored content.</p>
+</section>
