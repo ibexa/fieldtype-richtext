@@ -10,6 +10,7 @@ namespace Ibexa\Tests\FieldTypeRichText\RichText\Converter\Xslt;
 
 use Ibexa\FieldTypeRichText\RichText\Converter;
 use Ibexa\FieldTypeRichText\RichText\Converter\Aggregate;
+use Ibexa\FieldTypeRichText\RichText\Converter\LinkHref;
 use Ibexa\FieldTypeRichText\RichText\Converter\LiteralLayoutNestedList;
 use Ibexa\FieldTypeRichText\RichText\Converter\ProgramListing;
 use Ibexa\FieldTypeRichText\RichText\Converter\XmlId;
@@ -114,6 +115,7 @@ class Xhtml5ToDocbookTest extends BaseTest
                         $this->getCustomConversionTransformationStylesheets()
                     ),
                     new XmlId(),
+                    new LinkHref(),
                     new LiteralLayoutNestedList(),
                 ]
             );

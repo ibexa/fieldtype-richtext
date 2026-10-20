@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xmlns="http://docbook.org/ns/docbook"
+         xmlns:xlink="http://www.w3.org/1999/xlink"
+         xmlns:ezxhtml="http://ibexa.co/xmlns/dxp/docbook/xhtml"
+         xmlns:ezcustom="http://ibexa.co/xmlns/dxp/docbook/custom"
+         version="5.0-variant ezpublish-1.0">
+    <para>
+        <link xlink:href="https://example.com/search?filter%5Btags%5D%5B%5D=foo" xlink:show="none">Square brackets in query</link>
+    </para>
+    <para>
+        <link xlink:href="https://example.com/100%25/off" xlink:show="none">Percent sign not followed by hex digits</link>
+    </para>
+    <para>
+        <link xlink:href="https://example.com/page#section%232" xlink:show="none">Number sign in fragment</link>
+    </para>
+    <para>
+        <link xlink:href="http://[::1]:8080/path%20with%20spaces" xlink:show="none">IP literal and valid percent-encoding must stay</link>
+    </para>
+</section>
