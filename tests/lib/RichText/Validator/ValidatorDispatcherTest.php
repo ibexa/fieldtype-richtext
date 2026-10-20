@@ -33,7 +33,7 @@ final class ValidatorDispatcherTest extends TestCase
 
         $validator = $this->createMock(ValidatorInterface::class);
         $validator
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('validateDocument')
             ->with($document)
             ->willReturn(['error']);
