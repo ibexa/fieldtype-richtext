@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xmlns="http://ibexa.co/namespaces/ezpublish5/xhtml5/edit">
+    <p>
+        <a href="https://example.com/search?filter[tags][]=foo">Square brackets in query</a>
+    </p>
+    <p>
+        <a href="https://example.com/100%/off">Percent sign not followed by hex digits</a>
+    </p>
+    <p>
+        <a href="https://example.com/page#section#2">Number sign in fragment</a>
+    </p>
+    <p>
+        <a href="http://[::1]:8080/path%20with%20spaces">IP literal and valid percent-encoding must stay</a>
+    </p>
+</section>

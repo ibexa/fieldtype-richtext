@@ -147,6 +147,11 @@ services:
         tags:
             - {name: ibexa.field_type.richtext.converter.input.xhtml5, priority: 60}
 
+    # Note: should run after xsl transformation and after XmlId, which rewrites internal link fragments
+    Ibexa\FieldTypeRichText\RichText\Converter\LinkHref:
+        tags:
+            - {name: ibexa.field_type.richtext.converter.input.xhtml5, priority: 70}
+
     # Note: should run after xsl transformation
     Ibexa\FieldTypeRichText\RichText\Converter\LiteralLayoutNestedList:
         tags:
