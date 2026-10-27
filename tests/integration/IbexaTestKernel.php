@@ -9,7 +9,6 @@ declare(strict_types=1);
 namespace Ibexa\Tests\Integration\FieldTypeRichText;
 
 use DAMA\DoctrineTestBundle\DAMADoctrineTestBundle;
-use Hautelook\TemplatedUriBundle\HautelookTemplatedUriBundle;
 use Ibexa\Bundle\ContentForms\IbexaContentFormsBundle;
 use Ibexa\Bundle\DesignEngine\IbexaDesignEngineBundle;
 use Ibexa\Bundle\FieldTypeRichText\IbexaFieldTypeRichTextBundle;
@@ -42,7 +41,6 @@ final class IbexaTestKernel extends BaseIbexaTestKernel
         yield new IbexaTestCoreBundle();
 
         yield new LexikJWTAuthenticationBundle();
-        yield new HautelookTemplatedUriBundle();
         yield new WebpackEncoreBundle();
 
         yield new IbexaRestBundle();
