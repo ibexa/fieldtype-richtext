@@ -10,7 +10,7 @@ parameters:
     ibexa.field_type.richtext.converter.output.xhtml5.fragment.resources: '%ibexa.field_type.richtext.resources%/stylesheets/xhtml5/output/fragment.xsl'
 
     ibexa.field_type.richtext.validator.docbook.resources:
-        - '%ibexa.field_type.richtext.resources%/schemas/docbook/ezpublish.rng'
+        - '%ibexa.field_type.richtext.resources%/schemas/docbook/ezpublish.pruned.rng'
         - '%ibexa.field_type.richtext.resources%/schemas/docbook/docbook.iso.sch.xsl'
     ibexa.field_type.richtext.validator.output.xhtml5.resources:
         - '%ibexa.field_type.richtext.resources%/schemas/ezxhtml5/output/ezxhtml5.xsd'
