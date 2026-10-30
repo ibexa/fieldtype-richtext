@@ -25,6 +25,19 @@ RELAX NG schema as a base for replacement and extension:
 
  - ezpublish.rng
 
+libxml compiles the whole RELAX NG grammar on every validation, which for the full Docbook schema
+takes tens of milliseconds per document. Validation therefore uses a pruned copy of the schema,
+without the Docbook definitions that are unreachable from ``ezpublish.rng`` and without annotations:
+
+ - ezpublish.pruned.rng
+ - docbook.pruned.rng
+
+These files are generated and must be regenerated after changing ``ezpublish.rng``:
+
+.. code:: bash
+
+   php prune-rng.php
+
 Similarly, Schematron rules for eZ Publish variant of Docbook format are provided in separate
 file:
 

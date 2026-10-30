@@ -55,7 +55,7 @@ class RichTextTest extends TestCase
                 'http://docbook.org/ns/docbook' => null,
             ]),
             new Validator([
-                $this->getAbsolutePath('src/bundle/Resources/richtext/schemas/docbook/ezpublish.rng'),
+                $this->getAbsolutePath('src/bundle/Resources/richtext/schemas/docbook/ezpublish.pruned.rng'),
                 $this->getAbsolutePath('src/bundle/Resources/richtext/schemas/docbook/docbook.iso.sch.xsl'),
             ]),
             new RelationProcessor()

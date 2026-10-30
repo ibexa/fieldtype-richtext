@@ -199,7 +199,7 @@ class DocbookTest extends TestCase
     protected function getConversionValidationSchemas()
     {
         return [
-            __DIR__ . '/../../../../src/bundle/Resources/richtext/schemas/docbook/ezpublish.rng',
+            __DIR__ . '/../../../../src/bundle/Resources/richtext/schemas/docbook/ezpublish.pruned.rng',
             __DIR__ . '/../../../../src/bundle/Resources/richtext/schemas/docbook/docbook.iso.sch.xsl',
         ];
     }
