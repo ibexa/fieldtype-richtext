@@ -327,10 +327,10 @@
     &.is-invalid {
         .ibexa-data-source {
             border-color: $ibexa-color-danger;
-        }
 
-        .ibexa-data-source__richtext {
-            background-color: $ibexa-color-danger-100;
+            &:hover {
+                border-color: $ibexa-color-danger-700;
+            }
         }
     }
 }
