@@ -29,10 +29,18 @@ libxml compiles the whole RELAX NG grammar on every validation, which for the fu
 takes tens of milliseconds per document. Validation therefore uses a pruned copy of the schema,
 without the Docbook definitions that are unreachable from ``ezpublish.rng`` and without annotations:
 
- - ezpublish.pruned.rng
- - docbook.pruned.rng
+ - pruned/ezpublish.rng
+ - pruned/docbook.rng
 
-These files are generated and must be regenerated after changing ``ezpublish.rng``:
+Applying overrides inside ``<include>`` is slow in libxml as well, so ``pruned/docbook.rng`` also holds
+the start pattern and the definitions overriding Docbook ones from ``ezpublish.rng``, and is only usable
+through ``pruned/ezpublish.rng``. The pruned files are not an extension point: custom schemas should keep
+including ``ezpublish.rng``, as the set of kept Docbook definitions changes whenever the schema does.
+
+The files keep the original names because the validator resource whose path contains ``ezpublish.rng``
+is replaced with the combined schema when schema fragments are registered (5.0 and later).
+
+These files are generated and must be regenerated after changing ``docbook.rng`` or ``ezpublish.rng``:
 
 .. code:: bash
 

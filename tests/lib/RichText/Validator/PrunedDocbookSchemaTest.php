@@ -13,7 +13,6 @@ use DOMXPath;
 use Ibexa\FieldTypeRichText\RichText\Validator\Validator;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Finder\Finder;
-use Symfony\Component\Yaml\Yaml;
 
 /**
  * Compiling the full DocBook RELAX NG grammar takes ~80ms per validated document, so the docbook validator
@@ -39,19 +38,6 @@ final class PrunedDocbookSchemaTest extends TestCase
         }
     }
 
-    public function testDefaultDocbookValidatorUsesPrunedSchema(): void
-    {
-        $config = Yaml::parseFile(
-            __DIR__ . '/../../../../src/bundle/Resources/config/fieldtype_services.yaml',
-            Yaml::PARSE_CUSTOM_TAGS
-        );
-
-        self::assertContains(
-            '%ibexa.field_type.richtext.resources%/schemas/docbook/ezpublish.pruned.rng',
-            $config['parameters']['ibexa.field_type.richtext.validator.docbook.resources']
-        );
-    }
-
     public function testPrunedSchemaIsUpToDate(): void
     {
         exec(
@@ -66,11 +52,11 @@ final class PrunedDocbookSchemaTest extends TestCase
         );
 
         self::assertSame(0, $exitCode, implode("\n", $output));
-        foreach (['docbook.pruned.rng', 'ezpublish.pruned.rng'] as $file) {
+        foreach (['docbook.rng', 'ezpublish.rng'] as $file) {
             self::assertFileEquals(
                 $this->outputDir . '/' . $file,
-                self::SCHEMA_DIR . '/' . $file,
-                "$file is outdated, regenerate it with prune-rng.php"
+                self::SCHEMA_DIR . '/pruned/' . $file,
+                "pruned/$file is outdated, regenerate it with prune-rng.php"
             );
         }
     }
@@ -78,26 +64,38 @@ final class PrunedDocbookSchemaTest extends TestCase
     public function testPrunedSchemaDropsUnreachableDefinitions(): void
     {
         $fullCount = $this->countDefinitions(self::SCHEMA_DIR . '/docbook.rng');
-        $prunedCount = $this->countDefinitions(self::SCHEMA_DIR . '/docbook.pruned.rng');
+        $prunedCount = $this->countDefinitions(self::SCHEMA_DIR . '/pruned/docbook.rng');
 
         self::assertLessThan($fullCount / 2, $prunedCount);
     }
 
     /**
+     * Compiles the full schema for every case, skip with --exclude-group slow for quick local runs.
+     *
+     * @group slow
+     *
      * @dataProvider provideDocuments
      */
     public function testPrunedSchemaValidatesLikeFullSchema(string $xml): void
     {
-        $document = new DOMDocument();
-        $document->loadXML($xml);
-
         $fullValidator = new Validator([self::SCHEMA_DIR . '/ezpublish.rng']);
-        $prunedValidator = new Validator([self::SCHEMA_DIR . '/ezpublish.pruned.rng']);
+        $prunedValidator = new Validator([self::SCHEMA_DIR . '/pruned/ezpublish.rng']);
 
         self::assertSame(
-            $fullValidator->validateDocument($document),
-            $prunedValidator->validateDocument($document)
+            $fullValidator->validateDocument($this->loadDocument($xml)),
+            $prunedValidator->validateDocument($this->loadDocument($xml))
         );
+    }
+
+    /**
+     * libxml keeps the IDs and IDREFs found during validation on the document, so each validation needs a fresh one.
+     */
+    private function loadDocument(string $xml): DOMDocument
+    {
+        $document = new DOMDocument();
+        self::assertTrue($document->loadXML($xml));
+
+        return $document;
     }
 
     /**
@@ -110,7 +108,9 @@ final class PrunedDocbookSchemaTest extends TestCase
 
         yield 'empty section' => [sprintf($documentTemplate, '')];
         yield 'DocBook element disabled by ezpublish.rng' => [sprintf($documentTemplate, '<abstract><para>Foo</para></abstract>')];
-        yield 'DocBook element never referenced by ezpublish.rng' => [sprintf($documentTemplate, '<para><footnote><para>Foo</para></footnote></para>')];
+        yield 'DocBook element replaced by notAllowed in ezpublish.rng' => [sprintf($documentTemplate, '<para><footnote><para>Foo</para></footnote></para>')];
+        yield 'DocBook element removed from the pruned schema' => [sprintf($documentTemplate, '<para><indexterm><primary>Foo</primary></indexterm></para>')];
+        yield 'link to a missing anchor' => [sprintf($documentTemplate, '<para><link linkend="missing-anchor">Foo</link></para>')];
         yield 'unknown element' => [sprintf($documentTemplate, '<para><foo>bar</foo></para>')];
         yield 'invalid attribute value' => [sprintf($documentTemplate, '<orderedlist numeration="foo"><listitem><para>Foo</para></listitem></orderedlist>')];
         yield 'article root element' => ['<?xml version="1.0" encoding="UTF-8"?><article xmlns="http://docbook.org/ns/docbook" version="5.0"><title>Foo</title></article>'];
