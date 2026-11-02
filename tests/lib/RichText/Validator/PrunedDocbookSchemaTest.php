@@ -10,6 +10,7 @@ namespace Ibexa\Tests\FieldTypeRichText\RichText\Validator;
 
 use DOMDocument;
 use DOMXPath;
+use Ibexa\FieldTypeRichText\RichText\Schema\DocbookSchemaPruner;
 use Ibexa\FieldTypeRichText\RichText\Validator\Validator;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Finder\Finder;
@@ -23,39 +24,17 @@ final class PrunedDocbookSchemaTest extends TestCase
     private const SCHEMA_DIR = __DIR__ . '/../../../../src/bundle/Resources/richtext/schemas/docbook';
     private const DOCBOOK_NAMESPACE = 'http://docbook.org/ns/docbook';
 
-    private string $outputDir;
-
-    protected function setUp(): void
-    {
-        $this->outputDir = sys_get_temp_dir() . '/' . uniqid('ibexa_richtext_pruned_rng_', true);
-    }
-
-    protected function tearDown(): void
-    {
-        array_map('unlink', glob($this->outputDir . '/*') ?: []);
-        if (is_dir($this->outputDir)) {
-            rmdir($this->outputDir);
-        }
-    }
-
     public function testPrunedSchemaIsUpToDate(): void
     {
-        exec(
-            sprintf(
-                '%s %s %s 2>&1',
-                escapeshellarg(PHP_BINARY),
-                escapeshellarg(self::SCHEMA_DIR . '/prune-rng.php'),
-                escapeshellarg($this->outputDir)
-            ),
-            $output,
-            $exitCode
+        $schemas = (new DocbookSchemaPruner())->prune(
+            self::SCHEMA_DIR . '/' . DocbookSchemaPruner::DOCBOOK_FILE,
+            self::SCHEMA_DIR . '/' . DocbookSchemaPruner::EZPUBLISH_FILE
         );
 
-        self::assertSame(0, $exitCode, implode("\n", $output));
-        foreach (['docbook.rng', 'ezpublish.rng'] as $file) {
-            self::assertFileEquals(
-                $this->outputDir . '/' . $file,
+        foreach ($schemas as $file => $document) {
+            self::assertStringEqualsFile(
                 self::SCHEMA_DIR . '/pruned/' . $file,
+                (string)$document->saveXML(),
                 "pruned/$file is outdated, regenerate it with prune-rng.php"
             );
         }
