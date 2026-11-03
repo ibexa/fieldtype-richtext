@@ -22,8 +22,15 @@ final class LinkHref implements Converter
 {
     private const XLINK_NAMESPACE = 'http://www.w3.org/1999/xlink';
 
-    /** Scheme and authority, where "[" and "]" are allowed to delimit an IP literal. */
-    private const SCHEME_AND_AUTHORITY_PATTERN = '~^[a-z][a-z0-9+.\-]*://[^/?#]*~i';
+    private const SCHEME_PATTERN = '~^[a-z][a-z0-9+.\-]*://~i';
+
+    private const USERINFO_PATTERN = '~^[^/?#@]*@~';
+
+    /**
+     * Host and port, where "[" and "]" are allowed to delimit an IP literal.
+     * Left untouched, as invalid characters cannot be fixed by encoding them in a host.
+     */
+    private const HOST_PATTERN = '~^[^/?#]*~';
 
     private const INVALID_CHARACTERS_PATTERN = '~[\[\]]|%(?![0-9a-f]{2})~i';
 
@@ -58,9 +65,19 @@ final class LinkHref implements Converter
         }
 
         $prefix = '';
-        if (preg_match(self::SCHEME_AND_AUTHORITY_PATTERN, $uri, $matches) === 1) {
+        if (preg_match(self::SCHEME_PATTERN, $uri, $matches) === 1) {
             $prefix = $matches[0];
-            $uri = substr($uri, strlen($prefix));
+            $uri = substr($uri, strlen($matches[0]));
+
+            if (preg_match(self::USERINFO_PATTERN, $uri, $matches) === 1) {
+                $prefix .= $this->encode(self::INVALID_CHARACTERS_PATTERN, $matches[0]);
+                $uri = substr($uri, strlen($matches[0]));
+            }
+
+            if (preg_match(self::HOST_PATTERN, $uri, $matches) === 1) {
+                $prefix .= $matches[0];
+                $uri = substr($uri, strlen($matches[0]));
+            }
         }
 
         $encodedHref = $prefix . $this->encode(self::INVALID_CHARACTERS_PATTERN, $uri);

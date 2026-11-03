@@ -12,4 +12,10 @@
     <p>
         <a href="http://[::1]:8080/path%20with%20spaces">IP literal and valid percent-encoding must stay</a>
     </p>
+    <p>
+        <a href="https://user:pa[ss@example.com/x">Square bracket in userinfo</a>
+    </p>
+    <p>
+        <a href="https://user:pa%ss@example.com/x">Percent sign in userinfo</a>
+    </p>
 </section>

@@ -16,4 +16,10 @@
     <para>
         <link xlink:href="http://[::1]:8080/path%20with%20spaces" xlink:show="none">IP literal and valid percent-encoding must stay</link>
     </para>
+    <para>
+        <link xlink:href="https://user:pa%5Bss@example.com/x" xlink:show="none">Square bracket in userinfo</link>
+    </para>
+    <para>
+        <link xlink:href="https://user:pa%25ss@example.com/x" xlink:show="none">Percent sign in userinfo</link>
+    </para>
 </section>

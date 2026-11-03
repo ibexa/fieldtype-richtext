@@ -49,22 +49,22 @@ final class LinkHrefTest extends TestCase
                 '/foo[bar]',
                 '/foo%5Bbar%5D',
             ],
-            'IP literal in authority is untouched' => [
-                'http://[::1]:8080/foo',
-                'http://[::1]:8080/foo',
+            'square bracket in userinfo' => [
+                'https://user:pa[ss@example.com/x',
+                'https://user:pa%5Bss@example.com/x',
             ],
-            'valid percent-encoding is untouched' => [
-                'https://example.com/foo%5Bbar%5d%20baz',
-                'https://example.com/foo%5Bbar%5d%20baz',
+            'percent sign in userinfo' => [
+                'https://user:pa%ss@example.com/x',
+                'https://user:pa%25ss@example.com/x',
             ],
-            'characters accepted by anyURI are untouched' => [
-                'https://example.com/a b{c}|d^e`f\\g&amp;h&quot;i&lt;j',
-                'https://example.com/a b{c}|d^e`f\\g&amp;h&quot;i&lt;j',
+            'square brackets in userinfo before IP literal' => [
+                'https://u[s]er@[::1]/x',
+                'https://u%5Bs%5Der@[::1]/x',
             ],
-            'internal link is untouched' => ['#foo', '#foo'],
-            'ezurl link is untouched' => ['ezurl://95#foo', 'ezurl://95#foo'],
-            'ezlocation link is untouched' => ['ezlocation://42', 'ezlocation://42'],
-            'mailto link is untouched' => ['mailto:foo@example.com', 'mailto:foo@example.com'],
+            'invalid characters in host are untouched' => [
+                'https://exa[mple.com:80%/x[y]',
+                'https://exa[mple.com:80%/x%5By%5D',
+            ],
         ];
     }
 
@@ -86,6 +86,34 @@ final class LinkHrefTest extends TestCase
             $expectedOutputDocument,
             $converter->convert($this->createDocument($expectedHref)),
             'Conversion should be idempotent'
+        );
+    }
+
+    /**
+     * @return array<string, array{string}>
+     */
+    public static function providerConvertKeepsHrefUntouched(): array
+    {
+        return [
+            'IP literal in authority' => ['http://[::1]:8080/foo'],
+            'IP literal after userinfo' => ['https://user@[::1]:8080/foo'],
+            'valid percent-encoding' => ['https://example.com/foo%5Bbar%5d%20baz'],
+            'characters accepted by anyURI' => ['https://example.com/a b{c}|d^e`f\\g&amp;h&quot;i&lt;j'],
+            'internal link' => ['#foo'],
+            'ezurl link' => ['ezurl://95#foo'],
+            'ezlocation link' => ['ezlocation://42'],
+            'mailto link' => ['mailto:foo@example.com'],
+        ];
+    }
+
+    /**
+     * @dataProvider providerConvertKeepsHrefUntouched
+     */
+    public function testConvertKeepsHrefUntouched(string $href): void
+    {
+        self::assertEquals(
+            $this->createDocument($href),
+            (new LinkHref())->convert($this->createDocument($href))
         );
     }
 
