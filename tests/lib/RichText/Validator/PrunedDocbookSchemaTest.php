@@ -112,7 +112,7 @@ final class PrunedDocbookSchemaTest extends TestCase
         $schema->load($schemaPath);
 
         $xpath = new DOMXPath($schema);
-        $xpath->registerNamespace('rng', 'https://relaxng.org/ns/structure/1.0');
+        $xpath->registerNamespace('rng', 'http://relaxng.org/ns/structure/1.0');
 
         $definitions = $xpath->query('//rng:define');
         self::assertNotFalse($definitions);

@@ -58,7 +58,7 @@ final class DocbookSchemaPrunerTest extends TestCase
             [' License notice '],
             $this->queryValues($base, '/rng:grammar/comment()')
         );
-        self::assertSame(0, $this->countNodes($base, '//*[namespace-uri() != "https://relaxng.org/ns/structure/1.0"]'));
+        self::assertSame(0, $this->countNodes($base, '//*[namespace-uri() != "http://relaxng.org/ns/structure/1.0"]'));
     }
 
     public function testAddsGeneratedNoticeToBothSchemas(): void
@@ -115,7 +115,7 @@ final class DocbookSchemaPrunerTest extends TestCase
     private function createXPath(DOMDocument $document): DOMXPath
     {
         $xpath = new DOMXPath($document);
-        $xpath->registerNamespace('rng', 'https://relaxng.org/ns/structure/1.0');
+        $xpath->registerNamespace('rng', 'http://relaxng.org/ns/structure/1.0');
 
         return $xpath;
     }
