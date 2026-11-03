@@ -65,12 +65,96 @@ final class DocbookSchemaPruner
         // The DocBook license requires its copyright notice in all copies.
         $licenseComments = $this->queryNodes($docbookXPath, '/rng:grammar/comment()[following-sibling::rng:start]');
 
-        // Definitions inside <include> replace all included ones with the same name, combine or not.
+        $overridden = $this->collectOverriddenNames($ezpublishXPath, $include);
+        $overridesStart = !empty($this->queryElements($ezpublishXPath, './/rng:start', $include));
+        $reachable = $this->collectReachableNames($docbookXPath, $ezpublishXPath, $overridden, $overridesStart);
+
+        $this->removeDefinitions($docbookXPath, $overridden, $reachable, $overridesStart);
+        $this->moveIncludeContent($include, $docbookGrammar);
+        $this->removeAnnotations($docbookXPath, $licenseComments);
+        $this->removeEmptyDivs($docbookXPath);
+
+        $pruned = [
+            self::DOCBOOK_FILE => $docbook,
+            self::EZPUBLISH_FILE => $ezpublish,
+        ];
+        foreach ($pruned as $document) {
+            $this->addGeneratedNotice($document);
+        }
+
+        return $pruned;
+    }
+
+    /**
+     * Definitions inside <include> replace all included ones with the same name, combine or not.
+     *
+     * @return array<string, true>
+     */
+    private function collectOverriddenNames(
+        DOMXPath $ezpublishXPath,
+        DOMElement $include
+    ): array {
         $overridden = [];
         foreach ($this->queryElements($ezpublishXPath, './/rng:define', $include) as $define) {
             $overridden[$define->getAttribute('name')] = true;
         }
 
+        return $overridden;
+    }
+
+    /**
+     * @param array<string, true> $overridden
+     *
+     * @return array<string, true>
+     *
+     * @throws RuntimeException if a reachable reference has no definition
+     */
+    private function collectReachableNames(
+        DOMXPath $docbookXPath,
+        DOMXPath $ezpublishXPath,
+        array $overridden,
+        bool $overridesStart
+    ): array {
+        $definitions = $this->collectDefinitions($docbookXPath, $ezpublishXPath, $overridden);
+
+        // libxml resolves the references of every definition, used or not.
+        $roots = $this->queryElements($ezpublishXPath, '//rng:ref');
+        if (!$overridesStart) {
+            $roots = array_merge($roots, $this->queryElements($docbookXPath, '//rng:start//rng:ref'));
+        }
+
+        $reachable = [];
+        $queue = $this->getReferencedNames($roots);
+        while (!empty($queue)) {
+            $name = array_pop($queue);
+            if (isset($reachable[$name])) {
+                continue;
+            }
+            $reachable[$name] = true;
+            foreach ($definitions[$name] ?? [] as [$xpath, $define]) {
+                $refs = $this->queryElements($xpath, './/rng:ref', $define);
+                array_push($queue, ...$this->getReferencedNames($refs));
+            }
+        }
+
+        $undefined = array_keys(array_diff_key($reachable, $definitions));
+        if (!empty($undefined)) {
+            throw new RuntimeException('References without a definition: ' . implode(', ', $undefined));
+        }
+
+        return $reachable;
+    }
+
+    /**
+     * @param array<string, true> $overridden
+     *
+     * @return array<string, array<array{DOMXPath, DOMElement}>> effective definitions by name
+     */
+    private function collectDefinitions(
+        DOMXPath $docbookXPath,
+        DOMXPath $ezpublishXPath,
+        array $overridden
+    ): array {
         $definitions = [];
         foreach ($this->queryElements($docbookXPath, '//rng:define') as $define) {
             $name = $define->getAttribute('name');
@@ -82,56 +166,77 @@ final class DocbookSchemaPruner
             $definitions[$define->getAttribute('name')][] = [$ezpublishXPath, $define];
         }
 
-        // libxml resolves the references of every definition, used or not.
-        $overridesStart = !empty($this->queryElements($ezpublishXPath, './/rng:start', $include));
-        $roots = $this->queryElements($ezpublishXPath, '//rng:ref');
-        if (!$overridesStart) {
-            $roots = array_merge($roots, $this->queryElements($docbookXPath, '//rng:start//rng:ref'));
-        }
+        return $definitions;
+    }
 
-        $reachable = [];
-        $queue = [];
-        foreach ($roots as $ref) {
-            $queue[] = $ref->getAttribute('name');
-        }
-        while (!empty($queue)) {
-            $name = array_pop($queue);
-            if (isset($reachable[$name])) {
-                continue;
-            }
-            $reachable[$name] = true;
-            foreach ($definitions[$name] ?? [] as [$xpath, $define]) {
-                foreach ($this->queryElements($xpath, './/rng:ref', $define) as $ref) {
-                    $queue[] = $ref->getAttribute('name');
-                }
-            }
-        }
+    /**
+     * @param DOMElement[] $refs
+     *
+     * @return string[]
+     */
+    private function getReferencedNames(array $refs): array
+    {
+        return array_map(
+            static fn (DOMElement $ref): string => $ref->getAttribute('name'),
+            $refs
+        );
+    }
 
-        $undefined = array_keys(array_diff_key($reachable, $definitions));
-        if (!empty($undefined)) {
-            throw new RuntimeException('References without a definition: ' . implode(', ', $undefined));
-        }
-
+    /**
+     * Removes DocBook definitions that are overridden or unreachable, and the start pattern if overridden.
+     *
+     * @param array<string, true> $overridden
+     * @param array<string, true> $reachable
+     */
+    private function removeDefinitions(
+        DOMXPath $docbookXPath,
+        array $overridden,
+        array $reachable,
+        bool $overridesStart
+    ): void {
         foreach ($this->queryElements($docbookXPath, '//rng:define') as $define) {
             $name = $define->getAttribute('name');
             if (isset($overridden[$name]) || !isset($reachable[$name])) {
                 $this->removeNode($define);
             }
         }
-        if ($overridesStart) {
-            foreach ($this->queryElements($docbookXPath, '//rng:start') as $start) {
-                $this->removeNode($start);
-            }
+
+        if (!$overridesStart) {
+            return;
+        }
+        foreach ($this->queryElements($docbookXPath, '//rng:start') as $start) {
+            $this->removeNode($start);
+        }
+    }
+
+    /**
+     * Appended after the included definitions, the order in which libxml combines them.
+     * The order matters: moving them before the DocBook definitions changes validation results.
+     */
+    private function moveIncludeContent(
+        DOMElement $include,
+        DOMElement $docbookGrammar
+    ): void {
+        $docbook = $docbookGrammar->ownerDocument;
+        if ($docbook === null) {
+            throw new RuntimeException('docbook.rng grammar is not attached to a document');
         }
 
-        // Appended after the included definitions, the order in which libxml combines them.
-        // The order matters: moving them before the DocBook definitions changes validation results.
         while ($include->firstChild !== null) {
             $docbookGrammar->appendChild($docbook->importNode($include->firstChild, true));
             $include->removeChild($include->firstChild);
         }
+    }
 
-        // Annotations are ignored by RELAX NG validation.
+    /**
+     * Annotations are ignored by RELAX NG validation.
+     *
+     * @param DOMNode[] $licenseComments comments to keep
+     */
+    private function removeAnnotations(
+        DOMXPath $docbookXPath,
+        array $licenseComments
+    ): void {
         $annotations = $this->queryNodes(
             $docbookXPath,
             '//comment() | //*[namespace-uri() != "' . self::RNG_NAMESPACE . '"]'
@@ -141,24 +246,22 @@ final class DocbookSchemaPruner
                 $this->removeNode($node);
             }
         }
+    }
 
+    private function removeEmptyDivs(DOMXPath $docbookXPath): void
+    {
         while (!empty($emptyDivs = $this->queryElements($docbookXPath, '//rng:div[not(*)]'))) {
             foreach ($emptyDivs as $div) {
                 $this->removeNode($div);
             }
         }
+    }
 
-        $pruned = [
-            self::DOCBOOK_FILE => $docbook,
-            self::EZPUBLISH_FILE => $ezpublish,
-        ];
-        foreach ($pruned as $document) {
-            if ($document->documentElement !== null) {
-                $document->insertBefore($document->createComment(self::GENERATED_NOTICE), $document->documentElement);
-            }
+    private function addGeneratedNotice(DOMDocument $document): void
+    {
+        if ($document->documentElement !== null) {
+            $document->insertBefore($document->createComment(self::GENERATED_NOTICE), $document->documentElement);
         }
-
-        return $pruned;
     }
 
     private function loadSchema(string $path): DOMXPath
