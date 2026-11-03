@@ -187,7 +187,7 @@ jobs:
             contents: read
         services:
             solr:
-                image: ghcr.io/ibexa/core/solr
+                image: ghcr.io/ibexa/solr:4.6
                 ports:
                     - 8983:8983
                 options: >-
