@@ -313,10 +313,6 @@
     }
 
     &.is-invalid {
-        .ids-label {
-            color: $ibexa-color-danger;
-        }
-
         .ibexa-data-source {
             border-color: $ibexa-color-danger;
         }
