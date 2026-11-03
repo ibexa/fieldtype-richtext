@@ -10,9 +10,9 @@ namespace Ibexa\Tests\FieldTypeRichText\RichText\Schema;
 
 use DOMDocument;
 use DOMXPath;
+use Ibexa\FieldTypeRichText\RichText\Exception\DocbookSchemaPruningException;
 use Ibexa\FieldTypeRichText\RichText\Schema\DocbookSchemaPruner;
 use PHPUnit\Framework\TestCase;
-use RuntimeException;
 
 /**
  * @covers \Ibexa\FieldTypeRichText\RichText\Schema\DocbookSchemaPruner
@@ -79,7 +79,7 @@ final class DocbookSchemaPrunerTest extends TestCase
         string $variantPath,
         string $expectedMessage
     ): void {
-        $this->expectException(RuntimeException::class);
+        $this->expectException(DocbookSchemaPruningException::class);
         $this->expectExceptionMessage($expectedMessage);
 
         $this->pruner->prune(self::FIXTURES_DIR . '/base.rng', $variantPath);

@@ -14,6 +14,7 @@ declare(strict_types=1);
  * Usage: php prune-rng.php [target_dir]
  */
 
+use Ibexa\FieldTypeRichText\RichText\Exception\DocbookSchemaPruningException;
 use Ibexa\FieldTypeRichText\RichText\Schema\DocbookSchemaPruner;
 
 require_once __DIR__ . '/../../../../../../vendor/autoload.php';
@@ -26,7 +27,7 @@ if (!is_dir($targetDir) && !mkdir($targetDir, 0777, true)) {
 
 try {
     $schemas = (new DocbookSchemaPruner())->prune(__DIR__ . '/docbook.rng', __DIR__ . '/ezpublish.rng');
-} catch (RuntimeException $e) {
+} catch (DocbookSchemaPruningException $e) {
     fwrite(STDERR, $e->getMessage() . "\n");
     exit(1);
 }

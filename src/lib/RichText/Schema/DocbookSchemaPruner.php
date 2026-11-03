@@ -13,7 +13,7 @@ use DOMElement;
 use DOMNode;
 use DOMText;
 use DOMXPath;
-use RuntimeException;
+use Ibexa\FieldTypeRichText\RichText\Exception\DocbookSchemaPruningException;
 
 /**
  * Generates pruned/docbook.rng and pruned/ezpublish.rng from docbook.rng and ezpublish.rng.
@@ -44,7 +44,7 @@ final class DocbookSchemaPruner
     /**
      * @return array<self::*_FILE, DOMDocument> pruned schemas keyed by the file name they must be saved as
      *
-     * @throws RuntimeException if a schema cannot be loaded or does not have the expected structure
+     * @throws DocbookSchemaPruningException if a schema cannot be loaded or does not have the expected structure
      */
     public function prune(
         string $docbookPath,
@@ -58,7 +58,7 @@ final class DocbookSchemaPruner
         $docbookGrammar = $docbook->documentElement;
         $includes = $this->queryElements($ezpublishXPath, '/rng:grammar/rng:include');
         if ($docbookGrammar === null || count($includes) !== 1) {
-            throw new RuntimeException('Expected a docbook.rng grammar and a single <include> in ezpublish.rng');
+            throw new DocbookSchemaPruningException('Expected a docbook.rng grammar and a single <include> in ezpublish.rng');
         }
         $include = $includes[0];
 
@@ -107,7 +107,7 @@ final class DocbookSchemaPruner
      *
      * @return array<string, true>
      *
-     * @throws RuntimeException if a reachable reference has no definition
+     * @throws DocbookSchemaPruningException if a reachable reference has no definition
      */
     private function collectReachableNames(
         DOMXPath $docbookXPath,
@@ -139,7 +139,7 @@ final class DocbookSchemaPruner
 
         $undefined = array_keys(array_diff_key($reachable, $definitions));
         if (!empty($undefined)) {
-            throw new RuntimeException('References without a definition: ' . implode(', ', $undefined));
+            throw new DocbookSchemaPruningException('References without a definition: ' . implode(', ', $undefined));
         }
 
         return $reachable;
@@ -219,7 +219,7 @@ final class DocbookSchemaPruner
     ): void {
         $docbook = $docbookGrammar->ownerDocument;
         if ($docbook === null) {
-            throw new RuntimeException('docbook.rng grammar is not attached to a document');
+            throw new DocbookSchemaPruningException('docbook.rng grammar is not attached to a document');
         }
 
         while ($include->firstChild !== null) {
@@ -268,7 +268,7 @@ final class DocbookSchemaPruner
     {
         $document = new DOMDocument();
         if (!@$document->load($path)) {
-            throw new RuntimeException("Cannot load '{$path}'");
+            throw new DocbookSchemaPruningException("Cannot load '{$path}'");
         }
 
         $xpath = new DOMXPath($document);
@@ -287,7 +287,7 @@ final class DocbookSchemaPruner
     ): array {
         $nodes = $xpath->query($expression, $contextNode);
         if ($nodes === false) {
-            throw new RuntimeException("Invalid XPath expression '{$expression}'");
+            throw new DocbookSchemaPruningException("Invalid XPath expression '{$expression}'");
         }
 
         $result = [];
