@@ -20,52 +20,22 @@ final class LinkHrefTest extends TestCase
     private const SECTION_OPEN_TAG = '<section xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0-variant ezpublish-1.0">';
 
     /**
-     * @return array<string, array{string, string}>
+     * @return iterable<string, array{string, string}>
      */
-    public static function providerConvert(): array
+    public static function providerConvert(): iterable
     {
-        return [
-            'square brackets in path' => [
-                'https://example.com/foo[bar]',
-                'https://example.com/foo%5Bbar%5D',
-            ],
-            'square brackets in query' => [
-                'https://example.com/?filter[tags][]=foo',
-                'https://example.com/?filter%5Btags%5D%5B%5D=foo',
-            ],
-            'square brackets in fragment' => [
-                'https://example.com/#foo[bar]',
-                'https://example.com/#foo%5Bbar%5D',
-            ],
-            'percent sign not followed by hex digits' => [
-                'https://example.com/100%/off%2',
-                'https://example.com/100%25/off%252',
-            ],
-            'number sign in fragment' => [
-                'https://example.com/#foo#bar',
-                'https://example.com/#foo%23bar',
-            ],
-            'relative URL' => [
-                '/foo[bar]',
-                '/foo%5Bbar%5D',
-            ],
-            'square bracket in userinfo' => [
-                'https://user:pa[ss@example.com/x',
-                'https://user:pa%5Bss@example.com/x',
-            ],
-            'percent sign in userinfo' => [
-                'https://user:pa%ss@example.com/x',
-                'https://user:pa%25ss@example.com/x',
-            ],
-            'square brackets in userinfo before IP literal' => [
-                'https://u[s]er@[::1]/x',
-                'https://u%5Bs%5Der@[::1]/x',
-            ],
-            'invalid characters in host are untouched' => [
-                'https://exa[mple.com:80%/x[y]',
-                'https://exa[mple.com:80%/x%5By%5D',
-            ],
-        ];
+        yield 'square brackets in path' => ['https://example.com/foo[bar]', 'https://example.com/foo%5Bbar%5D'];
+        yield 'square brackets in query' => ['https://example.com/?filter[tags][]=foo', 'https://example.com/?filter%5Btags%5D%5B%5D=foo'];
+        yield 'square brackets in fragment' => ['https://example.com/#foo[bar]', 'https://example.com/#foo%5Bbar%5D'];
+        yield 'percent sign not followed by hex digits' => ['https://example.com/100%/off%2', 'https://example.com/100%25/off%252'];
+        yield 'number sign in fragment' => ['https://example.com/#foo#bar', 'https://example.com/#foo%23bar'];
+        yield 'relative URL' => ['/foo[bar]', '/foo%5Bbar%5D'];
+        yield 'square bracket in userinfo' => ['https://user:pa[ss@example.com/x', 'https://user:pa%5Bss@example.com/x'];
+        yield 'percent sign in userinfo' => ['https://user:pa%ss@example.com/x', 'https://user:pa%25ss@example.com/x'];
+        yield 'square brackets in userinfo before IP literal' => ['https://u[s]er@[::1]/x', 'https://u%5Bs%5Der@[::1]/x'];
+        yield 'at sign in query' => ['https://example.com/?email=a@example.org&amp;filter[x]=1', 'https://example.com/?email=a@example.org&amp;filter%5Bx%5D=1'];
+        yield 'at sign in path' => ['https://medium.com/@user[1]', 'https://medium.com/@user%5B1%5D'];
+        yield 'invalid characters in host are untouched' => ['https://exa[mple.com:80%/x[y]', 'https://exa[mple.com:80%/x%5By%5D'];
     }
 
     /**
@@ -90,20 +60,20 @@ final class LinkHrefTest extends TestCase
     }
 
     /**
-     * @return array<string, array{string}>
+     * @return iterable<string, array{string}>
      */
-    public static function providerConvertKeepsHrefUntouched(): array
+    public static function providerConvertKeepsHrefUntouched(): iterable
     {
-        return [
-            'IP literal in authority' => ['http://[::1]:8080/foo'],
-            'IP literal after userinfo' => ['https://user@[::1]:8080/foo'],
-            'valid percent-encoding' => ['https://example.com/foo%5Bbar%5d%20baz'],
-            'characters accepted by anyURI' => ['https://example.com/a b{c}|d^e`f\\g&amp;h&quot;i&lt;j'],
-            'internal link' => ['#foo'],
-            'ezurl link' => ['ezurl://95#foo'],
-            'ezlocation link' => ['ezlocation://42'],
-            'mailto link' => ['mailto:foo@example.com'],
-        ];
+        yield 'IP literal in authority' => ['http://[::1]:8080/foo'];
+        yield 'IP literal with uppercase scheme' => ['HTTP://[::1]:8080/foo'];
+        yield 'IP literal in scheme-relative URL' => ['//[::1]/foo'];
+        yield 'IP literal after userinfo' => ['https://user@[::1]:8080/foo'];
+        yield 'valid percent-encoding' => ['https://example.com/foo%5Bbar%5d%20baz'];
+        yield 'characters accepted by anyURI' => ['https://example.com/a b{c}|d^e`f\\g&amp;h&quot;i&lt;j'];
+        yield 'internal link' => ['#foo'];
+        yield 'ezurl link' => ['ezurl://95#foo'];
+        yield 'ezlocation link' => ['ezlocation://42'];
+        yield 'mailto link' => ['mailto:foo@example.com'];
     }
 
     /**

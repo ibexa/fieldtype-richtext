@@ -22,4 +22,8 @@
     <para>
         <link xlink:href="https://user:pa%25ss@example.com/x" xlink:show="none">Percent sign in userinfo</link>
     </para>
+    <para>
+        <link xlink:href="#foo_bar_" xlink:show="none">Internal link, fragment is rewritten by XmlId before encoding</link>
+    </para>
+    <para><anchor xml:id="foo_bar_"/>Anchored content.</para>
 </section>
