@@ -22,19 +22,14 @@ final class LinkHref implements Converter
 {
     private const XLINK_NAMESPACE = 'http://www.w3.org/1999/xlink';
 
-    private const SCHEME_PATTERN = '~^[a-z][a-z0-9+.\-]*://~i';
-
-    private const USERINFO_PATTERN = '~^[^/?#@]*@~';
-
     /**
-     * Host and port, where "[" and "]" are allowed to delimit an IP literal.
-     * Left untouched, as invalid characters cannot be fixed by encoding them in a host.
+     * Optional scheme, followed by an authority: userinfo, which is encoded, and host with port.
+     * The host is left untouched, so "[" and "]" delimiting an IP literal are kept,
+     * as invalid characters cannot be fixed by encoding them in a host.
      */
-    private const HOST_PATTERN = '~^[^/?#]*~';
+    private const AUTHORITY_PATTERN = '~^(?<scheme>(?:[a-z][a-z0-9+.\-]*:)?//)(?<userinfo>[^/?#@]*@)?(?<host>[^/?#]*)~i';
 
-    private const INVALID_CHARACTERS_PATTERN = '~[\[\]]|%(?![0-9a-f]{2})~i';
-
-    private const INVALID_FRAGMENT_CHARACTERS_PATTERN = '~[\[\]#]|%(?![0-9a-f]{2})~i';
+    private const INVALID_CHARACTERS_PATTERN = '~[\[\]#]|%(?![0-9a-f]{2})~i';
 
     public function convert(DOMDocument $document): DOMDocument
     {
@@ -56,44 +51,22 @@ final class LinkHref implements Converter
 
     private function encodeHref(string $href): string
     {
-        $uri = $href;
-        $fragment = null;
-        $fragmentPosition = strpos($href, '#');
-        if ($fragmentPosition !== false) {
-            $uri = substr($href, 0, $fragmentPosition);
-            $fragment = substr($href, $fragmentPosition + 1);
-        }
-
         $prefix = '';
-        if (preg_match(self::SCHEME_PATTERN, $uri, $matches) === 1) {
-            $prefix = $matches[0];
-            $uri = substr($uri, strlen($matches[0]));
-
-            if (preg_match(self::USERINFO_PATTERN, $uri, $matches) === 1) {
-                $prefix .= $this->encode(self::INVALID_CHARACTERS_PATTERN, $matches[0]);
-                $uri = substr($uri, strlen($matches[0]));
-            }
-
-            if (preg_match(self::HOST_PATTERN, $uri, $matches) === 1) {
-                $prefix .= $matches[0];
-                $uri = substr($uri, strlen($matches[0]));
-            }
+        if (preg_match(self::AUTHORITY_PATTERN, $href, $matches) === 1) {
+            $prefix = $matches['scheme'] . $this->encode($matches['userinfo']) . $matches['host'];
+            $href = substr($href, strlen($matches[0]));
         }
 
-        $encodedHref = $prefix . $this->encode(self::INVALID_CHARACTERS_PATTERN, $uri);
-        if ($fragment !== null) {
-            $encodedHref .= '#' . $this->encode(self::INVALID_FRAGMENT_CHARACTERS_PATTERN, $fragment);
-        }
+        // The first "#" starts the fragment. Any further ones are inside the fragment and need encoding.
+        $parts = explode('#', $href, 2);
 
-        return $encodedHref;
+        return $prefix . implode('#', array_map([$this, 'encode'], $parts));
     }
 
-    private function encode(
-        string $pattern,
-        string $value
-    ): string {
+    private function encode(string $value): string
+    {
         return (string)preg_replace_callback(
-            $pattern,
+            self::INVALID_CHARACTERS_PATTERN,
             static fn (array $matches): string => rawurlencode($matches[0]),
             $value
         );

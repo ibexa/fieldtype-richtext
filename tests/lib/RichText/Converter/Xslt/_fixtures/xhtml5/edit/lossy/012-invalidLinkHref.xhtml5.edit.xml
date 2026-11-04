@@ -18,4 +18,8 @@
     <p>
         <a href="https://user:pa%ss@example.com/x">Percent sign in userinfo</a>
     </p>
+    <p>
+        <a href="#foo[bar]">Internal link, fragment is rewritten by XmlId before encoding</a>
+    </p>
+    <p><a id="foo[bar]"/>Anchored content.</p>
 </section>
