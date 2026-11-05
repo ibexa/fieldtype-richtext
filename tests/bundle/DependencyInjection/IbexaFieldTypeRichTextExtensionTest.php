@@ -100,6 +100,23 @@ class IbexaFieldTypeRichTextExtensionTest extends AbstractExtensionTestCase
     }
 
     /**
+     * RichTextDocbookSchemaPass (5.0+) replaces the resource whose path contains "ezpublish.rng" with the schema
+     * combined with the registered schema fragments, so the pruned schema has to keep that file name.
+     */
+    public function testDefaultDocbookValidatorUsesPrunedSchema(): void
+    {
+        $this->load([]);
+
+        $this->assertContainerBuilderHasParameter(
+            'ibexa.field_type.richtext.validator.docbook.resources',
+            [
+                '%ibexa.field_type.richtext.resources%/schemas/docbook/pruned/ezpublish.rng',
+                '%ibexa.field_type.richtext.resources%/schemas/docbook/docbook.iso.sch.xsl',
+            ]
+        );
+    }
+
+    /**
      * Test IbexaFieldTypeRichTextExtension prepends expected and needed core settings.
      *
      * @see IbexaFieldTypeRichTextExtension::prepend
