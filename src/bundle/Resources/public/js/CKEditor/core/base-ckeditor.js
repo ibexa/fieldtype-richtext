@@ -44,6 +44,7 @@ const VIEWPORT_TOP_OFFSET_DISTRACTION_FREE_MODE = 0;
 
             this.editor = null;
             this.viewportTopOffset = config?.viewportTopOffset ?? VIEWPORT_TOP_OFFSET;
+            this.hasConfiguredViewportTopOffset = config?.viewportTopOffset !== undefined;
 
             this.xhtmlify = this.xhtmlify.bind(this);
             this.getData = this.getData.bind(this);
@@ -125,6 +126,13 @@ const VIEWPORT_TOP_OFFSET_DISTRACTION_FREE_MODE = 0;
         }
 
         init(container) {
+            const viewportTopOffsetNode = container.closest('[data-richtext-viewport-top-offset]');
+            const viewportTopOffsetFromDom = Number.parseInt(viewportTopOffsetNode?.dataset.richtextViewportTopOffset, 10);
+
+            if (!this.hasConfiguredViewportTopOffset && Number.isFinite(viewportTopOffsetFromDom)) {
+                this.viewportTopOffset = viewportTopOffsetFromDom;
+            }
+
             const wrapper = this.getHTMLDocumentFragment(container.closest('.ibexa-data-source').querySelector('textarea').value);
             const section = wrapper.childNodes[0];
             const { toolbar, extraPlugins = [], extraConfig = {} } = window.ibexa.richText.CKEditor;
