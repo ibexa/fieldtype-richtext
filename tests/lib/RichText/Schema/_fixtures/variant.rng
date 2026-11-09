@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grammar xmlns="http://relaxng.org/ns/structure/1.0">
+  <include href="base.rng">
+    <start>
+      <ref name="variantRoot"/>
+    </start>
+    <define name="overridden">
+      <element name="replacement"><text/></element>
+    </define>
+  </include>
+  <define name="variantRoot">
+    <element name="variantRoot">
+      <ref name="used"/>
+      <ref name="overridden"/>
+    </element>
+  </define>
+</grammar>

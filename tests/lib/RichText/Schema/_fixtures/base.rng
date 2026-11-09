@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grammar xmlns="http://relaxng.org/ns/structure/1.0" xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+  <!-- License notice -->
+  <start>
+    <ref name="root"/>
+  </start>
+  <define name="root">
+    <a:documentation>Root element</a:documentation>
+    <element name="root">
+      <ref name="used"/>
+    </element>
+  </define>
+  <define name="used">
+    <element name="used"><text/></element>
+  </define>
+  <define name="unused">
+    <element name="unused"><text/></element>
+  </define>
+  <div>
+    <define name="unusedInDiv">
+      <element name="unusedInDiv"><text/></element>
+    </define>
+  </div>
+  <define name="overridden">
+    <element name="original"><text/></element>
+  </define>
+</grammar>
