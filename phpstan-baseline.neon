@@ -799,12 +799,6 @@ parameters:
 			path: src/lib/RichText/Converter/Link.php
 
 		-
-			message: '#^Parameter \#1 \$locationId of method Ibexa\\Contracts\\Core\\Repository\\LocationService\:\:loadLocation\(\) expects int, int\|null given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/lib/RichText/Converter/Link.php
-
-		-
 			message: '#^Property Ibexa\\FieldTypeRichText\\RichText\\Converter\\Link\:\:\$logger \(Psr\\Log\\LoggerInterface\) does not accept Psr\\Log\\LoggerInterface\|null\.$#'
 			identifier: assign.propertyType
 			count: 1

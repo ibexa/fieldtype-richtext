@@ -512,8 +512,7 @@ class LinkTest extends TestCase
         $location = $this->createMock(APILocation::class);
 
         $contentInfo->expects($this->once())
-            ->method('__get')
-            ->with($this->equalTo('mainLocationId'))
+            ->method('getMainLocationId')
             ->willReturn($locationId);
 
         $contentService->expects($this->any())
@@ -649,6 +648,72 @@ class LinkTest extends TestCase
         $expectedOutputDocument->loadXML($output);
 
         $this->assertEquals($expectedOutputDocument, $outputDocument);
+    }
+
+    /**
+     * @return iterable<string, array{string, string}>
+     */
+    public static function provideContentLinkWithoutMainLocation(): iterable
+    {
+        yield 'link' => [
+            '<link xlink:href="ezcontent://205">Content name</link>',
+            '<link xlink:href="#">Content name</link>',
+        ];
+
+        yield 'ezlink' => [
+            '<ezlink xlink:href="ezcontent://205"/>',
+            '<ezlink xlink:href="ezcontent://205" href_resolved="#"/>',
+        ];
+    }
+
+    /**
+     * @dataProvider provideContentLinkWithoutMainLocation
+     */
+    public function testConvertContentLinkWithoutMainLocation(
+        string $inputLink,
+        string $expectedLink
+    ): void {
+        $contentService = $this->getMockContentService();
+        $locationService = $this->getMockLocationService();
+        $logger = $this->createMock(LoggerInterface::class);
+
+        // Content sent to Trash has no main Location
+        $contentService
+            ->expects(self::once())
+            ->method('loadContentInfo')
+            ->with(205)
+            ->willReturn(new APIContentInfo([
+                'id' => 205,
+                'mainLocationId' => null,
+                'status' => APIContentInfo::STATUS_TRASHED,
+            ]));
+
+        $locationService
+            ->expects(self::never())
+            ->method('loadLocation');
+
+        $logger
+            ->expects(self::once())
+            ->method('warning')
+            ->with('While generating links for richtext, Content object with ID 205 has no main Location');
+
+        $converter = new Link($locationService, $contentService, $this->getMockRouter(), $logger);
+
+        self::assertEquals(
+            self::createLinkDocument($expectedLink),
+            $converter->convert(self::createLinkDocument($inputLink))
+        );
+    }
+
+    private static function createLinkDocument(string $link): DOMDocument
+    {
+        $document = new DOMDocument();
+        $document->loadXML('<?xml version="1.0" encoding="UTF-8"?>
+<section xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0-variant ezpublish-1.0">
+  <para>' . $link . '</para>
+</section>');
+
+        return $document;
     }
 }
 

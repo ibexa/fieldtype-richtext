@@ -85,9 +85,18 @@ class Link implements Converter
 
             if ($scheme === 'ezcontent://') {
                 try {
-                    $contentInfo = $this->contentService->loadContentInfo((int) $id);
-                    $location = $this->locationService->loadLocation($contentInfo->mainLocationId);
-                    $hrefResolved = $this->generateUrlAliasForLocation($location, $fragment, $siteaccess);
+                    $mainLocationId = $this->contentService->loadContentInfo((int) $id)->getMainLocationId();
+                    if (null === $mainLocationId) {
+                        if ($this->logger) {
+                            $this->logger->warning(
+                                'While generating links for richtext, Content object with ID ' .
+                                $id . ' has no main Location'
+                            );
+                        }
+                    } else {
+                        $location = $this->locationService->loadLocation($mainLocationId);
+                        $hrefResolved = $this->generateUrlAliasForLocation($location, $fragment, $siteaccess);
+                    }
                 } catch (APINotFoundException $e) {
                     if ($this->logger) {
                         $this->logger->warning(
