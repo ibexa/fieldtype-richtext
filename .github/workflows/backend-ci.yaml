@@ -68,7 +68,7 @@ jobs:
                 run: composer run-script --timeout=600 test
 
     integration-tests-postgres:
-        name: PostgreSQL integration tests
+        name: PostgreSQL integration tests (${{ matrix.php }}${{ !matrix.schema_builder_event && ', Doctrine Migrations' || '' }})
         needs: tests
         services:
             postgres:
@@ -96,6 +96,13 @@ jobs:
                 postgres_version:
                     - '14'
                     - '18'
+                schema_builder_event:
+                    - true
+                # One more run, on the Doctrine Migrations install path.
+                include:
+                    -   php: '8.5'
+                        postgres_version: '14'
+                        schema_builder_event: false
 
         steps:
             -   uses: actions/checkout@v7
@@ -116,12 +123,13 @@ jobs:
             -   name: Run integration test suite vs Postgresql
                 run: composer run-script integration
                 env:
+                    IBEXA_TEST_SCHEMA_BUILDER_EVENT_ENABLED: ${{ matrix.schema_builder_event && '1' || '0' }}
                     DATABASE_URL: "pgsql://postgres:postgres@localhost:${{ job.services.postgres.ports[5432] }}/testdb?serverVersion=${{ matrix.postgres_version }}"
                     # Required by old repository tests
                     DATABASE: "pgsql://postgres:postgres@localhost:${{ job.services.postgres.ports[5432] }}/testdb?serverVersion=${{ matrix.postgres_version }}"
 
     integration-tests-mysql:
-        name: MySQL integration tests
+        name: MySQL integration tests (${{ matrix.php }}${{ !matrix.schema_builder_event && ', Doctrine Migrations' || '' }})
         needs: tests
         services:
             mysql:
@@ -147,6 +155,12 @@ jobs:
             matrix:
                 php:
                     - '8.5'
+                schema_builder_event:
+                    - true
+                # One more run, on the Doctrine Migrations install path.
+                include:
+                    -   php: '8.5'
+                        schema_builder_event: false
 
         steps:
             -   uses: actions/checkout@v7
@@ -167,6 +181,7 @@ jobs:
             -   name: Run integration test suite vs MySQL
                 run: composer run-script integration
                 env:
+                    IBEXA_TEST_SCHEMA_BUILDER_EVENT_ENABLED: ${{ matrix.schema_builder_event && '1' || '0' }}
                     DATABASE_URL: "mysql://mysql:mysql@127.0.0.1:${{ job.services.mysql.ports[3306] }}/testdb"
                     DATABASE: "mysql://mysql:mysql@127.0.0.1:${{ job.services.mysql.ports[3306] }}/testdb"
 
