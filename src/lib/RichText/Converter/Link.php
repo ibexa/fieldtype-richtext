@@ -18,6 +18,7 @@ use Ibexa\Contracts\Core\Repository\Values\Content\Location;
 use Ibexa\Contracts\FieldTypeRichText\RichText\Converter;
 use Ibexa\Core\MVC\Symfony\Routing\UrlAliasRouter;
 use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 
@@ -38,10 +39,7 @@ class Link implements Converter
      */
     protected $router;
 
-    /**
-     * @var LoggerInterface
-     */
-    protected $logger;
+    protected LoggerInterface $logger;
 
     public function __construct(
         LocationService $locationService,
@@ -52,7 +50,7 @@ class Link implements Converter
         $this->locationService = $locationService;
         $this->contentService = $contentService;
         $this->router = $router;
-        $this->logger = $logger;
+        $this->logger = $logger ?? new NullLogger();
     }
 
     /**
@@ -85,42 +83,41 @@ class Link implements Converter
 
             if ($scheme === 'ezcontent://') {
                 try {
-                    $contentInfo = $this->contentService->loadContentInfo((int) $id);
-                    $location = $this->locationService->loadLocation($contentInfo->mainLocationId);
-                    $hrefResolved = $this->generateUrlAliasForLocation($location, $fragment, $siteaccess);
+                    $mainLocationId = $this->contentService->loadContentInfo((int) $id)->getMainLocationId();
+                    if (null === $mainLocationId) {
+                        $this->logger->warning(sprintf(
+                            'While generating links for richtext, Content object with ID %s has no main Location',
+                            $id
+                        ));
+                    } else {
+                        $location = $this->locationService->loadLocation($mainLocationId);
+                        $hrefResolved = $this->generateUrlAliasForLocation($location, $fragment, $siteaccess);
+                    }
                 } catch (APINotFoundException $e) {
-                    if ($this->logger) {
-                        $this->logger->warning(
-                            'While generating links for richtext, could not locate ' .
-                            'Content object with ID ' . $id
-                        );
-                    }
+                    $this->logger->warning(
+                        'While generating links for richtext, could not locate ' .
+                        'Content object with ID ' . $id
+                    );
                 } catch (APIUnauthorizedException $e) {
-                    if ($this->logger) {
-                        $this->logger->notice(
-                            'While generating links for richtext, unauthorized to load ' .
-                            'Content object with ID ' . $id
-                        );
-                    }
+                    $this->logger->notice(
+                        'While generating links for richtext, unauthorized to load ' .
+                        'Content object with ID ' . $id
+                    );
                 }
             } elseif ($scheme === 'ezlocation://') {
                 try {
                     $location = $this->locationService->loadLocation((int) $id);
                     $hrefResolved = $this->generateUrlAliasForLocation($location, $fragment, $siteaccess);
                 } catch (APINotFoundException $e) {
-                    if ($this->logger) {
-                        $this->logger->warning(
-                            'While generating links for richtext, could not locate ' .
-                            'Location with ID ' . $id
-                        );
-                    }
+                    $this->logger->warning(
+                        'While generating links for richtext, could not locate ' .
+                        'Location with ID ' . $id
+                    );
                 } catch (APIUnauthorizedException $e) {
-                    if ($this->logger) {
-                        $this->logger->notice(
-                            'While generating links for richtext, unauthorized to load ' .
-                            'Location with ID ' . $id
-                        );
-                    }
+                    $this->logger->notice(
+                        'While generating links for richtext, unauthorized to load ' .
+                        'Location with ID ' . $id
+                    );
                 }
             } else {
                 $hrefResolved = $href;
