@@ -799,12 +799,6 @@ parameters:
 			path: src/lib/RichText/Converter/Link.php
 
 		-
-			message: '#^Property Ibexa\\FieldTypeRichText\\RichText\\Converter\\Link\:\:\$logger \(Psr\\Log\\LoggerInterface\) does not accept Psr\\Log\\LoggerInterface\|null\.$#'
-			identifier: assign.propertyType
-			count: 1
-			path: src/lib/RichText/Converter/Link.php
-
-		-
 			message: '#^Access to an undefined property DOMNameSpaceNode\|DOMNode\:\:\$textContent\.$#'
 			identifier: property.notFound
 			count: 2
