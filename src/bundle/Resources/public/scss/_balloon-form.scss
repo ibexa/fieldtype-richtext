@@ -286,5 +286,9 @@
         .ck-balloon-panel_visible:has(.ck-dropdown__panel-visible) {
             z-index: 1082;
         }
+
+        .ck-balloon-panel_visible:has(.ibexa-ckeditor-balloon-form) {
+            z-index: 1083;
+        }
     }
 }
