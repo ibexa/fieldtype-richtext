@@ -241,6 +241,30 @@ class RichTextTest extends AbstractParserTestCase
                 ],
                 'Number type does not support the "choices" setting',
             ],
+            [
+                [
+                    'attributes' => [
+                        'paragraph' => [
+                            'my attr' => [
+                                'type' => 'string',
+                            ],
+                        ],
+                    ],
+                ],
+                'Custom data attribute names may contain only lowercase letters, digits, "_", "." and "-"',
+            ],
+            [
+                [
+                    'attributes' => [
+                        'paragraph' => [
+                            'myAttr' => [
+                                'type' => 'string',
+                            ],
+                        ],
+                    ],
+                ],
+                'Custom data attribute names may contain only lowercase letters, digits, "_", "." and "-"',
+            ],
         ];
     }
 
