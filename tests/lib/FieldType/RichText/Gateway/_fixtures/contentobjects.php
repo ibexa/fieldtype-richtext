@@ -7,8 +7,12 @@
 declare(strict_types=1);
 
 use Ibexa\Core\Persistence\Legacy\Content\Gateway;
+use Ibexa\Core\Persistence\Legacy\Content\Language\Gateway as LanguageGateway;
 
 return [
+    LanguageGateway::CONTENT_LANGUAGE_TABLE => [
+        ['disabled' => 0, 'id' => 2, 'locale' => 'eng-US', 'name' => 'English (American)'],
+    ],
     Gateway::CONTENT_ITEM_TABLE => [
         0 => [
             'content_type_id' => '3',
