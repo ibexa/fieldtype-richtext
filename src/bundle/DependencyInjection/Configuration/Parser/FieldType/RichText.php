@@ -24,6 +24,8 @@ class RichText extends AbstractFieldTypeParser
 
     public const string ATTRIBUTES_SA_SETTINGS_ID = 'fieldtypes.ibexa_richtext.attributes';
     private const string ATTRIBUTES_NODE_KEY = 'attributes';
+    // The names become data-* attribute names and ezattribute keys.
+    private const string ATTRIBUTE_NAME_PATTERN = '/^[a-z0-9_.-]+\z/';
     private const string ATTRIBUTE_TYPE_NODE_KEY = 'type';
     private const string ATTRIBUTE_TYPE_CHOICE = 'choice';
     private const string ATTRIBUTE_TYPE_BOOLEAN = 'boolean';
@@ -379,6 +381,13 @@ class RichText extends AbstractFieldTypeParser
                 ->arrayPrototype()
                     // allow dashes in data attribute name
                     ->normalizeKeys(false)
+                    ->validate()
+                        ->ifTrue(static fn (array $attributes): bool => array_any(
+                            array_keys($attributes),
+                            static fn (int | string $name): bool => preg_match(self::ATTRIBUTE_NAME_PATTERN, (string)$name) !== 1
+                        ))
+                        ->thenInvalid('Custom data attribute names may contain only lowercase letters, digits, "_", "." and "-", got %s.')
+                    ->end()
                     ->arrayPrototype()
                         ->validate()
                             ->always($this->getAttributesValidatorCallback($invalidChoiceCallback))
